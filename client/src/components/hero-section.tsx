@@ -53,7 +53,7 @@ export function HeroSection() {
           loop 
           playsInline
         >
-          <source src="/videos/arctic-adventure.mp4" type="video/mp4" />
+          <source src="/videos/TXA Teaser 2025.mov" type="video/quicktime" />
           {/* Fallback image if video fails to load */}
           <img 
             src="https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" 
