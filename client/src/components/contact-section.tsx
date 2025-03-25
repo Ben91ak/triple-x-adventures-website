@@ -16,12 +16,12 @@ import { z } from "zod";
 
 // The interests options
 const interestOptions = [
-  { id: "snowmobile", label: "Snowmobiling" },
-  { id: "dogsledding", label: "Dog Sledding" },
-  { id: "northernlights", label: "Northern Lights" },
-  { id: "accommodation", label: "Accommodation" },
-  { id: "restaurant", label: "JayJay's Restaurant" },
-  { id: "custompackage", label: "Custom Package" },
+  { id: "snowmobile", label: "Schneemobil Abenteuer" },
+  { id: "dogsledding", label: "Husky Schlittentour" },
+  { id: "northernlights", label: "Polarlichter Expedition" },
+  { id: "accommodation", label: "Unterkunft" },
+  { id: "restaurant", label: "Triple X Taste Restaurant" },
+  { id: "custompackage", label: "Maßgeschneidertes Paket" },
 ];
 
 export function ContactSection() {
@@ -49,16 +49,16 @@ export function ContactSection() {
     },
     onSuccess: () => {
       toast({
-        title: "Message Sent",
-        description: "We've received your inquiry and will get back to you shortly.",
+        title: "Nachricht Gesendet",
+        description: "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.",
       });
       form.reset();
       setInterests([]);
     },
     onError: (error) => {
       toast({
-        title: "Submission Failed",
-        description: error instanceof Error ? error.message : "Please try again later.",
+        title: "Übermittlung Fehlgeschlagen",
+        description: error instanceof Error ? error.message : "Bitte versuchen Sie es später noch einmal.",
         variant: "destructive",
       });
     },
@@ -85,14 +85,14 @@ export function ContactSection() {
     <section id="contact" className="py-16 md:py-24 bg-midnight text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">LET'S MAKE WINTER LEGENDARY</h2>
-          <p className="text-lg max-w-3xl mx-auto opacity-90">Ready to experience the real Arctic? Contact us to start planning your adventure</p>
+          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">MACHEN WIR DEN WINTER LEGENDÄR</h2>
+          <p className="text-lg max-w-3xl mx-auto opacity-90">Bereit für ein echtes arktisches Erlebnis? Kontaktieren Sie uns, um Ihr Abenteuer zu planen</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-white text-midnight rounded-lg shadow-xl overflow-hidden">
             <div className="p-8">
-              <h3 className="font-montserrat font-semibold text-xl mb-6">Contact Us</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-6">Kontakt</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -101,7 +101,7 @@ export function ContactSection() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Name</FormLabel>
+                          <FormLabel>Vorname</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -114,7 +114,7 @@ export function ContactSection() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last Name</FormLabel>
+                          <FormLabel>Nachname</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -129,7 +129,7 @@ export function ContactSection() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email Address</FormLabel>
+                        <FormLabel>E-Mail-Adresse</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" />
                         </FormControl>
@@ -143,7 +143,7 @@ export function ContactSection() {
                     name="phone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Phone Number</FormLabel>
+                        <FormLabel>Telefonnummer</FormLabel>
                         <FormControl>
                           <Input {...field} type="tel" />
                         </FormControl>
@@ -157,18 +157,18 @@ export function ContactSection() {
                     name="visitDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>When are you planning to visit?</FormLabel>
+                        <FormLabel>Wann planen Sie Ihren Besuch?</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Select a time frame" />
+                              <SelectValue placeholder="Zeitraum auswählen" />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="december-january">December - January</SelectItem>
-                            <SelectItem value="february-march">February - March</SelectItem>
-                            <SelectItem value="april-may">April - May</SelectItem>
-                            <SelectItem value="other">Other / Not sure yet</SelectItem>
+                            <SelectItem value="december-january">Dezember - Januar</SelectItem>
+                            <SelectItem value="february-march">Februar - März</SelectItem>
+                            <SelectItem value="april-may">April - Mai</SelectItem>
+                            <SelectItem value="other">Andere / Noch nicht sicher</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -177,7 +177,7 @@ export function ContactSection() {
                   />
                   
                   <div>
-                    <FormLabel>I'm interested in (select all that apply)</FormLabel>
+                    <FormLabel>Ich interessiere mich für (Mehrfachauswahl möglich)</FormLabel>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                       {interestOptions.map((option) => (
                         <div key={option.id} className="flex items-center space-x-2">
@@ -202,7 +202,7 @@ export function ContactSection() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Your Message</FormLabel>
+                        <FormLabel>Ihre Nachricht</FormLabel>
                         <FormControl>
                           <Textarea 
                             rows={4} 
