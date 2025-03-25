@@ -9,8 +9,9 @@
   --card-bg: #1A1D1F;
   --primary-text: #FFFFFF;
   --secondary-text: #D1D5DB;
-  --accent-color: #3B82F6;
-  --accent-hover: #2563EB;
+  --accent-color: #A4D233;
+  --accent-hover: #8FBB1C;
+  --dark-accent: #576A24;
   --divider-color: #2D3748;
   --input-bg: #232629;
   --success-color: #10B981;
@@ -83,7 +84,7 @@
 
 /* Custom animation for gradient background */
 .bg-gradient-animated {
-  background: linear-gradient(120deg, #0F1112, #1E293B, #0F1112);
+  background: linear-gradient(120deg, #0F1112, #1E293B, #0F1112, #1A271A);
   background-size: 300% 300%;
   animation: gradientBackground 15s ease infinite;
 }
