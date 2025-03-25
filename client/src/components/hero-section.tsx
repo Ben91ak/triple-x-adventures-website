@@ -1,16 +1,31 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { ChevronDown } from "lucide-react";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState(false);
   const { language } = useLanguage();
   const t = useTranslation(language);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.8;
+      
+      // Handle video error (show fallback animation)
+      const handleVideoError = () => {
+        setVideoError(true);
+        console.log("Video failed to load, showing fallback animation");
+      };
+      
+      videoRef.current.addEventListener('error', handleVideoError);
+      
+      return () => {
+        if (videoRef.current) {
+          videoRef.current.removeEventListener('error', handleVideoError);
+        }
+      };
     }
   }, []);
 
@@ -43,19 +58,21 @@ export function HeroSection() {
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden">
-      {/* Stylish gradient background */}
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        {/* Dynamic background gradient */}
-        <div className="absolute inset-0 bg-gradient-animated"></div>
+        <video 
+          ref={videoRef}
+          className="absolute object-cover w-full h-full"
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
+        </video>
         
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgMjcuNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMSAxYTUuNSA1LjUgMCAxIDEgMCAxMSA1LjUgNS41IDAgMCAxIDAtMTF6TTIwIDIwLjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAgMWE1LjUgNS41IDAgMSAxIDAgMTEgNS41IDUuNSAwIDAgMSAwLTExeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
-        
-        {/* Accent color light effect */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-72 bg-accent-color/20 rounded-full blur-3xl"></div>
-        
-        {/* Additional accent glow */}
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-accent-color/5 rounded-full blur-3xl"></div>
+        {/* Fallback gradient background in case video fails to load */}
+        <div className={`absolute inset-0 bg-gradient-animated transition-opacity duration-500 ${videoError ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
       
       {/* Dark overlay */}
