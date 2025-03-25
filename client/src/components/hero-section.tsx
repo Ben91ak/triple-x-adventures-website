@@ -75,8 +75,8 @@ export function HeroSection() {
         <div className={`absolute inset-0 bg-gradient-animated transition-opacity duration-500 ${videoError ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
       
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-dark-bg bg-opacity-60 z-10"></div>
+      {/* Dark overlay - increased opacity for better text contrast */}
+      <div className="absolute inset-0 bg-dark-bg bg-opacity-75 z-10"></div>
       
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-20 pointer-events-none"></div>
@@ -84,32 +84,32 @@ export function HeroSection() {
       <div className="container mx-auto px-4 relative z-30 mt-16 md:mt-0">
         {/* Hero Content */}
         <div className="text-center max-w-4xl mx-auto">
-          <div className="mb-3 text-secondary-text text-sm font-medium tracking-wider uppercase">{content.welcome}</div>
+          <div className="mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-sm">{content.welcome}</div>
           
-          <h1 className="font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent">
-            TRIPLE <span className="text-accent-color">X</span> ADVENTURES
+          <h1 className="font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent text-shadow-lg">
+            TRIPLE <span className="text-accent-color text-shadow-lg">X</span> ADVENTURES
           </h1>
           
           <div 
-            className="text-lg md:text-xl mb-4 max-w-2xl mx-auto font-light"
+            className="text-lg md:text-xl mb-4 max-w-2xl mx-auto font-light text-white text-shadow-sm"
             dangerouslySetInnerHTML={{ __html: content.adventure }}
           />
           
-          <p className="text-sm mb-8 font-mono text-secondary-text">65.5916° N, 19.1668° E</p>
+          <p className="text-sm mb-8 font-mono text-white/80">65.5916° N, 19.1668° E</p>
           
-          <div className="glass-card p-6 md:p-8 mb-12 max-w-3xl mx-auto text-left">
+          <div className="glass-card p-6 md:p-8 mb-12 max-w-3xl mx-auto text-left shadow-xl">
             <p 
-              className="mb-4 text-secondary-text leading-relaxed"
+              className="mb-4 text-white leading-relaxed"
               dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
             />
             
             <p 
-              className="mb-4 text-secondary-text leading-relaxed"
+              className="mb-4 text-white leading-relaxed"
               dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
             />
             
             <p 
-              className="text-secondary-text leading-relaxed"
+              className="text-white leading-relaxed"
               dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
             />
           </div>
@@ -126,8 +126,8 @@ export function HeroSection() {
         
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-          <span className="text-sm text-secondary-text mb-2 opacity-80">Scroll down</span>
-          <ChevronDown className="h-5 w-5 text-accent-color" />
+          <span className="text-sm text-white mb-2 opacity-80 text-shadow-sm">Scroll down</span>
+          <ChevronDown className="h-5 w-5 text-accent-color drop-shadow-md" />
         </div>
       </div>
     </section>
