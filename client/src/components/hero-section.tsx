@@ -58,7 +58,7 @@ export function HeroSection() {
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden">
-      {/* Video Background */}
+      {/* BASE LAYER - Video Background (lowest z-index) */}
       <div className="absolute inset-0 z-0">
         <video 
           ref={videoRef}
@@ -75,12 +75,27 @@ export function HeroSection() {
         <div className={`absolute inset-0 bg-gradient-animated transition-opacity duration-500 ${videoError ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
       
-      {/* Dark overlay - increased opacity for better text contrast */}
+      {/* Dark overlay for text contrast */}
       <div className="absolute inset-0 bg-dark-bg bg-opacity-75 z-10"></div>
       
       {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-20 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-15 pointer-events-none"></div>
 
+      {/* MIDDLE LAYER - Transition Elements */}
+      {/* Gradient to next section fade - placed behind content but above video */}
+      <div className="absolute bottom-0 left-0 right-0 h-[300px] z-20">
+        {/* Gradient overlay for smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/70 to-dark-bg"></div>
+      </div>
+      
+      {/* Wave overlay - perfectly matches the next section */}
+      <div className="wave-overlay z-25 pointer-events-none">
+        <div className="wave-shape"></div>
+        <div className="wave-animated"></div>
+        <div className="accent-line"></div>
+      </div>
+      
+      {/* TOP LAYER - Content (highest z-index) */}
       <div className="container mx-auto px-4 relative z-50 mt-16 md:mt-0">
         {/* Hero Content */}
         <div className="text-center max-w-4xl mx-auto">
@@ -114,28 +129,15 @@ export function HeroSection() {
             />
           </div>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16 relative z-50">
-            <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-all relative z-50">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+            <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-all">
               {t.hero.cta}
             </a>
-            <a href="#contact" className="btn-ghost inline-flex items-center justify-center gap-2 text-sm uppercase tracking-wide font-medium transition-all relative z-50">
+            <a href="#contact" className="btn-ghost inline-flex items-center justify-center gap-2 text-sm uppercase tracking-wide font-medium transition-all">
               {t.nav.contact}
             </a>
           </div>
         </div>
-      </div>
-      
-      {/* Video to next section smooth fade transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-[300px] z-40">
-        {/* Gradient overlay for smooth transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/80 to-dark-bg"></div>
-      </div>
-      
-      {/* Wave overlay for gentle transition to next section */}
-      <div className="wave-overlay">
-        <div className="wave-shape"></div>
-        <div className="wave-animated"></div>
-        <div className="accent-line"></div>
       </div>
     </section>
   );
