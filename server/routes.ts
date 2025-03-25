@@ -50,7 +50,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Weather API proxy to avoid CORS and hide API key
   router.get("/weather", async (req, res) => {
     try {
-      const API_KEY = process.env.OPENWEATHER_API_KEY || "demo";
+      const API_KEY = process.env.WEATHER_API_KEY;
+      
+      if (!API_KEY) {
+        throw new Error("Weather API key is not configured");
+      }
+      
       const city = "Arvidsjaur,se"; // Swedish town for Triple X Adventures
       
       const response = await fetch(

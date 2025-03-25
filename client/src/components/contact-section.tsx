@@ -13,20 +13,24 @@ import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { ContactFormData } from "@/types";
 import { z } from "zod";
-
-// The interests options
-const interestOptions = [
-  { id: "snowmobile", label: "Schneemobil Abenteuer" },
-  { id: "dogsledding", label: "Husky Schlittentour" },
-  { id: "northernlights", label: "Polarlichter Expedition" },
-  { id: "accommodation", label: "Unterkunft" },
-  { id: "restaurant", label: "Triple X Taste Restaurant" },
-  { id: "custompackage", label: "Maßgeschneidertes Paket" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/translations";
 
 export function ContactSection() {
   const { toast } = useToast();
   const [interests, setInterests] = useState<string[]>([]);
+  const { language } = useLanguage();
+  const t = useTranslation(language);
+
+  // Interest options with translation support
+  const interestOptions = [
+    { id: "snowmobile", label: language === "de" ? "Schneemobil Abenteuer" : language === "sv" ? "Snöskoter Äventyr" : "Snowmobile Adventure" },
+    { id: "dogsledding", label: language === "de" ? "Husky Schlittentour" : language === "sv" ? "Hundspann Tur" : "Husky Sledding Tour" },
+    { id: "northernlights", label: language === "de" ? "Polarlichter Expedition" : language === "sv" ? "Norrsken Expedition" : "Northern Lights Expedition" },
+    { id: "accommodation", label: language === "de" ? "Unterkunft" : language === "sv" ? "Boende" : "Accommodation" },
+    { id: "restaurant", label: language === "de" ? "Triple X Taste Restaurant" : language === "sv" ? "Triple X Taste Restaurang" : "Triple X Taste Restaurant" },
+    { id: "custompackage", label: language === "de" ? "Maßgeschneidertes Paket" : language === "sv" ? "Skräddarsytt Paket" : "Custom Package" },
+  ];
 
   // Set up form with zod validation
   const form = useForm<z.infer<typeof contactFormSchema>>({
@@ -49,16 +53,16 @@ export function ContactSection() {
     },
     onSuccess: () => {
       toast({
-        title: "Nachricht Gesendet",
-        description: "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.",
+        title: t.contact.successTitle,
+        description: t.contact.successMessage,
       });
       form.reset();
       setInterests([]);
     },
     onError: (error) => {
       toast({
-        title: "Übermittlung Fehlgeschlagen",
-        description: error instanceof Error ? error.message : "Bitte versuchen Sie es später noch einmal.",
+        title: t.contact.errorTitle,
+        description: error instanceof Error ? error.message : t.contact.errorMessage,
         variant: "destructive",
       });
     },
@@ -85,14 +89,14 @@ export function ContactSection() {
     <section id="contact" className="py-16 md:py-24 bg-midnight text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">MACHEN WIR DEN WINTER LEGENDÄR</h2>
-          <p className="text-lg max-w-3xl mx-auto opacity-90">Bereit für ein echtes arktisches Erlebnis? Kontaktieren Sie uns, um Ihr Abenteuer zu planen</p>
+          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">{t.contact.title}</h2>
+          <p className="text-lg max-w-3xl mx-auto opacity-90">{t.contact.subtitle}</p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="bg-white text-midnight rounded-lg shadow-xl overflow-hidden">
             <div className="p-8">
-              <h3 className="font-montserrat font-semibold text-xl mb-6">Kontakt</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-6">{t.contact.formTitle}</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -101,7 +105,7 @@ export function ContactSection() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Vorname</FormLabel>
+                          <FormLabel>{t.contact.firstName}</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -114,7 +118,7 @@ export function ContactSection() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Nachname</FormLabel>
+                          <FormLabel>{t.contact.lastName}</FormLabel>
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
@@ -129,7 +133,7 @@ export function ContactSection() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>E-Mail-Adresse</FormLabel>
+                        <FormLabel>{t.contact.email}</FormLabel>
                         <FormControl>
                           <Input {...field} type="email" />
                         </FormControl>
@@ -143,7 +147,7 @@ export function ContactSection() {
                     name="phone"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Telefonnummer</FormLabel>
+                        <FormLabel>{t.contact.phone}</FormLabel>
                         <FormControl>
                           <Input {...field} type="tel" />
                         </FormControl>
@@ -157,18 +161,18 @@ export function ContactSection() {
                     name="visitDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Wann planen Sie Ihren Besuch?</FormLabel>
+                        <FormLabel>{t.contact.visitDate}</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger>
-                              <SelectValue placeholder="Zeitraum auswählen" />
+                              <SelectValue placeholder={t.contact.visitDatePlaceholder} />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="december-january">Dezember - Januar</SelectItem>
-                            <SelectItem value="february-march">Februar - März</SelectItem>
-                            <SelectItem value="april-may">April - Mai</SelectItem>
-                            <SelectItem value="other">Andere / Noch nicht sicher</SelectItem>
+                            <SelectItem value="december-january">{t.contact.visitDateOptions.decJan}</SelectItem>
+                            <SelectItem value="february-march">{t.contact.visitDateOptions.febMar}</SelectItem>
+                            <SelectItem value="april-may">{t.contact.visitDateOptions.aprMay}</SelectItem>
+                            <SelectItem value="other">{t.contact.visitDateOptions.other}</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
@@ -177,7 +181,7 @@ export function ContactSection() {
                   />
                   
                   <div>
-                    <FormLabel>Ich interessiere mich für (Mehrfachauswahl möglich)</FormLabel>
+                    <FormLabel>{t.contact.interests}</FormLabel>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                       {interestOptions.map((option) => (
                         <div key={option.id} className="flex items-center space-x-2">
@@ -202,7 +206,7 @@ export function ContactSection() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Ihre Nachricht</FormLabel>
+                        <FormLabel>{t.contact.message}</FormLabel>
                         <FormControl>
                           <Textarea 
                             rows={4} 
@@ -219,7 +223,7 @@ export function ContactSection() {
                     className="w-full bg-fire text-white font-montserrat font-semibold py-3 px-6 rounded hover:bg-opacity-90 transition"
                     disabled={mutation.isPending}
                   >
-                    {mutation.isPending ? "Wird gesendet..." : "Nachricht senden"}
+                    {mutation.isPending ? t.contact.sending : t.contact.send}
                   </Button>
                 </form>
               </Form>
@@ -228,15 +232,15 @@ export function ContactSection() {
           
           <div>
             <div className="mb-8">
-              <h3 className="font-montserrat font-semibold text-xl mb-4">Kontaktieren Sie uns</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">{t.contact.info.title}</h3>
               <div className="space-y-4">
                 <div className="flex items-start">
                   <div className="bg-fire text-white p-3 rounded-full mr-4">
                     <i className="fas fa-map-marker-alt"></i>
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold mb-1">Unser Standort</h4>
-                    <p className="opacity-80">Akkavare, nahe Arvidsjaur<br />Schwedisch Lappland, Schweden</p>
+                    <h4 className="font-montserrat font-semibold mb-1">{t.contact.info.location}</h4>
+                    <p className="opacity-80">{t.contact.info.locationText}</p>
                   </div>
                 </div>
                 
@@ -245,8 +249,11 @@ export function ContactSection() {
                     <i className="fas fa-phone-alt"></i>
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold mb-1">Telefon</h4>
-                    <p className="opacity-80">+46 123 456 789</p>
+                    <h4 className="font-montserrat font-semibold mb-1">{t.contact.info.phone}</h4>
+                    <p className="opacity-80">
+                      {t.contact.info.phoneText1}<br />
+                      {t.contact.info.phoneText2}
+                    </p>
                   </div>
                 </div>
                 
@@ -255,33 +262,33 @@ export function ContactSection() {
                     <i className="fas fa-envelope"></i>
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold mb-1">E-Mail</h4>
-                    <p className="opacity-80">adventures@triplexarctic.com</p>
+                    <h4 className="font-montserrat font-semibold mb-1">{t.contact.info.email}</h4>
+                    <p className="opacity-80">{t.contact.info.emailText}</p>
                   </div>
                 </div>
               </div>
             </div>
             
             <div className="mb-8">
-              <h3 className="font-montserrat font-semibold text-xl mb-4">Häufig gestellte Fragen</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">{t.contact.faq.title}</h3>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-montserrat font-semibold mb-1">Was ist die beste Reisezeit?</h4>
-                  <p className="opacity-80">Die Hauptsaison läuft von Dezember bis April, wobei Januar bis März die besten Schneebedingungen und Polarlichtsichtbarkeit bieten.</p>
+                  <h4 className="font-montserrat font-semibold mb-1">{t.contact.faq.q1}</h4>
+                  <p className="opacity-80">{t.contact.faq.a1}</p>
                 </div>
                 <div>
-                  <h4 className="font-montserrat font-semibold mb-1">Wie komme ich nach Arvidsjaur?</h4>
-                  <p className="opacity-80">Arvidsjaur hat einen eigenen Flughafen mit Verbindungen nach Stockholm. Wir bieten Transfers vom Flughafen zu unserem Standort an.</p>
+                  <h4 className="font-montserrat font-semibold mb-1">{t.contact.faq.q2}</h4>
+                  <p className="opacity-80">{t.contact.faq.a2}</p>
                 </div>
                 <div>
-                  <h4 className="font-montserrat font-semibold mb-1">Benötige ich spezielle Ausrüstung?</h4>
-                  <p className="opacity-80">Wir stellen alle Spezialausrüstungen wie Thermoanzüge, Stiefel und Helme zur Verfügung. Bringen Sie einfach warme Grundbekleidung und Ihren Abenteuersinn mit!</p>
+                  <h4 className="font-montserrat font-semibold mb-1">{t.contact.faq.q3}</h4>
+                  <p className="opacity-80">{t.contact.faq.a3}</p>
                 </div>
               </div>
             </div>
             
             <div>
-              <h3 className="font-montserrat font-semibold text-xl mb-4">Folgen Sie uns</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">{t.contact.social.title}</h3>
               <div className="flex space-x-4">
                 <a href="#" className="bg-white text-midnight hover:bg-fire hover:text-white transition w-12 h-12 rounded-full flex items-center justify-center">
                   <i className="fab fa-facebook-f"></i>
