@@ -129,4 +129,11 @@ export const sv = {
     loading: "Laddar väderdata...",
     error: "Kunde inte ladda väderdata",
   },
+  
+  // Not Found Page
+  notFound: {
+    title: "404 Sidan hittades inte",
+    message: "Sidan du letar efter finns inte eller har flyttats.",
+    returnHome: "Återgå till startsidan",
+  },
 };

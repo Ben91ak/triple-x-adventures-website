@@ -129,4 +129,11 @@ export const en = {
     loading: "Loading weather data...",
     error: "Could not load weather data",
   },
+  
+  // Not Found Page
+  notFound: {
+    title: "404 Page Not Found",
+    message: "The page you're looking for doesn't exist or has been moved.",
+    returnHome: "Return to Homepage",
+  },
 };

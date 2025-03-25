@@ -129,4 +129,11 @@ export const de = {
     loading: "Wetterdaten werden geladen...",
     error: "Wetterdaten konnten nicht geladen werden",
   },
+  
+  // Not Found Page
+  notFound: {
+    title: "404 Seite nicht gefunden",
+    message: "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    returnHome: "Zurück zur Startseite",
+  },
 };
