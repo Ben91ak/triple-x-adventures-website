@@ -124,11 +124,7 @@ export function HeroSection() {
           </div>
         </div>
         
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-          <span className="text-sm text-white mb-2 opacity-80 text-shadow-sm">Scroll down</span>
-          <ChevronDown className="h-5 w-5 text-accent-color drop-shadow-md" />
-        </div>
+        {/* Removed the scroll indicator */}
       </div>
     </section>
   );
