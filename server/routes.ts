@@ -47,36 +47,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Weather API proxy to avoid CORS and hide API key
-  router.get("/weather", async (req, res) => {
-    try {
-      const API_KEY = process.env.WEATHER_API_KEY;
-      
-      if (!API_KEY) {
-        throw new Error("Weather API key is not configured");
-      }
-      
-      const city = "Arvidsjaur,se"; // Swedish town for Triple X Adventures
-      
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
-      );
-      
-      if (!response.ok) {
-        throw new Error(`Weather API error: ${response.statusText}`);
-      }
-      
-      const data = await response.json();
-      res.json(data);
-    } catch (error) {
-      console.error("Weather API error:", error);
-      res.status(500).json({ 
-        success: false, 
-        message: "Failed to fetch weather data",
-        error: error instanceof Error ? error.message : "Unknown error" 
-      });
-    }
-  });
+  // Weather API endpoint removed as requested
 
   // Get all contact submissions (would be admin only in a real app)
   router.get("/contact", async (req, res) => {

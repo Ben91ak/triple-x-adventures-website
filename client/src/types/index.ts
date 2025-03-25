@@ -52,15 +52,7 @@ export interface GalleryImage {
   alt: string;
 }
 
-// Weather data type
-export interface WeatherData {
-  temperature: number;
-  wind: {
-    speed: number;
-  };
-  condition: string;
-  icon: string;
-}
+// Weather data type removed as requested
 
 // Package option type
 export interface PackageOption {

@@ -1,4 +1,3 @@
-import { WeatherWidget } from "@/components/ui/weather-widget";
 import { useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
@@ -86,10 +85,6 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <a href="#experiences" className="custom-button font-montserrat text-base uppercase bg-fire px-8 py-4 rounded tracking-wide font-semibold hover:bg-opacity-90 transition">{t.hero.cta}</a>
           <a href="#contact" className="custom-button font-montserrat text-base uppercase bg-midnight border-2 border-white px-8 py-4 rounded tracking-wide font-semibold hover:bg-opacity-70 transition">{t.nav.contact}</a>
-        </div>
-
-        <div className="mt-16">
-          <WeatherWidget />
         </div>
       </div>
     </section>
