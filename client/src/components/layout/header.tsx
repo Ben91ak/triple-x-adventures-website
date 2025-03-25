@@ -11,6 +11,12 @@ export function Header() {
   const { language } = useLanguage();
   const t = useTranslation(language);
 
+  const Logo = () => (
+    <Link href="/">
+      <img src="/logo.png" alt="Triple X Adventures" className="h-12" />
+    </Link>
+  );
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 60);
