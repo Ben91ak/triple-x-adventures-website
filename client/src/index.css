@@ -122,3 +122,91 @@
 .text-shadow-lg {
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
 }
+
+/* Northern Lights inspired gradient */
+.northern-lights-gradient {
+  background: linear-gradient(180deg, var(--dark-bg) 0%, #0A1520 10%, #122835 40%, #0D1F2D 60%, #071520 85%, var(--dark-bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.northern-lights-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: linear-gradient(90deg, 
+    rgba(30, 85, 55, 0.15),
+    rgba(164, 210, 51, 0.1),
+    rgba(70, 140, 100, 0.15),
+    rgba(30, 90, 120, 0.1)
+  );
+  filter: blur(50px);
+  opacity: 0.7;
+  transform: translateY(-50%);
+  animation: northernLightsFlow 15s ease-in-out infinite alternate;
+}
+
+.northern-lights-gradient::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  right: 0;
+  height: 200px;
+  width: 300%;
+  background: linear-gradient(90deg, 
+    rgba(30, 85, 85, 0), 
+    rgba(30, 200, 85, 0.1), 
+    rgba(164, 210, 51, 0.2), 
+    rgba(70, 90, 140, 0.1),
+    rgba(30, 85, 85, 0)
+  );
+  filter: blur(40px);
+  opacity: 0.5;
+  animation: northernLightsShimmer 20s ease-in-out infinite;
+}
+
+@keyframes northernLightsFlow {
+  0% {
+    transform: translateY(-60%) translateX(-10%);
+  }
+  50% {
+    transform: translateY(-50%) translateX(5%);
+  }
+  100% {
+    transform: translateY(-40%) translateX(-5%);
+  }
+}
+
+@keyframes northernLightsShimmer {
+  0% {
+    transform: translateX(-10%) translateY(-70%);
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(0%) translateY(-60%);
+    opacity: 0.7;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(10%) translateY(-70%);
+    opacity: 0.3;
+  }
+}
+
+/* Hero to intro section transition */
+.hero-transition-overlap {
+  margin-top: -200px;
+  position: relative;
+  z-index: 40;
+  padding-top: 200px;
+  border-top: 1px solid rgba(164, 210, 51, 0.1);
+}

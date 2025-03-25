@@ -114,7 +114,7 @@ export function HeroSection() {
             />
           </div>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
             <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-all">
               {t.hero.cta}
             </a>
@@ -123,8 +123,13 @@ export function HeroSection() {
             </a>
           </div>
         </div>
-        
-        {/* Removed the scroll indicator */}
+      </div>
+      
+      {/* Northern Lights transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-b from-transparent via-dark-bg to-[#0A1520] z-40">
+        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-40">
+          <div className="w-full h-full northern-lights-gradient opacity-70"></div>
+        </div>
       </div>
     </section>
   );
