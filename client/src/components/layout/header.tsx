@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/translations";
+import { LanguageSelector } from "@/components/ui/language-selector";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { language } = useLanguage();
+  const t = useTranslation(language);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,19 +38,18 @@ export function Header() {
             </div>
             
             <div className="hidden md:flex items-center space-x-6">
-              <a href="/" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Startseite</a>
-              <a href="#pakete" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Pakete</a>
-              <a href="#about" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Über uns</a>
-              <a href="#restaurant" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Triple X Taste</a>
-              <a href="#management" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Triple X Management</a>
-              <a href="#contact" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Kontakt</a>
-              <a href="#faq" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">FAQ</a>
-              <div className="ml-2 border border-white rounded px-3 py-1 hover:bg-white hover:text-midnight transition">
-                <span>DE</span>
-              </div>
+              <a href="/" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">{t.nav.home}</a>
+              <a href="#pakete" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">{t.nav.packages}</a>
+              <a href="#about" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">{t.nav.about}</a>
+              <a href="#restaurant" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">{t.nav.restaurant}</a>
+              <a href="#accommodations" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">{t.nav.accommodations}</a>
+              <a href="#gallery" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">{t.nav.gallery}</a>
+              <a href="#contact" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">{t.nav.contact}</a>
+              <LanguageSelector />
             </div>
             
-            <div className="md:hidden flex items-center">
+            <div className="md:hidden flex items-center space-x-2">
+              <LanguageSelector className="mr-1" />
               <button 
                 type="button" 
                 className="mobile-menu-button"
@@ -63,16 +67,13 @@ export function Header() {
         {/* Mobile menu */}
         <div className={`mobile-menu md:hidden ${mobileMenuOpen ? '' : 'hidden'}`}>
           <div className="px-2 pt-2 pb-4 space-y-1 bg-midnight">
-            <a href="/" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Startseite</a>
-            <a href="#pakete" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Pakete</a>
-            <a href="#about" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Über uns</a>
-            <a href="#restaurant" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Triple X Taste</a>
-            <a href="#management" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Triple X Management</a>
-            <a href="#contact" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Kontakt</a>
-            <a href="#faq" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-            <div className="mt-2 border border-white rounded px-3 py-2 text-center">
-              <span>DE</span>
-            </div>
+            <a href="/" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>{t.nav.home}</a>
+            <a href="#pakete" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>{t.nav.packages}</a>
+            <a href="#about" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>{t.nav.about}</a>
+            <a href="#restaurant" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>{t.nav.restaurant}</a>
+            <a href="#accommodations" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>{t.nav.accommodations}</a>
+            <a href="#gallery" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>{t.nav.gallery}</a>
+            <a href="#contact" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>{t.nav.contact}</a>
           </div>
         </div>
       </nav>
