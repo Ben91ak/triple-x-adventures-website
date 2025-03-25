@@ -43,22 +43,19 @@ export function HeroSection() {
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden">
-      {/* Video Background */}
+      {/* Stylish gradient background */}
       <div className="absolute inset-0 z-0">
-        <video 
-          ref={videoRef}
-          className="absolute object-cover w-full h-full"
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          src="/videos/TXA Teaser 2025.mov"
-        >
-          {/* Note: Using direct src attribute as an alternative approach */}
-        </video>
+        {/* Dynamic background gradient */}
+        <div className="absolute inset-0 bg-gradient-animated"></div>
         
-        {/* Fallback dark background if video fails to load */}
-        <div className="absolute inset-0 bg-gray-900"></div>
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMiIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgMjcuNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMSAxYTUuNSA1LjUgMCAxIDEgMCAxMSA1LjUgNS41IDAgMCAxIDAtMTF6TTIwIDIwLjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAgMWE1LjUgNS41IDAgMSAxIDAgMTEgNS41IDUuNSAwIDAgMSAwLTExeiIvPjwvZz48L2c+PC9zdmc+')] opacity-30"></div>
+        
+        {/* Accent color light effect */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-72 bg-accent-color/20 rounded-full blur-3xl"></div>
+        
+        {/* Additional accent glow */}
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-accent-color/5 rounded-full blur-3xl"></div>
       </div>
       
       {/* Dark overlay */}
