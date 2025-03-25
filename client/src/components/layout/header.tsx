@@ -25,18 +25,24 @@ export function Header() {
           <div className="flex justify-between h-20">
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0 flex items-center">
-                <span className="font-montserrat font-bold text-2xl tracking-tight">
-                  <span className="text-fire">XXX</span> ADVENTURES
+                <img src="https://placehold.co/40x40/green/white?text=X" alt="Triple X Logo" className="h-10 w-auto mr-2" />
+                <span className="font-montserrat font-bold text-xl tracking-tight">
+                  TRIPLE <span className="text-green-400">X</span>
                 </span>
               </Link>
             </div>
             
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#experiences" className="nav-link font-montserrat text-sm uppercase tracking-wide font-semibold hover:text-fire">Experiences</a>
-              <a href="#stay" className="nav-link font-montserrat text-sm uppercase tracking-wide font-semibold hover:text-fire">Stay</a>
-              <a href="#restaurant" className="nav-link font-montserrat text-sm uppercase tracking-wide font-semibold hover:text-fire">Restaurant</a>
-              <a href="#about" className="nav-link font-montserrat text-sm uppercase tracking-wide font-semibold hover:text-fire">About</a>
-              <a href="#contact" className="custom-button font-montserrat text-sm uppercase bg-fire px-6 py-3 rounded tracking-wide font-semibold hover:bg-opacity-90 transition">Book Now</a>
+            <div className="hidden md:flex items-center space-x-6">
+              <a href="/" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Startseite</a>
+              <a href="#pakete" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Pakete</a>
+              <a href="#about" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Über uns</a>
+              <a href="#restaurant" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Triple X Taste</a>
+              <a href="#management" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Triple X Management</a>
+              <a href="#contact" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">Kontakt</a>
+              <a href="#faq" className="nav-link font-montserrat text-sm tracking-wide font-semibold hover:text-green-400">FAQ</a>
+              <div className="ml-2 border border-white rounded px-3 py-1 hover:bg-white hover:text-midnight transition">
+                <span>DE</span>
+              </div>
             </div>
             
             <div className="md:hidden flex items-center">
@@ -57,11 +63,16 @@ export function Header() {
         {/* Mobile menu */}
         <div className={`mobile-menu md:hidden ${mobileMenuOpen ? '' : 'hidden'}`}>
           <div className="px-2 pt-2 pb-4 space-y-1 bg-midnight">
-            <a href="#experiences" className="block px-3 py-2 rounded font-montserrat text-sm uppercase tracking-wide font-semibold hover:bg-gray-800 hover:text-fire" onClick={() => setMobileMenuOpen(false)}>Experiences</a>
-            <a href="#stay" className="block px-3 py-2 rounded font-montserrat text-sm uppercase tracking-wide font-semibold hover:bg-gray-800 hover:text-fire" onClick={() => setMobileMenuOpen(false)}>Stay</a>
-            <a href="#restaurant" className="block px-3 py-2 rounded font-montserrat text-sm uppercase tracking-wide font-semibold hover:bg-gray-800 hover:text-fire" onClick={() => setMobileMenuOpen(false)}>Restaurant</a>
-            <a href="#about" className="block px-3 py-2 rounded font-montserrat text-sm uppercase tracking-wide font-semibold hover:bg-gray-800 hover:text-fire" onClick={() => setMobileMenuOpen(false)}>About</a>
-            <a href="#contact" className="block px-3 py-3 mt-2 rounded font-montserrat text-sm uppercase bg-fire text-center tracking-wide font-semibold hover:bg-opacity-90 transition" onClick={() => setMobileMenuOpen(false)}>Book Now</a>
+            <a href="/" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Startseite</a>
+            <a href="#pakete" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Pakete</a>
+            <a href="#about" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Über uns</a>
+            <a href="#restaurant" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Triple X Taste</a>
+            <a href="#management" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Triple X Management</a>
+            <a href="#contact" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>Kontakt</a>
+            <a href="#faq" className="block px-3 py-2 rounded font-montserrat text-sm tracking-wide font-semibold hover:bg-gray-800 hover:text-green-400" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
+            <div className="mt-2 border border-white rounded px-3 py-2 text-center">
+              <span>DE</span>
+            </div>
           </div>
         </div>
       </nav>
