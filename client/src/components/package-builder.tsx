@@ -11,56 +11,56 @@ const packageOptionsByLanguage = {
       title: "Snowmobile Adventure",
       price: 2495,
       description: "Half-day snowmobile safari through forests and across frozen lakes",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "dogsledding",
       title: "Dog Sledding",
       price: 1895,
       description: "Guide your own husky team through the winter wonderland",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "northernlights",
       title: "Northern Lights",
       price: 1695,
       description: "Evening expedition to hunt for the magical Aurora Borealis",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "txachalet",
       title: "TXA Chalet",
       price: 3995,
       description: "Exclusive chalet with private sauna and panoramic views",
-      category: "accommodation"
+      category: "accommodation" as const
     },
     {
       id: "partnerhotel",
       title: "Partner Hotel",
       price: 1495,
       description: "Comfortable hotel in Arvidsjaur with all amenities",
-      category: "accommodation"
+      category: "accommodation" as const
     },
     {
       id: "sauna",
       title: "Traditional Sauna",
       price: 895,
       description: "Authentic Finnish sauna experience with ice bath",
-      category: "addon"
+      category: "addon" as const
     },
     {
       id: "dinner",
       title: "Wilderness Dinner",
       price: 995,
       description: "Gourmet dinner experience at JayJay's Restaurant",
-      category: "addon"
+      category: "addon" as const
     },
     {
       id: "photography",
       title: "Photography Package",
       price: 695,
       description: "Professional photos of your adventure",
-      category: "addon"
+      category: "addon" as const
     }
   ],
   de: [
@@ -69,56 +69,56 @@ const packageOptionsByLanguage = {
       title: "Schneemobil-Abenteuer",
       price: 2495,
       description: "Halbtägige Schneemobilsafari durch Wälder und über gefrorene Seen",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "dogsledding",
       title: "Hundeschlittenfahrt",
       price: 1895,
       description: "Führen Sie Ihr eigenes Husky-Team durch das Winterwunderland",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "northernlights",
       title: "Nordlichter",
       price: 1695,
       description: "Abendliche Expedition zur Jagd nach der magischen Aurora Borealis",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "txachalet",
       title: "TXA-Chalet",
       price: 3995,
       description: "Exklusives Chalet mit privater Sauna und Panoramablick",
-      category: "accommodation"
+      category: "accommodation" as const
     },
     {
       id: "partnerhotel",
       title: "Partnerhotel",
       price: 1495,
       description: "Komfortables Hotel in Arvidsjaur mit allen Annehmlichkeiten",
-      category: "accommodation"
+      category: "accommodation" as const
     },
     {
       id: "sauna",
       title: "Traditionelle Sauna",
       price: 895,
       description: "Authentisches finnisches Saunaerlebnis mit Eisbad",
-      category: "addon"
+      category: "addon" as const
     },
     {
       id: "dinner",
       title: "Wildnis-Dinner",
       price: 995,
       description: "Gourmet-Dinner-Erlebnis im JayJay's Restaurant",
-      category: "addon"
+      category: "addon" as const
     },
     {
       id: "photography",
       title: "Fotografie-Paket",
       price: 695,
       description: "Professionelle Fotos Ihres Abenteuers",
-      category: "addon"
+      category: "addon" as const
     }
   ],
   sv: [
@@ -127,56 +127,56 @@ const packageOptionsByLanguage = {
       title: "Snöskotersafari",
       price: 2495,
       description: "Halvdags snöskotersafari genom skogar och över frusna sjöar",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "dogsledding",
       title: "Hundspann",
       price: 1895,
       description: "Styr ditt eget husky-team genom vinterlandskapet",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "northernlights",
       title: "Norrsken",
       price: 1695,
       description: "Kvällsexpedition för att jaga det magiska norrskenet",
-      category: "core"
+      category: "core" as const
     },
     {
       id: "txachalet",
       title: "TXA-Chalet",
       price: 3995,
       description: "Exklusiv stuga med privat bastu och panoramautsikt",
-      category: "accommodation"
+      category: "accommodation" as const
     },
     {
       id: "partnerhotel",
       title: "Partnerhotell",
       price: 1495,
       description: "Bekvämt hotell i Arvidsjaur med alla bekvämligheter",
-      category: "accommodation"
+      category: "accommodation" as const
     },
     {
       id: "sauna",
       title: "Traditionell Bastu",
       price: 895,
       description: "Autentisk finsk bastuupplevelse med isbad",
-      category: "addon"
+      category: "addon" as const
     },
     {
       id: "dinner",
       title: "Vildmarksmiddag",
       price: 995,
       description: "Gourmetmiddagsupplevelse på JayJay's Restaurant",
-      category: "addon"
+      category: "addon" as const
     },
     {
       id: "photography",
       title: "Fotograferingspaket",
       price: 695,
       description: "Professionella foton av ditt äventyr",
-      category: "addon"
+      category: "addon" as const
     }
   ]
 };
