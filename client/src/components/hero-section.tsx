@@ -43,16 +43,28 @@ export function HeroSection() {
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen bg-gradient-animated overflow-hidden">
-      {/* Semi-transparent overlay with pattern */}
-      <div className="absolute inset-0 bg-dark-bg bg-opacity-60 z-10"></div>
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video 
+          ref={videoRef}
+          className="absolute object-cover w-full h-full"
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+        >
+          <source src="/videos/arctic-adventure.mp4" type="video/mp4" />
+          {/* Fallback image if video fails to load */}
+          <img 
+            src="https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" 
+            alt="Arctic adventure background" 
+            className="absolute object-cover w-full h-full" 
+          />
+        </video>
+      </div>
       
-      {/* Background image with blur and dark overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center brightness-50 blur-[2px]"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80')`,
-        }}
-      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-dark-bg bg-opacity-60 z-10"></div>
       
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-20 pointer-events-none"></div>
