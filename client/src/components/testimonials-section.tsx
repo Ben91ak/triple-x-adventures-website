@@ -1,6 +1,7 @@
 import { Testimonial } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
+import { Quote, Star } from "lucide-react";
 
 // Testimonial data by language
 const testimonialsByLanguage = {
@@ -126,37 +127,62 @@ export function TestimonialsSection() {
   const testimonials: Testimonial[] = testimonialsByLanguage[language];
 
   return (
-    <section className="py-16 md:py-24 bg-ice">
-      <div className="container mx-auto px-4">
+    <section id="testimonials" className="py-24 md:py-32 relative">
+      {/* Background with diagonal gradient */}
+      <div className="absolute inset-0 bg-gradient-to-bl from-dark-bg via-card-bg to-dark-bg opacity-95 z-0"></div>
+      
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4 text-midnight">{content.title}</h2>
-          <p className="text-lg max-w-3xl mx-auto text-slate">{content.subtitle}</p>
+          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
+            {language === 'de' ? 'Erfahrungen' : language === 'sv' ? 'Upplevelser' : 'Experiences'}
+          </span>
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+            {content.title}
+          </h2>
+          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+            {content.subtitle}
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white rounded-lg shadow-lg p-8 relative">
-              <div className="text-fire text-4xl absolute -top-4 left-6">
-                <i className="fas fa-quote-left"></i>
-              </div>
-              <div className="pt-6">
-                <p className="mb-6 text-slate italic">{testimonial.text}</p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                    <img 
-                      src={testimonial.author.image} 
-                      alt={testimonial.author.name} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-montserrat font-semibold text-midnight">{testimonial.author.name}</h4>
-                    <p className="text-sm text-gray-500">{testimonial.author.location}</p>
-                  </div>
-                  <div className="ml-auto text-fire">
+            <div key={testimonial.id} className="group relative">
+              {/* Decorative background element */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-accent-color/5 rounded-xl blur-xl opacity-0 group-hover:opacity-70 transition-all duration-700"></div>
+              
+              {/* Card */}
+              <div className="card bg-card-bg border border-white/10 backdrop-blur-sm rounded-xl p-8 transition-all duration-300 relative z-10 h-full flex flex-col">
+                {/* Quote icon */}
+                <div className="absolute -top-4 -left-2 text-accent-color/80">
+                  <Quote size={40} className="opacity-50" />
+                </div>
+                
+                <div className="pt-6 flex-grow">
+                  <p className="mb-6 text-secondary-text">{testimonial.text}</p>
+                  
+                  {/* Stars */}
+                  <div className="flex mb-4 text-accent-color">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <i key={i} className="fas fa-star"></i>
+                      <Star key={i} size={16} className="fill-accent-color" />
                     ))}
+                  </div>
+                  
+                  {/* Author info */}
+                  <div className="flex items-center mt-auto">
+                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-accent-color/20 p-0.5">
+                      <img 
+                        src={testimonial.author.image} 
+                        alt={testimonial.author.name} 
+                        className="w-full h-full object-cover rounded-full"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-primary-text">{testimonial.author.name}</h4>
+                      <p className="text-sm text-secondary-text/80">{testimonial.author.location}</p>
+                    </div>
                   </div>
                 </div>
               </div>
