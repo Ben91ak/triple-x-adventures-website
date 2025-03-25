@@ -86,9 +86,13 @@ export function Footer() {
           {/* Column 1 - Logo & Description */}
           <div>
             <div className="mb-4">
-              <h3 className="text-2xl font-bold text-primary-text mb-1 bg-clip-text text-transparent bg-gradient-to-r from-primary-text to-accent-color">
-                Triple X Adventures
-              </h3>
+              <Link href="/">
+                <img 
+                  src="/logo.png" 
+                  alt="Triple X Adventures" 
+                  className="h-16 mb-4 hover:opacity-90 transition-opacity" 
+                />
+              </Link>
               <div className="w-12 h-1 bg-accent-color rounded-full"></div>
             </div>
             <p className="text-secondary-text mb-6 leading-relaxed">{content.description}</p>

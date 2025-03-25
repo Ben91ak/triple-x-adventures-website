@@ -64,21 +64,16 @@ export function Header() {
               <Link href="/" className="flex-shrink-0 flex items-center group">
                 <div className="relative">
                   {/* Logo glow effect */}
-                  <div className="absolute -inset-1 rounded-full bg-accent-color/20 blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -inset-2 rounded-lg bg-accent-color/20 blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
-                  {/* Logo emblem */}
-                  <div className="relative h-10 w-10 rounded-full bg-gradient-to-br from-accent-color to-purple-600 flex items-center justify-center mr-3 overflow-hidden border border-white/20 group-hover:border-white/40 transition-colors">
-                    <span className="text-lg font-bold text-white drop-shadow-sm">X</span>
-                    <div className="absolute inset-0 bg-black/10"></div>
+                  {/* Logo */}
+                  <div className="relative overflow-hidden h-10 transition-all">
+                    <img 
+                      src="/logo.png" 
+                      alt="Triple X Adventures" 
+                      className="h-10 object-contain" 
+                    />
                   </div>
-                </div>
-                
-                <div className="flex flex-col ml-2">
-                  <span className="font-bold text-xl tracking-tight">
-                    <span className="text-primary-text group-hover:text-white transition-colors">TRIPLE</span>
-                    <span className="text-accent-color ml-1">X</span>
-                  </span>
-                  <span className="text-xs text-secondary-text/70 tracking-widest uppercase -mt-1">Adventures</span>
                 </div>
               </Link>
             </div>
