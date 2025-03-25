@@ -79,8 +79,8 @@ export function Header() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center">
-              <div className="mr-6 flex items-center space-x-1">
+            <div className="hidden lg:flex items-center">
+              <div className="mr-6 flex items-center flex-wrap justify-center">
                 {[
                   { href: "/", label: t.nav.home },
                   { href: "#pakete", label: t.nav.packages },
@@ -93,7 +93,7 @@ export function Header() {
                   <a 
                     key={index}
                     href={item.href} 
-                    className="relative px-4 py-2 text-sm tracking-wide font-medium text-white transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
+                    className="relative px-2 lg:px-4 py-2 text-xs lg:text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
                   >
                     {item.label}
                   </a>
@@ -106,7 +106,7 @@ export function Header() {
             </div>
             
             {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center space-x-3">
+            <div className="lg:hidden flex items-center space-x-3">
               <LanguageSelector className="mr-1" />
               <button 
                 type="button" 
@@ -117,7 +117,7 @@ export function Header() {
                 {mobileMenuOpen ? (
                   <X size={18} className="text-accent-color" />
                 ) : (
-                  <Menu size={18} className="text-secondary-text" />
+                  <Menu size={18} className="text-white" />
                 )}
               </button>
             </div>
@@ -126,7 +126,7 @@ export function Header() {
         
         {/* Mobile menu with animation */}
         <div 
-          className={`mobile-menu md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             mobileMenuOpen ? 'max-h-[440px] opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
