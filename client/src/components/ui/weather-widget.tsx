@@ -1,8 +1,12 @@
 import { useWeather } from "@/hooks/use-weather";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/translations";
 
 export function WeatherWidget() {
   const { data: weather, isLoading, error } = useWeather();
+  const { language } = useLanguage();
+  const t = useTranslation(language);
 
   if (isLoading) {
     return (
@@ -14,7 +18,7 @@ export function WeatherWidget() {
           <div className="h-8 border-r border-gray-500"></div>
           <Skeleton className="w-24 h-6" />
         </div>
-        <div className="text-sm text-ice opacity-80 mt-1">Current Weather in Arvidsjaur</div>
+        <div className="text-sm text-ice opacity-80 mt-1">{t.weather.loading}</div>
       </div>
     );
   }
@@ -24,9 +28,9 @@ export function WeatherWidget() {
       <div className="inline-block bg-midnight bg-opacity-70 p-4 rounded-lg">
         <div className="text-ice text-base">
           <i className="fas fa-exclamation-circle mr-2"></i>
-          <span>Weather data unavailable</span>
+          <span>{t.weather.error}</span>
         </div>
-        <div className="text-sm text-ice opacity-80 mt-1">Current Weather in Arvidsjaur</div>
+        <div className="text-sm text-ice opacity-80 mt-1">{t.weather.title}</div>
       </div>
     );
   }
@@ -49,7 +53,7 @@ export function WeatherWidget() {
           <span>{weather.condition}</span>
         </div>
       </div>
-      <div className="text-sm text-ice opacity-80 mt-1">Current Weather in Arvidsjaur</div>
+      <div className="text-sm text-ice opacity-80 mt-1">{t.weather.title}</div>
     </div>
   );
 }
