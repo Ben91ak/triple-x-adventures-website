@@ -52,15 +52,13 @@ export function HeroSection() {
           muted 
           loop 
           playsInline
+          src="/videos/TXA Teaser 2025.mov"
         >
-          <source src="/videos/TXA Teaser 2025.mov" type="video/quicktime" />
-          {/* Fallback image if video fails to load */}
-          <img 
-            src="https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" 
-            alt="Arctic adventure background" 
-            className="absolute object-cover w-full h-full" 
-          />
+          {/* Note: Using direct src attribute as an alternative approach */}
         </video>
+        
+        {/* Fallback dark background if video fails to load */}
+        <div className="absolute inset-0 bg-gray-900"></div>
       </div>
       
       {/* Dark overlay */}
