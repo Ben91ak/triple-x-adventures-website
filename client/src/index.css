@@ -208,5 +208,77 @@
   position: relative;
   z-index: 40;
   padding-top: 200px;
-  border-top: 1px solid rgba(164, 210, 51, 0.1);
+}
+
+/* Snow/ice overlay transition effect */
+.snow-overlay {
+  position: absolute;
+  bottom: -2px; /* Small overlap to prevent any gap */
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDIwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZD0iTTAsNTAgQzE0MCwxNzAgNDAwLC0yMCA3NTAsMTAwIEMxMDUwLDIwMCAxMzAwLDMwIDE0NDAsMTAwIEwxNDQwLDIwMCBMMCwyMDAgWiIvPjwvc3ZnPg==');
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 45;
+  opacity: 0.98;
+  filter: drop-shadow(0 -5px 10px rgba(164, 210, 51, 0.05));
+}
+
+.snow-overlay-animated {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 180px; /* Taller to allow animation movement */
+  z-index: 44;
+  overflow: hidden;
+}
+
+.snow-overlay-animated::before,
+.snow-overlay-animated::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDIwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZmlsbC1vcGFjaXR5PSIwLjciIGQ9Ik0wLDAgQzEyMCw4MCAzMDAsMTAgNTAwLDEzMCBDNzAwLDIwIDkwMCwxNzAgMTE1MCw1MCBDMTM1MCwxNTAgMTQ0MCw4MCBDMTQ0MCwyMDAgTDAsMjAwIFoiLz48L3N2Zz4=');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
+.snow-overlay-animated::before {
+  animation: snowMove 15s linear infinite;
+}
+
+.snow-overlay-animated::after {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDIwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZmlsbC1vcGFjaXR5PSIwLjYiIGQ9Ik0wLDEwMCBDMjAwLDUwIDQwMCwxNTAgNjAwLDMwIEM4MDAsMTIwIDEwMDAsNTAgMTIwMCwxMjAgQzEzMDAsNzAgMTQ0MCwxMzAgTDE0NDAsMjAwIEwwLDIwMCBaIi8+PC9zdmc+');
+  animation: snowMoveAlt 20s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes snowMove {
+  0% {
+    transform: translateX(-5%);
+  }
+  50% {
+    transform: translateX(3%);
+  }
+  100% {
+    transform: translateX(-5%);
+  }
+}
+
+@keyframes snowMoveAlt {
+  0% {
+    transform: translateX(5%);
+  }
+  50% {
+    transform: translateX(-3%);
+  }
+  100% {
+    transform: translateX(5%);
+  }
 }

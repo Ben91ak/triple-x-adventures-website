@@ -130,6 +130,12 @@ export function HeroSection() {
         {/* Gradient overlay for smooth transition */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/90 to-dark-bg"></div>
       </div>
+      
+      {/* Snow/ice overlay animation */}
+      <div className="snow-overlay-animated"></div>
+      
+      {/* Snow/ice overlay for transition to next section */}
+      <div className="snow-overlay"></div>
     </section>
   );
 }
