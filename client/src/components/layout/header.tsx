@@ -93,7 +93,7 @@ export function Header() {
                   <a 
                     key={index}
                     href={item.href} 
-                    className="relative px-4 py-2 text-sm tracking-wide font-medium text-secondary-text transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
+                    className="relative px-4 py-2 text-sm tracking-wide font-medium text-white transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
                   >
                     {item.label}
                   </a>
@@ -143,12 +143,12 @@ export function Header() {
               <a 
                 key={index}
                 href={item.href} 
-                className="flex items-center px-4 py-3 rounded-lg hover:bg-white/5 text-secondary-text hover:text-accent-color group transition-colors"
+                className="flex items-center px-4 py-3 rounded-lg hover:bg-white/5 text-white hover:text-accent-color group transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <ChevronRight 
                   size={16} 
-                  className="mr-3 text-accent-color/60 group-hover:translate-x-1 transition-transform" 
+                  className="mr-3 text-accent-color/70 group-hover:translate-x-1 transition-transform" 
                 />
                 <span className="font-medium">{item.label}</span>
               </a>

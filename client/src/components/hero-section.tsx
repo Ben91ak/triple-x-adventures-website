@@ -86,8 +86,8 @@ export function HeroSection() {
         <div className="text-center max-w-4xl mx-auto">
           <div className="mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-sm">{content.welcome}</div>
           
-          <h1 className="font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent text-shadow-lg">
-            TRIPLE <span className="text-accent-color text-shadow-lg">X</span> ADVENTURES
+          <h1 className="font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent">
+            TRIPLE <span className="text-accent-color">X</span> ADVENTURES
           </h1>
           
           <div 
