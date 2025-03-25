@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
+import { ChevronDown } from "lucide-react";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -41,50 +42,68 @@ export function HeroSection() {
   const content = heroContent[language];
 
   return (
-    <section className="relative flex items-center justify-center text-white min-h-screen">
-      {/* Video background with fallback */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <div className="absolute inset-0 bg-midnight opacity-40 z-10"></div>
-        {/* Video will be added when provided */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80')`,
-          }}
-        />
-      </div>
+    <section className="relative flex items-center justify-center text-primary-text h-screen bg-gradient-animated overflow-hidden">
+      {/* Semi-transparent overlay with pattern */}
+      <div className="absolute inset-0 bg-dark-bg bg-opacity-60 z-10"></div>
+      
+      {/* Background image with blur and dark overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center brightness-50 blur-[2px]"
+        style={{
+          backgroundImage: `url('https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80')`,
+        }}
+      />
+      
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-20 pointer-events-none"></div>
 
-      <div className="container mx-auto px-4 text-center relative z-20">
-        <div className="mb-4 text-ice">{content.welcome}</div>
-        <h1 className="font-montserrat font-bold text-4xl md:text-6xl mb-6 tracking-tight">
-          TRIPLE <span className="text-green-400">X</span> ADVENTURES
-        </h1>
-        <p 
-          className="font-opensans text-lg md:text-xl mb-4 max-w-2xl mx-auto"
-          dangerouslySetInnerHTML={{ __html: content.adventure }}
-        />
-        <p className="text-sm mb-8">65.5916° N, 19.1668°</p>
-        
-        <div className="max-w-3xl mx-auto mb-8">
-          <p 
-            className="mb-4"
-            dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
+      <div className="container mx-auto px-4 relative z-30 mt-16 md:mt-0">
+        {/* Hero Content */}
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="mb-3 text-secondary-text text-sm font-medium tracking-wider uppercase">{content.welcome}</div>
+          
+          <h1 className="font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent">
+            TRIPLE <span className="text-accent-color">X</span> ADVENTURES
+          </h1>
+          
+          <div 
+            className="text-lg md:text-xl mb-4 max-w-2xl mx-auto font-light"
+            dangerouslySetInnerHTML={{ __html: content.adventure }}
           />
           
-          <p 
-            className="mb-4"
-            dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
-          />
+          <p className="text-sm mb-8 font-mono text-secondary-text">65.5916° N, 19.1668° E</p>
           
-          <p 
-            className="mb-4"
-            dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
-          />
+          <div className="glass-card p-6 md:p-8 mb-12 max-w-3xl mx-auto text-left">
+            <p 
+              className="mb-4 text-secondary-text leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
+            />
+            
+            <p 
+              className="mb-4 text-secondary-text leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
+            />
+            
+            <p 
+              className="text-secondary-text leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
+            />
+          </div>
+          
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-all">
+              {t.hero.cta}
+            </a>
+            <a href="#contact" className="btn-ghost inline-flex items-center justify-center gap-2 text-sm uppercase tracking-wide font-medium transition-all">
+              {t.nav.contact}
+            </a>
+          </div>
         </div>
         
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="#experiences" className="custom-button font-montserrat text-base uppercase bg-fire px-8 py-4 rounded tracking-wide font-semibold hover:bg-opacity-90 transition">{t.hero.cta}</a>
-          <a href="#contact" className="custom-button font-montserrat text-base uppercase bg-midnight border-2 border-white px-8 py-4 rounded tracking-wide font-semibold hover:bg-opacity-70 transition">{t.nav.contact}</a>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+          <span className="text-sm text-secondary-text mb-2 opacity-80">Scroll down</span>
+          <ChevronDown className="h-5 w-5 text-accent-color" />
         </div>
       </div>
     </section>
