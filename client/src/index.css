@@ -216,29 +216,52 @@
   bottom: -2px; /* Small overlap to prevent any gap */
   left: 0;
   width: 100%;
-  height: 70px; /* Short to not interfere with content */
+  height: 100px; /* Taller to be more visible */
   z-index: 45;
-  overflow: hidden;
+  pointer-events: none; /* Important: Prevents interaction issues */
 }
 
-.wave-overlay::before, 
-.wave-overlay::after {
+/* Main wave shape */
+.wave-overlay .wave-shape {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDEwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZD0iTTAsMTAwIEwwLDYwIEMxODAsODUgMzYwLDQwIDU0MCw1MCBDNZAMLDY1IDkwMCw0MCAxMDgwLDU1IEMxMjYwLDcwIDE0NDAsMzUgMTQ0MCw2MCBMMTQ0MCwxMDAgWiIvPjwvc3ZnPg==');
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDEwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZD0iTTAsMTAwIEwwLDY1IEMxMDAsMzUgMzAwLDkwIDUwMCw1MCBDNTA1LDQ4LjUgNzAwLDMwIDkwMCw2MCBDMTA3MCw4NSAxMjcwLDQwIDE0NDAsNzAgTDE0NDAsMTAwIFoiLz48L3N2Zz4=');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
-.wave-overlay::after {
+/* Animated duplicate for effect */
+.wave-overlay .wave-animated {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDEwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZD0iTTAsMTAwIEwwLDY1IEMxMDAsMzUgMzAwLDkwIDUwMCw1MCBDNTA1LDQ4LjUgNzAwLDMwIDkwMCw2MCBDMTA3MCw4NSAxMjcwLDQwIDE0NDAsNzAgTDE0NDAsMTAwIFoiLz48L3N2Zz4=');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   opacity: 0.8;
   animation: wave 15s linear infinite;
   animation-delay: -5s;
+  filter: drop-shadow(0 -4px 2px rgba(164, 210, 51, 0.15));
+}
+
+/* Accent line */
+.wave-overlay .accent-line {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(164, 210, 51, 0.2), transparent);
+  z-index: 1;
 }
 
 @keyframes wave {
@@ -246,22 +269,22 @@
     transform: translateX(0%) scaleY(1);
   }
   50% {
-    transform: translateX(-1%) scaleY(1.02);
+    transform: translateX(-1.5%) scaleY(1.05);
   }
   100% {
     transform: translateX(0%) scaleY(1);
   }
 }
 
-/* More subtle animated wave for better responsiveness */
+/* Responsive adjustments */
 @media (min-width: 768px) {
   .wave-overlay {
-    height: 80px; /* Slightly taller on larger screens */
+    height: 120px; /* Taller on larger screens */
   }
 }
 
 @media (min-width: 1024px) {
   .wave-overlay {
-    height: 90px; /* Even taller on largest screens */
+    height: 140px; /* Even taller on largest screens */
   }
 }
