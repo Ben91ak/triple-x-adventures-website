@@ -75,8 +75,8 @@ export function HeroSection() {
         <div className={`absolute inset-0 bg-gradient-animated transition-opacity duration-500 ${videoError ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
       
-      {/* Dark overlay - increased opacity for better text contrast */}
-      <div className="absolute inset-0 bg-dark-bg bg-opacity-75 z-10"></div>
+      {/* Dark overlay - improved for better text contrast and smoother transition */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg/70 via-dark-bg/70 to-dark-bg/90 z-10"></div>
       
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-20 pointer-events-none"></div>
@@ -125,11 +125,10 @@ export function HeroSection() {
         </div>
       </div>
       
-      {/* Northern Lights transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-52 bg-gradient-to-b from-transparent via-dark-bg to-[#0A1520] z-40">
-        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-40">
-          <div className="w-full h-full northern-lights-gradient opacity-70"></div>
-        </div>
+      {/* Video to next section smooth fade transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-[300px] z-40">
+        {/* Gradient overlay for smooth transition */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/90 to-dark-bg"></div>
       </div>
     </section>
   );
