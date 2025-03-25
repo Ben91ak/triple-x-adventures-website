@@ -210,75 +210,58 @@
   padding-top: 200px;
 }
 
-/* Snow/ice overlay transition effect */
-.snow-overlay {
+/* Wave transition effect */
+.wave-overlay {
   position: absolute;
   bottom: -2px; /* Small overlap to prevent any gap */
   left: 0;
   width: 100%;
-  height: 150px;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDIwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZD0iTTAsNTAgQzE0MCwxNzAgNDAwLC0yMCA3NTAsMTAwIEMxMDUwLDIwMCAxMzAwLDMwIDE0NDAsMTAwIEwxNDQwLDIwMCBMMCwyMDAgWiIvPjwvc3ZnPg==');
-  background-size: cover;
-  background-repeat: no-repeat;
+  height: 70px; /* Short to not interfere with content */
   z-index: 45;
-  opacity: 0.98;
-  filter: drop-shadow(0 -5px 10px rgba(164, 210, 51, 0.05));
+  overflow: hidden;
 }
 
-.snow-overlay-animated {
+.wave-overlay::before, 
+.wave-overlay::after {
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 180px; /* Taller to allow animation movement */
-  z-index: 44;
-  overflow: hidden;
-}
-
-.snow-overlay-animated::before,
-.snow-overlay-animated::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: -50%;
-  width: 200%;
   height: 100%;
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDIwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZmlsbC1vcGFjaXR5PSIwLjciIGQ9Ik0wLDAgQzEyMCw4MCAzMDAsMTAgNTAwLDEzMCBDNzAwLDIwIDkwMCwxNzAgMTE1MCw1MCBDMTM1MCwxNTAgMTQ0MCw4MCBDMTQ0MCwyMDAgTDAsMjAwIFoiLz48L3N2Zz4=');
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDEwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZD0iTTAsMTAwIEwwLDYwIEMxODAsODUgMzYwLDQwIDU0MCw1MCBDNZAMLDY1IDkwMCw0MCAxMDgwLDU1IEMxMjYwLDcwIDE0NDAsMzUgMTQ0MCw2MCBMMTQ0MCwxMDAgWiIvPjwvc3ZnPg==');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  opacity: 0.7;
+  opacity: 0.92;
 }
 
-.snow-overlay-animated::before {
-  animation: snowMove 15s linear infinite;
+.wave-overlay::after {
+  opacity: 0.8;
+  animation: wave 15s linear infinite;
+  animation-delay: -5s;
 }
 
-.snow-overlay-animated::after {
-  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDIwMCI+PHBhdGggZmlsbD0iIzBGMTExMiIgZmlsbC1vcGFjaXR5PSIwLjYiIGQ9Ik0wLDEwMCBDMjAwLDUwIDQwMCwxNTAgNjAwLDMwIEM4MDAsMTIwIDEwMDAsNTAgMTIwMCwxMjAgQzEzMDAsNzAgMTQ0MCwxMzAgTDE0NDAsMjAwIEwwLDIwMCBaIi8+PC9zdmc+');
-  animation: snowMoveAlt 20s linear infinite;
-  opacity: 0.5;
-}
-
-@keyframes snowMove {
+@keyframes wave {
   0% {
-    transform: translateX(-5%);
+    transform: translateX(0%) scaleY(1);
   }
   50% {
-    transform: translateX(3%);
+    transform: translateX(-1%) scaleY(1.02);
   }
   100% {
-    transform: translateX(-5%);
+    transform: translateX(0%) scaleY(1);
   }
 }
 
-@keyframes snowMoveAlt {
-  0% {
-    transform: translateX(5%);
+/* More subtle animated wave for better responsiveness */
+@media (min-width: 768px) {
+  .wave-overlay {
+    height: 80px; /* Slightly taller on larger screens */
   }
-  50% {
-    transform: translateX(-3%);
-  }
-  100% {
-    transform: translateX(5%);
+}
+
+@media (min-width: 1024px) {
+  .wave-overlay {
+    height: 90px; /* Even taller on largest screens */
   }
 }

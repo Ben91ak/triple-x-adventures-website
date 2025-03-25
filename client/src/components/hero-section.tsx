@@ -128,14 +128,11 @@ export function HeroSection() {
       {/* Video to next section smooth fade transition */}
       <div className="absolute bottom-0 left-0 right-0 h-[300px] z-40">
         {/* Gradient overlay for smooth transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/90 to-dark-bg"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/80 to-dark-bg"></div>
       </div>
       
-      {/* Snow/ice overlay animation */}
-      <div className="snow-overlay-animated"></div>
-      
-      {/* Snow/ice overlay for transition to next section */}
-      <div className="snow-overlay"></div>
+      {/* Wave overlay for gentle transition to next section */}
+      <div className="wave-overlay"></div>
     </section>
   );
 }
