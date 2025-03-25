@@ -219,7 +219,7 @@ export function ContactSection() {
                     className="w-full bg-fire text-white font-montserrat font-semibold py-3 px-6 rounded hover:bg-opacity-90 transition"
                     disabled={mutation.isPending}
                   >
-                    {mutation.isPending ? "Sending..." : "Send Message"}
+                    {mutation.isPending ? "Wird gesendet..." : "Nachricht senden"}
                   </Button>
                 </form>
               </Form>
@@ -228,15 +228,15 @@ export function ContactSection() {
           
           <div>
             <div className="mb-8">
-              <h3 className="font-montserrat font-semibold text-xl mb-4">Get In Touch</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">Kontaktieren Sie uns</h3>
               <div className="space-y-4">
                 <div className="flex items-start">
                   <div className="bg-fire text-white p-3 rounded-full mr-4">
                     <i className="fas fa-map-marker-alt"></i>
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold mb-1">Our Location</h4>
-                    <p className="opacity-80">Akkavare, near Arvidsjaur<br />Swedish Lapland, Sweden</p>
+                    <h4 className="font-montserrat font-semibold mb-1">Unser Standort</h4>
+                    <p className="opacity-80">Akkavare, nahe Arvidsjaur<br />Schwedisch Lappland, Schweden</p>
                   </div>
                 </div>
                 
@@ -245,7 +245,7 @@ export function ContactSection() {
                     <i className="fas fa-phone-alt"></i>
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold mb-1">Phone</h4>
+                    <h4 className="font-montserrat font-semibold mb-1">Telefon</h4>
                     <p className="opacity-80">+46 123 456 789</p>
                   </div>
                 </div>
@@ -255,7 +255,7 @@ export function ContactSection() {
                     <i className="fas fa-envelope"></i>
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold mb-1">Email</h4>
+                    <h4 className="font-montserrat font-semibold mb-1">E-Mail</h4>
                     <p className="opacity-80">adventures@triplexarctic.com</p>
                   </div>
                 </div>
@@ -263,25 +263,25 @@ export function ContactSection() {
             </div>
             
             <div className="mb-8">
-              <h3 className="font-montserrat font-semibold text-xl mb-4">Frequently Asked Questions</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">Häufig gestellte Fragen</h3>
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-montserrat font-semibold mb-1">What's the best time to visit?</h4>
-                  <p className="opacity-80">The prime season runs from December to April, with January to March offering the best snow conditions and northern lights visibility.</p>
+                  <h4 className="font-montserrat font-semibold mb-1">Was ist die beste Reisezeit?</h4>
+                  <p className="opacity-80">Die Hauptsaison läuft von Dezember bis April, wobei Januar bis März die besten Schneebedingungen und Polarlichtsichtbarkeit bieten.</p>
                 </div>
                 <div>
-                  <h4 className="font-montserrat font-semibold mb-1">How do I get to Arvidsjaur?</h4>
-                  <p className="opacity-80">Arvidsjaur has its own airport with connections to Stockholm. We offer transfers from the airport to our location.</p>
+                  <h4 className="font-montserrat font-semibold mb-1">Wie komme ich nach Arvidsjaur?</h4>
+                  <p className="opacity-80">Arvidsjaur hat einen eigenen Flughafen mit Verbindungen nach Stockholm. Wir bieten Transfers vom Flughafen zu unserem Standort an.</p>
                 </div>
                 <div>
-                  <h4 className="font-montserrat font-semibold mb-1">Do I need special gear?</h4>
-                  <p className="opacity-80">We provide all specialist equipment including thermal suits, boots, and helmets. Just bring warm base layers and your sense of adventure!</p>
+                  <h4 className="font-montserrat font-semibold mb-1">Benötige ich spezielle Ausrüstung?</h4>
+                  <p className="opacity-80">Wir stellen alle Spezialausrüstungen wie Thermoanzüge, Stiefel und Helme zur Verfügung. Bringen Sie einfach warme Grundbekleidung und Ihren Abenteuersinn mit!</p>
                 </div>
               </div>
             </div>
             
             <div>
-              <h3 className="font-montserrat font-semibold text-xl mb-4">Connect With Us</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-4">Folgen Sie uns</h3>
               <div className="flex space-x-4">
                 <a href="#" className="bg-white text-midnight hover:bg-fire hover:text-white transition w-12 h-12 rounded-full flex items-center justify-center">
                   <i className="fab fa-facebook-f"></i>
