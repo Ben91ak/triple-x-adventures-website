@@ -42,7 +42,7 @@ export function HeroSection() {
   const content = heroContent[language];
 
   return (
-    <section className="relative flex items-center justify-center text-primary-text h-screen bg-gradient-animated overflow-hidden">
+    <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video 
