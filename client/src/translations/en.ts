@@ -121,14 +121,7 @@ export const en = {
     sv: "Svenska",
   },
   
-  // Weather Widget
-  weather: {
-    title: "Current Weather in Arvidsjaur",
-    temperature: "Temperature",
-    wind: "Wind",
-    loading: "Loading weather data...",
-    error: "Could not load weather data",
-  },
+  // Weather Widget removed as requested
   
   // Not Found Page
   notFound: {
