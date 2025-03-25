@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  /* Brand colors */
+  --midnight: #0F2D40;
+  --ice: #F8FBFF;
+  --fire: #E05E2B;
+  --forest: #2C5545;
+  --slate: #4A5568;
+  
+  /* Add these to support shadcn-ui theming */
+  --background: 210 33% 99%;
+  --foreground: 222 47% 11%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  
+  --primary: 204 64% 15%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222 47% 11%;
+  
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215 16% 47%;
+  
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222 47% 11%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+  
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 204 64% 15%;
+  
+  --radius: 0.5rem;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-opensans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Background gradients */
+.bg-gradient-dark {
+  background-image: linear-gradient(rgba(15, 45, 64, 0.4), rgba(15, 45, 64, 0.4));
+}
+
+/* Navigation effects */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--fire);
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Button hover effect */
+.custom-button {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.custom-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+  transition: 0.5s;
+  transform: skewX(-15deg);
+}
+
+.custom-button:hover::before {
+  left: 100%;
+}
+
+/* Card hover effects */
+.experience-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Gallery effects */
+.gallery-item img {
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+/* Text colors */
+.text-midnight {
+  color: var(--midnight);
+}
+
+.text-ice {
+  color: var(--ice);
+}
+
+.text-fire {
+  color: var(--fire);
+}
+
+.text-forest {
+  color: var(--forest);
+}
+
+.text-slate {
+  color: var(--slate);
+}
+
+/* Background colors */
+.bg-midnight {
+  background-color: var(--midnight);
+}
+
+.bg-ice {
+  background-color: var(--ice);
+}
+
+.bg-fire {
+  background-color: var(--fire);
+}
+
+.bg-forest {
+  background-color: var(--forest);
+}
