@@ -1,6 +1,7 @@
 import { TeamMember } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
+import { Mountain, Leaf, Heart } from "lucide-react";
 
 // Team member data by language
 const teamMembersByLanguage = {
@@ -110,17 +111,17 @@ const aboutContentByLanguage = {
       {
         title: "Authenticity",
         description: "We showcase the real Arctic, without filters or pretense. What you experience with us is genuine Lapland.",
-        icon: "fas fa-mountain"
+        icon: "mountain"
       },
       {
         title: "Sustainability",
         description: "We tread lightly on the land we love, employing sustainable practices that preserve the Arctic for future generations.",
-        icon: "fas fa-leaf"
+        icon: "leaf"
       },
       {
         title: "Passion",
         description: "Our guides aren't just employees—they're enthusiasts who love sharing their knowledge and excitement for the Arctic.",
-        icon: "fas fa-heart"
+        icon: "heart"
       }
     ],
     teamTitle: "MEET OUR TEAM",
@@ -138,17 +139,17 @@ const aboutContentByLanguage = {
       {
         title: "Authentizität",
         description: "Wir präsentieren die echte Arktis, ohne Filter oder Vorwand. Was Sie mit uns erleben, ist echtes Lappland.",
-        icon: "fas fa-mountain"
+        icon: "mountain"
       },
       {
         title: "Nachhaltigkeit",
         description: "Wir gehen behutsam mit dem Land um, das wir lieben, und setzen nachhaltige Praktiken ein, die die Arktis für zukünftige Generationen bewahren.",
-        icon: "fas fa-leaf"
+        icon: "leaf"
       },
       {
         title: "Leidenschaft",
         description: "Unsere Guides sind nicht nur Mitarbeiter – sie sind Enthusiasten, die ihr Wissen und ihre Begeisterung für die Arktis gerne teilen.",
-        icon: "fas fa-heart"
+        icon: "heart"
       }
     ],
     teamTitle: "LERNEN SIE UNSER TEAM KENNEN",
@@ -166,17 +167,17 @@ const aboutContentByLanguage = {
       {
         title: "Autenticitet",
         description: "Vi visar upp den verkliga Arktis, utan filter eller låtsas. Vad du upplever med oss är genuina Lappland.",
-        icon: "fas fa-mountain"
+        icon: "mountain"
       },
       {
         title: "Hållbarhet",
         description: "Vi går lätt på landet vi älskar och använder hållbara metoder som bevarar Arktis för framtida generationer.",
-        icon: "fas fa-leaf"
+        icon: "leaf"
       },
       {
         title: "Passion",
         description: "Våra guider är inte bara anställda – de är entusiaster som älskar att dela sin kunskap och spänning för Arktis.",
-        icon: "fas fa-heart"
+        icon: "heart"
       }
     ],
     teamTitle: "TRÄFFA VÅRT TEAM",
@@ -191,60 +192,132 @@ export function AboutSection() {
   const content = aboutContentByLanguage[language];
   const teamMembers: TeamMember[] = teamMembersByLanguage[language];
 
+  // Map value icons to Lucide components
+  const getValueIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'mountain':
+        return <Mountain size={28} />;
+      case 'leaf':
+        return <Leaf size={28} />;
+      case 'heart':
+        return <Heart size={28} />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <section id="about" className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4">
+    <section id="team" className="py-24 md:py-32 relative">
+      {/* Background with diagonal gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-card-bg/30 via-dark-bg to-card-bg/30 opacity-95 z-0"></div>
+      
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4 text-midnight">{content.title}</h2>
-          <p className="text-lg max-w-3xl mx-auto text-slate">{content.subtitle}</p>
+          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
+            {language === 'de' ? 'Unser Team' : language === 'sv' ? 'Vårt Team' : 'Our Team'}
+          </span>
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+            {content.title}
+          </h2>
+          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+            {content.subtitle}
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-          <div>
-            <h3 className="font-montserrat font-semibold text-2xl mb-4 text-midnight">{content.storyTitle}</h3>
-            <p className="mb-4 text-slate leading-relaxed">{content.storyParagraph1}</p>
-            <p className="mb-4 text-slate leading-relaxed">{content.storyParagraph2}</p>
-            <p className="text-slate leading-relaxed">{content.storyParagraph3}</p>
-          </div>
-          <div>
-            <img 
-              src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
-              alt={content.teamImageAlt} 
-              className="w-full h-full object-cover rounded-lg shadow-lg"
-            />
-          </div>
-        </div>
-        
-        <div className="bg-ice rounded-lg p-8 md:p-12 mb-16">
-          <h3 className="font-montserrat font-semibold text-2xl mb-6 text-center text-midnight">{content.valuesTitle}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {content.values.map((value, index) => (
-              <div key={index} className="text-center">
-                <div className={`w-16 h-16 ${index === 0 ? 'bg-forest' : index === 1 ? 'bg-fire' : 'bg-midnight'} text-white rounded-full flex items-center justify-center mx-auto mb-4`}>
-                  <i className={`${value.icon} text-2xl`}></i>
+        {/* Our Story with image */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20 max-w-6xl mx-auto">
+          <div className="group relative">
+            {/* Glass effect wrapper */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/20 to-purple-600/20 rounded-2xl blur-lg opacity-0 group-hover:opacity-70 transition-all duration-700"></div>
+            
+            <div className="card relative z-10 bg-card-bg/60 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl">
+              <div className="p-8">
+                <h3 className="font-bold text-2xl mb-6 text-primary-text group-hover:text-accent-color transition-colors">
+                  {content.storyTitle}
+                </h3>
+                <div className="space-y-4 text-secondary-text">
+                  <p className="leading-relaxed">{content.storyParagraph1}</p>
+                  <p className="leading-relaxed">{content.storyParagraph2}</p>
+                  <p className="leading-relaxed">{content.storyParagraph3}</p>
                 </div>
-                <h4 className="font-montserrat font-semibold text-lg mb-2 text-midnight">{value.title}</h4>
-                <p className="text-slate">{value.description}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="group relative overflow-hidden rounded-xl shadow-2xl transform transition-transform duration-500 hover:scale-[1.01]">
+            {/* Image with gradient overlay */}
+            <div className="relative h-full">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                alt={content.teamImageAlt} 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Our Values */}
+        <div className="mb-24">
+          <h3 className="font-bold text-2xl mb-12 text-center text-primary-text">
+            {content.valuesTitle}
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+            {content.values.map((value, index) => (
+              <div key={index} className="group relative">
+                {/* Hover glow effect */}
+                <div className="absolute -inset-px bg-gradient-to-br from-accent-color/20 to-accent-color/5 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                
+                <div className="card bg-card-bg/80 border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 h-full flex flex-col items-center text-center group-hover:border-accent-color/30 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color mb-5 group-hover:scale-110 transition-transform duration-300">
+                    {getValueIcon(value.icon)}
+                  </div>
+                  <h4 className="font-bold text-xl mb-3 text-primary-text group-hover:text-accent-color transition-colors">
+                    {value.title}
+                  </h4>
+                  <p className="text-secondary-text">
+                    {value.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
         
+        {/* Team Members */}
         <div>
-          <h3 className="font-montserrat font-semibold text-2xl mb-8 text-center text-midnight">{content.teamTitle}</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <h3 className="font-bold text-2xl mb-12 text-center text-primary-text">
+            {content.teamTitle}
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {teamMembers.map((member) => (
-              <div key={member.id} className="text-center">
-                <div className="mb-4 aspect-square overflow-hidden rounded-full mx-auto w-48">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover"
-                  />
+              <div key={member.id} className="group relative">
+                {/* Decorative background glow */}
+                <div className="absolute -inset-px bg-gradient-to-t from-accent-color/10 to-purple-600/10 rounded-xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                
+                <div className="card bg-card-bg/30 border border-white/10 backdrop-blur-sm rounded-xl p-6 transition-all duration-300 relative z-10 flex flex-col items-center text-center">
+                  {/* Image with color border */}
+                  <div className="mb-5 w-32 h-32 rounded-full overflow-hidden border-2 border-accent-color/40 p-1 group-hover:scale-105 transition-all duration-500">
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  </div>
+                  
+                  <h4 className="font-bold text-lg mb-1 text-primary-text group-hover:text-accent-color transition-colors">
+                    {member.name}
+                  </h4>
+                  <p className="text-accent-color font-medium mb-3 text-sm">
+                    {member.role}
+                  </p>
+                  <p className="text-secondary-text text-sm">
+                    {member.bio}
+                  </p>
                 </div>
-                <h4 className="font-montserrat font-semibold text-lg mb-1 text-midnight">{member.name}</h4>
-                <p className="text-fire font-semibold mb-2">{member.role}</p>
-                <p className="text-slate">{member.bio}</p>
               </div>
             ))}
           </div>

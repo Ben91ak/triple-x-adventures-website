@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
+import { ArrowRight } from "lucide-react";
 
 // CTA content by language
 const ctaContentByLanguage = {
@@ -27,14 +28,50 @@ export function CTASection() {
   const content = ctaContentByLanguage[language];
 
   return (
-    <section className="py-16 md:py-20 bg-forest text-white relative">
-      <div className="absolute inset-0 bg-black opacity-40"></div>
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <h2 className="font-montserrat font-bold text-3xl md:text-5xl mb-6">{content.title}</h2>
-        <p className="text-lg max-w-2xl mx-auto mb-10 opacity-90">{content.description}</p>
-        <a href="#contact" className="custom-button inline-block font-montserrat text-base uppercase bg-fire px-10 py-4 rounded tracking-wide font-semibold hover:bg-opacity-90 transition">
-          {content.buttonText}
-        </a>
+    <section id="cta" className="py-24 md:py-32 relative">
+      {/* Background with gradient and image overlay */}
+      <div className="absolute inset-0 bg-black z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 z-0"
+          style={{ 
+            backgroundImage: "url('https://images.unsplash.com/photo-1517299321609-52687d1bc55a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')"
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-transparent to-dark-bg opacity-90 z-0"></div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="mb-8 inline-flex items-center justify-center">
+            <span className="w-12 h-1 bg-accent-color rounded-full mr-3"></span>
+            <span className="text-accent-color uppercase text-sm tracking-wider font-medium">
+              {language === 'de' ? 'Dein Abenteuer wartet' : language === 'sv' ? 'Ditt äventyr väntar' : 'Your Adventure Awaits'}
+            </span>
+            <span className="w-12 h-1 bg-accent-color rounded-full ml-3"></span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-text via-accent-color to-primary-text">
+            {content.title}
+          </h2>
+          
+          <p className="text-lg md:text-xl text-secondary-text mb-10">
+            {content.description}
+          </p>
+          
+          <div className="group relative inline-block">
+            {/* Pulse effect */}
+            <span className="absolute inset-0 rounded-full bg-accent-color/20 animate-pulse group-hover:animate-none transition-all duration-300"></span>
+            
+            <a 
+              href="#contact" 
+              className="btn-primary inline-flex items-center gap-2 px-10 py-4 relative border border-accent-color/20 group-hover:border-accent-color/50 transition-all duration-300"
+            >
+              {content.buttonText}
+              <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
