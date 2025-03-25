@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
+import { Utensils, Wine, Award } from "lucide-react";
 
 // Restaurant content by language
 const restaurantContentByLanguage = {
@@ -63,58 +64,106 @@ export function RestaurantSection() {
   // Get content based on the current language
   const content = restaurantContentByLanguage[language];
 
+  // Specialties icons
+  const specialtyIcons = [
+    <Utensils size={18} />,
+    <Award size={18} />,
+    <Wine size={18} />
+  ];
+
   return (
-    <section id="restaurant" className="py-16 md:py-24 bg-midnight text-white relative">
-      <div className="absolute inset-0 bg-black opacity-50"></div>
+    <section id="restaurant" className="py-24 md:py-32 relative">
+      {/* Background with diagonal gradient */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-dark-bg via-black/90 to-dark-bg opacity-95 z-0"></div>
+      
+      {/* Subtle texture overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4">{content.title}</h2>
-          <p className="text-lg opacity-90">{content.subtitle}</p>
+        <div className="text-center mb-20">
+          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
+            {language === 'de' ? 'Arktische Kulinarik' : language === 'sv' ? 'Arktisk Matlagning' : 'Arctic Cuisine'}
+          </span>
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+            {content.title}
+          </h2>
+          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+            {content.subtitle}
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="aspect-w-4 aspect-h-3 mb-6">
-              <img 
-                src="https://images.unsplash.com/photo-1528659882437-b89a74bc157f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
-                alt={content.imageAlt1} 
-                className="w-full h-full object-cover rounded-lg shadow-lg"
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <img 
-                src="https://images.unsplash.com/photo-1617196123643-bab924c7a9f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                alt={content.imageAlt2} 
-                className="w-full h-40 object-cover rounded-lg shadow-lg"
-              />
-              <img 
-                src="https://images.unsplash.com/photo-1563245440-ad2c9507d76e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-                alt={content.imageAlt3} 
-                className="w-full h-40 object-cover rounded-lg shadow-lg"
-              />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Left column - Images with glass effect borders */}
+          <div className="group relative">
+            {/* Decorative background element */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/30 to-purple-600/30 rounded-xl blur-xl opacity-40 group-hover:opacity-70 transition-all duration-700"></div>
+            
+            <div className="relative z-10">
+              <div className="overflow-hidden rounded-xl mb-6 bg-card-bg/50 backdrop-blur-sm p-2 border border-white/10 shadow-xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1528659882437-b89a74bc157f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                  alt={content.imageAlt1} 
+                  className="w-full h-72 object-cover rounded-lg transition-transform duration-700 group-hover:scale-105"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="overflow-hidden rounded-xl bg-card-bg/50 backdrop-blur-sm p-2 border border-white/10 shadow-lg">
+                  <img 
+                    src="https://images.unsplash.com/photo-1617196123643-bab924c7a9f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                    alt={content.imageAlt2} 
+                    className="w-full h-40 object-cover rounded-lg transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-xl bg-card-bg/50 backdrop-blur-sm p-2 border border-white/10 shadow-lg">
+                  <img 
+                    src="https://images.unsplash.com/photo-1563245440-ad2c9507d76e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                    alt={content.imageAlt3} 
+                    className="w-full h-40 object-cover rounded-lg transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           
-          <div>
-            <h3 className="font-montserrat font-semibold text-2xl mb-6">{content.heading}</h3>
-            <p className="mb-6 leading-relaxed">{content.description1}</p>
-            <p className="mb-8 leading-relaxed">{content.description2}</p>
+          {/* Right column - Content with glass card effect */}
+          <div className="relative group">
+            {/* Glass card effect */}
+            <div className="absolute -inset-1 bg-gradient-to-l from-accent-color/20 to-purple-600/20 rounded-xl blur-xl opacity-0 group-hover:opacity-70 transition-all duration-700"></div>
             
-            <div className="mb-8">
-              <h4 className="font-montserrat font-semibold text-lg mb-3">{content.specialtiesHeading}</h4>
-              <ul className="space-y-2">
-                {content.specialties.map((specialty, index) => (
-                  <li key={index} className="flex items-start">
-                    <i className="fas fa-utensils mt-1 mr-3 text-green-400"></i>
-                    <span>{specialty}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="card relative z-10 p-8 bg-card-bg border border-white/10 backdrop-blur-sm rounded-xl shadow-xl">
+              <h3 className="font-bold text-2xl mb-6 text-primary-text group-hover:text-accent-color transition-colors">
+                {content.heading}
+              </h3>
+              <p className="mb-6 text-secondary-text">
+                {content.description1}
+              </p>
+              <p className="mb-8 text-secondary-text">
+                {content.description2}
+              </p>
+              
+              <div className="mb-8">
+                <h4 className="font-medium text-lg mb-5 text-primary-text">
+                  {content.specialtiesHeading}
+                </h4>
+                <ul className="space-y-4">
+                  {content.specialties.map((specialty, index) => (
+                    <li key={index} className="flex items-start">
+                      <div className="w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center mr-3 text-accent-color">
+                        {specialtyIcons[index]}
+                      </div>
+                      <span className="text-secondary-text">{specialty}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <a 
+                href="#contact" 
+                className="btn-primary text-center inline-flex items-center justify-center transition-all"
+              >
+                {content.reserveButton}
+              </a>
             </div>
-            
-            <a href="#contact" className="inline-block bg-green-600 text-white font-montserrat font-semibold py-3 px-6 rounded hover:bg-green-700 transition">
-              {content.reserveButton}
-            </a>
           </div>
         </div>
       </div>

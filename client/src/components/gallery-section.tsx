@@ -1,6 +1,7 @@
 import { GalleryImage } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
+import { Camera, ExternalLink } from "lucide-react";
 
 // Gallery data by language
 const galleryImagesByLanguage = {
@@ -159,28 +160,60 @@ export function GallerySection() {
   const galleryImages: GalleryImage[] = galleryImagesByLanguage[language];
 
   return (
-    <section className="py-16 md:py-24 bg-midnight">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="font-montserrat font-bold text-3xl md:text-4xl mb-4 text-white">{content.title}</h2>
-          <p className="text-lg max-w-3xl mx-auto text-white opacity-90">{content.subtitle}</p>
+    <section id="gallery" className="py-24 md:py-32 relative">
+      {/* Background with diagonal gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-card-bg to-dark-bg opacity-95 z-0"></div>
+      
+      {/* Subtle dots overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
+            {language === 'de' ? 'Galerie' : language === 'sv' ? 'Galleri' : 'Gallery'}
+          </span>
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+            {content.title}
+          </h2>
+          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+            {content.subtitle}
+          </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 max-w-6xl mx-auto">
           {galleryImages.map((image) => (
-            <div key={image.id} className="gallery-item overflow-hidden rounded-lg">
+            <div key={image.id} className="group relative overflow-hidden rounded-xl">
+              {/* Hover overlay with gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center p-4 z-10">
+                <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                  {image.alt}
+                </span>
+              </div>
+              
+              {/* Pulse effect on hover */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 z-10">
+                <div className="w-12 h-12 rounded-full bg-accent-color/20 flex items-center justify-center">
+                  <Camera className="text-accent-color" size={20} />
+                </div>
+              </div>
+              
+              {/* Image with scale effect */}
               <img 
                 src={image.src} 
                 alt={image.alt} 
-                className="w-full h-64 object-cover"
+                className="w-full h-60 md:h-64 object-cover transform transition-transform duration-700 group-hover:scale-110"
               />
             </div>
           ))}
         </div>
         
-        <div className="text-center mt-8">
-          <a href="#" className="inline-block text-ice font-montserrat font-semibold py-2 border-b-2 border-fire hover:text-fire transition">
-            {content.viewGalleryLink}
+        <div className="text-center mt-12">
+          <a 
+            href="#" 
+            className="inline-flex items-center gap-2 text-accent-color hover:text-accent-hover font-medium border-b border-accent-color/30 hover:border-accent-color pb-1 transition-all duration-300"
+          >
+            {content.viewGalleryLink} 
+            <ExternalLink size={16} className="opacity-70" />
           </a>
         </div>
       </div>
