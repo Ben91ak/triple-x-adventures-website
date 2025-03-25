@@ -16,10 +16,17 @@ export function LanguageSelector({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const t = useTranslation(language);
   
+  // Flag emojis for each language
+  const flags = {
+    en: "🇬🇧",
+    de: "🇩🇪",
+    sv: "🇸🇪"
+  };
+  
   const languages = [
-    { code: "en", label: t.language.en },
-    { code: "de", label: t.language.de },
-    { code: "sv", label: t.language.sv },
+    { code: "en", label: t.language.en, flag: flags.en },
+    { code: "de", label: t.language.de, flag: flags.de },
+    { code: "sv", label: t.language.sv, flag: flags.sv },
   ];
 
   return (
@@ -29,19 +36,26 @@ export function LanguageSelector({ className }: { className?: string }) {
           variant="ghost"
           size="sm"
           className={cn(
-            "flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-secondary-text bg-transparent hover:bg-white/5 rounded-lg border border-divider-color transition-colors",
+            "group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-secondary-text bg-card-bg/40 hover:bg-card-bg/80 rounded-lg border border-white/5 hover:border-white/10 transition-all",
             className
           )}
         >
-          <Globe className="h-4 w-4 text-accent-color" />
-          <span className="hidden sm:inline">{languages.find(lang => lang.code === language)?.label}</span>
-          <span className="inline sm:hidden uppercase">{language}</span>
-          <ChevronDown className="h-3 w-3 opacity-70" />
+          <div className="relative">
+            <Globe className="h-4 w-4 text-accent-color group-hover:scale-110 transition-transform" />
+            <div className="absolute h-2 w-2 rounded-full bg-accent-color -right-1 -top-1 scale-0 group-hover:scale-100 transition-transform"></div>
+          </div>
+          
+          <div className="flex items-center">
+            <span className="hidden sm:inline ml-1 mr-1">{languages.find(lang => lang.code === language)?.label}</span>
+            <span className="inline sm:hidden uppercase">{language}</span>
+            <ChevronDown className="h-3 w-3 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
+          </div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="w-40 bg-card-bg border border-divider-color shadow-xl rounded-lg p-1 text-primary-text"
+        sideOffset={8}
+        className="w-48 bg-card-bg/95 backdrop-blur-md border border-white/10 shadow-xl rounded-xl p-1.5 text-primary-text animate-in zoom-in-95 duration-100"
       >
         {languages.map((lang) => (
           <DropdownMenuItem
@@ -51,17 +65,22 @@ export function LanguageSelector({ className }: { className?: string }) {
               setOpen(false);
             }}
             className={cn(
-              "flex items-center justify-between py-2 px-3 rounded-md cursor-pointer",
+              "flex items-center justify-between py-2.5 px-3 rounded-md cursor-pointer",
               language === lang.code 
-                ? "bg-accent-color/10 text-accent-color" 
-                : "hover:bg-white/5"
+                ? "bg-accent-color/10 text-accent-color border-l-2 border-accent-color" 
+                : "hover:bg-white/5 border-l-2 border-transparent"
             )}
           >
             <div className="flex items-center gap-2">
-              <span className="uppercase text-xs font-medium opacity-70">{lang.code}</span>
-              <span>{lang.label}</span>
+              <span className="text-base mr-1">{lang.flag}</span>
+              <span className="uppercase text-xs font-semibold opacity-70">{lang.code}</span>
+              <span className="font-medium">{lang.label}</span>
             </div>
-            {language === lang.code && <Check className="h-4 w-4" />}
+            {language === lang.code && (
+              <div className="h-5 w-5 rounded-full bg-accent-color/10 flex items-center justify-center">
+                <Check className="h-3 w-3" />
+              </div>
+            )}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
