@@ -2,13 +2,46 @@ import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { ChevronDown } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const [videoError, setVideoError] = useState(false);
   const { language } = useLanguage();
   const t = useTranslation(language);
-
+  
+  // Create animation hooks for various hero elements with staggered timing
+  const { ref: titleRef, isVisible: isTitleVisible } = useScrollAnimation({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+  
+  const { ref: subtitleRef, isVisible: isSubtitleVisible } = useScrollAnimation({
+    triggerOnce: true,
+    threshold: 0.1,
+    animationDelay: 300
+  });
+  
+  const { ref: descriptionRef, isVisible: isDescriptionVisible } = useScrollAnimation({
+    triggerOnce: true,
+    threshold: 0.1,
+    animationDelay: 600
+  });
+  
+  const { ref: buttonsRef, isVisible: isButtonsVisible } = useScrollAnimation({
+    triggerOnce: true,
+    threshold: 0.1,
+    animationDelay: 900
+  });
+  
+  // Create scroll indicator animation that runs continuously
+  const { ref: scrollIndicatorAnimRef, isVisible: isScrollIndicatorVisible } = useScrollAnimation({
+    triggerOnce: false,
+    threshold: 0.1,
+    animationDelay: 1500
+  });
+  
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.8;
@@ -21,10 +54,23 @@ export function HeroSection() {
       
       videoRef.current.addEventListener('error', handleVideoError);
       
+      // Add scroll event listener for scroll indicator fade out
+      const handleScroll = () => {
+        if (scrollIndicatorRef.current) {
+          // Calculate scroll position as percentage
+          const scrollY = window.scrollY;
+          const opacity = Math.max(0, 1 - (scrollY / 200)); // Fade out over first 200px of scroll
+          scrollIndicatorRef.current.style.opacity = opacity.toString();
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll);
+      
       return () => {
         if (videoRef.current) {
           videoRef.current.removeEventListener('error', handleVideoError);
         }
+        window.removeEventListener('scroll', handleScroll);
       };
     }
   }, []);
@@ -97,22 +143,43 @@ export function HeroSection() {
       
       {/* TOP LAYER - Content (highest z-index) */}
       <div className="container mx-auto px-4 relative z-50 mt-16 md:mt-0">
-        {/* Hero Content */}
+        {/* Hero Content with animated entrance */}
         <div className="text-center max-w-4xl mx-auto">
-          <div className="mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-sm">{content.welcome}</div>
+          {/* Entrance animation for welcome text */}
+          <div 
+            className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-sm fade-in ${isTitleVisible ? 'visible' : ''}`}
+            ref={titleRef as React.RefObject<HTMLDivElement>}
+          >
+            {content.welcome}
+          </div>
           
-          <h1 className="font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent">
+          {/* Main title with animated entrance */}
+          <h1 
+            className={`font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent fade-in ${isTitleVisible ? 'visible' : ''}`}
+            ref={titleRef as React.RefObject<HTMLHeadingElement>}
+          >
             TRIPLE <span className="text-accent-color">X</span> ADVENTURES
           </h1>
           
+          {/* Subtitle with slightly delayed entrance */}
           <div 
-            className="text-lg md:text-xl mb-4 max-w-2xl mx-auto font-light text-white text-shadow-sm"
+            className={`text-lg md:text-xl mb-4 max-w-2xl mx-auto font-light text-white text-shadow-sm fade-in ${isSubtitleVisible ? 'visible' : ''}`}
             dangerouslySetInnerHTML={{ __html: content.adventure }}
+            ref={subtitleRef as React.RefObject<HTMLDivElement>}
           />
           
-          <p className="text-sm mb-8 font-mono text-white/80">65.5916° N, 19.1668° E</p>
+          <p 
+            className={`text-sm mb-8 font-mono text-white/80 fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+            ref={subtitleRef as React.RefObject<HTMLParagraphElement>}
+          >
+            65.5916° N, 19.1668° E
+          </p>
           
-          <div className="glass-card p-6 md:p-8 mb-12 max-w-3xl mx-auto text-left shadow-xl">
+          {/* Content card with delayed entrance */}
+          <div 
+            className={`glass-card p-6 md:p-8 mb-12 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
+            ref={descriptionRef as React.RefObject<HTMLDivElement>}
+          >
             <p 
               className="mb-4 text-white leading-relaxed"
               dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
@@ -129,7 +196,11 @@ export function HeroSection() {
             />
           </div>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+          {/* Button group with the most delayed entrance */}
+          <div 
+            className={`flex flex-col sm:flex-row justify-center gap-4 mb-16 fade-in ${isButtonsVisible ? 'visible' : ''}`}
+            ref={buttonsRef as React.RefObject<HTMLDivElement>}
+          >
             <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-all">
               {t.hero.cta}
             </a>
@@ -138,6 +209,20 @@ export function HeroSection() {
             </a>
           </div>
         </div>
+      </div>
+      
+      {/* Scroll indicator - fades in after all content and fades out on scroll */}
+      <div 
+        ref={(el) => {
+          scrollIndicatorRef.current = el;
+          if (typeof scrollIndicatorAnimRef === 'function') {
+            scrollIndicatorAnimRef(el);
+          }
+        }}
+        className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50 text-white flex flex-col items-center fade-in ${isScrollIndicatorVisible ? 'visible' : ''}`}
+      >
+        <span className="text-xs uppercase tracking-widest mb-2 text-white/80">Scroll Down</span>
+        <ChevronDown className="animate-bounce w-6 h-6" />
       </div>
     </section>
   );
