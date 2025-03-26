@@ -470,7 +470,7 @@ export function PackageBuilder() {
   };
 
   return (
-    <section id="package-builder" className="py-24 md:py-32 relative">
+    <section id="package-builder" className="py-24 md:py-32 relative overflow-hidden premium-dark-gradient">
       {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
       <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0 transform-gpu"></div>
       
