@@ -47,7 +47,7 @@ export function Header() {
 
   return (
     <header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-[90] transition-all duration-300 ${
         isScrolled 
           ? 'py-3 bg-dark-bg/95 shadow-md shadow-black/10 border-b border-white/5' 
           : 'py-5 bg-gradient-to-b from-black/80 to-transparent'
@@ -124,17 +124,17 @@ export function Header() {
           </div>
         </div>
         
-        {/* Mobile menu with animation - higher z-index and positioned overlay */}
+        {/* Mobile menu with animation - much higher z-index and positioned overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 bg-dark-bg/50 backdrop-blur-sm z-30" onClick={() => setMobileMenuOpen(false)}></div>
+          <div className="fixed inset-0 bg-dark-bg/80 backdrop-blur-lg z-[100]" onClick={() => setMobileMenuOpen(false)}></div>
         )}
         <div 
-          className={`mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out fixed top-20 left-0 right-0 z-40 px-4 ${
+          className={`mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out fixed top-20 left-0 right-0 z-[101] px-4 ${
             mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
           style={{ pointerEvents: mobileMenuOpen ? 'auto' : 'none' }}
         >
-          <div className="py-5 mx-auto max-w-md rounded-xl space-y-1 bg-card-bg border border-white/10 shadow-xl">
+          <div className="py-5 mx-auto max-w-md rounded-xl space-y-1 bg-dark-bg border border-white/10 shadow-2xl">
             {[
               { href: "/", label: t.nav.home },
               { href: "#pakete", label: t.nav.packages },
@@ -147,7 +147,7 @@ export function Header() {
               <a 
                 key={index}
                 href={item.href} 
-                className="block px-4 py-3 rounded-lg hover:bg-white/5 text-white hover:text-accent-color group transition-colors"
+                className="block px-4 py-3 rounded-lg hover:bg-accent-color/10 text-white hover:text-accent-color group transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
                   setMobileMenuOpen(false);
@@ -155,10 +155,10 @@ export function Header() {
               >
                 <div className="flex items-center">
                   <ChevronRight 
-                    size={16} 
-                    className="mr-3 text-accent-color/70 group-hover:translate-x-1 transition-transform" 
+                    size={18} 
+                    className="mr-3 text-accent-color group-hover:translate-x-1 transition-transform" 
                   />
-                  <span className="font-medium">{item.label}</span>
+                  <span className="font-medium text-base">{item.label}</span>
                 </div>
               </a>
             ))}
