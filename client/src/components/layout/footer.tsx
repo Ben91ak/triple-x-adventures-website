@@ -74,7 +74,12 @@ export function Footer() {
   const content = footerContent[language];
 
   return (
-    <footer className="relative bg-dark-bg border-t border-white/5">
+    <footer className="relative premium-dark-gradient overflow-hidden border-t border-white/5">
+      {/* Stars background effect */}
+      <div className="stars absolute inset-0 z-1"></div>
+      {/* Northern Lights animation layers */}
+      <div className="northern-glow absolute inset-0 z-1 opacity-30"></div>
+      
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')] opacity-40 z-0 pointer-events-none"></div>
       
@@ -95,18 +100,18 @@ export function Footer() {
               </Link>
               <div className="w-12 h-1 bg-accent-color rounded-full"></div>
             </div>
-            <p className="text-secondary-text mb-6 leading-relaxed">{content.description}</p>
+            <p className="text-white text-opacity-80 mb-6 leading-relaxed">{content.description}</p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors">
                 <Facebook size={16} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors">
                 <Instagram size={16} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors">
                 <Youtube size={16} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors">
                 <svg 
                   width="16" 
                   height="16" 
@@ -130,7 +135,7 @@ export function Footer() {
           
           {/* Column 2 - Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-primary-text">{content.quickLinks}</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">{content.quickLinks}</h3>
             <ul className="space-y-2">
               {[
                 { href: "#experiences", text: content.ourExperiences },
@@ -143,7 +148,7 @@ export function Footer() {
                 <li key={index}>
                   <a 
                     href={link.href} 
-                    className="text-secondary-text hover:text-accent-color transition-colors flex items-center group"
+                    className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group"
                   >
                     <ChevronRight 
                       size={14} 
@@ -158,7 +163,7 @@ export function Footer() {
           
           {/* Column 3 - Popular Adventures */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-primary-text">{content.popularAdventures}</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">{content.popularAdventures}</h3>
             <ul className="space-y-2">
               {[
                 { href: "#", text: content.adventures.snowmobile },
@@ -170,7 +175,7 @@ export function Footer() {
                 <li key={index}>
                   <a 
                     href={adventure.href} 
-                    className="text-secondary-text hover:text-accent-color transition-colors flex items-center group"
+                    className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group"
                   >
                     <ChevronRight 
                       size={14} 
@@ -185,28 +190,28 @@ export function Footer() {
           
           {/* Column 4 - Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-primary-text">{content.contactInfo}</h3>
+            <h3 className="text-lg font-semibold mb-6 text-white">{content.contactInfo}</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
-                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color mt-0.5">
+                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm mt-0.5">
                   <MapPin size={16} />
                 </div>
                 <span 
-                  className="text-secondary-text" 
+                  className="text-white text-opacity-80" 
                   dangerouslySetInnerHTML={{ __html: content.address }} 
                 />
               </li>
               <li className="flex items-center">
-                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color">
+                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm">
                   <Phone size={16} />
                 </div>
-                <span className="text-secondary-text">+46 (0) 70 357 5455</span>
+                <span className="text-white text-opacity-80">+46 (0) 70 357 5455</span>
               </li>
               <li className="flex items-center">
-                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color">
+                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm">
                   <Mail size={16} />
                 </div>
-                <span className="text-secondary-text">info@triple-x-adventures.com</span>
+                <span className="text-white text-opacity-80">info@triple-x-adventures.com</span>
               </li>
             </ul>
           </div>
@@ -214,7 +219,7 @@ export function Footer() {
         
         {/* Copyright Section */}
         <div className="border-t border-white/5 pt-8 mt-8 text-center">
-          <p className="text-secondary-text/70 text-sm">{t.footer.copyright}</p>
+          <p className="text-white text-opacity-70 text-sm">{t.footer.copyright}</p>
           <div className="mt-4 space-x-6">
             {[
               { href: "#", text: t.footer.privacyPolicy },
@@ -224,7 +229,7 @@ export function Footer() {
               <a 
                 key={index}
                 href={link.href} 
-                className="text-secondary-text/70 text-sm hover:text-accent-color transition-colors"
+                className="text-white text-opacity-70 text-sm hover:text-accent-color transition-colors"
               >
                 {link.text}
               </a>
