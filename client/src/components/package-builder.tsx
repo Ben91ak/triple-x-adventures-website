@@ -471,8 +471,13 @@ export function PackageBuilder() {
 
   return (
     <section id="package-builder" className="py-24 md:py-32 relative">
-      {/* Background with diagonal gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/40 to-dark-bg opacity-95 z-0"></div>
+      {/* Background with enhanced diagonal gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0"></div>
+      
+      {/* Northern lights glow effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="aurora-glow absolute inset-0 opacity-10"></div>
+      </div>
       
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
@@ -496,7 +501,7 @@ export function PackageBuilder() {
         </div>
         
         <div className="max-w-5xl mx-auto">
-          <div className="glass-card bg-card-bg/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-xl">
+          <div className="glass-card bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-2xl">
             {/* Steps section */}
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
               {[
@@ -536,10 +541,10 @@ export function PackageBuilder() {
                         transition-opacity duration-300`}
                       ></div>
                       
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/40
+                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60
                         ${isSelected(option.id) 
-                          ? 'bg-card-bg border-accent-color/50' 
-                          : 'bg-card-bg/50 border-white/5'}`}
+                          ? 'bg-card-bg border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
+                          : 'bg-card-bg/70 border-white/15'}`}
                       >
                         <div className="flex justify-between items-start mb-4">
                           <h4 className={`font-bold ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors`}>
@@ -593,10 +598,10 @@ export function PackageBuilder() {
                         transition-opacity duration-300`}
                       ></div>
                       
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/40
+                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60
                         ${isSelected(option.id) 
-                          ? 'bg-card-bg border-accent-color/50' 
-                          : 'bg-card-bg/50 border-white/5'}`}
+                          ? 'bg-card-bg border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
+                          : 'bg-card-bg/70 border-white/15'}`}
                       >
                         <div className="flex justify-between items-start mb-4">
                           <h4 className={`font-bold ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors`}>
@@ -650,10 +655,10 @@ export function PackageBuilder() {
                         transition-opacity duration-300`}
                       ></div>
                       
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/40
+                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60
                         ${isSelected(option.id) 
-                          ? 'bg-card-bg border-accent-color/50' 
-                          : 'bg-card-bg/50 border-white/5'}`}
+                          ? 'bg-card-bg border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
+                          : 'bg-card-bg/70 border-white/15'}`}
                       >
                         <div className="flex justify-between items-start mb-4">
                           <h4 className={`font-bold ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors`}>
