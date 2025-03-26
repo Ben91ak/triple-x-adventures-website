@@ -137,9 +137,9 @@ export function IntroductionSection() {
             {content.title}
           </h2>
           
-          {/* Description with delayed fade-in */}
+          {/* Description with delayed fade-in - text color changed to white */}
           <p 
-            className={`text-lg md:text-xl mb-16 leading-relaxed text-secondary-text max-w-3xl mx-auto fade-in ${isDescriptionVisible ? 'visible' : ''}`}
+            className={`text-lg md:text-xl mb-16 leading-relaxed text-white max-w-3xl mx-auto fade-in ${isDescriptionVisible ? 'visible' : ''}`}
             ref={descriptionAnimRef as React.RefObject<HTMLParagraphElement>}
           >
             {content.description}
@@ -171,7 +171,7 @@ export function IntroductionSection() {
                     <h3 className="font-bold text-xl mb-4 text-primary-text group-hover:text-accent-color transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="text-secondary-text">
+                    <p className="text-white">
                       {feature.description}
                     </p>
                   </div>
