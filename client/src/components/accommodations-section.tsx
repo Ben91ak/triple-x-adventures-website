@@ -114,6 +114,10 @@ export function AccommodationsSection() {
     <section id="accommodations" className="py-24 md:py-32 relative premium-dark-gradient overflow-hidden">
       {/* Stars background effect */}
       <div className="stars absolute inset-0 z-1"></div>
+      {/* Northern Lights animation layers */}
+      <div className="northern-glow absolute inset-0 z-1"></div>
+      <div className="aurora-pillar absolute z-2"></div>
+      <div className="aurora-pillar-2 absolute z-2"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-20">

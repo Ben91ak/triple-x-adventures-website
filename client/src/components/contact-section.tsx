@@ -87,22 +87,23 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative">
-      {/* Background with gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-black/95 to-dark-bg opacity-95 z-0"></div>
-      
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-40 z-0 pointer-events-none"></div>
+    <section id="contact" className="py-24 md:py-32 relative premium-dark-gradient overflow-hidden">
+      {/* Stars background effect */}
+      <div className="stars absolute inset-0 z-1"></div>
+      {/* Northern Lights animation layers */}
+      <div className="northern-glow absolute inset-0 z-1"></div>
+      <div className="aurora-pillar absolute z-2"></div>
+      <div className="aurora-pillar-2 absolute z-2"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {language === 'de' ? 'Kontakt' : language === 'sv' ? 'Kontakt' : 'Contact Us'}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
             {t.contact.title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
             {t.contact.subtitle}
           </p>
         </div>
@@ -113,9 +114,9 @@ export function ContactSection() {
             {/* Decorative background element */}
             <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/30 to-purple-600/30 rounded-xl blur-xl opacity-40 group-hover:opacity-70 transition-all duration-700"></div>
             
-            <div className="card relative z-10 bg-card-bg border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl">
+            <div className="glass-card relative z-10 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl">
               <div className="p-8">
-                <h3 className="font-medium text-xl mb-6 text-primary-text">{t.contact.formTitle}</h3>
+                <h3 className="font-medium text-xl mb-6 text-white">{t.contact.formTitle}</h3>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -257,7 +258,7 @@ export function ContactSection() {
           <div className="group">
             {/* Contact info */}
             <div className="mb-12">
-              <h3 className="font-medium text-xl mb-6 text-primary-text group-hover:text-accent-color transition-colors">
+              <h3 className="font-medium text-xl mb-6 text-white group-hover:text-accent-color transition-colors">
                 {t.contact.info.title}
               </h3>
               <div className="space-y-8">
@@ -299,7 +300,7 @@ export function ContactSection() {
             {/* FAQ */}
             <div className="mb-12">
               <div className="card bg-card-bg/50 border border-white/10 rounded-xl p-6 backdrop-blur-sm">
-                <h3 className="font-medium text-xl mb-6 text-primary-text">
+                <h3 className="font-medium text-xl mb-6 text-white">
                   {t.contact.faq.title}
                 </h3>
                 <div className="space-y-6">
@@ -321,7 +322,7 @@ export function ContactSection() {
             
             {/* Social Media */}
             <div>
-              <h3 className="font-medium text-xl mb-6 text-primary-text">
+              <h3 className="font-medium text-xl mb-6 text-white">
                 {t.contact.social.title}
               </h3>
               <div className="flex space-x-4">
