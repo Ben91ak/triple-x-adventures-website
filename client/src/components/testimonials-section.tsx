@@ -131,37 +131,37 @@ export function TestimonialsSection() {
       {/* Background with diagonal gradient */}
       <div className="absolute inset-0 bg-gradient-to-bl from-dark-bg via-card-bg to-dark-bg opacity-95 z-0"></div>
       
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      {/* Subtle pattern overlay - optimized with transform-gpu for better performance */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none transform-gpu"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
+          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2 text-shadow-sm">
             {language === 'de' ? 'Erfahrungen' : language === 'sv' ? 'Upplevelser' : 'Experiences'}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text text-shadow-lg">
             {content.title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+          <p className="text-lg max-w-3xl mx-auto text-secondary-text text-shadow-sm">
             {content.subtitle}
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="group relative">
-              {/* Decorative background element */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-accent-color/5 rounded-xl blur-xl opacity-0 group-hover:opacity-70 transition-all duration-700"></div>
+            <div key={testimonial.id} className="group relative transform-gpu">
+              {/* Decorative background element - optimized with reduced blur and transform-gpu */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/10 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
               
-              {/* Card */}
-              <div className="card bg-card-bg border border-white/10 backdrop-blur-sm rounded-xl p-8 transition-all duration-300 relative z-10 h-full flex flex-col">
+              {/* Card - optimized with glass-card class and transform-gpu */}
+              <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-8 relative z-10 h-full flex flex-col group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu">
                 {/* Quote icon */}
                 <div className="absolute -top-4 -left-2 text-accent-color/80">
                   <Quote size={40} className="opacity-50" />
                 </div>
                 
                 <div className="pt-6 flex-grow">
-                  <p className="mb-6 text-secondary-text">{testimonial.text}</p>
+                  <p className="mb-6 text-secondary-text text-shadow-sm">{testimonial.text}</p>
                   
                   {/* Stars */}
                   <div className="flex mb-4 text-accent-color">
@@ -172,15 +172,16 @@ export function TestimonialsSection() {
                   
                   {/* Author info */}
                   <div className="flex items-center mt-auto">
-                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-accent-color/20 p-0.5">
+                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border border-accent-color/30 p-0.5 transform-gpu">
                       <img 
                         src={testimonial.author.image} 
                         alt={testimonial.author.name} 
                         className="w-full h-full object-cover rounded-full"
+                        loading="lazy"
                       />
                     </div>
                     <div>
-                      <h4 className="font-medium text-primary-text">{testimonial.author.name}</h4>
+                      <h4 className="font-medium text-primary-text text-shadow-sm">{testimonial.author.name}</h4>
                       <p className="text-sm text-secondary-text/80">{testimonial.author.location}</p>
                     </div>
                   </div>
