@@ -73,87 +73,98 @@ export function RestaurantSection() {
 
   return (
     <section id="restaurant" className="py-24 md:py-32 relative premium-dark-gradient overflow-hidden">
-      {/* Stars background effect */}
-      <div className="stars absolute inset-0 z-1"></div>
-      {/* Northern Lights animation layers */}
-      <div className="northern-glow absolute inset-0 z-1"></div>
+      {/* Stars background effect - optimized with transform-gpu */}
+      <div className="stars absolute inset-0 z-1 transform-gpu will-change-opacity"></div>
+      {/* Northern Lights animation layers - optimized with transform-gpu */}
+      <div className="northern-glow absolute inset-0 z-1 transform-gpu will-change-transform will-change-opacity"></div>
+      {/* Additional aurora pillar for subtle effect - optimized for performance */}
+      <div className="aurora-pillar absolute inset-0 z-1 animate-aurora-slow transform-gpu will-change-transform will-change-opacity"></div>
       
-      {/* Subtle texture overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      {/* Subtle texture overlay - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none transform-gpu"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-20">
-          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
+          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2 text-shadow-sm">
             {language === 'de' ? 'Arktische Kulinarik' : language === 'sv' ? 'Arktisk Matlagning' : 'Arctic Cuisine'}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white text-shadow-lg">
             {content.title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
+          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80 text-shadow-sm">
             {content.subtitle}
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Left column - Images with glass effect borders */}
-          <div className="group relative">
-            {/* Decorative background element */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/30 to-purple-600/30 rounded-xl blur-xl opacity-40 group-hover:opacity-70 transition-all duration-700"></div>
+          {/* Left column - Images with glass effect borders - optimized for performance */}
+          <div className="group relative transform-gpu">
+            {/* Decorative background element - optimized with reduced blur and transform-gpu */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
             
-            <div className="relative z-10">
-              <div className="overflow-hidden rounded-xl mb-6 bg-card-bg/50 backdrop-blur-sm p-2 border border-white/10 shadow-xl">
+            <div className="relative z-10 transform-gpu">
+              <div className="overflow-hidden rounded-xl mb-6 glass-card border border-white/10 shadow-lg">
                 <img 
                   src="https://images.unsplash.com/photo-1528659882437-b89a74bc157f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
                   alt={content.imageAlt1} 
-                  className="w-full h-72 object-cover rounded-lg transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-72 object-cover rounded-lg transition-transform duration-500 group-hover:scale-105 transform-gpu"
+                  loading="eager"
+                  width="600"
+                  height="400"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div className="overflow-hidden rounded-xl bg-card-bg/50 backdrop-blur-sm p-2 border border-white/10 shadow-lg">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu">
                   <img 
                     src="https://images.unsplash.com/photo-1617196123643-bab924c7a9f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
                     alt={content.imageAlt2} 
-                    className="w-full h-40 object-cover rounded-lg transition-transform duration-700 hover:scale-105"
+                    className="w-full h-40 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
+                    loading="lazy"
+                    width="300"
+                    height="200"
                   />
                 </div>
-                <div className="overflow-hidden rounded-xl bg-card-bg/50 backdrop-blur-sm p-2 border border-white/10 shadow-lg">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu">
                   <img 
                     src="https://images.unsplash.com/photo-1563245440-ad2c9507d76e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
                     alt={content.imageAlt3} 
-                    className="w-full h-40 object-cover rounded-lg transition-transform duration-700 hover:scale-105"
+                    className="w-full h-40 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
+                    loading="lazy"
+                    width="300"
+                    height="200"
                   />
                 </div>
               </div>
             </div>
           </div>
           
-          {/* Right column - Content with glass card effect */}
-          <div className="relative group">
-            {/* Glass card effect */}
-            <div className="absolute -inset-1 bg-gradient-to-l from-accent-color/20 to-purple-600/20 rounded-xl blur-xl opacity-0 group-hover:opacity-70 transition-all duration-700"></div>
+          {/* Right column - Content with glass card effect - optimized for performance */}
+          <div className="relative group transform-gpu">
+            {/* Glass card effect - optimized with reduced blur and transform-gpu */}
+            <div className="absolute -inset-1 bg-gradient-to-l from-accent-color/10 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
             
-            <div className="glass-card relative z-10 p-8 backdrop-blur-sm rounded-xl shadow-xl">
-              <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors">
+            <div className="glass-card relative z-10 p-8 rounded-xl shadow-lg transform-gpu">
+              <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-sm">
                 {content.heading}
               </h3>
-              <p className="mb-6 text-white text-opacity-80">
+              <p className="mb-6 text-white text-opacity-80 text-shadow-sm">
                 {content.description1}
               </p>
-              <p className="mb-8 text-white text-opacity-80">
+              <p className="mb-8 text-white text-opacity-80 text-shadow-sm">
                 {content.description2}
               </p>
               
               <div className="mb-8">
-                <h4 className="font-medium text-lg mb-5 text-white">
+                <h4 className="font-medium text-lg mb-5 text-white text-shadow-sm">
                   {content.specialtiesHeading}
                 </h4>
                 <ul className="space-y-4">
                   {content.specialties.map((specialty, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center mr-3 text-accent-color shadow-glow-sm">
+                    <li key={index} className="flex items-start transform-gpu">
+                      <div className="w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center mr-3 text-accent-color transform-gpu">
                         {specialtyIcons[index]}
                       </div>
-                      <span className="text-white text-opacity-80">{specialty}</span>
+                      <span className="text-white text-opacity-80 text-shadow-sm">{specialty}</span>
                     </li>
                   ))}
                 </ul>
@@ -161,9 +172,9 @@ export function RestaurantSection() {
               
               <a 
                 href="#contact" 
-                className="btn-primary text-center inline-flex items-center justify-center transition-all"
+                className="glass-button text-center inline-flex items-center justify-center transition-colors duration-300"
               >
-                {content.reserveButton}
+                <span className="text-shadow-sm">{content.reserveButton}</span>
               </a>
             </div>
           </div>

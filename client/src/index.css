@@ -37,12 +37,34 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+  
+  .glass-button {
+    background: rgba(26, 29, 31, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--primary-text);
+    font-weight: 600;
+    will-change: transform;
+    transform: translateZ(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .glass-button:hover {
+    background: rgba(26, 29, 31, 0.8);
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   }
   
   .gradient-text {
     background: linear-gradient(90deg, var(--primary-text), var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    will-change: background-position;
   }
   
   .btn-primary {
@@ -52,6 +74,7 @@
     border-radius: 8px;
     font-weight: 600;
     transition: all 0.2s ease-in-out;
+    will-change: transform;
   }
   
   .btn-primary:hover {
@@ -67,6 +90,7 @@
     font-weight: 500;
     border: 1px solid var(--divider-color);
     transition: all 0.2s ease-in-out;
+    will-change: transform, background-color;
   }
   
   .btn-ghost:hover {
@@ -79,6 +103,7 @@
     border-radius: 12px;
     border: 1px solid var(--divider-color);
     overflow: hidden;
+    will-change: transform;
   }
 }
 
