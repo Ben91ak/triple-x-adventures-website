@@ -105,7 +105,7 @@ export function HeroSection() {
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
       {/* BASE LAYER - Video Background (lowest z-index) */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
         <video 
           ref={videoRef}
           className="absolute w-full h-full object-cover"
@@ -119,7 +119,7 @@ export function HeroSection() {
             height: '100%'
           }}
         >
-          <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-snowmobiles-racing-at-night-in-the-snow-4748-large.mp4" type="video/mp4" />
         </video>
         
         {/* Fallback gradient background in case video fails to load */}
@@ -127,23 +127,24 @@ export function HeroSection() {
       </div>
       
       {/* Dark overlay for text contrast */}
-      <div className="absolute inset-0 bg-dark-bg bg-opacity-65 z-10"></div>
+      <div className="absolute inset-0 bg-dark-bg bg-opacity-65" style={{ zIndex: 10 }}></div>
       
       {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-15 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none" style={{ zIndex: 15 }}></div>
 
       {/* No transition overlay between sections - removed as requested */}
       
       {/* TOP LAYER - Content (highest z-index) */}
-      <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full">
+      <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full" style={{ zIndex: 50 }}>
         {/* Hero Content with animated entrance */}
         <div className="text-center max-w-4xl mx-auto py-8 md:py-0">
           {/* Mobile design - simplified content to show more video */}
           <div className="md:block hidden">
             {/* Desktop/tablet content - show full content */}
             <div 
-              className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-sm fade-in ${isTitleVisible ? 'visible' : ''}`}
+              className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-lg fade-in ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLDivElement>}
+              style={{ color: '#FFFFFF', textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}
             >
               {content.welcome}
             </div>
@@ -151,19 +152,22 @@ export function HeroSection() {
             <h1 
               className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent fade-in ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
+              style={{ textShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}
             >
               TRIPLE <span className="text-accent-color">X</span> ADVENTURES
             </h1>
             
             <div 
-              className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-light text-white text-shadow-sm fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-light text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
               dangerouslySetInnerHTML={{ __html: content.adventure }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
+              style={{ color: '#FFFFFF', textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}
             />
             
             <p 
               className={`text-xs sm:text-sm mb-6 md:mb-8 font-mono text-white/80 fade-in ${isSubtitleVisible ? 'visible' : ''}`}
               ref={subtitleRef as React.RefObject<HTMLParagraphElement>}
+              style={{ color: '#FFFFFF', textShadow: '0 1px 3px rgba(0, 0, 0, 0.75)' }}
             >
               65.5916° N, 19.1668° E
             </p>
@@ -194,19 +198,22 @@ export function HeroSection() {
             <h1 
               className={`font-bold text-4xl sm:text-5xl mb-3 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent fade-in ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
+              style={{ textShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}
             >
               TRIPLE <span className="text-accent-color">X</span> ADVENTURES
             </h1>
             
             <div 
-              className={`text-base sm:text-lg mb-3 max-w-xs mx-auto font-light text-white text-shadow-sm fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-base sm:text-lg mb-3 max-w-xs mx-auto font-light text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
               dangerouslySetInnerHTML={{ __html: content.adventure }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
+              style={{ color: '#FFFFFF', textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}
             />
             
             <p 
               className={`text-xs mb-6 font-mono text-white/80 fade-in ${isSubtitleVisible ? 'visible' : ''}`}
               ref={subtitleRef as React.RefObject<HTMLParagraphElement>}
+              style={{ color: '#FFFFFF', textShadow: '0 1px 3px rgba(0, 0, 0, 0.75)' }}
             >
               65.5916° N, 19.1668° E
             </p>
