@@ -181,7 +181,7 @@ export function ContactSection() {
                       name="visitDate"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-primary-text">{t.contact.visitDate}</FormLabel>
+                          <FormLabel className="text-white">{t.contact.visitDate}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="bg-card-bg/50 border-white/10">
@@ -201,7 +201,7 @@ export function ContactSection() {
                     />
                     
                     <div>
-                      <FormLabel className="text-primary-text">{t.contact.interests}</FormLabel>
+                      <FormLabel className="text-white">{t.contact.interests}</FormLabel>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                         {interestOptions.map((option) => (
                           <div key={option.id} className="flex items-center space-x-2">
@@ -213,7 +213,7 @@ export function ContactSection() {
                             />
                             <label 
                               htmlFor={option.id}
-                              className="text-sm cursor-pointer text-secondary-text"
+                              className="text-sm cursor-pointer text-white text-opacity-90"
                             >
                               {option.label}
                             </label>
@@ -227,7 +227,7 @@ export function ContactSection() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-primary-text">{t.contact.message}</FormLabel>
+                          <FormLabel className="text-white">{t.contact.message}</FormLabel>
                           <FormControl>
                             <Textarea 
                               rows={4} 
@@ -328,25 +328,25 @@ export function ContactSection() {
               <div className="flex space-x-4">
                 <a 
                   href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors"
+                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
                 >
                   <Facebook size={18} />
                 </a>
                 <a 
                   href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors"
+                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
                 >
                   <Instagram size={18} />
                 </a>
                 <a 
                   href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors"
+                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
                 >
                   <Youtube size={18} />
                 </a>
                 <a 
                   href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-secondary-text hover:text-accent-color hover:border-accent-color/50 transition-colors"
+                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
                 >
                   <svg 
                     width="18" 
