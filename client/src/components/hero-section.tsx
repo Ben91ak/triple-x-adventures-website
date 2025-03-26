@@ -43,14 +43,18 @@ export function HeroSection() {
   });
   
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = 0.8;
+    // Performance optimizations for video loading and playback
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      // Set a slightly slower playback rate for a more cinematic feel
+      videoElement.playbackRate = 0.8;
       
-      // Force video load attempt
+      // Force video load attempt with error handling
       try {
-        videoRef.current.load();
+        videoElement.load();
       } catch (e) {
         console.log("Error loading video:", e);
+        setVideoError(true); // Set fallback immediately on load error
       }
       
       // Handle video error (show fallback animation)
@@ -59,24 +63,28 @@ export function HeroSection() {
         console.log("Video failed to load, showing fallback animation");
       };
       
-      videoRef.current.addEventListener('error', handleVideoError);
+      // Use passive event listener for better performance
+      videoElement.addEventListener('error', handleVideoError, { passive: true });
       
-      // Add scroll event listener for scroll indicator fade out
+      // Add optimized scroll event listener for scroll indicator fade out if needed
       const handleScroll = () => {
         if (scrollIndicatorRef.current) {
-          // Calculate scroll position as percentage
-          const scrollY = window.scrollY;
-          const opacity = Math.max(0, 1 - (scrollY / 200)); // Fade out over first 200px of scroll
-          scrollIndicatorRef.current.style.opacity = opacity.toString();
+          // Calculate scroll position as percentage with optimization
+          // Use requestAnimationFrame for better performance
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const opacity = Math.max(0, 1 - (scrollY / 200)); // Fade out over first 200px of scroll
+            scrollIndicatorRef.current.style.opacity = opacity.toString();
+          });
         }
       };
       
-      window.addEventListener('scroll', handleScroll);
+      // Use passive event listener for better scroll performance
+      window.addEventListener('scroll', handleScroll, { passive: true });
       
+      // Clean up event listeners
       return () => {
-        if (videoRef.current) {
-          videoRef.current.removeEventListener('error', handleVideoError);
-        }
+        videoElement.removeEventListener('error', handleVideoError);
         window.removeEventListener('scroll', handleScroll);
       };
     }
@@ -111,15 +119,16 @@ export function HeroSection() {
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
-      {/* BASE LAYER - Video Background (lowest z-index) */}
-      <div className="absolute inset-0 overflow-hidden" style={{ zIndex: 0 }}>
+      {/* BASE LAYER - Video Background (lowest z-index) - optimized with transform-gpu */}
+      <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
         <video 
           ref={videoRef}
-          className="absolute w-full h-full object-cover"
+          className="absolute w-full h-full object-cover transform-gpu"
           autoPlay 
           muted 
           loop 
           playsInline
+          preload="auto"
           style={{ 
             objectFit: 'cover',
             width: '100%',
@@ -129,35 +138,37 @@ export function HeroSection() {
           <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
         </video>
         
-        {/* Fallback gradient background in case video fails to load */}
-        <div className={`absolute inset-0 bg-gradient-animated transition-opacity duration-500 ${videoError ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Fallback image */}
+        {/* Fallback gradient background in case video fails to load - optimized for performance */}
+        <div className={`absolute inset-0 bg-gradient-animated transition-opacity duration-300 transform-gpu ${videoError ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Fallback image with loading optimizations */}
           <img 
             src="/images/TXA_fallback.jpg" 
             alt="Arctic Adventure" 
-            className="w-full h-full object-cover opacity-70" 
+            className="w-full h-full object-cover opacity-70 transform-gpu" 
             onError={(e) => e.currentTarget.style.display = 'none'}
+            loading="eager"
+            decoding="async"
           />
         </div>
       </div>
       
-      {/* Dark overlay for text contrast */}
-      <div className="absolute inset-0 bg-dark-bg" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}></div>
+      {/* Dark overlay for text contrast - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}></div>
       
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none" style={{ zIndex: 15 }}></div>
+      {/* Grid pattern overlay - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 15 }}></div>
 
       {/* No transition overlay between sections - removed as requested */}
       
-      {/* TOP LAYER - Content (highest z-index) */}
-      <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full" style={{ zIndex: 50 }}>
-        {/* Hero Content with animated entrance */}
-        <div className="text-center max-w-4xl mx-auto py-8 md:py-0">
+      {/* TOP LAYER - Content (highest z-index) - optimized with transform-gpu */}
+      <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full transform-gpu" style={{ zIndex: 50 }}>
+        {/* Hero Content with animated entrance - optimized for performance */}
+        <div className="text-center max-w-4xl mx-auto py-8 md:py-0 transform-gpu">
           {/* Desktop/tablet content - show full content */}
-          <div className="hidden md:block">
-            {/* Content for larger screens */}
+          <div className="hidden md:block transform-gpu">
+            {/* Content for larger screens - optimized with transform-gpu */}
             <div 
-              className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-lg fade-in ${isTitleVisible ? 'visible' : ''}`}
+              className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-lg fade-in transform-gpu ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLDivElement>}
               style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             >
@@ -165,7 +176,7 @@ export function HeroSection() {
             </div>
             
             <h1 
-              className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-tight fade-in ${isTitleVisible ? 'visible' : ''}`}
+              className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-tight fade-in transform-gpu ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
               style={{ 
                 color: '#FFFFFF', 
@@ -177,14 +188,14 @@ export function HeroSection() {
             </h1>
             
             <div 
-              className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-semibold text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-semibold text-white text-shadow-lg fade-in transform-gpu ${isSubtitleVisible ? 'visible' : ''}`}
               dangerouslySetInnerHTML={{ __html: content.adventure }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
               style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             />
             
             <p 
-              className={`text-xs sm:text-sm mb-6 md:mb-8 font-mono text-white/80 fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-xs sm:text-sm mb-6 md:mb-8 font-mono text-white/80 fade-in transform-gpu ${isSubtitleVisible ? 'visible' : ''}`}
               ref={subtitleRef as React.RefObject<HTMLParagraphElement>}
               style={{ color: '#FFFFFF', textShadow: '0 1px 3px rgba(0, 0, 0, 0.75)' }}
             >
@@ -192,31 +203,31 @@ export function HeroSection() {
             </p>
             
             <div 
-              className={`glass-card p-4 sm:p-6 md:p-8 mb-8 md:mb-12 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
+              className={`glass-card p-4 sm:p-6 md:p-8 mb-8 md:mb-12 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up transform-gpu ${isDescriptionVisible ? 'visible' : ''}`}
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
-              style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(10px)' }}
+              style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(8px)' }}
             >
               <p 
-                className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed"
+                className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu"
                 dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
               />
               
               <p 
-                className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed"
+                className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu"
                 dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
               />
               
               <p 
-                className="text-white text-sm md:text-base leading-relaxed"
+                className="text-white text-sm md:text-base leading-relaxed transform-gpu"
                 dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
               />
             </div>
           </div>
           
-          {/* Mobile-only content - minimalist to maximize video visibility */}
-          <div className="md:hidden block">
+          {/* Mobile-only content - optimized for performance */}
+          <div className="md:hidden block transform-gpu">
             <h1 
-              className={`font-bold text-4xl sm:text-5xl mb-3 tracking-tight fade-in ${isTitleVisible ? 'visible' : ''}`}
+              className={`font-bold text-4xl sm:text-5xl mb-3 tracking-tight fade-in transform-gpu ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
               style={{ 
                 color: '#FFFFFF', 
@@ -228,52 +239,52 @@ export function HeroSection() {
             </h1>
             
             <div 
-              className={`text-base sm:text-lg mb-3 max-w-xs mx-auto font-semibold text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-base sm:text-lg mb-3 max-w-xs mx-auto font-semibold text-white text-shadow-lg fade-in transform-gpu ${isSubtitleVisible ? 'visible' : ''}`}
               dangerouslySetInnerHTML={{ __html: content.adventure }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
               style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             />
             
             <p 
-              className={`text-xs mb-6 font-mono text-white/80 fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-xs mb-6 font-mono text-white/80 fade-in transform-gpu ${isSubtitleVisible ? 'visible' : ''}`}
               ref={subtitleRef as React.RefObject<HTMLParagraphElement>}
               style={{ color: '#FFFFFF', textShadow: '0 1px 3px rgba(0, 0, 0, 0.75)' }}
             >
               65.5916° N, 19.1668° E
             </p>
             
-            {/* Full content for mobile with smaller text */}
+            {/* Full content for mobile with smaller text - optimized blur effect */}
             <div 
-              className={`glass-card p-3 mb-4 mx-auto text-left shadow-lg fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
+              className={`glass-card p-3 mb-4 mx-auto text-left shadow-lg fade-in scale-up transform-gpu ${isDescriptionVisible ? 'visible' : ''}`}
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
-              style={{ maxHeight: 'calc(60vh - 200px)', overflowY: 'auto', backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(10px)' }}
+              style={{ maxHeight: 'calc(60vh - 200px)', overflowY: 'auto', backgroundColor: 'rgba(26, 29, 31, 0.75)', backdropFilter: 'blur(6px)' }}
             >
               <p 
-                className="mb-2 text-white text-xs leading-relaxed"
+                className="mb-2 text-white text-xs leading-relaxed transform-gpu"
                 dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
               />
               
               <p 
-                className="mb-2 text-white text-xs leading-relaxed"
+                className="mb-2 text-white text-xs leading-relaxed transform-gpu"
                 dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
               />
               
               <p 
-                className="text-white text-xs leading-relaxed"
+                className="text-white text-xs leading-relaxed transform-gpu"
                 dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
               />
             </div>
           </div>
           
-          {/* Button group with the most delayed entrance - same for all displays */}
+          {/* Button group with the most delayed entrance - optimized for performance */}
           <div 
-            className={`flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-2 md:mb-16 fade-in ${isButtonsVisible ? 'visible' : ''}`}
+            className={`flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-2 md:mb-16 fade-in transform-gpu ${isButtonsVisible ? 'visible' : ''}`}
             ref={buttonsRef as React.RefObject<HTMLDivElement>}
           >
-            <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-all">
+            <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-colors transform-gpu">
               {t.hero.cta}
             </a>
-            <a href="#contact" className="btn-ghost inline-flex items-center justify-center gap-2 text-sm uppercase tracking-wide font-medium transition-all">
+            <a href="#contact" className="btn-ghost inline-flex items-center justify-center gap-2 text-sm uppercase tracking-wide font-medium transition-colors transform-gpu">
               {t.nav.contact}
             </a>
           </div>
