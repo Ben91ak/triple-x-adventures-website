@@ -153,9 +153,9 @@ export function HeroSection() {
       <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full" style={{ zIndex: 50 }}>
         {/* Hero Content with animated entrance */}
         <div className="text-center max-w-4xl mx-auto py-8 md:py-0">
-          {/* Mobile design - simplified content to show more video */}
-          <div className="md:block hidden">
-            {/* Desktop/tablet content - show full content */}
+          {/* Desktop/tablet content - show full content */}
+          <div className="hidden md:block">
+            {/* Content for larger screens */}
             <div 
               className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-lg fade-in ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLDivElement>}
