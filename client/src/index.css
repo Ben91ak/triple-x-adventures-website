@@ -8,7 +8,7 @@
   --dark-bg: #0F1112;
   --card-bg: #1A1D1F;
   --primary-text: #FFFFFF;
-  --secondary-text: #D1D5DB;
+  --secondary-text: #FFFFFF;
   --accent-color: #A4D233;
   --accent-hover: #8FBB1C;
   --dark-accent: #576A24;
@@ -416,6 +416,53 @@
 
 .parallax-content {
   will-change: transform;
+}
+
+/* Aurora glow for package builder */
+.aurora-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(120, 255, 70, 0.15) 0%,
+    rgba(164, 210, 51, 0.1) 45%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  filter: blur(40px);
+  animation: auroraGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes auroraGlow {
+  0% {
+    opacity: 0.1;
+    transform: scale(1) translateY(2%);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.05) translateY(0%);
+  }
+  100% {
+    opacity: 0.1;
+    transform: scale(1) translateY(2%);
+  }
+}
+
+/* Package builder section text enhancements */
+#package-builder h2, 
+#package-builder h3,
+#package-builder h4,
+#package-builder p,
+#package-builder span,
+#package-builder label {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+
+#package-builder h2,
+#package-builder h3 {
+  font-weight: 700;
+}
+
+#package-builder .card p {
+  color: white !important;
 }
 
 /* Media Query for Mobile Landscape */
