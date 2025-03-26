@@ -487,6 +487,49 @@
   }
 }
 
+/* Aurora pillar animations for package builder */
+.aurora-pillar {
+  will-change: transform, opacity;
+}
+
+.animate-aurora-slow {
+  animation: auroraPillarSlow 20s ease-in-out infinite alternate;
+}
+
+.animate-aurora-medium {
+  animation: auroraPillarMedium 15s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes auroraPillarSlow {
+  0% {
+    opacity: 0.05;
+    transform: translateX(-5%) scale(0.95);
+  }
+  50% {
+    opacity: 0.1;
+    transform: translateX(0%) scale(1);
+  }
+  100% {
+    opacity: 0.05;
+    transform: translateX(5%) scale(0.98);
+  }
+}
+
+@keyframes auroraPillarMedium {
+  0% {
+    opacity: 0.08;
+    transform: translateX(3%) scale(0.98);
+  }
+  50% {
+    opacity: 0.15;
+    transform: translateX(-2%) scale(1.02);
+  }
+  100% {
+    opacity: 0.1;
+    transform: translateX(0%) scale(1);
+  }
+}
+
 /* Package builder section text enhancements */
 #package-builder h2, 
 #package-builder h3,

@@ -474,9 +474,14 @@ export function PackageBuilder() {
       {/* Background with enhanced diagonal gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0"></div>
       
-      {/* Northern lights glow effect */}
+      {/* Northern lights glow effect - enhanced */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="aurora-glow absolute inset-0 opacity-10"></div>
+        <div className="aurora-glow absolute inset-0 opacity-20"></div>
+        <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow"></div>
+        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/10 to-transparent animate-aurora-medium"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30"></div>
+        </div>
       </div>
       
       {/* Subtle pattern overlay */}
@@ -495,8 +500,8 @@ export function PackageBuilder() {
           </div>
           
           <div className="text-center">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-primary-text">{content.title}</h2>
-            <p className="text-lg max-w-2xl mx-auto text-secondary-text leading-relaxed">{content.subtitle}</p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-primary-text text-shadow-lg">{content.title}</h2>
+            <p className="text-lg max-w-2xl mx-auto text-secondary-text leading-relaxed text-shadow-sm">{content.subtitle}</p>
           </div>
         </div>
         
@@ -541,28 +546,31 @@ export function PackageBuilder() {
                         transition-opacity duration-300`}
                       ></div>
                       
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60
+                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60 transition-all duration-300
                         ${isSelected(option.id) 
-                          ? 'bg-card-bg border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
+                          ? 'bg-card-bg/80 border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
                           : 'bg-card-bg/70 border-white/15'}`}
                       >
-                        <div className="flex justify-between items-start mb-4">
-                          <h4 className={`font-bold ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors`}>
+                        {/* Inner glow effect on selection */}
+                        <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
+                        
+                        <div className="relative z-10 flex justify-between items-start mb-4">
+                          <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
                             {option.title}
                           </h4>
-                          <div className={`flex items-center justify-center h-7 w-7 rounded-full
+                          <div className={`flex items-center justify-center h-7 w-7 rounded-full transition-all duration-300 transform group-hover:scale-110
                             ${isSelected(option.id) 
-                              ? 'bg-accent-color text-black' 
+                              ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
                               : 'bg-card-bg border border-white/20 text-white/50'}`}
                           >
                             {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
                           </div>
                         </div>
                         
-                        <p className="text-sm text-secondary-text mb-4 line-clamp-2">{option.description}</p>
+                        <p className="relative z-10 text-sm text-secondary-text mb-4 line-clamp-2 text-shadow-sm">{option.description}</p>
                         
-                        <div className="pt-2 border-t border-white/10 flex justify-between items-center">
-                          <div className="text-accent-color font-bold">
+                        <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center">
+                          <div className="text-accent-color font-bold text-shadow-sm">
                             {formatPrice(option.price)} <span className="text-xs font-normal">SEK</span>
                           </div>
                           
@@ -598,28 +606,31 @@ export function PackageBuilder() {
                         transition-opacity duration-300`}
                       ></div>
                       
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60
+                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60 transition-all duration-300
                         ${isSelected(option.id) 
-                          ? 'bg-card-bg border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
+                          ? 'bg-card-bg/80 border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
                           : 'bg-card-bg/70 border-white/15'}`}
                       >
-                        <div className="flex justify-between items-start mb-4">
-                          <h4 className={`font-bold ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors`}>
+                        {/* Inner glow effect on selection */}
+                        <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
+                        
+                        <div className="relative z-10 flex justify-between items-start mb-4">
+                          <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
                             {option.title}
                           </h4>
-                          <div className={`flex items-center justify-center h-7 w-7 rounded-full
+                          <div className={`flex items-center justify-center h-7 w-7 rounded-full transition-all duration-300 transform group-hover:scale-110
                             ${isSelected(option.id) 
-                              ? 'bg-accent-color text-black' 
+                              ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
                               : 'bg-card-bg border border-white/20 text-white/50'}`}
                           >
                             {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
                           </div>
                         </div>
                         
-                        <p className="text-sm text-secondary-text mb-4">{option.description}</p>
+                        <p className="relative z-10 text-sm text-secondary-text mb-4 text-shadow-sm">{option.description}</p>
                         
-                        <div className="pt-2 border-t border-white/10 flex justify-between items-center">
-                          <div className="text-accent-color font-bold">
+                        <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center">
+                          <div className="text-accent-color font-bold text-shadow-sm">
                             {formatPrice(option.price)} <span className="text-xs font-normal">{content.perNight}</span>
                           </div>
                           
@@ -655,28 +666,31 @@ export function PackageBuilder() {
                         transition-opacity duration-300`}
                       ></div>
                       
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60
+                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60 transition-all duration-300
                         ${isSelected(option.id) 
-                          ? 'bg-card-bg border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
+                          ? 'bg-card-bg/80 border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
                           : 'bg-card-bg/70 border-white/15'}`}
                       >
-                        <div className="flex justify-between items-start mb-4">
-                          <h4 className={`font-bold ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors`}>
+                        {/* Inner glow effect on selection */}
+                        <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
+                        
+                        <div className="relative z-10 flex justify-between items-start mb-4">
+                          <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
                             {option.title}
                           </h4>
-                          <div className={`flex items-center justify-center h-7 w-7 rounded-full
+                          <div className={`flex items-center justify-center h-7 w-7 rounded-full transition-all duration-300 transform group-hover:scale-110
                             ${isSelected(option.id) 
-                              ? 'bg-accent-color text-black' 
+                              ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
                               : 'bg-card-bg border border-white/20 text-white/50'}`}
                           >
                             {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
                           </div>
                         </div>
                         
-                        <p className="text-sm text-secondary-text mb-4 line-clamp-2">{option.description}</p>
+                        <p className="relative z-10 text-sm text-secondary-text mb-4 line-clamp-2 text-shadow-sm">{option.description}</p>
                         
-                        <div className="pt-2 border-t border-white/10 flex justify-between items-center">
-                          <div className="text-accent-color font-bold">
+                        <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center">
+                          <div className="text-accent-color font-bold text-shadow-sm">
                             {formatPrice(option.price)} <span className="text-xs font-normal">SEK</span>
                           </div>
                           
@@ -692,22 +706,27 @@ export function PackageBuilder() {
               
               {/* Summary section */}
               <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center">
-                <div className="text-center sm:text-left mb-6 sm:mb-0">
-                  <span className="block text-secondary-text mb-1">{content.estimatedTotal}</span>
-                  <span className="font-bold text-3xl text-primary-text">
-                    {formatPrice(total)} <span className="text-accent-color">SEK</span>
-                  </span>
+                <div className="text-center sm:text-left mb-6 sm:mb-0 relative">
+                  {/* Price glow effect */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/5 to-transparent rounded-full blur-xl opacity-50 hidden sm:block"></div>
+                  
+                  <div className="relative">
+                    <span className="block text-secondary-text mb-1 text-shadow-sm">{content.estimatedTotal}</span>
+                    <span className="font-bold text-3xl text-primary-text text-shadow-lg">
+                      {formatPrice(total)} <span className="text-accent-color">SEK</span>
+                    </span>
+                  </div>
                 </div>
                 
                 <button 
                   onClick={() => setIsDialogOpen(true)}
-                  className="group relative rounded-lg overflow-hidden"
+                  className="group relative rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
                 >
                   {/* Button glow effect */}
-                  <div className="absolute inset-0 group-hover:bg-accent-color/20 transition-colors duration-300"></div>
+                  <div className="absolute -inset-1 bg-accent-color/30 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   
-                  <div className="relative bg-accent-color hover:brightness-110 text-black font-bold py-4 px-8 flex items-center space-x-2 transition-all duration-300 group-hover:shadow-lg">
-                    <ShoppingBag size={20} />
+                  <div className="relative bg-accent-color hover:brightness-110 text-black font-bold py-4 px-8 flex items-center space-x-3 transition-all duration-300 group-hover:shadow-lg shadow-md">
+                    <ShoppingBag size={20} className="transform group-hover:scale-110 transition-transform duration-300" />
                     <span>{content.requestBooking}</span>
                   </div>
                 </button>
@@ -719,9 +738,12 @@ export function PackageBuilder() {
 
       {/* Adventure Request Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[550px] bg-card-bg border-white/10 text-primary-text">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-primary-text">
+        <DialogContent className="sm:max-w-[550px] bg-card-bg/95 backdrop-blur-md border border-white/10 text-primary-text shadow-2xl">
+          {/* Dialog background glow */}
+          <div className="absolute -inset-1 bg-accent-color/5 rounded-lg blur-md opacity-70 z-0"></div>
+          
+          <DialogHeader className="relative z-10">
+            <DialogTitle className="text-2xl font-bold text-primary-text text-shadow-sm">
               {content.formTitle}
             </DialogTitle>
             <DialogDescription className="text-secondary-text">
@@ -729,13 +751,13 @@ export function PackageBuilder() {
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-6 pt-4">
+          <form onSubmit={handleSubmit} className="space-y-6 pt-4 relative z-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* First Name */}
               <div className="space-y-2">
-                <Label htmlFor="firstName" className="text-primary-text">
-                  <User size={16} className="inline mr-2 text-accent-color" />
-                  {content.firstName}
+                <Label htmlFor="firstName" className="text-primary-text flex items-center">
+                  <User size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.firstName}</span>
                 </Label>
                 <Input
                   id="firstName"
@@ -743,15 +765,15 @@ export function PackageBuilder() {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   required
-                  className="bg-card-bg/50 border-white/10"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 />
               </div>
 
               {/* Last Name */}
               <div className="space-y-2">
-                <Label htmlFor="lastName" className="text-primary-text">
-                  <User size={16} className="inline mr-2 text-accent-color" />
-                  {content.lastName}
+                <Label htmlFor="lastName" className="text-primary-text flex items-center">
+                  <User size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.lastName}</span>
                 </Label>
                 <Input
                   id="lastName"
@@ -759,7 +781,7 @@ export function PackageBuilder() {
                   value={formData.lastName}
                   onChange={handleInputChange}
                   required
-                  className="bg-card-bg/50 border-white/10"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 />
               </div>
             </div>
@@ -767,9 +789,9 @@ export function PackageBuilder() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-primary-text">
-                  <Mail size={16} className="inline mr-2 text-accent-color" />
-                  {content.email}
+                <Label htmlFor="email" className="text-primary-text flex items-center">
+                  <Mail size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.email}</span>
                 </Label>
                 <Input
                   id="email"
@@ -778,22 +800,22 @@ export function PackageBuilder() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="bg-card-bg/50 border-white/10"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 />
               </div>
 
               {/* Phone */}
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-primary-text">
-                  <Phone size={16} className="inline mr-2 text-accent-color" />
-                  {content.phone}
+                <Label htmlFor="phone" className="text-primary-text flex items-center">
+                  <Phone size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.phone}</span>
                 </Label>
                 <Input
                   id="phone"
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className="bg-card-bg/50 border-white/10"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 />
               </div>
             </div>
@@ -801,9 +823,9 @@ export function PackageBuilder() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Start Date */}
               <div className="space-y-2">
-                <Label htmlFor="startDate" className="text-primary-text">
-                  <Calendar size={16} className="inline mr-2 text-accent-color" />
-                  {content.startDate}
+                <Label htmlFor="startDate" className="text-primary-text flex items-center">
+                  <Calendar size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.startDate}</span>
                 </Label>
                 <Input
                   id="startDate"
@@ -811,15 +833,15 @@ export function PackageBuilder() {
                   type="date"
                   value={formData.startDate}
                   onChange={handleInputChange}
-                  className="bg-card-bg/50 border-white/10"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 />
               </div>
 
               {/* End Date */}
               <div className="space-y-2">
-                <Label htmlFor="endDate" className="text-primary-text">
-                  <Calendar size={16} className="inline mr-2 text-accent-color" />
-                  {content.endDate}
+                <Label htmlFor="endDate" className="text-primary-text flex items-center">
+                  <Calendar size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.endDate}</span>
                 </Label>
                 <Input
                   id="endDate"
@@ -827,7 +849,7 @@ export function PackageBuilder() {
                   type="date"
                   value={formData.endDate}
                   onChange={handleInputChange}
-                  className="bg-card-bg/50 border-white/10"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 />
               </div>
             </div>
@@ -835,21 +857,21 @@ export function PackageBuilder() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Departure Airport */}
               <div className="space-y-2">
-                <Label htmlFor="departureAirport" className="text-primary-text">
-                  <PlaneTakeoff size={16} className="inline mr-2 text-accent-color" />
-                  {content.departureAirport}
+                <Label htmlFor="departureAirport" className="text-primary-text flex items-center">
+                  <PlaneTakeoff size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.departureAirport}</span>
                 </Label>
                 <Select 
                   value={formData.departureAirport} 
                   onValueChange={(value) => handleSelectChange('departureAirport', value)}
                   required
                 >
-                  <SelectTrigger className="bg-card-bg/50 border-white/10">
+                  <SelectTrigger className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300">
                     <SelectValue placeholder={content.selectDeparture} />
                   </SelectTrigger>
-                  <SelectContent className="bg-card-bg border-white/10">
+                  <SelectContent className="bg-card-bg/95 backdrop-blur-md border-white/10">
                     {departureOptions.map(option => (
-                      <SelectItem key={option.value} value={option.value}>
+                      <SelectItem key={option.value} value={option.value} className="focus:bg-accent-color/10">
                         {option.label}
                       </SelectItem>
                     ))}
@@ -859,9 +881,9 @@ export function PackageBuilder() {
 
               {/* Group Size */}
               <div className="space-y-2">
-                <Label htmlFor="groupSize" className="text-primary-text">
-                  <Users size={16} className="inline mr-2 text-accent-color" />
-                  {content.groupSize}
+                <Label htmlFor="groupSize" className="text-primary-text flex items-center">
+                  <Users size={16} className="mr-2 text-accent-color" />
+                  <span className="text-shadow-sm">{content.groupSize}</span>
                 </Label>
                 <Input
                   id="groupSize"
@@ -871,23 +893,23 @@ export function PackageBuilder() {
                   onChange={handleNumberChange}
                   min="1"
                   required
-                  className="bg-card-bg/50 border-white/10"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 />
               </div>
             </div>
 
             {/* Additional Requests */}
             <div className="space-y-2">
-              <Label htmlFor="additionalRequests" className="text-primary-text">
-                <Coffee size={16} className="inline mr-2 text-accent-color" />
-                {content.additionalRequests}
+              <Label htmlFor="additionalRequests" className="text-primary-text flex items-center">
+                <Coffee size={16} className="mr-2 text-accent-color" />
+                <span className="text-shadow-sm">{content.additionalRequests}</span>
               </Label>
               <Textarea
                 id="additionalRequests"
                 name="additionalRequests"
                 value={formData.additionalRequests}
                 onChange={handleInputChange}
-                className="bg-card-bg/50 border-white/10"
+                className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
                 rows={3}
               />
             </div>
@@ -897,21 +919,26 @@ export function PackageBuilder() {
                 type="button" 
                 variant="outline" 
                 onClick={() => setIsDialogOpen(false)}
-                className="border-white/10 hover:bg-card-bg/80"
+                className="border-white/10 hover:bg-card-bg/80 hover:border-white/20 transition-all duration-300"
               >
                 {content.cancel}
               </Button>
               <Button 
                 type="submit" 
-                className="bg-accent-color hover:brightness-110 text-black"
+                className="bg-accent-color hover:brightness-110 text-black transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-accent-color/20"
                 disabled={adventureMutation.isPending}
               >
                 {adventureMutation.isPending ? (
                   <div className="flex items-center">
-                    <div className="w-4 h-4 rounded-full border-2 border-t-transparent border-white animate-spin mr-2"></div>
+                    <div className="w-4 h-4 rounded-full border-2 border-t-transparent border-black animate-spin mr-2"></div>
                     {content.submit}
                   </div>
-                ) : content.submit}
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <ShoppingBag size={16} />
+                    <span>{content.submit}</span>
+                  </div>
+                )}
               </Button>
             </DialogFooter>
           </form>
