@@ -30,7 +30,7 @@ import {
   SelectValue
 } from "@/components/ui/select";
 
-// Package option data by language
+// Package option data by language (unchanged from original)
 const packageOptionsByLanguage = {
   en: [
     {
@@ -208,7 +208,7 @@ const packageOptionsByLanguage = {
   ]
 };
 
-// Departure airports by language
+// Departure airports by language (unchanged from original)
 const departureAirportsByLanguage = {
   en: [
     { value: "munich", label: "Munich" },
@@ -239,7 +239,7 @@ const departureAirportsByLanguage = {
   ]
 };
 
-// Section content by language
+// Section content by language (unchanged from original)
 const contentByLanguage = {
   en: {
     title: "BUILD YOUR ADVENTURE",
@@ -481,265 +481,242 @@ export function PackageBuilder() {
         
         {/* Aurora pillars - optimized with transform-gpu for better performance */}
         <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow transform-gpu will-change-transform"></div>
-        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/10 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>
-        
-        {/* Additional top glow */}
-        <div className="absolute inset-0 transform-gpu">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30 transform-gpu"></div>
-        </div>
-        
-        {/* Stars background effect - added for more depth */}
-        <div className="stars absolute inset-0 z-1 opacity-40 transform-gpu will-change-opacity"></div>
+        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>
+        <div className="aurora-pillar absolute h-full w-32 right-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-fast transform-gpu will-change-transform"></div>
       </div>
       
-      {/* Subtle pattern overlay - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none transform-gpu"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Logo with "Build Your Adventure" text - optimized for performance */}
-        <div className="flex flex-col items-center justify-center mb-16">
-          <div className="relative w-28 h-28 mb-8 transform-gpu">
-            {/* Logo glow effect - optimized with reduced blur and transform-gpu */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/20 to-transparent rounded-full opacity-70 transition-opacity duration-500 transform-gpu will-change-opacity"></div>
-            <img 
-              src="./attached_assets/170804_Logo-TripleX_final.png" 
-              alt="Triple X Adventures" 
-              className="w-full h-full object-contain relative z-10 transform-gpu"
-              width="112"
-              height="112"
-              loading="eager"
-            />
-          </div>
-          
-          <div className="text-center transform-gpu">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4 text-primary-text text-shadow-lg">{content.title}</h2>
-            <p className="text-lg max-w-2xl mx-auto text-secondary-text leading-relaxed text-shadow-sm">{content.subtitle}</p>
-          </div>
+      {/* Content container */}
+      <div className="container mx-auto px-4 py-12 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 text-primary-text text-shadow-lg">{content.title}</h2>
+          <p className="text-lg max-w-2xl mx-auto text-secondary-text leading-relaxed text-shadow-sm">{content.subtitle}</p>
         </div>
         
-        <div className="max-w-5xl mx-auto transform-gpu">
-          <div className="glass-card bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-2xl transform-gpu">
-            {/* Steps section - optimized for performance */}
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 transform-gpu">
-              {[
-                { title: content.coreExperience, icon: <Snowflake size={24} className="text-accent-color" /> },
-                { title: content.accommodations, icon: <Home size={24} className="text-accent-color" /> },
-                { title: content.addOns, icon: <Coffee size={24} className="text-accent-color" /> }
-              ].map((step, index) => (
-                <div key={index} className="p-6 bg-gradient-to-b from-card-bg/80 to-card-bg/20 flex items-center space-x-4 transform-gpu">
-                  <div className="w-12 h-12 rounded-full bg-card-bg border border-white/10 flex items-center justify-center flex-shrink-0 transform-gpu">
-                    {step.icon}
-                  </div>
-                  <h3 className="font-bold text-lg text-primary-text text-shadow-sm">{step.title}</h3>
-                </div>
-              ))}
+        {/* Package builder cards */}
+        <div className="glass-card bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-2xl transform-gpu">
+          
+          {/* Step 1: Core Experiences */}
+          <div className="p-6 md:p-8">
+            <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent-color/10 border border-accent-color/30">
+                <Snowflake size={24} className="text-accent-color" />
+              </div>
+              <div>
+                <h3 className="font-bold text-lg text-primary-text text-shadow-sm">{content.coreExperience}</h3>
+              </div>
             </div>
             
-            <div className="p-8 md:p-10">
-              {/* Core Experiences */}
-              <div className="mb-12">
-                <div className="mb-6">
-                  <h3 className="font-bold text-2xl mb-2 text-primary-text">
-                    {content.coreExperience}
-                  </h3>
-                  <div className="w-20 h-1 bg-accent-color rounded-full opacity-80"></div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {packageOptions.filter(opt => opt.category === 'core').map(option => (
-                    <div 
-                      key={option.id}
-                      className={`group relative cursor-pointer transition-all duration-300`}
-                      onClick={() => toggleOption(option.id)}
+            <div className="w-20 h-1 bg-accent-color rounded-full opacity-80 mb-8"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {packageOptions
+                .filter(option => option.category === 'core')
+                .map(option => (
+                  <div 
+                    key={option.id}
+                    className={`group relative cursor-pointer transition-all duration-300`}
+                    onClick={() => toggleOption(option.id)}
+                  >
+                    {/* Option background glow on hover/selected - ENHANCED GLOW EFFECT */}
+                    <div className={`absolute -inset-2 rounded-xl bg-accent-color/30 blur-lg 
+                      ${isSelected(option.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'} 
+                      transition-opacity duration-300`}
+                    ></div>
+                    
+                    <div className={`relative z-10 card p-5 border group-hover:border-accent-color/70 transition-all duration-300
+                      ${isSelected(option.id) 
+                        ? 'bg-card-bg/80 border-accent-color/90 shadow-[0_0_25px_rgba(129,255,0,0.30)]' 
+                        : 'bg-card-bg/70 border-white/15'}`}
                     >
-                      {/* Option background glow on hover/selected */}
-                      <div className={`absolute -inset-1 rounded-xl bg-accent-color/20 blur-md 
-                        ${isSelected(option.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'} 
-                        transition-opacity duration-300`}
-                      ></div>
+                      {/* Inner glow effect on selection - ENHANCED */}
+                      <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/20 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
                       
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60 transition-all duration-300
-                        ${isSelected(option.id) 
-                          ? 'bg-card-bg/80 border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
-                          : 'bg-card-bg/70 border-white/15'}`}
-                      >
-                        {/* Inner glow effect on selection */}
-                        <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
-                        
-                        <div className="relative z-10 flex justify-between items-start mb-4">
-                          <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
-                            {option.title}
-                          </h4>
-                          <div className={`flex items-center justify-center h-7 w-7 rounded-full transition-all duration-300 transform group-hover:scale-110
+                      <div className="relative z-10 flex justify-between items-start mb-4">
+                        <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
+                          {option.title}
+                        </h4>
+                        <button 
+                          className={`ml-2 w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-300 
                             ${isSelected(option.id) 
                               ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
-                              : 'bg-card-bg border border-white/20 text-white/50'}`}
-                          >
-                            {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
-                          </div>
+                              : 'bg-card-bg/80 border border-white/20 text-white/70'}`}
+                        >
+                          {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
+                        </button>
+                      </div>
+                      
+                      <p className="relative z-10 text-sm text-secondary-text mb-4 line-clamp-2 text-shadow-sm">{option.description}</p>
+                      
+                      <div className="relative z-10 flex justify-between items-center">
+                        <div className="text-accent-color font-bold text-shadow-sm">
+                          {formatPrice(option.price)} SEK
                         </div>
-                        
-                        <p className="relative z-10 text-sm text-secondary-text mb-4 line-clamp-2 text-shadow-sm">{option.description}</p>
-                        
-                        <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center">
-                          <div className="text-accent-color font-bold text-shadow-sm">
-                            {formatPrice(option.price)} <span className="text-xs font-normal">SEK</span>
-                          </div>
-                          
-                          <div className="flex items-center space-x-2">
-                            {getCategoryIcon('core', isSelected(option.id))}
-                          </div>
+                        <div>
+                          {getCategoryIcon('core', isSelected(option.id))}
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Accommodations */}
-              <div className="mb-12">
-                <div className="mb-6">
-                  <h3 className="font-bold text-2xl mb-2 text-primary-text">
-                    {content.accommodations}
-                  </h3>
-                  <div className="w-20 h-1 bg-accent-color rounded-full opacity-80"></div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {packageOptions.filter(opt => opt.category === 'accommodation').map(option => (
-                    <div 
-                      key={option.id}
-                      className="group relative cursor-pointer transition-all duration-300"
-                      onClick={() => toggleOption(option.id)}
-                    >
-                      {/* Option background glow on hover/selected */}
-                      <div className={`absolute -inset-1 rounded-xl bg-accent-color/20 blur-md 
-                        ${isSelected(option.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'} 
-                        transition-opacity duration-300`}
-                      ></div>
-                      
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60 transition-all duration-300
-                        ${isSelected(option.id) 
-                          ? 'bg-card-bg/80 border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
-                          : 'bg-card-bg/70 border-white/15'}`}
-                      >
-                        {/* Inner glow effect on selection */}
-                        <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
-                        
-                        <div className="relative z-10 flex justify-between items-start mb-4">
-                          <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
-                            {option.title}
-                          </h4>
-                          <div className={`flex items-center justify-center h-7 w-7 rounded-full transition-all duration-300 transform group-hover:scale-110
-                            ${isSelected(option.id) 
-                              ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
-                              : 'bg-card-bg border border-white/20 text-white/50'}`}
-                          >
-                            {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
-                          </div>
-                        </div>
-                        
-                        <p className="relative z-10 text-sm text-secondary-text mb-4 text-shadow-sm">{option.description}</p>
-                        
-                        <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center">
-                          <div className="text-accent-color font-bold text-shadow-sm">
-                            {formatPrice(option.price)} <span className="text-xs font-normal">{content.perNight}</span>
-                          </div>
-                          
-                          <div className="flex items-center space-x-2">
-                            {getCategoryIcon('accommodation', isSelected(option.id))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Addons */}
-              <div className="mb-8">
-                <div className="mb-6">
-                  <h3 className="font-bold text-2xl mb-2 text-primary-text">
-                    {content.addOns}
-                  </h3>
-                  <div className="w-20 h-1 bg-accent-color rounded-full opacity-80"></div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {packageOptions.filter(opt => opt.category === 'addon').map(option => (
-                    <div 
-                      key={option.id}
-                      className="group relative cursor-pointer transition-all duration-300"
-                      onClick={() => toggleOption(option.id)}
-                    >
-                      {/* Option background glow on hover/selected */}
-                      <div className={`absolute -inset-1 rounded-xl bg-accent-color/20 blur-md 
-                        ${isSelected(option.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'} 
-                        transition-opacity duration-300`}
-                      ></div>
-                      
-                      <div className={`relative z-10 card p-5 border group-hover:border-accent-color/60 transition-all duration-300
-                        ${isSelected(option.id) 
-                          ? 'bg-card-bg/80 border-accent-color/70 shadow-[0_0_15px_rgba(129,255,0,0.15)]' 
-                          : 'bg-card-bg/70 border-white/15'}`}
-                      >
-                        {/* Inner glow effect on selection */}
-                        <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
-                        
-                        <div className="relative z-10 flex justify-between items-start mb-4">
-                          <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
-                            {option.title}
-                          </h4>
-                          <div className={`flex items-center justify-center h-7 w-7 rounded-full transition-all duration-300 transform group-hover:scale-110
-                            ${isSelected(option.id) 
-                              ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
-                              : 'bg-card-bg border border-white/20 text-white/50'}`}
-                          >
-                            {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
-                          </div>
-                        </div>
-                        
-                        <p className="relative z-10 text-sm text-secondary-text mb-4 line-clamp-2 text-shadow-sm">{option.description}</p>
-                        
-                        <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center">
-                          <div className="text-accent-color font-bold text-shadow-sm">
-                            {formatPrice(option.price)} <span className="text-xs font-normal">SEK</span>
-                          </div>
-                          
-                          <div className="flex items-center space-x-2">
-                            {getCategoryIcon('addon', isSelected(option.id))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Summary section - optimized for performance */}
-              <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center transform-gpu">
-                <div className="text-center sm:text-left mb-6 sm:mb-0 relative transform-gpu">
-                  {/* Price glow effect - optimized with reduced blur and transform-gpu */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/5 to-transparent rounded-full opacity-50 hidden sm:block transform-gpu will-change-opacity"></div>
-                  
-                  <div className="relative transform-gpu">
-                    <span className="block text-secondary-text mb-1 text-shadow-sm">{content.estimatedTotal}</span>
-                    <span className="font-bold text-3xl text-primary-text text-shadow-lg">
-                      {formatPrice(total)} <span className="text-accent-color">SEK</span>
-                    </span>
                   </div>
+                ))}
+            </div>
+          </div>
+          
+          {/* Step 2: Accommodations */}
+          <div className="p-6 md:p-8 border-t border-white/10">
+            <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent-color/10 border border-accent-color/30">
+                <Home size={24} className="text-accent-color" />
+              </div>
+              <div>
+                <h3 className="font-bold text-lg text-primary-text text-shadow-sm">{content.accommodations}</h3>
+              </div>
+            </div>
+            
+            <div className="w-20 h-1 bg-accent-color rounded-full opacity-80 mb-8"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {packageOptions
+                .filter(option => option.category === 'accommodation')
+                .map(option => (
+                  <div 
+                    key={option.id}
+                    className={`group relative cursor-pointer transition-all duration-300`}
+                    onClick={() => toggleOption(option.id)}
+                  >
+                    {/* Option background glow on hover/selected - ENHANCED GLOW EFFECT */}
+                    <div className={`absolute -inset-2 rounded-xl bg-accent-color/30 blur-lg 
+                      ${isSelected(option.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'} 
+                      transition-opacity duration-300`}
+                    ></div>
+                    
+                    <div className={`relative z-10 card p-5 border group-hover:border-accent-color/70 transition-all duration-300
+                      ${isSelected(option.id) 
+                        ? 'bg-card-bg/80 border-accent-color/90 shadow-[0_0_25px_rgba(129,255,0,0.30)]' 
+                        : 'bg-card-bg/70 border-white/15'}`}
+                    >
+                      {/* Inner glow effect on selection - ENHANCED */}
+                      <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/20 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
+                      
+                      <div className="relative z-10 flex justify-between items-start mb-4">
+                        <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
+                          {option.title}
+                        </h4>
+                        <button 
+                          className={`ml-2 w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-300 
+                            ${isSelected(option.id) 
+                              ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
+                              : 'bg-card-bg/80 border border-white/20 text-white/70'}`}
+                        >
+                          {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
+                        </button>
+                      </div>
+                      
+                      <p className="relative z-10 text-sm text-secondary-text mb-4 text-shadow-sm">{option.description}</p>
+                      
+                      <div className="relative z-10 flex justify-between items-center">
+                        <div className="text-accent-color font-bold text-shadow-sm">
+                          {formatPrice(option.price)} {content.perNight}
+                        </div>
+                        <div>
+                          {getCategoryIcon('accommodation', isSelected(option.id))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+          
+          {/* Step 3: Add-Ons */}
+          <div className="p-6 md:p-8 border-t border-white/10">
+            <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-accent-color/10 border border-accent-color/30">
+                <Coffee size={24} className="text-accent-color" />
+              </div>
+              <div>
+                <h3 className="font-bold text-lg text-primary-text text-shadow-sm">{content.addOns}</h3>
+              </div>
+            </div>
+            
+            <div className="w-20 h-1 bg-accent-color rounded-full opacity-80 mb-8"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {packageOptions
+                .filter(option => option.category === 'addon')
+                .map(option => (
+                  <div 
+                    key={option.id}
+                    className={`group relative cursor-pointer transition-all duration-300`}
+                    onClick={() => toggleOption(option.id)}
+                  >
+                    {/* Option background glow on hover/selected - ENHANCED GLOW EFFECT */}
+                    <div className={`absolute -inset-2 rounded-xl bg-accent-color/30 blur-lg 
+                      ${isSelected(option.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-70'} 
+                      transition-opacity duration-300`}
+                    ></div>
+                    
+                    <div className={`relative z-10 card p-5 border group-hover:border-accent-color/70 transition-all duration-300
+                      ${isSelected(option.id) 
+                        ? 'bg-card-bg/80 border-accent-color/90 shadow-[0_0_25px_rgba(129,255,0,0.30)]' 
+                        : 'bg-card-bg/70 border-white/15'}`}
+                    >
+                      {/* Inner glow effect on selection - ENHANCED */}
+                      <div className={`absolute inset-0 bg-gradient-to-br from-accent-color/20 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${isSelected(option.id) ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
+                      
+                      <div className="relative z-10 flex justify-between items-start mb-4">
+                        <h4 className={`font-bold text-shadow-sm ${isSelected(option.id) ? 'text-accent-color' : 'text-primary-text group-hover:text-accent-color'} transition-colors duration-300`}>
+                          {option.title}
+                        </h4>
+                        <button 
+                          className={`ml-2 w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-300 
+                            ${isSelected(option.id) 
+                              ? 'bg-accent-color text-black shadow-md shadow-accent-color/20' 
+                              : 'bg-card-bg/80 border border-white/20 text-white/70'}`}
+                        >
+                          {isSelected(option.id) ? <Minus size={16} /> : <Plus size={16} />}
+                        </button>
+                      </div>
+                      
+                      <p className="relative z-10 text-sm text-secondary-text mb-4 line-clamp-2 text-shadow-sm">{option.description}</p>
+                      
+                      <div className="relative z-10 flex justify-between items-center">
+                        <div className="text-accent-color font-bold text-shadow-sm">
+                          {formatPrice(option.price)} SEK
+                        </div>
+                        <div>
+                          {getCategoryIcon('addon', isSelected(option.id))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+          
+          {/* Booking Summary and Button */}
+          <div className="p-6 md:p-8 bg-card-bg/50 border-t border-white/10">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className="text-center md:text-left mb-6 md:mb-0">
+                <div className="flex flex-col items-center md:items-start">
+                  <span className="block text-secondary-text mb-1 text-shadow-sm">{content.estimatedTotal}</span>
+                  <span className="font-bold text-3xl text-primary-text text-shadow-lg">
+                    {formatPrice(total)} SEK
+                  </span>
                 </div>
-                
+              </div>
+              
+              <div>
                 <button 
                   onClick={() => setIsDialogOpen(true)}
-                  className="glass-button group relative rounded-lg overflow-hidden transform-gpu transition-transform duration-300 hover:scale-105"
+                  disabled={selectedOptions.length === 0}
+                  className="group relative transform-gpu"
                 >
-                  {/* Button glow effect - optimized with reduced blur and transform-gpu */}
+                  {/* Enhanced button hover glow effect */}
                   <div className="absolute -inset-1 bg-accent-color/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform-gpu will-change-opacity"></div>
                   
                   <div className="relative bg-accent-color hover:brightness-110 text-black font-bold py-4 px-8 flex items-center space-x-3 transition-colors duration-300 group-hover:shadow-lg shadow-md transform-gpu">
-                    <ShoppingBag size={20} className="transform-gpu group-hover:scale-110 transition-transform duration-300" />
-                    <span className="text-shadow-sm">{content.requestBooking}</span>
+                    <ShoppingBag size={20} />
+                    <span>{content.requestBooking}</span>
                   </div>
                 </button>
               </div>
@@ -747,210 +724,156 @@ export function PackageBuilder() {
           </div>
         </div>
       </div>
-
-      {/* Adventure Request Dialog - optimized for performance */}
+      
+      {/* Request Dialog */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[550px] bg-card-bg/95 backdrop-blur-md border border-white/10 text-primary-text shadow-2xl transform-gpu">
-          {/* Dialog background glow - optimized with reduced blur intensity and transform-gpu */}
-          <div className="absolute -inset-1 bg-accent-color/5 rounded-lg opacity-70 z-0 transform-gpu will-change-opacity"></div>
-          
-          <DialogHeader className="relative z-10 transform-gpu">
-            <DialogTitle className="text-2xl font-bold text-primary-text text-shadow-sm">
-              {content.formTitle}
-            </DialogTitle>
+        <DialogContent className="sm:max-w-[500px] bg-card-bg border-white/20 text-primary-text">
+          <DialogHeader>
+            <DialogTitle className="text-primary-text text-2xl">{content.formTitle}</DialogTitle>
             <DialogDescription className="text-secondary-text">
               {content.formDescription}
             </DialogDescription>
           </DialogHeader>
-
-          <form onSubmit={handleSubmit} className="space-y-6 pt-4 relative z-10 transform-gpu">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 transform-gpu">
-              {/* First Name */}
-              <div className="space-y-2 transform-gpu">
-                <Label htmlFor="firstName" className="text-primary-text flex items-center">
-                  <User size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.firstName}</span>
-                </Label>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName" className="text-primary-text">{content.firstName}</Label>
                 <Input
                   id="firstName"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
                   required
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-colors duration-300"
+                  className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70"
                 />
               </div>
-
-              {/* Last Name */}
               <div className="space-y-2">
-                <Label htmlFor="lastName" className="text-primary-text flex items-center">
-                  <User size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.lastName}</span>
-                </Label>
+                <Label htmlFor="lastName" className="text-primary-text">{content.lastName}</Label>
                 <Input
                   id="lastName"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleInputChange}
                   required
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
+                  className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70"
                 />
               </div>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {/* Email */}
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-primary-text flex items-center">
-                  <Mail size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.email}</span>
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
-                />
-              </div>
-
-              {/* Phone */}
-              <div className="space-y-2">
-                <Label htmlFor="phone" className="text-primary-text flex items-center">
-                  <Phone size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.phone}</span>
-                </Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
-                />
-              </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-primary-text">{content.email}</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70"
+              />
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {/* Start Date */}
+            
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="text-primary-text">{content.phone}</Label>
+              <Input
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70"
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="startDate" className="text-primary-text flex items-center">
-                  <Calendar size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.startDate}</span>
-                </Label>
+                <Label htmlFor="startDate" className="text-primary-text">{content.startDate}</Label>
                 <Input
                   id="startDate"
                   name="startDate"
                   type="date"
                   value={formData.startDate}
                   onChange={handleInputChange}
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
+                  className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70"
                 />
               </div>
-
-              {/* End Date */}
               <div className="space-y-2">
-                <Label htmlFor="endDate" className="text-primary-text flex items-center">
-                  <Calendar size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.endDate}</span>
-                </Label>
+                <Label htmlFor="endDate" className="text-primary-text">{content.endDate}</Label>
                 <Input
                   id="endDate"
                   name="endDate"
                   type="date"
                   value={formData.endDate}
                   onChange={handleInputChange}
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
+                  className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70"
                 />
               </div>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {/* Departure Airport */}
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="departureAirport" className="text-primary-text flex items-center">
-                  <PlaneTakeoff size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.departureAirport}</span>
-                </Label>
+                <Label htmlFor="departureAirport" className="text-primary-text">{content.departureAirport}</Label>
                 <Select 
                   value={formData.departureAirport} 
                   onValueChange={(value) => handleSelectChange('departureAirport', value)}
-                  required
                 >
-                  <SelectTrigger className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300">
+                  <SelectTrigger className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70">
                     <SelectValue placeholder={content.selectDeparture} />
                   </SelectTrigger>
-                  <SelectContent className="bg-card-bg/95 backdrop-blur-md border-white/10">
-                    {departureOptions.map(option => (
-                      <SelectItem key={option.value} value={option.value} className="focus:bg-accent-color/10">
+                  <SelectContent className="bg-dark-bg border-white/20">
+                    {departureOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
                         {option.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-
-              {/* Group Size */}
               <div className="space-y-2">
-                <Label htmlFor="groupSize" className="text-primary-text flex items-center">
-                  <Users size={16} className="mr-2 text-accent-color" />
-                  <span className="text-shadow-sm">{content.groupSize}</span>
-                </Label>
+                <Label htmlFor="groupSize" className="text-primary-text">{content.groupSize}</Label>
                 <Input
                   id="groupSize"
                   name="groupSize"
                   type="number"
+                  min="1"
                   value={formData.groupSize}
                   onChange={handleNumberChange}
-                  min="1"
                   required
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
+                  className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70"
                 />
               </div>
             </div>
-
-            {/* Additional Requests */}
+            
             <div className="space-y-2">
-              <Label htmlFor="additionalRequests" className="text-primary-text flex items-center">
-                <Coffee size={16} className="mr-2 text-accent-color" />
-                <span className="text-shadow-sm">{content.additionalRequests}</span>
-              </Label>
+              <Label htmlFor="additionalRequests" className="text-primary-text">{content.additionalRequests}</Label>
               <Textarea
                 id="additionalRequests"
                 name="additionalRequests"
                 value={formData.additionalRequests}
                 onChange={handleInputChange}
-                className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
-                rows={3}
+                className="bg-dark-bg/80 border-white/20 focus:border-accent-color/70 min-h-[100px]"
               />
             </div>
-
-            <DialogFooter className="mt-8 transform-gpu">
-              <Button 
-                type="button" 
-                variant="outline" 
+            
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
                 onClick={() => setIsDialogOpen(false)}
-                className="border-white/10 hover:bg-card-bg/80 hover:border-white/20 transition-colors duration-300 transform-gpu"
+                className="border-white/20 hover:bg-card-bg/50 hover:text-primary-text"
               >
-                <span className="text-shadow-sm">{content.cancel}</span>
+                {content.cancel}
               </Button>
               <Button 
-                type="submit" 
-                className="bg-accent-color hover:brightness-110 text-black transition-colors duration-300 shadow-md hover:shadow-lg hover:shadow-accent-color/20 transform-gpu"
+                type="submit"
+                className="bg-accent-color hover:bg-accent-color/90 text-black"
                 disabled={adventureMutation.isPending}
               >
                 {adventureMutation.isPending ? (
-                  <div className="flex items-center transform-gpu">
-                    <div className="w-4 h-4 rounded-full border-2 border-t-transparent border-black animate-spin mr-2 transform-gpu will-change-transform"></div>
-                    <span className="text-shadow-sm">{content.submit}</span>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-2 transform-gpu">
-                    <ShoppingBag size={16} className="transform-gpu" />
-                    <span className="text-shadow-sm">{content.submit}</span>
-                  </div>
-                )}
+                  <span className="flex items-center gap-2">
+                    <span className="animate-spin">⟳</span> 
+                    {content.submit}
+                  </span>
+                ) : content.submit}
               </Button>
             </DialogFooter>
           </form>
