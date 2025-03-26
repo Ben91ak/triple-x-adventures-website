@@ -125,7 +125,7 @@ export function ContactSection() {
                         name="firstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-primary-text">{t.contact.firstName}</FormLabel>
+                            <FormLabel className="text-white">{t.contact.firstName}</FormLabel>
                             <FormControl>
                               <Input {...field} className="bg-card-bg/50 border-white/10" />
                             </FormControl>
@@ -138,7 +138,7 @@ export function ContactSection() {
                         name="lastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-primary-text">{t.contact.lastName}</FormLabel>
+                            <FormLabel className="text-white">{t.contact.lastName}</FormLabel>
                             <FormControl>
                               <Input {...field} className="bg-card-bg/50 border-white/10" />
                             </FormControl>
@@ -153,7 +153,7 @@ export function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-primary-text">{t.contact.email}</FormLabel>
+                          <FormLabel className="text-white">{t.contact.email}</FormLabel>
                           <FormControl>
                             <Input {...field} type="email" className="bg-card-bg/50 border-white/10" />
                           </FormControl>
@@ -167,7 +167,7 @@ export function ContactSection() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-primary-text">{t.contact.phone}</FormLabel>
+                          <FormLabel className="text-white">{t.contact.phone}</FormLabel>
                           <FormControl>
                             <Input {...field} type="tel" className="bg-card-bg/50 border-white/10" />
                           </FormControl>
@@ -267,8 +267,8 @@ export function ContactSection() {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-primary-text">{t.contact.info.location}</h4>
-                    <p className="text-secondary-text">{t.contact.info.locationText}</p>
+                    <h4 className="font-medium mb-1 text-white">{t.contact.info.location}</h4>
+                    <p className="text-white text-opacity-80">{t.contact.info.locationText}</p>
                   </div>
                 </div>
                 
@@ -277,8 +277,8 @@ export function ContactSection() {
                     <Phone size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-primary-text">{t.contact.info.phone}</h4>
-                    <p className="text-secondary-text">
+                    <h4 className="font-medium mb-1 text-white">{t.contact.info.phone}</h4>
+                    <p className="text-white text-opacity-80">
                       {t.contact.info.phoneText1}<br />
                       {t.contact.info.phoneText2}
                     </p>
@@ -290,8 +290,8 @@ export function ContactSection() {
                     <Mail size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-primary-text">{t.contact.info.email}</h4>
-                    <p className="text-secondary-text">{t.contact.info.emailText}</p>
+                    <h4 className="font-medium mb-1 text-white">{t.contact.info.email}</h4>
+                    <p className="text-white text-opacity-80">{t.contact.info.emailText}</p>
                   </div>
                 </div>
               </div>
@@ -299,22 +299,22 @@ export function ContactSection() {
             
             {/* FAQ */}
             <div className="mb-12">
-              <div className="card bg-card-bg/50 border border-white/10 rounded-xl p-6 backdrop-blur-sm">
+              <div className="glass-card border border-white/10 rounded-xl p-6 backdrop-blur-sm">
                 <h3 className="font-medium text-xl mb-6 text-white">
                   {t.contact.faq.title}
                 </h3>
                 <div className="space-y-6">
                   <div>
-                    <h4 className="font-medium mb-2 text-primary-text">{t.contact.faq.q1}</h4>
-                    <p className="text-secondary-text text-sm">{t.contact.faq.a1}</p>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q1}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a1}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-primary-text">{t.contact.faq.q2}</h4>
-                    <p className="text-secondary-text text-sm">{t.contact.faq.a2}</p>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q2}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a2}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-primary-text">{t.contact.faq.q3}</h4>
-                    <p className="text-secondary-text text-sm">{t.contact.faq.a3}</p>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q3}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a3}</p>
                   </div>
                 </div>
               </div>
