@@ -83,9 +83,10 @@ export function Header() {
               <div className="mr-6 flex items-center flex-wrap justify-center">
                 {[
                   { href: "/", label: t.nav.home },
+                  { href: "#about", label: t.nav.about },
+                  { href: "#team", label: t.nav.about + " Team" },
                   { href: "#pakete", label: t.nav.packages },
-                  { href: "#team", label: t.nav.about },
-                  { href: "#restaurant", label: t.nav.restaurant },
+                  { href: "#package-builder", label: "Build Your Adventure" },
                   { href: "#accommodations", label: t.nav.accommodations },
                   { href: "#gallery", label: t.nav.gallery },
                   { href: "#contact", label: t.nav.contact }
@@ -137,9 +138,10 @@ export function Header() {
           <div className="py-5 mx-auto max-w-md rounded-xl space-y-1 bg-dark-bg border border-white/10 shadow-2xl">
             {[
               { href: "/", label: t.nav.home },
+              { href: "#about", label: t.nav.about },
+              { href: "#team", label: t.nav.about + " Team" },
               { href: "#pakete", label: t.nav.packages },
-              { href: "#team", label: t.nav.about },
-              { href: "#restaurant", label: t.nav.restaurant },
+              { href: "#package-builder", label: "Build Your Adventure" },
               { href: "#accommodations", label: t.nav.accommodations },
               { href: "#gallery", label: t.nav.gallery },
               { href: "#contact", label: t.nav.contact }
