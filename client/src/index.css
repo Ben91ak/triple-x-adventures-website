@@ -497,6 +497,38 @@
   animation: auroraGlow 8s ease-in-out infinite alternate;
 }
 
+/* Stars background effect for package builder */
+.stars {
+  background-image: 
+    radial-gradient(1px 1px at 30px 30px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+    radial-gradient(1px 1px at 50px 100px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
+    radial-gradient(1px 1px at 100px 60px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
+    radial-gradient(1px 1px at 175px 90px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+    radial-gradient(2px 2px at 195px 150px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
+    radial-gradient(2px 2px at 220px 200px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+    radial-gradient(1px 1px at 250px 230px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
+    radial-gradient(1px 1px at 275px 260px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
+    radial-gradient(1px 1px at 300px 290px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+    radial-gradient(1px 1px at 325px 320px, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+  background-repeat: repeat;
+  background-size: 350px 350px;
+  animation: starsTwinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes starsTwinkle {
+  0% {
+    opacity: 0.3;
+    background-position: 0 0;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.5;
+    background-position: 10px 10px;
+  }
+}
+
 @keyframes auroraGlow {
   0% {
     opacity: 0.1;

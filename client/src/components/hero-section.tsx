@@ -1,12 +1,10 @@
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
-import { ChevronDown } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const [videoError, setVideoError] = useState(false);
   const { language } = useLanguage();
   const t = useTranslation(language);
@@ -36,6 +34,7 @@ export function HeroSection() {
   });
   
   // Create scroll indicator animation that runs continuously
+  // This is a ref for an element we no longer show, but keep for animation logic
   const { ref: scrollIndicatorAnimRef, isVisible: isScrollIndicatorVisible } = useScrollAnimation({
     triggerOnce: false,
     threshold: 0.1,
@@ -66,26 +65,9 @@ export function HeroSection() {
       // Use passive event listener for better performance
       videoElement.addEventListener('error', handleVideoError, { passive: true });
       
-      // Add optimized scroll event listener for scroll indicator fade out if needed
-      const handleScroll = () => {
-        if (scrollIndicatorRef.current) {
-          // Calculate scroll position as percentage with optimization
-          // Use requestAnimationFrame for better performance
-          requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-            const opacity = Math.max(0, 1 - (scrollY / 200)); // Fade out over first 200px of scroll
-            scrollIndicatorRef.current.style.opacity = opacity.toString();
-          });
-        }
-      };
-      
-      // Use passive event listener for better scroll performance
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      
       // Clean up event listeners
       return () => {
         videoElement.removeEventListener('error', handleVideoError);
-        window.removeEventListener('scroll', handleScroll);
       };
     }
   }, []);
