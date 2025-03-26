@@ -105,14 +105,19 @@ export function HeroSection() {
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden">
       {/* BASE LAYER - Video Background (lowest z-index) */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <video 
           ref={videoRef}
-          className="absolute object-cover w-full h-full"
+          className="absolute w-auto min-w-full min-h-full max-w-none object-cover"
           autoPlay 
           muted 
           loop 
           playsInline
+          style={{ 
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)'
+          }}
         >
           <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
         </video>
@@ -128,23 +133,16 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-15 pointer-events-none"></div>
 
       {/* MIDDLE LAYER - Transition Elements */}
-      {/* Gradient to next section fade - placed behind content but above video */}
+      {/* Simple gradient fade to next section (removed wave overlay) */}
       <div className="absolute bottom-0 left-0 right-0 h-[300px] z-20">
         {/* Gradient overlay for smooth transition */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/70 to-dark-bg"></div>
       </div>
       
-      {/* Wave overlay - perfectly matches the next section */}
-      <div className="wave-overlay z-25 pointer-events-none">
-        <div className="wave-shape"></div>
-        <div className="wave-animated"></div>
-        <div className="accent-line"></div>
-      </div>
-      
       {/* TOP LAYER - Content (highest z-index) */}
-      <div className="container mx-auto px-4 relative z-50 mt-16 md:mt-0">
+      <div className="container mx-auto px-4 relative z-50 mt-16 md:mt-0 flex items-center justify-center h-full">
         {/* Hero Content with animated entrance */}
-        <div className="text-center max-w-4xl mx-auto">
+        <div className="text-center max-w-4xl mx-auto py-8 md:py-0">
           {/* Entrance animation for welcome text */}
           <div 
             className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-sm fade-in ${isTitleVisible ? 'visible' : ''}`}
@@ -155,7 +153,7 @@ export function HeroSection() {
           
           {/* Main title with animated entrance */}
           <h1 
-            className={`font-bold text-5xl md:text-7xl mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent fade-in ${isTitleVisible ? 'visible' : ''}`}
+            className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent fade-in ${isTitleVisible ? 'visible' : ''}`}
             ref={titleRef as React.RefObject<HTMLHeadingElement>}
           >
             TRIPLE <span className="text-accent-color">X</span> ADVENTURES
@@ -163,13 +161,13 @@ export function HeroSection() {
           
           {/* Subtitle with slightly delayed entrance */}
           <div 
-            className={`text-lg md:text-xl mb-4 max-w-2xl mx-auto font-light text-white text-shadow-sm fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+            className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-light text-white text-shadow-sm fade-in ${isSubtitleVisible ? 'visible' : ''}`}
             dangerouslySetInnerHTML={{ __html: content.adventure }}
             ref={subtitleRef as React.RefObject<HTMLDivElement>}
           />
           
           <p 
-            className={`text-sm mb-8 font-mono text-white/80 fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+            className={`text-xs sm:text-sm mb-6 md:mb-8 font-mono text-white/80 fade-in ${isSubtitleVisible ? 'visible' : ''}`}
             ref={subtitleRef as React.RefObject<HTMLParagraphElement>}
           >
             65.5916° N, 19.1668° E
@@ -177,28 +175,28 @@ export function HeroSection() {
           
           {/* Content card with delayed entrance */}
           <div 
-            className={`glass-card p-6 md:p-8 mb-12 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
+            className={`glass-card p-4 sm:p-6 md:p-8 mb-8 md:mb-12 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
             ref={descriptionRef as React.RefObject<HTMLDivElement>}
           >
             <p 
-              className="mb-4 text-white leading-relaxed"
+              className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed"
               dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
             />
             
             <p 
-              className="mb-4 text-white leading-relaxed"
+              className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed"
               dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
             />
             
             <p 
-              className="text-white leading-relaxed"
+              className="text-white text-sm md:text-base leading-relaxed"
               dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
             />
           </div>
           
           {/* Button group with the most delayed entrance */}
           <div 
-            className={`flex flex-col sm:flex-row justify-center gap-4 mb-16 fade-in ${isButtonsVisible ? 'visible' : ''}`}
+            className={`flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-10 md:mb-16 fade-in ${isButtonsVisible ? 'visible' : ''}`}
             ref={buttonsRef as React.RefObject<HTMLDivElement>}
           >
             <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-all">
