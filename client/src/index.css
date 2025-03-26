@@ -87,19 +87,23 @@
     will-change: background-position;
   }
   
+  /* Performance optimized buttons with hardware acceleration */
   .btn-primary {
     background-color: var(--accent-color);
     color: white;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), 
+                background-color 0.2s ease-out;
     will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
   
   .btn-primary:hover {
     background-color: var(--accent-hover);
-    transform: translateY(-1px);
+    transform: translateY(-1px) translateZ(0);
   }
   
   .btn-ghost {
@@ -109,13 +113,18 @@
     border-radius: 8px;
     font-weight: 500;
     border: 1px solid var(--divider-color);
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+                background-color 0.2s ease-out,
+                border-color 0.2s ease-out;
     will-change: transform, background-color;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
   
   .btn-ghost:hover {
     background-color: rgba(255, 255, 255, 0.05);
     border-color: var(--primary-text);
+    transform: translateY(-1px) translateZ(0);
   }
   
   .card {
@@ -165,14 +174,23 @@
   pointer-events: none;
 }
 
+/* Performance optimized glow animation using only transform */
 @keyframes slowGlow {
   0% {
     opacity: 0.5;
-    transform: scale(1);
+    transform: scale(1) translateZ(0);
   }
   100% {
     opacity: 0.8;
-    transform: scale(1.1);
+    transform: scale(1.1) translateZ(0);
+  }
+}
+
+/* Optimized version for mobile devices */
+@media (max-width: 768px), (pointer: coarse) {
+  .premium-dark-gradient::before,
+  .premium-dark-gradient::after {
+    animation-duration: 20s; /* Slower animation for better performance */
   }
 }
 
@@ -385,37 +403,52 @@
   }
 }
 
+/* Performance optimized northern lights animations with hardware acceleration */
 @keyframes northernLightsGlow {
   0% {
     opacity: 0.6;
-    transform: scale(1) translateY(5%);
+    transform: scale(1) translateY(5%) translateZ(0);
   }
   50% {
     opacity: 0.9;
-    transform: scale(1.05) translateY(0%);
+    transform: scale(1.05) translateY(0%) translateZ(0);
   }
   100% {
     opacity: 0.6;
-    transform: scale(1) translateY(5%);
+    transform: scale(1) translateY(5%) translateZ(0);
   }
 }
 
 @keyframes northernLightsWave {
   0% {
-    transform: skewY(-7deg) translateY(-2%);
+    transform: skewY(-7deg) translateY(-2%) translateZ(0);
     opacity: 0.7;
   }
   33% {
-    transform: skewY(-3deg) translateY(0%);
+    transform: skewY(-3deg) translateY(0%) translateZ(0);
     opacity: 0.9;
   }
   66% {
-    transform: skewY(-5deg) translateY(-1%);
+    transform: skewY(-5deg) translateY(-1%) translateZ(0);
     opacity: 0.8;
   }
   100% {
-    transform: skewY(-2deg) translateY(1%);
+    transform: skewY(-2deg) translateY(1%) translateZ(0);
     opacity: 0.7;
+  }
+}
+
+/* Reduce animation frequency on lower-power devices */
+@media (max-width: 768px), (pointer: coarse) {
+  .northern-lights-gradient .northern-glow,
+  .northern-lights-gradient::after,
+  .northern-lights-gradient .aurora-pillar,
+  .northern-lights-gradient .aurora-pillar-2 {
+    animation-duration: 30s; /* Slower animation for better performance */
+  }
+  
+  .stars {
+    animation-duration: 10s;
   }
 }
 
@@ -427,16 +460,35 @@
   padding-top: 120px;
 }
 
-/* Scroll-triggered animations for content elements */
+/* Performance optimized animations */
+/* Main animation utility with reduced repaints */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateY(20px) translateZ(0);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
 }
 
 .fade-in.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
+}
+
+/* Reduce animation on devices that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transform: translateY(10px);
+  }
+  
+  /* Disable all keyframe animations for those who prefer reduced motion */
+  * {
+    animation-duration: 0.001s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001s !important;
+  }
 }
 
 /* Staggered animation classes with varying delays */
@@ -460,49 +512,77 @@
   transition-delay: 0.5s;
 }
 
-/* Scale animations */
+/* Performance optimized scale animations */
 .scale-up {
   opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: scale(0.95) translateZ(0);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
 }
 
 .scale-up.visible {
   opacity: 1;
-  transform: scale(1);
+  transform: scale(1) translateZ(0);
 }
 
-/* Slide animations */
+/* Performance optimized horizontal slide animations */
 .slide-left {
   opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateX(20px) translateZ(0);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
 }
 
 .slide-left.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
 }
 
 .slide-right {
   opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateX(-20px) translateZ(0);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform, opacity;
 }
 
 .slide-right.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateX(0) translateZ(0);
 }
 
-/* Parallax effect */
+/* Performance optimized parallax effect */
 .parallax-wrapper {
   position: relative;
   overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .parallax-content {
   will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.1s ease-out;
+}
+
+/* Optimize parallax for mobile devices */
+@media (max-width: 768px), (pointer: coarse) {
+  .parallax-content {
+    /* Disable parallax on mobile for better performance */
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
 }
 
 /* Aurora glow for package builder */
@@ -577,33 +657,47 @@
   animation: auroraPillarMedium 15s ease-in-out infinite alternate-reverse;
 }
 
+/* Performance optimized aurora animations with hardware acceleration */
 @keyframes auroraPillarSlow {
   0% {
     opacity: 0.05;
-    transform: translateX(-5%) scale(0.95);
+    transform: translateX(-5%) scale(0.95) translateZ(0);
   }
   50% {
     opacity: 0.1;
-    transform: translateX(0%) scale(1);
+    transform: translateX(0%) scale(1) translateZ(0);
   }
   100% {
     opacity: 0.05;
-    transform: translateX(5%) scale(0.98);
+    transform: translateX(5%) scale(0.98) translateZ(0);
   }
 }
 
 @keyframes auroraPillarMedium {
   0% {
     opacity: 0.08;
-    transform: translateX(3%) scale(0.98);
+    transform: translateX(3%) scale(0.98) translateZ(0);
   }
   50% {
     opacity: 0.15;
-    transform: translateX(-2%) scale(1.02);
+    transform: translateX(-2%) scale(1.02) translateZ(0);
   }
   100% {
     opacity: 0.1;
-    transform: translateX(0%) scale(1);
+    transform: translateX(0%) scale(1) translateZ(0);
+  }
+}
+
+/* Disable complex animations on low-power devices */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-pillar, 
+  .northern-glow,
+  .northern-lights-gradient::after,
+  .premium-dark-gradient::before,
+  .premium-dark-gradient::after {
+    animation: none !important;
+    opacity: 0.1 !important;
+    transform: none !important;
   }
 }
 
