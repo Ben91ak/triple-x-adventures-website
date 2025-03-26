@@ -72,9 +72,11 @@ export function RestaurantSection() {
   ];
 
   return (
-    <section id="restaurant" className="py-24 md:py-32 relative">
-      {/* Background with diagonal gradient */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-dark-bg via-black/90 to-dark-bg opacity-95 z-0"></div>
+    <section id="restaurant" className="py-24 md:py-32 relative premium-dark-gradient overflow-hidden">
+      {/* Stars background effect */}
+      <div className="stars absolute inset-0 z-1"></div>
+      {/* Northern Lights animation layers */}
+      <div className="northern-glow absolute inset-0 z-1"></div>
       
       {/* Subtle texture overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
@@ -84,10 +86,10 @@ export function RestaurantSection() {
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {language === 'de' ? 'Arktische Kulinarik' : language === 'sv' ? 'Arktisk Matlagning' : 'Arctic Cuisine'}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
             {content.title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
             {content.subtitle}
           </p>
         </div>
@@ -130,28 +132,28 @@ export function RestaurantSection() {
             {/* Glass card effect */}
             <div className="absolute -inset-1 bg-gradient-to-l from-accent-color/20 to-purple-600/20 rounded-xl blur-xl opacity-0 group-hover:opacity-70 transition-all duration-700"></div>
             
-            <div className="card relative z-10 p-8 bg-card-bg border border-white/10 backdrop-blur-sm rounded-xl shadow-xl">
-              <h3 className="font-bold text-2xl mb-6 text-primary-text group-hover:text-accent-color transition-colors">
+            <div className="glass-card relative z-10 p-8 backdrop-blur-sm rounded-xl shadow-xl">
+              <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors">
                 {content.heading}
               </h3>
-              <p className="mb-6 text-secondary-text">
+              <p className="mb-6 text-white text-opacity-80">
                 {content.description1}
               </p>
-              <p className="mb-8 text-secondary-text">
+              <p className="mb-8 text-white text-opacity-80">
                 {content.description2}
               </p>
               
               <div className="mb-8">
-                <h4 className="font-medium text-lg mb-5 text-primary-text">
+                <h4 className="font-medium text-lg mb-5 text-white">
                   {content.specialtiesHeading}
                 </h4>
                 <ul className="space-y-4">
                   {content.specialties.map((specialty, index) => (
                     <li key={index} className="flex items-start">
-                      <div className="w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center mr-3 text-accent-color">
+                      <div className="w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center mr-3 text-accent-color shadow-glow-sm">
                         {specialtyIcons[index]}
                       </div>
-                      <span className="text-secondary-text">{specialty}</span>
+                      <span className="text-white text-opacity-80">{specialty}</span>
                     </li>
                   ))}
                 </ul>
