@@ -110,6 +110,9 @@ export function IntroductionSection() {
 
   return (
     <section id="about" className="py-24 md:py-32 relative hero-transition-overlap northern-lights-gradient">
+      {/* Northern Lights inspired animated gradient effect */}
+      <div className="stars absolute inset-0 z-5"></div>
+      
       {/* Background with gradient */}
       <div 
         className="absolute inset-0 bg-gradient-to-r from-card-bg/30 via-dark-bg to-card-bg/30 opacity-95 z-0"
@@ -131,7 +134,7 @@ export function IntroductionSection() {
           </span>
           
           <h2 
-            className={`font-bold text-3xl md:text-5xl mb-8 text-primary-text fade-in ${isTitleVisible ? 'visible' : ''}`}
+            className={`font-bold text-3xl md:text-5xl mb-8 text-white fade-in ${isTitleVisible ? 'visible' : ''}`}
             ref={titleAnimRef as React.RefObject<HTMLHeadingElement>}
           >
             {content.title}
@@ -168,7 +171,7 @@ export function IntroductionSection() {
                     <div className="w-16 h-16 rounded-full flex items-center justify-center bg-accent-color/10 text-accent-color mb-6 group-hover:scale-110 transition-transform duration-300">
                       {getIcon(feature.icon)}
                     </div>
-                    <h3 className="font-bold text-xl mb-4 text-primary-text group-hover:text-accent-color transition-colors">
+                    <h3 className="font-bold text-xl mb-4 text-white group-hover:text-accent-color transition-colors">
                       {feature.title}
                     </h3>
                     <p className="text-white">
