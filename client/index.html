@@ -5,9 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Triple X Adventures - The Real Arctic Deal</title>
   <meta name="description" content="Triple X Adventures offers authentic, premium Arctic experiences in Swedish Lapland including snowmobiling, dog sledding, and wilderness adventures.">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Performance optimization: Preload critical assets -->
+  <link rel="preload" href="/images/TXA_fallback.jpg" as="image" type="image/jpeg">
+  
+  <!-- Load fonts and stylesheets with proper performance hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  
+  <!-- Preloading Inter font for faster render -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+  
+  <!-- Meta tags for better performance -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#0F1112">
 </head>
 <body>
   <div id="root"></div>

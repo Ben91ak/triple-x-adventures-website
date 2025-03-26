@@ -53,32 +53,62 @@ export function HeroSection() {
   useEffect(() => {
     // Performance optimizations for video loading and playback
     const videoElement = videoRef.current;
-    if (videoElement) {
-      // Set a slightly slower playback rate for a more cinematic feel
-      videoElement.playbackRate = 0.8;
-      
-      // Force video load attempt with error handling
-      try {
-        videoElement.load();
-      } catch (e) {
-        console.log("Error loading video:", e);
-        setVideoError(true); // Set fallback immediately on load error
-      }
-      
-      // Handle video error (show fallback animation)
-      const handleVideoError = () => {
-        setVideoError(true);
-        console.log("Video failed to load, showing fallback animation");
+    if (!videoElement) return;
+    
+    // Set a slightly slower playback rate for a more cinematic feel
+    videoElement.playbackRate = 0.8;
+    
+    // Delayed video loading to prioritize critical content first
+    let videoLoadTimer: number;
+    
+    // Only attempt to load the video after the page has fully loaded
+    if (document.readyState === 'complete') {
+      // Page is already loaded, delay video load by 1 second to prioritize other content
+      videoLoadTimer = window.setTimeout(() => {
+        try {
+          videoElement.load();
+        } catch (e) {
+          console.log("Error loading video:", e);
+          setVideoError(true);
+        }
+      }, 1000);
+    } else {
+      // Wait for page load before loading video
+      const handleLoad = () => {
+        // Delay video load after page is fully loaded
+        videoLoadTimer = window.setTimeout(() => {
+          try {
+            videoElement.load();
+          } catch (e) {
+            console.log("Error loading video:", e);
+            setVideoError(true);
+          }
+        }, 1000);
       };
       
-      // Use passive event listener for better performance
-      videoElement.addEventListener('error', handleVideoError, { passive: true });
+      window.addEventListener('load', handleLoad, { once: true, passive: true });
       
-      // Clean up event listeners
       return () => {
-        videoElement.removeEventListener('error', handleVideoError);
+        window.removeEventListener('load', handleLoad);
       };
     }
+    
+    // Handle video error (show fallback animation)
+    const handleVideoError = () => {
+      setVideoError(true);
+      console.log("Video failed to load, showing fallback animation");
+    };
+    
+    // Use passive event listener for better performance
+    videoElement.addEventListener('error', handleVideoError, { passive: true });
+    
+    // Clean up event listeners and timers
+    return () => {
+      if (videoLoadTimer) {
+        clearTimeout(videoLoadTimer);
+      }
+      videoElement.removeEventListener('error', handleVideoError);
+    };
   }, []);
 
   // Content based on language
@@ -110,37 +140,44 @@ export function HeroSection() {
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
-      {/* BASE LAYER - Video Background (lowest z-index) - optimized with transform-gpu */}
+      {/* BASE LAYER - Optimized Background Solution */}
       <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
+        {/* Display static image first for fast initial render */}
+        <div className="absolute inset-0 bg-gradient-animated transform-gpu">
+          <img 
+            src="/images/TXA_fallback.jpg" 
+            alt="Arctic Adventure" 
+            className="w-full h-full object-cover opacity-70 transform-gpu" 
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        
+        {/* Load video with low priority after initial render */}
         <video 
           ref={videoRef}
-          className="absolute w-full h-full object-cover transform-gpu"
+          className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 opacity-0`}
           autoPlay 
           muted 
           loop 
           playsInline
-          preload="auto"
+          preload="metadata"
           style={{ 
             objectFit: 'cover',
             width: '100%',
             height: '100%'
           }}
+          onCanPlay={() => {
+            // Only show video once it's ready to play
+            if (videoRef.current) {
+              videoRef.current.classList.remove('opacity-0');
+              videoRef.current.classList.add('opacity-100');
+            }
+          }}
+          onError={() => setVideoError(true)}
         >
           <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
         </video>
-        
-        {/* Fallback gradient background in case video fails to load - optimized for performance */}
-        <div className={`absolute inset-0 bg-gradient-animated transition-opacity duration-300 transform-gpu ${videoError ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Fallback image with loading optimizations */}
-          <img 
-            src="/images/TXA_fallback.jpg" 
-            alt="Arctic Adventure" 
-            className="w-full h-full object-cover opacity-70 transform-gpu" 
-            onError={(e) => e.currentTarget.style.display = 'none'}
-            loading="eager"
-            decoding="async"
-          />
-        </div>
       </div>
       
       {/* Dark overlay for text contrast - optimized with transform-gpu */}

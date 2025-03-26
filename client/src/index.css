@@ -32,18 +32,28 @@
 }
 
 @layer components {
+  /* Optimized glass card with conditional blur for better performance */
   .glass-card {
     background: rgba(26, 29, 31, 0.7);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     will-change: transform, opacity;
     transform: translateZ(0);
+    
+    /* Only apply expensive blur on capable devices */
+    @supports (backdrop-filter: blur(10px)) {
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Fallback for devices without backdrop-filter support */
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(26, 29, 31, 0.85);
+    }
   }
   
+  /* Optimized glass button with conditional blur */
   .glass-button {
     background: rgba(26, 29, 31, 0.6);
-    backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     color: var(--primary-text);
@@ -51,6 +61,16 @@
     will-change: transform;
     transform: translateZ(0);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    /* Only apply expensive blur on capable devices */
+    @supports (backdrop-filter: blur(8px)) {
+      backdrop-filter: blur(8px);
+    }
+    
+    /* Fallback for devices without backdrop-filter support */
+    @supports not (backdrop-filter: blur(8px)) {
+      background: rgba(26, 29, 31, 0.8);
+    }
   }
   
   .glass-button:hover {

@@ -1,33 +1,79 @@
+import { memo, lazy, Suspense } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/hero-section";
-import { IntroductionSection } from "@/components/introduction-section";
-import { ExperiencesSection } from "@/components/experiences-section";
-import { AccommodationsSection } from "@/components/accommodations-section";
-import { RestaurantSection } from "@/components/restaurant-section";
-import { PackageBuilder } from "@/components/package-builder";
-import { AboutSection } from "@/components/about-section";
-import { GallerySection } from "@/components/gallery-section";
-import { TestimonialsSection } from "@/components/testimonials-section";
-import { ContactSection } from "@/components/contact-section";
-import { CTASection } from "@/components/cta-section";
 
-export default function Home() {
+// Lazy-load non-critical sections for better performance
+const IntroductionSection = lazy(() => import("@/components/introduction-section").then(module => ({ default: module.IntroductionSection })));
+const ExperiencesSection = lazy(() => import("@/components/experiences-section").then(module => ({ default: module.ExperiencesSection })));
+const AccommodationsSection = lazy(() => import("@/components/accommodations-section").then(module => ({ default: module.AccommodationsSection })));
+const RestaurantSection = lazy(() => import("@/components/restaurant-section").then(module => ({ default: module.RestaurantSection })));
+const PackageBuilder = lazy(() => import("@/components/package-builder").then(module => ({ default: module.PackageBuilder })));
+const AboutSection = lazy(() => import("@/components/about-section").then(module => ({ default: module.AboutSection })));
+const GallerySection = lazy(() => import("@/components/gallery-section").then(module => ({ default: module.GallerySection })));
+const TestimonialsSection = lazy(() => import("@/components/testimonials-section").then(module => ({ default: module.TestimonialsSection })));
+const ContactSection = lazy(() => import("@/components/contact-section").then(module => ({ default: module.ContactSection })));
+const CTASection = lazy(() => import("@/components/cta-section").then(module => ({ default: module.CTASection })));
+
+// Loading component for lazy-loaded sections
+const SectionLoader = () => (
+  <div className="flex justify-center items-center py-8">
+    <div className="w-8 h-8 border-4 border-accent-color rounded-full border-t-transparent animate-spin"></div>
+  </div>
+);
+
+// Memoize the entire Home component to prevent unnecessary re-renders
+const Home = memo(function Home() {
   return (
     <div className="font-opensans text-slate bg-ice">
+      {/* Critical path section - load immediately */}
       <Header />
       <HeroSection />
-      <IntroductionSection />
-      <ExperiencesSection />
-      <AccommodationsSection />
-      <RestaurantSection />
-      <PackageBuilder />
-      <AboutSection />
-      <GallerySection />
-      <TestimonialsSection />
-      <ContactSection />
-      <CTASection />
+      
+      {/* Non-critical sections - lazy loaded */}
+      <Suspense fallback={<SectionLoader />}>
+        <IntroductionSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <ExperiencesSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <AccommodationsSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <RestaurantSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <PackageBuilder />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <AboutSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <GallerySection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <TestimonialsSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <ContactSection />
+      </Suspense>
+      
+      <Suspense fallback={<SectionLoader />}>
+        <CTASection />
+      </Suspense>
+      
       <Footer />
     </div>
   );
-}
+});
+
+export default Home;
