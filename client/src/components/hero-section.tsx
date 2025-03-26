@@ -213,12 +213,7 @@ export function HeroSection() {
       
       {/* Scroll indicator - fades in after all content and fades out on scroll */}
       <div 
-        ref={(el) => {
-          scrollIndicatorRef.current = el;
-          if (typeof scrollIndicatorAnimRef === 'function') {
-            scrollIndicatorAnimRef(el);
-          }
-        }}
+        ref={scrollIndicatorAnimRef as React.RefObject<HTMLDivElement>}
         className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50 text-white flex flex-col items-center fade-in ${isScrollIndicatorVisible ? 'visible' : ''}`}
       >
         <span className="text-xs uppercase tracking-widest mb-2 text-white/80">Scroll Down</span>
