@@ -159,24 +159,28 @@ export function HeroSection() {
             <div 
               className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-lg fade-in ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLDivElement>}
-              style={{ color: '#FFFFFF', textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}
+              style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             >
               {content.welcome}
             </div>
             
             <h1 
-              className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent fade-in ${isTitleVisible ? 'visible' : ''}`}
+              className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-tight fade-in ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
-              style={{ textShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}
+              style={{ 
+                color: '#FFFFFF', 
+                textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)',
+                WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)'
+              }}
             >
-              TRIPLE <span className="text-accent-color">X</span> ADVENTURES
+              TRIPLE <span style={{ color: 'rgb(149, 204, 47)' }}>X</span> ADVENTURES
             </h1>
             
             <div 
-              className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-light text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-semibold text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
               dangerouslySetInnerHTML={{ __html: content.adventure }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
-              style={{ color: '#FFFFFF', textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}
+              style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             />
             
             <p 
@@ -212,18 +216,22 @@ export function HeroSection() {
           {/* Mobile-only content - minimalist to maximize video visibility */}
           <div className="md:hidden block">
             <h1 
-              className={`font-bold text-4xl sm:text-5xl mb-3 tracking-tight background-animate bg-gradient-to-r from-white via-accent-color to-white bg-clip-text text-transparent fade-in ${isTitleVisible ? 'visible' : ''}`}
+              className={`font-bold text-4xl sm:text-5xl mb-3 tracking-tight fade-in ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
-              style={{ textShadow: '0 4px 8px rgba(0, 0, 0, 0.5)' }}
+              style={{ 
+                color: '#FFFFFF', 
+                textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)',
+                WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)'
+              }}
             >
-              TRIPLE <span className="text-accent-color">X</span> ADVENTURES
+              TRIPLE <span style={{ color: 'rgb(149, 204, 47)' }}>X</span> ADVENTURES
             </h1>
             
             <div 
-              className={`text-base sm:text-lg mb-3 max-w-xs mx-auto font-light text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
+              className={`text-base sm:text-lg mb-3 max-w-xs mx-auto font-semibold text-white text-shadow-lg fade-in ${isSubtitleVisible ? 'visible' : ''}`}
               dangerouslySetInnerHTML={{ __html: content.adventure }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
-              style={{ color: '#FFFFFF', textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}
+              style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             />
             
             <p 
