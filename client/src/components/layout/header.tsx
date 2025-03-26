@@ -60,7 +60,7 @@ export function Header() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <div className="flex items-center">
+            <div className="flex items-center relative z-20">
               <Link href="/" className="flex-shrink-0 flex items-center group">
                 <div className="relative">
                   {/* Logo glow effect */}
@@ -79,7 +79,7 @@ export function Header() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center">
+            <div className="hidden lg:flex items-center relative z-20">
               <div className="mr-6 flex items-center flex-wrap justify-center">
                 {[
                   { href: "/", label: t.nav.home },
@@ -106,7 +106,7 @@ export function Header() {
             </div>
             
             {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center space-x-3">
+            <div className="lg:hidden flex items-center space-x-3 relative z-20">
               <LanguageSelector className="mr-1" />
               <button 
                 type="button" 
@@ -124,13 +124,17 @@ export function Header() {
           </div>
         </div>
         
-        {/* Mobile menu with animation */}
+        {/* Mobile menu with animation - higher z-index and positioned overlay */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 bg-dark-bg/50 backdrop-blur-sm z-30" onClick={() => setMobileMenuOpen(false)}></div>
+        )}
         <div 
-          className={`mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-            mobileMenuOpen ? 'max-h-[440px] opacity-100' : 'max-h-0 opacity-0'
+          className={`mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out fixed top-20 left-0 right-0 z-40 px-4 ${
+            mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
+          style={{ pointerEvents: mobileMenuOpen ? 'auto' : 'none' }}
         >
-          <div className="px-4 py-5 mt-3 mx-4 rounded-xl space-y-1 bg-card-bg/90 backdrop-blur-md border border-white/10 shadow-xl">
+          <div className="py-5 mx-auto max-w-md rounded-xl space-y-1 bg-card-bg border border-white/10 shadow-xl">
             {[
               { href: "/", label: t.nav.home },
               { href: "#pakete", label: t.nav.packages },
@@ -143,14 +147,19 @@ export function Header() {
               <a 
                 key={index}
                 href={item.href} 
-                className="flex items-center px-4 py-3 rounded-lg hover:bg-white/5 text-white hover:text-accent-color group transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
+                className="block px-4 py-3 rounded-lg hover:bg-white/5 text-white hover:text-accent-color group transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setMobileMenuOpen(false);
+                }}
               >
-                <ChevronRight 
-                  size={16} 
-                  className="mr-3 text-accent-color/70 group-hover:translate-x-1 transition-transform" 
-                />
-                <span className="font-medium">{item.label}</span>
+                <div className="flex items-center">
+                  <ChevronRight 
+                    size={16} 
+                    className="mr-3 text-accent-color/70 group-hover:translate-x-1 transition-transform" 
+                  />
+                  <span className="font-medium">{item.label}</span>
+                </div>
               </a>
             ))}
           </div>
