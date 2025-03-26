@@ -12,10 +12,11 @@ export function useScrollAnimation<T extends HTMLElement = HTMLDivElement>({
   rootMargin = '0px',
   triggerOnce = true,
   animationDelay = 0,
+  initiallyVisible = false, // New option to set initial visibility
 } = {}) {
   const elementRef = useRef<T | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isVisible, setIsVisible] = useState(initiallyVisible);
+  const [hasAnimated, setHasAnimated] = useState(initiallyVisible);
   
   useEffect(() => {
     // Store the current element reference to use in cleanup

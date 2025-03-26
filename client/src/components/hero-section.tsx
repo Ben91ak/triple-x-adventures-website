@@ -10,27 +10,36 @@ export function HeroSection() {
   const t = useTranslation(language);
   
   // Create animation hooks for various hero elements with staggered timing
+  // Set initiallyVisible to true to ensure elements show immediately on page load
   const { ref: titleRef, isVisible: isTitleVisible } = useScrollAnimation({
     triggerOnce: true,
-    threshold: 0.1
+    threshold: 0,
+    rootMargin: '100% 0px 100% 0px',
+    initiallyVisible: true // Always visible immediately
   });
   
   const { ref: subtitleRef, isVisible: isSubtitleVisible } = useScrollAnimation({
     triggerOnce: true,
-    threshold: 0.1,
-    animationDelay: 300
+    threshold: 0,
+    rootMargin: '100% 0px 100% 0px',
+    animationDelay: 300,
+    initiallyVisible: true // Always visible immediately
   });
   
   const { ref: descriptionRef, isVisible: isDescriptionVisible } = useScrollAnimation({
     triggerOnce: true,
-    threshold: 0.1,
-    animationDelay: 600
+    threshold: 0,
+    rootMargin: '100% 0px 100% 0px',
+    animationDelay: 600,
+    initiallyVisible: true // Always visible immediately
   });
   
   const { ref: buttonsRef, isVisible: isButtonsVisible } = useScrollAnimation({
     triggerOnce: true,
-    threshold: 0.1,
-    animationDelay: 900
+    threshold: 0,
+    rootMargin: '100% 0px 100% 0px',
+    animationDelay: 900,
+    initiallyVisible: true // Always visible immediately
   });
   
   // Create scroll indicator animation that runs continuously
