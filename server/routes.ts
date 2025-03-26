@@ -1,7 +1,7 @@
 import express, { type Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { contactFormSchema } from "@shared/schema";
+import { contactFormSchema, adventureFormSchema } from "@shared/schema";
 import { z } from "zod";
 import { ZodError } from "zod";
 

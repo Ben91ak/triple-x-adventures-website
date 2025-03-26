@@ -1,4 +1,4 @@
-import { users, type User, type InsertUser, type Contact, type InsertContact } from "@shared/schema";
+import { users, type User, type InsertUser, type Contact, type InsertContact, type Adventure, type InsertAdventure } from "@shared/schema";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -6,19 +6,25 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createContactSubmission(contact: InsertContact): Promise<Contact>;
   getContactSubmissions(): Promise<Contact[]>;
+  createAdventureSubmission(adventure: InsertAdventure): Promise<Adventure>;
+  getAdventureSubmissions(): Promise<Adventure[]>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private contactSubmissions: Map<number, Contact>;
+  private adventureSubmissions: Map<number, Adventure>;
   userCurrentId: number;
   contactCurrentId: number;
+  adventureCurrentId: number;
 
   constructor() {
     this.users = new Map();
     this.contactSubmissions = new Map();
+    this.adventureSubmissions = new Map();
     this.userCurrentId = 1;
     this.contactCurrentId = 1;
+    this.adventureCurrentId = 1;
   }
 
   async getUser(id: number): Promise<User | undefined> {
@@ -61,6 +67,49 @@ export class MemStorage implements IStorage {
 
   async getContactSubmissions(): Promise<Contact[]> {
     return Array.from(this.contactSubmissions.values());
+  }
+
+  async createAdventureSubmission(insertAdventure: InsertAdventure): Promise<Adventure> {
+    const id = this.adventureCurrentId++;
+    const submittedAt = new Date();
+    
+    // Ensure all fields have the correct types
+    const adventure: Adventure = {
+      id,
+      firstName: insertAdventure.firstName,
+      lastName: insertAdventure.lastName,
+      email: insertAdventure.email,
+      phone: insertAdventure.phone ?? null,
+      startDate: insertAdventure.startDate ?? null,
+      endDate: insertAdventure.endDate ?? null,
+      departureAirport: insertAdventure.departureAirport,
+      groupSize: insertAdventure.groupSize,
+      selectedPackages: insertAdventure.selectedPackages ?? null,
+      selectedAccommodations: insertAdventure.selectedAccommodations ?? null,
+      selectedActivities: insertAdventure.selectedActivities ?? null,
+      additionalRequests: insertAdventure.additionalRequests ?? null,
+      preferredLanguage: insertAdventure.preferredLanguage,
+      submittedAt
+    };
+    
+    this.adventureSubmissions.set(id, adventure);
+    
+    // Log the submission for easier tracking (in a real app, this would send an email notification)
+    console.log('New Adventure Submission:', {
+      name: `${adventure.firstName} ${adventure.lastName}`,
+      email: adventure.email,
+      phone: adventure.phone,
+      departureAirport: adventure.departureAirport,
+      groupSize: adventure.groupSize,
+      dates: `${adventure.startDate || 'Not specified'} - ${adventure.endDate || 'Not specified'}`,
+      language: adventure.preferredLanguage
+    });
+    
+    return adventure;
+  }
+
+  async getAdventureSubmissions(): Promise<Adventure[]> {
+    return Array.from(this.adventureSubmissions.values());
   }
 }
 
