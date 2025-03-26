@@ -170,19 +170,19 @@ export function ExperiencesSection() {
   const experiences: Experience[] = experiencesByLanguage[language];
 
   return (
-    <section id="pakete" className="py-16 md:py-28 relative overflow-hidden">
-      {/* Background with subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg to-card-bg"></div>
+    <section id="pakete" className="py-16 md:py-28 relative overflow-hidden premium-dark-gradient">
+      {/* Stars background effect */}
+      <div className="stars absolute inset-0 z-1"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {language === 'de' ? 'Unsere Erlebnisse' : language === 'sv' ? 'Våra Upplevelser' : 'Our Experiences'}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
             {t.experiences.title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
             {t.experiences.subtitle}
           </p>
         </div>
@@ -191,7 +191,7 @@ export function ExperiencesSection() {
           {experiences.map((experience) => (
             <div 
               key={experience.id} 
-              className="card group transition-all duration-300 hover:shadow-lg hover:shadow-accent-color/10 hover:translate-y-[-5px]"
+              className="glass-card group transition-all duration-300 hover:shadow-lg hover:shadow-accent-color/10 hover:translate-y-[-5px]"
             >
               <div className="relative h-64 overflow-hidden">
                 {/* Image with overlay */}

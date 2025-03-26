@@ -109,16 +109,13 @@ export function IntroductionSection() {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 relative hero-transition-overlap northern-lights-gradient">
-      {/* Northern Lights inspired animated gradient effect - enhanced animation */}
-      <div className="northern-glow absolute inset-0 z-5"></div>
-      <div className="stars absolute inset-0 z-6"></div>
-      <div className="aurora-pillar"></div>
-      <div className="aurora-pillar-2"></div>
+    <section id="about" className="py-24 md:py-32 relative hero-transition-overlap premium-dark-gradient">
+      {/* Premium dark gradient inspired by the screenshot */}
+      <div className="stars absolute inset-0 z-1"></div>
       
       {/* Background with gradient */}
       <div 
-        className="absolute inset-0 bg-gradient-to-r from-card-bg/30 via-dark-bg to-card-bg/30 opacity-95 z-0"
+        className="absolute inset-0 opacity-90 z-0"
         ref={parallaxRef as React.RefObject<HTMLDivElement>}
         style={parallaxStyle} // Apply parallax effect to background
       ></div>
