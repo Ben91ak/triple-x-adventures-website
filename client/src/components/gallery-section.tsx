@@ -160,49 +160,75 @@ export function GallerySection() {
   const galleryImages: GalleryImage[] = galleryImagesByLanguage[language];
 
   return (
-    <section id="gallery" className="py-24 md:py-32 relative">
-      {/* Background with diagonal gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-card-bg to-dark-bg opacity-95 z-0"></div>
+    <section id="gallery" className="py-24 md:py-32 relative overflow-hidden premium-dark-gradient">
+      {/* Northern lights glow effect - enhanced and optimized for performance */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+        {/* Main aurora glow */}
+        <div className="aurora-glow absolute inset-0 opacity-20 transform-gpu will-change-transform will-change-opacity"></div>
+        
+        {/* Aurora pillars - optimized with transform-gpu for better performance */}
+        <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow transform-gpu will-change-transform"></div>
+        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/10 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>
+        
+        {/* Additional top glow */}
+        <div className="absolute inset-0 transform-gpu">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30 transform-gpu"></div>
+        </div>
+        
+        {/* Stars background effect - added for more depth */}
+        <div className="stars absolute inset-0 z-1 opacity-40 transform-gpu will-change-opacity"></div>
+      </div>
       
-      {/* Subtle dots overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      {/* Background with diagonal gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0 transform-gpu"></div>
+      
+      {/* Subtle pattern overlay - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {language === 'de' ? 'Galerie' : language === 'sv' ? 'Galleri' : 'Gallery'}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text">
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
             {content.title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-secondary-text">
+          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
             {content.subtitle}
           </p>
         </div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 max-w-6xl mx-auto">
           {galleryImages.map((image) => (
-            <div key={image.id} className="group relative overflow-hidden rounded-xl">
-              {/* Hover overlay with gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center p-4 z-10">
-                <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                  {image.alt}
-                </span>
-              </div>
+            <div 
+              key={image.id} 
+              className="group relative transition-all duration-300 hover:translate-y-[-5px] transform-gpu"
+            >
+              {/* Card background glow effect - optimized with reduced blur and transform-gpu */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-md transform-gpu will-change-opacity"></div>
               
-              {/* Pulse effect on hover */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 z-10">
-                <div className="w-12 h-12 rounded-full bg-accent-color/20 flex items-center justify-center">
-                  <Camera className="text-accent-color" size={20} />
+              <div className="glass-card relative z-10 overflow-hidden rounded-xl bg-card-bg/40 backdrop-blur-md border border-white/10 hover:border-accent-color/30 transition-all duration-300 transform-gpu">
+                {/* Hover overlay with gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center p-4 z-10">
+                  <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                    {image.alt}
+                  </span>
                 </div>
+                
+                {/* Pulse effect on hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 z-10">
+                  <div className="w-12 h-12 rounded-full bg-accent-color/20 backdrop-blur-md border border-accent-color/30 flex items-center justify-center transform-gpu scale-90 group-hover:scale-100 transition-transform duration-300">
+                    <Camera className="text-accent-color" size={20} />
+                  </div>
+                </div>
+                
+                {/* Image with scale effect */}
+                <img 
+                  src={image.src} 
+                  alt={image.alt} 
+                  className="w-full h-60 md:h-64 object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
               </div>
-              
-              {/* Image with scale effect */}
-              <img 
-                src={image.src} 
-                alt={image.alt} 
-                className="w-full h-60 md:h-64 object-cover transform transition-transform duration-700 group-hover:scale-110"
-              />
             </div>
           ))}
         </div>
