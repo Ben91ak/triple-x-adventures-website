@@ -142,7 +142,7 @@ export function HeroSection() {
       </div>
       
       {/* Dark overlay for text contrast */}
-      <div className="absolute inset-0 bg-dark-bg bg-opacity-70" style={{ zIndex: 10 }}></div>
+      <div className="absolute inset-0 bg-dark-bg" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}></div>
       
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none" style={{ zIndex: 15 }}></div>
@@ -190,6 +190,7 @@ export function HeroSection() {
             <div 
               className={`glass-card p-4 sm:p-6 md:p-8 mb-8 md:mb-12 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
+              style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(10px)' }}
             >
               <p 
                 className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed"
@@ -237,7 +238,7 @@ export function HeroSection() {
             <div 
               className={`glass-card p-3 mb-4 mx-auto text-left shadow-lg fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
-              style={{ maxHeight: 'calc(60vh - 200px)', overflowY: 'auto' }}
+              style={{ maxHeight: 'calc(60vh - 200px)', overflowY: 'auto', backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(10px)' }}
             >
               <p 
                 className="mb-2 text-white text-xs leading-relaxed"
