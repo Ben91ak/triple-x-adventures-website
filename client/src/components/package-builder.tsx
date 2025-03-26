@@ -2,7 +2,33 @@ import { useState } from "react";
 import { PackageOption } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
-import { Plus, Minus, Snowflake, Home, Coffee, ShoppingBag, Sparkles } from "lucide-react";
+import { 
+  Plus, Minus, Snowflake, Home, Coffee, 
+  ShoppingBag, Sparkles, PlaneTakeoff, 
+  Calendar, User, Users, Mail, Phone 
+} from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { api } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle,
+  DialogDescription,
+  DialogFooter
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "@/components/ui/select";
 
 // Package option data by language
 const packageOptionsByLanguage = {
