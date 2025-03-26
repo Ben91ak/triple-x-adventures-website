@@ -84,7 +84,6 @@ export function Header() {
                 {[
                   { href: "/", label: t.nav.home },
                   { href: "#about", label: t.nav.about },
-                  { href: "#team", label: t.nav.about + " Team" },
                   { href: "#pakete", label: t.nav.packages },
                   { href: "#package-builder", label: "Build Your Adventure" },
                   { href: "#accommodations", label: t.nav.accommodations },
@@ -139,7 +138,6 @@ export function Header() {
             {[
               { href: "/", label: t.nav.home },
               { href: "#about", label: t.nav.about },
-              { href: "#team", label: t.nav.about + " Team" },
               { href: "#pakete", label: t.nav.packages },
               { href: "#package-builder", label: "Build Your Adventure" },
               { href: "#accommodations", label: t.nav.accommodations },
