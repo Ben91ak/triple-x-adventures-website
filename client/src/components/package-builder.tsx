@@ -8,7 +8,7 @@ import {
   Calendar, User, Users, Mail, Phone 
 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { api, AdventureFormData } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Dialog, 
@@ -208,6 +208,37 @@ const packageOptionsByLanguage = {
   ]
 };
 
+// Departure airports by language
+const departureAirportsByLanguage = {
+  en: [
+    { value: "munich", label: "Munich" },
+    { value: "stuttgart", label: "Stuttgart" },
+    { value: "koln", label: "Cologne/Bonn" },
+    { value: "hannover", label: "Hannover" },
+    { value: "stockholm", label: "Stockholm" },
+    { value: "privatejet", label: "Private Jet" },
+    { value: "own", label: "Own Arrival" }
+  ],
+  de: [
+    { value: "munich", label: "München" },
+    { value: "stuttgart", label: "Stuttgart" },
+    { value: "koln", label: "Köln/Bonn" },
+    { value: "hannover", label: "Hannover" },
+    { value: "stockholm", label: "Stockholm" },
+    { value: "privatejet", label: "Privatjet" },
+    { value: "own", label: "Eigene Anreise" }
+  ],
+  sv: [
+    { value: "munich", label: "München" },
+    { value: "stuttgart", label: "Stuttgart" },
+    { value: "koln", label: "Köln/Bonn" },
+    { value: "hannover", label: "Hannover" },
+    { value: "stockholm", label: "Stockholm" },
+    { value: "privatejet", label: "Privatjet" },
+    { value: "own", label: "Egen ankomst" }
+  ]
+};
+
 // Section content by language
 const contentByLanguage = {
   en: {
@@ -218,7 +249,24 @@ const contentByLanguage = {
     addOns: "3. Select Add-Ons",
     perNight: "SEK/night",
     estimatedTotal: "Estimated Total",
-    requestBooking: "Request Booking"
+    requestBooking: "Request Booking",
+    // Form content
+    formTitle: "Complete Your Adventure Request",
+    formDescription: "Please provide your details to receive a personalized quote",
+    firstName: "First Name",
+    lastName: "Last Name",
+    email: "Email",
+    phone: "Phone (optional)",
+    startDate: "Start Date (optional)",
+    endDate: "End Date (optional)",
+    departureAirport: "Departure Airport",
+    groupSize: "Group Size",
+    additionalRequests: "Additional Requests (optional)",
+    submit: "Submit Request",
+    cancel: "Cancel",
+    selectDeparture: "Select departure",
+    success: "Adventure request submitted successfully! We'll contact you shortly.",
+    error: "There was an error submitting your request. Please try again."
   },
   de: {
     title: "GESTALTEN SIE IHR ABENTEUER",
@@ -228,7 +276,24 @@ const contentByLanguage = {
     addOns: "3. Zusatzoptionen auswählen",
     perNight: "SEK/Nacht",
     estimatedTotal: "Geschätzte Gesamtsumme",
-    requestBooking: "Buchung anfragen"
+    requestBooking: "Buchung anfragen",
+    // Form content
+    formTitle: "Vervollständigen Sie Ihre Abenteueranfrage",
+    formDescription: "Bitte geben Sie Ihre Daten an, um ein personalisiertes Angebot zu erhalten",
+    firstName: "Vorname",
+    lastName: "Nachname",
+    email: "E-Mail",
+    phone: "Telefon (optional)",
+    startDate: "Startdatum (optional)",
+    endDate: "Enddatum (optional)",
+    departureAirport: "Abflughafen",
+    groupSize: "Gruppengröße",
+    additionalRequests: "Zusätzliche Wünsche (optional)",
+    submit: "Anfrage senden",
+    cancel: "Abbrechen",
+    selectDeparture: "Abflughafen wählen",
+    success: "Abenteueranfrage erfolgreich übermittelt! Wir werden uns in Kürze mit Ihnen in Verbindung setzen.",
+    error: "Bei der Übermittlung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
   },
   sv: {
     title: "SKAPA DITT ÄVENTYR",
@@ -238,7 +303,24 @@ const contentByLanguage = {
     addOns: "3. Välj tillägg",
     perNight: "SEK/natt",
     estimatedTotal: "Beräknad totalsumma",
-    requestBooking: "Begär bokning"
+    requestBooking: "Begär bokning",
+    // Form content
+    formTitle: "Slutför din äventyrsförfrågan",
+    formDescription: "Vänligen ange dina uppgifter för att få en personlig offert",
+    firstName: "Förnamn",
+    lastName: "Efternamn",
+    email: "E-post",
+    phone: "Telefon (valfritt)",
+    startDate: "Startdatum (valfritt)",
+    endDate: "Slutdatum (valfritt)",
+    departureAirport: "Avgångsflygplats",
+    groupSize: "Gruppstorlek",
+    additionalRequests: "Ytterligare önskemål (valfritt)",
+    submit: "Skicka förfrågan",
+    cancel: "Avbryt",
+    selectDeparture: "Välj avgång",
+    success: "Äventyrsförfrågan har skickats! Vi kontaktar dig inom kort.",
+    error: "Det uppstod ett fel när din förfrågan skulle skickas. Försök igen."
   }
 };
 
@@ -246,10 +328,24 @@ export function PackageBuilder() {
   const { language } = useLanguage();
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [total, setTotal] = useState(0);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    startDate: "",
+    endDate: "",
+    departureAirport: "",
+    groupSize: 1,
+    additionalRequests: ""
+  });
+  const { toast } = useToast();
   
   // Get content and package options based on the current language
   const content = contentByLanguage[language];
   const packageOptions: PackageOption[] = packageOptionsByLanguage[language];
+  const departureOptions = departureAirportsByLanguage[language];
 
   // Get icon for category
   const getCategoryIcon = (category: string, selected: boolean = false) => {
@@ -517,8 +613,8 @@ export function PackageBuilder() {
                   </span>
                 </div>
                 
-                <a 
-                  href="#contact" 
+                <button 
+                  onClick={() => setIsDialogOpen(true)}
                   className="group relative rounded-lg overflow-hidden"
                 >
                   {/* Button glow effect */}
@@ -528,7 +624,7 @@ export function PackageBuilder() {
                     <ShoppingBag size={20} />
                     <span>{content.requestBooking}</span>
                   </div>
-                </a>
+                </button>
               </div>
             </div>
           </div>
