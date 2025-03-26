@@ -287,3 +287,38 @@
 .parallax-content {
   will-change: transform;
 }
+
+/* Media Query for Mobile Landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    @apply py-1.5 px-4 text-xs;
+  }
+  
+  .glass-card {
+    @apply p-3;
+  }
+  
+  /* Adjustments for landscape mode to show more of the video */
+  section.h-screen {
+    height: 100vh;
+    min-height: 450px;
+  }
+  
+  video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  
+  /* Smaller header for landscape */
+  header {
+    @apply py-2 !important;
+  }
+  
+  /* Compact content for landscape */
+  h1 {
+    @apply text-2xl mb-2 !important;
+  }
+}

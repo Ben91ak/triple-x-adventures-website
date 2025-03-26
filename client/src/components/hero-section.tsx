@@ -108,15 +108,15 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video 
           ref={videoRef}
-          className="absolute w-auto min-w-full min-h-full max-w-none object-cover"
+          className="absolute w-full h-full object-cover"
           autoPlay 
           muted 
           loop 
           playsInline
           style={{ 
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)'
+            objectFit: 'cover',
+            width: '100%',
+            height: '100%'
           }}
         >
           <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
@@ -132,12 +132,7 @@ export function HeroSection() {
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-15 pointer-events-none"></div>
 
-      {/* MIDDLE LAYER - Transition Elements */}
-      {/* Simple gradient fade to next section (removed wave overlay) */}
-      <div className="absolute bottom-0 left-0 right-0 h-[300px] z-20">
-        {/* Gradient overlay for smooth transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/70 to-dark-bg"></div>
-      </div>
+      {/* No transition overlay between sections - removed as requested */}
       
       {/* TOP LAYER - Content (highest z-index) */}
       <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full">
@@ -216,18 +211,26 @@ export function HeroSection() {
               65.5916° N, 19.1668° E
             </p>
             
-            {/* Just show a small teaser text and CTA button on mobile to maintain 9:16 ratio */}
+            {/* Full content for mobile with smaller text */}
             <div 
-              className={`glass-card p-3 mb-4 mx-auto text-center shadow-lg fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
+              className={`glass-card p-3 mb-4 mx-auto text-left shadow-lg fade-in scale-up ${isDescriptionVisible ? 'visible' : ''}`}
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
+              style={{ maxHeight: 'calc(60vh - 200px)', overflowY: 'auto' }}
             >
-              <p className="text-white text-xs sm:text-sm leading-relaxed">
-                {language === 'de' 
-                  ? 'Entdecke authentische arktische Erlebnisse in Schwedisch-Lappland' 
-                  : language === 'sv'
-                    ? 'Upptäck autentiska arktiska upplevelser i svenska Lappland'
-                    : 'Discover authentic Arctic experiences in Swedish Lapland'}
-              </p>
+              <p 
+                className="mb-2 text-white text-xs leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
+              />
+              
+              <p 
+                className="mb-2 text-white text-xs leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
+              />
+              
+              <p 
+                className="text-white text-xs leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
+              />
             </div>
           </div>
           
