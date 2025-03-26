@@ -471,54 +471,66 @@ export function PackageBuilder() {
 
   return (
     <section id="package-builder" className="py-24 md:py-32 relative">
-      {/* Background with enhanced diagonal gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0"></div>
+      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0 transform-gpu"></div>
       
-      {/* Northern lights glow effect - enhanced */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div className="aurora-glow absolute inset-0 opacity-20"></div>
-        <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow"></div>
-        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/10 to-transparent animate-aurora-medium"></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30"></div>
+      {/* Northern lights glow effect - enhanced and optimized for performance */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+        {/* Main aurora glow */}
+        <div className="aurora-glow absolute inset-0 opacity-20 transform-gpu will-change-transform will-change-opacity"></div>
+        
+        {/* Aurora pillars - optimized with transform-gpu for better performance */}
+        <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow transform-gpu will-change-transform"></div>
+        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/10 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>
+        
+        {/* Additional top glow */}
+        <div className="absolute inset-0 transform-gpu">
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30 transform-gpu"></div>
         </div>
+        
+        {/* Stars background effect - added for more depth */}
+        <div className="stars absolute inset-0 z-1 opacity-40 transform-gpu will-change-opacity"></div>
       </div>
       
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none"></div>
+      {/* Subtle pattern overlay - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none transform-gpu"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        {/* Logo with "Build Your Adventure" text */}
+        {/* Logo with "Build Your Adventure" text - optimized for performance */}
         <div className="flex flex-col items-center justify-center mb-16">
-          <div className="relative w-28 h-28 mb-8">
-            <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/30 to-accent-color/10 rounded-full blur-xl opacity-70"></div>
+          <div className="relative w-28 h-28 mb-8 transform-gpu">
+            {/* Logo glow effect - optimized with reduced blur and transform-gpu */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/20 to-transparent rounded-full opacity-70 transition-opacity duration-500 transform-gpu will-change-opacity"></div>
             <img 
               src="./attached_assets/170804_Logo-TripleX_final.png" 
               alt="Triple X Adventures" 
-              className="w-full h-full object-contain relative z-10"
+              className="w-full h-full object-contain relative z-10 transform-gpu"
+              width="112"
+              height="112"
+              loading="eager"
             />
           </div>
           
-          <div className="text-center">
+          <div className="text-center transform-gpu">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 text-primary-text text-shadow-lg">{content.title}</h2>
             <p className="text-lg max-w-2xl mx-auto text-secondary-text leading-relaxed text-shadow-sm">{content.subtitle}</p>
           </div>
         </div>
         
-        <div className="max-w-5xl mx-auto">
-          <div className="glass-card bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-2xl">
-            {/* Steps section */}
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+        <div className="max-w-5xl mx-auto transform-gpu">
+          <div className="glass-card bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-2xl transform-gpu">
+            {/* Steps section - optimized for performance */}
+            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10 transform-gpu">
               {[
                 { title: content.coreExperience, icon: <Snowflake size={24} className="text-accent-color" /> },
                 { title: content.accommodations, icon: <Home size={24} className="text-accent-color" /> },
                 { title: content.addOns, icon: <Coffee size={24} className="text-accent-color" /> }
               ].map((step, index) => (
-                <div key={index} className="p-6 bg-gradient-to-b from-card-bg/80 to-card-bg/20 flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-full bg-card-bg border border-white/10 flex items-center justify-center flex-shrink-0">
+                <div key={index} className="p-6 bg-gradient-to-b from-card-bg/80 to-card-bg/20 flex items-center space-x-4 transform-gpu">
+                  <div className="w-12 h-12 rounded-full bg-card-bg border border-white/10 flex items-center justify-center flex-shrink-0 transform-gpu">
                     {step.icon}
                   </div>
-                  <h3 className="font-bold text-lg text-primary-text">{step.title}</h3>
+                  <h3 className="font-bold text-lg text-primary-text text-shadow-sm">{step.title}</h3>
                 </div>
               ))}
             </div>
@@ -704,13 +716,13 @@ export function PackageBuilder() {
                 </div>
               </div>
               
-              {/* Summary section */}
-              <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center">
-                <div className="text-center sm:text-left mb-6 sm:mb-0 relative">
-                  {/* Price glow effect */}
-                  <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/5 to-transparent rounded-full blur-xl opacity-50 hidden sm:block"></div>
+              {/* Summary section - optimized for performance */}
+              <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center transform-gpu">
+                <div className="text-center sm:text-left mb-6 sm:mb-0 relative transform-gpu">
+                  {/* Price glow effect - optimized with reduced blur and transform-gpu */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/5 to-transparent rounded-full opacity-50 hidden sm:block transform-gpu will-change-opacity"></div>
                   
-                  <div className="relative">
+                  <div className="relative transform-gpu">
                     <span className="block text-secondary-text mb-1 text-shadow-sm">{content.estimatedTotal}</span>
                     <span className="font-bold text-3xl text-primary-text text-shadow-lg">
                       {formatPrice(total)} <span className="text-accent-color">SEK</span>
@@ -720,14 +732,14 @@ export function PackageBuilder() {
                 
                 <button 
                   onClick={() => setIsDialogOpen(true)}
-                  className="group relative rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
+                  className="glass-button group relative rounded-lg overflow-hidden transform-gpu transition-transform duration-300 hover:scale-105"
                 >
-                  {/* Button glow effect */}
-                  <div className="absolute -inset-1 bg-accent-color/30 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Button glow effect - optimized with reduced blur and transform-gpu */}
+                  <div className="absolute -inset-1 bg-accent-color/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform-gpu will-change-opacity"></div>
                   
-                  <div className="relative bg-accent-color hover:brightness-110 text-black font-bold py-4 px-8 flex items-center space-x-3 transition-all duration-300 group-hover:shadow-lg shadow-md">
-                    <ShoppingBag size={20} className="transform group-hover:scale-110 transition-transform duration-300" />
-                    <span>{content.requestBooking}</span>
+                  <div className="relative bg-accent-color hover:brightness-110 text-black font-bold py-4 px-8 flex items-center space-x-3 transition-colors duration-300 group-hover:shadow-lg shadow-md transform-gpu">
+                    <ShoppingBag size={20} className="transform-gpu group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-shadow-sm">{content.requestBooking}</span>
                   </div>
                 </button>
               </div>
@@ -736,13 +748,13 @@ export function PackageBuilder() {
         </div>
       </div>
 
-      {/* Adventure Request Dialog */}
+      {/* Adventure Request Dialog - optimized for performance */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[550px] bg-card-bg/95 backdrop-blur-md border border-white/10 text-primary-text shadow-2xl">
-          {/* Dialog background glow */}
-          <div className="absolute -inset-1 bg-accent-color/5 rounded-lg blur-md opacity-70 z-0"></div>
+        <DialogContent className="sm:max-w-[550px] bg-card-bg/95 backdrop-blur-md border border-white/10 text-primary-text shadow-2xl transform-gpu">
+          {/* Dialog background glow - optimized with reduced blur intensity and transform-gpu */}
+          <div className="absolute -inset-1 bg-accent-color/5 rounded-lg opacity-70 z-0 transform-gpu will-change-opacity"></div>
           
-          <DialogHeader className="relative z-10">
+          <DialogHeader className="relative z-10 transform-gpu">
             <DialogTitle className="text-2xl font-bold text-primary-text text-shadow-sm">
               {content.formTitle}
             </DialogTitle>
@@ -751,10 +763,10 @@ export function PackageBuilder() {
             </DialogDescription>
           </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-6 pt-4 relative z-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <form onSubmit={handleSubmit} className="space-y-6 pt-4 relative z-10 transform-gpu">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 transform-gpu">
               {/* First Name */}
-              <div className="space-y-2">
+              <div className="space-y-2 transform-gpu">
                 <Label htmlFor="firstName" className="text-primary-text flex items-center">
                   <User size={16} className="mr-2 text-accent-color" />
                   <span className="text-shadow-sm">{content.firstName}</span>
@@ -765,7 +777,7 @@ export function PackageBuilder() {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   required
-                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-all duration-300"
+                  className="bg-card-bg/50 border-white/10 focus:border-accent-color/50 focus:ring-accent-color/20 transition-colors duration-300"
                 />
               </div>
 
@@ -914,29 +926,29 @@ export function PackageBuilder() {
               />
             </div>
 
-            <DialogFooter className="mt-8">
+            <DialogFooter className="mt-8 transform-gpu">
               <Button 
                 type="button" 
                 variant="outline" 
                 onClick={() => setIsDialogOpen(false)}
-                className="border-white/10 hover:bg-card-bg/80 hover:border-white/20 transition-all duration-300"
+                className="border-white/10 hover:bg-card-bg/80 hover:border-white/20 transition-colors duration-300 transform-gpu"
               >
-                {content.cancel}
+                <span className="text-shadow-sm">{content.cancel}</span>
               </Button>
               <Button 
                 type="submit" 
-                className="bg-accent-color hover:brightness-110 text-black transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-accent-color/20"
+                className="bg-accent-color hover:brightness-110 text-black transition-colors duration-300 shadow-md hover:shadow-lg hover:shadow-accent-color/20 transform-gpu"
                 disabled={adventureMutation.isPending}
               >
                 {adventureMutation.isPending ? (
-                  <div className="flex items-center">
-                    <div className="w-4 h-4 rounded-full border-2 border-t-transparent border-black animate-spin mr-2"></div>
-                    {content.submit}
+                  <div className="flex items-center transform-gpu">
+                    <div className="w-4 h-4 rounded-full border-2 border-t-transparent border-black animate-spin mr-2 transform-gpu will-change-transform"></div>
+                    <span className="text-shadow-sm">{content.submit}</span>
                   </div>
                 ) : (
-                  <div className="flex items-center space-x-2">
-                    <ShoppingBag size={16} />
-                    <span>{content.submit}</span>
+                  <div className="flex items-center space-x-2 transform-gpu">
+                    <ShoppingBag size={16} className="transform-gpu" />
+                    <span className="text-shadow-sm">{content.submit}</span>
                   </div>
                 )}
               </Button>
