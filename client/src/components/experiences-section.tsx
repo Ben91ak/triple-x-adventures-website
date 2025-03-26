@@ -1,6 +1,7 @@
 import { Experience } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
+import { WeatherWidget } from "@/components/ui/weather-widget";
 
 // Experience data mapped by language
 const experiencesByLanguage = {
@@ -175,16 +176,23 @@ export function ExperiencesSection() {
       <div className="stars absolute inset-0 z-1"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
-            {language === 'de' ? 'Unsere Erlebnisse' : language === 'sv' ? 'Våra Upplevelser' : 'Our Experiences'}
-          </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
-            {t.experiences.title}
-          </h2>
-          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
-            {t.experiences.subtitle}
-          </p>
+        <div className="flex flex-col md:flex-row items-center justify-between mb-16">
+          <div className="text-center md:text-left mb-8 md:mb-0">
+            <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
+              {language === 'de' ? 'Unsere Erlebnisse' : language === 'sv' ? 'Våra Upplevelser' : 'Our Experiences'}
+            </span>
+            <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
+              {t.experiences.title}
+            </h2>
+            <p className="text-lg md:max-w-2xl text-white text-opacity-80">
+              {t.experiences.subtitle}
+            </p>
+          </div>
+          
+          {/* Weather widget */}
+          <div className="w-full md:w-auto">
+            <WeatherWidget className="w-full md:w-64" location="Kiruna,se" />
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -205,8 +213,8 @@ export function ExperiencesSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                 
                 {/* Price tag */}
-                <div className="absolute top-4 right-4 bg-card-bg/90 backdrop-blur-sm px-3 py-1.5 rounded-full border border-divider-color">
-                  <span className="font-semibold text-primary-text">{experience.price.toLocaleString()} SEK</span>
+                <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-accent-color/30">
+                  <span className="font-semibold text-white">{experience.price.toLocaleString()} SEK</span>
                 </div>
                 
                 {/* Bestseller/New tag */}
@@ -226,21 +234,21 @@ export function ExperiencesSection() {
               </div>
               
               <div className="p-6">
-                <h3 className="font-bold text-xl mb-3 text-primary-text group-hover:text-accent-color transition-colors">
+                <h3 className="font-bold text-xl mb-3 text-white group-hover:text-accent-color transition-colors">
                   {experience.title}
                 </h3>
-                <p className="mb-5 text-secondary-text text-sm">
+                <p className="mb-5 text-white text-opacity-80 text-sm">
                   {experience.description}
                 </p>
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className="text-xs opacity-70">
+                    <span className="text-xs text-white text-opacity-70">
                       {language === 'de' ? 'Ab' : language === 'sv' ? 'Från' : 'From'}
                     </span>
                   </div>
                   <a 
                     href="#contact" 
-                    className="inline-flex items-center gap-1.5 text-accent-color hover:underline font-medium text-sm"
+                    className="inline-flex items-center gap-1.5 text-accent-color hover:text-white transition-colors font-medium text-sm"
                   >
                     {language === 'de' ? 'Details ansehen' : language === 'sv' ? 'Visa detaljer' : 'View details'}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
