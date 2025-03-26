@@ -110,8 +110,9 @@ export function IntroductionSection() {
 
   return (
     <section id="about" className="py-24 md:py-32 relative hero-transition-overlap northern-lights-gradient">
-      {/* Northern Lights inspired animated gradient effect */}
-      <div className="stars absolute inset-0 z-5"></div>
+      {/* Northern Lights inspired animated gradient effect - enhanced animation */}
+      <div className="northern-glow absolute inset-0 z-5"></div>
+      <div className="stars absolute inset-0 z-6"></div>
       <div className="aurora-pillar"></div>
       <div className="aurora-pillar-2"></div>
       
