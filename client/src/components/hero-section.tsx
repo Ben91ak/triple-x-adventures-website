@@ -142,18 +142,19 @@ export function HeroSection() {
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
       {/* BASE LAYER - Optimized Background Solution */}
       <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
-        {/* Display static image first for fast initial render */}
+        {/* Display static image first for fast initial render - increased brightness */}
         <div className="absolute inset-0 bg-gradient-animated transform-gpu">
           <img 
             src="/images/TXA_fallback.jpg" 
             alt="Arctic Adventure" 
-            className="w-full h-full object-cover opacity-70 transform-gpu" 
+            className="w-full h-full object-cover opacity-85 transform-gpu" 
             loading="eager"
             decoding="async"
+            style={{ filter: "brightness(1.15)" }}
           />
         </div>
         
-        {/* Load video with low priority after initial render */}
+        {/* Load video with low priority after initial render - increased brightness */}
         <video 
           ref={videoRef}
           className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 opacity-0`}
@@ -165,7 +166,8 @@ export function HeroSection() {
           style={{ 
             objectFit: 'cover',
             width: '100%',
-            height: '100%'
+            height: '100%',
+            filter: 'brightness(1.25) contrast(1.05)'
           }}
           onCanPlay={() => {
             // Only show video once it's ready to play
@@ -180,8 +182,8 @@ export function HeroSection() {
         </video>
       </div>
       
-      {/* Dark overlay for text contrast - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.5)' }}></div>
+      {/* Dark overlay for text contrast - reduced opacity for brighter video */}
+      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.3)' }}></div>
       
       {/* Grid pattern overlay - optimized with transform-gpu */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 15 }}></div>
