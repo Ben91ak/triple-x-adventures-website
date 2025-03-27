@@ -142,27 +142,24 @@ export function HeroSection() {
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
       {/* BASE LAYER - Optimized Background Solution */}
       <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
-        {/* Display static image first for fast initial render - increased brightness */}
-        <div className="absolute inset-0 bg-gradient-animated transform-gpu">
-          <img 
-            src="/images/TXA_fallback.jpg" 
-            alt="Arctic Adventure" 
-            className="w-full h-full object-cover opacity-85 transform-gpu" 
-            loading="eager"
-            decoding="async"
-            style={{ filter: "brightness(1.15)" }}
-          />
+        {/* Enhanced background gradient while video loads */}
+        <div className="absolute inset-0 transform-gpu" style={{ 
+          background: "linear-gradient(180deg, #0A0D10 0%, #141A1F 50%, #0A0D10 100%)",
+          opacity: 1
+        }}>
+          {/* Premium gradient overlay with subtle animation */}
+          <div className="absolute inset-0 transform-gpu premium-dark-gradient opacity-80"></div>
         </div>
         
-        {/* Load video with low priority after initial render - increased brightness */}
+        {/* Load video with improved transition time - increased brightness */}
         <video 
           ref={videoRef}
-          className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 opacity-0`}
+          className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-300 opacity-0`}
           autoPlay 
           muted 
           loop 
           playsInline
-          preload="metadata"
+          preload="auto"
           style={{ 
             objectFit: 'cover',
             width: '100%',
