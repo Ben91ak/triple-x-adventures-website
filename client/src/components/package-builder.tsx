@@ -10,7 +10,6 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { api, AdventureFormData } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
-import { SectionAtmosphere } from "@/components/layout/background-fixed";
 import { 
   Dialog, 
   DialogContent, 
@@ -471,20 +470,18 @@ export function PackageBuilder() {
   };
 
   return (
-    <section id="package-builder" className="py-24 md:py-32 relative overflow-hidden premium-dark-gradient">
-      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0 transform-gpu"></div>
-      
-      {/* Enhanced and unified atmosphere effect from our global component library */}
-      <SectionAtmosphere intensity="high" accentPosition="center" />
-      
-      {/* Northern lights glow effect - enhanced and optimized for performance */}
+    <section id="package-builder" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Using the global background - no need for section-specific background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Aurora pillars - optimized with transform-gpu for better performance */}
-        <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow transform-gpu will-change-transform"></div>
-        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>
-        <div className="aurora-pillar absolute h-full w-32 right-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-fast transform-gpu will-change-transform"></div>
+        {/* Simple glow effect to complement global background */}
+        <div className="aurora-glow absolute inset-0 opacity-30"></div>
+        
+        {/* Subtle glass overlay to create depth */}
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-0"></div>
       </div>
+      
+      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg/80 via-card-bg/60 to-dark-bg/80 opacity-90 z-0 transform-gpu"></div>
       
       {/* Content container */}
       <div className="container mx-auto px-4 py-12 relative z-10">

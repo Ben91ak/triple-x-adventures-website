@@ -711,25 +711,25 @@
 /* Small stars */
 .stars-small {
   background-image: 
-    radial-gradient(1px 1px at 30px 30px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
-    radial-gradient(1px 1px at 50px 100px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
-    radial-gradient(1px 1px at 100px 60px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
-    radial-gradient(1px 1px at 175px 90px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
-    radial-gradient(1px 1px at 195px 150px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
-    radial-gradient(1px 1px at 220px 200px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
-    radial-gradient(1px 1px at 250px 230px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
-    radial-gradient(1px 1px at 275px 260px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
-    radial-gradient(1px 1px at 300px 290px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
-    radial-gradient(1px 1px at 325px 320px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
-    radial-gradient(1px 1px at 350px 350px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
-    radial-gradient(1px 1px at 375px 380px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
-    radial-gradient(1px 1px at 400px 410px, rgba(255, 255, 255, 0.7) 50%, transparent 100%),
-    radial-gradient(1px 1px at 425px 440px, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
-    radial-gradient(1px 1px at 450px 470px, rgba(255, 255, 255, 0.7) 50%, transparent 100%);
+    radial-gradient(1px 1px at 30px 30px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50px 100px, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 100px 60px, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 175px 90px, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 195px 150px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 220px 200px, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 250px 230px, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 275px 260px, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 300px 290px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 325px 320px, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 350px 350px, rgba(255, 255, 255, 0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 375px 380px, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 400px 410px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1px 1px at 425px 440px, rgba(255, 255, 255, 0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 450px 470px, rgba(255, 255, 255, 0.7) 0%, transparent 100%);
   background-repeat: repeat;
   background-size: 500px 500px;
-  opacity: 0.6;
-  animation: twinkleSmallStars 8s ease-in-out infinite alternate;
+  opacity: 0.7;
+  animation: twinkleSmallStars 20s linear infinite;
   will-change: background-position, opacity;
   transform: translateZ(0);
 }
@@ -737,19 +737,19 @@
 /* Medium stars */
 .stars-medium {
   background-image: 
-    radial-gradient(1.5px 1.5px at 75px 75px, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 150px 200px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 225px 125px, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 300px 250px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 375px 375px, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 450px 425px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 525px 500px, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 600px 550px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
-    radial-gradient(1.5px 1.5px at 675px 625px, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    radial-gradient(1.5px 1.5px at 75px 75px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 150px 200px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 225px 125px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 300px 250px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 375px 375px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 450px 425px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 525px 500px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 600px 550px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 675px 625px, rgba(255, 255, 255, 1) 0%, transparent 100%);
   background-repeat: repeat;
   background-size: 700px 700px;
   opacity: 0.7;
-  animation: twinkleMediumStars 12s ease-in-out infinite alternate;
+  animation: twinkleMediumStars 30s linear infinite;
   will-change: background-position, opacity;
   transform: translateZ(0);
 }
@@ -757,18 +757,18 @@
 /* Large stars (fewer, brighter) */
 .stars-large {
   background-image: 
-    radial-gradient(2px 2px at 100px 100px, rgba(255, 255, 255, 1) 50%, transparent 100%),
-    radial-gradient(2px 2px at 200px 400px, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
-    radial-gradient(2.5px 2.5px at 300px 200px, rgba(255, 255, 255, 1) 50%, transparent 100%),
-    radial-gradient(2px 2px at 400px 500px, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
-    radial-gradient(2.5px 2.5px at 500px 300px, rgba(255, 255, 255, 1) 50%, transparent 100%),
-    radial-gradient(2px 2px at 600px 600px, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
-    radial-gradient(2.5px 2.5px at 700px 400px, rgba(255, 255, 255, 1) 50%, transparent 100%),
-    radial-gradient(2px 2px at 800px 700px, rgba(255, 255, 255, 0.9) 50%, transparent 100%);
+    radial-gradient(2px 2px at 100px 100px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(2px 2px at 200px 400px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 300px 200px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(2px 2px at 400px 500px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 500px 300px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 600px 600px, rgba(255, 255, 255, 0.9) 0%, transparent 100%),
+    radial-gradient(3px 3px at 700px 400px, rgba(255, 255, 255, 1) 0%, transparent 100%),
+    radial-gradient(2.5px 2.5px at 800px 700px, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
   background-repeat: repeat;
   background-size: 900px 900px;
-  opacity: 0.8;
-  animation: twinkleLargeStars 15s ease-in-out infinite alternate;
+  opacity: 0.9;
+  animation: twinkleLargeStars 40s linear infinite;
   will-change: background-position, opacity;
   transform: translateZ(0);
 }
@@ -812,35 +812,71 @@
 
 /* Star twinkle animations */
 @keyframes twinkleSmallStars {
-  0%, 100% {
-    opacity: 0.5;
-    background-position: 0% 0%;
+  0% {
+    opacity: 0.6;
+    background-position: 0px 0px;
+  }
+  25% {
+    opacity: 0.8;
+    background-position: 100px 50px;
   }
   50% {
     opacity: 0.7;
-    background-position: 10px 10px;
+    background-position: 200px 100px;
+  }
+  75% {
+    opacity: 0.9;
+    background-position: 300px 150px;
+  }
+  100% {
+    opacity: 0.6;
+    background-position: 400px 200px;
   }
 }
 
 @keyframes twinkleMediumStars {
-  0%, 100% {
+  0% {
     opacity: 0.6;
-    background-position: 0% 0%;
+    background-position: 0px 0px;
+  }
+  25% {
+    opacity: 0.9;
+    background-position: -100px 100px;
   }
   50% {
-    opacity: 0.8;
-    background-position: -15px 15px;
+    opacity: 0.7;
+    background-position: -200px 200px;
+  }
+  75% {
+    opacity: 0.9;
+    background-position: -300px 300px;
+  }
+  100% {
+    opacity: 0.6;
+    background-position: -400px 400px;
   }
 }
 
 @keyframes twinkleLargeStars {
-  0%, 100% {
+  0% {
     opacity: 0.7;
-    background-position: 0% 0%;
+    background-position: 0px 0px;
+  }
+  25% {
+    opacity: 1;
+    background-position: 150px -150px;
   }
   50% {
-    opacity: 0.9;
-    background-position: 25px -25px;
+    opacity: 0.8;
+    background-position: 300px -300px;
+  } 
+  75% {
+    opacity: 1;
+    background-position: 450px -450px;
+  }
+  100% {
+    opacity: 0.7;
+    background-position: 600px -600px;
   }
 }
 

@@ -160,27 +160,18 @@ export function GallerySection() {
   const galleryImages: GalleryImage[] = galleryImagesByLanguage[language];
 
   return (
-    <section id="gallery" className="py-24 md:py-32 relative overflow-hidden premium-dark-gradient">
-      {/* Northern lights glow effect - enhanced and optimized for performance */}
+    <section id="gallery" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Using the global background - no need for section-specific background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Main aurora glow */}
-        <div className="aurora-glow absolute inset-0 opacity-20 transform-gpu will-change-transform will-change-opacity"></div>
+        {/* Simple glow effect to complement global background */}
+        <div className="aurora-glow absolute inset-0 opacity-30"></div>
         
-        {/* Aurora pillars - optimized with transform-gpu for better performance */}
-        <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow transform-gpu will-change-transform"></div>
-        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/10 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>
-        
-        {/* Additional top glow */}
-        <div className="absolute inset-0 transform-gpu">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30 transform-gpu"></div>
-        </div>
-        
-        {/* Stars background effect - added for more depth */}
-        <div className="stars absolute inset-0 z-1 opacity-40 transform-gpu will-change-opacity"></div>
+        {/* Subtle glass overlay to create depth */}
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-0"></div>
       </div>
       
-      {/* Background with diagonal gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0 transform-gpu"></div>
+      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg/80 via-card-bg/60 to-dark-bg/80 opacity-90 z-0 transform-gpu"></div>
       
       {/* Subtle pattern overlay - optimized with transform-gpu */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu"></div>

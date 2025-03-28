@@ -111,13 +111,18 @@ export function AccommodationsSection() {
   };
 
   return (
-    <section id="accommodations" className="py-24 md:py-32 relative premium-dark-gradient overflow-hidden">
-      {/* Stars background effect */}
-      <div className="stars absolute inset-0 z-1"></div>
-      {/* Northern Lights animation layers */}
-      <div className="northern-glow absolute inset-0 z-1"></div>
-      <div className="aurora-pillar absolute z-2"></div>
-      <div className="aurora-pillar-2 absolute z-2"></div>
+    <section id="accommodations" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Using the global background - no need for section-specific background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+        {/* Simple glow effect to complement global background */}
+        <div className="aurora-glow absolute inset-0 opacity-30"></div>
+        
+        {/* Subtle glass overlay to create depth */}
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-0"></div>
+      </div>
+      
+      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg/80 via-card-bg/60 to-dark-bg/80 opacity-90 z-0 transform-gpu"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-20">

@@ -171,17 +171,11 @@ export function ExperiencesSection() {
   const experiences: Experience[] = experiencesByLanguage[language];
 
   return (
-    <section id="pakete" className="py-16 md:py-28 relative overflow-hidden premium-dark-gradient">
-      {/* Northern lights glow effect - enhanced and optimized for performance */}
+    <section id="pakete" className="py-16 md:py-28 relative overflow-hidden">
+      {/* Using the global background - no need for section-specific background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Main aurora glow */}
-        <div className="aurora-glow absolute inset-0 opacity-20 transform-gpu will-change-transform will-change-opacity"></div>
-        
-        {/* Aurora pillars - optimized with transform-gpu for better performance */}
-        <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow transform-gpu will-change-transform"></div>
-        <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/10 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>
-        
-        {/* Additional top glow */}
+        {/* Simple glow effect instead */}
+        <div className="aurora-glow absolute inset-0 opacity-30"></div>
         <div className="absolute inset-0 transform-gpu">
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30 transform-gpu"></div>
         </div>
