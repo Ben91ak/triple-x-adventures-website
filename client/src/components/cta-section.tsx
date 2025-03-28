@@ -33,9 +33,6 @@ export function CTASection() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
         {/* Simple glow effect to complement global background */}
         <div className="aurora-glow absolute inset-0 opacity-30"></div>
-        
-        {/* Subtle glass overlay to create depth */}
-        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-0"></div>
       </div>
       
       {/* Subtle image overlay that won't conflict with the global background */}

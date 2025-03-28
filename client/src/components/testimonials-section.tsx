@@ -132,13 +132,7 @@ export function TestimonialsSection() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
         {/* Simple glow effect to complement global background */}
         <div className="aurora-glow absolute inset-0 opacity-30"></div>
-        
-        {/* Subtle glass overlay to create depth */}
-        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-0"></div>
       </div>
-      
-      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg/80 via-card-bg/60 to-dark-bg/80 opacity-90 z-0 transform-gpu"></div>
       
       {/* Dark overlay for text contrast */}
       <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.4)' }}></div>

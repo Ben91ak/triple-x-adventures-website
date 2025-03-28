@@ -146,9 +146,6 @@ export function HeroSection() {
         <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
           {/* Simple glow effect to complement global background */}
           <div className="aurora-glow absolute inset-0 opacity-30"></div>
-          
-          {/* Subtle glass overlay to create depth */}
-          <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px] z-0"></div>
         </div>
         
         {/* Load video with improved transition time - increased brightness */}
