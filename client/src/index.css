@@ -16,6 +16,7 @@
   --input-bg: #232629;
   --success-color: #10B981;
   --error-color: #EF4444;
+  --bg-size-200: 200% 200%;
 }
 
 @layer base {

@@ -97,15 +97,17 @@ export function LanguageSelector({ className }: { className?: string }) {
           style={buttonStyle}
           className={cn(
             "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-all",
-            "border-[2px] border-transparent z-10",
-            "bg-black/10 hover:bg-black/15 backdrop-filter backdrop-blur-[2px]",
-            "after:absolute after:inset-[-2px] after:rounded-lg after:z-[-1]",
-            "after:bg-gradient-to-r after:from-[var(--flag-primary)] after:via-[var(--flag-secondary)] after:to-[var(--flag-tertiary)]",
-            "after:bg-size-200 after:animate-[glow-outline_3s_ease_infinite] after:opacity-100 after:blur-[0.5px]",
-            "shadow-[0_0_10px_rgba(var(--flag-primary-rgb),0.3)]",
-            "hover:shadow-[0_0_15px_rgba(var(--flag-secondary-rgb),0.4)]",
-            "transition-shadow duration-300",
-            "after:will-change-[background-position,opacity]",
+            "bg-transparent border-none z-10",
+            "backdrop-filter backdrop-blur-[2px]",
+            "ring-[2px] ring-transparent",
+            "before:absolute before:inset-0 before:rounded-lg before:z-[-1]",
+            "before:bg-gradient-to-r before:from-[var(--flag-primary)] before:via-[var(--flag-secondary)] before:to-[var(--flag-tertiary)]",
+            "before:bg-size-200 before:animate-[glow-outline_3s_ease_infinite] before:opacity-0",
+            "shadow-[0_0_10px_rgba(var(--flag-primary-rgb),0.2)]",
+            "hover:shadow-[0_0_15px_rgba(var(--flag-secondary-rgb),0.3)]",
+            "hover:before:opacity-[0.15] transition-all duration-300",
+            "after:absolute after:inset-0 after:rounded-lg after:border-[2px] after:border-[rgba(var(--flag-primary-rgb),0.5)]",
+            "after:bg-transparent after:z-[-1]",
             "focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none",
             className
           )}
