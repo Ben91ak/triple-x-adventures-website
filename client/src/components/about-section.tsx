@@ -208,42 +208,64 @@ export function AboutSection() {
 
   return (
     <section id="team" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background with premium dark gradient - more optimized for performance */}
-      <div className="absolute inset-0 bg-gradient-to-br from-card-bg/30 via-dark-bg to-card-bg/30 opacity-95 z-0"></div>
-      
-      {/* Northern lights glow effect - simplified for better performance */}
-      <div className="absolute inset-0 pointer-events-none z-0 will-change-transform">
-        <div className="absolute inset-0 bg-gradient-to-b from-accent-color/5 via-transparent to-transparent opacity-20 transform-gpu"></div>
+      {/* BASE LAYER - Optimized Background Solution */}
+      <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
+        {/* Enhanced background gradient */}
+        <div className="absolute inset-0 transform-gpu" style={{ 
+          background: "linear-gradient(180deg, #0A0D10 0%, #141A1F 50%, #0A0D10 100%)",
+          opacity: 1
+        }}>
+          {/* Premium gradient overlay with subtle animation */}
+          <div className="absolute inset-0 transform-gpu premium-dark-gradient opacity-80"></div>
+        </div>
+        
+        {/* Northern Lights effect */}
+        <div className="northern-lights-gradient absolute inset-0">
+          <div className="northern-glow"></div>
+          <div className="aurora-pillar"></div>
+          <div className="aurora-pillar-2"></div>
+          <div className="stars"></div>
+        </div>
       </div>
       
-      {/* Subtle pattern overlay - optimized with transform-gpu for better performance */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none transform-gpu"></div>
+      {/* Dark overlay for text contrast */}
+      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.4)' }}></div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2 text-shadow-sm">
+      {/* Grid pattern overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 15 }}></div>
+      
+      <div className="container mx-auto px-4 relative z-50" style={{ zIndex: 50 }}>
+        <div className="text-center mb-16 transform-gpu">
+          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2 text-shadow-lg">
             {language === 'de' ? 'Unser Team' : language === 'sv' ? 'Vårt Team' : 'Our Team'}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-primary-text text-shadow-lg">
+          <h2 className="font-bold text-4xl md:text-5xl lg:text-6xl mb-4 tracking-tight text-white text-shadow-lg" 
+            style={{ 
+              color: '#FFFFFF', 
+              textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)',
+              WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)'
+            }}>
             {content.title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-secondary-text text-shadow-sm">
+          <p className="text-xl max-w-3xl mx-auto text-white text-shadow-lg mb-8">
             {content.subtitle}
           </p>
         </div>
         
         {/* Our Story with image - optimized for performance */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20 max-w-6xl mx-auto fade-in scale-up transform-gpu visible">
           <div className="group relative transform-gpu">
-            {/* Glass effect wrapper - optimized with transform-gpu and transition-opacity */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-accent-color/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-500 transform-gpu"></div>
+            {/* Aurora glow effect behind card */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-full max-h-full aurora-glow opacity-30 pointer-events-none"></div>
             
-            <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg relative z-10 transform-gpu">
+            <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-2xl relative z-10 transform-gpu" 
+                style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)' }}>
               <div className="p-8">
-                <h3 className="font-bold text-2xl mb-6 text-primary-text group-hover:text-accent-color transition-colors duration-300 text-shadow-sm">
+                <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-lg"
+                    style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}>
                   {content.storyTitle}
                 </h3>
-                <div className="space-y-4 text-secondary-text">
+                <div className="space-y-4 text-white">
                   <p className="leading-relaxed text-shadow-sm">{content.storyParagraph1}</p>
                   <p className="leading-relaxed text-shadow-sm">{content.storyParagraph2}</p>
                   <p className="leading-relaxed text-shadow-sm">{content.storyParagraph3}</p>
@@ -252,9 +274,9 @@ export function AboutSection() {
             </div>
           </div>
           
-          <div className="relative overflow-hidden rounded-xl shadow-xl transform-gpu">
-            {/* Image with gradient overlay - simplified hover effect for better performance */}
-            <div className="relative h-full">
+          <div className="relative overflow-hidden rounded-xl shadow-2xl transform-gpu">
+            {/* Image with gradient overlay and glass effect */}
+            <div className="relative h-full glassmorphism">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 transform-gpu"></div>
               <img 
                 src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
@@ -264,71 +286,92 @@ export function AboutSection() {
                 width="500"
                 height="300"
               />
+              {/* Northern lights glow overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent-color/10 via-transparent to-transparent opacity-40 mix-blend-overlay"></div>
             </div>
           </div>
         </div>
         
-        {/* Our Values - optimized for performance */}
-        <div className="mb-24">
-          <h3 className="font-bold text-2xl mb-12 text-center text-primary-text text-shadow-sm">
+        {/* Our Values - optimized with premium look */}
+        <div className="mb-24 fade-in transform-gpu visible">
+          <h3 className="font-bold text-2xl md:text-3xl mb-12 text-center text-white text-shadow-lg"
+              style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}>
             {content.valuesTitle}
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
-            {content.values.map((value, index) => (
-              <div key={index} className="group relative transform-gpu">
-                {/* Hover glow effect - optimized with reduced blur and transform-gpu */}
-                <div className="absolute -inset-px bg-gradient-to-br from-accent-color/10 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
-                
-                <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 h-full flex flex-col items-center text-center group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu">
-                  <div className="w-14 h-14 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color mb-5 group-hover:scale-110 transition-transform duration-300 transform-gpu">
-                    {getValueIcon(value.icon)}
+          
+          {/* Background aurora glow for values section */}
+          <div className="relative">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-5xl max-h-[400px] aurora-glow opacity-30 pointer-events-none"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
+              {content.values.map((value, index) => (
+                <div key={index} className="group relative transform-gpu">
+                  {/* Hover glow effect */}
+                  <div className="absolute -inset-px bg-gradient-to-br from-accent-color/20 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
+                  
+                  <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 h-full flex flex-col items-center text-center group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu"
+                      style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)' }}>
+                    <div className="w-14 h-14 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color mb-5 group-hover:scale-110 transition-transform duration-300 transform-gpu">
+                      {getValueIcon(value.icon)}
+                    </div>
+                    <h4 className="font-bold text-xl mb-3 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-md">
+                      {value.title}
+                    </h4>
+                    <p className="text-white/80 text-shadow-sm">
+                      {value.description}
+                    </p>
                   </div>
-                  <h4 className="font-bold text-xl mb-3 text-primary-text group-hover:text-accent-color transition-colors duration-300 text-shadow-sm">
-                    {value.title}
-                  </h4>
-                  <p className="text-secondary-text text-shadow-sm">
-                    {value.description}
-                  </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
         
         {/* Team Members */}
-        <div>
-          <h3 className="font-bold text-2xl mb-12 text-center text-primary-text text-shadow-sm">
+        <div className="fade-in transform-gpu visible">
+          <h3 className="font-bold text-2xl md:text-3xl mb-12 text-center text-white text-shadow-lg"
+              style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}>
             {content.teamTitle}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {teamMembers.map((member) => (
-              <div key={member.id} className="group relative transform-gpu">
-                {/* Decorative background glow - optimized with reduced opacity for better performance */}
-                <div className="absolute -inset-px bg-gradient-to-t from-accent-color/5 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500"></div>
-                
-                <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 flex flex-col items-center text-center group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu">
-                  {/* Image with color border - optimized transitions */}
-                  <div className="mb-5 w-32 h-32 rounded-full overflow-hidden border border-accent-color/40 p-1 transition-transform duration-300 group-hover:scale-105 transform-gpu">
-                    <img 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover rounded-full"
-                      loading="lazy"
-                    />
-                  </div>
+          
+          {/* Background aurora glow for team section */}
+          <div className="relative">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl max-h-[600px] aurora-glow opacity-30 pointer-events-none"></div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+              {teamMembers.map((member, index) => (
+                <div key={member.id} className={`group relative transform-gpu stagger-${index % 5 + 1}`}>
+                  {/* Decorative background glow */}
+                  <div className="absolute -inset-px bg-gradient-to-t from-accent-color/20 via-accent-color/10 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
                   
-                  <h4 className="font-bold text-lg mb-1 text-primary-text group-hover:text-accent-color transition-colors duration-300 text-shadow-sm">
-                    {member.name}
-                  </h4>
-                  <p className="text-accent-color font-medium mb-3 text-sm">
-                    {member.role}
-                  </p>
-                  <p className="text-secondary-text text-sm text-shadow-sm">
-                    {member.bio}
-                  </p>
+                  <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 flex flex-col items-center text-center group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu"
+                      style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)' }}>
+                    {/* Image with accent color glow */}
+                    <div className="relative mb-5">
+                      <div className="absolute -inset-1 bg-gradient-to-br from-accent-color via-accent-color/50 to-accent-color/30 rounded-full opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
+                      <div className="w-32 h-32 rounded-full overflow-hidden border border-white/20 p-1 relative transition-transform duration-300 group-hover:scale-105 transform-gpu">
+                        <img 
+                          src={member.image} 
+                          alt={member.name} 
+                          className="w-full h-full object-cover rounded-full"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                    
+                    <h4 className="font-bold text-lg mb-1 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-md">
+                      {member.name}
+                    </h4>
+                    <p className="text-accent-color font-medium mb-3 text-sm">
+                      {member.role}
+                    </p>
+                    <p className="text-white/70 text-sm text-shadow-sm">
+                      {member.bio}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
