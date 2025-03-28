@@ -43,11 +43,10 @@ export function CTASection() {
         }}
       ></div>
       
-      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-transparent to-dark-bg/90 opacity-90 z-10 transform-gpu"></div>
+      {/* Removed gradient overlay for consistency */}
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="relative z-50 container mx-auto px-4" style={{ zIndex: 50 }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-8 inline-flex items-center justify-center">
             <span className="w-12 h-1 bg-accent-color rounded-full mr-3 transform-gpu"></span>
