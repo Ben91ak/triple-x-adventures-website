@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AdventureMap } from "@/components/adventure-map";
-import { GlobalBackground } from "@/components/layout/background";
+import { GlobalBackground } from "@/components/layout/background-fixed";
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 import { adventureLocations } from '@/data/adventureLocations';

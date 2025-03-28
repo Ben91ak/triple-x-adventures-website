@@ -2,7 +2,7 @@ import { memo, lazy, Suspense } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/hero-section";
-import { GlobalBackground } from "@/components/layout/background";
+import { GlobalBackground } from "@/components/layout/background-fixed";
 
 // Lazy-load non-critical sections for better performance
 const IntroductionSection = lazy(() => import("@/components/introduction-section").then(module => ({ default: module.IntroductionSection })));

@@ -10,6 +10,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { api, AdventureFormData } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
+import { SectionAtmosphere } from "@/components/layout/background-fixed";
 import { 
   Dialog, 
   DialogContent, 
@@ -474,11 +475,11 @@ export function PackageBuilder() {
       {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
       <div className="absolute inset-0 bg-gradient-to-br from-dark-bg via-card-bg/80 to-dark-bg opacity-95 z-0 transform-gpu"></div>
       
+      {/* Enhanced and unified atmosphere effect from our global component library */}
+      <SectionAtmosphere intensity="high" accentPosition="center" />
+      
       {/* Northern lights glow effect - enhanced and optimized for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Main aurora glow */}
-        <div className="aurora-glow absolute inset-0 opacity-20 transform-gpu will-change-transform will-change-opacity"></div>
-        
         {/* Aurora pillars - optimized with transform-gpu for better performance */}
         <div className="aurora-pillar absolute h-full w-16 left-1/4 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-slow transform-gpu will-change-transform"></div>
         <div className="aurora-pillar absolute h-full w-24 left-2/3 bg-gradient-to-t from-transparent via-accent-color/5 to-transparent animate-aurora-medium transform-gpu will-change-transform"></div>

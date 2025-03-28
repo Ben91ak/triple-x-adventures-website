@@ -3,7 +3,7 @@ import { AlertCircle } from "lucide-react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
-import { GlobalBackground } from "@/components/layout/background";
+import { GlobalBackground } from "@/components/layout/background-fixed";
 
 export default function NotFound() {
   const { language } = useLanguage();
