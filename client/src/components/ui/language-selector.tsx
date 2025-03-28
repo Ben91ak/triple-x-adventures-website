@@ -63,11 +63,28 @@ export function LanguageSelector({ className }: { className?: string }) {
     { code: "sv", label: t.language.sv, flag: flags.sv },
   ];
 
+  // Helper function to convert hex color to RGB values
+  const hexToRgb = (hex: string) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+        }
+      : { r: 0, g: 0, b: 0 };
+  };
+
   // Create CSS variables for the glow animation
+  const primaryRgb = hexToRgb(flagColors[language as Language].primary);
+  const secondaryRgb = hexToRgb(flagColors[language as Language].secondary);
+  
   const buttonStyle = {
     '--flag-primary': flagColors[language as Language].primary,
     '--flag-secondary': flagColors[language as Language].secondary,
     '--flag-tertiary': flagColors[language as Language].tertiary,
+    '--flag-primary-rgb': `${primaryRgb.r}, ${primaryRgb.g}, ${primaryRgb.b}`,
+    '--flag-secondary-rgb': `${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}`,
   } as React.CSSProperties;
 
   return (
@@ -80,13 +97,16 @@ export function LanguageSelector({ className }: { className?: string }) {
           style={buttonStyle}
           className={cn(
             "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-all",
-            "border-[2px] border-transparent bg-transparent backdrop-blur-sm z-10",
+            "border-[2px] border-transparent z-10",
+            "bg-black/10 hover:bg-black/15 backdrop-filter backdrop-blur-[2px]",
             "after:absolute after:inset-[-2px] after:rounded-lg after:z-[-1]",
             "after:bg-gradient-to-r after:from-[var(--flag-primary)] after:via-[var(--flag-secondary)] after:to-[var(--flag-tertiary)]",
-            "after:bg-size-200 after:animate-[glow-outline_3s_ease_infinite] after:opacity-100 after:blur-[1px]",
-            "after:will-change-[background-position,opacity] shadow-lg shadow-black/5",
+            "after:bg-size-200 after:animate-[glow-outline_3s_ease_infinite] after:opacity-100 after:blur-[0.5px]",
+            "shadow-[0_0_10px_rgba(var(--flag-primary-rgb),0.3)]",
+            "hover:shadow-[0_0_15px_rgba(var(--flag-secondary-rgb),0.4)]",
+            "transition-shadow duration-300",
+            "after:will-change-[background-position,opacity]",
             "focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none",
-            "before:absolute before:inset-0 before:rounded-lg before:bg-black/20 before:-z-10 hover:before:bg-black/30",
             className
           )}
         >
