@@ -243,7 +243,7 @@
 /* Flag color glowing outline animation for language selector */
 @keyframes glow-outline {
   0% {
-    opacity: 0.7;
+    opacity: 0.8;
     background-position: 0% 50%;
   }
   50% {
@@ -251,7 +251,7 @@
     background-position: 100% 50%;
   }
   100% {
-    opacity: 0.7;
+    opacity: 0.8;
     background-position: 0% 50%;
   }
 }

@@ -63,10 +63,12 @@ export function LanguageSelector({ className }: { className?: string }) {
           size="sm"
           style={buttonStyle}
           className={cn(
-            "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-card-bg/60 hover:bg-card-bg/80 rounded-lg border border-white/10 transition-all",
-            "before:absolute before:inset-0 before:rounded-lg before:p-[1.5px] before:bg-gradient-to-r before:from-[var(--flag-primary)] before:via-[var(--flag-secondary)] before:to-[var(--flag-tertiary)]",
-            "before:opacity-70 before:blur-[1px] before:-z-10 shadow-lg shadow-black/20",
-            "before:bg-size-200 before:animate-[glow-outline_3s_ease_infinite] before:will-change-[opacity,background-position]",
+            "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-card-bg/60 hover:bg-card-bg/70 rounded-lg transition-all",
+            "border-[2px] border-transparent bg-clip-padding z-10",
+            "after:absolute after:inset-[-2px] after:rounded-lg after:z-[-1]",
+            "after:bg-gradient-to-r after:from-[var(--flag-primary)] after:via-[var(--flag-secondary)] after:to-[var(--flag-tertiary)]",
+            "after:bg-size-200 after:animate-[glow-outline_3s_ease_infinite] after:opacity-100 after:blur-[1px]",
+            "after:will-change-[background-position,opacity] shadow-lg shadow-black/20",
             className
           )}
         >
