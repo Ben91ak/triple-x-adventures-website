@@ -8,25 +8,27 @@ interface ExtendedSentMessageInfo extends SentMessageInfo {
 }
 
 // Create a transporter for sending emails
-// For production, you would use real SMTP settings
+// For production, we would use real SMTP settings
 // For testing, we'll use a test account
 const createTransporter = async () => {
   // For testing purposes only - in production, use real SMTP settings
   // This is a fallback mechanism when no SMTP settings are provided
   try {
     // Use environment variables for SMTP settings if available
-    if (process.env.SMTP_HOST && process.env.SMTP_PORT) {
+    if (process.env.EMAIL_HOST && process.env.EMAIL_PORT) {
+      console.log('Using configured email settings');
       return nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT),
-        secure: process.env.SMTP_SECURE === 'true',
+        host: process.env.EMAIL_HOST,
+        port: parseInt(process.env.EMAIL_PORT),
+        secure: parseInt(process.env.EMAIL_PORT) === 465, // Auto-detect secure based on port
         auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
         },
       });
     }
 
+    console.log('No email configuration found, using test account');
     // Fallback to Ethereal for development/testing
     const testAccount = await nodemailer.createTestAccount();
     
@@ -55,7 +57,7 @@ export const sendContactEmail = async (contact: Contact): Promise<{ success: boo
     
     // Construct email content
     const mailOptions = {
-      from: '"Triple X Adventures Website" <no-reply@triple-x-adventures.com>',
+      from: `"Triple X Adventures Website" <${process.env.EMAIL_USER || 'no-reply@triple-x-adventures.com'}>`,
       to: 'info@triple-x-adventures.com',
       subject: `New Contact Form Submission from ${contact.firstName} ${contact.lastName}`,
       text: `
@@ -135,7 +137,7 @@ export const sendAdventureEmail = async (adventure: Adventure): Promise<{ succes
     
     // Construct email content
     const mailOptions = {
-      from: '"Triple X Adventures Website" <no-reply@triple-x-adventures.com>',
+      from: `"Triple X Adventures Website" <${process.env.EMAIL_USER || 'no-reply@triple-x-adventures.com'}>`,
       to: 'info@triple-x-adventures.com',
       subject: `New Adventure Package Request from ${adventure.firstName} ${adventure.lastName}`,
       text: `
