@@ -109,19 +109,25 @@ export function IntroductionSection() {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 relative premium-dark-gradient">
-      {/* Premium dark gradient inspired by the screenshot */}
-      <div className="stars absolute inset-0 z-1"></div>
+    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Using the global background - no need for section-specific background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+        {/* Simple glow effect to complement global background */}
+        <div className="aurora-glow absolute inset-0 opacity-30"></div>
+        
+        {/* Subtle glass overlay to create depth */}
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-0"></div>
+      </div>
       
-      {/* Background with gradient */}
-      <div 
-        className="absolute inset-0 opacity-90 z-0"
-        ref={parallaxRef as React.RefObject<HTMLDivElement>}
-        style={parallaxStyle} // Apply parallax effect to background
-      ></div>
+      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-gradient-to-br from-dark-bg/80 via-card-bg/60 to-dark-bg/80 opacity-90 z-0 transform-gpu"></div>
       
       {/* Subtle dot pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-10 pointer-events-none"></div>
+      <div 
+        className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-10 pointer-events-none transform-gpu"
+        ref={parallaxRef as React.RefObject<HTMLDivElement>}
+        style={parallaxStyle} // Apply parallax effect to background pattern
+      ></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">

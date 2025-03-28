@@ -140,15 +140,15 @@ export function HeroSection() {
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
-      {/* BASE LAYER - Optimized Background Solution */}
+      {/* BASE LAYER - Using the global background - complemented with section-specific elements */}
       <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
-        {/* Enhanced background gradient while video loads */}
-        <div className="absolute inset-0 transform-gpu" style={{ 
-          background: "linear-gradient(180deg, #0A0D10 0%, #141A1F 50%, #0A0D10 100%)",
-          opacity: 1
-        }}>
-          {/* Premium gradient overlay with subtle animation */}
-          <div className="absolute inset-0 transform-gpu premium-dark-gradient opacity-80"></div>
+        {/* Using the global background - complemented with a subtle overlay */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
+          {/* Simple glow effect to complement global background */}
+          <div className="aurora-glow absolute inset-0 opacity-30"></div>
+          
+          {/* Subtle glass overlay to create depth */}
+          <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px] z-0"></div>
         </div>
         
         {/* Load video with improved transition time - increased brightness */}

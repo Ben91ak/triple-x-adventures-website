@@ -28,17 +28,26 @@ export function CTASection() {
   const content = ctaContentByLanguage[language];
 
   return (
-    <section id="cta" className="py-24 md:py-32 relative">
-      {/* Background with gradient and image overlay - optimized for performance */}
-      <div className="absolute inset-0 bg-black z-0 transform-gpu">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 z-0 transform-gpu"
-          style={{ 
-            backgroundImage: "url('https://images.unsplash.com/photo-1517299321609-52687d1bc55a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')"
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-transparent to-dark-bg/90 opacity-90 z-0 transform-gpu"></div>
+    <section id="cta" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Using the global background - no need for section-specific background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+        {/* Simple glow effect to complement global background */}
+        <div className="aurora-glow absolute inset-0 opacity-30"></div>
+        
+        {/* Subtle glass overlay to create depth */}
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] z-0"></div>
       </div>
+      
+      {/* Subtle image overlay that won't conflict with the global background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15 z-5 transform-gpu"
+        style={{ 
+          backgroundImage: "url('https://images.unsplash.com/photo-1517299321609-52687d1bc55a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')"
+        }}
+      ></div>
+      
+      {/* Background with enhanced diagonal gradient - optimized with transform-gpu */}
+      <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-transparent to-dark-bg/90 opacity-90 z-10 transform-gpu"></div>
       
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4">
