@@ -19,18 +19,33 @@ import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from "lucide-
 
 export function ContactSection() {
   const { toast } = useToast();
-  const [interests, setInterests] = useState<string[]>([]);
+  const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
+  const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const { language } = useLanguage();
   const t = useTranslation(language);
 
-  // Interest options with translation support
-  const interestOptions = [
-    { id: "snowmobile", label: language === "de" ? "Schneemobil Abenteuer" : language === "sv" ? "Snöskoter Äventyr" : "Snowmobile Adventure" },
-    { id: "dogsledding", label: language === "de" ? "Husky Schlittentour" : language === "sv" ? "Hundspann Tur" : "Husky Sledding Tour" },
-    { id: "northernlights", label: language === "de" ? "Polarlichter Expedition" : language === "sv" ? "Norrsken Expedition" : "Northern Lights Expedition" },
-    { id: "accommodation", label: language === "de" ? "Unterkunft" : language === "sv" ? "Boende" : "Accommodation" },
-    { id: "restaurant", label: language === "de" ? "Triple X Taste Restaurant" : language === "sv" ? "Triple X Taste Restaurang" : "Triple X Taste Restaurant" },
-    { id: "custompackage", label: language === "de" ? "Maßgeschneidertes Paket" : language === "sv" ? "Skräddarsytt Paket" : "Custom Package" },
+  // Packages with translation support
+  const packageOptions = [
+    { id: "arctic-adventure-week", label: language === "de" ? "Arctic Adventure (Woche)" : language === "sv" ? "Arctic Adventure (Vecka)" : "Arctic Adventure (Week)" },
+    { id: "arctic-adventure-weekend", label: language === "de" ? "Arctic Adventure (Wochenende)" : language === "sv" ? "Arctic Adventure (Helg)" : "Arctic Adventure (Weekend)" },
+    { id: "sideways-adventure-week", label: language === "de" ? "Sideways Adventure (Woche)" : language === "sv" ? "Sideways Adventure (Vecka)" : "Sideways Adventure (Week)" },
+    { id: "sideways-adventure-weekend", label: language === "de" ? "Sideways Adventure (Wochenende)" : language === "sv" ? "Sideways Adventure (Helg)" : "Sideways Adventure (Weekend)" },
+    { id: "performance-package-week", label: language === "de" ? "Performance Paket (Woche)" : language === "sv" ? "Performance Paket (Vecka)" : "Performance Package (Week)" },
+    { id: "performance-package-weekend", label: language === "de" ? "Performance Paket (Wochenende)" : language === "sv" ? "Performance Paket (Helg)" : "Performance Package (Weekend)" },
+    { id: "incentive-events", label: language === "de" ? "Incentive Events" : language === "sv" ? "Incentive Events" : "Incentive Events" },
+    { id: "customized-events", label: language === "de" ? "Maßgeschneiderte Events" : language === "sv" ? "Skräddarsydda Event" : "Customized Events" },
+  ];
+  
+  // Activities with translation support
+  const activityOptions = [
+    { id: "snowmobile-tour", label: language === "de" ? "Schneemobil Tour" : language === "sv" ? "Snöskoter Tur" : "Snowmobile Tour" },
+    { id: "husky-tour", label: language === "de" ? "Husky Tour" : language === "sv" ? "Husky Tur" : "Husky Tour" },
+    { id: "reindeer-visit", label: language === "de" ? "Rentier Besuch" : language === "sv" ? "Besök Renarna" : "Visit the Reindeers" },
+    { id: "snowshoe-hike", label: language === "de" ? "Schneeschuh Wanderung" : language === "sv" ? "Snösko Vandring" : "Snowshoe Hike" },
+    { id: "arctic-spa", label: language === "de" ? "Arctic Spa" : language === "sv" ? "Arctic Spa" : "Arctic Spa" },
+    { id: "restaurant", label: language === "de" ? "Jay Jays Restaurant" : language === "sv" ? "Jay Jays Restaurang" : "Jay Jays Restaurant" },
+    { id: "helicopter-flight", label: language === "de" ? "Hubschrauber Flüge" : language === "sv" ? "Helikopter Flygningar" : "Helicopter Flights" },
+    { id: "northern-lights", label: language === "de" ? "Nordlicht Jagd" : language === "sv" ? "Norrskensjakt" : "Northern Lights" },
   ];
 
   // Set up form with zod validation
@@ -58,7 +73,8 @@ export function ContactSection() {
         description: t.contact.successMessage,
       });
       form.reset();
-      setInterests([]);
+      setSelectedPackages([]);
+      setSelectedActivities([]);
     },
     onError: (error) => {
       toast({
@@ -73,16 +89,25 @@ export function ContactSection() {
   const onSubmit = (data: z.infer<typeof contactFormSchema>) => {
     mutation.mutate({
       ...data,
-      interests,
+      interests: [...selectedPackages, ...selectedActivities], // Combine both selections
     });
   };
 
-  // Handle interest checkbox changes
-  const handleInterestsChange = (checked: boolean, value: string) => {
+  // Handle package checkbox changes
+  const handlePackageChange = (checked: boolean, value: string) => {
     if (checked) {
-      setInterests(prev => [...prev, value]);
+      setSelectedPackages(prev => [...prev, value]);
     } else {
-      setInterests(prev => prev.filter(item => item !== value));
+      setSelectedPackages(prev => prev.filter(item => item !== value));
+    }
+  };
+  
+  // Handle activity checkbox changes
+  const handleActivityChange = (checked: boolean, value: string) => {
+    if (checked) {
+      setSelectedActivities(prev => [...prev, value]);
+    } else {
+      setSelectedActivities(prev => prev.filter(item => item !== value));
     }
   };
 
@@ -200,14 +225,36 @@ export function ContactSection() {
                     />
                     
                     <div>
-                      <FormLabel className="text-white">{t.contact.interests}</FormLabel>
+                      <FormLabel className="text-white">{language === "de" ? "Gewünschte Pakete" : language === "sv" ? "Önskade paket" : "Desired Packages"}</FormLabel>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                        {interestOptions.map((option) => (
+                        {packageOptions.map((option) => (
                           <div key={option.id} className="flex items-center space-x-2">
                             <Checkbox 
                               id={option.id} 
-                              checked={interests.includes(option.id)}
-                              onCheckedChange={(checked) => handleInterestsChange(checked as boolean, option.id)}
+                              checked={selectedPackages.includes(option.id)}
+                              onCheckedChange={(checked) => handlePackageChange(checked as boolean, option.id)}
+                              className="border-accent-color/50 data-[state=checked]:bg-accent-color data-[state=checked]:border-accent-color"
+                            />
+                            <label 
+                              htmlFor={option.id}
+                              className="text-sm cursor-pointer text-white text-opacity-90"
+                            >
+                              {option.label}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <FormLabel className="text-white">{language === "de" ? "Gewünschte Aktivitäten" : language === "sv" ? "Önskade aktiviteter" : "Desired Activities"}</FormLabel>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                        {activityOptions.map((option) => (
+                          <div key={option.id} className="flex items-center space-x-2">
+                            <Checkbox 
+                              id={option.id} 
+                              checked={selectedActivities.includes(option.id)}
+                              onCheckedChange={(checked) => handleActivityChange(checked as boolean, option.id)}
                               className="border-accent-color/50 data-[state=checked]:bg-accent-color data-[state=checked]:border-accent-color"
                             />
                             <label 
