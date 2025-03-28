@@ -90,25 +90,17 @@ export function LanguageSelector({ className }: { className?: string }) {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <Button
+        <div
           ref={buttonRef}
-          variant="ghost"
-          size="sm"
           style={buttonStyle}
           className={cn(
-            "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-all",
-            "bg-transparent border-none z-10",
+            "relative group inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg",
+            "transition-all duration-300 cursor-pointer",
+            "border-[1px] border-[rgba(var(--flag-primary-rgb),0.4)]",
+            "shadow-[0_0_10px_rgba(var(--flag-primary-rgb),0.1)]",
+            "hover:shadow-[0_0_15px_rgba(var(--flag-secondary-rgb),0.2)]",
             "backdrop-filter backdrop-blur-[2px]",
-            "ring-[2px] ring-transparent",
-            "before:absolute before:inset-0 before:rounded-lg before:z-[-1]",
-            "before:bg-gradient-to-r before:from-[var(--flag-primary)] before:via-[var(--flag-secondary)] before:to-[var(--flag-tertiary)]",
-            "before:bg-size-200 before:animate-[glow-outline_3s_ease_infinite] before:opacity-0",
-            "shadow-[0_0_10px_rgba(var(--flag-primary-rgb),0.2)]",
-            "hover:shadow-[0_0_15px_rgba(var(--flag-secondary-rgb),0.3)]",
-            "hover:before:opacity-[0.15] transition-all duration-300",
-            "after:absolute after:inset-0 after:rounded-lg after:border-[2px] after:border-[rgba(var(--flag-primary-rgb),0.5)]",
-            "after:bg-transparent after:z-[-1]",
-            "focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none",
+            "focus:outline-none",
             className
           )}
         >
@@ -146,7 +138,7 @@ export function LanguageSelector({ className }: { className?: string }) {
               style={{ color: flagColors[language as Language].secondary }}
             />
           </div>
-        </Button>
+        </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
