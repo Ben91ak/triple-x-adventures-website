@@ -11,8 +11,8 @@ export default function NotFound() {
 
   return (
     <div className="min-h-screen w-full relative">
-      {/* Unified animated background */}
-      <GlobalBackground />
+      {/* Enhanced starry night background with purple color scheme */}
+      <GlobalBackground colorScheme="purple" starDensity="dense" />
       
       {/* Content with proper z-index */}
       <div className="relative z-10 min-h-screen w-full flex items-center justify-center">

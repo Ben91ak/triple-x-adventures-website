@@ -59,8 +59,8 @@ export default function AdventureMapPage() {
 
   return (
     <div className="min-h-screen font-sans text-primary-text relative">
-      {/* Unified animated background for the entire page */}
-      <GlobalBackground />
+      {/* Enhanced starry night background with blue color scheme */}
+      <GlobalBackground intensity="high" colorScheme="blue" starDensity="dense" />
       
       {/* Main content with appropriate z-index */}
       <div className="relative z-10">

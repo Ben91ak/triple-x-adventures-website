@@ -3,6 +3,7 @@ import React, { useEffect, useRef, memo } from 'react';
 interface GlobalBackgroundProps {
   intensity?: 'low' | 'medium' | 'high';
   colorScheme?: 'default' | 'blue' | 'purple';
+  starDensity?: 'sparse' | 'medium' | 'dense';
 }
 
 /**
@@ -11,10 +12,12 @@ interface GlobalBackgroundProps {
  * 
  * @param intensity Controls animation intensity, useful for reducing on mobile
  * @param colorScheme Different color schemes for the Northern Lights effect
+ * @param starDensity Controls how many stars appear in the background
  */
 export const GlobalBackground = memo(function GlobalBackground({
   intensity = 'medium',
-  colorScheme = 'default'
+  colorScheme = 'default',
+  starDensity = 'medium'
 }: GlobalBackgroundProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -38,22 +41,34 @@ export const GlobalBackground = memo(function GlobalBackground({
     // Apply color scheme classes
     container.classList.remove('color-default', 'color-blue', 'color-purple');
     container.classList.add(`color-${colorScheme}`);
-  }, [intensity, colorScheme]);
+    
+    // Apply star density classes
+    container.classList.remove('stars-sparse', 'stars-medium', 'stars-dense');
+    container.classList.add(`stars-${starDensity}`);
+  }, [intensity, colorScheme, starDensity]);
 
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 overflow-hidden transform-gpu will-change-transform z-0 intensity-medium color-default" 
+      className="fixed inset-0 overflow-hidden transform-gpu will-change-transform z-0 intensity-medium color-default stars-medium" 
       aria-hidden="true"
     >
-      {/* Base gradient layer */}
+      {/* Base gradient layer with deep night sky effect */}
       <div className="absolute inset-0 transform-gpu" 
            style={{ 
-             background: "linear-gradient(180deg, #0A0D10 0%, #141A1F 50%, #0A0D10 100%)",
+             background: "linear-gradient(180deg, #050A11 0%, #0A1019 40%, #0A0D14 100%)",
              opacity: 1 
            }}>
         {/* Premium gradient overlay with subtle animation */}
         <div className="absolute inset-0 transform-gpu premium-dark-gradient opacity-80"></div>
+      </div>
+      
+      {/* Enhanced starry night background layer */}
+      <div className="absolute inset-0 transform-gpu">
+        <div className="stars-small absolute inset-0"></div>
+        <div className="stars-medium absolute inset-0"></div>
+        <div className="stars-large absolute inset-0"></div>
+        <div className="shooting-stars absolute inset-0"></div>
       </div>
       
       {/* Northern Lights effect - persists across the entire page */}
@@ -62,16 +77,15 @@ export const GlobalBackground = memo(function GlobalBackground({
         <div className="aurora-pillar"></div>
         <div className="aurora-pillar-2"></div>
         <div className="aurora-band"></div>
-        <div className="stars"></div>
       </div>
       
-      {/* Dark overlay for text contrast */}
+      {/* Dark overlay for text contrast - slightly reduced opacity for better star visibility */}
       <div className="absolute inset-0 bg-dark-bg transform-gpu" 
-           style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}></div>
+           style={{ backgroundColor: 'rgba(0, 0, 0, 0.35)' }}></div>
       
-      {/* Grid pattern overlay */}
+      {/* Subtle grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')] 
-           opacity-60 pointer-events-none transform-gpu"></div>
+           opacity-50 pointer-events-none transform-gpu"></div>
            
       {/* Additional atmospheric effects for premium feel */}
       <div className="absolute inset-0 opacity-20">

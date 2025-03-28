@@ -30,8 +30,8 @@ const SectionLoader = () => (
 const Home = memo(function Home() {
   return (
     <div className="font-opensans text-slate relative">
-      {/* Unified animated background for the entire page */}
-      <GlobalBackground />
+      {/* Enhanced unified animated background with starry night effect */}
+      <GlobalBackground intensity="high" starDensity="dense" />
       
       {/* Main content with appropriate z-index */}
       <div className="relative z-10">
