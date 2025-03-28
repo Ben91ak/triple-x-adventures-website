@@ -87,16 +87,27 @@ export function Header() {
                   { href: "#pakete", label: t.nav.packages },
                   { href: "#package-builder", label: "Build Your Adventure" },
                   { href: "#accommodations", label: t.nav.accommodations },
+                  { href: "/adventure-map", label: language === 'en' ? "Adventure Map" : language === 'de' ? "Abenteuerkarte" : "Äventyrskarta" },
                   { href: "#gallery", label: t.nav.gallery },
                   { href: "#contact", label: t.nav.contact }
                 ].map((item, index) => (
-                  <a 
-                    key={index}
-                    href={item.href} 
-                    className="relative px-2 lg:px-4 py-2 text-xs lg:text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
-                  >
-                    {item.label}
-                  </a>
+                  item.href.startsWith('#') ? (
+                    <a 
+                      key={index}
+                      href={item.href} 
+                      className="relative px-2 lg:px-4 py-2 text-xs lg:text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link 
+                      key={index}
+                      href={item.href} 
+                      className="relative px-2 lg:px-4 py-2 text-xs lg:text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
+                    >
+                      {item.label}
+                    </Link>
+                  )
                 ))}
               </div>
               
@@ -141,26 +152,47 @@ export function Header() {
               { href: "#pakete", label: t.nav.packages },
               { href: "#package-builder", label: "Build Your Adventure" },
               { href: "#accommodations", label: t.nav.accommodations },
+              { href: "/adventure-map", label: language === 'en' ? "Adventure Map" : language === 'de' ? "Abenteuerkarte" : "Äventyrskarta" },
               { href: "#gallery", label: t.nav.gallery },
               { href: "#contact", label: t.nav.contact }
             ].map((item, index) => (
-              <a 
-                key={index}
-                href={item.href} 
-                className="block px-4 py-3 rounded-lg hover:bg-accent-color/10 text-white hover:text-accent-color group transition-colors"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setMobileMenuOpen(false);
-                }}
-              >
-                <div className="flex items-center">
-                  <ChevronRight 
-                    size={18} 
-                    className="mr-3 text-accent-color group-hover:translate-x-1 transition-transform" 
-                  />
-                  <span className="font-medium text-base">{item.label}</span>
-                </div>
-              </a>
+              item.href.startsWith('#') ? (
+                <a 
+                  key={index}
+                  href={item.href} 
+                  className="block px-4 py-3 rounded-lg hover:bg-accent-color/10 text-white hover:text-accent-color group transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  <div className="flex items-center">
+                    <ChevronRight 
+                      size={18} 
+                      className="mr-3 text-accent-color group-hover:translate-x-1 transition-transform" 
+                    />
+                    <span className="font-medium text-base">{item.label}</span>
+                  </div>
+                </a>
+              ) : (
+                <Link 
+                  key={index}
+                  href={item.href} 
+                  className="block px-4 py-3 rounded-lg hover:bg-accent-color/10 text-white hover:text-accent-color group transition-colors"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  <div className="flex items-center">
+                    <ChevronRight 
+                      size={18} 
+                      className="mr-3 text-accent-color group-hover:translate-x-1 transition-transform" 
+                    />
+                    <span className="font-medium text-base">{item.label}</span>
+                  </div>
+                </Link>
+              )
             ))}
           </div>
         </div>
