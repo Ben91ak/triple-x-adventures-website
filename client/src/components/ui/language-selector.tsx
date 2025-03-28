@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Check, Globe, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,7 +14,22 @@ import { useTranslation } from "@/translations";
 export function LanguageSelector({ className }: { className?: string }) {
   const { language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const t = useTranslation(language);
+  
+  // Effect to remove focus from the button when language changes
+  useEffect(() => {
+    // Remove focus from any active element
+    const activeElement = document.activeElement as HTMLElement;
+    if (activeElement) {
+      activeElement.blur();
+    }
+    
+    // Also directly blur our button if it exists
+    if (buttonRef.current) {
+      buttonRef.current.blur();
+    }
+  }, [language]);
   
   // Flag emojis for each language
   const flags = {
@@ -59,6 +74,7 @@ export function LanguageSelector({ className }: { className?: string }) {
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button
+          ref={buttonRef}
           variant="ghost"
           size="sm"
           style={buttonStyle}
@@ -69,6 +85,7 @@ export function LanguageSelector({ className }: { className?: string }) {
             "after:bg-gradient-to-r after:from-[var(--flag-primary)] after:via-[var(--flag-secondary)] after:to-[var(--flag-tertiary)]",
             "after:bg-size-200 after:animate-[glow-outline_3s_ease_infinite] after:opacity-100 after:blur-[1px]",
             "after:will-change-[background-position,opacity] shadow-lg shadow-black/20",
+            "focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none",
             className
           )}
         >
@@ -92,12 +109,14 @@ export function LanguageSelector({ className }: { className?: string }) {
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => {
+            onClick={(e) => {
+              e.currentTarget.blur(); // Remove focus state immediately
               setLanguage(lang.code as Language);
               setOpen(false);
             }}
             className={cn(
               "flex items-center justify-between py-2.5 px-3 rounded-md cursor-pointer transition-all duration-200",
+              "focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none",
               language === lang.code 
                 ? `bg-opacity-10 border-l-2 text-white` 
                 : "hover:bg-white/5 border-l-2 border-transparent"
