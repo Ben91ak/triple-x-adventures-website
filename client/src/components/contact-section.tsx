@@ -94,7 +94,7 @@ export function ContactSection() {
         <div className="aurora-glow absolute inset-0 opacity-30"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-50" style={{ zIndex: 50 }}>
         <div className="text-center mb-16">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {language === 'de' ? 'Kontakt' : language === 'sv' ? 'Kontakt' : 'Contact Us'}
