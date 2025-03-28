@@ -50,6 +50,14 @@
       background: rgba(26, 29, 31, 0.85);
     }
   }
+}
+
+@layer utilities {
+  /* Utility for background size for animations */
+  .bg-size-200 {
+    background-size: 200% 200%;
+  }
+}
   
   /* Optimized glass button with conditional blur */
   .glass-button {
@@ -134,6 +142,10 @@
     overflow: hidden;
     will-change: transform;
   }
+
+/* Utility for background size for animations */
+.bg-size-200 {
+  background-size: 200% 200%;
 }
 
 /* Custom animation for gradient background */
@@ -226,6 +238,22 @@
 
 .text-shadow-lg {
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
+}
+
+/* Flag color glowing outline animation for language selector */
+@keyframes glow-outline {
+  0% {
+    opacity: 0.7;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 1;
+    background-position: 100% 50%;
+  }
+  100% {
+    opacity: 0.7;
+    background-position: 0% 50%;
+  }
 }
 
 /* Northern Lights inspired gradient - enhanced based on screenshot */

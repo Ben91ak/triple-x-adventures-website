@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, Globe, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,11 +23,37 @@ export function LanguageSelector({ className }: { className?: string }) {
     sv: "🇸🇪"
   };
   
+  // Flag colors for glow effects - these match the dominant colors of each flag
+  const flagColors = {
+    en: {
+      primary: "#012169", // Deep blue
+      secondary: "#C8102E", // Red
+      tertiary: "#FFFFFF", // White
+    },
+    de: {
+      primary: "#000000", // Black
+      secondary: "#DD0000", // Red
+      tertiary: "#FFCE00", // Gold
+    },
+    sv: {
+      primary: "#006AA7", // Blue
+      secondary: "#FECC00", // Yellow
+      tertiary: "#FFFFFF", // White
+    },
+  };
+  
   const languages = [
     { code: "en", label: t.language.en, flag: flags.en },
     { code: "de", label: t.language.de, flag: flags.de },
     { code: "sv", label: t.language.sv, flag: flags.sv },
   ];
+
+  // Create CSS variables for the glow animation
+  const buttonStyle = {
+    '--flag-primary': flagColors[language as Language].primary,
+    '--flag-secondary': flagColors[language as Language].secondary,
+    '--flag-tertiary': flagColors[language as Language].tertiary,
+  } as React.CSSProperties;
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -35,19 +61,23 @@ export function LanguageSelector({ className }: { className?: string }) {
         <Button
           variant="ghost"
           size="sm"
+          style={buttonStyle}
           className={cn(
-            "group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-secondary-text bg-card-bg/40 hover:bg-card-bg/80 rounded-lg border border-white/5 hover:border-white/10 transition-all",
+            "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-card-bg/60 hover:bg-card-bg/80 rounded-lg border border-white/10 transition-all",
+            "before:absolute before:inset-0 before:rounded-lg before:p-[1.5px] before:bg-gradient-to-r before:from-[var(--flag-primary)] before:via-[var(--flag-secondary)] before:to-[var(--flag-tertiary)]",
+            "before:opacity-70 before:blur-[1px] before:-z-10 shadow-lg shadow-black/20",
+            "before:bg-size-200 before:animate-[glow-outline_3s_ease_infinite] before:will-change-[opacity,background-position]",
             className
           )}
         >
           <div className="relative">
-            <Globe className="h-4 w-4 text-accent-color group-hover:scale-110 transition-transform" />
-            <div className="absolute h-2 w-2 rounded-full bg-accent-color -right-1 -top-1 scale-0 group-hover:scale-100 transition-transform"></div>
+            <Globe className="h-4 w-4 text-white group-hover:scale-110 transition-transform" />
+            <div className="absolute h-2 w-2 rounded-full bg-[var(--flag-secondary)] -right-1 -top-1 scale-0 group-hover:scale-100 transition-transform"></div>
           </div>
           
           <div className="flex items-center">
             <span className="hidden sm:inline ml-1 mr-1">{languages.find(lang => lang.code === language)?.label}</span>
-            <span className="inline sm:hidden uppercase">{language}</span>
+            <span className="inline sm:hidden uppercase font-bold">{language}</span>
             <ChevronDown className="h-3 w-3 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
           </div>
         </Button>
@@ -65,11 +95,15 @@ export function LanguageSelector({ className }: { className?: string }) {
               setOpen(false);
             }}
             className={cn(
-              "flex items-center justify-between py-2.5 px-3 rounded-md cursor-pointer",
+              "flex items-center justify-between py-2.5 px-3 rounded-md cursor-pointer transition-all duration-200",
               language === lang.code 
-                ? "bg-accent-color/10 text-accent-color border-l-2 border-accent-color" 
+                ? `bg-opacity-10 border-l-2 text-white` 
                 : "hover:bg-white/5 border-l-2 border-transparent"
             )}
+            style={language === lang.code ? {
+              backgroundColor: `${flagColors[lang.code as Language].secondary}20`,
+              borderLeftColor: flagColors[lang.code as Language].secondary,
+            } : {}}
           >
             <div className="flex items-center gap-2">
               <span className="text-base mr-1">{lang.flag}</span>
@@ -77,8 +111,18 @@ export function LanguageSelector({ className }: { className?: string }) {
               <span className="font-medium">{lang.label}</span>
             </div>
             {language === lang.code && (
-              <div className="h-5 w-5 rounded-full bg-accent-color/10 flex items-center justify-center">
-                <Check className="h-3 w-3" />
+              <div 
+                className="h-5 w-5 rounded-full flex items-center justify-center"
+                style={{
+                  backgroundColor: `${flagColors[lang.code as Language].primary}30`,
+                }}
+              >
+                <Check 
+                  className="h-3 w-3" 
+                  style={{
+                    color: flagColors[lang.code as Language].secondary
+                  }}
+                />
               </div>
             )}
           </DropdownMenuItem>
