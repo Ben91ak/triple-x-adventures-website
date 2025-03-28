@@ -591,7 +591,7 @@
   animation: auroraGlow 8s ease-in-out infinite alternate;
 }
 
-/* Stars background effect for package builder */
+/* Enhanced Stars background effect */
 .stars {
   background-image: 
     radial-gradient(1px 1px at 30px 30px, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
@@ -606,7 +606,93 @@
     radial-gradient(1px 1px at 325px 320px, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
   background-repeat: repeat;
   background-size: 350px 350px;
-  animation: starsTwinkle 5s ease-in-out infinite alternate;
+}
+
+/* Special aurora band animation for global background */
+.aurora-band {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 300%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0) 0%, 
+    rgba(164, 210, 51, 0.05) 20%, 
+    rgba(164, 210, 51, 0.1) 40%,
+    rgba(164, 210, 51, 0.2) 50%,
+    rgba(164, 210, 51, 0.1) 60%,
+    rgba(164, 210, 51, 0.05) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: auroraBand 30s linear infinite;
+  pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0) skewY(-5deg);
+}
+
+@keyframes auroraBand {
+  0% {
+    transform: translateX(0%) skewY(-5deg) translateZ(0);
+  }
+  100% {
+    transform: translateX(33.33%) skewY(-5deg) translateZ(0);
+  }
+}
+
+/* Particle effect for aurora texture */
+.aurora-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(164, 210, 51, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 70% 60%, rgba(164, 210, 51, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 50% 50%, rgba(164, 210, 51, 0.05) 0%, transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(164, 210, 51, 0.07) 0%, transparent 25%);
+  filter: blur(30px);
+  opacity: 0.5;
+  animation: floatParticles 15s ease-in-out infinite alternate;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@keyframes floatParticles {
+  0% {
+    transform: translateY(-2%) scale(1) translateZ(0);
+  }
+  100% {
+    transform: translateY(2%) scale(1.05) translateZ(0);
+  }
+}
+
+/* Additional glow pulse for sections */
+.section-pulse-glow {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(164, 210, 51, 0.2) 0%, transparent 70%);
+  filter: blur(40px);
+  opacity: 0;
+  animation: pulsateGlow 10s ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+@keyframes pulsateGlow {
+  0%, 100% {
+    transform: scale(0.8) translateZ(0);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.2) translateZ(0);
+    opacity: 0.3;
+  }
 }
 
 @keyframes starsTwinkle {
