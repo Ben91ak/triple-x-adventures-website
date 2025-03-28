@@ -39,8 +39,8 @@ export function AdventureMap() {
     });
   }, []);
 
-  // Center position of the map (Kiruna area)
-  const center: [number, number] = useMemo(() => [67.8558, 20.2253], []);
+  // Center position of the map (Arvidsjaur area)
+  const center: [number, number] = useMemo(() => [65.5905, 19.1791], []);
   
   // Create a function to handle marker click
   const handleMarkerClick = (id: number, coordinates: [number, number]) => {

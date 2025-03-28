@@ -48,9 +48,9 @@ export default function AdventureMapPage() {
       sv: "äventyrsplatser"
     },
     description: {
-      en: "Our adventure map showcases all the incredible locations where we offer our premium Arctic experiences. From the best Northern Lights viewing spots to our luxury accommodations and thrilling activity sites, this interactive guide will help you visualize your ultimate Swedish Lapland journey.",
-      de: "Unsere Abenteuerkarte zeigt alle unglaublichen Orte, an denen wir unsere erstklassigen arktischen Erlebnisse anbieten. Von den besten Aussichtspunkten für Nordlichter bis hin zu unseren Luxusunterkünften und aufregenden Aktivitätsorten - dieser interaktive Führer hilft Ihnen, Ihre ultimative Reise durch Schwedisch-Lappland zu visualisieren.",
-      sv: "Vår äventyrskarta visar alla otroliga platser där vi erbjuder våra förstklassiga arktiska upplevelser. Från de bästa platserna för att se norrsken till våra lyxiga boenden och spännande aktivitetsplatser - denna interaktiva guide hjälper dig att visualisera din ultimata resa genom svenska Lappland."
+      en: "Our adventure map showcases all the incredible locations in and around Arvidsjaur where we offer our premium Arctic experiences. From our main office at Storgatan 6F to Sameland restaurant and cabins at Karlavagnen 1, and our premium accommodations at Hotel Laponia - this interactive guide will help you visualize your ultimate Swedish Lapland journey.",
+      de: "Unsere Abenteuerkarte zeigt alle unglaublichen Orte in und um Arvidsjaur, an denen wir unsere erstklassigen arktischen Erlebnisse anbieten. Von unserem Hauptbüro in der Storgatan 6F bis zum Sameland Restaurant und den Hütten in der Karlavagnen 1 und unseren Premium-Unterkünften im Hotel Laponia - dieser interaktive Führer hilft Ihnen, Ihre ultimative Reise durch Schwedisch-Lappland zu visualisieren.",
+      sv: "Vår äventyrskarta visar alla otroliga platser i och runt Arvidsjaur där vi erbjuder våra förstklassiga arktiska upplevelser. Från vårt huvudkontor på Storgatan 6F till Sameland restaurang och stugor på Karlavagnen 1, och våra förstklassiga boenden på Hotel Laponia - denna interaktiva guide hjälper dig att visualisera din ultimata resa genom svenska Lappland."
     }
   };
 
@@ -98,9 +98,9 @@ export default function AdventureMapPage() {
           
           <div className="mt-8 p-4 bg-gray-900/40 backdrop-blur-sm rounded-lg border border-white/10">
             <p className="text-sm text-gray-400">
-              {language === 'en' ? 'Click on any marker to learn more about the location. The color indicates the type of location: green for accommodations, blue for experiences, and purple for natural landmarks.' : 
-               language === 'de' ? 'Klicken Sie auf einen beliebigen Marker, um mehr über den Ort zu erfahren. Die Farbe gibt die Art des Ortes an: Grün für Unterkünfte, Blau für Erlebnisse und Lila für natürliche Wahrzeichen.' :
-               'Klicka på en markör för att lära dig mer om platsen. Färgen indikerar typen av plats: grön för boenden, blå för upplevelser och lila för naturliga landmärken.'}
+              {language === 'en' ? 'Click on any marker to learn more about the location. The color indicates the type of location: green for accommodations, blue for experiences, and purple for points of interest.' : 
+               language === 'de' ? 'Klicken Sie auf einen beliebigen Marker, um mehr über den Ort zu erfahren. Die Farbe gibt die Art des Ortes an: Grün für Unterkünfte, Blau für Erlebnisse und Lila für Sehenswürdigkeiten.' :
+               'Klicka på en markör för att lära dig mer om platsen. Färgen indikerar typen av plats: grön för boenden, blå för upplevelser och lila för intressepunkter.'}
             </p>
           </div>
         </section>
