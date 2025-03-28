@@ -452,13 +452,7 @@
   }
 }
 
-/* Hero to intro section transition - simplified version without wave */
-.hero-transition-overlap {
-  margin-top: -120px; /* Reduced overlap since we removed the wave */
-  position: relative;
-  z-index: 40;
-  padding-top: 120px;
-}
+/* Hero to intro section transition - completely removed */
 
 /* Performance optimized animations */
 /* Main animation utility with reduced repaints */

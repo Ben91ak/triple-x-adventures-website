@@ -109,7 +109,7 @@ export function IntroductionSection() {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 relative hero-transition-overlap premium-dark-gradient">
+    <section id="about" className="py-24 md:py-32 relative premium-dark-gradient">
       {/* Premium dark gradient inspired by the screenshot */}
       <div className="stars absolute inset-0 z-1"></div>
       
