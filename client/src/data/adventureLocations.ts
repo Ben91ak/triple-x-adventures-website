@@ -12,7 +12,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 1,
     name: "Triple X Adventures Office",
-    coordinates: [65.5905, 19.1791], // Storgatan 6F, Arvidsjaur
+    coordinates: [65.5940, 19.1710], // Storgatan 6F, Arvidsjaur
     description: "Our main office in Arvidsjaur, where your Arctic adventure begins.",
     type: "landmark",
     image: "/images/basecamp.jpg",
@@ -20,7 +20,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 2,
     name: "Sameland & JayJay's Restaurant",
-    coordinates: [65.5829, 19.2023], // Karlavagnen 1, Arvidsjaur
+    coordinates: [65.6842, 19.2580], // Karlavagnen 1, Arvidsjaur
     description: "Our traditional restaurant and cabin area where you can enjoy authentic Swedish Lapland cuisine.",
     type: "accommodation",
     image: "/images/restaurant.jpg",
@@ -28,7 +28,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 3,
     name: "Triple X Cabins",
-    coordinates: [65.5828, 19.2025], // Karlavagnen 1, Arvidsjaur (slightly offset for visibility)
+    coordinates: [65.6840, 19.2582], // Karlavagnen 1, Arvidsjaur (slightly offset for visibility)
     description: "Comfortable cabins with traditional design, perfect for immersing yourself in the Arctic experience.",
     type: "accommodation",
     image: "/images/cabins.jpg",

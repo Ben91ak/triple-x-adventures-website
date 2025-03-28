@@ -40,7 +40,7 @@ export function AdventureMap() {
   }, []);
 
   // Center position of the map (Arvidsjaur area)
-  const center: [number, number] = useMemo(() => [65.5905, 19.1791], []);
+  const center: [number, number] = useMemo(() => [65.6391, 19.2145], []);
   
   // Create a function to handle marker click
   const handleMarkerClick = (id: number, coordinates: [number, number]) => {
@@ -75,7 +75,7 @@ export function AdventureMap() {
       <div className="h-[500px] w-full rounded-xl overflow-hidden border border-white/10 shadow-lg">
         <MapContainer 
           center={center} 
-          zoom={12} 
+          zoom={10} 
           style={{ height: '100%', width: '100%' }}
           zoomControl={false}
           attributionControl={false}
