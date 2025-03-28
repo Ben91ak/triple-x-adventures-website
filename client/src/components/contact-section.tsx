@@ -349,7 +349,7 @@ export function ContactSection() {
                 <h3 className="font-medium text-xl mb-6 text-white">
                   {t.contact.faq.title}
                 </h3>
-                <div className="space-y-6">
+                <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t.contact.faq.q1}</h4>
                     <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a1}</p>
@@ -361,6 +361,50 @@ export function ContactSection() {
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t.contact.faq.q3}</h4>
                     <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a3}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q4}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a4}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q5}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a5}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q6}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a6}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q7}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a7}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q8}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a8}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q9}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a9}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q10}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a10}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q11}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a11}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q12}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a12}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q13}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a13}</p>
+                  </div>
+                  <div>
+                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q14}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a14}</p>
                   </div>
                 </div>
               </div>
