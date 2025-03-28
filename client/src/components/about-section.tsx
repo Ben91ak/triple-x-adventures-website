@@ -208,24 +208,10 @@ export function AboutSection() {
 
   return (
     <section id="team" className="py-24 md:py-32 relative overflow-hidden">
-      {/* BASE LAYER - Optimized Background Solution */}
-      <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
-        {/* Enhanced background gradient */}
-        <div className="absolute inset-0 transform-gpu" style={{ 
-          background: "linear-gradient(180deg, #0A0D10 0%, #141A1F 50%, #0A0D10 100%)",
-          opacity: 1
-        }}>
-          {/* Premium gradient overlay with subtle animation */}
-          <div className="absolute inset-0 transform-gpu premium-dark-gradient opacity-80"></div>
-        </div>
-        
-        {/* Northern Lights effect */}
-        <div className="northern-lights-gradient absolute inset-0">
-          <div className="northern-glow"></div>
-          <div className="aurora-pillar"></div>
-          <div className="aurora-pillar-2"></div>
-          <div className="stars"></div>
-        </div>
+      {/* Using the global background - no need for section-specific background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+        {/* Simple glow effect to complement global background */}
+        <div className="aurora-glow absolute inset-0 opacity-30"></div>
       </div>
       
       {/* Removed dark overlay for consistency */}
