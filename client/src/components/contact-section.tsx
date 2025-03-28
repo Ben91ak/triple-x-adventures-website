@@ -88,13 +88,13 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Using the global background - no need for section-specific background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Simple glow effect to complement global background */}
-        <div className="aurora-glow absolute inset-0 opacity-30"></div>
+      {/* Using the global background - no section-specific background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu" style={{ zIndex: 1 }}>
+        {/* Enhanced aurora effect for better visibility */}
+        <div className="aurora-glow-strong absolute inset-0 opacity-30"></div>
       </div>
       
-      <div className="container mx-auto px-4 relative z-50" style={{ zIndex: 50 }}>
+      <div className="container mx-auto px-4 relative" style={{ zIndex: 10 }}>
         <div className="text-center mb-16">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {language === 'de' ? 'Kontakt' : language === 'sv' ? 'Kontakt' : 'Contact Us'}

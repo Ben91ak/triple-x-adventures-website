@@ -29,19 +29,14 @@ export function CTASection() {
 
   return (
     <section id="cta" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Using the global background - no need for section-specific background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Simple glow effect to complement global background */}
-        <div className="aurora-glow absolute inset-0 opacity-30"></div>
-      </div>
-      
-      {/* Enhanced aurora effect for better visibility instead of image */}
-      <div className="absolute inset-0 z-5 transform-gpu">
-        <div className="aurora-glow-strong absolute inset-0 opacity-40"></div>
+      {/* Using the global background - no section-specific background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu" style={{ zIndex: 1 }}>
+        {/* Enhanced aurora effect for better visibility instead of image */}
+        <div className="aurora-glow-strong absolute inset-0 opacity-50"></div>
       </div>
       
       {/* Content */}
-      <div className="relative z-50 container mx-auto px-4" style={{ zIndex: 50 }}>
+      <div className="relative container mx-auto px-4" style={{ zIndex: 10 }}>
         <div className="max-w-3xl mx-auto text-center">
           <div className="mb-8 inline-flex items-center justify-center">
             <span className="w-12 h-1 bg-accent-color rounded-full mr-3 transform-gpu"></span>
