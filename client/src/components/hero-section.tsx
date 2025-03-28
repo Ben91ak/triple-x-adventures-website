@@ -203,15 +203,16 @@ export function HeroSection() {
             </div>
             
             <h1 
-              className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-tight fade-in transform-gpu ${isTitleVisible ? 'visible' : ''}`}
+              className={`font-bold text-4xl sm:text-5xl md:text-7xl mb-4 md:mb-6 tracking-wider uppercase fade-in transform-gpu ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
               style={{ 
-                color: '#FFFFFF', 
+                color: '#555555', 
                 textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)',
-                WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)'
+                letterSpacing: '0.05em',
+                fontFamily: '"Montserrat", "Arial", sans-serif'
               }}
             >
-              TRIPLE <span style={{ color: 'rgb(149, 204, 47)' }}>X</span> ADVENTURES
+              TRIPLE <span style={{ color: 'rgb(149, 204, 47)', fontWeight: 'bolder' }}>X</span> <span style={{ color: 'rgb(149, 204, 47)', fontSize: '0.8em', letterSpacing: '0.15em' }}>ADVENTURES</span>
             </h1>
             
             <div 
@@ -254,15 +255,16 @@ export function HeroSection() {
           {/* Mobile-only content - optimized for performance */}
           <div className="md:hidden block transform-gpu">
             <h1 
-              className={`font-bold text-4xl sm:text-5xl mb-3 tracking-tight fade-in transform-gpu ${isTitleVisible ? 'visible' : ''}`}
+              className={`font-bold text-4xl sm:text-5xl mb-3 tracking-wider uppercase fade-in transform-gpu ${isTitleVisible ? 'visible' : ''}`}
               ref={titleRef as React.RefObject<HTMLHeadingElement>}
               style={{ 
-                color: '#FFFFFF', 
+                color: '#555555', 
                 textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)',
-                WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)'
+                letterSpacing: '0.05em',
+                fontFamily: '"Montserrat", "Arial", sans-serif'
               }}
             >
-              TRIPLE <span style={{ color: 'rgb(149, 204, 47)' }}>X</span> ADVENTURES
+              TRIPLE <span style={{ color: 'rgb(149, 204, 47)', fontWeight: 'bolder' }}>X</span> <span style={{ color: 'rgb(149, 204, 47)', fontSize: '0.7em', letterSpacing: '0.15em', display: 'block' }}>ADVENTURES</span>
             </h1>
             
             <div 
