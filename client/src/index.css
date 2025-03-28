@@ -256,6 +256,21 @@
   }
 }
 
+@keyframes glow-text {
+  0% {
+    opacity: 0.9;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 1;
+    background-position: 100% 50%;
+  }
+  100% {
+    opacity: 0.9;
+    background-position: 0% 50%;
+  }
+}
+
 /* Northern Lights inspired gradient - enhanced based on screenshot */
 .northern-lights-gradient {
   background: linear-gradient(180deg, #000000 0%, #050A0D 20%, #081015 45%, #070E10 75%, #000000 100%);

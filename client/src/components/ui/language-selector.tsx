@@ -79,25 +79,50 @@ export function LanguageSelector({ className }: { className?: string }) {
           size="sm"
           style={buttonStyle}
           className={cn(
-            "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-card-bg/60 hover:bg-card-bg/70 rounded-lg transition-all",
-            "border-[2px] border-transparent bg-clip-padding z-10",
+            "relative group flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg transition-all",
+            "border-[2px] border-transparent bg-transparent backdrop-blur-sm z-10",
             "after:absolute after:inset-[-2px] after:rounded-lg after:z-[-1]",
             "after:bg-gradient-to-r after:from-[var(--flag-primary)] after:via-[var(--flag-secondary)] after:to-[var(--flag-tertiary)]",
             "after:bg-size-200 after:animate-[glow-outline_3s_ease_infinite] after:opacity-100 after:blur-[1px]",
-            "after:will-change-[background-position,opacity] shadow-lg shadow-black/20",
+            "after:will-change-[background-position,opacity] shadow-lg shadow-black/5",
             "focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none",
+            "before:absolute before:inset-0 before:rounded-lg before:bg-black/20 before:-z-10 hover:before:bg-black/30",
             className
           )}
         >
           <div className="relative">
-            <Globe className="h-4 w-4 text-white group-hover:scale-110 transition-transform" />
+            <Globe 
+              className="h-4 w-4 group-hover:scale-110 transition-transform" 
+              style={{ color: flagColors[language as Language].secondary }}
+            />
             <div className="absolute h-2 w-2 rounded-full bg-[var(--flag-secondary)] -right-1 -top-1 scale-0 group-hover:scale-100 transition-transform"></div>
           </div>
           
           <div className="flex items-center">
-            <span className="hidden sm:inline ml-1 mr-1">{languages.find(lang => lang.code === language)?.label}</span>
-            <span className="inline sm:hidden uppercase font-bold">{language}</span>
-            <ChevronDown className="h-3 w-3 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
+            <span 
+              className="hidden sm:inline ml-1 mr-1 text-transparent font-medium bg-gradient-to-r from-[var(--flag-primary)] via-[var(--flag-secondary)] to-[var(--flag-tertiary)] bg-clip-text animate-[glow-text_3s_ease_infinite] will-change-opacity" 
+              style={{ 
+                WebkitBackgroundClip: "text",
+                backgroundSize: "200% auto",
+                textShadow: "0 0 5px rgba(255,255,255,0.1)" 
+              }}
+            >
+              {languages.find(lang => lang.code === language)?.label}
+            </span>
+            <span 
+              className="inline sm:hidden uppercase font-bold text-transparent bg-gradient-to-r from-[var(--flag-primary)] via-[var(--flag-secondary)] to-[var(--flag-tertiary)] bg-clip-text animate-[glow-text_3s_ease_infinite] will-change-opacity" 
+              style={{ 
+                WebkitBackgroundClip: "text",
+                backgroundSize: "200% auto",
+                textShadow: "0 0 5px rgba(255,255,255,0.1)" 
+              }}
+            >
+              {language}
+            </span>
+            <ChevronDown 
+              className="h-3 w-3 group-hover:rotate-180 transition-transform duration-300" 
+              style={{ color: flagColors[language as Language].secondary }}
+            />
           </div>
         </Button>
       </DropdownMenuTrigger>
