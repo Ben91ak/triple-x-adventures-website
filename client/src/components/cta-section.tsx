@@ -35,15 +35,10 @@ export function CTASection() {
         <div className="aurora-glow absolute inset-0 opacity-30"></div>
       </div>
       
-      {/* Subtle image overlay that won't conflict with the global background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15 z-5 transform-gpu"
-        style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1517299321609-52687d1bc55a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')"
-        }}
-      ></div>
-      
-      {/* Removed gradient overlay for consistency */}
+      {/* Enhanced aurora effect for better visibility instead of image */}
+      <div className="absolute inset-0 z-5 transform-gpu">
+        <div className="aurora-glow-strong absolute inset-0 opacity-40"></div>
+      </div>
       
       {/* Content */}
       <div className="relative z-50 container mx-auto px-4" style={{ zIndex: 50 }}>
@@ -56,11 +51,11 @@ export function CTASection() {
             <span className="w-12 h-1 bg-accent-color rounded-full ml-3 transform-gpu"></span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-text via-accent-color to-primary-text text-shadow-lg">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white text-shadow-lg" style={{ textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}>
             {content.title}
           </h2>
           
-          <p className="text-lg md:text-xl text-secondary-text mb-10 text-shadow-sm">
+          <p className="text-lg md:text-xl text-white mb-10 text-shadow-sm" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)' }}>
             {content.description}
           </p>
           

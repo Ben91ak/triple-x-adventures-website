@@ -707,6 +707,18 @@
   animation: auroraGlow 8s ease-in-out infinite alternate;
 }
 
+/* Stronger aurora effect for CTA section */
+.aurora-glow-strong {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(120, 255, 70, 0.3) 0%,
+    rgba(164, 210, 51, 0.2) 45%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  filter: blur(30px);
+  animation: auroraGlow 6s ease-in-out infinite alternate;
+}
+
 /* Enhanced starry background with multiple star layers and sizes */
 /* Small stars */
 .stars-small {
