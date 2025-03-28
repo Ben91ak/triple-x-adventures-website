@@ -269,17 +269,17 @@ const contentByLanguage = {
     error: "There was an error submitting your request. Please try again."
   },
   de: {
-    title: "GESTALTEN SIE IHR ABENTEUER",
-    subtitle: "Erstellen Sie Ihr perfektes arktisches Erlebnis, indem Sie die Elemente auswählen, die Ihnen am wichtigsten sind",
-    coreExperience: "1. Wählen Sie Ihr Kernerlebnis",
+    title: "GESTALTE DEIN ABENTEUER",
+    subtitle: "Erstelle dein perfektes arktisches Erlebnis, indem du die Elemente auswählst, die dir am wichtigsten sind",
+    coreExperience: "1. Wähle dein Kernerlebnis",
     accommodations: "2. Unterkunft hinzufügen",
     addOns: "3. Zusatzoptionen auswählen",
     perNight: "SEK/Nacht",
     estimatedTotal: "Geschätzte Gesamtsumme",
     requestBooking: "Buchung anfragen",
     // Form content
-    formTitle: "Vervollständigen Sie Ihre Abenteueranfrage",
-    formDescription: "Bitte geben Sie Ihre Daten an, um ein personalisiertes Angebot zu erhalten",
+    formTitle: "Vervollständige deine Abenteueranfrage",
+    formDescription: "Bitte gib deine Daten an, um ein personalisiertes Angebot zu erhalten",
     firstName: "Vorname",
     lastName: "Nachname",
     email: "E-Mail",
@@ -292,8 +292,8 @@ const contentByLanguage = {
     submit: "Anfrage senden",
     cancel: "Abbrechen",
     selectDeparture: "Abflughafen wählen",
-    success: "Abenteueranfrage erfolgreich übermittelt! Wir werden uns in Kürze mit Ihnen in Verbindung setzen.",
-    error: "Bei der Übermittlung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+    success: "Abenteueranfrage erfolgreich übermittelt! Wir werden uns in Kürze bei dir melden.",
+    error: "Bei der Übermittlung deiner Anfrage ist ein Fehler aufgetreten. Bitte versuche es erneut."
   },
   sv: {
     title: "SKAPA DITT ÄVENTYR",

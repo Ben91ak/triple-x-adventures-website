@@ -26,16 +26,16 @@ export const de = {
   
   // Accommodations Section
   accommodations: {
-    title: "ÜBERNACHTEN SIE BEI UNS",
+    title: "ÜBERNACHTE BEI UNS",
     subtitle: "Komfort in der Wildnis",
     viewAll: "Alle Unterkünfte ansehen",
   },
   
   // Restaurant Section
   restaurant: {
-    title: "SCHMECKEN SIE DIE ARKTIS",
+    title: "SCHMECKE DIE ARKTIS",
     subtitle: "Lokale Aromen & Herzliche Gastfreundschaft",
-    description: "Erleben Sie authentische nordische Küche mit frischen, lokalen Zutaten.",
+    description: "Erlebe authentische nordische Küche mit frischen, lokalen Zutaten.",
     menu: "Speisekarte anzeigen",
     book: "Tisch reservieren",
   },
@@ -51,13 +51,13 @@ export const de = {
   // Contact Section
   contact: {
     title: "MACHEN WIR DEN WINTER LEGENDÄR",
-    subtitle: "Bereit für ein echtes arktisches Erlebnis? Kontaktieren Sie uns, um Ihr Abenteuer zu planen",
+    subtitle: "Bereit für ein echtes arktisches Erlebnis? Kontaktiere uns, um dein Abenteuer zu planen",
     formTitle: "Kontakt",
     firstName: "Vorname",
     lastName: "Nachname",
     email: "E-Mail-Adresse",
     phone: "Telefonnummer",
-    visitDate: "Wann planen Sie Ihren Besuch?",
+    visitDate: "Wann planst du deinen Besuch?",
     visitDatePlaceholder: "Zeitraum auswählen",
     visitDateOptions: {
       decJan: "Dezember - Januar",
@@ -66,17 +66,17 @@ export const de = {
       other: "Andere / Noch nicht sicher",
     },
     interests: "Ich interessiere mich für (Mehrfachauswahl möglich)",
-    message: "Ihre Nachricht",
+    message: "Deine Nachricht",
     sending: "Wird gesendet...",
     send: "Nachricht senden",
     successTitle: "Nachricht Gesendet",
-    successMessage: "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.",
+    successMessage: "Wir haben deine Anfrage erhalten und werden uns in Kürze bei dir melden.",
     errorTitle: "Übermittlung Fehlgeschlagen",
-    errorMessage: "Bitte versuchen Sie es später noch einmal.",
+    errorMessage: "Bitte versuche es später noch einmal.",
     
     // Contact Info Section
     info: {
-      title: "Kontaktieren Sie uns",
+      title: "Kontaktiere uns",
       location: "Unser Standort",
       locationText: "Storgatan 6F, 93331 Arvidsjaur, Schwedisch Lappland, Schweden",
       phone: "Telefon",
@@ -96,34 +96,34 @@ export const de = {
       q2: "Wie komme ich nach Arvidsjaur?",
       a2: "Arvidsjaur hat einen eigenen Flughafen mit Verbindungen nach Stockholm. Wir bieten Transfers vom Flughafen zu unserem Standort an.",
       q3: "Benötige ich spezielle Ausrüstung?",
-      a3: "Wir stellen alle Spezialausrüstungen wie Thermoanzüge, Stiefel und Helme zur Verfügung. Bringen Sie einfach warme Grundbekleidung und Ihren Abenteuersinn mit!",
+      a3: "Wir stellen alle Spezialausrüstungen wie Thermoanzüge, Stiefel und Helme zur Verfügung. Bringe einfach warme Grundbekleidung und deinen Abenteuersinn mit!",
       q4: "Benötige ich einen gültigen Führerschein?",
-      a4: "Um einen Schneemobil zu fahren oder an unserem Auto-Drift-auf-Eis-Programm teilzunehmen, müssen Sie über 18 Jahre alt sein und einen gültigen Führerschein besitzen. Bitte haben Sie Ihren Führerschein immer dabei, da die Polizei die Gültigkeit des Führerscheins überprüfen kann.",
+      a4: "Um einen Schneemobil zu fahren oder an unserem Auto-Drift-auf-Eis-Programm teilzunehmen, musst du über 18 Jahre alt sein und einen gültigen Führerschein besitzen. Bitte habe deinen Führerschein immer dabei, da die Polizei die Gültigkeit des Führerscheins überprüfen kann.",
       q5: "Kann ich mein eigenes Schneemobil fahren?",
-      a5: "Ja, unsere Schneemobile sind alle einsitzig. Wenn Sie als Beifahrer an einer Tour teilnehmen möchten, informieren Sie bitte unser Team.",
+      a5: "Ja, unsere Schneemobile sind alle einsitzig. Wenn du als Beifahrer an einer Tour teilnehmen möchtest, informiere bitte unser Team.",
       q6: "Was ist, wenn mir kalt wird?",
-      a6: "Der Winter in Schwedisch-Lappland kann um die -20°C oder darunter liegen. Bitte stellen Sie sicher, dass Sie unsere Ausrüstung zu jeder Zeit tragen, wenn Sie draußen sind. Verschiedene Kleidungsschichten halten Sie warm. Wir sagen unsere Touren aufgrund der Kälte nicht ab.",
+      a6: "Der Winter in Schwedisch-Lappland kann um die -20°C oder darunter liegen. Bitte stelle sicher, dass du unsere Ausrüstung zu jeder Zeit trägst, wenn du draußen bist. Verschiedene Kleidungsschichten halten dich warm. Wir sagen unsere Touren aufgrund der Kälte nicht ab.",
       q7: "Wie viel Tageslicht haben wir?",
       a7: "Hier die verschiedenen Tageslichtzeiten in Arvidsjaur, Schweden: Mitte Dezember (10:48-14:23, 3Std 35Min), Mitte Januar (10:47-14:55, 4Std 8Min), Mitte Februar (09:10-16:47, 7Std 37Min), Mitte März (07:23-18:26, 11Std 3Min), Mitte April (05:26-20:06, 14Std 40Min).",
       q8: "Kann ich 'nur' eine Schneemobiltour buchen?",
-      a8: "Ja, Sie können jede Aktivität einzeln buchen. TXA ist auf Premium-Paketreisen spezialisiert und fokussiert, aber wir prüfen gerne unsere Terminpläne und unterbreiten Ihnen ein Angebot für einzelne Aktivitäten.",
+      a8: "Ja, du kannst jede Aktivität einzeln buchen. TXA ist auf Premium-Paketreisen spezialisiert und fokussiert, aber wir prüfen gerne unsere Terminpläne und unterbreiten dir ein Angebot für einzelne Aktivitäten.",
       q9: "Wann ist die beste Zeit, um die Aurora Borealis zu sehen?",
-      a9: "Die mystischen Nordlichter sind ein Naturspektakel und können daher nicht garantiert werden. Wenn die Bedingungen gut sind (Oktober - März, keine Wolken, hohe KP-Prognose), hoffen wir, dieses Phänomen mit Ihnen beobachten zu können.",
+      a9: "Die mystischen Nordlichter sind ein Naturspektakel und können daher nicht garantiert werden. Wenn die Bedingungen gut sind (Oktober - März, keine Wolken, hohe KP-Prognose), hoffen wir, dieses Phänomen mit dir beobachten zu können.",
       q10: "Was ist die beste Reisezeit?",
       a10: "Unsere Wintersaison läuft von Dezember bis April.",
       q11: "Was ist in den Premium-Paketen enthalten?",
-      a11: "Unsere Premium-Pakete beinhalten alles, vom ersten Angebot bis zur Nachbereitung der Events. Grundsätzlich muss nur der Alkohol vor Ort extra bezahlt werden. Schauen Sie sich unsere Premium-Paketbeispiele an!",
+      a11: "Unsere Premium-Pakete beinhalten alles, vom ersten Angebot bis zur Nachbereitung der Events. Grundsätzlich muss nur der Alkohol vor Ort extra bezahlt werden. Schau dir unsere Premium-Paketbeispiele an!",
       q12: "Was gibt es zu den Reiseinformationen zu sagen?",
-      a12: "Die Möglichkeiten, in den hohen Norden zu reisen, sind sehr begrenzt. Planen Sie daher immer genügend Zeit ein (mindestens 1 Std. 30 Min. vor Abflug). Denken Sie daran, Ihren gültigen Personalausweis oder Reisepass und Ihren Führerschein mitzubringen. Gepäck: 20 kg und 1 Handgepäckstück sind in Ihrem Ticket inbegriffen. In Arvidsjaur am Flughafen treffen Sie unser Team am Triple X Schalter in der Ankunftshalle. Die Flüge werden von Populair und den Chartergesellschaften PAS, Polar Flights und Prosky durchgeführt.",
+      a12: "Die Möglichkeiten, in den hohen Norden zu reisen, sind sehr begrenzt. Plane daher immer genügend Zeit ein (mindestens 1 Std. 30 Min. vor Abflug). Denke daran, deinen gültigen Personalausweis oder Reisepass und deinen Führerschein mitzubringen. Gepäck: 20 kg und 1 Handgepäckstück sind in deinem Ticket inbegriffen. In Arvidsjaur am Flughafen triffst du unser Team am Triple X Schalter in der Ankunftshalle. Die Flüge werden von Populair und den Chartergesellschaften PAS, Polar Flights und Prosky durchgeführt.",
       q13: "Was ist mit Haftungsausschlüssen?",
       a13: "Ein Haftungsausschluss wird vor Ort ausgestellt. Es gelten folgende Selbstbehalte: 2.200,00 EUR Schneemobil | 500,00 EUR Eis-Karts | 2.200,00 EUR Side-by-Sides | 7.500,00 EUR AUDI RS3.",
       q14: "Was ist mit der Versicherung?",
-      a14: "Reisen in ein fremdes Land kann mit verschiedenen Risiken verbunden sein. Egal, wie vorsichtig Sie sind. Seit der Gründung von Triple X im Jahr 2017 hatten wir keine schwerwiegenden Verletzungen, möchten aber darauf hinweisen, dass es zusätzliche Versicherungen gibt, die online gebucht werden können. Reiserücktrittsversicherung sowie Haftpflichtversicherung, die den Selbstbehalt im Schadensfall reduzieren kann. www.allianz-reiseversicherung.de. Der Fahrer unserer Fahrzeuge haftet für Schäden am Fahrzeug. Die maximale persönliche Haftung finden Sie in unserem Haftungsausschluss.",
+      a14: "Reisen in ein fremdes Land kann mit verschiedenen Risiken verbunden sein. Egal, wie vorsichtig du bist. Seit der Gründung von Triple X im Jahr 2017 hatten wir keine schwerwiegenden Verletzungen, möchten aber darauf hinweisen, dass es zusätzliche Versicherungen gibt, die online gebucht werden können. Reiserücktrittsversicherung sowie Haftpflichtversicherung, die den Selbstbehalt im Schadensfall reduzieren kann. www.allianz-reiseversicherung.de. Der Fahrer unserer Fahrzeuge haftet für Schäden am Fahrzeug. Die maximale persönliche Haftung findest du in unserem Haftungsausschluss.",
     },
     
     // Social Media Section
     social: {
-      title: "Folgen Sie uns",
+      title: "Folge uns",
     },
   },
   
