@@ -14,15 +14,17 @@ export default function AdventureMapPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Setup animations for page elements
+  // Setup animations for page elements with better defaults
   const { ref: headerRef, isVisible: headerInView } = useScrollAnimation({
     threshold: 0.1,
-    triggerOnce: true
+    triggerOnce: true,
+    initiallyVisible: true // Always show immediately
   });
 
   const { ref: mapRef, isVisible: mapInView } = useScrollAnimation({
     threshold: 0.1,
-    triggerOnce: true
+    triggerOnce: true,
+    animationDelay: 300 // Slight delay for staggered effect
   });
   
   // Translations
@@ -55,49 +57,107 @@ export default function AdventureMapPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-950 text-white">
+    <div className="min-h-screen flex flex-col font-sans text-primary-text">
       <Header />
       
       <main className="flex-grow">
-        {/* Hero section */}
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-          {/* Northern lights-inspired background effect */}
-          <div className="absolute inset-0 z-0 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-blue-950/40 via-purple-900/20 to-gray-950" />
-            <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_30%_20%,rgba(120,119,198,0.3)_0%,rgba(0,0,0,0)_60%)]" />
-            <div className="absolute inset-0 z-10 bg-[radial-gradient(circle_at_70%_60%,rgba(78,152,235,0.2)_0%,rgba(0,0,0,0)_60%)]" />
+        {/* Hero section with optimized Northern Lights effect */}
+        <section className="relative flex items-center justify-center text-primary-text pt-16 pb-12 overflow-hidden">
+          {/* BASE LAYER - Premium dark background with Northern Lights effect */}
+          <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 0 }}>
+            {/* Enhanced background gradient */}
+            <div className="absolute inset-0 transform-gpu" style={{ 
+              background: "linear-gradient(180deg, #0A0D10 0%, #141A1F 50%, #0A0D10 100%)",
+              opacity: 1
+            }}>
+              {/* Premium gradient overlay with subtle animation */}
+              <div className="absolute inset-0 transform-gpu premium-dark-gradient opacity-80"></div>
+            </div>
+            
+            {/* Northern Lights effect */}
+            <div className="northern-lights-gradient absolute inset-0">
+              <div className="northern-glow"></div>
+              <div className="aurora-pillar"></div>
+              <div className="aurora-pillar-2"></div>
+              <div className="stars"></div>
+            </div>
           </div>
           
-          <div 
-            ref={headerRef}
-            className={`relative z-10 max-w-5xl mx-auto text-center transition-all duration-1000 ease-out ${headerInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
-              {translations.pageTitle[language]}
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-200 mb-8">
-              {translations.pageSubtitle[language]}
-            </p>
-            <div className="inline-flex items-center px-4 py-2 bg-blue-600/20 backdrop-blur-sm rounded-full text-blue-200 mb-12">
-              <span className="font-semibold">{translations.locationCount[language]}</span>
-              <span className="mx-2 text-2xl font-bold text-white">{adventureLocations.length}</span>
-              <span>{translations.locationsText[language]}</span>
+          {/* Dark overlay for text contrast */}
+          <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.4)' }}></div>
+          
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 15 }}></div>
+          
+          {/* TOP LAYER - Content */}
+          <div className="container mx-auto px-4 relative z-50 py-12 transform-gpu" style={{ zIndex: 50 }}>
+            {/* Hero Content with animated entrance - optimized for performance */}
+            <div className="text-center max-w-4xl mx-auto transform-gpu">
+              <div
+                ref={headerRef}
+                className="transform-gpu"
+              >
+                <div 
+                  className={`mb-3 text-white text-sm font-medium tracking-wider uppercase text-shadow-lg fade-in transform-gpu ${headerInView ? 'visible' : ''}`}
+                  style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
+                >
+                  {language === 'en' ? 'INTERACTIVE' : language === 'de' ? 'INTERAKTIVE' : 'INTERAKTIV'}
+                </div>
+                
+                <h1 
+                  className={`font-bold text-4xl sm:text-5xl md:text-6xl mb-4 tracking-tight fade-in transform-gpu ${headerInView ? 'visible' : ''}`}
+                  style={{ 
+                    color: '#FFFFFF', 
+                    textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)',
+                    WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)'
+                  }}
+                >
+                  {translations.pageTitle[language]}
+                </h1>
+                
+                <p 
+                  className={`text-xl md:text-2xl text-white mb-6 text-shadow-md fade-in transform-gpu ${headerInView ? 'visible' : ''}`}
+                  style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
+                >
+                  {translations.pageSubtitle[language]}
+                </p>
+                
+                <div 
+                  className={`glass-card p-4 sm:p-6 mb-6 inline-flex items-center backdrop-blur-sm fade-in scale-up transform-gpu ${headerInView ? 'visible' : ''}`}
+                  style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)' }}
+                >
+                  <span className="font-semibold">{translations.locationCount[language]}</span>
+                  <span className="mx-2 text-2xl font-bold text-accent-color">{adventureLocations.length}</span>
+                  <span>{translations.locationsText[language]}</span>
+                </div>
+                
+                <div 
+                  className={`glass-card p-4 sm:p-6 md:p-8 mb-8 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up transform-gpu ${headerInView ? 'visible' : ''}`}
+                  style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(8px)' }}
+                >
+                  <p 
+                    className="mb-0 text-white text-sm md:text-base leading-relaxed transform-gpu"
+                  >
+                    {translations.description[language]}
+                  </p>
+                </div>
+              </div>
             </div>
-            <p className="max-w-3xl mx-auto text-gray-300 text-lg">
-              {translations.description[language]}
-            </p>
           </div>
         </section>
         
         {/* Map section */}
         <section 
           ref={mapRef}
-          className={`py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto transition-all duration-1000 ease-out ${mapInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+          className={`py-8 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative fade-in transform-gpu ${mapInView ? 'visible' : ''}`}
         >
+          {/* Background glow effect for map section */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-[600px] aurora-glow opacity-30 pointer-events-none z-0"></div>
+          
           <AdventureMap />
           
-          <div className="mt-8 p-4 bg-gray-900/40 backdrop-blur-sm rounded-lg border border-white/10">
-            <p className="text-sm text-gray-400">
+          <div className="mt-8 glass-card p-4 backdrop-blur-sm border border-white/10 shadow-lg">
+            <p className="text-sm text-secondary-text">
               {language === 'en' ? 'Click on any marker to learn more about the location. The color indicates the type of location: green for accommodations, blue for experiences, and purple for points of interest.' : 
                language === 'de' ? 'Klicken Sie auf einen beliebigen Marker, um mehr über den Ort zu erfahren. Die Farbe gibt die Art des Ortes an: Grün für Unterkünfte, Blau für Erlebnisse und Lila für Sehenswürdigkeiten.' :
                'Klicka på en markör för att lära dig mer om platsen. Färgen indikerar typen av plats: grön för boenden, blå för upplevelser och lila för intressepunkter.'}
