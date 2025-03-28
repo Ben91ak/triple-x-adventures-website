@@ -36,7 +36,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 4,
     name: "Hotel Laponia",
-    coordinates: [65.5881, 19.1684], // Storgatan 45, Arvidsjaur
+    coordinates: [65.5900, 19.1660], // Storgatan 45, Arvidsjaur
     description: "Modern hotel accommodations with all amenities for a comfortable stay in Swedish Lapland.",
     type: "accommodation",
     image: "/images/hotel.jpg",
@@ -44,7 +44,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 5,
     name: "Triple X Chalet",
-    coordinates: [65.5883, 19.1682], // Storgatan 45, Arvidsjaur (slightly offset for visibility)
+    coordinates: [65.5902, 19.1662], // Storgatan 45, Arvidsjaur (slightly offset for visibility)
     description: "Premium chalet with luxury amenities and breathtaking views of the surrounding landscape.",
     type: "accommodation",
     image: "/images/luxury-lodge.jpg",
