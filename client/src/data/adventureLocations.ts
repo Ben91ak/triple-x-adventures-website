@@ -20,7 +20,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 2,
     name: "Sameland & JayJay's Restaurant",
-    coordinates: [65.6842, 19.2580], // Karlavagnen 1, Arvidsjaur
+    coordinates: [65.5951, 19.1731], // Karlavagnen 1, Arvidsjaur - adjusted to be closer to town center
     description: "Our traditional restaurant and cabin area where you can enjoy authentic Swedish Lapland cuisine.",
     type: "accommodation",
     image: "/images/restaurant.jpg",
@@ -28,7 +28,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 3,
     name: "Triple X Cabins",
-    coordinates: [65.6840, 19.2582], // Karlavagnen 1, Arvidsjaur (slightly offset for visibility)
+    coordinates: [65.5953, 19.1735], // Karlavagnen 1, Arvidsjaur - adjusted and slightly offset for visibility
     description: "Comfortable cabins with traditional design, perfect for immersing yourself in the Arctic experience.",
     type: "accommodation",
     image: "/images/cabins.jpg",
@@ -52,7 +52,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 6,
     name: "Northern Lights Viewpoint",
-    coordinates: [65.5861, 19.1556],
+    coordinates: [65.5880, 19.1680],
     description: "Prime location for aurora borealis viewing with unobstructed views of the night sky.",
     type: "experience",
     image: "/images/northern-lights-spot.jpg",
@@ -60,7 +60,7 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 7,
     name: "Ice Fishing Experience",
-    coordinates: [65.5783, 19.1732],
+    coordinates: [65.5920, 19.1650],
     description: "Frozen lake perfect for traditional ice fishing experiences and winter activities.",
     type: "experience",
     image: "/images/ice-fishing.jpg",
@@ -68,42 +68,10 @@ export const adventureLocations: AdventureLocation[] = [
   {
     id: 8,
     name: "Arctic Forest Trail",
-    coordinates: [65.5935, 19.1877],
+    coordinates: [65.5935, 19.1700],
     description: "Scenic hiking trail through pristine Arctic forests with opportunities to spot local wildlife.",
     type: "experience",
     image: "/images/forest-trail.jpg",
-  },
-  {
-    id: 9,
-    name: "Traditional Sami Camp",
-    coordinates: [65.5814, 19.2145],
-    description: "Experience authentic Sami culture and traditions in this cultural immersion site.",
-    type: "experience",
-    image: "/images/sami-camp.jpg",
-  },
-  {
-    id: 10,
-    name: "Dog Sledding Trail Start",
-    coordinates: [65.5766, 19.1902],
-    description: "Starting point for our exhilarating dog sledding adventures through the winter landscape.",
-    type: "experience",
-    image: "/images/dog-sledding.jpg",
-  },
-  {
-    id: 11,
-    name: "Snowmobile Adventure Park",
-    coordinates: [65.5952, 19.1965],
-    description: "Thrilling snowmobile tracks and trails for all skill levels.",
-    type: "experience",
-    image: "/images/snowmobile-park.jpg",
-  },
-  {
-    id: 12,
-    name: "Arctic Wildlife Spotting Area",
-    coordinates: [65.6025, 19.1827],
-    description: "Area known for reindeer, moose, and arctic fox sightings with professional guides.",
-    type: "landmark",
-    image: "/images/wildlife-area.jpg",
   }
 ];
 

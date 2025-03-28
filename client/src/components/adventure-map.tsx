@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, CircleMarker, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { adventureLocations, typeLabels } from '@/data/adventureLocations';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -40,7 +40,7 @@ export function AdventureMap() {
   }, []);
 
   // Center position of the map (Arvidsjaur area)
-  const center: [number, number] = useMemo(() => [65.6391, 19.2145], []);
+  const center: [number, number] = useMemo(() => [65.5900, 19.1700], []);
   
   // Create a function to handle marker click
   const handleMarkerClick = (id: number, coordinates: [number, number]) => {
@@ -72,10 +72,10 @@ export function AdventureMap() {
       </div>
 
       {/* Map Container */}
-      <div className="h-[500px] w-full rounded-xl overflow-hidden border border-white/10 shadow-lg">
+      <div className="h-[600px] w-full rounded-xl overflow-hidden border border-white/10 shadow-lg">
         <MapContainer 
           center={center} 
-          zoom={10} 
+          zoom={14} 
           style={{ height: '100%', width: '100%' }}
           zoomControl={false}
           attributionControl={false}
@@ -91,7 +91,7 @@ export function AdventureMap() {
             <CircleMarker
               key={location.id}
               center={location.coordinates}
-              radius={6}
+              radius={8}
               pathOptions={{ 
                 fillColor: markerColors[location.type],
                 fillOpacity: 0.8,
@@ -103,6 +103,7 @@ export function AdventureMap() {
                 click: () => handleMarkerClick(location.id, location.coordinates)
               }}
             >
+
               <Popup>
                 <div className="text-black">
                   <h3 className="font-bold">{location.name}</h3>
@@ -115,6 +116,20 @@ export function AdventureMap() {
             </CircleMarker>
           ))}
         </MapContainer>
+      </div>
+
+      {/* Location names list */}
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        {adventureLocations.map(location => (
+          <div 
+            key={location.id} 
+            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-black/40 backdrop-blur-sm border border-white/10 cursor-pointer hover:bg-black/60 transition-colors"
+            onClick={() => handleMarkerClick(location.id, location.coordinates)}
+          >
+            <div className="w-4 h-4 rounded-full" style={{ backgroundColor: markerColors[location.type] }}></div>
+            <span className="text-sm font-medium">{location.name}</span>
+          </div>
+        ))}
       </div>
 
       {/* Selected location info card with animation */}
