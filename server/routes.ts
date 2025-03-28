@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { contactFormSchema, adventureFormSchema } from "@shared/schema";
 import { z } from "zod";
 import { ZodError } from "zod";
+import { sendContactEmail, sendAdventureEmail } from "./emailService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
@@ -25,6 +26,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         interests: validatedData.interests || [],
         message: validatedData.message || "",
       });
+
+      // Send email notification to info@triple-x-adventures.com
+      const emailResult = await sendContactEmail(submission);
+      
+      // Log email status for debugging
+      if (emailResult.success) {
+        console.log('Contact form email sent successfully');
+        if (emailResult.previewUrl) {
+          console.log('Email preview URL (for testing):', emailResult.previewUrl);
+        }
+      } else {
+        console.log('Failed to send contact form email:', emailResult.message);
+      }
 
       res.status(201).json({ 
         success: true, 
@@ -86,8 +100,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
         preferredLanguage: validatedData.preferredLanguage,
       });
 
-      // In a production app, here we would send an email notification
-      console.log(`New adventure package request from ${submission.firstName} ${submission.lastName}`);
+      // Send email notification to info@triple-x-adventures.com
+      const emailResult = await sendAdventureEmail(submission);
+      
+      // Log email status for debugging
+      if (emailResult.success) {
+        console.log(`New adventure package request from ${submission.firstName} ${submission.lastName}`);
+        console.log('Adventure form email sent successfully');
+        if (emailResult.previewUrl) {
+          console.log('Email preview URL (for testing):', emailResult.previewUrl);
+        }
+      } else {
+        console.log('Failed to send adventure form email:', emailResult.message);
+      }
 
       res.status(201).json({ 
         success: true, 
