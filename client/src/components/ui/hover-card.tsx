@@ -1,27 +1,119 @@
-import * as React from "react"
-import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
+import React, { useState } from 'react';
+import { AnimatedElement } from './animated-element';
 
-import { cn } from "@/lib/utils"
+interface HoverCardProps {
+  children: React.ReactNode;
+  hoverContent: React.ReactNode;
+  delay?: number;
+  position?: 'top' | 'right' | 'bottom' | 'left';
+  className?: string;
+  contentClassName?: string;
+  hoverContentClassName?: string;
+}
 
-const HoverCard = HoverCardPrimitive.Root
+/**
+ * HoverCard component that shows additional content on hover
+ * Uses micro-animations for smooth transitions
+ */
+export function HoverCard({
+  children,
+  hoverContent,
+  delay = 100,
+  position = 'top',
+  className = '',
+  contentClassName = '',
+  hoverContentClassName = '',
+}: HoverCardProps) {
+  const [isHovering, setIsHovering] = useState(false);
+  
+  // Position styles for the hover content
+  const getPositionStyles = () => {
+    switch (position) {
+      case 'top':
+        return 'bottom-full left-1/2 -translate-x-1/2 mb-2';
+      case 'right':
+        return 'left-full top-1/2 -translate-y-1/2 ml-2';
+      case 'bottom':
+        return 'top-full left-1/2 -translate-x-1/2 mt-2';
+      case 'left':
+        return 'right-full top-1/2 -translate-y-1/2 mr-2';
+      default:
+        return 'bottom-full left-1/2 -translate-x-1/2 mb-2';
+    }
+  };
+  
+  // Arrow position based on hover content position
+  const getArrowStyles = () => {
+    switch (position) {
+      case 'top':
+        return 'bottom-[-6px] left-1/2 -translate-x-1/2 border-t-white border-l-transparent border-r-transparent border-b-transparent';
+      case 'right':
+        return 'left-[-6px] top-1/2 -translate-y-1/2 border-r-white border-t-transparent border-b-transparent border-l-transparent';
+      case 'bottom':
+        return 'top-[-6px] left-1/2 -translate-x-1/2 border-b-white border-l-transparent border-r-transparent border-t-transparent';
+      case 'left':
+        return 'right-[-6px] top-1/2 -translate-y-1/2 border-l-white border-t-transparent border-b-transparent border-r-transparent';
+      default:
+        return 'bottom-[-6px] left-1/2 -translate-x-1/2 border-t-white border-l-transparent border-r-transparent border-b-transparent';
+    }
+  };
+  
+  return (
+    <div 
+      className={`relative inline-block ${className}`}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      {/* Main content */}
+      <div className={contentClassName}>
+        {children}
+      </div>
+      
+      {/* Hover content with animation */}
+      <AnimatedElement
+        animation="fade-in"
+        duration={200}
+        delay={delay}
+        isActive={isHovering}
+        trigger="manual"
+        className={`absolute z-50 pointer-events-none ${getPositionStyles()} ${hoverContentClassName}`}
+      >
+        <div className="bg-white text-black rounded-lg p-3 shadow-lg min-w-[150px] relative">
+          {/* Arrow element */}
+          <div 
+            className={`absolute w-0 h-0 border-[6px] ${getArrowStyles()}`} 
+            aria-hidden="true"
+          ></div>
+          
+          {hoverContent}
+        </div>
+      </AnimatedElement>
+    </div>
+  );
+}
 
-const HoverCardTrigger = HoverCardPrimitive.Trigger
-
-const HoverCardContent = React.forwardRef<
-  React.ElementRef<typeof HoverCardPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>
->(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
-  <HoverCardPrimitive.Content
-    ref={ref}
-    align={align}
-    sideOffset={sideOffset}
-    className={cn(
-      "z-50 w-64 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-      className
-    )}
-    {...props}
-  />
-))
-HoverCardContent.displayName = HoverCardPrimitive.Content.displayName
-
-export { HoverCard, HoverCardTrigger, HoverCardContent }
+/**
+ * A simpler version that just applies micro-animations on hover
+ * without displaying additional content
+ */
+export function HoverEffect({
+  children,
+  animation = 'hover-scale',
+  className = '',
+  ...props
+}: {
+  children: React.ReactNode;
+  animation?: 'hover-scale' | 'hover-lift' | 'hover-glow' | 'pulse-soft' | 'float';
+  className?: string;
+  [key: string]: any;
+}) {
+  return (
+    <AnimatedElement
+      hoverAnimation={animation}
+      className={className}
+      {...props}
+    >
+      {children}
+    </AnimatedElement>
+  );
+}

@@ -151,4 +151,16 @@ export const de = {
     message: "Die gesuchte Seite existiert nicht oder wurde verschoben.",
     returnHome: "Zurück zur Startseite",
   },
+  
+  // Animations Showcase
+  animationsShowcase: {
+    title: "Interaktive Elemente",
+    description: "Entdecken Sie unsere Premium-Mikrointeraktionen und Animationen, die Ihr arktisches Abenteuererlebnis verbessern.",
+    entranceAnimations: "Eingangsanimationen",
+    hoverAnimations: "Hover-Effekte",
+    continuousAnimations: "Kontinuierliche Animationen",
+    hoverCards: "Interaktive Informationen",
+    staggeredAnimations: "Sequenzierte Elemente",
+    specialEffects: "Spezialeffekte",
+  },
 };

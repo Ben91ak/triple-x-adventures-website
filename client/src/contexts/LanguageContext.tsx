@@ -7,7 +7,7 @@ type LanguageContextType = {
   setLanguage: (lang: Language) => void;
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   // Try to get the language from localStorage, default to 'de' if not found

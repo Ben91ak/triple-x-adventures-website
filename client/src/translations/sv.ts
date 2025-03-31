@@ -151,4 +151,16 @@ export const sv = {
     message: "Sidan du letar efter finns inte eller har flyttats.",
     returnHome: "Återgå till startsidan",
   },
+  
+  // Animations Showcase
+  animationsShowcase: {
+    title: "Interaktiva Element",
+    description: "Utforska våra förstklassiga mikrointeraktioner och animationer som förbättrar din arktiska äventyrsupplevelse.",
+    entranceAnimations: "Introduktionsanimationer",
+    hoverAnimations: "Svävningseffekter",
+    continuousAnimations: "Kontinuerliga Animationer",
+    hoverCards: "Interaktiv Information",
+    staggeredAnimations: "Sekvenserade Element",
+    specialEffects: "Specialeffekter",
+  },
 };

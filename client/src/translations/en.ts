@@ -151,4 +151,16 @@ export const en = {
     message: "The page you're looking for doesn't exist or has been moved.",
     returnHome: "Return to Homepage",
   },
+  
+  // Animations Showcase
+  animationsShowcase: {
+    title: "Interactive Elements",
+    description: "Explore our premium micro-interactions and animations that enhance your Arctic adventure experience.",
+    entranceAnimations: "Entrance Animations",
+    hoverAnimations: "Hover Effects",
+    continuousAnimations: "Continuous Animations",
+    hoverCards: "Interactive Information",
+    staggeredAnimations: "Sequenced Elements",
+    specialEffects: "Special Effects",
+  },
 };
