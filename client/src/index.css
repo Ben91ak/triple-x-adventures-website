@@ -149,6 +149,13 @@
   background-size: 200% 200%;
 }
 
+/* Aurora animation for button hover effects */
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Custom animation for gradient background */
 .bg-gradient-animated {
   background: linear-gradient(120deg, #0F1112, #1E293B, #0F1112, #1A271A);

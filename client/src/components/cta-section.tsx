@@ -55,39 +55,22 @@ export function CTASection() {
           </p>
           
           <div className="group relative inline-block transform-gpu overflow-hidden rounded-lg">
-            {/* Simple single aurora effect that only appears on hover */}
-            <span className="absolute inset-0 bg-gradient-to-r from-[#4ADE80]/10 via-[#2DD4BF]/20 to-[#38BDF8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" 
+            {/* Northern Lights static gradient overlay (always visible) */}
+            <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-[rgba(45,212,191,0.1)] via-[rgba(74,222,128,0.15)] to-[rgba(56,189,248,0.1)]"></span>
+            
+            {/* Northern Lights animated gradient - visible on hover */}
+            <span 
+              className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               style={{
+                background: 'linear-gradient(90deg, rgba(74,222,128,0.3), rgba(74,222,128,0.6), rgba(45,212,191,0.5), rgba(74,222,128,0.3))',
                 backgroundSize: '300% 100%',
-                animation: 'none', 
-                transitionProperty: 'opacity, background-position',
-                animationPlayState: 'paused'
-              }}
-              onMouseEnter={(e) => {
-                // Start the animation only on hover
-                e.currentTarget.style.animation = 'aurora 15s ease infinite';
-                e.currentTarget.style.animationPlayState = 'running';
-              }}
-              onMouseLeave={(e) => {
-                // Pause the animation when not hovering
-                e.currentTarget.style.animationPlayState = 'paused';
+                animation: 'aurora 3s ease infinite'
               }}
             ></span>
-            
-            {/* Northern lights wave glow that slides up on hover */}
-            <span className="absolute inset-0 bg-gradient-to-t from-transparent via-[#4ADE80]/10 to-transparent translate-y-full group-hover:translate-y-0 transition-all duration-1000 transform-gpu"
-              style={{
-                transformOrigin: 'bottom',
-                transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)'
-              }}
-            ></span>
-            
-            {/* Subtle border glow on hover */}
-            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 shadow-[0_0_8px_1px_rgba(164,210,51,0.3)] transition-all duration-500"></span>
             
             <a 
               href="#contact" 
-              className="glass-button inline-flex items-center gap-2 px-10 py-4 relative border border-accent-color/20 group-hover:border-accent-color/50 transition-all duration-500 transform-gpu z-10"
+              className="glass-button inline-flex items-center gap-2 px-10 py-4 relative border border-[#A4D233]/60 group-hover:border-[#A4D233] group-hover:shadow-[0_0_12px_2px_rgba(164,210,51,0.4)] transition-all duration-300 transform-gpu z-10"
             >
               <span className="text-shadow-sm relative z-10">{content.buttonText}</span>
               <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
