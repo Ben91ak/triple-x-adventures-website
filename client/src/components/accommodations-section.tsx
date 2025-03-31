@@ -186,8 +186,8 @@ export function AccommodationsSection() {
               {/* Decorative background element - enhanced for featured property */}
               <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/60 to-purple-600/60 rounded-xl blur-xl opacity-20 group-hover:opacity-80 transition-all duration-700"></div>
               
-              {/* Coming Soon badge */}
-              <div className="absolute top-6 right-6 z-20">
+              {/* Coming Soon badge - moved to left corner on the image */}
+              <div className="absolute top-6 left-6 z-20">
                 <div className="relative">
                   <span className="flex items-center gap-2 bg-gradient-to-r from-accent-color to-purple-600 text-white px-5 py-3 rounded-full font-bold text-sm uppercase tracking-widest shadow-xl border border-white/20 backdrop-blur-sm animate-pulse">
                     <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
