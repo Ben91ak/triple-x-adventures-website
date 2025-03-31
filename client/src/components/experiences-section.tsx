@@ -101,6 +101,32 @@ const experiencesByLanguage = {
         "/images/Drifting.jpg",
       ],
       fullDescription: "Feel the exhilaration of sliding sideways on ice in our Ice Drifting Experience. Under the guidance of professional driving instructors, you'll learn the techniques of controlling a vehicle in extreme winter conditions. Using specially prepared performance cars equipped with studded tires, you'll practice drifting techniques on our purpose-built ice course. Start with basic exercises and progress to more complex maneuvers as your confidence grows. This experience is perfect for driving enthusiasts looking to improve their winter driving skills in a safe and controlled environment. All drivers receive thorough instruction and have the opportunity for multiple driving sessions to perfect their technique."
+    },
+    {
+      id: 8,
+      title: "Ice Fishing Adventure",
+      description: "Try your hand at traditional ice fishing on a frozen lake. Learn techniques from expert guides and enjoy your fresh catch cooked over an open fire.",
+      price: 1295,
+      image: "/images/Ice-Fishing.jpg",
+      gallery: [
+        "/images/Ice-Fishing.jpg",
+      ],
+      fullDescription: "Experience the peaceful tradition of ice fishing in the heart of Lapland's winter wonderland. Your adventure begins with a snowmobile or snowshoe journey to a secluded frozen lake surrounded by pristine forest scenery. Our experienced guides will teach you traditional ice fishing techniques and help you drill holes in the thick ice. As you wait for Arctic fish species like perch and Arctic char to bite, warm yourself by a crackling fire and listen to tales of local fishing traditions. This mindful experience connects you with nature while enjoying the serene beauty of the Arctic wilderness. The highlight of the tour is enjoying your fresh catch, prepared and cooked by your guide over an open fire - the ultimate wild food experience."
+    },
+    {
+      id: 9,
+      title: "Side-by-Side Buggy Adventure",
+      description: "Navigate snow-covered terrain in a powerful all-terrain buggy. Experience the thrill of drifting and exploring untouched winter landscapes.",
+      price: 1895,
+      image: "/images/Side-By-Side-Buggy-Drifting.jpg",
+      gallery: [
+        "/images/Side-By-Side-Buggy-Drifting.jpg",
+      ],
+      fullDescription: "Experience the ultimate Arctic off-road adventure in our powerful side-by-side buggies. These specialized all-terrain vehicles are designed to conquer the challenging winter landscape with ease, allowing you to access remote areas and enjoy the pristine wilderness. After a comprehensive safety briefing, you'll take the wheel of your own buggy and follow our expert guides along specially designed trails through forests, across frozen lakes, and over snowy hills. Feel the exhilaration as you drift around corners and power through snow drifts in these agile, responsive vehicles. The tour includes stops at scenic viewpoints and a wilderness lunch break. This adventure offers a perfect blend of excitement and natural beauty, suitable for drivers of all skill levels.",
+      tag: {
+        text: "New",
+        type: "new" as "new"
+      }
     }
   ],
   de: [
@@ -181,6 +207,30 @@ const experiencesByLanguage = {
       gallery: [
         "/images/Drifting.jpg",
       ]
+    },
+    {
+      id: 8,
+      title: "Eisangeln Abenteuer",
+      description: "Versuchen Sie sich im traditionellen Eisangeln auf einem gefrorenen See. Lernen Sie Techniken von Experten und genießen Sie Ihren frischen Fang, zubereitet über offenem Feuer.",
+      price: 1295,
+      image: "/images/Ice-Fishing.jpg",
+      gallery: [
+        "/images/Ice-Fishing.jpg",
+      ]
+    },
+    {
+      id: 9,
+      title: "Side-by-Side Buggy Abenteuer",
+      description: "Navigieren Sie durch schneebedecktes Gelände in einem leistungsstarken Geländefahrzeug. Erleben Sie den Nervenkitzel des Driftens und erkunden Sie unberührte Winterlandschaften.",
+      price: 1895,
+      image: "/images/Side-By-Side-Buggy-Drifting.jpg",
+      gallery: [
+        "/images/Side-By-Side-Buggy-Drifting.jpg",
+      ],
+      tag: {
+        text: "Neu",
+        type: "new" as "new"
+      }
     }
   ],
   sv: [
@@ -261,6 +311,30 @@ const experiencesByLanguage = {
       gallery: [
         "/images/Drifting.jpg",
       ]
+    },
+    {
+      id: 8,
+      title: "Pimpelfiske Äventyr",
+      description: "Prova på traditionellt pimpelfiske på en frusen sjö. Lär dig tekniker från expertguider och njut av din nyfångade fisk tillagad över öppen eld.",
+      price: 1295,
+      image: "/images/Ice-Fishing.jpg",
+      gallery: [
+        "/images/Ice-Fishing.jpg",
+      ]
+    },
+    {
+      id: 9,
+      title: "Side-by-Side Buggy Äventyr",
+      description: "Navigera i snötäckt terräng i en kraftfull terrängbuggy. Upplev spänningen med att drifta och utforska orörda vinterlandskap.",
+      price: 1895,
+      image: "/images/Side-By-Side-Buggy-Drifting.jpg",
+      gallery: [
+        "/images/Side-By-Side-Buggy-Drifting.jpg",
+      ],
+      tag: {
+        text: "Ny",
+        type: "new" as "new"
+      }
     }
   ]
 };
