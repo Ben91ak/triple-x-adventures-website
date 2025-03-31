@@ -188,9 +188,13 @@ export function AccommodationsSection() {
               
               {/* Coming Soon badge */}
               <div className="absolute top-6 right-6 z-20">
-                <span className="bg-accent-color text-white px-4 py-2 rounded-full font-semibold text-sm uppercase tracking-wide shadow-lg">
-                  {language === 'de' ? 'Demnächst' : language === 'sv' ? 'Kommer snart' : 'Coming Soon'}
-                </span>
+                <div className="relative">
+                  <span className="flex items-center gap-2 bg-gradient-to-r from-accent-color to-purple-600 text-white px-5 py-3 rounded-full font-bold text-sm uppercase tracking-widest shadow-xl border border-white/20 backdrop-blur-sm animate-pulse">
+                    <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
+                    {language === 'de' ? 'Demnächst' : language === 'sv' ? 'Kommer snart' : 'Coming Soon'}
+                  </span>
+                  <span className="absolute inset-0 bg-accent-color/20 rounded-full blur-lg -z-10"></span>
+                </div>
               </div>
               
               {/* Card - larger for featured property */}
