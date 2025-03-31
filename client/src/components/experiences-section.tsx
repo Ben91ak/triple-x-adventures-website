@@ -459,10 +459,7 @@ function ExperienceDetailModal({
               </div>
             )}
             
-            {/* Price tag */}
-            <div className="absolute top-4 right-16 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-accent-color/30">
-              <span className="font-semibold text-white">{experience.price.toLocaleString()} SEK</span>
-            </div>
+            {/* Price tag removed as requested */}
             
             {/* Bestseller/New tag */}
             {experience.tag && (
@@ -649,7 +646,7 @@ export function ExperiencesSection() {
               <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-md transform-gpu will-change-opacity"></div>
               
               <div className="glass-card relative z-10 overflow-hidden bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-xl hover:shadow-lg hover:border-accent-color/30 hover:shadow-accent-color/10 transition-all duration-300 transform-gpu">
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-[225px] overflow-hidden">
                   {/* Image with overlay */}
                   <img 
                     src={experience.image} 
@@ -660,10 +657,7 @@ export function ExperiencesSection() {
                   {/* Dark gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
                   
-                  {/* Price tag */}
-                  <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-accent-color/30">
-                    <span className="font-semibold text-white">{experience.price.toLocaleString()} SEK</span>
-                  </div>
+                  {/* Price tag removed as requested */}
                   
                   {/* Bestseller/New tag */}
                   {experience.tag && (
@@ -681,19 +675,14 @@ export function ExperiencesSection() {
                   )}
                 </div>
                 
-                <div className="p-6">
+                <div className="p-6 flex flex-col h-[220px]">
                   <h3 className="font-bold text-xl mb-3 text-white group-hover:text-accent-color transition-colors">
                     {experience.title}
                   </h3>
-                  <p className="mb-5 text-white text-opacity-80 text-sm">
+                  <p className="mb-5 text-white text-opacity-80 text-sm flex-grow overflow-y-auto">
                     {experience.description}
                   </p>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <span className="text-xs text-white text-opacity-70">
-                        {language === 'de' ? 'Ab' : language === 'sv' ? 'Från' : 'From'}
-                      </span>
-                    </div>
+                  <div className="flex justify-end items-center mt-auto">
                     <button 
                       onClick={() => openExperienceDetail(experience)}
                       className="inline-flex items-center gap-1.5 text-accent-color hover:text-white transition-colors font-medium text-sm"
