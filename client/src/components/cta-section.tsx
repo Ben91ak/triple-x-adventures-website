@@ -70,17 +70,15 @@ export function CTASection() {
             
             <a 
               href="#contact" 
-              className="glass-button inline-flex items-center gap-2 px-10 py-4 relative border border-[#A4D233]/60 transition-all duration-300 transform-gpu z-10"
+              className="glass-button inline-flex items-center gap-2 px-10 py-4 relative transition-all duration-300 transform-gpu z-10"
               style={{
-                boxShadow: '0 0 0 1px rgba(164, 210, 51, 0.1)'
+                boxShadow: '0 0 0 1px rgba(164, 210, 51, 0.6)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 0 1px rgba(164, 210, 51, 0.8), 0 0 12px 2px rgba(164, 210, 51, 0.4)';
-                e.currentTarget.style.borderColor = '#A4D233';
+                e.currentTarget.style.boxShadow = '0 0 0 1px rgba(164, 210, 51, 0), 0 0 12px 2px rgba(164, 210, 51, 0.4)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 0 1px rgba(164, 210, 51, 0.1)';
-                e.currentTarget.style.borderColor = 'rgba(164, 210, 51, 0.6)';
+                e.currentTarget.style.boxShadow = '0 0 0 1px rgba(164, 210, 51, 0.6)';
               }}
             >
               <span className="text-shadow-sm relative z-10">{content.buttonText}</span>
