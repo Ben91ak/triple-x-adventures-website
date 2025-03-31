@@ -145,6 +145,15 @@ export default {
           '50%': { backgroundPosition: '100% 50%' },
           '100%': { backgroundPosition: '0% 50%' },
         },
+        'northern-wave': {
+          '0%': { transform: 'translateY(100%) scaleY(1)', opacity: '0.5' },
+          '50%': { transform: 'translateY(0%) scaleY(1.2)', opacity: '0.8' },
+          '100%': { transform: 'translateY(-100%) scaleY(1)', opacity: '0.5' },
+        },
+        'twinkle': {
+          '0%, 100%': { opacity: '0.2', transform: 'scale(0.8)' },
+          '50%': { opacity: '1', transform: 'scale(1.2)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -163,6 +172,8 @@ export default {
         'spin-slow': 'spin-slow 8s linear infinite',
         'bounce-slight': 'bounce-slight 2s ease-in-out infinite',
         'aurora': 'aurora 10s ease infinite',
+        'northern-wave': 'northern-wave 8s ease-in-out infinite',
+        'twinkle': 'twinkle 2s ease-in-out infinite',
       },
       scale: {
         '102': '1.02',
