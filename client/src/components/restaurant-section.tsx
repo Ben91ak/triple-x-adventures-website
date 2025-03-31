@@ -102,32 +102,32 @@ export function RestaurantSection() {
             <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
             
             <div className="relative z-10 transform-gpu h-full glass-card border border-white/10 shadow-lg rounded-xl overflow-hidden flex flex-col">
-              <div className="overflow-hidden">
+              <div className="overflow-hidden flex-grow-0">
                 <img 
                   src="/images/restaurant/dining-area.jpg" 
                   alt={content.imageAlt1} 
-                  className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105 transform-gpu"
+                  className="w-full h-[320px] object-cover object-center transition-transform duration-500 group-hover:scale-105 transform-gpu"
                   loading="eager"
                   width="600"
                   height="400"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4 p-6">
-                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu">
+              <div className="grid grid-cols-2 gap-4 p-6 flex-1">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu h-40">
                   <img 
                     src="/images/restaurant/dish.jpg" 
                     alt={content.imageAlt2} 
-                    className="w-full h-32 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
+                    className="w-full h-full object-cover object-center rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
                     width="300"
                     height="200"
                   />
                 </div>
-                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu h-40">
                   <img 
                     src="/images/restaurant/meat-preparation.jpg" 
                     alt={content.imageAlt3} 
-                    className="w-full h-32 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
+                    className="w-full h-full object-cover object-center rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
                     width="300"
                     height="200"
