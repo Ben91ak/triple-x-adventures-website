@@ -97,27 +97,27 @@ export function RestaurantSection() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Left column - Images with glass effect borders - optimized for performance */}
-          <div className="group relative transform-gpu">
+          <div className="group relative transform-gpu h-full flex flex-col">
             {/* Decorative background element - optimized with reduced blur and transform-gpu */}
             <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
             
-            <div className="relative z-10 transform-gpu">
-              <div className="overflow-hidden rounded-xl mb-6 glass-card border border-white/10 shadow-lg">
+            <div className="relative z-10 transform-gpu h-full glass-card border border-white/10 shadow-lg rounded-xl overflow-hidden flex flex-col">
+              <div className="overflow-hidden">
                 <img 
                   src="/images/restaurant/dining-area.jpg" 
                   alt={content.imageAlt1} 
-                  className="w-full h-72 object-cover rounded-lg transition-transform duration-500 group-hover:scale-105 transform-gpu"
+                  className="w-full h-[300px] object-cover transition-transform duration-500 group-hover:scale-105 transform-gpu"
                   loading="eager"
                   width="600"
                   height="400"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 p-6">
                 <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu">
                   <img 
                     src="/images/restaurant/dish.jpg" 
                     alt={content.imageAlt2} 
-                    className="w-full h-40 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
+                    className="w-full h-32 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
                     width="300"
                     height="200"
@@ -127,7 +127,7 @@ export function RestaurantSection() {
                   <img 
                     src="/images/restaurant/meat-preparation.jpg" 
                     alt={content.imageAlt3} 
-                    className="w-full h-40 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
+                    className="w-full h-32 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
                     width="300"
                     height="200"
@@ -138,11 +138,11 @@ export function RestaurantSection() {
           </div>
           
           {/* Right column - Content with glass card effect - optimized for performance */}
-          <div className="relative group transform-gpu">
+          <div className="relative group transform-gpu h-full">
             {/* Glass card effect - optimized with reduced blur and transform-gpu */}
             <div className="absolute -inset-1 bg-gradient-to-l from-accent-color/10 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
             
-            <div className="glass-card relative z-10 p-8 rounded-xl shadow-lg transform-gpu">
+            <div className="glass-card relative z-10 p-8 rounded-xl shadow-lg transform-gpu h-full flex flex-col">
               <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-sm">
                 {content.heading}
               </h3>
@@ -153,7 +153,7 @@ export function RestaurantSection() {
                 {content.description2}
               </p>
               
-              <div className="mb-8">
+              <div className="mb-8 flex-grow">
                 <h4 className="font-medium text-lg mb-5 text-white text-shadow-sm">
                   {content.specialtiesHeading}
                 </h4>
@@ -171,7 +171,7 @@ export function RestaurantSection() {
               
               <a 
                 href="#contact" 
-                className="glass-button text-center inline-flex items-center justify-center transition-colors duration-300"
+                className="glass-button text-center inline-flex items-center justify-center transition-colors duration-300 mt-auto"
               >
                 <span className="text-shadow-sm">{content.reserveButton}</span>
               </a>
