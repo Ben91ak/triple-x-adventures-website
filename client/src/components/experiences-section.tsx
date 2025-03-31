@@ -383,8 +383,17 @@ function ExperienceDetailModal({
   
   if (!isOpen) return null;
   
+  // Fix image paths if needed
+  const fixImagePath = (path: string): string => {
+    if (path.startsWith('/')) {
+      // Remove leading slash to help with path resolution
+      return path.substring(1);
+    }
+    return path;
+  };
+  
   // Default gallery to the main image if no gallery is provided
-  const gallery = experience.gallery || [experience.image];
+  const gallery = (experience.gallery || [experience.image]).map(fixImagePath);
   
   // Navigation for next/previous image
   const nextImage = () => {
@@ -424,6 +433,10 @@ function ExperienceDetailModal({
             <img 
               src={gallery[activeImageIndex]} 
               alt={experience.title} 
+              onError={(e) => {
+                console.error(`Error loading modal image: ${gallery[activeImageIndex]}`);
+                e.currentTarget.onerror = null; // Prevent infinite error loops
+              }}
               className="w-full h-full object-cover"
             />
             
@@ -651,6 +664,16 @@ export function ExperiencesSection() {
                   <img 
                     src={experience.image} 
                     alt={experience.title} 
+                    onError={(e) => {
+                      console.error(`Error loading image: ${experience.image}`);
+                      // Try fallback with modified path (removing any leading slash)
+                      const fallbackPath = experience.image.startsWith('/') 
+                        ? experience.image.substring(1) 
+                        : `images/${experience.image.split('/').pop()}`;
+                      console.log(`Trying fallback path: ${fallbackPath}`);
+                      e.currentTarget.src = fallbackPath;
+                      e.currentTarget.onerror = null; // Prevent infinite error loops
+                    }}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   
