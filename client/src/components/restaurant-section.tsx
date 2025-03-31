@@ -104,7 +104,7 @@ export function RestaurantSection() {
             <div className="relative z-10 transform-gpu">
               <div className="overflow-hidden rounded-xl mb-6 glass-card border border-white/10 shadow-lg">
                 <img 
-                  src="https://images.unsplash.com/photo-1528659882437-b89a74bc157f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                  src="/images/restaurant/dining-area.jpg" 
                   alt={content.imageAlt1} 
                   className="w-full h-72 object-cover rounded-lg transition-transform duration-500 group-hover:scale-105 transform-gpu"
                   loading="eager"
@@ -115,7 +115,7 @@ export function RestaurantSection() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu">
                   <img 
-                    src="https://images.unsplash.com/photo-1617196123643-bab924c7a9f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                    src="/images/restaurant/dish.jpg" 
                     alt={content.imageAlt2} 
                     className="w-full h-40 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
@@ -125,7 +125,7 @@ export function RestaurantSection() {
                 </div>
                 <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu">
                   <img 
-                    src="https://images.unsplash.com/photo-1563245440-ad2c9507d76e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+                    src="/images/restaurant/meat-preparation.jpg" 
                     alt={content.imageAlt3} 
                     className="w-full h-40 object-cover rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
