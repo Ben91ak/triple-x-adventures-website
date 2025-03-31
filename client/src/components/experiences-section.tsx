@@ -232,13 +232,13 @@ function ExperienceDetailModal({
     <div className="fixed inset-0 z-[100] flex items-center justify-center">
       {/* Backdrop with blur effect */}
       <div 
-        className="absolute inset-0 bg-black/70 backdrop-blur-md" 
+        className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300" 
         onClick={onClose}
       ></div>
       
       {/* Modal content */}
       <div 
-        className="relative max-w-6xl w-full mx-3 max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 backdrop-blur-lg rounded-xl border border-white/10 shadow-2xl animate-in fade-in zoom-in-95 duration-200 transform-gpu"
+        className="relative max-w-6xl w-full mx-3 max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
