@@ -104,7 +104,7 @@ export function RestaurantSection() {
             <div className="relative z-10 transform-gpu h-full glass-card border border-white/10 shadow-lg rounded-xl overflow-hidden flex flex-col">
               <div className="overflow-hidden flex-grow-0">
                 <img 
-                  src="/images/restaurant/dining-area.jpg" 
+                  src="/images/restaurant/jayjays-exterior.jpg" 
                   alt={content.imageAlt1} 
                   className="w-full h-[380px] object-cover object-center transition-transform duration-500 group-hover:scale-105 transform-gpu"
                   loading="eager"
