@@ -27,7 +27,7 @@ const accommodationsByLanguage = {
       title: "TXA - CHALET",
       description: "Stay in your own TXA - Chalet and experience the highest level of comfort. Our exclusive chalet offers a perfect mix of rustic charm and modern luxury.",
       pricePerNight: 3995,
-      image: "https://images.unsplash.com/photo-1517600585934-41e19605986d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      image: "/images/txa-chalet.jpg",
       features: [
         { icon: "fas fa-user-group", text: "Up to 8 guests" },
         { icon: "fas fa-bed", text: "4 bedrooms" },
@@ -40,7 +40,7 @@ const accommodationsByLanguage = {
       title: "HOTEL LAPONIA",
       description: "A comfortable alternative to our TXA Chalet. Hotel Laponia provides you with a pleasant stay before and after your adventures, with all the amenities you need.",
       pricePerNight: 1495,
-      image: "https://images.unsplash.com/photo-1505692795793-20f543407193?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      image: "/images/hotel-laponia.jpg",
       features: [
         { icon: "fas fa-location-dot", text: "Central location" },
         { icon: "fas fa-snowflake", text: "Arctic ambiance" },
@@ -71,7 +71,7 @@ const accommodationsByLanguage = {
       title: "TXA - CHALET",
       description: "Übernachte im eigenen TXA - Chalet und erlebe ein Höchstmaß an Komfort. Unser exklusives Chalet bietet eine perfekte Mischung aus rustikalem Charme und modernem Luxus.",
       pricePerNight: 3995,
-      image: "https://images.unsplash.com/photo-1517600585934-41e19605986d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      image: "/images/txa-chalet.jpg",
       features: [
         { icon: "fas fa-user-group", text: "Bis zu 8 Gäste" },
         { icon: "fas fa-bed", text: "4 Schlafzimmer" },
@@ -84,7 +84,7 @@ const accommodationsByLanguage = {
       title: "HOTEL LAPONIA",
       description: "Eine komfortable Alternative zu unserem TXA Chalet. Das Hotel Laponia bietet Ihnen einen angenehmen Aufenthalt vor und nach Ihren Abenteuern, mit allen Annehmlichkeiten, die Sie benötigen.",
       pricePerNight: 1495,
-      image: "https://images.unsplash.com/photo-1505692795793-20f543407193?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      image: "/images/hotel-laponia.jpg",
       features: [
         { icon: "fas fa-location-dot", text: "Zentrale Lage" },
         { icon: "fas fa-snowflake", text: "Arktisches Ambiente" },
@@ -115,7 +115,7 @@ const accommodationsByLanguage = {
       title: "TXA - CHALET",
       description: "Bo i din egen TXA - Chalet och upplev högsta komfort. Vårt exklusiva chalet erbjuder en perfekt blandning av rustik charm och modern lyx.",
       pricePerNight: 3995,
-      image: "https://images.unsplash.com/photo-1517600585934-41e19605986d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      image: "/images/txa-chalet.jpg",
       features: [
         { icon: "fas fa-user-group", text: "Upp till 8 gäster" },
         { icon: "fas fa-bed", text: "4 sovrum" },
@@ -128,7 +128,7 @@ const accommodationsByLanguage = {
       title: "HOTEL LAPONIA",
       description: "Ett bekvämt alternativ till vårt TXA Chalet. Hotel Laponia erbjuder en bekväm vistelse före och efter dina äventyr, med alla bekvämligheter du behöver.",
       pricePerNight: 1495,
-      image: "https://images.unsplash.com/photo-1505692795793-20f543407193?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+      image: "/images/hotel-laponia.jpg",
       features: [
         { icon: "fas fa-location-dot", text: "Centralt läge" },
         { icon: "fas fa-snowflake", text: "Arktisk atmosfär" },
