@@ -8,6 +8,22 @@ const accommodationsByLanguage = {
   en: [
     {
       id: 1,
+      title: "ÖÖD HOTEL SAMELAND",
+      description: "Experience luxury in our premium ÖÖD Hotel, featuring floor-to-ceiling glass walls that provide uninterrupted views of the Arctic wilderness and Northern Lights. A truly unforgettable stay in nature.",
+      pricePerNight: 5995,
+      image: "/images/IMG_4353.jpg",
+      featured: true,
+      features: [
+        { icon: "fas fa-user-group", text: "For 2-4 guests" },
+        { icon: "fas fa-hot-tub", text: "Private outdoor hot tub" },
+        { icon: "fas fa-snowflake", text: "Climate controlled" },
+        { icon: "fas fa-bed", text: "Luxury king bed" },
+        { icon: "fas fa-utensils", text: "Gourmet breakfast included" },
+        { icon: "fas fa-location-dot", text: "Prime Northern Lights viewing" }
+      ]
+    },
+    {
+      id: 2,
       title: "TXA - CHALET",
       description: "Stay in your own TXA - Chalet and experience the highest level of comfort. Our exclusive chalet offers a perfect mix of rustic charm and modern luxury.",
       pricePerNight: 3995,
@@ -20,7 +36,7 @@ const accommodationsByLanguage = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       title: "HOTEL LAPONIA",
       description: "A comfortable alternative to our TXA Chalet. Hotel Laponia provides you with a pleasant stay before and after your adventures, with all the amenities you need.",
       pricePerNight: 1495,
@@ -36,6 +52,22 @@ const accommodationsByLanguage = {
   de: [
     {
       id: 1,
+      title: "ÖÖD HOTEL SAMELAND",
+      description: "Erleben Sie Luxus in unserem Premium-ÖÖD-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die arktische Wildnis und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
+      pricePerNight: 5995,
+      image: "/images/IMG_4353.jpg",
+      featured: true,
+      features: [
+        { icon: "fas fa-user-group", text: "Für 2-4 Gäste" },
+        { icon: "fas fa-hot-tub", text: "Privater Außen-Whirlpool" },
+        { icon: "fas fa-snowflake", text: "Klimatisiert" },
+        { icon: "fas fa-bed", text: "Luxuriöses Kingsize-Bett" },
+        { icon: "fas fa-utensils", text: "Gourmet-Frühstück inklusive" },
+        { icon: "fas fa-location-dot", text: "Beste Nordlicht-Sicht" }
+      ]
+    },
+    {
+      id: 2,
       title: "TXA - CHALET",
       description: "Übernachte im eigenen TXA - Chalet und erlebe ein Höchstmaß an Komfort. Unser exklusives Chalet bietet eine perfekte Mischung aus rustikalem Charme und modernem Luxus.",
       pricePerNight: 3995,
@@ -48,7 +80,7 @@ const accommodationsByLanguage = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       title: "HOTEL LAPONIA",
       description: "Eine komfortable Alternative zu unserem TXA Chalet. Das Hotel Laponia bietet Ihnen einen angenehmen Aufenthalt vor und nach Ihren Abenteuern, mit allen Annehmlichkeiten, die Sie benötigen.",
       pricePerNight: 1495,
@@ -64,6 +96,22 @@ const accommodationsByLanguage = {
   sv: [
     {
       id: 1,
+      title: "ÖÖD HOTEL SAMELAND",
+      description: "Upplev lyx i vårt premium ÖÖD Hotel, med glasväggar från golv till tak som ger obrutna vyer över den arktiska vildmarken och norrskenet. En verkligt oförglömlig vistelse i naturen.",
+      pricePerNight: 5995,
+      image: "/images/IMG_4353.jpg",
+      featured: true,
+      features: [
+        { icon: "fas fa-user-group", text: "För 2-4 gäster" },
+        { icon: "fas fa-hot-tub", text: "Privat utomhus badtunna" },
+        { icon: "fas fa-snowflake", text: "Klimatkontrollerad" },
+        { icon: "fas fa-bed", text: "Lyxig king-size säng" },
+        { icon: "fas fa-utensils", text: "Gourmetfrukost ingår" },
+        { icon: "fas fa-location-dot", text: "Bästa läget för norrsken" }
+      ]
+    },
+    {
+      id: 2,
       title: "TXA - CHALET",
       description: "Bo i din egen TXA - Chalet och upplev högsta komfort. Vårt exklusiva chalet erbjuder en perfekt blandning av rustik charm och modern lyx.",
       pricePerNight: 3995,
@@ -76,7 +124,7 @@ const accommodationsByLanguage = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       title: "HOTEL LAPONIA",
       description: "Ett bekvämt alternativ till vårt TXA Chalet. Hotel Laponia erbjuder en bekväm vistelse före och efter dina äventyr, med alla bekvämligheter du behöver.",
       pricePerNight: 1495,
@@ -131,22 +179,30 @@ export function AccommodationsSection() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-          {accommodations.map((accommodation) => (
+        <div className="grid grid-cols-1 gap-10 max-w-6xl mx-auto">
+          {/* Featured accommodation (ÖÖD Hotel) */}
+          {accommodations.filter(a => a.featured).map((accommodation) => (
             <div key={accommodation.id} className="group relative">
-              {/* Decorative background element */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/40 to-purple-600/40 rounded-xl blur-xl opacity-0 group-hover:opacity-60 transition-all duration-700"></div>
+              {/* Decorative background element - enhanced for featured property */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/60 to-purple-600/60 rounded-xl blur-xl opacity-20 group-hover:opacity-80 transition-all duration-700"></div>
               
-              {/* Card */}
-              <div className="glass-card relative overflow-hidden h-full flex flex-col transition-all duration-300 group-hover:shadow-accent-color/20 group-hover:shadow-lg z-10">
-                <div className="relative h-72 overflow-hidden">
+              {/* Featured badge */}
+              <div className="absolute top-6 right-6 z-20">
+                <span className="bg-accent-color text-white px-4 py-2 rounded-full font-semibold text-sm uppercase tracking-wide shadow-lg">
+                  {language === 'de' ? 'Premium' : language === 'sv' ? 'Premium' : 'Premium'}
+                </span>
+              </div>
+              
+              {/* Card - larger for featured property */}
+              <div className="glass-card relative overflow-hidden flex flex-col md:flex-row transition-all duration-300 group-hover:shadow-accent-color/30 group-hover:shadow-lg z-10 border-2 border-accent-color/20">
+                <div className="relative h-96 md:h-auto md:w-3/5 overflow-hidden">
                   {/* Image with overlay gradient */}
                   <img 
                     src={accommodation.image} 
                     alt={`${accommodation.title} exterior`} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
                   
                   {/* Price badge */}
                   <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center">
@@ -155,7 +211,7 @@ export function AccommodationsSection() {
                         {language === 'de' ? 'Ab' : language === 'sv' ? 'Från' : 'From'}
                       </p>
                       <div className="flex items-baseline">
-                        <span className="font-bold text-xl text-white">
+                        <span className="font-bold text-2xl text-white">
                           {accommodation.pricePerNight.toLocaleString()}
                         </span>
                         <span className="text-white text-opacity-70 ml-1 text-sm">
@@ -166,42 +222,110 @@ export function AccommodationsSection() {
                   </div>
                 </div>
                 
-                <div className="p-8 flex-1 flex flex-col">
-                  <h3 className="font-bold text-2xl mb-3 text-white group-hover:text-accent-color transition-colors">
+                <div className="p-8 md:p-10 flex-1 flex flex-col">
+                  <h3 className="font-bold text-3xl mb-4 text-white group-hover:text-accent-color transition-colors">
                     {accommodation.title}
                   </h3>
-                  <p className="mb-6 text-white text-opacity-80 flex-grow">
+                  <p className="mb-6 text-lg text-white text-opacity-90 flex-grow">
                     {accommodation.description}
                   </p>
                   
-                  {/* Features grid with modern styling */}
-                  <div className="grid grid-cols-2 gap-4 mb-6">
+                  {/* Features grid with modern styling - 3 columns for featured property */}
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
                     {accommodation.features.map((feature, index) => (
                       <div key={index} className="flex items-center">
-                        <div className="w-8 h-8 rounded-full bg-accent-color/20 flex items-center justify-center mr-3 text-accent-color shadow-glow-sm">
+                        <div className="w-10 h-10 rounded-full bg-accent-color/20 flex items-center justify-center mr-3 text-accent-color shadow-glow-sm">
                           {iconMap[feature.icon]}
                         </div>
-                        <span className="text-white text-opacity-80 text-sm">{feature.text}</span>
+                        <span className="text-white text-opacity-90 text-sm">{feature.text}</span>
                       </div>
                     ))}
                   </div>
                   
                   <a 
                     href="#contact" 
-                    className="btn-primary text-center w-full inline-flex items-center justify-center"
+                    className="btn-primary text-center w-full inline-flex items-center justify-center text-base px-8 py-4"
                   >
-                    {accommodation.id === 1 ? 
-                      (language === 'de' ? 'Verfügbarkeit prüfen' : 
-                       language === 'sv' ? 'Kontrollera tillgänglighet' : 
-                       'Check availability') : 
-                      (language === 'de' ? 'Optionen anzeigen' : 
-                       language === 'sv' ? 'Visa alternativ' : 
-                       'View options')}
+                    {language === 'de' ? 'Jetzt Buchen' : language === 'sv' ? 'Boka Nu' : 'Book Now'}
                   </a>
                 </div>
               </div>
             </div>
           ))}
+          
+          {/* Regular accommodations (TXA Chalet and Hotel Laponia) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-4">
+            {accommodations.filter(a => !a.featured).map((accommodation) => (
+              <div key={accommodation.id} className="group relative">
+                {/* Decorative background element */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/40 to-purple-600/40 rounded-xl blur-xl opacity-0 group-hover:opacity-60 transition-all duration-700"></div>
+                
+                {/* Card */}
+                <div className="glass-card relative overflow-hidden h-full flex flex-col transition-all duration-300 group-hover:shadow-accent-color/20 group-hover:shadow-lg z-10">
+                  <div className="relative h-72 overflow-hidden">
+                    {/* Image with overlay gradient */}
+                    <img 
+                      src={accommodation.image} 
+                      alt={`${accommodation.title} exterior`} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    
+                    {/* Price badge */}
+                    <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center">
+                      <div className="bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
+                        <p className="text-sm text-white text-opacity-70">
+                          {language === 'de' ? 'Ab' : language === 'sv' ? 'Från' : 'From'}
+                        </p>
+                        <div className="flex items-baseline">
+                          <span className="font-bold text-xl text-white">
+                            {accommodation.pricePerNight.toLocaleString()}
+                          </span>
+                          <span className="text-white text-opacity-70 ml-1 text-sm">
+                            SEK/{language === 'de' ? 'Nacht' : language === 'sv' ? 'natt' : 'night'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-8 flex-1 flex flex-col">
+                    <h3 className="font-bold text-2xl mb-3 text-white group-hover:text-accent-color transition-colors">
+                      {accommodation.title}
+                    </h3>
+                    <p className="mb-6 text-white text-opacity-80 flex-grow">
+                      {accommodation.description}
+                    </p>
+                    
+                    {/* Features grid with modern styling */}
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      {accommodation.features.map((feature, index) => (
+                        <div key={index} className="flex items-center">
+                          <div className="w-8 h-8 rounded-full bg-accent-color/20 flex items-center justify-center mr-3 text-accent-color shadow-glow-sm">
+                            {iconMap[feature.icon]}
+                          </div>
+                          <span className="text-white text-opacity-80 text-sm">{feature.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <a 
+                      href="#contact" 
+                      className="btn-primary text-center w-full inline-flex items-center justify-center"
+                    >
+                      {accommodation.id === 2 ? 
+                        (language === 'de' ? 'Verfügbarkeit prüfen' : 
+                         language === 'sv' ? 'Kontrollera tillgänglighet' : 
+                         'Check availability') : 
+                        (language === 'de' ? 'Optionen anzeigen' : 
+                         language === 'sv' ? 'Visa alternativ' : 
+                         'View options')}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

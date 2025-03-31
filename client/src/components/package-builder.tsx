@@ -55,6 +55,13 @@ const packageOptionsByLanguage = {
       category: "core" as const
     },
     {
+      id: "oodhotel",
+      title: "ÖÖD Hotel Sameland",
+      price: 5995,
+      description: "Premium glass cabin with hot tub and unobstructed Northern Lights views",
+      category: "accommodation" as const
+    },
+    {
       id: "txachalet",
       title: "TXA Chalet",
       price: 3995,
@@ -63,7 +70,7 @@ const packageOptionsByLanguage = {
     },
     {
       id: "partnerhotel",
-      title: "Partner Hotel",
+      title: "Hotel Laponia",
       price: 1495,
       description: "Comfortable hotel in Arvidsjaur with all amenities",
       category: "accommodation" as const
@@ -113,6 +120,13 @@ const packageOptionsByLanguage = {
       category: "core" as const
     },
     {
+      id: "oodhotel",
+      title: "ÖÖD Hotel Sameland",
+      price: 5995,
+      description: "Premium-Glaskabine mit Whirlpool und ungehindertem Blick auf die Nordlichter",
+      category: "accommodation" as const
+    },
+    {
       id: "txachalet",
       title: "TXA-Chalet",
       price: 3995,
@@ -121,7 +135,7 @@ const packageOptionsByLanguage = {
     },
     {
       id: "partnerhotel",
-      title: "Partnerhotel",
+      title: "Hotel Laponia",
       price: 1495,
       description: "Komfortables Hotel in Arvidsjaur mit allen Annehmlichkeiten",
       category: "accommodation" as const
@@ -171,6 +185,13 @@ const packageOptionsByLanguage = {
       category: "core" as const
     },
     {
+      id: "oodhotel",
+      title: "ÖÖD Hotel Sameland",
+      price: 5995,
+      description: "Premium glashytt med badtunna och obehindrad utsikt över norrsken",
+      category: "accommodation" as const
+    },
+    {
       id: "txachalet",
       title: "TXA-Chalet",
       price: 3995,
@@ -179,7 +200,7 @@ const packageOptionsByLanguage = {
     },
     {
       id: "partnerhotel",
-      title: "Partnerhotell",
+      title: "Hotel Laponia",
       price: 1495,
       description: "Bekvämt hotell i Arvidsjaur med alla bekvämligheter",
       category: "accommodation" as const

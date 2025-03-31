@@ -22,6 +22,7 @@ export interface Accommodation {
   description: string;
   pricePerNight: number;
   image: string;
+  featured?: boolean;
   features: Array<{
     icon: string;
     text: string;
