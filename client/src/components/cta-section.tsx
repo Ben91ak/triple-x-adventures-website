@@ -55,30 +55,39 @@ export function CTASection() {
           </p>
           
           <div className="group relative inline-block transform-gpu overflow-hidden rounded-lg">
-            {/* Northern Lights main effect overlay - visible on hover */}
-            <span className="absolute inset-0 bg-gradient-to-r from-[#4ADE80]/30 via-[#2DD4BF]/30 to-[#38BDF8]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-size-200 animate-aurora"></span>
+            {/* Simple single aurora effect that only appears on hover */}
+            <span className="absolute inset-0 bg-gradient-to-r from-[#4ADE80]/10 via-[#2DD4BF]/20 to-[#38BDF8]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" 
+              style={{
+                backgroundSize: '300% 100%',
+                animation: 'none', 
+                transitionProperty: 'opacity, background-position',
+                animationPlayState: 'paused'
+              }}
+              onMouseEnter={(e) => {
+                // Start the animation only on hover
+                e.currentTarget.style.animation = 'aurora 15s ease infinite';
+                e.currentTarget.style.animationPlayState = 'running';
+              }}
+              onMouseLeave={(e) => {
+                // Pause the animation when not hovering
+                e.currentTarget.style.animationPlayState = 'paused';
+              }}
+            ></span>
             
-            {/* Stars twinkling effect - visible on hover */}
-            <span className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-              <span className="absolute w-1 h-1 bg-white rounded-full top-1/4 left-1/5 animate-twinkle"></span>
-              <span className="absolute w-1 h-1 bg-white rounded-full top-1/3 left-2/3 animate-twinkle" style={{ animationDelay: '0.5s' }}></span>
-              <span className="absolute w-[2px] h-[2px] bg-white rounded-full top-2/3 left-1/4 animate-twinkle" style={{ animationDelay: '0.7s' }}></span>
-              <span className="absolute w-[2px] h-[2px] bg-white rounded-full top-1/2 left-3/4 animate-twinkle" style={{ animationDelay: '0.2s' }}></span>
-              <span className="absolute w-[3px] h-[3px] bg-white rounded-full top-3/4 left-1/2 animate-twinkle" style={{ animationDelay: '1s' }}></span>
-            </span>
+            {/* Northern lights wave glow that slides up on hover */}
+            <span className="absolute inset-0 bg-gradient-to-t from-transparent via-[#4ADE80]/10 to-transparent translate-y-full group-hover:translate-y-0 transition-all duration-1000 transform-gpu"
+              style={{
+                transformOrigin: 'bottom',
+                transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)'
+              }}
+            ></span>
             
-            {/* Northern lights horizontal wave effect - visible on hover */}
-            <span className="absolute inset-0 bg-gradient-to-t from-transparent via-[#4ADE80]/20 to-[#2DD4BF]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-northern-wave"></span>
-            
-            {/* Northern lights vertical pillar effect - visible on hover */}
-            <span className="absolute inset-x-0 bottom-0 h-full w-1/2 left-1/4 bg-gradient-to-t from-transparent via-[#2DD4BF]/30 to-[#38BDF8]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-700 delay-300 transform-gpu"></span>
-            
-            {/* Glass container with shadow glow effect */}
-            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 shadow-[0_0_15px_5px_rgba(74,222,128,0.3)] transition-opacity duration-700"></span>
+            {/* Subtle border glow on hover */}
+            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 shadow-[0_0_8px_1px_rgba(164,210,51,0.3)] transition-all duration-500"></span>
             
             <a 
               href="#contact" 
-              className="glass-button inline-flex items-center gap-2 px-10 py-4 relative border border-accent-color/20 group-hover:border-accent-color/80 transition-all duration-300 transform-gpu z-10"
+              className="glass-button inline-flex items-center gap-2 px-10 py-4 relative border border-accent-color/20 group-hover:border-accent-color/50 transition-all duration-500 transform-gpu z-10"
             >
               <span className="text-shadow-sm relative z-10">{content.buttonText}</span>
               <ArrowRight size={18} className="transform group-hover:translate-x-1 transition-transform duration-300 relative z-10" />
