@@ -11,7 +11,7 @@ const accommodationsByLanguage = {
       title: "ÖÖD HOTEL SAMELAND",
       description: "Experience luxury in our premium ÖÖD Hotel, featuring floor-to-ceiling glass walls that provide uninterrupted views of the Arctic wilderness and Northern Lights. A truly unforgettable stay in nature.",
       pricePerNight: 5995,
-      image: "/images/IMG_4353.jpg",
+      image: "/images/ood-hotel.jpg",
       featured: true,
       features: [
         { icon: "fas fa-user-group", text: "For 2-4 guests" },
@@ -55,7 +55,7 @@ const accommodationsByLanguage = {
       title: "ÖÖD HOTEL SAMELAND",
       description: "Erleben Sie Luxus in unserem Premium-ÖÖD-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die arktische Wildnis und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
       pricePerNight: 5995,
-      image: "/images/IMG_4353.jpg",
+      image: "/images/ood-hotel.jpg",
       featured: true,
       features: [
         { icon: "fas fa-user-group", text: "Für 2-4 Gäste" },
@@ -99,7 +99,7 @@ const accommodationsByLanguage = {
       title: "ÖÖD HOTEL SAMELAND",
       description: "Upplev lyx i vårt premium ÖÖD Hotel, med glasväggar från golv till tak som ger obrutna vyer över den arktiska vildmarken och norrskenet. En verkligt oförglömlig vistelse i naturen.",
       pricePerNight: 5995,
-      image: "/images/IMG_4353.jpg",
+      image: "/images/ood-hotel.jpg",
       featured: true,
       features: [
         { icon: "fas fa-user-group", text: "För 2-4 gäster" },
@@ -186,10 +186,10 @@ export function AccommodationsSection() {
               {/* Decorative background element - enhanced for featured property */}
               <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/60 to-purple-600/60 rounded-xl blur-xl opacity-20 group-hover:opacity-80 transition-all duration-700"></div>
               
-              {/* Featured badge */}
+              {/* Coming Soon badge */}
               <div className="absolute top-6 right-6 z-20">
                 <span className="bg-accent-color text-white px-4 py-2 rounded-full font-semibold text-sm uppercase tracking-wide shadow-lg">
-                  {language === 'de' ? 'Premium' : language === 'sv' ? 'Premium' : 'Premium'}
+                  {language === 'de' ? 'Demnächst' : language === 'sv' ? 'Kommer snart' : 'Coming Soon'}
                 </span>
               </div>
               
@@ -246,7 +246,7 @@ export function AccommodationsSection() {
                     href="#contact" 
                     className="btn-primary text-center w-full inline-flex items-center justify-center text-base px-8 py-4"
                   >
-                    {language === 'de' ? 'Jetzt Buchen' : language === 'sv' ? 'Boka Nu' : 'Book Now'}
+                    {language === 'de' ? 'Vormerken' : language === 'sv' ? 'Intresseanmälan' : 'Register Interest'}
                   </a>
                 </div>
               </div>
