@@ -45,16 +45,14 @@ const experiencesByLanguage = {
     },
     {
       id: 3,
-      title: "Northern Lights Expedition",
-      description: "Chase the magical Northern Lights with our experienced guides who know the best viewpoints. Includes warm drinks and snacks.",
+      title: "JayJay's Restaurant",
+      description: "Enjoy authentic Lapland cuisine in a cozy atmosphere with views of the Northern Lights. Our restaurant offers a unique dining experience with local ingredients.",
       price: 1695,
-      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/images/JayJays-Restaurant.jpg",
       gallery: [
-        "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1579033462043-0f11a7862f7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1579033461380-adb47c3eb938?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "/images/JayJays-Restaurant.jpg",
       ],
-      fullDescription: "Experience the awe-inspiring Northern Lights (Aurora Borealis) on this guided expedition into the Arctic wilderness. Our expert guides monitor solar activity and weather conditions to maximize your chances of witnessing this magnificent natural phenomenon. Travel in comfortable, heated vehicles to carefully selected viewing locations away from light pollution, where the night sky comes alive with dancing colors. While waiting for the lights to appear, warm up with hot beverages and traditional Swedish snacks around a campfire. Your guide will share fascinating insights about the science and folklore behind the Northern Lights, and help you capture perfect photographs with professional tips."
+      fullDescription: "JayJay's Restaurant offers an unforgettable culinary experience in the heart of Swedish Lapland. Located in a traditional wooden cabin with panoramic windows, you can enjoy gourmet meals while watching the Northern Lights dance across the night sky. Our talented chefs create exquisite dishes using fresh, locally-sourced ingredients including Arctic char, reindeer, wild berries, and forest mushrooms. The intimate, candle-lit atmosphere combines rustic charm with elegant dining, making it perfect for both casual meals and special occasions. Our menu changes seasonally to showcase the best flavors of Lapland, and each dish tells a story of the region's rich culinary heritage. Complete your dining experience with our selection of fine wines and craft cocktails featuring local spirits."
     },
     {
       id: 4,
@@ -132,12 +130,12 @@ const experiencesByLanguage = {
     },
     {
       id: 3,
-      title: "Polarlichter Expedition",
-      description: "Jagen Sie das magische Nordlicht mit unseren erfahrenen Guides, die die besten Aussichtspunkte kennen. Inklusive warmer Getränke und Snacks.",
+      title: "JayJay's Restaurant",
+      description: "Genießen Sie authentische Lappländische Küche in gemütlicher Atmosphäre mit Blick auf die Nordlichter. Unser Restaurant bietet ein einzigartiges Speisenerlebnis mit lokalen Zutaten.",
       price: 1695,
-      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/images/JayJays-Restaurant.jpg",
       gallery: [
-        "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "/images/JayJays-Restaurant.jpg",
       ]
     },
     {
@@ -212,12 +210,12 @@ const experiencesByLanguage = {
     },
     {
       id: 3,
-      title: "Norrsken Expedition",
-      description: "Jaga det magiska norrskenet med våra erfarna guider som känner till de bästa utsiktsplatserna. Inklusive varma drycker och snacks.",
+      title: "JayJay's Restaurant",
+      description: "Njut av äkta lappländsk mat i en mysig atmosfär med utsikt över norrskenet. Vår restaurang erbjuder en unik matupplevelse med lokala råvaror.",
       price: 1695,
-      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/images/JayJays-Restaurant.jpg",
       gallery: [
-        "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "/images/JayJays-Restaurant.jpg",
       ]
     },
     {
