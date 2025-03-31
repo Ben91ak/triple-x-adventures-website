@@ -106,14 +106,14 @@ export function RestaurantSection() {
                 <img 
                   src="/images/restaurant/dining-area.jpg" 
                   alt={content.imageAlt1} 
-                  className="w-full h-[320px] object-cover object-center transition-transform duration-500 group-hover:scale-105 transform-gpu"
+                  className="w-full h-[380px] object-cover object-center transition-transform duration-500 group-hover:scale-105 transform-gpu"
                   loading="eager"
                   width="600"
                   height="400"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4 p-6 flex-1">
-                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu h-40">
+              <div className="flex gap-4 p-6">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-44">
                   <img 
                     src="/images/restaurant/dish.jpg" 
                     alt={content.imageAlt2} 
@@ -123,7 +123,7 @@ export function RestaurantSection() {
                     height="200"
                   />
                 </div>
-                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu h-40">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-44">
                   <img 
                     src="/images/restaurant/meat-preparation.jpg" 
                     alt={content.imageAlt3} 
