@@ -13,10 +13,10 @@ const experiencesByLanguage = {
       title: "Snowmobile Adventure",
       description: "Experience the freedom on a snowmobile through the snowy wilderness of Swedish Lapland. Perfect for beginners and advanced riders alike.",
       price: 2495,
-      image: "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/images/Snowmobile.jpg",
       gallery: [
+        "/images/Snowmobile.jpg",
         "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1549227904-68e74696ce61?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1603475215943-7ef1fe62ad19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1574985734577-6339de6b0a7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
       ],
@@ -31,11 +31,11 @@ const experiencesByLanguage = {
       title: "Husky Sledding Tour",
       description: "Lead your own dog sled team through the breathtaking Arctic wilderness. An unforgettable experience with friendly huskies.",
       price: 1895,
-      image: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/images/Husky.jpg",
       gallery: [
+        "/images/Husky.jpg",
         "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1583614749616-4c27737e1f8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1609351807566-a220f4f0c3b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       ],
       fullDescription: "Experience the thrill of mushing your own dog sled team across pristine snowy landscapes. Our friendly Siberian and Alaskan huskies are eager to take you on an unforgettable journey through the stunning Arctic wilderness. After a thorough introduction and safety briefing, you'll learn how to handle your own team of 4-6 dogs. Feel the excitement as the dogs bark in anticipation, then the sudden silence as they focus on running through the breathtaking winter landscape. Halfway through, we'll stop for a warming wilderness lunch around an open fire, where you can also spend time bonding with the dogs. This authentic Arctic experience connects you with nature in a unique and memorable way.",
       tag: {
@@ -58,28 +58,51 @@ const experiencesByLanguage = {
     },
     {
       id: 4,
-      title: "Traditional Ice Fishing",
-      description: "Learn the ancient techniques of ice fishing from our local guides and cook your catch over an open fire.",
-      price: 995,
-      image: "https://images.unsplash.com/photo-1606594689023-61c61cd7dc97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      title: "Ice Karting Experience",
+      description: "Race specially designed karts on a frozen lake track with expert instruction. An adrenaline-filled winter driving experience.",
+      price: 1495,
+      image: "/images/Ice Kart.jpg",
+      gallery: [
+        "/images/Ice Kart.jpg",
+      ],
+      fullDescription: "Experience the unique thrill of racing on ice with our specialized Ice Karting Adventure. Our professional instructors will teach you the techniques of driving on a slippery surface before you take to our specially prepared ice track on a frozen lake. Feel the excitement as you drift around corners and master the art of controlling a vehicle in challenging winter conditions. This experience is suitable for all skill levels, from complete beginners to experienced drivers looking to test their skills. All necessary equipment is provided, including helmets, racing suits, and gloves. Compete against friends and family for the fastest lap time in this unforgettable Arctic motorsport experience."
     },
     {
       id: 5,
-      title: "Sauna & Ice Bath Experience",
-      description: "Enjoy an authentic Finnish sauna followed by an invigorating ice bath in the frozen lake. A true Nordic tradition.",
-      price: 895,
-      image: "https://images.unsplash.com/photo-1610566286375-a33f654dc875?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      title: "Reindeer Farm Visit",
+      description: "Meet the iconic reindeer of Lapland, learn about Sami culture, and enjoy a traditional meal in an authentic setting.",
+      price: 1095,
+      image: "/images/Reindeers.jpg",
+      gallery: [
+        "/images/Reindeers.jpg",
+      ],
+      fullDescription: "Step into the world of the Sami people and their most cherished animal - the reindeer. Visit a traditional reindeer farm where you'll learn about these magnificent creatures and their importance to the indigenous Sami culture. Get up close with the reindeer, feed them, and learn about their seasonal migration and adaptation to the harsh Arctic climate. Your Sami host will share stories and traditions passed down through generations while you enjoy a traditional meal in an authentic lavvu (Sami tent). This cultural experience provides valuable insight into a way of life that has survived for thousands of years in the Arctic region."
     },
     {
       id: 6,
-      title: "Arctic Survival Course",
-      description: "Learn essential winter survival skills, including fire making, shelter building, and navigation in the wilderness.",
-      price: 1295,
-      image: "https://images.unsplash.com/photo-1517309530578-38066e4589e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      title: "Helicopter Scenic Flight",
+      description: "Soar above the Arctic landscape for a breathtaking aerial perspective of mountains, forests, and frozen lakes.",
+      price: 3295,
+      image: "/images/Helikopter.jpg",
+      gallery: [
+        "/images/Helikopter.jpg",
+      ],
+      fullDescription: "Take to the skies for an unforgettable perspective of Swedish Lapland's breathtaking landscapes on our scenic helicopter flight. From your privileged vantage point, you'll witness the vastness of the Arctic wilderness stretching to the horizon - snow-covered forests, frozen lakes, mountain ranges, and perhaps even wildlife. Your pilot will provide informative commentary through your headset, pointing out notable landmarks and sharing interesting facts about the region. This exclusive experience offers unparalleled photo opportunities and a sense of the true scale and beauty of Lapland that cannot be appreciated from the ground. Each flight path is carefully planned to showcase the most spectacular scenery while ensuring minimal environmental impact.",
       tag: {
         text: "New",
         type: "new" as "new"
       }
+    },
+    {
+      id: 7,
+      title: "Ice Drifting Experience",
+      description: "Master the art of controlled drifting on a frozen lake in a performance car with professional instructors.",
+      price: 2295,
+      image: "/images/Drifting.jpg",
+      gallery: [
+        "/images/Drifting.jpg",
+      ],
+      fullDescription: "Feel the exhilaration of sliding sideways on ice in our Ice Drifting Experience. Under the guidance of professional driving instructors, you'll learn the techniques of controlling a vehicle in extreme winter conditions. Using specially prepared performance cars equipped with studded tires, you'll practice drifting techniques on our purpose-built ice course. Start with basic exercises and progress to more complex maneuvers as your confidence grows. This experience is perfect for driving enthusiasts looking to improve their winter driving skills in a safe and controlled environment. All drivers receive thorough instruction and have the opportunity for multiple driving sessions to perfect their technique."
     }
   ],
   de: [
@@ -88,7 +111,10 @@ const experiencesByLanguage = {
       title: "Snowmobile Abenteuer",
       description: "Erleben Sie die Freiheit auf einem Schneemobil durch die verschneite Wildnis von Schwedisch-Lappland. Perfekt für Anfänger und Fortgeschrittene.",
       price: 2495,
-      image: "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/images/Snowmobile.jpg",
+      gallery: [
+        "/images/Snowmobile.jpg",
+      ],
       tag: {
         text: "Beliebt",
         type: "bestseller" as "bestseller"
@@ -99,39 +125,64 @@ const experiencesByLanguage = {
       title: "Husky Schlittentour",
       description: "Führen Sie Ihr eigenes Hundeschlittenteam durch die atemberaubende arktische Wildnis. Ein unvergessliches Erlebnis mit freundlichen Huskies.",
       price: 1895,
-      image: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "/images/Husky.jpg",
+      gallery: [
+        "/images/Husky.jpg",
+      ]
     },
     {
       id: 3,
       title: "Polarlichter Expedition",
       description: "Jagen Sie das magische Nordlicht mit unseren erfahrenen Guides, die die besten Aussichtspunkte kennen. Inklusive warmer Getränke und Snacks.",
       price: 1695,
-      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      gallery: [
+        "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      ]
     },
     {
       id: 4,
-      title: "Traditionelles Eisangeln",
-      description: "Erlernen Sie die alten Techniken des Eisangelns von unseren lokalen Führern und kochen Sie Ihren Fang über einem offenen Feuer.",
-      price: 995,
-      image: "https://images.unsplash.com/photo-1606594689023-61c61cd7dc97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      title: "Eiskart Erlebnis",
+      description: "Fahren Sie speziell entworfene Karts auf einer gefrorenen Seestrecke mit fachkundiger Anleitung. Ein adrenalingeladenes Winterfahrerlebnis.",
+      price: 1495,
+      image: "/images/Ice Kart.jpg",
+      gallery: [
+        "/images/Ice Kart.jpg",
+      ]
     },
     {
       id: 5,
-      title: "Sauna & Eisbad Erlebnis",
-      description: "Genießen Sie eine authentische finnische Sauna gefolgt von einem belebenden Eisbad im gefrorenen See. Eine echte nordische Tradition.",
-      price: 895,
-      image: "https://images.unsplash.com/photo-1610566286375-a33f654dc875?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      title: "Rentier Farm Besuch",
+      description: "Treffen Sie die ikonischen Rentiere Lapplands, lernen Sie über die Sami-Kultur und genießen Sie eine traditionelle Mahlzeit in authentischer Umgebung.",
+      price: 1095,
+      image: "/images/Reindeers.jpg",
+      gallery: [
+        "/images/Reindeers.jpg",
+      ]
     },
     {
       id: 6,
-      title: "Arktischer Survival Kurs",
-      description: "Lernen Sie wichtige Überlebensfähigkeiten für den Winter, einschließlich Feuermachen, Unterbau und Navigation in der wilden Natur.",
-      price: 1295,
-      image: "https://images.unsplash.com/photo-1517309530578-38066e4589e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      title: "Hubschrauber Panoramaflug",
+      description: "Schweben Sie über die arktische Landschaft für eine atemberaubende Luftperspektive von Bergen, Wäldern und gefrorenen Seen.",
+      price: 3295,
+      image: "/images/Helikopter.jpg",
+      gallery: [
+        "/images/Helikopter.jpg",
+      ],
       tag: {
         text: "Neu",
         type: "new" as "new"
       }
+    },
+    {
+      id: 7,
+      title: "Eisdrifting Erlebnis",
+      description: "Meistern Sie die Kunst des kontrollierten Driftens auf einem gefrorenen See in einem Leistungsfahrzeug mit professionellen Instruktoren.",
+      price: 2295,
+      image: "/images/Drifting.jpg",
+      gallery: [
+        "/images/Drifting.jpg",
+      ]
     }
   ],
   sv: [
@@ -140,7 +191,10 @@ const experiencesByLanguage = {
       title: "Snöskoter Äventyr",
       description: "Upplev friheten på en snöskoter genom den snötäckta vildmarken i Svenska Lappland. Perfekt för nybörjare och erfarna åkare.",
       price: 2495,
-      image: "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/images/Snowmobile.jpg",
+      gallery: [
+        "/images/Snowmobile.jpg",
+      ],
       tag: {
         text: "Mest populär",
         type: "bestseller" as "bestseller"
@@ -151,39 +205,64 @@ const experiencesByLanguage = {
       title: "Husky Slädhundstur",
       description: "Led ditt eget hundspann genom den hisnande arktiska vildmarken. En oförglömlig upplevelse med vänliga huskies.",
       price: 1895,
-      image: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "/images/Husky.jpg",
+      gallery: [
+        "/images/Husky.jpg",
+      ]
     },
     {
       id: 3,
       title: "Norrsken Expedition",
       description: "Jaga det magiska norrskenet med våra erfarna guider som känner till de bästa utsiktsplatserna. Inklusive varma drycker och snacks.",
       price: 1695,
-      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      gallery: [
+        "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      ]
     },
     {
       id: 4,
-      title: "Traditionellt Pimpelfiske",
-      description: "Lär dig de gamla teknikerna för isfiske från våra lokala guider och laga din fångst över öppen eld.",
-      price: 995,
-      image: "https://images.unsplash.com/photo-1606594689023-61c61cd7dc97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      title: "Iskart Upplevelse",
+      description: "Kör specialdesignade karts på en frusen sjöbana med expertvägledning. En adrenalinfylld vinterupplevelse.",
+      price: 1495,
+      image: "/images/Ice Kart.jpg",
+      gallery: [
+        "/images/Ice Kart.jpg",
+      ]
     },
     {
       id: 5,
-      title: "Bastu & Isbad Upplevelse",
-      description: "Njut av en autentisk finsk bastu följt av ett uppfriskande isbad i den frusna sjön. En äkta nordisk tradition.",
-      price: 895,
-      image: "https://images.unsplash.com/photo-1610566286375-a33f654dc875?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      title: "Renbesök",
+      description: "Träffa Lapplands ikoniska renar, lär dig om samisk kultur och njut av en traditionell måltid i en autentisk miljö.",
+      price: 1095,
+      image: "/images/Reindeers.jpg",
+      gallery: [
+        "/images/Reindeers.jpg",
+      ]
     },
     {
       id: 6,
-      title: "Arktisk Överlevnadskurs",
-      description: "Lär dig grundläggande vinteröverlevnadskunskaper, inklusive att göra upp eld, bygga skydd och navigera i vildmarken.",
-      price: 1295,
-      image: "https://images.unsplash.com/photo-1517309530578-38066e4589e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      title: "Helikopter Sightseeingtur",
+      description: "Sväva över det arktiska landskapet för ett hisnande flygperspektiv över berg, skogar och frusna sjöar.",
+      price: 3295,
+      image: "/images/Helikopter.jpg",
+      gallery: [
+        "/images/Helikopter.jpg",
+      ],
       tag: {
         text: "Ny",
         type: "new" as "new"
       }
+    },
+    {
+      id: 7,
+      title: "Isdrift Upplevelse",
+      description: "Bemästra konsten att kontrollera driften på en frusen sjö i en prestandabil med professionella instruktörer.",
+      price: 2295,
+      image: "/images/Drifting.jpg",
+      gallery: [
+        "/images/Drifting.jpg",
+      ]
     }
   ]
 };
