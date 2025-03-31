@@ -435,6 +435,7 @@ function ExperienceDetailModal({
               alt={experience.title} 
               onError={(e) => {
                 console.error(`Error loading modal image: ${gallery[activeImageIndex]}`);
+                e.currentTarget.src = '/images/TXA_fallback.jpg';
                 e.currentTarget.onerror = null; // Prevent infinite error loops
               }}
               className="w-full h-full object-cover"
@@ -662,16 +663,12 @@ export function ExperiencesSection() {
                 <div className="relative h-[225px] overflow-hidden">
                   {/* Image with overlay */}
                   <img 
-                    src={experience.image} 
+                    src={experience.image.startsWith('/') ? experience.image.substring(1) : experience.image} 
                     alt={experience.title} 
                     onError={(e) => {
                       console.error(`Error loading image: ${experience.image}`);
-                      // Try fallback with modified path (removing any leading slash)
-                      const fallbackPath = experience.image.startsWith('/') 
-                        ? experience.image.substring(1) 
-                        : `images/${experience.image.split('/').pop()}`;
-                      console.log(`Trying fallback path: ${fallbackPath}`);
-                      e.currentTarget.src = fallbackPath;
+                      // Fall back to our backup image if loading fails
+                      e.currentTarget.src = '/images/TXA_fallback.jpg';
                       e.currentTarget.onerror = null; // Prevent infinite error loops
                     }}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
