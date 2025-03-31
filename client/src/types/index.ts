@@ -5,6 +5,10 @@ export interface Experience {
   description: string;
   price: number;
   image: string;
+  // Gallery images for the expanded view
+  gallery?: string[];
+  // Longer, more detailed description for the expanded view
+  fullDescription?: string;
   tag?: {
     text: string;
     type: 'bestseller' | 'new';
