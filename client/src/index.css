@@ -618,11 +618,21 @@
 /* Main animation utility with reduced repaints */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px) translateZ(0);
-  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fadeIn 0.3s ease-in-out forwards;
   backface-visibility: hidden;
   perspective: 1000px;
   will-change: transform, opacity;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateZ(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+  }
 }
 
 .fade-in.visible {

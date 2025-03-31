@@ -31,14 +31,30 @@ const experiencesByLanguage = {
       title: "Husky Sledding Tour",
       description: "Lead your own dog sled team through the breathtaking Arctic wilderness. An unforgettable experience with friendly huskies.",
       price: 1895,
-      image: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      gallery: [
+        "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1583614749616-4c27737e1f8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1609351807566-a220f4f0c3b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      ],
+      fullDescription: "Experience the thrill of mushing your own dog sled team across pristine snowy landscapes. Our friendly Siberian and Alaskan huskies are eager to take you on an unforgettable journey through the stunning Arctic wilderness. After a thorough introduction and safety briefing, you'll learn how to handle your own team of 4-6 dogs. Feel the excitement as the dogs bark in anticipation, then the sudden silence as they focus on running through the breathtaking winter landscape. Halfway through, we'll stop for a warming wilderness lunch around an open fire, where you can also spend time bonding with the dogs. This authentic Arctic experience connects you with nature in a unique and memorable way.",
+      tag: {
+        text: "Popular",
+        type: "bestseller" as "bestseller"
+      }
     },
     {
       id: 3,
       title: "Northern Lights Expedition",
       description: "Chase the magical Northern Lights with our experienced guides who know the best viewpoints. Includes warm drinks and snacks.",
       price: 1695,
-      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      gallery: [
+        "https://images.unsplash.com/photo-1607287914173-70adb9a862e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1579033462043-0f11a7862f7d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1579033461380-adb47c3eb938?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      ],
+      fullDescription: "Experience the awe-inspiring Northern Lights (Aurora Borealis) on this guided expedition into the Arctic wilderness. Our expert guides monitor solar activity and weather conditions to maximize your chances of witnessing this magnificent natural phenomenon. Travel in comfortable, heated vehicles to carefully selected viewing locations away from light pollution, where the night sky comes alive with dancing colors. While waiting for the lights to appear, warm up with hot beverages and traditional Swedish snacks around a campfire. Your guide will share fascinating insights about the science and folklore behind the Northern Lights, and help you capture perfect photographs with professional tips."
     },
     {
       id: 4,
