@@ -81,10 +81,6 @@ const Home = memo(function Home() {
           <CTASection />
         </Suspense>
         
-        <Suspense fallback={<SectionLoader />}>
-          <AnimationsShowcase />
-        </Suspense>
-        
         <Footer />
       </div>
     </div>
