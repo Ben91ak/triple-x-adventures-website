@@ -27,7 +27,7 @@ export function Footer() {
         iceFishing: "Ice Fishing",
         arcticSurvival: "Arctic Survival",
       },
-      address: "Akkavare, near Arvidsjaur<br />Swedish Lapland, Sweden",
+      address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
     },
     de: {
       description: "Authentische arktische Erlebnisse im Herzen von Schwedisch-Lappland. Kleine Gruppen, lokale Expertise und unvergessliche Abenteuer.",
