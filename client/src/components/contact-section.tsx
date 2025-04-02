@@ -314,7 +314,7 @@ export function ContactSection() {
                   </div>
                   <div>
                     <h4 className="font-medium mb-1 text-white">{t.contact.info.location}</h4>
-                    <p className="text-white text-opacity-80">{t.contact.info.locationText}</p>
+                    <p className="text-white text-opacity-80">Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden</p>
                   </div>
                 </div>
                 
