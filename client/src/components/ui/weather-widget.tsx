@@ -6,7 +6,7 @@ interface WeatherWidgetProps {
   location?: string;
 }
 
-export function WeatherWidget({ className = "", location = "Kiruna,se" }: WeatherWidgetProps) {
+export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }: WeatherWidgetProps) {
   const { language } = useLanguage();
   const { data: weather, isLoading, isError } = useWeather(location);
 

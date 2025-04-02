@@ -646,7 +646,7 @@ export function ExperiencesSection() {
           
           {/* Weather widget */}
           <div className="w-full md:w-auto">
-            <WeatherWidget className="w-full md:w-64" location="Kiruna,se" />
+            <WeatherWidget className="w-full md:w-64" location="Arvidsjaur,Sweden" />
           </div>
         </div>
         
