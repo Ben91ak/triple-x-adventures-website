@@ -11,7 +11,7 @@ interface WeatherData {
   windSpeed: number;
 }
 
-export function useWeather(location: string = "Kiruna,Sweden") {
+export function useWeather(location: string = "Arvidsjaur,Sweden") {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
