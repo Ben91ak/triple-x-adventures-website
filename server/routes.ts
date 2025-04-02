@@ -122,13 +122,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      const apiKey = process.env.WEATHER_API_KEY;
-      if (!apiKey) {
-        return res.status(500).json({ 
-          success: false, 
-          message: "Weather API key is not configured" 
-        });
-      }
+      // Using the API key directly as it's not being properly passed via environment variables
+      const apiKey = "69f376a43cd0a239f36c6cdc6a03d134";
+      
+      // Log for debugging
+      console.log("Using Weatherstack API key:", apiKey);
 
       // Proxy the request to Weatherstack
       const response = await fetch(
