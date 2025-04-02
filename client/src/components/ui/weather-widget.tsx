@@ -1,5 +1,6 @@
 import { useWeather } from "@/hooks/use-weather";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Sun, Cloud, CloudRain, CloudSnow, Wind, Droplets, Thermometer } from "lucide-react";
 
 interface WeatherWidgetProps {
   className?: string;
@@ -9,6 +10,24 @@ interface WeatherWidgetProps {
 export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }: WeatherWidgetProps) {
   const { language } = useLanguage();
   const { data: weather, isLoading, isError } = useWeather(location);
+
+  // Function to determine which weather icon to display based on the description
+  const getWeatherIcon = (description: string) => {
+    const desc = description.toLowerCase();
+    
+    if (desc.includes('sun') || desc.includes('clear')) {
+      return <Sun size={32} />;
+    } else if (desc.includes('rain') || desc.includes('drizzle') || desc.includes('shower')) {
+      return <CloudRain size={32} />;
+    } else if (desc.includes('snow') || desc.includes('blizzard')) {
+      return <CloudSnow size={32} />;
+    } else if (desc.includes('cloud') || desc.includes('overcast')) {
+      return <Cloud size={32} />;
+    } else {
+      // Default icon
+      return <Sun size={32} />;
+    }
+  };
 
   // Translations
   const translations = {
@@ -71,11 +90,9 @@ export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }
     return (
       <div className={`glass-card p-5 shadow-lg border border-white/10 ${className}`}>
         <div className="h-full flex flex-col justify-center items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/40 mb-3">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-          </svg>
+          <div className="w-12 h-12 rounded-full bg-accent-color/20 flex items-center justify-center mb-3 text-accent-color shadow-glow-sm">
+            <Cloud size={24} />
+          </div>
           <p className="text-white/70 text-sm text-center">{translations.error[language]}</p>
         </div>
       </div>
@@ -94,11 +111,9 @@ export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }
               {translations.weatherIn[language]} {weather.location}
             </h4>
           </div>
-          <img 
-            src={weather.iconUrl} 
-            alt={weather.description} 
-            className="w-16 h-16 -mr-2 -mt-2" 
-          />
+          <div className="w-16 h-16 rounded-full bg-accent-color/20 flex items-center justify-center mr-1 -mt-2 text-accent-color shadow-glow-sm">
+            {getWeatherIcon(weather.description)}
+          </div>
         </div>
         
         <div className="flex items-end gap-2 mt-2">
@@ -107,16 +122,25 @@ export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }
         </div>
         
         <div className="grid grid-cols-3 gap-3 mt-auto pt-4 text-sm text-white opacity-90">
-          <div>
-            <p className="opacity-60 text-xs">{translations.feelsLike[language]}:</p>
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-accent-color/20 flex items-center justify-center mb-1 text-accent-color shadow-glow-sm">
+              <Thermometer size={16} />
+            </div>
+            <p className="opacity-60 text-xs">{translations.feelsLike[language]}</p>
             <p className="font-medium">{weather.feelsLike}°C</p>
           </div>
-          <div>
-            <p className="opacity-60 text-xs">{translations.humidity[language]}:</p>
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-accent-color/20 flex items-center justify-center mb-1 text-accent-color shadow-glow-sm">
+              <Droplets size={16} />
+            </div>
+            <p className="opacity-60 text-xs">{translations.humidity[language]}</p>
             <p className="font-medium">{weather.humidity}%</p>
           </div>
-          <div>
-            <p className="opacity-60 text-xs">{translations.wind[language]}:</p>
+          <div className="flex flex-col items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-accent-color/20 flex items-center justify-center mb-1 text-accent-color shadow-glow-sm">
+              <Wind size={16} />
+            </div>
+            <p className="opacity-60 text-xs">{translations.wind[language]}</p>
             <p className="font-medium">{weather.windSpeed} m/s</p>
           </div>
         </div>
