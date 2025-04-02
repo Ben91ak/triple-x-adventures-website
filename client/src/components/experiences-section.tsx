@@ -631,8 +631,8 @@ export function ExperiencesSection() {
 {/* Removed background gradient for consistency */}
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between mb-16">
-          <div className="text-center md:text-left mb-8 md:mb-0">
+        <div className="flex flex-col md:flex-row items-start justify-between mb-16">
+          <div className="text-center md:text-left mb-8 md:mb-0 flex-grow">
             <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
               {language === 'de' ? 'Unsere Erlebnisse' : language === 'sv' ? 'Våra Upplevelser' : 'Our Experiences'}
             </span>
@@ -645,8 +645,11 @@ export function ExperiencesSection() {
           </div>
           
           {/* Weather widget */}
-          <div className="w-full md:w-auto">
-            <WeatherWidget className="w-full md:w-64" location="Arvidsjaur,Sweden" />
+          <div className="flex-shrink-0 w-full sm:max-w-xs md:w-auto self-stretch md:self-end mt-4 md:mt-0">
+            <WeatherWidget 
+              className="w-full md:w-[280px] lg:w-[320px] h-full min-h-[160px] md:min-h-0" 
+              location="Arvidsjaur,Sweden" 
+            />
           </div>
         </div>
         
