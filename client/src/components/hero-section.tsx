@@ -149,31 +149,37 @@ export function HeroSection() {
         </div>
         
         {/* Load video with improved transition time - increased brightness */}
-        <video 
-          ref={videoRef}
-          className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-300 opacity-0`}
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          preload="auto"
-          style={{ 
-            objectFit: 'cover',
-            width: '100%',
-            height: '100%',
-            filter: 'brightness(1.25) contrast(1.05)'
-          }}
-          onCanPlay={() => {
-            // Only show video once it's ready to play
-            if (videoRef.current) {
-              videoRef.current.classList.remove('opacity-0');
-              videoRef.current.classList.add('opacity-100');
-            }
-          }}
-          onError={() => setVideoError(true)}
-        >
-          <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
-        </video>
+        {/* Video background with fallback for errors */}
+        {!videoError ? (
+          <video 
+            ref={videoRef}
+            className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-300 opacity-0`}
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            preload="auto"
+            style={{ 
+              objectFit: 'cover',
+              width: '100%',
+              height: '100%',
+              filter: 'brightness(1.25) contrast(1.05)'
+            }}
+            onCanPlay={() => {
+              // Only show video once it's ready to play
+              if (videoRef.current) {
+                videoRef.current.classList.remove('opacity-0');
+                videoRef.current.classList.add('opacity-100');
+              }
+            }}
+            onError={() => setVideoError(true)}
+          >
+            <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
+          </video>
+        ) : (
+          // Fallback for when video fails to load
+          <div className="absolute inset-0 bg-gradient-to-b from-accent-color/20 to-dark-bg/50 opacity-80 animate-aurora-slow"></div>
+        )}
       </div>
       
       {/* Dark overlay for text contrast - reduced opacity for brighter video */}
