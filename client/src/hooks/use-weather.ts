@@ -11,7 +11,7 @@ interface WeatherData {
   windSpeed: number;
 }
 
-export function useWeather(location: string = "Kiruna,se") {
+export function useWeather(location: string = "Kiruna,Sweden") {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -20,24 +20,26 @@ export function useWeather(location: string = "Kiruna,se") {
 
   const fetchWeather = async (): Promise<WeatherData> => {
     try {
+      // Using our proxy endpoint to Weatherstack API
       const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
+        `/api/weather?query=${encodeURIComponent(location)}`
       );
       
       if (!response.ok) {
-        throw new Error("Weather data fetch failed");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Weather data fetch failed");
       }
       
       const data = await response.json();
       
       return {
-        location: data.name,
-        temperature: Math.round(data.main.temp),
-        description: data.weather[0].description,
-        iconUrl: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
-        feelsLike: Math.round(data.main.feels_like),
-        humidity: data.main.humidity,
-        windSpeed: Math.round(data.wind.speed)
+        location: data.location.name,
+        temperature: Math.round(data.current.temperature),
+        description: data.current.weather_descriptions[0] || "Clear",
+        iconUrl: data.current.weather_icons[0] || "",
+        feelsLike: Math.round(data.current.feelslike),
+        humidity: data.current.humidity,
+        windSpeed: Math.round(data.current.wind_speed)
       };
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -48,7 +50,7 @@ export function useWeather(location: string = "Kiruna,se") {
   return useQuery({
     queryKey: ["weather", location],
     queryFn: fetchWeather,
-    enabled: isClient && !!import.meta.env.VITE_WEATHER_API_KEY,
+    enabled: isClient, // We're now using the server's environment variable
     refetchInterval: 30 * 60 * 1000, // Refetch every 30 minutes
     staleTime: 15 * 60 * 1000, // Data considered fresh for 15 minutes
   });

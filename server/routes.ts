@@ -5,6 +5,56 @@ import { contactFormSchema, adventureFormSchema } from "@shared/schema";
 import { z } from "zod";
 import { ZodError } from "zod";
 import { sendContactEmail, sendAdventureEmail } from "./emailService";
+import fetch from "node-fetch";
+
+// Weatherstack API response interfaces
+interface WeatherstackError {
+  success: boolean;
+  error: {
+    code: number;
+    type: string;
+    info: string;
+  };
+}
+
+interface WeatherstackSuccess {
+  request: {
+    type: string;
+    query: string;
+    language: string;
+    unit: string;
+  };
+  location: {
+    name: string;
+    country: string;
+    region: string;
+    lat: string;
+    lon: string;
+    timezone_id: string;
+    localtime: string;
+    localtime_epoch: number;
+    utc_offset: string;
+  };
+  current: {
+    observation_time: string;
+    temperature: number;
+    weather_code: number;
+    weather_icons: string[];
+    weather_descriptions: string[];
+    wind_speed: number;
+    wind_degree: number;
+    wind_dir: string;
+    pressure: number;
+    precip: number;
+    humidity: number;
+    cloudcover: number;
+    feelslike: number;
+    uv_index: number;
+    visibility: number;
+  };
+}
+
+type WeatherstackResponse = WeatherstackSuccess | WeatherstackError;
 
 export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
@@ -61,7 +111,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Weather API endpoint removed as requested
+  // Weather API proxy endpoint for Weatherstack
+  router.get("/weather", async (req, res) => {
+    try {
+      const { query } = req.query;
+      if (!query) {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Query parameter is required" 
+        });
+      }
+
+      const apiKey = process.env.WEATHER_API_KEY;
+      if (!apiKey) {
+        return res.status(500).json({ 
+          success: false, 
+          message: "Weather API key is not configured" 
+        });
+      }
+
+      // Proxy the request to Weatherstack
+      const response = await fetch(
+        `http://api.weatherstack.com/current?access_key=${apiKey}&query=${query}&units=m`
+      );
+      
+      const data = await response.json() as WeatherstackResponse;
+      
+      if ('error' in data) {
+        return res.status(400).json({ 
+          success: false, 
+          message: data.error.info || "Weather API error" 
+        });
+      }
+      
+      res.json(data);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to fetch weather data" 
+      });
+    }
+  });
 
   // Get all contact submissions (would be admin only in a real app)
   router.get("/contact", async (req, res) => {
