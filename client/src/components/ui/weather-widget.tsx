@@ -54,18 +54,20 @@ export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }
   if (isLoading) {
     return (
       <div className={`glass-card p-4 rounded-xl border border-white/5 bg-black/60 animate-pulse ${className}`}>
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="w-1/2 h-3 bg-white/10 rounded"></div>
           <div className="w-2/3 h-4 bg-white/10 rounded"></div>
-          <div className="flex items-center space-x-5 pt-1">
-            <div className="w-16 h-10 bg-white/10 rounded"></div>
-            <div className="flex-1 h-4 bg-white/5 rounded"></div>
-            <div className="flex space-x-3">
-              <div className="w-8 h-4 bg-white/10 rounded"></div>
-              <div className="w-8 h-4 bg-white/10 rounded"></div>
-              <div className="w-8 h-4 bg-white/10 rounded"></div>
-              <div className="w-6 h-6 bg-white/10 rounded-full"></div>
+          <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-9 bg-white/10 rounded"></div>
+              <div className="w-24 h-4 bg-white/5 rounded"></div>
             </div>
+            <div className="w-6 h-6 bg-white/10 rounded-full"></div>
+          </div>
+          <div className="flex mt-1 space-x-4">
+            <div className="w-10 h-3 bg-white/10 rounded"></div>
+            <div className="w-10 h-3 bg-white/10 rounded"></div>
+            <div className="w-14 h-3 bg-white/10 rounded"></div>
           </div>
         </div>
       </div>
@@ -77,10 +79,10 @@ export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }
       <div className={`glass-card p-4 rounded-xl border border-white/5 bg-black/60 ${className}`}>
         <div className="flex justify-between items-center">
           <div>
-            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Error</p>
-            <p className="text-white/60 text-sm">Weather unavailable</p>
+            <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Weather</p>
+            <p className="text-white/60 text-sm">Currently unavailable</p>
           </div>
-          <Cloud className="text-white/40" size={22} />
+          <Cloud className="text-white/40" size={20} />
         </div>
       </div>
     );
@@ -88,7 +90,7 @@ export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }
 
   return (
     <div className={`glass-card p-4 rounded-xl border border-white/5 bg-black/60 hover:border-white/10 transition-colors duration-300 ${className}`}>
-      <div className="space-y-3">
+      <div className="space-y-2">
         {/* Upper section */}
         <p className="text-white/40 text-xs tracking-wider uppercase">
           {translations.currentConditions[language]}
@@ -100,35 +102,35 @@ export function WeatherWidget({ className = "", location = "Arvidsjaur,Sweden" }
           <span className="ml-1">{weather.location.split(',')[0]}</span>
         </div>
         
-        {/* Bottom section with temperature and icons in line */}
-        <div className="flex items-center space-x-5">
-          {/* Temperature */}
-          <div className="flex items-baseline">
-            <span className="text-white text-6xl font-light">{Math.round(weather.temperature)}°</span>
-          </div>
-          
-          {/* Weather description */}
-          <div className="flex-1">
+        {/* Temperature and icon section */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            {/* Temperature */}
+            <span className="text-white text-5xl font-light">{Math.round(weather.temperature)}°</span>
+            
+            {/* Weather description */}
             <span className="text-white/60 text-sm capitalize">{weather.description}</span>
           </div>
           
-          {/* Icons in a row */}
-          <div className="flex items-center space-x-3">
-            <div className="flex items-center">
-              <Thermometer className="text-white/60 mr-1" size={16} />
-              <span className="text-white/80 text-sm">{Math.round(weather.feelsLike)}°</span>
-            </div>
-            <div className="flex items-center">
-              <Droplets className="text-white/60 mr-1" size={16} />
-              <span className="text-white/80 text-sm">{weather.humidity}%</span>
-            </div>
-            <div className="flex items-center">
-              <Wind className="text-white/60 mr-1" size={16} />
-              <span className="text-white/80 text-sm">{weather.windSpeed}</span>
-            </div>
-            <div className="text-white/60">
-              {getWeatherIcon(weather.description)}
-            </div>
+          {/* Weather icon */}
+          <div className="text-white/70">
+            {getWeatherIcon(weather.description)}
+          </div>
+        </div>
+        
+        {/* Weather details row */}
+        <div className="flex mt-1 space-x-4 text-white/70 text-xs">
+          <div className="flex items-center">
+            <Thermometer className="mr-1" size={14} />
+            <span>{Math.round(weather.feelsLike)}°</span>
+          </div>
+          <div className="flex items-center">
+            <Droplets className="mr-1" size={14} />
+            <span>{weather.humidity}%</span>
+          </div>
+          <div className="flex items-center">
+            <Wind className="mr-1" size={14} />
+            <span>{weather.windSpeed} m/s</span>
           </div>
         </div>
       </div>
