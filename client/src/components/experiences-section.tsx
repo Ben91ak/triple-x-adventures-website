@@ -646,21 +646,24 @@ export function ExperiencesSection() {
 
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 will-change-transform transform-gpu contain-layout">
           {experiences.map((experience) => (
             <div 
               key={experience.id} 
-              className="group relative transition-all duration-300 hover:translate-y-[-5px] transform-gpu"
+              className="group relative will-change-transform transition-all duration-300 hover:translate-y-[-5px] transform-gpu content-visibility-auto"
+              style={{ containIntrinsicSize: '0 445px' }} /* Pre-allocate space for better scroll performance */
             >
               {/* Card background glow effect - optimized with reduced blur and transform-gpu */}
               <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-md transform-gpu will-change-opacity"></div>
               
               <div className="glass-card relative z-10 overflow-hidden bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-xl hover:shadow-lg hover:border-accent-color/30 hover:shadow-accent-color/10 transition-all duration-300 transform-gpu">
                 <div className="relative h-[225px] overflow-hidden">
-                  {/* Image with overlay */}
+                  {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
                     src={experience.image.startsWith('/') ? experience.image.substring(1) : experience.image} 
                     alt={experience.title} 
+                    loading={experience.id > 3 ? "lazy" : "eager"} /* Lazy load images that are likely below the fold */
+                    decoding="async"
                     onError={(e) => {
                       console.error(`Error loading image: ${experience.image}`);
                       // Fall back to our backup image if loading fails
@@ -672,8 +675,6 @@ export function ExperiencesSection() {
                   
                   {/* Dark gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                  
-                  {/* Price tag removed as requested */}
                   
                   {/* Bestseller/New tag */}
                   {experience.tag && (

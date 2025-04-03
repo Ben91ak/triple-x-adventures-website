@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, memo } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
@@ -59,6 +59,12 @@ export function HeroSection() {
     // Set video properties for better performance
     videoElement.playbackRate = 0.8;
     
+    // Use lower resolution on mobile - improves scrolling performance
+    if (window.innerWidth < 768) {
+      videoElement.setAttribute('disablePictureInPicture', 'true');
+      videoElement.setAttribute('disableRemotePlayback', 'true');
+    }
+    
     // Handle video loading errors
     const handleVideoError = () => {
       console.log("Video failed to load, showing fallback animation");
@@ -68,6 +74,34 @@ export function HeroSection() {
     // Handle when video can play
     const handleCanPlay = () => {
       setVideoLoaded(true);
+    };
+    
+    // Optimize video playback performance
+    const handleVisibilityChange = () => {
+      if (document.hidden && videoElement) {
+        // Pause video when tab is not visible to save resources
+        videoElement.pause();
+      } else if (videoElement && videoElement.paused) {
+        // Resume playback when tab becomes visible
+        videoElement.play().catch(() => {
+          // Fallback to animation if autoplay fails
+          handleVideoError();
+        });
+      }
+    };
+    
+    // Handle scrolling past hero section
+    const handleScroll = () => {
+      // Only run this check when scrolling down (performance optimization)
+      if (window.scrollY > window.innerHeight && videoElement && !videoElement.paused) {
+        // Pause video when scrolled out of view
+        videoElement.pause();
+      } else if (window.scrollY < window.innerHeight / 2 && videoElement && videoElement.paused && !document.hidden) {
+        // Resume playback when scrolled back into view
+        videoElement.play().catch(() => {
+          // Silent catch - we don't want to show error here
+        });
+      }
     };
     
     // Check if the file exists by making a HEAD request
@@ -82,13 +116,18 @@ export function HeroSection() {
         handleVideoError();
       });
     
+    // Add event listeners with passive option for better performance
     videoElement.addEventListener('error', handleVideoError, { passive: true });
     videoElement.addEventListener('canplay', handleCanPlay, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Clean up event listeners
     return () => {
       videoElement.removeEventListener('error', handleVideoError);
       videoElement.removeEventListener('canplay', handleCanPlay);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
