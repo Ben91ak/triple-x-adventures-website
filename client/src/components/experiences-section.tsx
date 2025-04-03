@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Experience } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
-import { WeatherWidget } from "@/components/ui/weather-widget";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Experience data mapped by language
@@ -644,13 +643,7 @@ export function ExperiencesSection() {
             </p>
           </div>
           
-          {/* Weather widget */}
-          <div className="flex-shrink-0 w-full sm:max-w-xs md:w-auto self-stretch md:self-end mt-4 md:mt-0">
-            <WeatherWidget 
-              className="w-full md:w-[280px] lg:w-[320px] h-full min-h-[160px] md:min-h-0" 
-              location="Arvidsjaur,Sweden" 
-            />
-          </div>
+
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
