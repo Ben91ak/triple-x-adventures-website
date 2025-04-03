@@ -13,9 +13,9 @@ const experiencesByLanguage = {
       title: "Snowmobile Adventure",
       description: "Experience the freedom on a snowmobile through the snowy wilderness of Swedish Lapland. Perfect for beginners and advanced riders alike.",
       price: 2495,
-      image: "/images/experiences/snowmobile.jpg",
+      image: "/images/snowmobile.jpg",
       gallery: [
-        "/images/experiences/snowmobile.jpg",
+        "/images/snowmobile.jpg",
         "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1603475215943-7ef1fe62ad19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1574985734577-6339de6b0a7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"

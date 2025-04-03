@@ -70,6 +70,18 @@ export function HeroSection() {
       setVideoLoaded(true);
     };
     
+    // Check if the file exists by making a HEAD request
+    fetch("/videos/TXA Teaser 2025 (1).mp4", { method: 'HEAD' })
+      .then(response => {
+        // If the response is not ok or content length is 0, consider it an error
+        if (!response.ok || (response.headers.get('Content-Length') === '0')) {
+          handleVideoError();
+        }
+      })
+      .catch(() => {
+        handleVideoError();
+      });
+    
     videoElement.addEventListener('error', handleVideoError, { passive: true });
     videoElement.addEventListener('canplay', handleCanPlay, { passive: true });
     
