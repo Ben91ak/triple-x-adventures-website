@@ -105,7 +105,7 @@ export function HeroSection() {
     };
     
     // Check if the file exists by making a HEAD request
-    fetch("/videos/TXA Teaser 2025 (1).mp4", { method: 'HEAD' })
+    fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' })
       .then(response => {
         // If the response is not ok or content length is 0, consider it an error
         if (!response.ok || (response.headers.get('Content-Length') === '0')) {
@@ -186,7 +186,7 @@ export function HeroSection() {
                 filter: 'brightness(1.25) contrast(1.05)'
               }}
             >
-              <source src="/videos/TXA Teaser 2025 (1).mp4" type="video/mp4" />
+              <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
