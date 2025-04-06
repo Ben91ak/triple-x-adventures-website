@@ -168,7 +168,7 @@ export function HeroSection() {
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
       {/* BASE LAYER - Using the global background - complemented with section-specific elements */}
-      <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 15 }}>
+      <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 5 }}>
         {/* Using the global background - complemented with a subtle overlay */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
           {/* Simple glow effect to complement global background */}
@@ -196,7 +196,7 @@ export function HeroSection() {
                 width: '100%',
                 height: '100%',
                 filter: 'brightness(1.0) contrast(1.05)',
-                zIndex: 15,
+                zIndex: 6,
                 position: 'absolute'
               }}
             >
