@@ -3,6 +3,7 @@ import { Experience } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { getOptimizedImageSrc, optimizePageImages } from "@/utils/image-optimizer";
 
 // Experience data mapped by language
 const experiencesByLanguage = {
@@ -10,16 +11,15 @@ const experiencesByLanguage = {
     {
       id: 1,
       title: "Join Us for an Amazing Snowmobile Adventure!",
-      description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. 2hr, 4hr & 6hr tours available.",
-      price: 2495,
+      description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. Choose from 2hr, 4hr & 6hr tours for your perfect adventure.",
       image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
         "/images/Snowmobile/Snowmobile.jpg",
         "/images/Snowmobile/Snowmobile 2.jpg",
         "/images/Snowmobile/Snowmobile 3.jpg",
-        "/images/Snowmobile/Snwomobile 4.jpg"
+        "/images/Snowmobile/Snowmobile 4.jpg"
       ],
-      fullDescription: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.\n\n━━━ PICK YOUR ADVENTURE ━━━\n\n🔸 2-HOUR BACKCOUNTRY TOUR\nGreat if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 4-HOUR BACKCOUNTRY TOUR\nExplore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 6-HOUR BACKCOUNTRY ADVENTURE\nThe ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.\n• One-seater snowmobile\n• Two-seater available on request\n\n━━━ IMPORTANT INFORMATION ━━━\n\n• Children can join as passengers, making it perfect for family fun\n• Minimum age for drivers: 16 years\n• Valid 125cc driving license required for drivers\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMore than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!",
+      fullDescription: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.\n\n━━━ PICK YOUR ADVENTURE ━━━\n\n🔸 2-HOUR BACKCOUNTRY TOUR\nGreat if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 4-HOUR BACKCOUNTRY TOUR\nExplore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 6-HOUR BACKCOUNTRY ADVENTURE\nThe ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.\n• One-seater snowmobile\n• Two-seater available on request\n\n━━━ IMPORTANT INFORMATION ━━━\n\n• Children can join as passengers, making it perfect for family fun\n• Minimum age for drivers: 18 years with valid B driver's license\n• Two-seater snowmobiles available for families or couples\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMore than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!",
       tag: {
         text: "Bestseller",
         type: "bestseller" as "bestseller"
@@ -28,8 +28,7 @@ const experiencesByLanguage = {
     {
       id: 2,
       title: "Husky Sledding Tour",
-      description: "Guide your own team of Siberian and Alaskan huskies across untouched snowy landscapes. Choose from passive or active driving tours.",
-      price: 1895,
+      description: "Guide your own team of Siberian and Alaskan huskies across untouched snowy landscapes. Experience both passive and active driving options on 1.5-2 hour tours.",
       image: "/images/Huskys/Husky.jpg",
       gallery: [
         "/images/Huskys/Husky.jpg",
@@ -47,7 +46,6 @@ const experiencesByLanguage = {
       id: 3,
       title: "JayJay's Restaurant",
       description: "Fine Lapland cuisine in a cozy cabin with Northern Lights views. Experience local flavors from the Arctic prepared by expert chefs.",
-      price: 1695,
       image: "/images/JayJays-Restaurant.jpg",
       gallery: [
         "/images/JayJays-Restaurant.jpg",
@@ -58,7 +56,7 @@ const experiencesByLanguage = {
       id: 4,
       title: "Ice Karting Experience",
       description: "Race special karts on a frozen lake circuit with pro instructors. Feel the rush of drifting on ice in this thrilling winter activity.",
-      price: 1495,
+      
       image: "/images/Ice Kart.jpg",
       gallery: [
         "/images/Ice Kart.jpg",
@@ -69,7 +67,7 @@ const experiencesByLanguage = {
       id: 5,
       title: "Reindeer Farm Visit",
       description: "Meet Lapland's iconic reindeer and learn about Sami traditions. Feed the animals and enjoy authentic local food in a traditional setting.",
-      price: 1095,
+      
       image: "/images/Reindeers.jpg",
       gallery: [
         "/images/Reindeers.jpg",
@@ -80,7 +78,7 @@ const experiencesByLanguage = {
       id: 6,
       title: "Helicopter Scenic Flight",
       description: "Soar above pristine Arctic wilderness for stunning aerial views. Expert pilots guide you over mountains, forests, and frozen lakes.",
-      price: 3295,
+      
       image: "/images/Helikopter.jpg",
       gallery: [
         "/images/Helikopter.jpg",
@@ -95,7 +93,7 @@ const experiencesByLanguage = {
       id: 7,
       title: "Ice Drifting Experience",
       description: "Learn performance driving on ice with pro instructors. Master controlled drifts in specially equipped cars on our frozen lake circuit.",
-      price: 2295,
+      
       image: "/images/Drifting.jpg",
       gallery: [
         "/images/Drifting.jpg",
@@ -106,7 +104,7 @@ const experiencesByLanguage = {
       id: 8,
       title: "Ice Fishing Adventure",
       description: "Experience tranquil ice fishing on a secluded frozen lake. Learn traditional techniques and enjoy your fresh catch cooked over an open fire.",
-      price: 1295,
+      
       image: "/images/Ice-Fishing.jpg",
       gallery: [
         "/images/Ice-Fishing.jpg",
@@ -117,7 +115,7 @@ const experiencesByLanguage = {
       id: 9,
       title: "Side-by-Side Buggy Adventure",
       description: "Drive powerful off-road buggies through snow-covered forests and frozen lakes. Feel the thrill of exploring pristine Arctic wilderness.",
-      price: 1895,
+      
       image: "/images/Side-By-Side-Buggy-Drifting.jpg",
       gallery: [
         "/images/Side-By-Side-Buggy-Drifting.jpg",
@@ -133,8 +131,8 @@ const experiencesByLanguage = {
     {
       id: 1,
       title: "Snowmobile Abenteuer",
-      description: "Fahren Sie mit modernen Ski-doo Modellen durch verschneiten Lappland. Touren für 2, 4 & 6 Stunden verfügbar.",
-      price: 2495,
+      description: "Fahren Sie mit modernen Ski-doo Modellen durch verschneiten Lappland. Wählen Sie aus 2-, 4- oder 6-Stunden-Touren für Ihr perfektes Abenteuer.",
+      
       image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
         "/images/Snowmobile/Snowmobile.jpg",
@@ -150,8 +148,8 @@ const experiencesByLanguage = {
     {
       id: 2,
       title: "Husky Schlittentour",
-      description: "Führen Sie Ihr eigenes Hundeschlittenteam durch die atemberaubende arktische Wildnis. Ein unvergessliches Erlebnis mit freundlichen Huskies.",
-      price: 1895,
+      description: "Führen Sie Ihr eigenes Hundeschlittenteam durch die atemberaubende arktische Wildnis. Wählen Sie zwischen passiv oder aktiv fahren auf 1,5-2 Stunden Touren.",
+      
       image: "/images/Huskys/Husky.jpg",
       gallery: [
         "/images/Huskys/Husky.jpg",
@@ -164,7 +162,7 @@ const experiencesByLanguage = {
       id: 3,
       title: "JayJay's Restaurant",
       description: "Genießen Sie authentische Lappländische Küche in gemütlicher Atmosphäre mit Blick auf die Nordlichter. Unser Restaurant bietet ein einzigartiges Speisenerlebnis mit lokalen Zutaten.",
-      price: 1695,
+      
       image: "/images/JayJays-Restaurant.jpg",
       gallery: [
         "/images/JayJays-Restaurant.jpg",
@@ -174,7 +172,7 @@ const experiencesByLanguage = {
       id: 4,
       title: "Eiskart Erlebnis",
       description: "Fahren Sie speziell entworfene Karts auf einer gefrorenen Seestrecke mit fachkundiger Anleitung. Ein adrenalingeladenes Winterfahrerlebnis.",
-      price: 1495,
+      
       image: "/images/Ice Kart.jpg",
       gallery: [
         "/images/Ice Kart.jpg",
@@ -184,7 +182,7 @@ const experiencesByLanguage = {
       id: 5,
       title: "Rentier Farm Besuch",
       description: "Treffen Sie die ikonischen Rentiere Lapplands, lernen Sie über die Sami-Kultur und genießen Sie eine traditionelle Mahlzeit in authentischer Umgebung.",
-      price: 1095,
+      
       image: "/images/Reindeers.jpg",
       gallery: [
         "/images/Reindeers.jpg",
@@ -194,7 +192,7 @@ const experiencesByLanguage = {
       id: 6,
       title: "Hubschrauber Panoramaflug",
       description: "Schweben Sie über die arktische Landschaft für eine atemberaubende Luftperspektive von Bergen, Wäldern und gefrorenen Seen.",
-      price: 3295,
+      
       image: "/images/Helikopter.jpg",
       gallery: [
         "/images/Helikopter.jpg",
@@ -208,7 +206,7 @@ const experiencesByLanguage = {
       id: 7,
       title: "Eisdrifting Erlebnis",
       description: "Meistern Sie die Kunst des kontrollierten Driftens auf einem gefrorenen See in einem Leistungsfahrzeug mit professionellen Instruktoren.",
-      price: 2295,
+      
       image: "/images/Drifting.jpg",
       gallery: [
         "/images/Drifting.jpg",
@@ -218,7 +216,7 @@ const experiencesByLanguage = {
       id: 8,
       title: "Eisangeln Abenteuer",
       description: "Versuchen Sie sich im traditionellen Eisangeln auf einem gefrorenen See. Lernen Sie Techniken von Experten und genießen Sie Ihren frischen Fang, zubereitet über offenem Feuer.",
-      price: 1295,
+      
       image: "/images/Ice-Fishing.jpg",
       gallery: [
         "/images/Ice-Fishing.jpg",
@@ -228,7 +226,7 @@ const experiencesByLanguage = {
       id: 9,
       title: "Side-by-Side Buggy Abenteuer",
       description: "Navigieren Sie durch schneebedecktes Gelände in einem leistungsstarken Geländefahrzeug. Erleben Sie den Nervenkitzel des Driftens und erkunden Sie unberührte Winterlandschaften.",
-      price: 1895,
+      
       image: "/images/Side-By-Side-Buggy-Drifting.jpg",
       gallery: [
         "/images/Side-By-Side-Buggy-Drifting.jpg",
@@ -243,8 +241,8 @@ const experiencesByLanguage = {
     {
       id: 1,
       title: "Snöskoter Äventyr",
-      description: "Kör genom orörd snö i Svenska Lappland med toppmoderna Ski-doo skotrar. Turer på 2, 4 & 6 timmar finns.",
-      price: 2495,
+      description: "Kör genom orörd snö i Svenska Lappland med toppmoderna Ski-doo skotrar. Välj mellan 2-, 4- eller 6-timmars turer för ditt perfekta äventyr.",
+      
       image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
         "/images/Snowmobile/Snowmobile.jpg",
@@ -260,8 +258,8 @@ const experiencesByLanguage = {
     {
       id: 2,
       title: "Husky Slädhundstur",
-      description: "Led ditt eget hundspann genom den hisnande arktiska vildmarken. En oförglömlig upplevelse med vänliga huskies.",
-      price: 1895,
+      description: "Led ditt eget hundspann genom den hisnande arktiska vildmarken. Välj mellan passiv eller aktiv körning på 1,5-2 timmars turer.",
+      
       image: "/images/Huskys/Husky.jpg",
       gallery: [
         "/images/Huskys/Husky.jpg",
@@ -274,7 +272,7 @@ const experiencesByLanguage = {
       id: 3,
       title: "JayJay's Restaurant",
       description: "Njut av äkta lappländsk mat i en mysig atmosfär med utsikt över norrskenet. Vår restaurang erbjuder en unik matupplevelse med lokala råvaror.",
-      price: 1695,
+      
       image: "/images/JayJays-Restaurant.jpg",
       gallery: [
         "/images/JayJays-Restaurant.jpg",
@@ -284,7 +282,7 @@ const experiencesByLanguage = {
       id: 4,
       title: "Iskart Upplevelse",
       description: "Kör specialdesignade karts på en frusen sjöbana med expertvägledning. En adrenalinfylld vinterupplevelse.",
-      price: 1495,
+      
       image: "/images/Ice Kart.jpg",
       gallery: [
         "/images/Ice Kart.jpg",
@@ -294,7 +292,7 @@ const experiencesByLanguage = {
       id: 5,
       title: "Renbesök",
       description: "Träffa Lapplands ikoniska renar, lär dig om samisk kultur och njut av en traditionell måltid i en autentisk miljö.",
-      price: 1095,
+      
       image: "/images/Reindeers.jpg",
       gallery: [
         "/images/Reindeers.jpg",
@@ -304,7 +302,7 @@ const experiencesByLanguage = {
       id: 6,
       title: "Helikopter Sightseeingtur",
       description: "Sväva över det arktiska landskapet för ett hisnande flygperspektiv över berg, skogar och frusna sjöar.",
-      price: 3295,
+      
       image: "/images/Helikopter.jpg",
       gallery: [
         "/images/Helikopter.jpg",
@@ -318,7 +316,7 @@ const experiencesByLanguage = {
       id: 7,
       title: "Isdrift Upplevelse",
       description: "Bemästra konsten att kontrollera driften på en frusen sjö i en prestandabil med professionella instruktörer.",
-      price: 2295,
+      
       image: "/images/Drifting.jpg",
       gallery: [
         "/images/Drifting.jpg",
@@ -328,7 +326,7 @@ const experiencesByLanguage = {
       id: 8,
       title: "Pimpelfiske Äventyr",
       description: "Prova på traditionellt pimpelfiske på en frusen sjö. Lär dig tekniker från expertguider och njut av din nyfångade fisk tillagad över öppen eld.",
-      price: 1295,
+      
       image: "/images/Ice-Fishing.jpg",
       gallery: [
         "/images/Ice-Fishing.jpg",
@@ -338,7 +336,7 @@ const experiencesByLanguage = {
       id: 9,
       title: "Side-by-Side Buggy Äventyr",
       description: "Navigera i snötäckt terräng i en kraftfull terrängbuggy. Upplev spänningen med att drifta och utforska orörda vinterlandskap.",
-      price: 1895,
+      
       image: "/images/Side-By-Side-Buggy-Drifting.jpg",
       gallery: [
         "/images/Side-By-Side-Buggy-Drifting.jpg",
@@ -443,12 +441,13 @@ function ExperienceDetailModal({
           <div className="md:flex-1 relative overflow-hidden h-64 md:h-full">
             {/* Main image */}
             <img 
-              src={gallery[activeImageIndex]} 
+              src={getOptimizedImageSrc(gallery[activeImageIndex])} 
               alt={experience.title}
               loading="eager"
               decoding="async"
               width="800"
               height="600" 
+
               onError={(e) => {
                 console.error(`Error loading modal image: ${gallery[activeImageIndex]}`);
                 e.currentTarget.src = '/images/TXA_fallback.jpg';
@@ -699,6 +698,28 @@ export function ExperiencesSection() {
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   
+  // Run image optimization when component mounts
+  useEffect(() => {
+    // Apply image optimizations for better loading performance
+    optimizePageImages();
+    
+    // Prefetch important images (first 3 experiences)
+    const imagesToPrefetch = experiences
+      .slice(0, 3)
+      .flatMap(exp => [exp.image, ...(exp.gallery || [])])
+      .filter(Boolean)
+      .map(img => img.startsWith('/') ? img.substring(1) : img);
+      
+    // Adding a small delay to allow critical resources to load first
+    const timer = setTimeout(() => {
+      import('@/utils/image-optimizer').then(({ prefetchImages }) => {
+        prefetchImages(imagesToPrefetch);
+      });
+    }, 1000);
+    
+    return () => clearTimeout(timer);
+  }, [language]);
+  
   // Functions to navigate between experiences
   const navigateToNext = () => {
     if (!selectedExperience) return;
@@ -777,12 +798,13 @@ export function ExperiencesSection() {
                 <div className="relative h-[225px] overflow-hidden">
                   {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
-                    src={experience.image.startsWith('/') ? experience.image.substring(1) : experience.image} 
+                    src={getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image)}
                     alt={experience.title} 
                     loading={experience.id > 3 ? "lazy" : "eager"} /* Lazy load images that are likely below the fold */
                     decoding="async" 
                     width="640" 
                     height="480"
+
                     onError={(e) => {
                       console.error(`Error loading image: ${experience.image}`);
                       // Fall back to our backup image if loading fails

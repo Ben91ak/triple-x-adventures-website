@@ -168,7 +168,7 @@ export function HeroSection() {
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
       {/* BASE LAYER - Using the global background - complemented with section-specific elements */}
-      <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 5 }}>
+      <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 15 }}>
         {/* Using the global background - complemented with a subtle overlay */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
           {/* Simple glow effect to complement global background */}
@@ -186,7 +186,6 @@ export function HeroSection() {
               loop 
               playsInline
               preload="auto"
-              crossOrigin="anonymous"
               onError={(e) => {
                 console.error("Video error:", e);
                 setVideoError(true);
@@ -196,8 +195,9 @@ export function HeroSection() {
                 objectFit: 'cover',
                 width: '100%',
                 height: '100%',
-                filter: 'brightness(1.25) contrast(1.05)',
-                zIndex: 5
+                filter: 'brightness(1.0) contrast(1.05)',
+                zIndex: 15,
+                position: 'absolute'
               }}
             >
               <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
@@ -225,10 +225,10 @@ export function HeroSection() {
       </div>
       
       {/* Dark overlay for text contrast - reduced opacity for brighter video */}
-      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 6, backgroundColor: 'rgba(0, 0, 0, 0.3)' }}></div>
+      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></div>
       
       {/* Grid pattern overlay - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 7 }}></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 20 }}></div>
 
       {/* No transition overlay between sections - removed as requested */}
       

@@ -3,7 +3,7 @@ export interface Experience {
   id: number;
   title: string;
   description: string;
-  price: number;
+  price?: number;
   image: string;
   // Gallery images for the expanded view
   gallery?: string[];
