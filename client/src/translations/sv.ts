@@ -42,6 +42,7 @@ export const sv = {
           "/images/Snowmobile/Snowmobile 3.jpg",
           "/images/Snowmobile/Snwomobile 4.jpg"
         ],
+        fullDescription: "Känn pirret när du navigerar genom orörd snö och fantastiska vinterlandskap. Ta in frisk arktisk luft och njut av vackra vyer över Svenska Lappland. Våra turer är designade för att låta dig uppleva magien i området med vänliga, lokala guider som visar dig speciella platser och hjälper dig att skapa fantastiska minnen. Vi använder de senaste Ski-doo Backcountry modellerna som gör din resa säker, bekväm och rolig.\n\n━━━ VÄLJ DITT ÄVENTYR ━━━\n\n🔸 2-TIMMARS BACKCOUNTRY TUR\nPerfekt för dig som söker en kort, spännande utflykt i vildmarken. Inkluderar te och en god munsbit.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n🔸 4-TIMMARS BACKCOUNTRY TUR\nDyk djupare in i naturen med extra tid att slappna av och njuta av vyerna. Ta en paus för te och en söt munsbit i vacker miljö.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n🔸 6-TIMMARS BACKCOUNTRY ÄVENTYR\nDet ultimata äventyret för äventyrssökaren! Tillbringa dagen med att utforska olika terrängtyper och hisnande vyer. Denna tur inkluderar te, en söt munsbit och en läcker utomhuslunch.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n━━━ VIKTIG INFORMATION ━━━\n\n• Barn kan delta som passagerare, vilket gör detta perfekt för familjekul\n• Minimiålder för förare: 18 år med giltigt B-körkort\n• Dubbelskotrar tillgängliga för familjer eller par\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMer än bara en åktur - det handlar om oförglömliga stunder och spännande äventyr i Lapplands vackra vildmark!",
         tag: {
           text: "Mest populär",
           type: "bestseller"
@@ -57,7 +58,8 @@ export const sv = {
           "/images/Huskys/Husky 2.jpg",
           "/images/Huskys/Husky 3.jpg",
           "/images/Huskys/Husky 4.jpg"
-        ]
+        ],
+        fullDescription: "Upplev magin med en slädhundstur!\n\nKänn spänningen av att leda ditt eget team av entusiastiska sibiriska och alaskan huskies genom orörda, snötäckta landskap. Efter en informativ introduktion och säkerhetsgenomgång styr du din egen släde, dragen av upp till 12 ivriga huskies. Hör hur deras upphetsade skall övergår till koncentrerad tystnad medan ni glider genom den hisnande arktiska vildmarken.\n\n━━━ VÄLJ DITT HUSKY-ÄVENTYR ━━━\n\n• Passiv tur: Luta dig tillbaka, slappna av och njut av färden! Upp till 4 gäster bekvämt placerade i en släde, körd av en erfaren musher.\n\n• Aktiv tur: Turas om att köra! Två gäster per släde, en kör och en sitter. Byt plats under turen för att fullt ut uppleva båda upplevelserna.\n\n━━━ TURDETALJER ━━━\n\n• Rutter: Skräddarsydda 10-15 km spår\n• Längd: 1,5-2 timmar\n• Svårighetsgrad: Lämplig för alla nivåer\n• Utrustning: Vinterkläder och stövlar tillhandahålls\n\nEtt autentiskt arktiskt äventyr som kopplar dig djupt till naturen och skapar oförglömliga minnen!"
       },
       {
         id: 3,
@@ -66,7 +68,8 @@ export const sv = {
         image: "/images/JayJays-Restaurant.jpg",
         gallery: [
           "/images/JayJays-Restaurant.jpg"
-        ]
+        ],
+        fullDescription: "JayJay's Restaurant erbjuder en oförglömlig kulinarisk upplevelse i hjärtat av Svenska Lappland. Beläget i Sameland, hemmabasen för Triple X Adventures, kan du njuta av gourmetmåltider tillagade över öppen eld. Våra talangfulla kockar skapar utsökta rätter med färska, lokalt anskaffade ingredienser inklusive röding, ren, vilda bär och skogsvampar. Den intima atmosfären kombinerar rustik charm med elegant matlagning, vilket gör den perfekt för både vardagliga måltider och speciella tillfällen. Vår meny ändras med säsongerna för att framhäva de bästa smakerna från Lappland, och varje rätt berättar en historia om regionens rika kulinariska arv. Avsluta din matupplevelse med vårt urval av fina viner och hantverksmässiga cocktails med lokala sprit."
       },
       {
         id: 4,
@@ -75,7 +78,8 @@ export const sv = {
         image: "/images/Ice Kart.jpg",
         gallery: [
           "/images/Ice Kart.jpg"
-        ]
+        ],
+        fullDescription: "Upplev den unika spänningen av att köra på is med vårt specialiserade Iskart-äventyr. Känn spänningen när du glider runt hörn och bemästrar konsten att kontrollera ett fordon under utmanande vinterförhållanden. Denna upplevelse passar alla färdighetsnivåer, från nybörjare till erfarna förare som vill testa sina färdigheter. All nödvändig utrustning tillhandahålls, inklusive hjälmar, FXR-overaller och handskar. Tävla mot vänner och familj om den snabbaste varvtiden i denna oförglömliga arktiska motorsportupplevelse."
       },
       {
         id: 5,
