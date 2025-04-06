@@ -88,7 +88,8 @@ export const sv = {
         image: "/images/Reindeers.jpg",
         gallery: [
           "/images/Reindeers.jpg"
-        ]
+        ],
+        fullDescription: "Kliv in i samernas värld och deras mest värdefulla djur - renen. Besök våra renar och få chansen att fånga ett äkta minne med dessa magnifika varelser. Kom nära renarna, mata dem och lär dig om deras säsongsmässiga migration och anpassning till det stränga arktiska klimatet."
       },
       {
         id: 6,
@@ -98,6 +99,7 @@ export const sv = {
         gallery: [
           "/images/Helikopter.jpg"
         ],
+        fullDescription: "Ta till skyarna för ett oförglömligt perspektiv av Svenska Lapplands andlösa landskap på vår sceniska helikoptertur. Från din privilegierade utsiktsplats kommer du att bevittna den arktiska vildmarkens vidd som sträcker sig till horisonten - snötäckta skogar, frusna sjöar, bergskedjor och kanske även vilda djur. Din pilot kommer att ge informativa kommentarer genom ditt headset, peka ut anmärkningsvärda landmärken och dela intressanta fakta om regionen. Denna exklusiva upplevelse erbjuder oöverträffade fotomöjligheter och en känsla av Lapplands verkliga omfattning och skönhet som inte kan uppskattas från marken. Varje flygväg är noggrant planerad för att visa upp den mest spektakulära naturen samtidigt som miljöpåverkan minimeras.",
         tag: {
           text: "Ny",
           type: "new"
@@ -110,7 +112,8 @@ export const sv = {
         image: "/images/Drifting.jpg",
         gallery: [
           "/images/Drifting.jpg"
-        ]
+        ],
+        fullDescription: "Känn spänningen av att glida i sidled på is i vår Isdrift-upplevelse. Under ledning av professionella körinstruktörer kommer du att lära dig teknikerna för att kontrollera ett fordon under extrema vinterförhållanden. Med specialpreparerade prestandabilar utrustade med dubbdäck kommer du att öva driftteknik på vår särskilt byggda isbana. Börja med grundläggande övningar och gå vidare till mer komplexa manövrer när ditt självförtroende växer. Denna upplevelse är perfekt för körningsintresserade som vill förbättra sina vinterkörningsfärdigheter i en säker och kontrollerad miljö. Alla förare får grundlig instruktion och har möjlighet till flera körsessioner för att perfekta sin teknik."
       },
       {
         id: 8,
@@ -119,7 +122,8 @@ export const sv = {
         image: "/images/Ice-Fishing.jpg",
         gallery: [
           "/images/Ice-Fishing.jpg"
-        ]
+        ],
+        fullDescription: "Upplev den fridfulla traditionen av pimpelfiske i hjärtat av Lapplands vinterlandskap. Ditt äventyr börjar med en snöskotertur till en avskild frusen sjö omgiven av orörd skogsmiljö. Våra erfarna guider kommer att lära dig traditionella pimpelfisketekniker och hjälpa dig att borra hål i den tjocka isen. Medan du väntar på att arktiska fiskarter som abborre och röding ska nappa, värmer du dig vid en sprakande eld och lyssnar på berättelser om lokala fisketraditioner. Denna mindfulness-upplevelse kopplar dig till naturen medan du njuter av den rofyllda skönheten i den arktiska vildmarken. Höjdpunkten på turen är att njuta av din nyfångade fisk, beredd och tillagad av din guide över öppen eld - den ultimata vildmarksmatupplevelsen."
       },
       {
         id: 9,
@@ -129,6 +133,7 @@ export const sv = {
         gallery: [
           "/images/Side-By-Side-Buggy-Drifting.jpg"
         ],
+        fullDescription: "Upplev det ultimata arktiska terrängäventyret i våra kraftfulla side-by-side-buggies. Dessa specialiserade terrängfordon är utformade för att erövra det utmanande vinterlandskapet med lätthet, så att du kan nå avlägsna områden och njuta av den orörda vildmarken. Efter en omfattande säkerhetsgenomgång tar du ratten på din egen buggy och följer våra expertguider längs särskilt utformade spår genom skogar, över frusna sjöar och snötäckta kullar. Känn rysningen när du glider runt hörn och kör genom snödrivor i dessa smidiga, responsiva fordon. Turen inkluderar stopp vid natursköna utsiktsplatser och en lunchpaus i vildmarken. Detta äventyr erbjuder en perfekt blandning av spänning och naturskönhet, lämpligt för förare på alla färdighetsnivåer.",
         tag: {
           text: "Ny",
           type: "new"

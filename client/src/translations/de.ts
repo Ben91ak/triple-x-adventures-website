@@ -88,7 +88,8 @@ export const de = {
         image: "/images/Reindeers.jpg",
         gallery: [
           "/images/Reindeers.jpg"
-        ]
+        ],
+        fullDescription: "Tauchen Sie ein in die Welt der Sami und ihres am meisten geschätzten Tieres - dem Rentier. Besuchen Sie unsere Rentiere und nutzen Sie die Chance, eine echte Erinnerung mit diesen majestätischen Geschöpfen festzuhalten. Kommen Sie den Rentieren nahe, füttern Sie sie und erfahren Sie mehr über ihre saisonale Wanderung und Anpassung an das raue arktische Klima."
       },
       {
         id: 6,
@@ -98,6 +99,7 @@ export const de = {
         gallery: [
           "/images/Helikopter.jpg"
         ],
+        fullDescription: "Begeben Sie sich in die Lüfte für eine unvergessliche Perspektive auf die atemberaubenden Landschaften Schwedisch-Lapplands während unseres Panoramahubschrauberflugs. Von Ihrem privilegierten Aussichtspunkt aus werden Sie die Weite der arktischen Wildnis bis zum Horizont erleben - schneebedeckte Wälder, gefrorene Seen, Bergketten und vielleicht sogar Wildtiere. Ihr Pilot wird Ihnen über Ihr Headset informative Kommentare geben, Sie auf bemerkenswerte Sehenswürdigkeiten hinweisen und interessante Fakten über die Region teilen. Dieses exklusive Erlebnis bietet unvergleichliche Fotomöglichkeiten und vermittelt ein Gefühl für die wahre Größe und Schönheit Lapplands, die vom Boden aus nicht zu schätzen ist. Jede Flugroute wird sorgfältig geplant, um die spektakulärste Landschaft zu präsentieren und gleichzeitig minimale Umweltauswirkungen zu gewährleisten.",
         tag: {
           text: "Neu",
           type: "new"
@@ -110,7 +112,8 @@ export const de = {
         image: "/images/Drifting.jpg",
         gallery: [
           "/images/Drifting.jpg"
-        ]
+        ],
+        fullDescription: "Erleben Sie den Nervenkitzel des seitlichen Rutschens auf Eis bei unserem Eisdrifting-Erlebnis. Unter der Anleitung professioneller Fahrlehrer erlernen Sie die Techniken, ein Fahrzeug unter extremen Winterbedingungen zu kontrollieren. Mit speziell vorbereiteten Leistungsfahrzeugen, die mit Spikereifen ausgestattet sind, üben Sie Drifttechniken auf unserer eigens dafür eingerichteten Eisbahn. Beginnen Sie mit grundlegenden Übungen und steigern Sie sich zu komplexeren Manövern, wenn Ihr Selbstvertrauen wächst. Dieses Erlebnis ist perfekt für Fahrbegeisterte, die ihre Winterfahrfähigkeiten in einer sicheren und kontrollierten Umgebung verbessern möchten. Alle Fahrer erhalten eine gründliche Einweisung und haben die Möglichkeit, mehrere Fahrsessions zu absolvieren, um ihre Technik zu perfektionieren."
       },
       {
         id: 8,
@@ -119,7 +122,8 @@ export const de = {
         image: "/images/Ice-Fishing.jpg",
         gallery: [
           "/images/Ice-Fishing.jpg"
-        ]
+        ],
+        fullDescription: "Erleben Sie die friedliche Tradition des Eisangelns im Herzen von Lapplands Winterwunderland. Ihr Abenteuer beginnt mit einer Schneemobilfahrt zu einem abgelegenen gefrorenen See, umgeben von unberührter Waldlandschaft. Unsere erfahrenen Führer werden Ihnen traditionelle Eisangeltechniken beibringen und Ihnen helfen, Löcher in das dicke Eis zu bohren. Während Sie darauf warten, dass arktische Fischarten wie Barsch und Seesaibling anbeißen, wärmen Sie sich an einem knisternden Feuer und lauschen Geschichten über lokale Angeltraditionen. Dieses achtsame Erlebnis verbindet Sie mit der Natur, während Sie die ruhige Schönheit der arktischen Wildnis genießen. Der Höhepunkt der Tour ist der Genuss Ihres frischen Fangs, der von Ihrem Führer über offenem Feuer zubereitet und gekocht wird - das ultimative Wildnahrungserlebnis."
       },
       {
         id: 9,
@@ -129,6 +133,7 @@ export const de = {
         gallery: [
           "/images/Side-By-Side-Buggy-Drifting.jpg"
         ],
+        fullDescription: "Erleben Sie das ultimative arktische Off-Road-Abenteuer in unseren leistungsstarken Side-by-Side-Buggys. Diese spezialisierten Geländefahrzeuge sind darauf ausgelegt, die herausfordernde Winterlandschaft mit Leichtigkeit zu erobern und ermöglichen Ihnen den Zugang zu entlegenen Gebieten, um die unberührte Wildnis zu genießen. Nach einer umfassenden Sicherheitseinweisung übernehmen Sie das Steuer Ihres eigenen Buggys und folgen unseren Expertenführern entlang speziell angelegter Pfade durch Wälder, über gefrorene Seen und über schneebedeckte Hügel. Spüren Sie den Nervenkitzel, wenn Sie in diesen wendigen, reaktionsschnellen Fahrzeugen um Kurven driften und durch Schneeverwehungen fahren. Die Tour beinhaltet Stopps an malerischen Aussichtspunkten und eine Mittagspause in der Wildnis. Dieses Abenteuer bietet eine perfekte Mischung aus Aufregung und Naturschönheit und ist für Fahrer aller Könnerstufen geeignet.",
         tag: {
           text: "Neu",
           type: "new"

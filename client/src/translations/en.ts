@@ -68,7 +68,7 @@ export const en = {
       {
         id: 3,
         title: "JayJay's Restaurant",
-        description: "Fine Lapland cuisine in a cozy cabin with Northern Lights views. Experience local flavors from the Arctic prepared by expert chefs.",
+        description: "Fine Lapland cuisine in Sameland, Arvidsjaur. Experience local flavors from the Arctic prepared by expert chefs.",
         image: "/images/JayJays-Restaurant.jpg",
         gallery: [
           "/images/JayJays-Restaurant.jpg"
@@ -132,7 +132,7 @@ export const en = {
       {
         id: 9,
         title: "Side-by-Side Buggy Adventure",
-        description: "Drive powerful off-road buggies through snow-covered forests and frozen lakes. Feel the thrill of exploring pristine Arctic wilderness.",
+        description: "Drive powerful off-road buggies on a frozen lake.",
         image: "/images/Side-By-Side-Buggy-Drifting.jpg",
         gallery: [
           "/images/Side-By-Side-Buggy-Drifting.jpg"
