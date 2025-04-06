@@ -565,8 +565,8 @@ function ExperienceDetailModal({
                     
                     <ul className="list-disc list-inside space-y-2 ml-4 text-white/90">
                       <li>Children can join as passengers, making it perfect for family fun</li>
-                      <li>Minimum age for drivers: 16 years</li>
-                      <li>Valid 125cc driving license required for drivers</li>
+                      <li>Minimum age for drivers: 18 years</li>
+                      <li>Valid B driving license required for drivers</li>
                     </ul>
                   </div>
                 </div>
