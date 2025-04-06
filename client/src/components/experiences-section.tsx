@@ -437,7 +437,11 @@ function ExperienceDetailModal({
             {/* Main image */}
             <img 
               src={gallery[activeImageIndex]} 
-              alt={experience.title} 
+              alt={experience.title}
+              loading="eager"
+              decoding="async"
+              width="800"
+              height="600" 
               onError={(e) => {
                 console.error(`Error loading modal image: ${gallery[activeImageIndex]}`);
                 e.currentTarget.src = '/images/TXA_fallback.jpg';
@@ -710,7 +714,9 @@ export function ExperiencesSection() {
                     src={experience.image.startsWith('/') ? experience.image.substring(1) : experience.image} 
                     alt={experience.title} 
                     loading={experience.id > 3 ? "lazy" : "eager"} /* Lazy load images that are likely below the fold */
-                    decoding="async"
+                    decoding="async" 
+                    width="640" 
+                    height="480"
                     onError={(e) => {
                       console.error(`Error loading image: ${experience.image}`);
                       // Fall back to our backup image if loading fails
