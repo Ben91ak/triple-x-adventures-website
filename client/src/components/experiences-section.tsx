@@ -10,7 +10,7 @@ const experiencesByLanguage = {
     {
       id: 1,
       title: "Join Us for an Amazing Snowmobile Adventure!",
-      description: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes of Swedish Lapland with our newest Ski-doo Backcountry Adrenalin models.",
+      description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. 2hr, 4hr & 6hr tours available.",
       price: 2495,
       image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
@@ -132,7 +132,7 @@ const experiencesByLanguage = {
     {
       id: 1,
       title: "Snowmobile Abenteuer",
-      description: "Erleben Sie die Freiheit auf einem Schneemobil durch die verschneite Wildnis von Schwedisch-Lappland. Perfekt für Anfänger und Fortgeschrittene.",
+      description: "Fahren Sie mit modernen Ski-doo Modellen durch verschneiten Lappland. Touren für 2, 4 & 6 Stunden verfügbar.",
       price: 2495,
       image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
@@ -239,7 +239,7 @@ const experiencesByLanguage = {
     {
       id: 1,
       title: "Snöskoter Äventyr",
-      description: "Upplev friheten på en snöskoter genom den snötäckta vildmarken i Svenska Lappland. Perfekt för nybörjare och erfarna åkare.",
+      description: "Kör genom orörd snö i Svenska Lappland med toppmoderna Ski-doo skotrar. Turer på 2, 4 & 6 timmar finns.",
       price: 2495,
       image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
