@@ -12,12 +12,12 @@ const experiencesByLanguage = {
       title: "Join Us for an Amazing Snowmobile Adventure!",
       description: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes of Swedish Lapland with our newest Ski-doo Backcountry Adrenalin models.",
       price: 2495,
-      image: "/images/Snowmobile.jpg",
+      image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
-        "/images/Snowmobile.jpg",
-        "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1603475215943-7ef1fe62ad19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1574985734577-6339de6b0a7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+        "/images/Snowmobile/Snowmobile.jpg",
+        "/images/Snowmobile/Snowmobile 2.jpg",
+        "/images/Snowmobile/Snowmobile 3.jpg",
+        "/images/Snowmobile/Snwomobile 4.jpg"
       ],
       fullDescription: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.\n\n━━━ PICK YOUR ADVENTURE ━━━\n\n🔸 2-HOUR BACKCOUNTRY TOUR\nGreat if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 4-HOUR BACKCOUNTRY TOUR\nExplore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 6-HOUR BACKCOUNTRY ADVENTURE\nThe ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.\n• One-seater snowmobile\n• Two-seater available on request\n\n━━━ IMPORTANT INFORMATION ━━━\n\n• Children can join as passengers, making it perfect for family fun\n• Minimum age for drivers: 16 years\n• Valid 125cc driving license required for drivers\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMore than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!",
       tag: {
@@ -134,9 +134,12 @@ const experiencesByLanguage = {
       title: "Snowmobile Abenteuer",
       description: "Erleben Sie die Freiheit auf einem Schneemobil durch die verschneite Wildnis von Schwedisch-Lappland. Perfekt für Anfänger und Fortgeschrittene.",
       price: 2495,
-      image: "/images/Snowmobile.jpg",
+      image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
-        "/images/Snowmobile.jpg",
+        "/images/Snowmobile/Snowmobile.jpg",
+        "/images/Snowmobile/Snowmobile 2.jpg",
+        "/images/Snowmobile/Snowmobile 3.jpg",
+        "/images/Snowmobile/Snwomobile 4.jpg"
       ],
       tag: {
         text: "Beliebt",
@@ -238,9 +241,12 @@ const experiencesByLanguage = {
       title: "Snöskoter Äventyr",
       description: "Upplev friheten på en snöskoter genom den snötäckta vildmarken i Svenska Lappland. Perfekt för nybörjare och erfarna åkare.",
       price: 2495,
-      image: "/images/Snowmobile.jpg",
+      image: "/images/Snowmobile/Snowmobile.jpg",
       gallery: [
-        "/images/Snowmobile.jpg",
+        "/images/Snowmobile/Snowmobile.jpg",
+        "/images/Snowmobile/Snowmobile 2.jpg",
+        "/images/Snowmobile/Snowmobile 3.jpg",
+        "/images/Snowmobile/Snwomobile 4.jpg"
       ],
       tag: {
         text: "Mest populär",
