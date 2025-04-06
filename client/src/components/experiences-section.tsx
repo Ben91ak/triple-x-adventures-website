@@ -576,49 +576,6 @@ function ExperienceDetailModal({
                 </p>
               )}
               
-              {/* Additional details */}
-              <div className="mt-6 pt-6 border-t border-white/10">
-                <h3 className="text-lg font-semibold text-white mb-3">
-                  {language === 'de' ? 'Informationen' : language === 'sv' ? 'Information' : 'Details'}
-                </h3>
-                
-                <div className="bg-card-bg/40 rounded-lg p-4 border border-white/10">
-                  <h4 className="text-accent-color font-semibold mb-3">
-                    {language === 'de' ? 'Wichtige Informationen' : language === 'sv' ? 'Viktig Information' : 'Important Information'}
-                  </h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-white/70"></div>
-                        <span className="text-white font-medium">
-                          {language === 'de' ? 'Gruppengröße' : language === 'sv' ? 'Gruppstorlek' : 'Group size'}: <span className="font-light">{language === 'de' ? 'Min. 2, Max. 8 Personen' : language === 'sv' ? 'Min. 2, Max. 8 personer' : 'Min. 2, Max. 8 persons'}</span>
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-white/70"></div>
-                        <span className="text-white font-medium">
-                          {language === 'de' ? 'Schwierigkeitsgrad' : language === 'sv' ? 'Svårighetsnivå' : 'Difficulty level'}: <span className="font-light">{language === 'de' ? 'Einfach bis Mittel' : language === 'sv' ? 'Lätt till medel' : 'Easy to medium'}</span>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-white/70"></div>
-                        <span className="text-white font-medium">
-                          {language === 'de' ? 'Alter' : language === 'sv' ? 'Ålder' : 'Age'}: <span className="font-light">{language === 'de' ? 'Mindestalter 16 Jahre für Fahrer' : language === 'sv' ? 'Lägsta ålder 16 år för förare' : 'Minimum age 16 years for drivers'}</span>
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-white/70"></div>
-                        <span className="text-white font-medium">
-                          {language === 'de' ? 'Führerschein' : language === 'sv' ? 'Körkort' : 'License'}: <span className="font-light">{language === 'de' ? '125cc Führerschein erforderlich' : language === 'sv' ? '125cc körkort krävs' : '125cc license required'}</span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
               {/* CTA button */}
               <div className="mt-8 flex flex-col md:flex-row md:items-center gap-4">
                 <a 
