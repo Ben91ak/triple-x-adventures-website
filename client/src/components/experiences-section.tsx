@@ -28,7 +28,7 @@ const experiencesByLanguage = {
     {
       id: 2,
       title: "Husky Sledding Tour",
-      description: "Lead your own dog sled team through the breathtaking Arctic wilderness. An unforgettable experience with friendly huskies.",
+      description: "Lead your own dog sled team through beautiful Arctic trails. A memorable adventure with friendly, well-trained huskies.",
       price: 1895,
       image: "/images/Husky.jpg",
       gallery: [
@@ -45,7 +45,7 @@ const experiencesByLanguage = {
     {
       id: 3,
       title: "JayJay's Restaurant",
-      description: "Enjoy authentic Lapland cuisine in a cozy atmosphere with views of the Northern Lights. Our restaurant offers a unique dining experience with local ingredients.",
+      description: "Fine Lapland cuisine in a cozy cabin with Northern Lights views. Experience local flavors from the Arctic prepared by expert chefs.",
       price: 1695,
       image: "/images/JayJays-Restaurant.jpg",
       gallery: [
@@ -56,7 +56,7 @@ const experiencesByLanguage = {
     {
       id: 4,
       title: "Ice Karting Experience",
-      description: "Race specially designed karts on a frozen lake track with expert instruction. An adrenaline-filled winter driving experience.",
+      description: "Race special karts on a frozen lake circuit with pro instructors. Feel the rush of drifting on ice in this thrilling winter activity.",
       price: 1495,
       image: "/images/Ice Kart.jpg",
       gallery: [
@@ -67,7 +67,7 @@ const experiencesByLanguage = {
     {
       id: 5,
       title: "Reindeer Farm Visit",
-      description: "Meet the iconic reindeer of Lapland, learn about Sami culture, and enjoy a traditional meal in an authentic setting.",
+      description: "Meet Lapland's iconic reindeer and learn about Sami traditions. Feed the animals and enjoy authentic local food in a traditional setting.",
       price: 1095,
       image: "/images/Reindeers.jpg",
       gallery: [
@@ -78,7 +78,7 @@ const experiencesByLanguage = {
     {
       id: 6,
       title: "Helicopter Scenic Flight",
-      description: "Soar above the Arctic landscape for a breathtaking aerial perspective of mountains, forests, and frozen lakes.",
+      description: "Soar above pristine Arctic wilderness for stunning aerial views. Expert pilots guide you over mountains, forests, and frozen lakes.",
       price: 3295,
       image: "/images/Helikopter.jpg",
       gallery: [
@@ -93,7 +93,7 @@ const experiencesByLanguage = {
     {
       id: 7,
       title: "Ice Drifting Experience",
-      description: "Master the art of controlled drifting on a frozen lake in a performance car with professional instructors.",
+      description: "Learn performance driving on ice with pro instructors. Master controlled drifts in specially equipped cars on our frozen lake circuit.",
       price: 2295,
       image: "/images/Drifting.jpg",
       gallery: [
@@ -104,7 +104,7 @@ const experiencesByLanguage = {
     {
       id: 8,
       title: "Ice Fishing Adventure",
-      description: "Try your hand at traditional ice fishing on a frozen lake. Learn techniques from expert guides and enjoy your fresh catch cooked over an open fire.",
+      description: "Experience tranquil ice fishing on a secluded frozen lake. Learn traditional techniques and enjoy your fresh catch cooked over an open fire.",
       price: 1295,
       image: "/images/Ice-Fishing.jpg",
       gallery: [
@@ -115,7 +115,7 @@ const experiencesByLanguage = {
     {
       id: 9,
       title: "Side-by-Side Buggy Adventure",
-      description: "Navigate snow-covered terrain in a powerful all-terrain buggy. Experience the thrill of drifting and exploring untouched winter landscapes.",
+      description: "Drive powerful off-road buggies through snow-covered forests and frozen lakes. Feel the thrill of exploring pristine Arctic wilderness.",
       price: 1895,
       image: "/images/Side-By-Side-Buggy-Drifting.jpg",
       gallery: [
