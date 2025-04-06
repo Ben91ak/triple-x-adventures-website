@@ -19,9 +19,131 @@ export const en = {
   
   // Experiences/Packages Section
   experiences: {
-    title: "OUR PACKAGES",
+    title: "OUR EXPERIENCES",
     subtitle: "Authentic Arctic Adventures",
-    viewAll: "View All Packages",
+    viewAll: "View All Experiences",
+    sendInquiry: "Send Inquiry",
+    nextExperience: "Next",
+    previousExperience: "Previous",
+    closeModal: "Close",
+    viewDetails: "View details",
+    bookNow: "Book Now",
+    
+    // Experience List
+    list: [
+      {
+        id: 1,
+        title: "Join Us for an Amazing Snowmobile Adventure!",
+        description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. Choose from 2hr, 4hr & 6hr tours for your perfect adventure.",
+        image: "/images/Snowmobile/Snowmobile.jpg",
+        gallery: [
+          "/images/Snowmobile/Snowmobile.jpg",
+          "/images/Snowmobile/Snowmobile 2.jpg",
+          "/images/Snowmobile/Snowmobile 3.jpg",
+          "/images/Snowmobile/Snwomobile 4.jpg"
+        ],
+        fullDescription: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.\n\n━━━ PICK YOUR ADVENTURE ━━━\n\n🔸 2-HOUR BACKCOUNTRY TOUR\nGreat if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 4-HOUR BACKCOUNTRY TOUR\nExplore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 6-HOUR BACKCOUNTRY ADVENTURE\nThe ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.\n• One-seater snowmobile\n• Two-seater available on request\n\n━━━ IMPORTANT INFORMATION ━━━\n\n• Children can join as passengers, making it perfect for family fun\n• Minimum age for drivers: 18 years with valid B driver's license\n• Two-seater snowmobiles available for families or couples\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMore than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!",
+        tag: {
+          text: "Bestseller",
+          type: "bestseller"
+        }
+      },
+      {
+        id: 2,
+        title: "Husky Sledding Tour",
+        description: "Guide your own team of Siberian and Alaskan huskies across untouched snowy landscapes. Experience both passive and active driving options on 1.5-2 hour tours.",
+        image: "/images/Huskys/Husky.jpg",
+        gallery: [
+          "/images/Huskys/Husky.jpg",
+          "/images/Huskys/Husky 2.jpg",
+          "/images/Huskys/Husky 3.jpg",
+          "/images/Huskys/Husky 4.jpg"
+        ],
+        fullDescription: "Experience the Magic of a Husky Sledding Tour!\n\nFeel the thrill of guiding your own team of enthusiastic Siberian and Alaskan huskies across untouched, snowy landscapes. After an informative introduction and safety briefing, you'll handle your own sled pulled by up to 12 eager huskies. Listen to their excited barks fade into focused silence as you glide through the stunning Arctic wilderness.\n\n━━━ CHOOSE YOUR HUSKY ADVENTURE ━━━\n\n• Passive Tour: Sit back, relax, and enjoy the ride! Up to 4 guests comfortably seated in one sled driven by an experienced musher.\n\n• Active Tour: Take turns driving! Two guests per sled, with one driving and one riding. Swap places during the tour to fully enjoy both experiences.\n\n━━━ TOUR DETAILS ━━━\n\n• Routes: Customized 10-15 km trails\n• Duration: 1.5-2 hours\n• Difficulty: Suitable for all skill levels\n• Equipment: Winter clothing and boots provided\n\nAn authentic Arctic adventure that connects you deeply with nature and leaves you with unforgettable memories!",
+        tag: {
+          text: "Popular",
+          type: "bestseller"
+        }
+      },
+      {
+        id: 3,
+        title: "JayJay's Restaurant",
+        description: "Fine Lapland cuisine in a cozy cabin with Northern Lights views. Experience local flavors from the Arctic prepared by expert chefs.",
+        image: "/images/JayJays-Restaurant.jpg",
+        gallery: [
+          "/images/JayJays-Restaurant.jpg"
+        ],
+        fullDescription: "JayJay's Restaurant offers an unforgettable culinary experience in the heart of Swedish Lapland. Located in a traditional wooden cabin with panoramic windows, you can enjoy gourmet meals while watching the Northern Lights dance across the night sky. Our talented chefs create exquisite dishes using fresh, locally-sourced ingredients including Arctic char, reindeer, wild berries, and forest mushrooms. The intimate, candle-lit atmosphere combines rustic charm with elegant dining, making it perfect for both casual meals and special occasions. Our menu changes seasonally to showcase the best flavors of Lapland, and each dish tells a story of the region's rich culinary heritage. Complete your dining experience with our selection of fine wines and craft cocktails featuring local spirits."
+      },
+      {
+        id: 4,
+        title: "Ice Karting Experience",
+        description: "Race special karts on a frozen lake circuit with pro instructors. Feel the rush of drifting on ice in this thrilling winter activity.",
+        image: "/images/Ice Kart.jpg",
+        gallery: [
+          "/images/Ice Kart.jpg"
+        ],
+        fullDescription: "Experience the unique thrill of racing on ice with our specialized Ice Karting Adventure. Our professional instructors will teach you the techniques of driving on a slippery surface before you take to our specially prepared ice track on a frozen lake. Feel the excitement as you drift around corners and master the art of controlling a vehicle in challenging winter conditions. This experience is suitable for all skill levels, from complete beginners to experienced drivers looking to test their skills. All necessary equipment is provided, including helmets, racing suits, and gloves. Compete against friends and family for the fastest lap time in this unforgettable Arctic motorsport experience."
+      },
+      {
+        id: 5,
+        title: "Reindeer Farm Visit",
+        description: "Meet Lapland's iconic reindeer and learn about Sami traditions. Feed the animals and enjoy authentic local food in a traditional setting.",
+        image: "/images/Reindeers.jpg",
+        gallery: [
+          "/images/Reindeers.jpg"
+        ],
+        fullDescription: "Step into the world of the Sami people and their most cherished animal - the reindeer. Visit a traditional reindeer farm where you'll learn about these magnificent creatures and their importance to the indigenous Sami culture. Get up close with the reindeer, feed them, and learn about their seasonal migration and adaptation to the harsh Arctic climate. Your Sami host will share stories and traditions passed down through generations while you enjoy a traditional meal in an authentic lavvu (Sami tent). This cultural experience provides valuable insight into a way of life that has survived for thousands of years in the Arctic region."
+      },
+      {
+        id: 6,
+        title: "Helicopter Scenic Flight",
+        description: "Soar above pristine Arctic wilderness for stunning aerial views. Expert pilots guide you over mountains, forests, and frozen lakes.",
+        image: "/images/Helikopter.jpg",
+        gallery: [
+          "/images/Helikopter.jpg"
+        ],
+        fullDescription: "Take to the skies for an unforgettable perspective of Swedish Lapland's breathtaking landscapes on our scenic helicopter flight. From your privileged vantage point, you'll witness the vastness of the Arctic wilderness stretching to the horizon - snow-covered forests, frozen lakes, mountain ranges, and perhaps even wildlife. Your pilot will provide informative commentary through your headset, pointing out notable landmarks and sharing interesting facts about the region. This exclusive experience offers unparalleled photo opportunities and a sense of the true scale and beauty of Lapland that cannot be appreciated from the ground. Each flight path is carefully planned to showcase the most spectacular scenery while ensuring minimal environmental impact.",
+        tag: {
+          text: "New",
+          type: "new"
+        }
+      },
+      {
+        id: 7,
+        title: "Ice Drifting Experience",
+        description: "Learn performance driving on ice with pro instructors. Master controlled drifts in specially equipped cars on our frozen lake circuit.",
+        image: "/images/Drifting.jpg",
+        gallery: [
+          "/images/Drifting.jpg"
+        ],
+        fullDescription: "Feel the exhilaration of sliding sideways on ice in our Ice Drifting Experience. Under the guidance of professional driving instructors, you'll learn the techniques of controlling a vehicle in extreme winter conditions. Using specially prepared performance cars equipped with studded tires, you'll practice drifting techniques on our purpose-built ice course. Start with basic exercises and progress to more complex maneuvers as your confidence grows. This experience is perfect for driving enthusiasts looking to improve their winter driving skills in a safe and controlled environment. All drivers receive thorough instruction and have the opportunity for multiple driving sessions to perfect their technique."
+      },
+      {
+        id: 8,
+        title: "Ice Fishing Adventure",
+        description: "Experience tranquil ice fishing on a secluded frozen lake. Learn traditional techniques and enjoy your fresh catch cooked over an open fire.",
+        image: "/images/Ice-Fishing.jpg",
+        gallery: [
+          "/images/Ice-Fishing.jpg"
+        ],
+        fullDescription: "Experience the peaceful tradition of ice fishing in the heart of Lapland's winter wonderland. Your adventure begins with a snowmobile or snowshoe journey to a secluded frozen lake surrounded by pristine forest scenery. Our experienced guides will teach you traditional ice fishing techniques and help you drill holes in the thick ice. As you wait for Arctic fish species like perch and Arctic char to bite, warm yourself by a crackling fire and listen to tales of local fishing traditions. This mindful experience connects you with nature while enjoying the serene beauty of the Arctic wilderness. The highlight of the tour is enjoying your fresh catch, prepared and cooked by your guide over an open fire - the ultimate wild food experience."
+      },
+      {
+        id: 9,
+        title: "Side-by-Side Buggy Adventure",
+        description: "Drive powerful off-road buggies through snow-covered forests and frozen lakes. Feel the thrill of exploring pristine Arctic wilderness.",
+        image: "/images/Side-By-Side-Buggy-Drifting.jpg",
+        gallery: [
+          "/images/Side-By-Side-Buggy-Drifting.jpg"
+        ],
+        fullDescription: "Experience the ultimate Arctic off-road adventure in our powerful side-by-side buggies. These specialized all-terrain vehicles are designed to conquer the challenging winter landscape with ease, allowing you to access remote areas and enjoy the pristine wilderness. After a comprehensive safety briefing, you'll take the wheel of your own buggy and follow our expert guides along specially designed trails through forests, across frozen lakes, and over snowy hills. Feel the exhilaration as you drift around corners and power through snow drifts in these agile, responsive vehicles. The tour includes stops at scenic viewpoints and a wilderness lunch break. This adventure offers a perfect blend of excitement and natural beauty, suitable for drivers of all skill levels.",
+        tag: {
+          text: "New",
+          type: "new"
+        }
+      }
+    ]
   },
   
   // Accommodations Section

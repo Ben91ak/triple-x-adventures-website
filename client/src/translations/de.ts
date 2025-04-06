@@ -22,6 +22,115 @@ export const de = {
     title: "UNSERE PAKETE",
     subtitle: "Authentische Arktische Abenteuer",
     viewAll: "Alle Pakete ansehen",
+    sendInquiry: "Anfrage Senden",
+    nextExperience: "Weiter",
+    previousExperience: "Zurück",
+    closeModal: "Schließen",
+    viewDetails: "Details ansehen",
+    bookNow: "Jetzt Buchen",
+    
+    // Experience List
+    list: [
+      {
+        id: 1,
+        title: "Snowmobile Abenteuer",
+        description: "Fahren Sie mit modernen Ski-doo Modellen durch verschneiten Lappland. Wählen Sie aus 2-, 4- oder 6-Stunden-Touren für Ihr perfektes Abenteuer.",
+        image: "/images/Snowmobile/Snowmobile.jpg",
+        gallery: [
+          "/images/Snowmobile/Snowmobile.jpg",
+          "/images/Snowmobile/Snowmobile 2.jpg",
+          "/images/Snowmobile/Snowmobile 3.jpg",
+          "/images/Snowmobile/Snwomobile 4.jpg"
+        ],
+        tag: {
+          text: "Beliebt",
+          type: "bestseller"
+        }
+      },
+      {
+        id: 2,
+        title: "Husky Schlittentour",
+        description: "Führen Sie Ihr eigenes Hundeschlittenteam durch die atemberaubende arktische Wildnis. Wählen Sie zwischen passiv oder aktiv fahren auf 1,5-2 Stunden Touren.",
+        image: "/images/Huskys/Husky.jpg",
+        gallery: [
+          "/images/Huskys/Husky.jpg",
+          "/images/Huskys/Husky 2.jpg",
+          "/images/Huskys/Husky 3.jpg",
+          "/images/Huskys/Husky 4.jpg"
+        ]
+      },
+      {
+        id: 3,
+        title: "JayJay's Restaurant",
+        description: "Genießen Sie authentische Lappländische Küche in gemütlicher Atmosphäre mit Blick auf die Nordlichter. Unser Restaurant bietet ein einzigartiges Speisenerlebnis mit lokalen Zutaten.",
+        image: "/images/JayJays-Restaurant.jpg",
+        gallery: [
+          "/images/JayJays-Restaurant.jpg"
+        ]
+      },
+      {
+        id: 4,
+        title: "Eiskart Erlebnis",
+        description: "Fahren Sie speziell entworfene Karts auf einer gefrorenen Seestrecke mit fachkundiger Anleitung. Ein adrenalingeladenes Winterfahrerlebnis.",
+        image: "/images/Ice Kart.jpg",
+        gallery: [
+          "/images/Ice Kart.jpg"
+        ]
+      },
+      {
+        id: 5,
+        title: "Rentier Farm Besuch",
+        description: "Treffen Sie die ikonischen Rentiere Lapplands, lernen Sie über die Sami-Kultur und genießen Sie eine traditionelle Mahlzeit in authentischer Umgebung.",
+        image: "/images/Reindeers.jpg",
+        gallery: [
+          "/images/Reindeers.jpg"
+        ]
+      },
+      {
+        id: 6,
+        title: "Hubschrauber Panoramaflug",
+        description: "Schweben Sie über die arktische Landschaft für eine atemberaubende Luftperspektive von Bergen, Wäldern und gefrorenen Seen.",
+        image: "/images/Helikopter.jpg",
+        gallery: [
+          "/images/Helikopter.jpg"
+        ],
+        tag: {
+          text: "Neu",
+          type: "new"
+        }
+      },
+      {
+        id: 7,
+        title: "Eisdrifting Erlebnis",
+        description: "Meistern Sie die Kunst des kontrollierten Driftens auf einem gefrorenen See in einem Leistungsfahrzeug mit professionellen Instruktoren.",
+        image: "/images/Drifting.jpg",
+        gallery: [
+          "/images/Drifting.jpg"
+        ]
+      },
+      {
+        id: 8,
+        title: "Eisangeln Abenteuer",
+        description: "Versuchen Sie sich im traditionellen Eisangeln auf einem gefrorenen See. Lernen Sie Techniken von Experten und genießen Sie Ihren frischen Fang, zubereitet über offenem Feuer.",
+        image: "/images/Ice-Fishing.jpg",
+        gallery: [
+          "/images/Ice-Fishing.jpg"
+        ]
+      },
+      {
+        id: 9,
+        title: "Side-by-Side Buggy Abenteuer",
+        description: "Navigieren Sie durch schneebedecktes Gelände in einem leistungsstarken Geländefahrzeug. Erleben Sie den Nervenkitzel des Driftens und erkunden Sie unberührte Winterlandschaften.",
+        image: "/images/Side-By-Side-Buggy-Drifting.jpg",
+        gallery: [
+          "/images/Side-By-Side-Buggy-Drifting.jpg"
+        ],
+        tag: {
+          text: "Neu",
+          type: "new"
+        }
+      }
+    ]
   },
   
   // Accommodations Section

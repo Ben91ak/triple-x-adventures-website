@@ -6,12 +6,12 @@ export interface Experience {
   price?: number;
   image: string;
   // Gallery images for the expanded view
-  gallery?: string[];
+  gallery: string[];
   // Longer, more detailed description for the expanded view
   fullDescription?: string;
   tag?: {
     text: string;
-    type: 'bestseller' | 'new';
+    type: string;
   };
 }
 

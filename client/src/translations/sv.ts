@@ -22,6 +22,115 @@ export const sv = {
     title: "VÅRA PAKET",
     subtitle: "Autentiska Arktiska Äventyr",
     viewAll: "Visa Alla Paket",
+    sendInquiry: "Skicka Förfrågan",
+    nextExperience: "Nästa",
+    previousExperience: "Föregående",
+    closeModal: "Stäng",
+    viewDetails: "Visa detaljer",
+    bookNow: "Boka nu",
+    
+    // Experience List
+    list: [
+      {
+        id: 1,
+        title: "Snöskoter Äventyr",
+        description: "Kör genom orörd snö i Svenska Lappland med toppmoderna Ski-doo skotrar. Välj mellan 2-, 4- eller 6-timmars turer för ditt perfekta äventyr.",
+        image: "/images/Snowmobile/Snowmobile.jpg",
+        gallery: [
+          "/images/Snowmobile/Snowmobile.jpg",
+          "/images/Snowmobile/Snowmobile 2.jpg",
+          "/images/Snowmobile/Snowmobile 3.jpg",
+          "/images/Snowmobile/Snwomobile 4.jpg"
+        ],
+        tag: {
+          text: "Mest populär",
+          type: "bestseller"
+        }
+      },
+      {
+        id: 2,
+        title: "Husky Slädhundstur",
+        description: "Led ditt eget hundspann genom den hisnande arktiska vildmarken. Välj mellan passiv eller aktiv körning på 1,5-2 timmars turer.",
+        image: "/images/Huskys/Husky.jpg",
+        gallery: [
+          "/images/Huskys/Husky.jpg",
+          "/images/Huskys/Husky 2.jpg",
+          "/images/Huskys/Husky 3.jpg",
+          "/images/Huskys/Husky 4.jpg"
+        ]
+      },
+      {
+        id: 3,
+        title: "JayJay's Restaurant",
+        description: "Njut av äkta lappländsk mat i en mysig atmosfär med utsikt över norrskenet. Vår restaurang erbjuder en unik matupplevelse med lokala råvaror.",
+        image: "/images/JayJays-Restaurant.jpg",
+        gallery: [
+          "/images/JayJays-Restaurant.jpg"
+        ]
+      },
+      {
+        id: 4,
+        title: "Iskart Upplevelse",
+        description: "Kör specialdesignade karts på en frusen sjöbana med expertvägledning. En adrenalinfylld vinterupplevelse.",
+        image: "/images/Ice Kart.jpg",
+        gallery: [
+          "/images/Ice Kart.jpg"
+        ]
+      },
+      {
+        id: 5,
+        title: "Renbesök",
+        description: "Träffa Lapplands ikoniska renar, lär dig om samisk kultur och njut av en traditionell måltid i en autentisk miljö.",
+        image: "/images/Reindeers.jpg",
+        gallery: [
+          "/images/Reindeers.jpg"
+        ]
+      },
+      {
+        id: 6,
+        title: "Helikopter Sightseeingtur",
+        description: "Sväva över det arktiska landskapet för ett hisnande flygperspektiv över berg, skogar och frusna sjöar.",
+        image: "/images/Helikopter.jpg",
+        gallery: [
+          "/images/Helikopter.jpg"
+        ],
+        tag: {
+          text: "Ny",
+          type: "new"
+        }
+      },
+      {
+        id: 7,
+        title: "Isdrift Upplevelse",
+        description: "Bemästra konsten att kontrollera driften på en frusen sjö i en prestandabil med professionella instruktörer.",
+        image: "/images/Drifting.jpg",
+        gallery: [
+          "/images/Drifting.jpg"
+        ]
+      },
+      {
+        id: 8,
+        title: "Pimpelfiske Äventyr",
+        description: "Prova på traditionellt pimpelfiske på en frusen sjö. Lär dig tekniker från expertguider och njut av din nyfångade fisk tillagad över öppen eld.",
+        image: "/images/Ice-Fishing.jpg",
+        gallery: [
+          "/images/Ice-Fishing.jpg"
+        ]
+      },
+      {
+        id: 9,
+        title: "Side-by-Side Buggy Äventyr",
+        description: "Navigera i snötäckt terräng i en kraftfull terrängbuggy. Upplev spänningen med att drifta och utforska orörda vinterlandskap.",
+        image: "/images/Side-By-Side-Buggy-Drifting.jpg",
+        gallery: [
+          "/images/Side-By-Side-Buggy-Drifting.jpg"
+        ],
+        tag: {
+          text: "Ny",
+          type: "new"
+        }
+      }
+    ]
   },
   
   // Accommodations Section
