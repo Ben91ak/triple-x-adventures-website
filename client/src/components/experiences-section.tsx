@@ -497,9 +497,84 @@ function ExperienceDetailModal({
             </h2>
             
             <div className="text-white/80 space-y-4">
-              <p className="leading-relaxed">
-                {experience.fullDescription || experience.description}
-              </p>
+              {/* Check if fullDescription exists and contains structured sections */}
+              {experience.fullDescription && experience.fullDescription.includes('PICK YOUR ADVENTURE') ? (
+                <div className="leading-relaxed">
+                  {/* Introduction text */}
+                  <p className="mb-6">
+                    {experience.fullDescription.split('━━━ PICK YOUR ADVENTURE ━━━')[0].trim()}
+                  </p>
+                  
+                  {/* Adventure section */}
+                  <div className="mb-6">
+                    <h3 className="text-white font-bold text-lg flex items-center gap-2 mb-4">
+                      <span className="h-px w-6 bg-accent-color"></span>
+                      <span>PICK YOUR ADVENTURE</span>
+                      <span className="h-px flex-grow bg-accent-color"></span>
+                    </h3>
+                    
+                    <div className="space-y-6">
+                      {/* 2-HOUR TOUR */}
+                      <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
+                        <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
+                          <span className="inline-block w-4 h-4 bg-accent-color/70 rotate-45"></span>
+                          <span>2-HOUR BACKCOUNTRY TOUR</span>
+                        </h4>
+                        <p className="ml-6 mb-2">Great if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.</p>
+                        <ul className="ml-6 list-disc list-inside space-y-1 text-sm text-white/90">
+                          <li>One-seater snowmobile</li>
+                          <li>Two-seater available on request</li>
+                        </ul>
+                      </div>
+                      
+                      {/* 4-HOUR TOUR */}
+                      <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
+                        <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
+                          <span className="inline-block w-4 h-4 bg-accent-color/90 rotate-45"></span>
+                          <span>4-HOUR BACKCOUNTRY TOUR</span>
+                        </h4>
+                        <p className="ml-6 mb-2">Explore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.</p>
+                        <ul className="ml-6 list-disc list-inside space-y-1 text-sm text-white/90">
+                          <li>One-seater snowmobile</li>
+                          <li>Two-seater available on request</li>
+                        </ul>
+                      </div>
+                      
+                      {/* 6-HOUR TOUR */}
+                      <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
+                        <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
+                          <span className="inline-block w-4 h-4 bg-accent-color rotate-45"></span>
+                          <span>6-HOUR BACKCOUNTRY ADVENTURE</span>
+                        </h4>
+                        <p className="ml-6 mb-2">The ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.</p>
+                        <ul className="ml-6 list-disc list-inside space-y-1 text-sm text-white/90">
+                          <li>One-seater snowmobile</li>
+                          <li>Two-seater available on request</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Important information section */}
+                  <div>
+                    <h3 className="text-white font-bold text-lg flex items-center gap-2 mb-4">
+                      <span className="h-px w-6 bg-accent-color"></span>
+                      <span>IMPORTANT INFORMATION</span>
+                      <span className="h-px flex-grow bg-accent-color"></span>
+                    </h3>
+                    
+                    <ul className="list-disc list-inside space-y-2 ml-4 text-white/90">
+                      <li>Children can join as passengers, making it perfect for family fun</li>
+                      <li>Minimum age for drivers: 16 years</li>
+                      <li>Valid 125cc driving license required for drivers</li>
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <p className="leading-relaxed">
+                  {experience.fullDescription || experience.description}
+                </p>
+              )}
               
               {/* Additional details */}
               <div className="mt-6 pt-6 border-t border-white/10">
