@@ -28,7 +28,7 @@ const experiencesByLanguage = {
     {
       id: 2,
       title: "Husky Sledding Tour",
-      description: "Lead your own dog sled team through beautiful Arctic trails. A memorable adventure with friendly, well-trained huskies.",
+      description: "Guide your own team of Siberian and Alaskan huskies across untouched snowy landscapes. Choose from passive or active driving tours.",
       price: 1895,
       image: "/images/Husky.jpg",
       gallery: [
@@ -36,7 +36,7 @@ const experiencesByLanguage = {
         "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1583614749616-4c27737e1f8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       ],
-      fullDescription: "Experience the thrill of mushing your own dog sled team across pristine snowy landscapes. Our friendly Siberian and Alaskan huskies are eager to take you on an unforgettable journey through the stunning Arctic wilderness. After a thorough introduction and safety briefing, you'll learn how to handle your own team of 4-6 dogs. Feel the excitement as the dogs bark in anticipation, then the sudden silence as they focus on running through the breathtaking winter landscape. Halfway through, we'll stop for a warming wilderness lunch around an open fire, where you can also spend time bonding with the dogs. This authentic Arctic experience connects you with nature in a unique and memorable way.",
+      fullDescription: "Experience the Magic of a Husky Sledding Tour!\n\nFeel the thrill of guiding your own team of enthusiastic Siberian and Alaskan huskies across untouched, snowy landscapes. After an informative introduction and safety briefing, you'll handle your own sled pulled by up to 12 eager huskies. Listen to their excited barks fade into focused silence as you glide through the stunning Arctic wilderness.\n\n━━━ CHOOSE YOUR HUSKY ADVENTURE ━━━\n\nPassive Tour: Sit back, relax, and enjoy the ride! Up to 4 guests comfortably seated in one sled driven by an experienced musher.\n\nActive Tour: Take turns driving! Two guests per sled, with one driving and one riding. Swap places during the tour to fully enjoy both experiences.\n\nBoth tours follow customized routes between 10-15 kilometers, adjusted according to snow conditions, ensuring the best possible experience every time.\n\nAn authentic Arctic adventure that connects you deeply with nature and leaves you with unforgettable memories!",
       tag: {
         text: "Popular",
         type: "bestseller" as "bestseller"
