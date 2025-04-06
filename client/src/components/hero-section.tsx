@@ -68,6 +68,7 @@ export function HeroSection() {
     // Handle video loading errors
     const handleVideoError = () => {
       console.log("Video failed to load, showing fallback animation");
+      console.error("Video error details:", videoElement ? videoElement.error : "No video element");
       setVideoError(true);
     };
     
@@ -107,12 +108,18 @@ export function HeroSection() {
     // Check if the file exists by making a HEAD request
     fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' })
       .then(response => {
+        console.log("Video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
+        
         // If the response is not ok or content length is 0, consider it an error
         if (!response.ok || (response.headers.get('Content-Length') === '0')) {
+          console.error("Video fetch error: invalid response or zero content length");
           handleVideoError();
+        } else {
+          console.log("Video file exists and is ready to be loaded");
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("Video fetch error:", error);
         handleVideoError();
       });
     
@@ -179,6 +186,7 @@ export function HeroSection() {
               loop 
               playsInline
               preload="metadata"
+              crossOrigin="anonymous"
               style={{ 
                 objectFit: 'cover',
                 width: '100%',
@@ -187,6 +195,8 @@ export function HeroSection() {
               }}
             >
               <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
+              {/* Fallback text in case browser doesn't support video element */}
+              Your browser does not support the video tag.
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
