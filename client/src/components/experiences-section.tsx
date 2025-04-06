@@ -511,12 +511,6 @@ function ExperienceDetailModal({
                   <li className="flex">
                     <span className="text-accent-color mr-2">•</span> 
                     <span>
-                      {language === 'de' ? 'Preis' : language === 'sv' ? 'Pris' : 'Price'}: <strong>{experience.price.toLocaleString()} SEK</strong> {language === 'de' ? 'pro Person' : language === 'sv' ? 'per person' : 'per person'}
-                    </span>
-                  </li>
-                  <li className="flex">
-                    <span className="text-accent-color mr-2">•</span> 
-                    <span>
                       {language === 'de' ? 'Dauer' : language === 'sv' ? 'Varaktighet' : 'Duration'}: <strong>3-4 {language === 'de' ? 'Stunden' : language === 'sv' ? 'timmar' : 'hours'}</strong>
                     </span>
                   </li>
@@ -696,9 +690,11 @@ export function ExperiencesSection() {
                   <h3 className="font-bold text-xl mb-3 text-white group-hover:text-accent-color transition-colors">
                     {experience.title}
                   </h3>
-                  <p className="mb-5 text-white text-opacity-80 text-sm flex-grow overflow-y-auto">
-                    {experience.description}
-                  </p>
+                  <div className="mb-4 text-white text-opacity-80 text-sm flex-grow overflow-hidden">
+                    <div className="h-full overflow-y-auto pr-2 pb-2">
+                      {experience.description}
+                    </div>
+                  </div>
                   <div className="flex justify-end items-center mt-auto">
                     <button 
                       onClick={() => openExperienceDetail(experience)}
