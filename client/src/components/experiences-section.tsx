@@ -30,11 +30,12 @@ const experiencesByLanguage = {
       title: "Husky Sledding Tour",
       description: "Guide your own team of Siberian and Alaskan huskies across untouched snowy landscapes. Choose from passive or active driving tours.",
       price: 1895,
-      image: "/images/Husky.jpg",
+      image: "/images/Huskys/Husky.jpg",
       gallery: [
-        "/images/Husky.jpg",
-        "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1583614749616-4c27737e1f8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "/images/Huskys/Husky.jpg",
+        "/images/Huskys/Husky 2.jpg",
+        "/images/Huskys/Husky 3.jpg",
+        "/images/Huskys/Husky 4.jpg",
       ],
       fullDescription: "Experience the Magic of a Husky Sledding Tour!\n\nFeel the thrill of guiding your own team of enthusiastic Siberian and Alaskan huskies across untouched, snowy landscapes. After an informative introduction and safety briefing, you'll handle your own sled pulled by up to 12 eager huskies. Listen to their excited barks fade into focused silence as you glide through the stunning Arctic wilderness.\n\n━━━ CHOOSE YOUR HUSKY ADVENTURE ━━━\n\n• Passive Tour: Sit back, relax, and enjoy the ride! Up to 4 guests comfortably seated in one sled driven by an experienced musher.\n\n• Active Tour: Take turns driving! Two guests per sled, with one driving and one riding. Swap places during the tour to fully enjoy both experiences.\n\n━━━ TOUR DETAILS ━━━\n\n• Routes: Customized 10-15 km trails\n• Duration: 1.5-2 hours\n• Difficulty: Suitable for all skill levels\n• Equipment: Winter clothing and boots provided\n\nAn authentic Arctic adventure that connects you deeply with nature and leaves you with unforgettable memories!",
       tag: {
@@ -151,9 +152,12 @@ const experiencesByLanguage = {
       title: "Husky Schlittentour",
       description: "Führen Sie Ihr eigenes Hundeschlittenteam durch die atemberaubende arktische Wildnis. Ein unvergessliches Erlebnis mit freundlichen Huskies.",
       price: 1895,
-      image: "/images/Husky.jpg",
+      image: "/images/Huskys/Husky.jpg",
       gallery: [
-        "/images/Husky.jpg",
+        "/images/Huskys/Husky.jpg",
+        "/images/Huskys/Husky 2.jpg",
+        "/images/Huskys/Husky 3.jpg",
+        "/images/Huskys/Husky 4.jpg",
       ]
     },
     {
@@ -258,9 +262,12 @@ const experiencesByLanguage = {
       title: "Husky Slädhundstur",
       description: "Led ditt eget hundspann genom den hisnande arktiska vildmarken. En oförglömlig upplevelse med vänliga huskies.",
       price: 1895,
-      image: "/images/Husky.jpg",
+      image: "/images/Huskys/Husky.jpg",
       gallery: [
-        "/images/Husky.jpg",
+        "/images/Huskys/Husky.jpg",
+        "/images/Huskys/Husky 2.jpg",
+        "/images/Huskys/Husky 3.jpg",
+        "/images/Huskys/Husky 4.jpg",
       ]
     },
     {
