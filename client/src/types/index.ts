@@ -50,12 +50,7 @@ export interface Testimonial {
   rating: number;
 }
 
-// Gallery image type
-export interface GalleryImage {
-  id: number;
-  src: string;
-  alt: string;
-}
+// Gallery image type removed as it's no longer used
 
 // Weather data type removed as requested
 

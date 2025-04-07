@@ -1,137 +1,5 @@
-import { GalleryImage } from "@/types";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
-import { Camera, ExternalLink } from "lucide-react";
-
-// Gallery data by language
-const galleryImagesByLanguage = {
-  en: [
-    {
-      id: 1,
-      src: "/images/night-sky.jpg",
-      alt: "Northern lights over snowy landscape"
-    },
-    {
-      id: 2,
-      src: "/images/Snowmobile.jpg",
-      alt: "Snowmobiling through forest"
-    },
-    {
-      id: 3,
-      src: "/images/Husky.jpg",
-      alt: "Dog sledding team"
-    },
-    {
-      id: 4,
-      src: "/images/txa-chalet.jpg",
-      alt: "Winter cabin in snow"
-    },
-    {
-      id: 5,
-      src: "/images/hotel-laponia.jpg",
-      alt: "Cozy hotel accommodations"
-    },
-    {
-      id: 6,
-      src: "/images/Helikopter.jpg",
-      alt: "Arctic helicopter adventure"
-    },
-    {
-      id: 7,
-      src: "/images/restaurant/dish.jpg",
-      alt: "Traditional food"
-    },
-    {
-      id: 8,
-      src: "/images/Huskys/Husky.jpg",
-      alt: "Husky dogs"
-    }
-  ],
-  de: [
-    {
-      id: 1,
-      src: "/images/night-sky.jpg",
-      alt: "Nordlichter über verschneiter Landschaft"
-    },
-    {
-      id: 2,
-      src: "/images/Snowmobile.jpg",
-      alt: "Schneemobilfahrt durch den Wald"
-    },
-    {
-      id: 3,
-      src: "/images/Husky.jpg",
-      alt: "Hundeschlittenteam"
-    },
-    {
-      id: 4,
-      src: "/images/txa-chalet.jpg",
-      alt: "Winterhütte im Schnee"
-    },
-    {
-      id: 5,
-      src: "/images/hotel-laponia.jpg",
-      alt: "Gemütliche Hotelunterkünfte"
-    },
-    {
-      id: 6,
-      src: "/images/Helikopter.jpg",
-      alt: "Arktisches Hubschrauberabenteuer"
-    },
-    {
-      id: 7,
-      src: "/images/restaurant/dish.jpg",
-      alt: "Traditionelles Essen"
-    },
-    {
-      id: 8,
-      src: "/images/Huskys/Husky.jpg",
-      alt: "Husky-Hunde"
-    }
-  ],
-  sv: [
-    {
-      id: 1,
-      src: "/images/night-sky.jpg",
-      alt: "Norrsken över snöigt landskap"
-    },
-    {
-      id: 2,
-      src: "/images/Snowmobile.jpg",
-      alt: "Snöskoter genom skogen"
-    },
-    {
-      id: 3,
-      src: "/images/Husky.jpg",
-      alt: "Hundspannsteam"
-    },
-    {
-      id: 4,
-      src: "/images/txa-chalet.jpg",
-      alt: "Vinterstuga i snö"
-    },
-    {
-      id: 5,
-      src: "/images/hotel-laponia.jpg",
-      alt: "Mysiga hotellboenden"
-    },
-    {
-      id: 6,
-      src: "/images/Helikopter.jpg",
-      alt: "Arktiskt helikopteräventyr"
-    },
-    {
-      id: 7,
-      src: "/images/restaurant/dish.jpg",
-      alt: "Traditionell mat"
-    },
-    {
-      id: 8,
-      src: "/images/Huskys/Husky.jpg",
-      alt: "Huskyhundar"
-    }
-  ]
-};
 
 // Section content by language
 const contentByLanguage = {
@@ -155,9 +23,8 @@ const contentByLanguage = {
 export function GallerySection() {
   const { language } = useLanguage();
   
-  // Get content and gallery images based on the current language
+  // Get content based on the current language
   const content = contentByLanguage[language];
-  const galleryImages: GalleryImage[] = galleryImagesByLanguage[language];
 
   return (
     <section id="gallery" className="py-24 md:py-32 relative overflow-hidden">
@@ -181,51 +48,9 @@ export function GallerySection() {
           <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
             {content.subtitle}
           </p>
-        </div>
-        
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 max-w-6xl mx-auto">
-          {galleryImages.map((image) => (
-            <div 
-              key={image.id} 
-              className="group relative transition-all duration-300 hover:translate-y-[-5px] transform-gpu"
-            >
-              {/* Card background glow effect - optimized with reduced blur and transform-gpu */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-md transform-gpu will-change-opacity"></div>
-              
-              <div className="glass-card relative z-10 overflow-hidden rounded-xl bg-card-bg/40 backdrop-blur-md border border-white/10 hover:border-accent-color/30 transition-all duration-300 transform-gpu">
-                {/* Hover overlay with gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center p-4 z-10">
-                  <span className="text-white text-sm font-medium opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                    {image.alt}
-                  </span>
-                </div>
-                
-                {/* Pulse effect on hover */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 z-10">
-                  <div className="w-12 h-12 rounded-full bg-accent-color/20 backdrop-blur-md border border-accent-color/30 flex items-center justify-center transform-gpu scale-90 group-hover:scale-100 transition-transform duration-300">
-                    <Camera className="text-accent-color" size={20} />
-                  </div>
-                </div>
-                
-                {/* Image with scale effect */}
-                <img 
-                  src={image.src} 
-                  alt={image.alt} 
-                  className="w-full h-60 md:h-64 object-cover transform transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-12">
-          <a 
-            href="#" 
-            className="inline-flex items-center gap-2 text-accent-color hover:text-accent-hover font-medium border-b border-accent-color/30 hover:border-accent-color pb-1 transition-all duration-300"
-          >
-            {content.viewGalleryLink} 
-            <ExternalLink size={16} className="opacity-70" />
-          </a>
+          <p className="text-white text-opacity-80 mt-8">
+            {language === 'de' ? 'Galerie in Wartung.' : language === 'sv' ? 'Galleri under underhåll.' : 'Gallery under maintenance.'}
+          </p>
         </div>
       </div>
     </section>
