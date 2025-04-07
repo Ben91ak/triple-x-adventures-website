@@ -9,7 +9,6 @@ const IntroductionSection = lazy(() => import("@/components/introduction-section
 const ExperiencesSection = lazy(() => import("@/components/experiences-section").then(module => ({ default: module.ExperiencesSection })));
 const AccommodationsSection = lazy(() => import("@/components/accommodations-section").then(module => ({ default: module.AccommodationsSection })));
 const RestaurantSection = lazy(() => import("@/components/restaurant-section").then(module => ({ default: module.RestaurantSection })));
-const PackageBuilder = lazy(() => import("@/components/package-builder").then(module => ({ default: module.PackageBuilder })));
 const AboutSection = lazy(() => import("@/components/about-section").then(module => ({ default: module.AboutSection })));
 const GallerySection = lazy(() => import("@/components/gallery-section").then(module => ({ default: module.GallerySection })));
 const TestimonialsSection = lazy(() => import("@/components/testimonials-section").then(module => ({ default: module.TestimonialsSection })));
@@ -55,10 +54,6 @@ const Home = memo(function Home() {
         
         <Suspense fallback={<SectionLoader />}>
           <RestaurantSection />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <PackageBuilder />
         </Suspense>
         
         <Suspense fallback={<SectionLoader />}>

@@ -1221,28 +1221,7 @@
   }
 }
 
-/* Package builder section text enhancements */
-#package-builder h2, 
-#package-builder h3,
-#package-builder h4,
-#package-builder p,
-#package-builder span,
-#package-builder label {
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-  font-weight: 500;
-  color: #FFFFFF !important;
-}
-
-#package-builder h2,
-#package-builder h3 {
-  font-weight: 700;
-  color: #FFFFFF !important;
-}
-
-#package-builder .card p {
-  color: #FFFFFF !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-}
+/* Media Query Section */
 
 /* Media Query for Mobile Landscape */
 @media (max-height: 500px) and (orientation: landscape) {
