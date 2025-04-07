@@ -17,8 +17,13 @@ const imageLoadCache: Record<string, boolean> = {};
 export function getOptimizedImageSrc(src: string): string {
   if (!src) return src;
   
-  // Skip external URLs
-  if (src.startsWith('http')) return src;
+  // Skip external URLs or empty paths
+  if (!src || src.startsWith('http')) return src;
+  
+  // If the path includes the full domain, extract just the path part
+  if (src.includes('riker.replit.dev')) {
+    src = new URL(src).pathname;
+  }
   
   // Get screen width to determine appropriate image size
   const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
@@ -27,7 +32,7 @@ export function getOptimizedImageSrc(src: string): string {
   // Determine appropriate size based on screen width
   if (screenWidth <= 640) {
     sizeSuffix = 'small';
-  } else if (screenWidth > 1280 && sizeSuffix === 'large') {
+  } else if (screenWidth > 1280) {
     sizeSuffix = 'large';
   }
   
@@ -192,47 +197,51 @@ function applyImageOptimizations(): void {
   const allImages = document.querySelectorAll('img');
   
   allImages.forEach((img, index) => {
-    // Skip already processed images
-    if (img.dataset.optimized) return;
-    
-    // Mark as processed
-    img.dataset.optimized = 'true';
-    
-    // Apply loading strategies based on position
-    if (isInViewport(img)) {
-      img.loading = 'eager';
-      img.decoding = 'async';
-    } else {
-      img.loading = 'lazy';
-      img.decoding = 'async';
-    }
-    
-    // Try to optimize the image source using WebP if available
-    if (img.src && typeof img.src === 'string') {
-      // Check if this is an image that has optimized versions
-      if (img.src.includes('/images/Huskys/') || img.src.includes('/images/Snowmobile/')) {
-        const optimizedSrc = getOptimizedImageSrc(img.src);
-        if (optimizedSrc !== img.src) {
-          img.src = optimizedSrc;
+    try {
+      // Skip already processed images
+      if (img.dataset.optimized) return;
+      
+      // Mark as processed
+      img.dataset.optimized = 'true';
+      
+      // Apply loading strategies based on position
+      if (isInViewport(img)) {
+        img.loading = 'eager';
+        img.decoding = 'async';
+      } else {
+        img.loading = 'lazy';
+        img.decoding = 'async';
+      }
+      
+      // Try to optimize the image source using WebP if available
+      if (img.src && typeof img.src === 'string') {
+        // Check if this is an image that has optimized versions or contains the domain
+        if (img.src.includes('/images/') || img.src.includes('riker.replit.dev')) {
+          const optimizedSrc = getOptimizedImageSrc(img.src);
+          if (optimizedSrc !== img.src) {
+            img.src = optimizedSrc;
+          }
         }
       }
-    }
-    
-    // Add error handler if not already present
-    if (!img.onerror) {
-      img.onerror = function() {
-        console.error(`Failed to load image: ${img.src}`);
-        // Only apply fallback if src isn't already the fallback
-        if (!img.src.includes('TXA_fallback.jpg')) {
-          img.src = '/images/TXA_fallback.jpg';
-        }
-      };
-    }
-    
-    // Add width and height attributes if missing to prevent layout shifts
-    if (!img.getAttribute('width') && !img.getAttribute('height')) {
-      img.setAttribute('width', '100%');
-      img.style.aspectRatio = '4/3'; // Default aspect ratio if not specified
+      
+      // Add error handler if not already present
+      if (!img.onerror) {
+        img.onerror = function() {
+          console.error(`Failed to load image: ${img.src}`);
+          // Only apply fallback if src isn't already the fallback
+          if (!img.src.includes('TXA_fallback.jpg')) {
+            img.src = '/images/TXA_fallback.jpg';
+          }
+        };
+      }
+      
+      // Add width and height attributes if missing to prevent layout shifts
+      if (!img.getAttribute('width') && !img.getAttribute('height')) {
+        img.setAttribute('width', '100%');
+        img.style.aspectRatio = '4/3'; // Default aspect ratio if not specified
+      }
+    } catch (error) {
+      console.error('Error optimizing image:', error);
     }
   });
 }
