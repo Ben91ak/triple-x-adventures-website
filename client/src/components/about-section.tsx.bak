@@ -38,7 +38,7 @@ const teamMembersByLanguage = {
   de: [
     {
       id: 1,
-      name: "Janina JayJay Möller",
+      name: "Janina "JayJay" Möller",
       role: "Gründerin & CEO",
       bio: "Lernen Sie JayJay kennen, unsere abenteuerlustige CEO und Gründerin, deren Leidenschaft und Vision jedes unvergessliche Erlebnis bei Triple X Adventures inspirieren.",
       image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
@@ -68,7 +68,7 @@ const teamMembersByLanguage = {
   sv: [
     {
       id: 1,
-      name: "Janina JayJay Möller",
+      name: "Janina "JayJay" Möller",
       role: "Grundare & VD",
       bio: "Möt JayJay, vår äventyrliga VD och grundare, vars passion och vision inspirerar varje oförglömlig upplevelse hos Triple X Adventures.",
       image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
