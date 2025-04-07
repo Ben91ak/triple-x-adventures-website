@@ -8,126 +8,126 @@ const galleryImagesByLanguage = {
   en: [
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/night-sky.jpg",
       alt: "Northern lights over snowy landscape"
     },
     {
       id: 2,
-      src: "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Snowmobile.jpg",
       alt: "Snowmobiling through forest"
     },
     {
       id: 3,
-      src: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Husky.jpg",
       alt: "Dog sledding team"
     },
     {
       id: 4,
-      src: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/txa-chalet.jpg",
       alt: "Winter cabin in snow"
     },
     {
       id: 5,
-      src: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      alt: "Cozy fireplace"
+      src: "/images/hotel-laponia.jpg",
+      alt: "Cozy hotel accommodations"
     },
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1628105541664-ae6ee9dec166?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      alt: "Arctic landscape"
+      src: "/images/Helikopter.jpg",
+      alt: "Arctic helicopter adventure"
     },
     {
       id: 7,
-      src: "https://images.unsplash.com/photo-1609081214573-e409272dcd51?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/restaurant/dish.jpg",
       alt: "Traditional food"
     },
     {
       id: 8,
-      src: "https://images.unsplash.com/photo-1522775417749-4471cce3631b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Huskys/Husky.jpg",
       alt: "Husky dogs"
     }
   ],
   de: [
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/night-sky.jpg",
       alt: "Nordlichter über verschneiter Landschaft"
     },
     {
       id: 2,
-      src: "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Snowmobile.jpg",
       alt: "Schneemobilfahrt durch den Wald"
     },
     {
       id: 3,
-      src: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Husky.jpg",
       alt: "Hundeschlittenteam"
     },
     {
       id: 4,
-      src: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/txa-chalet.jpg",
       alt: "Winterhütte im Schnee"
     },
     {
       id: 5,
-      src: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      alt: "Gemütliches Kaminfeuer"
+      src: "/images/hotel-laponia.jpg",
+      alt: "Gemütliche Hotelunterkünfte"
     },
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1628105541664-ae6ee9dec166?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      alt: "Arktische Landschaft"
+      src: "/images/Helikopter.jpg",
+      alt: "Arktisches Hubschrauberabenteuer"
     },
     {
       id: 7,
-      src: "https://images.unsplash.com/photo-1609081214573-e409272dcd51?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/restaurant/dish.jpg",
       alt: "Traditionelles Essen"
     },
     {
       id: 8,
-      src: "https://images.unsplash.com/photo-1522775417749-4471cce3631b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Huskys/Husky.jpg",
       alt: "Husky-Hunde"
     }
   ],
   sv: [
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1518453047662-8a8d3ffb8c8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/night-sky.jpg",
       alt: "Norrsken över snöigt landskap"
     },
     {
       id: 2,
-      src: "https://images.unsplash.com/photo-1604537466573-5e94508fd243?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Snowmobile.jpg",
       alt: "Snöskoter genom skogen"
     },
     {
       id: 3,
-      src: "https://images.unsplash.com/photo-1517507654662-23d3b959c13e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Husky.jpg",
       alt: "Hundspannsteam"
     },
     {
       id: 4,
-      src: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/txa-chalet.jpg",
       alt: "Vinterstuga i snö"
     },
     {
       id: 5,
-      src: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      alt: "Mysig öppen spis"
+      src: "/images/hotel-laponia.jpg",
+      alt: "Mysiga hotellboenden"
     },
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1628105541664-ae6ee9dec166?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-      alt: "Arktiskt landskap"
+      src: "/images/Helikopter.jpg",
+      alt: "Arktiskt helikopteräventyr"
     },
     {
       id: 7,
-      src: "https://images.unsplash.com/photo-1609081214573-e409272dcd51?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/restaurant/dish.jpg",
       alt: "Traditionell mat"
     },
     {
       id: 8,
-      src: "https://images.unsplash.com/photo-1522775417749-4471cce3631b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+      src: "/images/Huskys/Husky.jpg",
       alt: "Huskyhundar"
     }
   ]
