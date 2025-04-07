@@ -8,31 +8,38 @@ const teamMembersByLanguage = {
   en: [
     {
       id: 1,
-      name: "Janina 'JayJay' Möller",
+      name: "Janina JayJay Möller",
       role: "Founder & CEO",
       bio: "Meet JayJay, our adventurous CEO and founder, whose passion and vision inspire every unforgettable experience at Triple X Adventures.",
-      image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Project Manager",
-      bio: "I'm Benni,leading the organizational projects at Triple X Adventures.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      bio: "I'm Benni, leading the organizational projects at Triple X Adventures.",
+      image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Master Dog Sledder",
-      bio: "Johan has been training huskies for over 15 years and treats each dog as family.",
-      image: "https://images.unsplash.com/photo-1618077360395-f3068be8e001?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      bio: "Jesper has been training huskies for over 15 years and treats each dog as family.",
+      image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
+      name: "Henni Eriksson",
+      role: "Experience Coordinator",
+      bio: "Henni ensures that each adventure is perfectly organized and exceeds your expectations.",
+      image: "/images/Team/Henni.jpg"
+    },
+    {
+      id: 5,
       name: "Fanny Johannson",
       role: "Chef at JayJay's",
       bio: "A culinary artist who specializes in traditional Arctic cuisine with a modern twist.",
-      image: "https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Fanny.jpg"
     }
   ],
   de: [
@@ -41,28 +48,35 @@ const teamMembersByLanguage = {
       name: "Janina JayJay Möller",
       role: "Gründerin & CEO",
       bio: "Lernen Sie JayJay kennen, unsere abenteuerlustige CEO und Gründerin, deren Leidenschaft und Vision jedes unvergessliche Erlebnis bei Triple X Adventures inspirieren.",
-      image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Projektmanager",
       bio: "Ich bin Benni und leite die organisatorischen Projekte bei Triple X Adventures.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Meister-Hundeschlittenführer",
-      bio: "Johan trainiert seit über 15 Jahren Huskies und behandelt jeden Hund wie ein Familienmitglied.",
-      image: "https://images.unsplash.com/photo-1618077360395-f3068be8e001?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      bio: "Jesper trainiert seit über 15 Jahren Huskies und behandelt jeden Hund wie ein Familienmitglied.",
+      image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
+      name: "Henni Eriksson",
+      role: "Erlebniskoordinatorin",
+      bio: "Henni sorgt dafür, dass jedes Abenteuer perfekt organisiert ist und Ihre Erwartungen übertrifft.",
+      image: "/images/Team/Henni.jpg"
+    },
+    {
+      id: 5,
       name: "Fanny Johannson",
       role: "Küchenchefin bei JayJay's",
       bio: "Eine kulinarische Künstlerin, die sich auf traditionelle arktische Küche mit modernem Twist spezialisiert hat.",
-      image: "https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Fanny.jpg"
     }
   ],
   sv: [
@@ -71,28 +85,35 @@ const teamMembersByLanguage = {
       name: "Janina JayJay Möller",
       role: "Grundare & VD",
       bio: "Möt JayJay, vår äventyrliga VD och grundare, vars passion och vision inspirerar varje oförglömlig upplevelse hos Triple X Adventures.",
-      image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Projektledare",
       bio: "Jag är Benni och leder de organisatoriska projekten på Triple X Adventures.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Mästare på Hundspann",
-      bio: "Johan har tränat huskies i över 15 år och behandlar varje hund som familj.",
-      image: "https://images.unsplash.com/photo-1618077360395-f3068be8e001?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      bio: "Jesper har tränat huskies i över 15 år och behandlar varje hund som familj.",
+      image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
+      name: "Henni Eriksson",
+      role: "Upplevelsekoordinator",
+      bio: "Henni ser till att varje äventyr är perfekt organiserat och överträffar dina förväntningar.",
+      image: "/images/Team/Henni.jpg"
+    },
+    {
+      id: 5,
       name: "Fanny Johannson",
       role: "Kock på JayJay's",
       bio: "En kulinarisk konstnär som specialiserar sig på traditionell arktisk mat med en modern twist.",
-      image: "https://images.unsplash.com/photo-1629425733761-caae3b5f2e50?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+      image: "/images/Team/Fanny.jpg"
     }
   ]
 };
@@ -323,7 +344,7 @@ export function AboutSection() {
           <div className="relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl max-h-[600px] aurora-glow opacity-30 pointer-events-none"></div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
               {teamMembers.map((member, index) => (
                 <div key={member.id} className={`group relative transform-gpu stagger-${index % 5 + 1}`}>
                   {/* Decorative background glow */}
