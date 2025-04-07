@@ -10,7 +10,6 @@ import "./styles/theme.css";
 // Lazy load pages for better performance
 const Home = lazy(() => import("@/pages/home"));
 const NotFound = lazy(() => import("@/pages/not-found"));
-const AdventureMap = lazy(() => import("@/pages/adventure-map"));
 
 // Loading fallback component for lazy-loaded pages
 const PageLoader = () => (
@@ -30,7 +29,6 @@ const Router = memo(function Router() {
     <Suspense fallback={<PageLoader />}>
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/adventure-map" component={AdventureMap} />
         <Route component={NotFound} />
       </Switch>
     </Suspense>

@@ -85,9 +85,7 @@ export function Header() {
                   { href: "/", label: t.nav.home },
                   { href: "#about", label: t.nav.about },
                   { href: "#pakete", label: t.nav.packages },
-                  { href: "#package-builder", label: "Build Your Adventure" },
                   { href: "#accommodations", label: t.nav.accommodations },
-                  { href: "/adventure-map", label: language === 'en' ? "Adventure Map" : language === 'de' ? "Abenteuerkarte" : "Äventyrskarta" },
                   { href: "#gallery", label: t.nav.gallery },
                   { href: "#contact", label: t.nav.contact }
                 ].map((item, index) => (
@@ -150,9 +148,7 @@ export function Header() {
               { href: "/", label: t.nav.home },
               { href: "#about", label: t.nav.about },
               { href: "#pakete", label: t.nav.packages },
-              { href: "#package-builder", label: "Build Your Adventure" },
               { href: "#accommodations", label: t.nav.accommodations },
-              { href: "/adventure-map", label: language === 'en' ? "Adventure Map" : language === 'de' ? "Abenteuerkarte" : "Äventyrskarta" },
               { href: "#gallery", label: t.nav.gallery },
               { href: "#contact", label: t.nav.contact }
             ].map((item, index) => (
