@@ -6,7 +6,7 @@ import { GlobalBackground } from "@/components/layout/background-fixed";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ContactSection } from "@/components/contact-section";
-import { SectionLoader } from "@/components/ui/section-loader";
+import SectionLoader from "../components/ui/section-loader";
 import { optimizePageImages } from "@/utils/performance-optimizer";
 
 export default function ContactPage() {

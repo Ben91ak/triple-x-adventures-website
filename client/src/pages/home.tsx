@@ -21,7 +21,7 @@ const ContactSection = lazy(() => import("@/components/contact-section").then(mo
 const CTASection = lazy(() => import("@/components/cta-section").then(module => ({ default: module.CTASection })));
 
 // Use the SectionLoader component from UI components
-import { SectionLoader } from "@/components/ui/section-loader";
+import SectionLoader from "../components/ui/section-loader";
 
 // Memoize the entire Home component to prevent unnecessary re-renders
 const Home = memo(function Home() {

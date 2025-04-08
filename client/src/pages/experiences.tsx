@@ -7,7 +7,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ExperiencesSection } from "@/components/experiences-section";
 import { CTASection } from "@/components/cta-section";
-import { SectionLoader } from "@/components/ui/section-loader";
+import SectionLoader from "../components/ui/section-loader";
 import { optimizePageImages } from "@/utils/performance-optimizer";
 
 export default function ExperiencesPage() {
