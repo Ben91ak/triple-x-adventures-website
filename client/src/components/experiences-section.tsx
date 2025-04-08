@@ -284,7 +284,7 @@ function ExperienceDetailModal({
       
       {/* Modal content */}
       <div 
-        className="relative max-w-6xl w-[95%] mx-auto my-auto max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
+        className="relative max-w-6xl w-[90%] mx-auto my-auto max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button - enhanced for mobile touchability */}
@@ -300,7 +300,7 @@ function ExperienceDetailModal({
         {/* Modal header */}
         <div className="flex flex-col md:flex-row md:h-[500px] overflow-hidden">
           {/* Gallery section */}
-          <div className="md:flex-1 relative overflow-hidden h-72 md:h-full">
+          <div className="md:flex-1 relative overflow-hidden h-[300px] md:h-full">
             {/* Loading spinner */}
             {isImageLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-10">
@@ -338,7 +338,7 @@ function ExperienceDetailModal({
               decoding="async"
               width="800"
               height="600"
-              className={`w-full h-full object-cover transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+              className={`w-full h-full object-cover object-center transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
               onLoad={() => setIsImageLoading(false)}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -565,7 +565,7 @@ function ExperienceDetailModal({
           </div>
           
           {/* Content section */}
-          <div className="md:flex-1 p-6 md:p-8 overflow-y-auto max-h-[40vh] md:max-h-full">
+          <div className="md:flex-1 p-6 md:p-8 overflow-y-auto max-h-[50vh] md:max-h-full">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               {experience.title}
             </h2>
