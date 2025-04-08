@@ -193,6 +193,15 @@ function ExperienceDetailModal({
       '/images/Helicopter/Helikopter 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Helicopter:', gallery);
+  } else if (experience.title.toLowerCase().includes('ice drift') || experience.title.toLowerCase().includes('drift')) {
+    // Skip path resolution and directly use WebP files for Ice Drift
+    gallery = [
+      '/images/Ice Drift/Cars 1_result.webp',
+      '/images/Ice Drift/Cars 2_result.webp',
+      '/images/Ice Drift/Cars 3_result.webp',
+      '/images/Ice Drift/Cars 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Ice Drift:', gallery);
   } else if (experience.title.toLowerCase().includes('reindeer') || experience.title.toLowerCase().includes('reindeers')) {
     // Skip path resolution and directly use WebP files for Reindeers
     gallery = [
@@ -278,6 +287,8 @@ function ExperienceDetailModal({
                    experience.title.toLowerCase().includes('kart') ||
                    experience.title.toLowerCase().includes('helicopter') ||
                    experience.title.toLowerCase().includes('helikopter') ||
+                   experience.title.toLowerCase().includes('ice drift') ||
+                   experience.title.toLowerCase().includes('drift') ||
                    experience.title.toLowerCase().includes('reindeer')
                 ? gallery[activeImageIndex] // For specialized experiences, use the direct WebP file paths
                 : getOptimizedImageSrc(gallery[activeImageIndex], { 
@@ -355,6 +366,19 @@ function ExperienceDetailModal({
                   } else {
                     target.src = `/images/optimized/buggy-${size}.jpg`;
                   }
+                } else if (originalSrc.toLowerCase().includes('ice drift') || (originalSrc.toLowerCase().includes('drift') && originalSrc.toLowerCase().includes('cars'))) {
+                  console.log('Ice Drift image failed to load:', originalSrc);
+                  // Extract the car number or default to 1
+                  let carNum = 1;
+                  const match = originalSrc.match(/Cars\s*(\d+)/i);
+                  if (match && match[1]) {
+                    carNum = parseInt(match[1], 10);
+                  }
+                  // Force to a known valid car file that exists
+                  if (carNum < 1 || carNum > 4) carNum = 1;
+                  
+                  target.src = `/images/Ice Drift/Cars ${carNum}_result.webp`;
+                  console.log('Fallback to:', `/images/Ice Drift/Cars ${carNum}_result.webp`);
                 } else if (originalSrc.toLowerCase().includes('drift')) {
                   // Try WebP if supported
                   if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
