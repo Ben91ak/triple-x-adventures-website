@@ -154,11 +154,11 @@ function tryPathAlternatives(
     const capitalizedName = baseName.charAt(0).toUpperCase() + baseName.slice(1);
     alternativePaths.push(`/images/${capitalizedName}.jpg`);
     
-    // Handle special cases
+    // Handle special cases with verified paths
     if (baseName.includes('husky')) {
-      alternativePaths.push('/images/Huskys/Husky.jpg');
-      alternativePaths.push('/images/husky.jpg');
-      alternativePaths.push('/images/Husky.jpg');
+      alternativePaths.push('/images/Huskys/Husky 1_result.webp');
+      alternativePaths.push('/images/Huskys/Husky 2_result.webp');
+      alternativePaths.push('/images/Huskys/Husky 3_result.webp');
     } 
     else if (baseName.includes('snowmobile')) {
       // WebP versions first (preferable)
@@ -166,26 +166,31 @@ function tryPathAlternatives(
       alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
       alternativePaths.push('/images/Snowmobile/Snowmobile 3_result.webp');
       alternativePaths.push('/images/Snowmobile/Snowmobile 4_result.webp');
-      
-      // JPG fallbacks
-      alternativePaths.push('/images/Snowmobile/Snowmobile.jpg');
-      alternativePaths.push('/images/snowmobile.jpg');
-      alternativePaths.push('/images/Snowmobile.jpg');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 2.jpg');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 3.jpg');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 4.jpg');
     }
     else if (baseName.includes('drift')) {
-      alternativePaths.push('/images/drifting.jpg');
+      alternativePaths.push('/images/Ice Drift/Cars 1_result.webp');
+      alternativePaths.push('/images/Ice Drift/Cars 2_result.webp');
+      alternativePaths.push('/images/Ice Drift/Cars 3_result.webp');
       alternativePaths.push('/images/Drifting.jpg');
     }
     else if (baseName.includes('kart') || baseName.includes('ice-kart')) {
-      alternativePaths.push('/images/ice-kart.jpg');
-      alternativePaths.push('/images/Ice-Fishing.jpg'); // Potential alternative if ice-kart is not found
+      alternativePaths.push('/images/Ice Kart.jpg');
+      alternativePaths.push('/images/Ice-Fishing.jpg');
     }
     else if (baseName.includes('helicopter') || baseName.includes('heli')) {
-      alternativePaths.push('/images/helicopter.jpg');
       alternativePaths.push('/images/Helikopter.jpg');
+    }
+    else if (baseName.includes('buggy') || baseName.includes('side')) {
+      alternativePaths.push('/images/Side by Side/SBS 1_result.webp');
+      alternativePaths.push('/images/Side by Side/SBS 2_result.webp');
+      alternativePaths.push('/images/Side by Side/SBS 3_result.webp');
+      alternativePaths.push('/images/Side-By-Side-Buggy-Drifting.jpg');
+    }
+    else if (baseName.includes('reindeer')) {
+      alternativePaths.push('/images/Reindeers/Reindeers 1_result.webp');
+      alternativePaths.push('/images/Reindeers/Reindeers 2_result.webp');
+      alternativePaths.push('/images/Reindeers/Reindeers 3_result.webp');
+      alternativePaths.push('/images/Reindeers.jpg');
     }
   } else {
     // If not in experiences folder, check if we have other variants
@@ -195,11 +200,11 @@ function tryPathAlternatives(
     const capitalizedName = baseName.charAt(0).toUpperCase() + baseName.slice(1);
     alternativePaths.push(`/images/${capitalizedName}.jpg`);
     
-    // Handle special cases 
+    // Handle special cases with verified paths
     if (baseName.includes('husky')) {
-      alternativePaths.push('/images/Huskys/Husky.jpg');
-      alternativePaths.push('/images/experiences/husky.jpg');
-      alternativePaths.push('/images/Husky.jpg');
+      alternativePaths.push('/images/Huskys/Husky 1_result.webp');
+      alternativePaths.push('/images/Huskys/Husky 2_result.webp');
+      alternativePaths.push('/images/Huskys/Husky 3_result.webp');
     } 
     else if (baseName.includes('snowmobile')) {
       // WebP versions first (preferable)
@@ -207,26 +212,31 @@ function tryPathAlternatives(
       alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
       alternativePaths.push('/images/Snowmobile/Snowmobile 3_result.webp');
       alternativePaths.push('/images/Snowmobile/Snowmobile 4_result.webp');
-      
-      // JPG fallbacks
-      alternativePaths.push('/images/Snowmobile/Snowmobile.jpg');
-      alternativePaths.push('/images/experiences/snowmobile.jpg');
-      alternativePaths.push('/images/Snowmobile.jpg');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 2.jpg');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 3.jpg');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 4.jpg');
     }
     else if (baseName.includes('drift')) {
-      alternativePaths.push('/images/experiences/drifting.jpg');
+      alternativePaths.push('/images/Ice Drift/Cars 1_result.webp');
+      alternativePaths.push('/images/Ice Drift/Cars 2_result.webp');
+      alternativePaths.push('/images/Ice Drift/Cars 3_result.webp');
       alternativePaths.push('/images/Drifting.jpg');
     }
     else if (baseName.includes('kart') || baseName.includes('ice-kart')) {
-      alternativePaths.push('/images/experiences/ice-kart.jpg');
-      alternativePaths.push('/images/Ice-Fishing.jpg'); // Potential alternative if ice-kart is not found
+      alternativePaths.push('/images/Ice Kart.jpg');
+      alternativePaths.push('/images/Ice-Fishing.jpg');
     }
     else if (baseName.includes('helicopter') || baseName.includes('heli')) {
-      alternativePaths.push('/images/experiences/helicopter.jpg');
       alternativePaths.push('/images/Helikopter.jpg');
+    }
+    else if (baseName.includes('buggy') || baseName.includes('side')) {
+      alternativePaths.push('/images/Side by Side/SBS 1_result.webp');
+      alternativePaths.push('/images/Side by Side/SBS 2_result.webp');
+      alternativePaths.push('/images/Side by Side/SBS 3_result.webp');
+      alternativePaths.push('/images/Side-By-Side-Buggy-Drifting.jpg');
+    }
+    else if (baseName.includes('reindeer')) {
+      alternativePaths.push('/images/Reindeers/Reindeers 1_result.webp');
+      alternativePaths.push('/images/Reindeers/Reindeers 2_result.webp');
+      alternativePaths.push('/images/Reindeers/Reindeers 3_result.webp');
+      alternativePaths.push('/images/Reindeers.jpg');
     }
   }
   
@@ -276,28 +286,18 @@ export function preloadImages(paths: string[], options: ImagePreloadOptions = {}
 export function preloadExperienceImages() {
   // Use actual verified image paths based on filesystem check
   const experienceImages = [
-    // Primary images with verified paths
-    '/images/Huskys/Husky.jpg',
-    '/images/Reindeers.jpg',
+    // Primary WebP images from verified directories - limit to 1 image per type for initial preload to improve performance
+    '/images/Huskys/Husky 1_result.webp',
+    '/images/Reindeers/Reindeers 1_result.webp',
+    '/images/Ice Drift/Cars 1_result.webp',
+    '/images/Side by Side/SBS 1_result.webp',
     
-    // Images with both capitalization variants
-    '/images/drifting.jpg',
+    // Verified JPG images in the root images directory
     '/images/Drifting.jpg',
-    
-    // Other experience images
-    '/images/ice-kart.jpg',
-    '/images/helicopter.jpg',
     '/images/Helikopter.jpg',
-    '/images/buggy.jpg',
-    '/images/Ice-Fishing.jpg',
-    
-    // Experience directory images
-    '/images/experiences/husky.jpg',
-    '/images/experiences/snowmobile.jpg',
-    '/images/experiences/drifting.jpg',
-    '/images/experiences/ice-kart.jpg',
-    '/images/experiences/helicopter.jpg',
-    '/images/experiences/buggy.jpg'
+    '/images/Ice Kart.jpg',
+    '/images/Reindeers.jpg',
+    '/images/Ice-Fishing.jpg'
   ];
   
   // WebP Snowmobile images with result suffix
@@ -361,9 +361,16 @@ export function preloadAccommodationImages() {
  */
 export function preloadRestaurantImages() {
   const restaurantImages = [
+    // Use the WebP versions for better performance
+    '/images/restaurant/Restaurant 1_result.webp',
+    '/images/restaurant/Restaurant 2_result.webp',
+    '/images/restaurant/Restaurant 3_result.webp',
+    '/images/restaurant/Restaurant 4_result.webp',
+    // Keep the JPGs as fallbacks
     '/images/restaurant/dish.jpg',
     '/images/restaurant/jayjays-exterior.jpg',
-    '/images/restaurant/meat-preparation.jpg'
+    '/images/restaurant/meat-preparation.jpg',
+    '/images/restaurant/dining-area.jpg'
   ];
   
   restaurantImages.forEach(path => {
@@ -381,7 +388,7 @@ export function preloadAllCriticalImages() {
   
   // Preload logo and other critical UI elements
   const uiImages = [
-    '/images/night-sky.jpg' // Using confirmed existing image
+    '/images/TXA_fallback.jpg' // Use the fallback as a reliable image
   ];
   
   uiImages.forEach(path => {

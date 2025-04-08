@@ -68,8 +68,8 @@ const reportWebVitals = () => {
 // Critical path optimization - run before DOMContentLoaded
 // Prefetch high-priority images that will be needed immediately
 const criticalImagePaths = [
-  '/images/TXA_fallback.jpg',
-  '/images/night-sky.jpg'
+  '/images/TXA_fallback.jpg'
+  // Remove night-sky.jpg as it doesn't exist
 ];
 prefetchImages(criticalImagePaths, { 
   priorityImages: criticalImagePaths,
@@ -121,9 +121,14 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Prefetch remaining important images for fast navigation
     const secondaryImagePaths = [
-      '/images/husky.jpg',
-      '/images/snowmobile.jpg',
-      '/images/drifting.jpg'
+      // Use existing verified image paths with full range of experience types
+      '/images/Huskys/Husky 1_result.webp',
+      '/images/Snowmobile/Snowmobile 1_result.webp',
+      '/images/Ice Drift/Cars 1_result.webp',
+      '/images/Side by Side/SBS 1_result.webp',
+      '/images/Reindeers/Reindeers 1_result.webp',
+      '/images/Drifting.jpg',
+      '/images/Helikopter.jpg'
     ];
     prefetchImages(secondaryImagePaths, { lowPriorityDelay: 2000 });
     
