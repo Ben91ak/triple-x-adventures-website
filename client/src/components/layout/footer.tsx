@@ -139,7 +139,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-6 text-white">{content.quickLinks}</h3>
             <ul className="space-y-2">
               {[
-                { href: "#experiences", text: content.ourExperiences },
+                { href: "#pakete", text: content.ourExperiences },
                 { href: "#accommodations", text: content.accommodations },
                 { href: "#restaurant", text: content.restaurant },
                 { href: "#team", text: content.aboutUs },
@@ -167,11 +167,11 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-6 text-white">{content.popularAdventures}</h3>
             <ul className="space-y-2">
               {[
-                { href: "#", text: content.adventures.snowmobile },
-                { href: "#", text: content.adventures.dogSledding },
-                { href: "#", text: content.adventures.northernLights },
-                { href: "#", text: content.adventures.iceFishing },
-                { href: "#", text: content.adventures.arcticSurvival }
+                { href: "#pakete", text: content.adventures.snowmobile },
+                { href: "#pakete", text: content.adventures.dogSledding },
+                { href: "#pakete", text: content.adventures.northernLights },
+                { href: "#pakete", text: content.adventures.iceFishing },
+                { href: "#pakete", text: content.adventures.arcticSurvival }
               ].map((adventure, index) => (
                 <li key={index}>
                   <a 
