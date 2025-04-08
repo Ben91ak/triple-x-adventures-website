@@ -82,7 +82,7 @@ export function Header() {
                   { href: "#about", label: t.nav.about },
                   { href: "#pakete", label: t.nav.packages },
                   { href: "#accommodations", label: t.nav.accommodations },
-                  { href: "#gallery", label: t.nav.gallery },
+                  // Gallery section removed per request
                   { href: "#contact", label: t.nav.contact }
                 ].map((item, index) => (
                   item.href.startsWith('#') ? (
@@ -145,7 +145,7 @@ export function Header() {
               { href: "#about", label: t.nav.about },
               { href: "#pakete", label: t.nav.packages },
               { href: "#accommodations", label: t.nav.accommodations },
-              { href: "#gallery", label: t.nav.gallery },
+              // Gallery section removed per request
               { href: "#contact", label: t.nav.contact }
             ].map((item, index) => (
               item.href.startsWith('#') ? (

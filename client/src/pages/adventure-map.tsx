@@ -88,7 +88,7 @@ function MapHeader() {
                   { href: "/#package-builder", label: "Build Your Adventure" },
                   { href: "/#accommodations", label: t.nav.accommodations },
                   { href: "/adventure-map", label: language === 'en' ? "Adventure Map" : language === 'de' ? "Abenteuerkarte" : "Äventyrskarta" },
-                  { href: "/#gallery", label: t.nav.gallery },
+                  // Gallery section removed per request to improve performance
                   { href: "/#contact", label: t.nav.contact }
                 ].map((item, index) => (
                   <Link 
@@ -143,7 +143,7 @@ function MapHeader() {
               { href: "/#package-builder", label: "Build Your Adventure" },
               { href: "/#accommodations", label: t.nav.accommodations },
               { href: "/adventure-map", label: language === 'en' ? "Adventure Map" : language === 'de' ? "Abenteuerkarte" : "Äventyrskarta" },
-              { href: "/#gallery", label: t.nav.gallery },
+              // Gallery section removed per request to improve performance
               { href: "/#contact", label: t.nav.contact }
             ].map((item, index) => (
               <Link 
