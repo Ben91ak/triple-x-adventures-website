@@ -135,8 +135,8 @@ export function Footer() {
             </div>
           </div>
           
-          {/* Links and contact section - converted to a side-by-side grid on mobile and stacked rows on larger screens */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-10 gap-x-4 sm:gap-x-6 lg:gap-x-12 mt-10 lg:mt-0 lg:max-w-2xl">
+          {/* Links and contact section - optimized for mobile with hidden Popular Adventures */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-10 gap-x-4 sm:gap-x-6 lg:gap-x-12 mt-10 lg:mt-0 lg:max-w-2xl">
             {/* Column 1 - Quick Links */}
             <div className="col-span-1">
               <h3 className="text-lg font-semibold mb-4 text-white">
@@ -167,10 +167,10 @@ export function Footer() {
               </ul>
             </div>
             
-            {/* Column 2 - Popular Adventures */}
-            <div className="col-span-1">
+            {/* Column 2 - Popular Adventures - Hidden on mobile */}
+            <div className="hidden sm:block col-span-1">
               <h3 className="text-lg font-semibold mb-4 text-white">
-                <span className="bg-accent-color/20 w-1.5 h-6 mr-2 rounded-full hidden sm:inline-block align-middle"></span>
+                <span className="bg-accent-color/20 w-1.5 h-6 mr-2 rounded-full inline-block align-middle"></span>
                 <span className="align-middle">{content.popularAdventures}</span>
               </h3>
               <ul className="space-y-2">
@@ -196,8 +196,8 @@ export function Footer() {
               </ul>
             </div>
             
-            {/* Column 3 - Contact Info */}
-            <div className="col-span-2 sm:col-span-1">
+            {/* Column 3 - Contact Info - Full width on mobile */}
+            <div className="col-span-1 sm:col-span-1">
               <h3 className="text-lg font-semibold mb-4 text-white">
                 <span className="bg-accent-color/20 w-1.5 h-6 mr-2 rounded-full hidden sm:inline-block align-middle"></span>
                 <span className="align-middle">{content.contactInfo}</span>
