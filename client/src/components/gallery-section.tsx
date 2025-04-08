@@ -1,4 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useVideo } from "@/contexts/VideoContext";
 import { useTranslation } from "@/translations";
 import { useState, useRef, useEffect } from "react";
 import { Play, Pause, X, Volume2, VolumeX } from "lucide-react";
@@ -58,18 +59,57 @@ function VideoThumbnail({
   });
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const { currentlyPlaying, playVideo, pauseAllVideos, registerVideo } = useVideo();
+  
+  // Effect to register/unregister video with the context
+  useEffect(() => {
+    if (videoRef.current && registerVideo) {
+      // Register the video element with the context
+      registerVideo(video.id.toString(), videoRef.current);
+      
+      // Update playing state when video plays or pauses
+      const handlePlay = () => setIsPlaying(true);
+      const handlePause = () => setIsPlaying(false);
+      
+      videoRef.current.addEventListener('play', handlePlay);
+      videoRef.current.addEventListener('pause', handlePause);
+      
+      return () => {
+        // Clean up
+        registerVideo(video.id.toString(), null);
+        if (videoRef.current) {
+          videoRef.current.removeEventListener('play', handlePlay);
+          videoRef.current.removeEventListener('pause', handlePause);
+        }
+      };
+    }
+  }, [video.id, registerVideo]);
+  
+  // Update playing state when currentlyPlaying changes in context
+  useEffect(() => {
+    if (currentlyPlaying !== video.id.toString() && isPlaying && videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  }, [currentlyPlaying, video.id, isPlaying]);
   
   // Toggle play/pause
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
+        // Pause via the context to update global state
         videoRef.current.pause();
         setIsPlaying(false);
       } else {
-        // Play the video
+        // Ensure other videos are paused first
+        pauseAllVideos();
+        
+        // Play this video
         videoRef.current.play()
           .then(() => {
             setIsPlaying(true);
+            // Update global state
+            playVideo(video.id.toString());
           })
           .catch(err => {
             console.log("Could not play video:", err);
