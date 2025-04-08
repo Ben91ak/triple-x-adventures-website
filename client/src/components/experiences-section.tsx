@@ -274,17 +274,17 @@ function ExperienceDetailModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+    <div className="fixed inset-0 z-[100] flex items-start md:items-center justify-center overflow-y-auto py-10 md:py-0">
       {/* Backdrop with blur effect - added modal-backdrop class for iOS touch handling */}
       <div 
-        className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300 modal-backdrop" 
+        className="fixed inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300 modal-backdrop" 
         onClick={onClose}
         style={{ touchAction: 'manipulation' }}
       ></div>
       
       {/* Modal content */}
       <div 
-        className="relative max-w-6xl w-[90%] mx-auto my-auto max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
+        className="relative max-w-6xl w-[90%] mx-auto my-4 md:my-auto max-h-full overflow-visible glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button - enhanced for mobile touchability */}
@@ -298,7 +298,7 @@ function ExperienceDetailModal({
         </button>
         
         {/* Modal header */}
-        <div className="flex flex-col md:flex-row md:h-[500px] overflow-hidden">
+        <div className="flex flex-col md:flex-row md:h-[500px] overflow-visible md:overflow-hidden">
           {/* Gallery section */}
           <div className="md:flex-1 relative overflow-hidden h-[300px] md:h-full">
             {/* Loading spinner */}
@@ -565,7 +565,7 @@ function ExperienceDetailModal({
           </div>
           
           {/* Content section */}
-          <div className="md:flex-1 p-6 md:p-8 overflow-y-auto max-h-[50vh] md:max-h-full">
+          <div className="md:flex-1 p-6 md:p-8 overflow-y-auto h-auto md:max-h-full">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               {experience.title}
             </h2>
