@@ -202,6 +202,15 @@ function ExperienceDetailModal({
       '/images/Ice Drift/Cars 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Ice Drift:', gallery);
+  } else if (experience.title.toLowerCase().includes('ice fishing') || experience.title.toLowerCase().includes('fishing')) {
+    // Skip path resolution and directly use WebP files for Ice Fishing
+    gallery = [
+      '/images/Ice Fishing/Icefish 1_result.webp',
+      '/images/Ice Fishing/Icefish 2_result.webp',
+      '/images/Ice Fishing/Shoot 3_result.webp',
+      '/images/Ice Fishing/Shoot 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Ice Fishing:', gallery);
   } else if (experience.title.toLowerCase().includes('reindeer') || experience.title.toLowerCase().includes('reindeers')) {
     // Skip path resolution and directly use WebP files for Reindeers
     gallery = [
@@ -289,6 +298,8 @@ function ExperienceDetailModal({
                    experience.title.toLowerCase().includes('helikopter') ||
                    experience.title.toLowerCase().includes('ice drift') ||
                    experience.title.toLowerCase().includes('drift') ||
+                   experience.title.toLowerCase().includes('ice fishing') ||
+                   experience.title.toLowerCase().includes('fishing') ||
                    experience.title.toLowerCase().includes('reindeer')
                 ? gallery[activeImageIndex] // For specialized experiences, use the direct WebP file paths
                 : getOptimizedImageSrc(gallery[activeImageIndex], { 
@@ -352,10 +363,44 @@ function ExperienceDetailModal({
                   
                   target.src = `/images/Ice Kart/Icekart ${kartNum}_result.webp`;
                   console.log('Fallback to:', `/images/Ice Kart/Icekart ${kartNum}_result.webp`);
+                } else if (originalSrc.toLowerCase().includes('ice fishing') || (originalSrc.toLowerCase().includes('fishing') && (originalSrc.toLowerCase().includes('icefish') || originalSrc.toLowerCase().includes('shoot')))) {
+                  console.log('Ice Fishing image failed to load:', originalSrc);
+                  
+                  // Check if it's an Icefish or Shoot image
+                  if (originalSrc.toLowerCase().includes('icefish')) {
+                    // Extract the fish number or default to 1
+                    let fishNum = 1;
+                    const match = originalSrc.match(/Icefish\s*(\d+)/i);
+                    if (match && match[1]) {
+                      fishNum = parseInt(match[1], 10);
+                    }
+                    // Force to a known valid fish file that exists
+                    if (fishNum < 1 || fishNum > 2) fishNum = 1;
+                    
+                    target.src = `/images/Ice Fishing/Icefish ${fishNum}_result.webp`;
+                    console.log('Fallback to:', `/images/Ice Fishing/Icefish ${fishNum}_result.webp`);
+                  } else if (originalSrc.toLowerCase().includes('shoot')) {
+                    // Extract the shoot number or default to 3
+                    let shootNum = 3;
+                    const match = originalSrc.match(/Shoot\s*(\d+)/i);
+                    if (match && match[1]) {
+                      shootNum = parseInt(match[1], 10);
+                    }
+                    // Force to a known valid shoot file that exists
+                    if (shootNum < 3 || shootNum > 4) shootNum = 3;
+                    
+                    target.src = `/images/Ice Fishing/Shoot ${shootNum}_result.webp`;
+                    console.log('Fallback to:', `/images/Ice Fishing/Shoot ${shootNum}_result.webp`);
+                  } else {
+                    // Default to first icefish image
+                    target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
+                    console.log('Fallback to default:', `/images/Ice Fishing/Icefish 1_result.webp`);
+                  }
                 } else if (originalSrc.toLowerCase().includes('fishing')) {
+                  // Generic fishing image fallback (for backwards compatibility)
                   // Try WebP if supported
                   if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                    target.src = `/images/optimized/Ice-Fishing-${size}.webp`;
+                    target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
                   } else {
                     target.src = `/images/optimized/Ice-Fishing-${size}.jpg`;
                   }
