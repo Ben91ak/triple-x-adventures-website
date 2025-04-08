@@ -96,7 +96,7 @@ export function Footer() {
                 <img 
                   src="/weiss-grun.png" 
                   alt="Triple X Adventures" 
-                  className="h-16 mb-4 hover:opacity-90 transition-opacity" 
+                  className="h-16 w-auto object-contain mb-4 hover:opacity-90 transition-opacity" 
                 />
               </Link>
               <div className="w-12 h-1 bg-accent-color rounded-full"></div>
