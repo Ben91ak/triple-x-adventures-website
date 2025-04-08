@@ -1,5 +1,4 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useVideo } from "@/contexts/VideoContext";
 import { useTranslation } from "@/translations";
 import { useState, useRef, useEffect } from "react";
 import { Play, Pause, X, Volume2, VolumeX } from "lucide-react";
@@ -47,6 +46,9 @@ const videos = [
 
 // No need for the modal VideoPlayer anymore as videos play inline
 
+// Keep track of the currently playing video
+let currentlyPlayingVideo: HTMLVideoElement | null = null;
+
 // Video Thumbnail Component with inline playing
 function VideoThumbnail({ 
   video
@@ -59,57 +61,46 @@ function VideoThumbnail({
   });
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const { currentlyPlaying, playVideo, pauseAllVideos, registerVideo } = useVideo();
   
-  // Effect to register/unregister video with the context
+  // Effect to handle play and pause events to update UI state
   useEffect(() => {
-    if (videoRef.current && registerVideo) {
-      // Register the video element with the context
-      registerVideo(video.id.toString(), videoRef.current);
+    if (videoRef.current) {
+      const videoElement = videoRef.current;
       
-      // Update playing state when video plays or pauses
+      // Event handlers for play and pause
       const handlePlay = () => setIsPlaying(true);
       const handlePause = () => setIsPlaying(false);
       
-      videoRef.current.addEventListener('play', handlePlay);
-      videoRef.current.addEventListener('pause', handlePause);
+      videoElement.addEventListener('play', handlePlay);
+      videoElement.addEventListener('pause', handlePause);
       
+      // Clean up event listeners on unmount
       return () => {
-        // Clean up
-        registerVideo(video.id.toString(), null);
-        if (videoRef.current) {
-          videoRef.current.removeEventListener('play', handlePlay);
-          videoRef.current.removeEventListener('pause', handlePause);
-        }
+        videoElement.removeEventListener('play', handlePlay);
+        videoElement.removeEventListener('pause', handlePause);
       };
     }
-  }, [video.id, registerVideo]);
-  
-  // Update playing state when currentlyPlaying changes in context
-  useEffect(() => {
-    if (currentlyPlaying !== video.id.toString() && isPlaying && videoRef.current) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  }, [currentlyPlaying, video.id, isPlaying]);
+  }, []);
   
   // Toggle play/pause
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
-        // Pause via the context to update global state
+        // Pause this video
         videoRef.current.pause();
         setIsPlaying(false);
+        currentlyPlayingVideo = null;
       } else {
-        // Ensure other videos are paused first
-        pauseAllVideos();
+        // Pause any currently playing video first
+        if (currentlyPlayingVideo && currentlyPlayingVideo !== videoRef.current) {
+          currentlyPlayingVideo.pause();
+        }
         
         // Play this video
         videoRef.current.play()
           .then(() => {
             setIsPlaying(true);
-            // Update global state
-            playVideo(video.id.toString());
+            currentlyPlayingVideo = videoRef.current;
           })
           .catch(err => {
             console.log("Could not play video:", err);

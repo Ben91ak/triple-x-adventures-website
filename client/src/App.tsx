@@ -4,7 +4,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { lazy, Suspense, memo } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
-import { VideoProvider } from "@/contexts/VideoContext";
 import { HelmetProvider } from "react-helmet-async";
 import "./styles/theme.css";
 
@@ -55,10 +54,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <LanguageProvider>
-          <VideoProvider>
-            <Router />
-            <Toaster />
-          </VideoProvider>
+          <Router />
+          <Toaster />
         </LanguageProvider>
       </HelmetProvider>
     </QueryClientProvider>
