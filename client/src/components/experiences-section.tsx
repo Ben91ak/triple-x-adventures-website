@@ -867,9 +867,9 @@ export function ExperiencesSection() {
                           target.src = `/images/optimized/ice-kart-${size}.jpg`;
                         }
                       } else if (originalSrc.toLowerCase().includes('fishing')) {
-                        // Try WebP if supported
+                        // Try new direct WebP paths first for Ice Fishing
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                          target.src = `/images/optimized/Ice-Fishing-${size}.webp`;
+                          target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
                         } else {
                           target.src = `/images/optimized/Ice-Fishing-${size}.jpg`;
                         }
@@ -880,6 +880,15 @@ export function ExperiencesSection() {
                         } else {
                           target.src = `/images/optimized/buggy-${size}.jpg`;
                         }
+                      } else if (originalSrc.toLowerCase().includes('helicopter') || originalSrc.toLowerCase().includes('helikopter')) {
+                        // Use direct WebP files for Helicopter
+                        target.src = `/images/Helicopter/Helikopter 1_result.webp`;
+                      } else if (originalSrc.toLowerCase().includes('ice drift') || (originalSrc.toLowerCase().includes('drift') && originalSrc.toLowerCase().includes('cars'))) {
+                        // Use direct WebP files for Ice Drift
+                        target.src = `/images/Ice Drift/Cars 1_result.webp`;
+                      } else if (originalSrc.toLowerCase().includes('ice fishing') || originalSrc.toLowerCase().includes('icefish')) {
+                        // Use direct WebP files for Ice Fishing
+                        target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
                       } else if (originalSrc.toLowerCase().includes('drift')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
