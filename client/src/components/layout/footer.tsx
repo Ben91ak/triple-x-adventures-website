@@ -88,10 +88,11 @@ export function Footer() {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-color/30 to-transparent" style={{ zIndex: 3 }}></div>
       
       <div className="container mx-auto px-4 pt-16 pb-8 relative" style={{ zIndex: 10 }}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {/* Column 1 - Logo & Description */}
-          <div>
-            <div className="mb-4">
+        {/* Mobile-optimized footer with improved layout */}
+        <div className="mb-8 md:mb-16">
+          {/* Logo, description and social icons - always full width on mobile */}
+          <div className="text-center md:text-left mb-10 md:mb-0">
+            <div className="mb-4 flex flex-col items-center md:items-start">
               <Link href="/">
                 <img 
                   src="/weiss-grun.png" 
@@ -101,8 +102,8 @@ export function Footer() {
               </Link>
               <div className="w-12 h-1 bg-accent-color rounded-full"></div>
             </div>
-            <p className="text-white text-opacity-80 mb-6 leading-relaxed">{content.description}</p>
-            <div className="flex space-x-4">
+            <p className="text-white text-opacity-80 mb-6 leading-relaxed max-w-md mx-auto md:mx-0">{content.description}</p>
+            <div className="flex space-x-4 justify-center md:justify-start">
               <a href="#" className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors">
                 <Facebook size={16} />
               </a>
@@ -134,94 +135,104 @@ export function Footer() {
             </div>
           </div>
           
-          {/* Column 2 - Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6 text-white">{content.quickLinks}</h3>
-            <ul className="space-y-2">
-              {[
-                { href: "#pakete", text: content.ourExperiences },
-                { href: "#accommodations", text: content.accommodations },
-                { href: "#restaurant", text: content.restaurant },
-                { href: "#team", text: content.aboutUs },
-                { href: "#contact", text: content.contact },
-                { href: "#", text: content.blog }
-              ].map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href} 
-                    className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group"
-                  >
-                    <ChevronRight 
-                      size={14} 
-                      className="mr-2 text-accent-color/50 group-hover:translate-x-1 transition-transform" 
-                    />
-                    {link.text}
-                  </a>
+          {/* Mobile-friendly grid with auto-fit columns for other sections */}
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+            {/* Column 1 - Quick Links */}
+            <div className="text-center sm:text-left">
+              <h3 className="text-lg font-semibold mb-4 text-white flex items-center justify-center sm:justify-start">
+                <span className="bg-accent-color/20 w-1.5 h-6 mr-2 rounded-full hidden sm:block"></span>
+                {content.quickLinks}
+              </h3>
+              <ul className="space-y-2">
+                {[
+                  { href: "#pakete", text: content.ourExperiences },
+                  { href: "#accommodations", text: content.accommodations },
+                  { href: "#restaurant", text: content.restaurant },
+                  { href: "#team", text: content.aboutUs },
+                  { href: "#contact", text: content.contact }
+                ].map((link, index) => (
+                  <li key={index}>
+                    <a 
+                      href={link.href} 
+                      className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group justify-center sm:justify-start"
+                    >
+                      <ChevronRight 
+                        size={14} 
+                        className="mr-2 text-accent-color/50 group-hover:translate-x-1 transition-transform" 
+                      />
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Column 2 - Popular Adventures */}
+            <div className="text-center sm:text-left">
+              <h3 className="text-lg font-semibold mb-4 text-white flex items-center justify-center sm:justify-start">
+                <span className="bg-accent-color/20 w-1.5 h-6 mr-2 rounded-full hidden sm:block"></span>
+                {content.popularAdventures}
+              </h3>
+              <ul className="space-y-2">
+                {[
+                  { href: "#pakete", text: content.adventures.snowmobile },
+                  { href: "#pakete", text: content.adventures.dogSledding },
+                  { href: "#pakete", text: content.adventures.northernLights },
+                  { href: "#pakete", text: content.adventures.iceFishing }
+                ].map((adventure, index) => (
+                  <li key={index}>
+                    <a 
+                      href={adventure.href} 
+                      className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group justify-center sm:justify-start"
+                    >
+                      <ChevronRight 
+                        size={14} 
+                        className="mr-2 text-accent-color/50 group-hover:translate-x-1 transition-transform" 
+                      />
+                      {adventure.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            {/* Column 3 - Contact Info */}
+            <div className="text-center sm:text-left col-span-1 sm:col-span-2 lg:col-span-1">
+              <h3 className="text-lg font-semibold mb-4 text-white flex items-center justify-center sm:justify-start">
+                <span className="bg-accent-color/20 w-1.5 h-6 mr-2 rounded-full hidden sm:block"></span>
+                {content.contactInfo}
+              </h3>
+              <ul className="space-y-4">
+                <li className="flex flex-col sm:flex-row items-center sm:items-start">
+                  <div className="mb-2 sm:mb-0 sm:mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm">
+                    <MapPin size={16} />
+                  </div>
+                  <span 
+                    className="text-white text-opacity-80" 
+                    dangerouslySetInnerHTML={{ __html: content.address }} 
+                  />
                 </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Column 3 - Popular Adventures */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6 text-white">{content.popularAdventures}</h3>
-            <ul className="space-y-2">
-              {[
-                { href: "#pakete", text: content.adventures.snowmobile },
-                { href: "#pakete", text: content.adventures.dogSledding },
-                { href: "#pakete", text: content.adventures.northernLights },
-                { href: "#pakete", text: content.adventures.iceFishing },
-                { href: "#pakete", text: content.adventures.arcticSurvival }
-              ].map((adventure, index) => (
-                <li key={index}>
-                  <a 
-                    href={adventure.href} 
-                    className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group"
-                  >
-                    <ChevronRight 
-                      size={14} 
-                      className="mr-2 text-accent-color/50 group-hover:translate-x-1 transition-transform" 
-                    />
-                    {adventure.text}
-                  </a>
+                <li className="flex flex-col sm:flex-row items-center sm:items-center">
+                  <div className="mb-2 sm:mb-0 sm:mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm">
+                    <Phone size={16} />
+                  </div>
+                  <span className="text-white text-opacity-80">+46 (0) 70 357 5455</span>
                 </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Column 4 - Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6 text-white">{content.contactInfo}</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm mt-0.5">
-                  <MapPin size={16} />
-                </div>
-                <span 
-                  className="text-white text-opacity-80" 
-                  dangerouslySetInnerHTML={{ __html: content.address }} 
-                />
-              </li>
-              <li className="flex items-center">
-                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm">
-                  <Phone size={16} />
-                </div>
-                <span className="text-white text-opacity-80">+46 (0) 70 357 5455</span>
-              </li>
-              <li className="flex items-center">
-                <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm">
-                  <Mail size={16} />
-                </div>
-                <span className="text-white text-opacity-80">info@triple-x-adventures.com</span>
-              </li>
-            </ul>
+                <li className="flex flex-col sm:flex-row items-center sm:items-center">
+                  <div className="mb-2 sm:mb-0 sm:mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm">
+                    <Mail size={16} />
+                  </div>
+                  <span className="text-white text-opacity-80">info@triple-x-adventures.com</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         
-        {/* Copyright Section */}
-        <div className="border-t border-white/5 pt-8 mt-8 text-center">
+        {/* Copyright Section - simplified for mobile */}
+        <div className="border-t border-white/5 pt-6 mt-6 text-center">
           <p className="text-white text-opacity-70 text-sm">{t.footer.copyright}</p>
-          <div className="mt-4 space-x-6">
+          <div className="mt-4 flex flex-wrap justify-center gap-4 px-2">
             {[
               { href: "#", text: t.footer.privacyPolicy },
               { href: "#", text: t.footer.termsConditions },
