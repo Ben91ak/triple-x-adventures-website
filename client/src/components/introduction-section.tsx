@@ -8,7 +8,7 @@ import { useRef } from "react";
 const introContentByLanguage = {
   en: {
     title: "Not Just Another Tour Company",
-    description: "Triple X Adventures offers authentic Arctic experiences rooted in Swedish Lapland. Based in Akkavare near Arvidsjaur, we combine thrill, comfort, and authenticity in every adventure. Whether it's carving through snow-covered forests, dining around a crackling open fire, or staying in our premium accommodations, you'll leave with stories, not just memories.",
+    description: "Triple X Adventures offers authentic Arctic experiences rooted in Swedish Lapland. Based in Arvidsjaur near the Polarcircle, we combine thrill, comfort, and authenticity in every adventure. Whether it's carving through snow-covered forests, dining around a crackling open fire, or staying in our premium accommodations, you'll leave with stories, not just memories.",
     features: [
       {
         icon: "users",
