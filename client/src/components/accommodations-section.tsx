@@ -238,8 +238,8 @@ export function AccommodationsSection() {
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
                     {accommodation.features.map((feature, index) => (
                       <div key={index} className="flex items-center">
-                        <div className="w-10 h-10 rounded-full border border-gray-700 bg-gray-900/90 flex items-center justify-center mr-3 text-white/70 shadow-sm">
-                          {iconMap[feature.icon]}
+                        <div className="flex-shrink-0 w-9 h-9 rounded-full border border-gray-700 bg-gray-900/90 flex items-center justify-center mr-3 text-white/80 shadow-sm">
+                          <div className="w-4 h-4">{iconMap[feature.icon]}</div>
                         </div>
                         <span className="text-white text-opacity-90 text-sm">{feature.text}</span>
                       </div>
@@ -305,8 +305,8 @@ export function AccommodationsSection() {
                     <div className="grid grid-cols-2 gap-4 mb-6">
                       {accommodation.features.map((feature, index) => (
                         <div key={index} className="flex items-center">
-                          <div className="w-8 h-8 rounded-full border border-gray-700 bg-gray-900/90 flex items-center justify-center mr-3 text-white/70 shadow-sm">
-                            {iconMap[feature.icon]}
+                          <div className="flex-shrink-0 w-8 h-8 rounded-full border border-gray-700 bg-gray-900/90 flex items-center justify-center mr-3 text-white/80 shadow-sm">
+                            <div className="w-3.5 h-3.5">{iconMap[feature.icon]}</div>
                           </div>
                           <span className="text-white text-opacity-80 text-sm">{feature.text}</span>
                         </div>
