@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo, useState } from 'react';
 
 interface GlobalBackgroundProps {
   intensity?: 'low' | 'medium' | 'high';
@@ -20,6 +20,52 @@ export const GlobalBackground = memo(function GlobalBackground({
   starDensity = 'medium'
 }: GlobalBackgroundProps = {}) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLowEndDevice, setIsLowEndDevice] = useState(false);
+  
+  // Detect mobile and low-end devices once on mount
+  useEffect(() => {
+    // Check for mobile devices
+    const checkIfMobile = () => {
+      const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+      setIsMobile(isMobileViewport || isTouchDevice);
+    };
+    
+    // Check for low-end devices or data saving mode
+    const checkIfLowEndDevice = () => {
+      const hasLowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+      const hasLowMemory = 'deviceMemory' in navigator && (navigator as any).deviceMemory < 4;
+      const hasSaveData = 'connection' in navigator && (navigator as any).connection?.saveData;
+      const hasSlowConnection = 'connection' in navigator && 
+         ['slow-2g', '2g', '3g'].includes((navigator as any).connection?.effectiveType);
+      
+      // If battery API is available, check if in low power mode
+      const checkBattery = async () => {
+        try {
+          if ('getBattery' in navigator) {
+            const battery = await (navigator as any).getBattery();
+            if (battery.level < 0.15 || battery.charging === false) {
+              setIsLowEndDevice(true);
+            }
+          }
+        } catch (e) {
+          // Battery API not available or error
+        }
+      };
+      
+      checkBattery().catch(() => {});
+      
+      setIsLowEndDevice(hasLowCPU || hasLowMemory || hasSaveData || hasSlowConnection);
+    };
+    
+    checkIfMobile();
+    checkIfLowEndDevice();
+    
+    // Listen for resize events to update mobile status
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
   
   // Apply intensity classes based on prop and device capability
   useEffect(() => {
@@ -29,10 +75,17 @@ export const GlobalBackground = memo(function GlobalBackground({
     // Remove any existing intensity classes
     container.classList.remove('intensity-low', 'intensity-medium', 'intensity-high');
     
-    // Reduce intensity automatically on low-power devices
+    // Reduce intensity based on device capabilities
     let appliedIntensity = intensity;
-    if (window.matchMedia('(max-width: 768px), (pointer: coarse)').matches && intensity === 'high') {
-      appliedIntensity = 'medium';
+    
+    // Significantly reduce for mobile devices
+    if (isMobile) {
+      appliedIntensity = intensity === 'high' ? 'medium' : 'low';
+    }
+    
+    // Further reduce for low-end devices
+    if (isLowEndDevice) {
+      appliedIntensity = 'low';
     }
     
     // Apply the appropriate intensity class
@@ -44,9 +97,57 @@ export const GlobalBackground = memo(function GlobalBackground({
     
     // Apply star density classes
     container.classList.remove('stars-sparse', 'stars-medium', 'stars-dense');
-    container.classList.add(`stars-${starDensity}`);
-  }, [intensity, colorScheme, starDensity]);
+    
+    // Reduce star density on mobile/low-end devices
+    let appliedStarDensity = starDensity;
+    if (isMobile || isLowEndDevice) {
+      appliedStarDensity = 'sparse';
+    }
+    
+    container.classList.add(`stars-${appliedStarDensity}`);
+    
+    // Add mobile-specific class
+    if (isMobile) {
+      container.classList.add('mobile-optimized');
+    } else {
+      container.classList.remove('mobile-optimized');
+    }
+  }, [intensity, colorScheme, starDensity, isMobile, isLowEndDevice]);
 
+  // Use a simplified background for low-end or mobile devices
+  if (isLowEndDevice || isMobile) {
+    return (
+      <div 
+        ref={containerRef}
+        className="fixed inset-0 overflow-hidden transform-gpu will-change-transform z-0 intensity-low mobile-optimized" 
+        aria-hidden="true"
+      >
+        {/* Base gradient layer with simplified effects */}
+        <div className="absolute inset-0 transform-gpu" 
+             style={{ 
+               background: "linear-gradient(180deg, #050A11 0%, #0A1019 40%, #0A0D14 100%)",
+               opacity: 1 
+             }}>
+        </div>
+        
+        {/* Simplified starry night - static image instead of animated */}
+        <div className="absolute inset-0 transform-gpu">
+          <div className="stars-small absolute inset-0"></div>
+        </div>
+        
+        {/* Simplified Northern Lights - only one element with reduced animation */}
+        <div className="northern-lights-gradient absolute inset-0">
+          <div className="northern-glow"></div>
+        </div>
+        
+        {/* Dark overlay for text contrast */}
+        <div className="absolute inset-0 bg-dark-bg transform-gpu" 
+             style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}></div>
+      </div>
+    );
+  }
+
+  // Full version for desktop/high-end devices
   return (
     <div 
       ref={containerRef}

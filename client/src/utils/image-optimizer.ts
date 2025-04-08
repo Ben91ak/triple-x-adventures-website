@@ -259,11 +259,46 @@ export function getOptimizedImageSrc(
   const fileName = src.split('/').pop() || '';
   const fileNameWithoutExt = fileName.split('.')[0];
   
-  // For any specific collection, just return the original source
-  // Since we've seen errors with the optimized versions not existing
-  if (src.includes('/images/Huskys/') || src.includes('/images/Snowmobile/')) {
-    // Just return the original source to avoid 404 errors
-    return src;
+  // Path normalization - handle various path inconsistencies
+  // Convert uppercase folder names to lowercase
+  if (src.includes('/images/Huskys/')) {
+    // Update path to match actual structure
+    const fileName = src.split('/').pop() || '';
+    const fileNameWithoutExt = fileName.split('.')[0];
+    
+    // Correct path structure 
+    return `/images/husky/${fileNameWithoutExt.toLowerCase()}.jpg`;
+  }
+  
+  if (src.includes('/images/Snowmobile/')) {
+    // Update path to match actual structure 
+    const fileName = src.split('/').pop() || '';
+    const fileNameWithoutExt = fileName.split('.')[0];
+    
+    // Correct path structure
+    return `/images/snowmobile/${fileNameWithoutExt.toLowerCase()}.jpg`;
+  }
+  
+  // Handle common path pattern issues with experiences
+  if (src.includes('experiences/') || src.includes('Experiences/')) {
+    // Make path lowercase for consistency
+    src = src.replace(/Experiences\//i, 'experiences/');
+    
+    // Convert spaces in filenames to dashes
+    const fileName = src.split('/').pop() || '';
+    const fileNameFixed = fileName.replace(/\s+/g, '-').toLowerCase();
+    
+    if (fileName !== fileNameFixed) {
+      const pathWithoutFile = src.substring(0, src.lastIndexOf('/') + 1);
+      return `${pathWithoutFile}${fileNameFixed}`;
+    }
+  }
+  
+  // Handle filenames with spaces
+  if (fileName.includes(' ')) {
+    const pathWithoutFile = src.substring(0, src.lastIndexOf('/') + 1);
+    const fileNameFixed = fileName.replace(/\s+/g, '-').toLowerCase();
+    return `${pathWithoutFile}${fileNameFixed}`;
   }
   
   // Generic optimization for any image in the images folder
@@ -488,11 +523,11 @@ function optimizeImage(img: HTMLImageElement, isPriority: boolean): void {
     if (isPriority) {
       img.loading = 'eager';
       img.decoding = 'async';
-      img.fetchPriority = 'high';
+      // TypeScript doesn't recognize fetchPriority yet, so we need to use any
+      (img as any).fetchPriority = 'high';
     } else {
       img.loading = 'lazy';
       img.decoding = 'async';
-      img.fetchPriority = 'low';
     }
     
     // Set appropriate image quality based on priority and network conditions

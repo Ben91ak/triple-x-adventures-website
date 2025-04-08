@@ -2,6 +2,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { supportsFormat, optimizePageImages, prefetchImages } from "./utils/image-optimizer";
+import { applyPerformanceOptimizations } from "./utils/performance-optimizer";
 
 // Initialize image format detection early
 // This runs immediately before the app renders to detect WebP/AVIF support
@@ -85,6 +86,9 @@ window.addEventListener('DOMContentLoaded', () => {
     
     // Start Core Web Vitals monitoring
     reportWebVitals();
+    
+    // Apply the new comprehensive performance optimizations
+    applyPerformanceOptimizations();
   };
   
   // Run critical optimizations right away
@@ -93,25 +97,6 @@ window.addEventListener('DOMContentLoaded', () => {
   // Schedule non-critical optimizations for after the page is interactive
   // This helps with TTI (Time to Interactive) and INP (Interaction to Next Paint)
   setTimeout(() => {
-    // Optimize scroll performance with passive listeners and debouncing
-    let scrollTimeout: ReturnType<typeof setTimeout>;
-    const html = document.documentElement;
-    
-    window.addEventListener('scroll', () => {
-      // Add class to html element during scrolling to pause animations
-      if (!html.classList.contains('is-scrolling')) {
-        html.classList.add('is-scrolling');
-      }
-      
-      // Clear the timeout on each scroll event
-      clearTimeout(scrollTimeout);
-      
-      // Set a timeout to remove the class after scrolling stops
-      scrollTimeout = setTimeout(() => {
-        html.classList.remove('is-scrolling');
-      }, 150); // Small timeout to allow for momentum scrolling
-    }, { passive: true }); // Use passive scroll listener for better performance
-    
     // Set up intersection observer for animations and lazy loading
     if ('IntersectionObserver' in window) {
       // Create observer for revealing elements on scroll

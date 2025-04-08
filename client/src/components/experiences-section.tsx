@@ -155,19 +155,27 @@ function ExperienceDetailModal({
           <div className="md:flex-1 relative overflow-hidden h-64 md:h-full">
             {/* Main image */}
             <img 
-              src={getOptimizedImageSrc(gallery[activeImageIndex])} 
+              src={getOptimizedImageSrc(gallery[activeImageIndex], { quality: 'high' })} 
               alt={experience.title}
               loading="eager"
               decoding="async"
               width="800"
-              height="600" 
-
-              onError={(e) => {
-                console.error(`Error loading modal image: ${gallery[activeImageIndex]}`);
-                e.currentTarget.src = '/images/TXA_fallback.jpg';
-                e.currentTarget.onerror = null; // Prevent infinite error loops
-              }}
+              height="600"
               className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                const originalSrc = gallery[activeImageIndex];
+                console.warn(`Error loading modal image: ${gallery[activeImageIndex]}`);
+                
+                // If using optimized version, fall back to original
+                if (target.src !== originalSrc) {
+                  target.src = originalSrc;
+                } else {
+                  // If original fails too, use fallback
+                  target.src = '/images/TXA_fallback.jpg';
+                  target.onerror = null; // Prevent infinite error loops
+                }
+              }}
             />
             
             {/* Image navigation left/right */}
@@ -516,18 +524,25 @@ export function ExperiencesSection() {
                 <div className="relative h-[225px] overflow-hidden">
                   {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
-                    src={getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image)}
+                    src={getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { quality: 'medium' })}
                     alt={experience.title} 
                     loading={experience.id > 3 ? "lazy" : "eager"} /* Lazy load images that are likely below the fold */
-                    decoding="async" 
+                    decoding="async"
                     width="640" 
                     height="480"
-
                     onError={(e) => {
-                      console.error(`Error loading image: ${experience.image}`);
-                      // Fall back to our backup image if loading fails
-                      e.currentTarget.src = '/images/TXA_fallback.jpg';
-                      e.currentTarget.onerror = null; // Prevent infinite error loops
+                      const target = e.target as HTMLImageElement;
+                      const originalSrc = experience.image;
+                      console.warn(`Error loading experience image: ${originalSrc}`);
+                      
+                      // If using optimized version, fall back to original
+                      if (target.src !== originalSrc) {
+                        target.src = originalSrc;
+                      } else {
+                        // If original fails too, use fallback
+                        target.src = '/images/TXA_fallback.jpg';
+                        target.onerror = null; // Prevent infinite error loops
+                      }
                     }}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />

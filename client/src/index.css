@@ -615,6 +615,42 @@
   opacity: 0.4;
 }
 
+/* Mobile-optimized background with significantly reduced animations */
+.mobile-optimized .northern-lights-gradient .northern-glow {
+  /* Extend animation duration dramatically to reduce CPU usage */
+  animation-duration: 60s !important;
+  /* Reduce quality but improve performance */
+  filter: blur(40px) !important;
+  opacity: 0.6 !important;
+}
+
+/* Disable most resource-intensive animations on mobile */
+.mobile-optimized .northern-lights-gradient .aurora-pillar,
+.mobile-optimized .northern-lights-gradient .aurora-pillar-2,
+.mobile-optimized .northern-lights-gradient .aurora-band,
+.mobile-optimized .aurora-particles,
+.mobile-optimized .stars-medium,
+.mobile-optimized .stars-large,
+.mobile-optimized .shooting-stars {
+  /* Hide completely on mobile for better performance */
+  display: none !important;
+}
+
+/* Reduce animation complexity by using reduced motion when available */
+@media (prefers-reduced-motion: reduce) {
+  .northern-lights-gradient *,
+  .stars-small, .stars-medium, .stars-large,
+  .shooting-stars, .aurora-particles {
+    animation-duration: 60s !important;
+    animation-delay: 0s !important;
+    transition-duration: 60s !important;
+  }
+  
+  .shooting-stars {
+    display: none !important;
+  }
+}
+
 /* Color scheme variations */
 /* Default - Green/Lime Northern Lights */
 .color-default .northern-glow {
