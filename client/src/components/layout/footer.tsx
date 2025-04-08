@@ -94,7 +94,7 @@ export function Footer() {
             <div className="mb-4">
               <Link href="/">
                 <img 
-                  src="/logo.png" 
+                  src="/weiss-grun.png" 
                   alt="Triple X Adventures" 
                   className="h-16 mb-4 hover:opacity-90 transition-opacity" 
                 />
