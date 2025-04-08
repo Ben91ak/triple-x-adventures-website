@@ -38,22 +38,62 @@ function ExperienceDetailModal({
   const t = useTranslation(language as any);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   
-  // Close modal when Escape key is pressed
+  // Setup modal behaviors when opened/closed
   useEffect(() => {
     const handleEscapeKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
     
+    // Add a click handler for iOS/mobile to ensure modal can be closed
+    const handleBackdropClick = (e: MouseEvent) => {
+      // Only handle clicks on the backdrop (outside the modal)
+      if ((e.target as HTMLElement).classList.contains('modal-backdrop')) {
+        onClose();
+      }
+    };
+    
+    // Handle touch events for iOS devices where click events might be problematic
+    const handleTouchEnd = (e: TouchEvent) => {
+      // If touch ends on the backdrop class, treat it as a close action
+      const target = document.elementFromPoint(
+        e.changedTouches[0].clientX, 
+        e.changedTouches[0].clientY
+      ) as HTMLElement;
+      
+      if (target && target.classList.contains('modal-backdrop')) {
+        e.preventDefault();
+        onClose();
+      }
+    };
+    
     if (isOpen) {
       document.addEventListener('keydown', handleEscapeKey);
+      document.addEventListener('click', handleBackdropClick);
+      document.addEventListener('touchend', handleTouchEnd);
+      
       // Prevent body scrolling when modal is open
       document.body.style.overflow = 'hidden';
+      
+      // For iOS - prevent bouncing/scrolling
+      document.documentElement.style.position = 'fixed';
+      document.documentElement.style.width = '100%';
+      document.documentElement.style.height = '100%';
+      document.documentElement.style.overflowY = 'scroll';
     }
     
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener('click', handleBackdropClick);
+      document.removeEventListener('touchend', handleTouchEnd);
+      
       // Re-enable scrolling when modal is closed
       document.body.style.overflow = '';
+      
+      // Reset iOS fixes
+      document.documentElement.style.position = '';
+      document.documentElement.style.width = '';
+      document.documentElement.style.height = '';
+      document.documentElement.style.overflowY = '';
     };
   }, [isOpen, onClose]);
   
@@ -87,10 +127,11 @@ function ExperienceDetailModal({
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center">
-      {/* Backdrop with blur effect */}
+      {/* Backdrop with blur effect - added modal-backdrop class for iOS touch handling */}
       <div 
-        className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300" 
+        className="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity duration-300 modal-backdrop" 
         onClick={onClose}
+        style={{ touchAction: 'manipulation' }}
       ></div>
       
       {/* Modal content */}
@@ -98,12 +139,14 @@ function ExperienceDetailModal({
         className="relative max-w-6xl w-full mx-3 max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close button */}
+        {/* Close button - enhanced for mobile touchability */}
         <button 
-          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-accent-color transition-colors duration-200"
+          className="absolute top-4 right-4 z-10 p-3 rounded-full bg-black/70 text-white hover:bg-accent-color transition-colors duration-200"
           onClick={onClose}
+          style={{ touchAction: 'manipulation' }}
+          aria-label="Close details"
         >
-          <X size={20} />
+          <X size={24} />
         </button>
         
         {/* Modal header */}
@@ -519,8 +562,14 @@ export function ExperiencesSection() {
                   </div>
                   <div className="flex justify-end items-center mt-auto">
                     <button 
-                      onClick={() => openExperienceDetail(experience)}
-                      className="inline-flex items-center gap-1.5 text-accent-color hover:text-white transition-colors font-medium text-sm"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        openExperienceDetail(experience);
+                      }}
+                      className="inline-flex items-center gap-1.5 text-accent-color hover:text-white transition-colors font-medium text-sm px-3 py-2 touch-manipulation"
+                      aria-label={`View details for ${experience.title}`}
+                      style={{ touchAction: 'manipulation' }}
                     >
                       {t.experiences.viewDetails}
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

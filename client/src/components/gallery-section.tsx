@@ -45,7 +45,7 @@ const videos = [
   { id: 8, src: "/videos/Reels/TXA Reels_8.mp4", title: "Snow Adventures" }
 ];
 
-// Video Thumbnail Component with inline playing
+// Video Thumbnail Component with inline playing and optimized mobile support
 function VideoThumbnail({ 
   video
 }: { 
@@ -57,25 +57,65 @@ function VideoThumbnail({
   });
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const { currentlyPlaying, playVideo, pauseAllVideos, registerVideo } = useVideo();
   const videoId = `gallery-video-${video.id}`;
   
   // Register video with context when it's mounted
   useEffect(() => {
     if (videoRef.current) {
+      // Register with the video context
       registerVideo?.(videoId, videoRef.current);
+      
+      // Check if the video file exists with a fetch request
+      // This helps detect 404 errors that might not trigger the video's error event
+      fetch(video.src, { method: 'HEAD' })
+        .then(response => {
+          if (!response.ok) {
+            console.error(`Video file not found: ${video.src}`);
+            setHasError(true);
+          }
+        })
+        .catch(err => {
+          console.error(`Error checking video file: ${err}`);
+          setHasError(true);
+        });
       
       // Clean up on unmount
       return () => {
         registerVideo?.(videoId, null);
       };
     }
-  }, [videoId, registerVideo]);
+  }, [videoId, registerVideo, video.src]);
   
   // Update playing state based on context
   useEffect(() => {
     setIsPlaying(currentlyPlaying === videoId);
   }, [currentlyPlaying, videoId]);
+  
+  // Handle visibility changes - pause when not visible
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+    
+    // Create an observer to detect when video is out of viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // If video is playing but not visible, pause it to save resources
+        if (!entries[0].isIntersecting && isPlaying) {
+          pauseAllVideos();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    
+    observer.observe(videoElement);
+    
+    return () => {
+      if (videoElement) observer.unobserve(videoElement);
+    };
+  }, [isPlaying, pauseAllVideos]);
   
   // Effect to handle play and pause events to update UI state
   useEffect(() => {
@@ -86,25 +126,63 @@ function VideoThumbnail({
       const handlePlay = () => setIsPlaying(true);
       const handlePause = () => setIsPlaying(false);
       
+      // Setup error handling for video loading
+      const handleError = (e: Event) => {
+        console.error(`Error loading video: ${video.src}`, e);
+        setHasError(true);
+      };
+      
+      // Add a loadeddata event to track when video is ready
+      const handleLoaded = () => {
+        console.log(`Video loaded: ${video.src}`);
+        setIsLoaded(true);
+      };
+      
       videoElement.addEventListener('play', handlePlay);
       videoElement.addEventListener('pause', handlePause);
+      videoElement.addEventListener('error', handleError);
+      videoElement.addEventListener('loadeddata', handleLoaded);
       
       // Clean up event listeners on unmount
       return () => {
         videoElement.removeEventListener('play', handlePlay);
         videoElement.removeEventListener('pause', handlePause);
+        videoElement.removeEventListener('error', handleError);
+        videoElement.removeEventListener('loadeddata', handleLoaded);
       };
     }
-  }, []);
+  }, [video.src]);
   
-  // Toggle play/pause
+  // Toggle play/pause with error handling
   const togglePlay = () => {
+    if (hasError) {
+      console.error("Cannot play video due to loading error");
+      return;
+    }
+    
     if (isPlaying) {
       pauseAllVideos();
     } else {
-      playVideo(videoId);
+      // If video element exists, ensure it's loaded before playing
+      if (videoRef.current) {
+        if (videoRef.current.readyState >= 2) {
+          playVideo(videoId);
+        } else {
+          // If video isn't loaded yet, load it first
+          videoRef.current.load();
+          // Add a one-time event listener to play when ready
+          const handleCanPlay = () => {
+            playVideo(videoId);
+            videoRef.current?.removeEventListener('canplay', handleCanPlay);
+          };
+          videoRef.current.addEventListener('canplay', handleCanPlay);
+        }
+      }
     }
   };
+  
+  // On mobile, create a simpler video experience to avoid playback issues
+  const isMobileDevice = typeof window !== 'undefined' && window.innerWidth < 768;
   
   return (
     <div 
@@ -119,31 +197,69 @@ function VideoThumbnail({
         <video 
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
-          preload="metadata"
+          preload={isMobileDevice ? "none" : "metadata"} // Only preload on desktop
           muted
           playsInline
           loop
           src={video.src}
-          onClick={togglePlay}
+          // Use a placeholder image for the video thumbnail
+          poster={'/images/TXA_fallback.jpg'}
+          onClick={(e) => {
+            e.stopPropagation();
+            togglePlay();
+          }}
+          onError={(e) => {
+            console.error(`Video error: ${video.src}`, e);
+            setHasError(true);
+          }}
+          style={{ touchAction: 'manipulation' }}
         />
         
-        {/* Play button overlay - only show when not playing */}
-        {!isPlaying && (
+        {/* Error message */}
+        {hasError && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 p-4 text-center">
+            <span className="text-white mb-2">Video could not be loaded</span>
+            <span className="text-sm text-white/70">Please try again later</span>
+          </div>
+        )}
+        
+        {/* Loading spinner - show when video is loading and play was requested */}
+        {isPlaying && !isLoaded && !hasError && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+            <div className="w-12 h-12 border-4 border-white/20 border-t-accent-color rounded-full animate-spin"></div>
+          </div>
+        )}
+        
+        {/* Play button overlay - only show when not playing and not in error state */}
+        {!isPlaying && !hasError && (
           <div 
             className="absolute inset-0 flex items-center justify-center cursor-pointer"
-            onClick={togglePlay}
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePlay();
+            }}
+            style={{ touchAction: 'manipulation' }}
           >
             <div className="w-16 h-16 rounded-full bg-accent-color/80 flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110">
               <Play className="text-white ml-1" size={24} />
+            </div>
+            
+            {/* Title overlay - shown when hovering */}
+            <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <h3 className="text-white text-lg font-medium">{video.title}</h3>
             </div>
           </div>
         )}
         
         {/* Controls overlay - show when playing */}
-        {isPlaying && (
+        {isPlaying && !hasError && (
           <div 
             className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer flex items-end justify-center"
-            onClick={togglePlay}
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePlay();
+            }}
+            style={{ touchAction: 'manipulation' }}
           >
             <div className="p-4 flex items-center w-full">
               <button 
@@ -152,10 +268,13 @@ function VideoThumbnail({
                   togglePlay();
                 }}
                 className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm hover:bg-white/30 transition-colors mb-2"
+                style={{ touchAction: 'manipulation' }}
               >
                 <Pause size={18} className="text-white" />
               </button>
-              <div className="flex-1"></div>
+              <div className="flex-1 ml-3">
+                <p className="text-white text-sm font-medium truncate">{video.title}</p>
+              </div>
             </div>
           </div>
         )}
