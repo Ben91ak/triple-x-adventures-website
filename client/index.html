@@ -6,21 +6,90 @@
   <title>Triple X Adventures - The Real Arctic Deal</title>
   <meta name="description" content="Triple X Adventures offers authentic, premium Arctic experiences in Swedish Lapland including snowmobiling, dog sledding, and wilderness adventures.">
   
-  <!-- Performance optimization: Preload critical assets -->
-  <link rel="preload" href="/images/TXA_fallback.jpg" as="image" type="image/jpeg">
-  
-  <!-- Load fonts and stylesheets with proper performance hints -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-  
-  <!-- Preloading Inter font for faster render -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
-  
   <!-- Meta tags for better performance -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content="#0F1112">
+  
+  <!-- DNS prefetch for external domains -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  
+  <!-- Performance optimization: Preload critical assets -->
+  <link rel="preload" href="/images/TXA_fallback.jpg" as="image" type="image/jpeg">
+  
+  <!-- Preload critical fonts with proper MIME types and crossorigin attributes -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" as="style">
+  <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVI.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Load fonts with display swap to prevent FOIT (Flash of Invisible Text) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"></noscript>
+  
+  <!-- Load non-critical CSS asynchronously using media query trick -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+  
+  <!-- Inline critical CSS to improve LCP -->
+  <style>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --midnight: #0F2D40;
+      --ice: #F8FBFF;
+      --fire: #E05E2B;
+      --forest: #2C5545;
+      --slate: #4A5568;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Reduce CLS (Cumulative Layout Shift) for images */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Heading font */
+    h1, h2, h3, h4, h5 {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin-top: 0;
+    }
+    
+    /* Hero section skeleton */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+  
+  <!-- Enable fetch priority hints for critical resources -->
+  <script>
+    // Dynamically set fetchpriority for critical resources
+    window.addEventListener('DOMContentLoaded', () => {
+      const heroImages = document.querySelectorAll('.hero-section img');
+      if (heroImages.length > 0) {
+        heroImages[0].fetchPriority = 'high';
+      }
+    });
+  </script>
 </head>
 <body>
   <div id="root"></div>

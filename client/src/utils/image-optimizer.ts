@@ -2,96 +2,232 @@
  * Image Optimization Utilities
  * 
  * This module provides functions for optimizing images and improving loading performance
+ * with features for:
+ * - WebP/AVIF format detection and usage
+ * - Responsive image loading based on device capabilities
+ * - Intelligent lazy loading with priority detection
+ * - Layout shift prevention
+ * - Error handling and fallbacks
+ * - Performance monitoring
  */
+
+// Typings for image format support
+type ImageFormat = 'webp' | 'avif' | 'jpeg' | 'png';
+type FormatSupportCache = Record<ImageFormat, boolean | null>;
 
 // Cache object to store image load states
 const imageLoadCache: Record<string, boolean> = {};
 
+// Cache for format support detection
+const formatSupportCache: FormatSupportCache = {
+  webp: null,
+  avif: null,
+  jpeg: true, // Always assume JPEG support
+  png: true   // Always assume PNG support
+};
+
+// Network condition detection
+interface NetworkInfo {
+  connectionType: 'slow-2g' | '2g' | '3g' | '4g' | '5g' | 'unknown';
+  effectiveBandwidth: number; // Mbps
+  saveData: boolean;
+}
+
+// Default network info - will be updated when available
+let networkInfo: NetworkInfo = {
+  connectionType: 'unknown',
+  effectiveBandwidth: 10, // Default assumption of good connection
+  saveData: false
+};
+
+// Initialize network information API if available
+if (typeof navigator !== 'undefined' && 'connection' in navigator) {
+  const connection = (navigator as any).connection;
+  
+  if (connection) {
+    // Update network info initially
+    networkInfo = {
+      connectionType: connection.effectiveType || 'unknown',
+      effectiveBandwidth: connection.downlink || 10,
+      saveData: !!connection.saveData
+    };
+    
+    // Listen for changes in network conditions
+    connection.addEventListener('change', () => {
+      networkInfo = {
+        connectionType: connection.effectiveType || 'unknown',
+        effectiveBandwidth: connection.downlink || 10,
+        saveData: !!connection.saveData
+      };
+    });
+  }
+}
+
+/**
+ * Check if the browser supports a specific image format
+ * This function caches the result to avoid redundant checks
+ * 
+ * @param format Image format to check support for
+ * @returns Promise resolving to boolean indicating format support
+ */
+export async function supportsFormat(format: ImageFormat): Promise<boolean> {
+  // Return cached result if available
+  if (formatSupportCache[format] !== null) return formatSupportCache[format] as boolean;
+  
+  // Skip check on server
+  if (typeof window === 'undefined') return false;
+  
+  return new Promise((resolve) => {
+    const img = new Image();
+    
+    img.onload = function() {
+      formatSupportCache[format] = true;
+      resolve(true);
+    };
+    
+    img.onerror = function() {
+      formatSupportCache[format] = false;
+      resolve(false);
+    };
+    
+    // Test images for different formats
+    switch(format) {
+      case 'webp':
+        img.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+        break;
+      case 'avif':
+        img.src = 'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=';
+        break;
+      default:
+        // For formats we always assume support for, resolve immediately
+        formatSupportCache[format] = true;
+        resolve(true);
+        return;
+    }
+  });
+}
+
+/**
+ * Check if the browser supports WebP format
+ * This function caches the result to avoid redundant checks
+ * 
+ * @returns Promise resolving to boolean indicating WebP support
+ */
+export async function supportsWebP(): Promise<boolean> {
+  return supportsFormat('webp');
+}
+
 /**
  * Get the best image source based on available formats and viewport size
- * This function tries to use WebP format and appropriately sized images when available
+ * This function tries to use WebP/AVIF format and appropriately sized images when available
  * 
  * @param src Original image source
+ * @param options Optional configuration for optimization
  * @returns Optimized image source
  */
-export function getOptimizedImageSrc(src: string): string {
+export function getOptimizedImageSrc(
+  src: string, 
+  options?: { 
+    forceFormat?: ImageFormat, 
+    quality?: 'low' | 'medium' | 'high',
+    priority?: boolean
+  }
+): string {
   if (!src) return src;
   
-  // Skip external URLs or empty paths
-  if (!src || src.startsWith('http')) return src;
+  // Skip data URIs
+  if (src.startsWith('data:')) return src;
+  
+  // Skip external URLs unless they're from our CDN
+  if (src.startsWith('http') && !src.includes('riker.replit.dev') && !src.includes('replit.app')) {
+    return src;
+  }
   
   // If the path includes the full domain, extract just the path part
-  if (src.includes('riker.replit.dev')) {
-    src = new URL(src).pathname;
+  if (src.includes('riker.replit.dev') || src.includes('replit.app')) {
+    try {
+      src = new URL(src).pathname;
+    } catch (e) {
+      // If URL parsing fails, keep the original
+      console.warn(`Failed to parse URL: ${src}`);
+    }
   }
+  
+  // Default options
+  const { forceFormat, quality = 'medium', priority = false } = options || {};
   
   // Get screen width to determine appropriate image size
   const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+  
+  // Use network conditions to determine appropriate size
   let sizeSuffix = 'medium'; // Default size
   
-  // Determine appropriate size based on screen width
-  if (screenWidth <= 640) {
+  // Calculate effective screen width accounting for device pixel ratio
+  const effectiveWidth = screenWidth * devicePixelRatio;
+  
+  // Determine size based on screen dimensions and network conditions
+  if (networkInfo.saveData || networkInfo.connectionType === 'slow-2g' || networkInfo.connectionType === '2g') {
+    // Always use small images on poor connections or when data saver is enabled
     sizeSuffix = 'small';
-  } else if (screenWidth > 1280) {
+  } else if (effectiveWidth <= 640 || networkInfo.effectiveBandwidth < 1.5) {
+    // Small screens or slow connections
+    sizeSuffix = 'small';
+  } else if (effectiveWidth > 1280 && networkInfo.effectiveBandwidth >= 5 && !networkInfo.saveData) {
+    // Large, high-DPI screens with good connection
     sizeSuffix = 'large';
   }
   
-  // For Husky images, use our optimized WebP versions
-  if (src.includes('/images/Huskys/') && !src.includes('optimized')) {
-    const fileName = src.split('/').pop() || '';
-    const fileNameWithoutExt = fileName.split('.')[0];
-    const optimizedWebP = `/images/Huskys/optimized/${fileNameWithoutExt}-${sizeSuffix}.webp`;
-    
-    // Cache the WebP path for future reference
-    const cacheKey = `husky-${fileNameWithoutExt}-${sizeSuffix}`;
-    
-    // If we've already successfully loaded this WebP, use it again
-    if (imageLoadCache[cacheKey]) {
-      return optimizedWebP;
-    }
-    
-    // If we've tried and failed to load this WebP, use original
-    if (imageLoadCache[cacheKey] === false) {
-      return src;
-    }
-    
-    // Try to load the WebP version asynchronously
-    if (typeof window !== 'undefined') {
-      const img = new Image();
-      img.onload = () => {
-        imageLoadCache[cacheKey] = true;
-      };
-      img.onerror = () => {
-        imageLoadCache[cacheKey] = false;
-        console.error(`Failed to load optimized image: ${optimizedWebP}`);
-      };
-      img.src = optimizedWebP;
-    }
-    
-    // Use WebP directly - we have confirmed they exist
-    return optimizedWebP;
+  // Override size suffix based on quality parameter
+  if (quality === 'low') {
+    sizeSuffix = 'small';
+  } else if (quality === 'high' && networkInfo.effectiveBandwidth >= 5 && !networkInfo.saveData) {
+    sizeSuffix = 'large';
   }
   
-  // For Snowmobile images, use our optimized WebP versions
-  if (src.includes('/images/Snowmobile/') && !src.includes('optimized')) {
-    const fileName = src.split('/').pop() || '';
-    const fileNameWithoutExt = fileName.split('.')[0];
-    const optimizedWebP = `/images/Snowmobile/optimized/${fileNameWithoutExt}-${sizeSuffix}.webp`;
+  // Determine best available format
+  let bestFormat: ImageFormat = 'jpeg'; // Default fallback
+  
+  // If format is forced, use that
+  if (forceFormat) {
+    bestFormat = forceFormat;
+  } 
+  // Otherwise determine based on browser support
+  else {
+    if (formatSupportCache.avif === true) {
+      bestFormat = 'avif';
+    } else if (formatSupportCache.webp === true) {
+      bestFormat = 'webp';
+    } else if (src.endsWith('.png')) {
+      bestFormat = 'png';
+    }
+  }
+  
+  // Optimization logic for specific image collections
+  
+  // Common function to handle image optimization across collections
+  const getOptimizedVersionForCollection = (
+    collectionPath: string, 
+    fileNameWithoutExt: string,
+    format: ImageFormat
+  ): string | null => {
+    // Build path to optimized version
+    const optimizedPath = `${collectionPath}/optimized/${fileNameWithoutExt}-${sizeSuffix}.${format}`;
     
-    // Cache the WebP path for future reference
-    const cacheKey = `snowmobile-${fileNameWithoutExt}-${sizeSuffix}`;
+    // Create a cache key for this specific optimized version
+    const cacheKey = `${collectionPath.replace('/images/', '')}-${fileNameWithoutExt}-${sizeSuffix}-${format}`;
     
-    // If we've already successfully loaded this WebP, use it again
-    if (imageLoadCache[cacheKey]) {
-      return optimizedWebP;
+    // If we've previously loaded this successfully, use it again
+    if (imageLoadCache[cacheKey] === true) {
+      return optimizedPath;
     }
     
-    // If we've tried and failed to load this WebP, use original
+    // If we've tried this before and it failed, don't try again
     if (imageLoadCache[cacheKey] === false) {
-      return src;
+      return null;
     }
     
-    // Try to load the WebP version asynchronously
+    // Try to load the optimized version asynchronously to confirm it exists
     if (typeof window !== 'undefined') {
       const img = new Image();
       img.onload = () => {
@@ -99,13 +235,100 @@ export function getOptimizedImageSrc(src: string): string {
       };
       img.onerror = () => {
         imageLoadCache[cacheKey] = false;
-        console.error(`Failed to load optimized image: ${optimizedWebP}`);
+        // Only log if it's not a normal fallback situation
+        if (format === bestFormat) {
+          console.warn(`Optimized image not found: ${optimizedPath}`);
+        }
       };
-      img.src = optimizedWebP;
+      img.src = optimizedPath;
+      
+      // If this is a high priority image, also preload it
+      if (priority) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = optimizedPath;
+        document.head.appendChild(link);
+      }
     }
     
-    // Use WebP directly - we have confirmed they exist
-    return optimizedWebP;
+    return optimizedPath;
+  };
+  
+  // Extract filename if there is one
+  const fileName = src.split('/').pop() || '';
+  const fileNameWithoutExt = fileName.split('.')[0];
+  
+  // Check for Husky images folder
+  if (src.includes('/images/Huskys/') && !src.includes('optimized')) {
+    const optimizedVersion = getOptimizedVersionForCollection('/images/Huskys', fileNameWithoutExt, bestFormat);
+    if (optimizedVersion) {
+      return optimizedVersion;
+    }
+    
+    // If best format failed or isn't cached yet, fallback to WebP which we know exists
+    if (bestFormat !== 'webp') {
+      const webpVersion = getOptimizedVersionForCollection('/images/Huskys', fileNameWithoutExt, 'webp');
+      if (webpVersion) {
+        return webpVersion;
+      }
+    }
+  }
+  
+  // Check for Snowmobile images folder
+  if (src.includes('/images/Snowmobile/') && !src.includes('optimized')) {
+    const optimizedVersion = getOptimizedVersionForCollection('/images/Snowmobile', fileNameWithoutExt, bestFormat);
+    if (optimizedVersion) {
+      return optimizedVersion;
+    }
+    
+    // If best format failed or isn't cached yet, fallback to WebP which we know exists
+    if (bestFormat !== 'webp') {
+      const webpVersion = getOptimizedVersionForCollection('/images/Snowmobile', fileNameWithoutExt, 'webp');
+      if (webpVersion) {
+        return webpVersion;
+      }
+    }
+  }
+  
+  // Generic optimization for any image in the images folder
+  if (src.includes('/images/') && !src.includes('optimized')) {
+    // Extract the folder path
+    const pathParts = src.split('/');
+    const fileName = pathParts.pop() || '';
+    const folderPath = pathParts.join('/');
+    const fileNameWithoutExt = fileName.split('.')[0];
+    
+    // Check if we have an optimized version
+    const genericOptimizedPath = `${folderPath}/optimized/${fileNameWithoutExt}-${sizeSuffix}.${bestFormat}`;
+    const cacheKey = `generic-${folderPath}-${fileNameWithoutExt}-${sizeSuffix}-${bestFormat}`;
+    
+    // Check cache first
+    if (imageLoadCache[cacheKey] === true) {
+      return genericOptimizedPath;
+    }
+    
+    // If WebP is available and this is an image type that benefits from it (jpg/jpeg)
+    if ((bestFormat === 'webp' || bestFormat === 'avif') && 
+        (src.endsWith('.jpg') || src.endsWith('.jpeg'))) {
+      // Try to load optimized version to see if it exists
+      if (typeof window !== 'undefined') {
+        const img = new Image();
+        img.onload = () => {
+          imageLoadCache[cacheKey] = true;
+        };
+        img.onerror = () => {
+          imageLoadCache[cacheKey] = false;
+        };
+        img.src = genericOptimizedPath;
+      }
+      
+      // For known image types, we'll gamble on the WebP existing
+      // The error handler on the actual <img> tag will catch failures
+      if (src.includes('experiences/') || src.includes('accommodations/')) {
+        return genericOptimizedPath;
+      }
+    }
   }
   
   return src;
@@ -195,55 +418,237 @@ export function optimizePageImages(): void {
  */
 function applyImageOptimizations(): void {
   const allImages = document.querySelectorAll('img');
+  const supportsIntersectionObserver = 'IntersectionObserver' in window;
+  const dataProtocol = 'data:';
   
-  allImages.forEach((img, index) => {
-    try {
-      // Skip already processed images
-      if (img.dataset.optimized) return;
-      
-      // Mark as processed
-      img.dataset.optimized = 'true';
-      
-      // Apply loading strategies based on position
-      if (isInViewport(img)) {
-        img.loading = 'eager';
-        img.decoding = 'async';
-      } else {
-        img.loading = 'lazy';
-        img.decoding = 'async';
-      }
-      
-      // Try to optimize the image source using WebP if available
-      if (img.src && typeof img.src === 'string') {
-        // Check if this is an image that has optimized versions or contains the domain
-        if (img.src.includes('/images/') || img.src.includes('riker.replit.dev')) {
-          const optimizedSrc = getOptimizedImageSrc(img.src);
-          if (optimizedSrc !== img.src) {
-            img.src = optimizedSrc;
-          }
-        }
-      }
-      
-      // Add error handler if not already present
-      if (!img.onerror) {
-        img.onerror = function() {
-          console.error(`Failed to load image: ${img.src}`);
-          // Only apply fallback if src isn't already the fallback
-          if (!img.src.includes('TXA_fallback.jpg')) {
-            img.src = '/images/TXA_fallback.jpg';
-          }
-        };
-      }
-      
-      // Add width and height attributes if missing to prevent layout shifts
-      if (!img.getAttribute('width') && !img.getAttribute('height')) {
-        img.setAttribute('width', '100%');
-        img.style.aspectRatio = '4/3'; // Default aspect ratio if not specified
-      }
-    } catch (error) {
-      console.error('Error optimizing image:', error);
+  // Process images based on priority
+  // First apply optimizations to images that are in the viewport
+  const priorityImages: HTMLImageElement[] = [];
+  const nonPriorityImages: HTMLImageElement[] = [];
+  
+  // Split images into priority (in viewport) and non-priority
+  allImages.forEach((img) => {
+    // Skip already processed images
+    if (img.dataset.optimized) return;
+    
+    // Skip data URIs and blank images
+    const src = img.getAttribute('src');
+    if (!src || src.startsWith(dataProtocol)) return;
+    
+    // Mark as processed
+    img.dataset.optimized = 'true';
+    
+    if (isInViewport(img)) {
+      priorityImages.push(img as HTMLImageElement);
+    } else {
+      nonPriorityImages.push(img as HTMLImageElement);
     }
   });
+  
+  // Process priority images immediately
+  priorityImages.forEach(img => optimizeImage(img, true));
+  
+  // Use Intersection Observer for non-priority images if available
+  if (supportsIntersectionObserver && nonPriorityImages.length > 0) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          optimizeImage(img, false);
+          observer.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: '200px 0px', // Start loading when image is 200px from viewport
+      threshold: 0.01
+    });
+    
+    nonPriorityImages.forEach(img => {
+      imageObserver.observe(img);
+      // Set a lazy loading attribute for browsers that support it
+      // as a fallback in case observer doesn't trigger
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+  } else {
+    // Fallback for browsers without Intersection Observer
+    nonPriorityImages.forEach(img => {
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      
+      // Process the image after a short delay to prioritize critical elements
+      setTimeout(() => optimizeImage(img, false), 100);
+    });
+  }
+}
+
+/**
+ * Apply optimizations to a single image
+ * @param img The image element to optimize
+ * @param isPriority Whether this is a priority image (in viewport)
+ */
+function optimizeImage(img: HTMLImageElement, isPriority: boolean): void {
+  try {
+    // Skip images that are part of a responsive set or picture element
+    if (img.closest('picture') || img.srcset) {
+      // For responsive images, we just ensure proper loading attributes
+      img.decoding = 'async';
+      img.loading = isPriority ? 'eager' : 'lazy';
+      return;
+    }
+    
+    // Extract original attributes to preserve for fallback scenarios
+    const originalSrc = img.src;
+    const originalWidth = img.getAttribute('width');
+    const originalHeight = img.getAttribute('height');
+    const originalAlt = img.getAttribute('alt') || '';
+    
+    // Get natural dimensions of the image for aspect ratio
+    let aspectRatio = null;
+    if (img.naturalWidth && img.naturalHeight) {
+      aspectRatio = img.naturalWidth / img.naturalHeight;
+    }
+    
+    // Apply loading strategies based on priority
+    if (isPriority) {
+      img.loading = 'eager';
+      img.decoding = 'async';
+      img.fetchPriority = 'high';
+    } else {
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+    }
+    
+    // Set appropriate image quality based on priority and network conditions
+    const quality = isPriority ? 'high' : (networkInfo.saveData ? 'low' : 'medium');
+    
+    // Try to optimize the image source using modern formats if available
+    if (img.src && typeof img.src === 'string') {
+      // Check if this is an image that has optimized versions or contains the domain
+      if (img.src.includes('/images/') || img.src.includes('riker.replit.dev')) {
+        const optimizedSrc = getOptimizedImageSrc(img.src, {
+          priority: isPriority,
+          quality
+        });
+        
+        if (optimizedSrc !== img.src) {
+          img.src = optimizedSrc;
+        }
+      }
+    }
+    
+    // Add error handler with smarter fallback strategy
+    if (!img.onerror) {
+      img.onerror = function() {
+        const currentSrc = img.src;
+        console.warn(`Failed to load optimized image: ${currentSrc}`);
+        
+        // Try a series of fallbacks:
+        
+        // 1. If we're trying an optimized version, fall back to original
+        if (currentSrc !== originalSrc && currentSrc.includes('/optimized/')) {
+          console.info(`Falling back to original image: ${originalSrc}`);
+          img.src = originalSrc;
+          return; // Exit and give the original a chance to load
+        }
+        
+        // 2. If original fails, try a WebP version regardless of browser support
+        if (currentSrc === originalSrc && !currentSrc.endsWith('.webp') && currentSrc.includes('/images/')) {
+          // Generate a WebP path by replacing extension
+          const webpSrc = currentSrc.replace(/\.(jpe?g|png)$/, '.webp');
+          if (webpSrc !== currentSrc) {
+            console.info(`Trying WebP fallback: ${webpSrc}`);
+            img.src = webpSrc;
+            return; // Exit and give WebP a chance to load
+          }
+        }
+        
+        // 3. Final fallback to a known good image
+        if (!currentSrc.includes('TXA_fallback.jpg')) {
+          console.info('Using default fallback image');
+          img.src = '/images/TXA_fallback.jpg';
+          // Reset dimensions to match the fallback image
+          img.removeAttribute('width');
+          img.removeAttribute('height');
+          img.style.aspectRatio = 'auto';
+        }
+      };
+    }
+    
+    // Add width and height attributes if missing to prevent layout shifts (CLS)
+    if (!originalWidth && !originalHeight) {
+      // Set dimensions to prevent layout shifts
+      if (aspectRatio) {
+        // If we know the aspect ratio, use it
+        img.style.aspectRatio = `${aspectRatio}`;
+      } else {
+        // Default aspect ratio if not known
+        img.style.aspectRatio = '4/3';
+      }
+      
+      // For proper layout behavior
+      img.setAttribute('width', '100%');
+      img.style.display = 'block'; // Prevent inline gaps
+    }
+    
+    // Add accessibility attributes if missing
+    if (!originalAlt && img.getAttribute('role') !== 'presentation') {
+      // If the image is likely decorative, mark it as presentation
+      if (img.closest('.bg-image') || img.closest('.decoration')) {
+        img.setAttribute('role', 'presentation');
+        img.setAttribute('alt', '');
+      } else {
+        // Otherwise, add a basic alt derived from filename or parent context
+        const filename = img.src.split('/').pop()?.split('.')[0] || '';
+        const parentText = img.closest('figure')?.querySelector('figcaption')?.textContent ||
+                       img.closest('a')?.textContent || '';
+        
+        const altText = parentText || filename.replace(/[-_]/g, ' ');
+        img.setAttribute('alt', altText);
+      }
+    }
+    
+    // For priority images above the fold, preload
+    if (isPriority && typeof document !== 'undefined') {
+      // Check if we already have a preload for this image
+      const existingPreload = document.querySelector(`link[rel="preload"][href="${img.src}"]`);
+      if (!existingPreload) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = img.src;
+        document.head.appendChild(link);
+      }
+    }
+    
+    // For important images, track loading performance
+    if (isPriority && window.performance && 'PerformanceObserver' in window) {
+      try {
+        // Create a unique ID for this image if not present
+        if (!img.id) {
+          img.id = `img-${Math.random().toString(36).substring(2, 9)}`;
+        }
+        
+        // Mark the start of loading
+        performance.mark(`${img.id}-start`);
+        
+        // Listen for load completion
+        img.addEventListener('load', () => {
+          performance.mark(`${img.id}-end`);
+          performance.measure(
+            `image-load-${img.id}`,
+            `${img.id}-start`,
+            `${img.id}-end`
+          );
+        });
+      } catch (e) {
+        // Ignore performance measurement errors
+      }
+    }
+  } catch (error) {
+    console.error('Error optimizing image:', error);
+  }
 }
 
 /**

@@ -2,10 +2,47 @@ import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { initializeTables } from "./db";
+import compression from "compression";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Enable GZIP compression for all responses
+app.use(compression({
+  // Compression level (0-9), 6 is a good balance between compression ratio and CPU usage
+  level: 6,
+  // Only compress responses larger than 1KB
+  threshold: 1024,
+  // Don't compress responses that are already compressed
+  filter: (req, res) => {
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    return compression.filter(req, res);
+  }
+}));
+
+// Add caching headers for static assets
+app.use((req, res, next) => {
+  const path = req.path;
+  
+  // For static assets like JavaScript, CSS, and images
+  if (path.match(/\.(js|css|png|jpg|jpeg|gif|webp|avif|ico|svg|woff|woff2|ttf|eot)(\?.*)?$/)) {
+    // If the asset has a cache-busting query param or hash in filename
+    if (path.match(/\.[0-9a-f]{8,}\./) || req.query.v) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable'); // 1 year
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // 1 day
+    }
+  } 
+  // For HTML files
+  else if (path.match(/\.html$/) || path === '/') {
+    res.setHeader('Cache-Control', 'no-cache');
+  }
+  
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();
