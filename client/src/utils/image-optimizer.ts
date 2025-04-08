@@ -279,6 +279,23 @@ export function getOptimizedImageSrc(
     return `/images/snowmobile/${fileNameWithoutExt.toLowerCase()}.jpg`;
   }
   
+  // Special cases for specific files with spaces
+  if (src.includes('Ice Kart.jpg')) {
+    return '/images/ice-kart.jpg';
+  }
+  
+  if (src.includes('Ice Fishing.jpg') || src.includes('Ice-Fishing.jpg')) {
+    return '/images/ice-fishing.jpg';
+  }
+  
+  if (src.includes('Side By Side Buggy Drifting.jpg') || src.includes('Side-By-Side-Buggy-Drifting.jpg')) {
+    return '/images/buggy.jpg';
+  }
+  
+  if (src.includes('JayJays Restaurant.jpg') || src.includes('JayJays-Restaurant.jpg')) {
+    return '/images/restaurant/jayjays-exterior.jpg';
+  }
+  
   // Handle common path pattern issues with experiences
   if (src.includes('experiences/') || src.includes('Experiences/')) {
     // Make path lowercase for consistency
