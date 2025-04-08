@@ -375,16 +375,25 @@ export function getOptimizedImageSrc(
     }
   }
   
-  if (src.includes('JayJays Restaurant.jpg') || src.includes('JayJays-Restaurant.jpg') || src.includes('jayjays')) {
-    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    const size = screenWidth < 768 ? 'small' : 'medium';
-    const useWebP = formatSupportCache.webp === true;
-    
-    if (useWebP) {
-      return `/images/restaurant/optimized/jayjays-exterior-${size}.webp`;
-    } else {
-      return `/images/restaurant/optimized/jayjays-exterior-${size}.jpg`;
+  if (src.includes('JayJays Restaurant') || src.includes('JayJays-Restaurant') || src.toLowerCase().includes('jayjays') || src.toLowerCase().includes('restaurant')) {
+    // Check if path already includes the _result.webp suffix (direct WebP file)
+    if (src.includes('_result.webp')) {
+      return src; // Already using the preferred format, don't modify it
     }
+    
+    // Check for Food image patterns
+    if (src.includes('Food 1') || src.includes('Food1')) {
+      return `/images/JayJays Restaurant/Food 1_result.webp`;
+    } else if (src.includes('Food 2') || src.includes('Food2')) {
+      return `/images/JayJays Restaurant/Food 2_result.webp`;
+    } else if (src.includes('Food 3') || src.includes('Food3')) {
+      return `/images/JayJays Restaurant/Food 3_result.webp`;
+    } else if (src.includes('Food 4') || src.includes('Food4')) {
+      return `/images/JayJays Restaurant/Food 4_result.webp`;
+    }
+    
+    // Default to Food 1 for generic restaurant references
+    return `/images/JayJays Restaurant/Food 1_result.webp`;
   }
   
   // Handle common path pattern issues with experiences

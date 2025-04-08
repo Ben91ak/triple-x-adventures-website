@@ -136,28 +136,28 @@ function ExperienceDetailModal({
   if (experience.title.toLowerCase().includes('husky')) {
     // Skip path resolution and directly use WebP files for husky
     gallery = [
-      'images/Huskys/Husky 1_result.webp',
-      'images/Huskys/Husky 2_result.webp',
-      'images/Huskys/Husky 3_result.webp',
-      'images/Huskys/Husky 4_result.webp'
+      '/images/Huskys/Husky 1_result.webp',
+      '/images/Huskys/Husky 2_result.webp',
+      '/images/Huskys/Husky 3_result.webp',
+      '/images/Huskys/Husky 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Husky:', gallery);
   } else if (experience.title.toLowerCase().includes('snowmobile')) {
     // Skip path resolution and directly use WebP files for snowmobile
     gallery = [
-      'images/Snowmobile/Snowmobile 1_result.webp',
-      'images/Snowmobile/Snowmobile 2_result.webp',
-      'images/Snowmobile/Snowmobile 3_result.webp',
-      'images/Snowmobile/Snowmobile 4_result.webp'
+      '/images/Snowmobile/Snowmobile 1_result.webp',
+      '/images/Snowmobile/Snowmobile 2_result.webp',
+      '/images/Snowmobile/Snowmobile 3_result.webp',
+      '/images/Snowmobile/Snowmobile 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Snowmobile:', gallery);
   } else if (experience.title.toLowerCase().includes('jayjays') || experience.title.toLowerCase().includes('restaurant')) {
     // Skip path resolution and directly use WebP files for JayJays Restaurant
     gallery = [
-      'images/JayJays Restaurant/Food 1_result.webp',
-      'images/JayJays Restaurant/Food 2_result.webp',
-      'images/JayJays Restaurant/Food 3_result.webp',
-      'images/JayJays Restaurant/Food 4_result.webp'
+      '/images/JayJays Restaurant/Food 1_result.webp',
+      '/images/JayJays Restaurant/Food 2_result.webp',
+      '/images/JayJays Restaurant/Food 3_result.webp',
+      '/images/JayJays Restaurant/Food 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for JayJays Restaurant:', gallery);
   } else {
