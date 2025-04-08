@@ -12,9 +12,9 @@ const restaurantContentByLanguage = {
     description2: "We celebrate the flavors of Swedish Lapland with a menu that focuses on local, seasonal ingredients. From freshly caught Arctic char to wild berries and game meats, our dishes tell the story of our region's rich culinary heritage.",
     specialtiesHeading: "OUR SPECIALTIES:",
     specialties: [
-      "Traditional Sami cuisine with a modern twist",
-      "Wilderness dinner experiences under the Northern Lights",
-      "Locally brewed beers and craft cocktails with Arctic ingredients"
+      "Traditional Swedish cuisine with a modern twist",
+      "Experience Culinary Magic – BBQ & Open-Fire Dining",
+      "Local Ingredients, Legendary Moments – Welcome to JayJays"
     ],
     reserveButton: "Reserve a table",
     imageAlt1: "Rustic restaurant interior with fireplace",
@@ -29,9 +29,9 @@ const restaurantContentByLanguage = {
     description2: "Wir feiern die Aromen Schwedisch-Lapplands mit einem Menü, das sich auf lokale, saisonale Zutaten konzentriert. Von frisch gefangenem arktischen Saibling bis hin zu Wildbeeren und Wildfleisch erzählen unsere Gerichte die Geschichte des reichen kulinarischen Erbes unserer Region.",
     specialtiesHeading: "UNSERE SPEZIALITÄTEN:",
     specialties: [
-      "Traditionelle samische Küche mit modernem Twist",
-      "Wilderness-Dinner-Erlebnisse unter Nordlichtern",
-      "Lokal gebraute Biere und Craft-Cocktails mit arktischen Zutaten"
+      "Traditionelle schwedische Küche mit modernem Twist",
+      "Erleben Sie kulinarische Magie – BBQ & Kochen am offenen Feuer",
+      "Lokale Zutaten, legendäre Momente – Willkommen bei JayJays"
     ],
     reserveButton: "Tisch reservieren",
     imageAlt1: "Rustikales Restaurant-Interieur mit Kamin",
@@ -46,9 +46,9 @@ const restaurantContentByLanguage = {
     description2: "Vi firar smakerna från Svenska Lappland med en meny som fokuserar på lokala, säsongsbetonade ingredienser. Från nyligen fångad röding till vilda bär och viltkött, berättar våra rätter historien om vår regions rika kulinariska arv.",
     specialtiesHeading: "VÅRA SPECIALITETER:",
     specialties: [
-      "Traditionell samisk mat med modern twist",
-      "Vildmarksmiddagsupplevelser under norrskenet",
-      "Lokalt bryggda öl och hantverkscocktails med arktiska ingredienser"
+      "Traditionell svensk mat med modern twist",
+      "Upplev kulinarisk magi – BBQ & matlagning över öppen eld",
+      "Lokala ingredienser, legendariska stunder – Välkommen till JayJays"
     ],
     reserveButton: "Reservera ett bord",
     imageAlt1: "Rustik restauranginteriör med öppen spis",

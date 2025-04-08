@@ -33,7 +33,7 @@ export const en = {
     list: [
       {
         id: 1,
-        title: "Snowmobile Adventure!",
+        title: "Snowmobile Adventure",
         description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. Choose from 2hr, 4hr & 6hr tours for your perfect adventure.",
         image: "/images/Snowmobile/Snowmobile.jpg",
         gallery: [
