@@ -11,7 +11,7 @@ const teamMembersByLanguage = {
       name: "Janina JayJay Möller",
       role: "Founder & CEO",
       bio: "Meet JayJay, our adventurous CEO and founder, whose passion and vision inspire every unforgettable experience at Triple X Adventures.",
-      image: "/images/Team/Jayjay.jpg"
+      image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
@@ -48,7 +48,7 @@ const teamMembersByLanguage = {
       name: "Janina JayJay Möller",
       role: "Gründerin & CEO",
       bio: "Lernen Sie JayJay kennen, unsere abenteuerlustige CEO und Gründerin, deren Leidenschaft und Vision jedes unvergessliche Erlebnis bei Triple X Adventures inspirieren.",
-      image: "/images/Team/Jayjay.jpg"
+      image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
@@ -85,7 +85,7 @@ const teamMembersByLanguage = {
       name: "Janina JayJay Möller",
       role: "Grundare & VD",
       bio: "Möt JayJay, vår äventyrliga VD och grundare, vars passion och vision inspirerar varje oförglömlig upplevelse hos Triple X Adventures.",
-      image: "/images/Team/Jayjay.jpg"
+      image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
