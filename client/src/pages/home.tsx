@@ -1,8 +1,13 @@
-import { memo, lazy, Suspense } from "react";
+import { memo, lazy, Suspense, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslation } from "@/translations";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/hero-section";
 import { GlobalBackground } from "@/components/layout/background-fixed";
+import { optimizePageImages } from "@/utils/performance-optimizer";
+import { preloadAllCriticalImages } from "@/utils/image-preloader";
 
 // Lazy-load non-critical sections for better performance
 const IntroductionSection = lazy(() => import("@/components/introduction-section").then(module => ({ default: module.IntroductionSection })));
@@ -15,20 +20,30 @@ const TestimonialsSection = lazy(() => import("@/components/testimonials-section
 const ContactSection = lazy(() => import("@/components/contact-section").then(module => ({ default: module.ContactSection })));
 const CTASection = lazy(() => import("@/components/cta-section").then(module => ({ default: module.CTASection })));
 
-// Enhanced loading component for lazy-loaded sections
-const SectionLoader = () => (
-  <div className="flex justify-center items-center py-12">
-    <div className="relative">
-      <div className="absolute inset-0 bg-accent-color/20 blur-xl rounded-full"></div>
-      <div className="w-10 h-10 border-4 border-accent-color rounded-full border-t-transparent animate-spin relative z-10"></div>
-    </div>
-  </div>
-);
+// Use the SectionLoader component from UI components
+import { SectionLoader } from "@/components/ui/section-loader";
 
 // Memoize the entire Home component to prevent unnecessary re-renders
 const Home = memo(function Home() {
+  const { language } = useLanguage();
+  const t = useTranslation(language);
+
+  // Run image optimization and preloading when component mounts
+  useEffect(() => {
+    optimizePageImages();
+    preloadAllCriticalImages();
+  }, [language]);
+
   return (
     <div className="font-opensans text-slate relative">
+      <Helmet>
+        <title>Triple X Adventures | Premium Arctic Experiences</title>
+        <meta name="description" content={t.hero.subtitle} />
+        <meta property="og:title" content="Triple X Adventures | Premium Arctic Experiences" />
+        <meta property="og:description" content={t.hero.subtitle} />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      
       {/* Enhanced unified animated background with starry night effect */}
       <GlobalBackground intensity="high" starDensity="dense" />
       

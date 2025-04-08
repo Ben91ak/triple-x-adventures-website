@@ -18,20 +18,20 @@ export function setupVisibilityBasedOptimizations() {
         if (!video.paused) {
           video.pause();
           // Mark the video as auto-paused so we can resume it when visible again
-          video.dataset.autoPaused = 'true';
+          video.setAttribute('data-auto-paused', 'true');
         }
       });
     } else {
       // Tab is visible again, resume videos that were auto-paused
       videos.forEach(video => {
-        if (video.dataset.autoPaused === 'true') {
+        if (video.getAttribute('data-auto-paused') === 'true') {
           // Only resume if the video was auto-paused by our code
           video.play().catch(() => {
             // Handle potential autoplay restrictions
             console.log('Auto-resume prevented by browser policy');
           });
           // Clear the auto-paused flag
-          delete video.dataset.autoPaused;
+          video.removeAttribute('data-auto-paused');
         }
       });
     }
@@ -91,7 +91,7 @@ export function setupIntersectionObserverForVideos() {
       
       if (entry.isIntersecting) {
         // Video is visible in the viewport
-        if (video.paused && !video.dataset.userPaused) {
+        if (video.paused && !video.getAttribute('data-user-paused')) {
           // Only play if it wasn't manually paused by the user
           video.play().catch(() => {
             console.log('Autoplay prevented by browser policy');
@@ -102,7 +102,7 @@ export function setupIntersectionObserverForVideos() {
         if (!video.paused) {
           video.pause();
           // Mark as auto-paused so we can distinguish from user-paused
-          video.dataset.autoPaused = 'true';
+          video.setAttribute('data-auto-paused', 'true');
         }
       }
     });
@@ -118,17 +118,80 @@ export function setupIntersectionObserverForVideos() {
     
     // Track user-initiated pause events
     video.addEventListener('pause', () => {
-      if (!document.hidden && !video.dataset.autoPaused) {
+      if (!document.hidden && !video.getAttribute('data-auto-paused')) {
         // User manually paused the video
-        video.dataset.userPaused = 'true';
+        video.setAttribute('data-user-paused', 'true');
       }
     });
     
     // Clear user-paused flag when user plays the video
     video.addEventListener('play', () => {
-      delete video.dataset.userPaused;
+      video.removeAttribute('data-user-paused');
     });
   });
+}
+
+/**
+ * Optimizes images on a page by applying lazy loading and proper sizing
+ */
+export function optimizePageImages() {
+  // Wait for DOM to be fully loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageOptimizations);
+  } else {
+    initImageOptimizations();
+  }
+  
+  function initImageOptimizations() {
+    // Find all images not already optimized
+    const images = document.querySelectorAll('img:not([data-optimized])');
+    
+    // Set up IntersectionObserver if supported
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            
+            // For images without explicit loading attribute, add lazy loading
+            if (!img.hasAttribute('loading')) {
+              img.loading = 'lazy';
+            }
+            
+            // Set decoding to async for better performance
+            if (!img.hasAttribute('decoding')) {
+              img.decoding = 'async';
+            }
+            
+            // Mark as optimized
+            img.setAttribute('data-optimized', 'true');
+            
+            // Stop observing this image
+            imageObserver.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '200px', // Start loading when within 200px of viewport
+      });
+      
+      // Start observing images
+      images.forEach(img => {
+        imageObserver.observe(img);
+      });
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      images.forEach(img => {
+        const imgElement = img as HTMLImageElement;
+        if (!imgElement.hasAttribute('loading')) {
+          imgElement.loading = 'lazy';
+        }
+        if (!imgElement.hasAttribute('decoding')) {
+          imgElement.decoding = 'async';
+        }
+        imgElement.setAttribute('data-optimized', 'true');
+      });
+    }
+  }
 }
 
 /**
@@ -145,6 +208,7 @@ export function applyPerformanceOptimizations() {
   function initOptimizations() {
     setupVisibilityBasedOptimizations();
     setupScrollOptimizations();
+    optimizePageImages();
     
     // Use a short delay to ensure all videos are initialized
     setTimeout(() => {
