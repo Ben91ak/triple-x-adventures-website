@@ -259,19 +259,19 @@ export function AboutSection() {
         </div>
         
         {/* Our Story with image - optimized for performance */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20 max-w-6xl mx-auto fade-in scale-up transform-gpu visible">
-          <div className="group relative transform-gpu">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch mb-20 max-w-6xl mx-auto fade-in scale-up transform-gpu visible">
+          <div className="group relative transform-gpu h-full min-h-[400px]">
             {/* Aurora glow effect behind card */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-full max-h-full aurora-glow opacity-30 pointer-events-none"></div>
             
-            <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-2xl relative z-10 transform-gpu" 
+            <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-2xl relative z-10 transform-gpu h-full" 
                 style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)' }}>
-              <div className="p-8">
+              <div className="p-8 h-full flex flex-col">
                 <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-lg"
                     style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.75)' }}>
                   {content.storyTitle}
                 </h3>
-                <div className="space-y-4 text-white">
+                <div className="space-y-4 text-white flex-grow">
                   <p className="leading-relaxed text-shadow-sm">{content.storyParagraph1}</p>
                   <p className="leading-relaxed text-shadow-sm">{content.storyParagraph2}</p>
                   <p className="leading-relaxed text-shadow-sm">{content.storyParagraph3}</p>
@@ -280,7 +280,7 @@ export function AboutSection() {
             </div>
           </div>
           
-          <div className="relative overflow-hidden rounded-xl shadow-2xl transform-gpu">
+          <div className="relative overflow-hidden rounded-xl shadow-2xl transform-gpu h-full min-h-[400px]">
             {/* Image with gradient overlay and glass effect */}
             <div className="relative h-full glassmorphism">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 transform-gpu"></div>
