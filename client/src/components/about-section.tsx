@@ -344,13 +344,13 @@ export function AboutSection() {
           <div className="relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl max-h-[600px] aurora-glow opacity-30 pointer-events-none"></div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-8 max-w-6xl mx-auto">
               {teamMembers.map((member, index) => (
                 <div key={member.id} className={`group relative transform-gpu stagger-${index % 5 + 1}`}>
                   {/* Decorative background glow */}
                   <div className="absolute -inset-px bg-gradient-to-t from-accent-color/20 via-accent-color/10 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
                   
-                  <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 flex flex-col items-center text-center group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu"
+                  <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 flex flex-col items-center text-center group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu h-full"
                       style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)' }}>
                     {/* Image with accent color glow */}
                     <div className="relative mb-5">
@@ -371,9 +371,11 @@ export function AboutSection() {
                     <p className="text-accent-color font-medium mb-3 text-sm">
                       {member.role}
                     </p>
-                    <p className="text-white/70 text-sm text-shadow-sm">
-                      {member.bio}
-                    </p>
+                    <div className="flex-grow flex items-center">
+                      <p className="text-white/70 text-sm text-shadow-sm min-h-[80px]">
+                        {member.bio}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}
