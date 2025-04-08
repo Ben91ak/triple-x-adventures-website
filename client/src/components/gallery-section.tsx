@@ -85,7 +85,8 @@ function VideoThumbnail({
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
     >
-      <div className="relative pb-[56.25%] bg-black/40">
+      {/* 9:16 aspect ratio container for vertical videos */}
+      <div className="relative pb-[177.78%] bg-black/40">
         {/* Video element */}
         <video 
           ref={videoRef}
@@ -113,7 +114,7 @@ function VideoThumbnail({
         {/* Controls overlay - show when playing */}
         {isPlaying && (
           <div 
-            className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer flex items-end justify-center"
+            className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer flex items-end justify-center"
             onClick={togglePlay}
           >
             <div className="p-4 flex items-center w-full">
@@ -130,11 +131,6 @@ function VideoThumbnail({
             </div>
           </div>
         )}
-        
-        {/* Title overlay at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-          <h3 className="text-white font-medium text-lg">{video.title}</h3>
-        </div>
       </div>
     </div>
   );
@@ -142,9 +138,20 @@ function VideoThumbnail({
 
 export function GallerySection() {
   const { language } = useLanguage();
+  const [showAllVideos, setShowAllVideos] = useState(false);
   
   // Get content based on the current language
   const content = contentByLanguage[language];
+  
+  // Initial videos (first 4)
+  const initialVideos = videos.slice(0, 4);
+  // Videos to show after clicking "Explore More"
+  const remainingVideos = videos.slice(4);
+  
+  // Toggle to show all videos
+  const handleShowMore = () => {
+    setShowAllVideos(true);
+  };
 
   return (
     <section id="gallery" className="py-24 md:py-32 relative overflow-hidden">
@@ -168,15 +175,39 @@ export function GallerySection() {
             {content.subtitle}
           </p>
           
-          {/* Video Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {videos.map((video) => (
+          {/* Video Gallery Grid - 4 videos in a row for initial view */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {initialVideos.map((video) => (
               <VideoThumbnail 
                 key={video.id} 
                 video={video}
               />
             ))}
           </div>
+          
+          {/* Additional videos - hidden initially */}
+          {showAllVideos && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 animate-fadeIn">
+              {remainingVideos.map((video) => (
+                <VideoThumbnail 
+                  key={video.id} 
+                  video={video}
+                />
+              ))}
+            </div>
+          )}
+          
+          {/* Show More Button - only visible when not all videos are shown */}
+          {!showAllVideos && (
+            <div className="mt-12">
+              <button 
+                onClick={handleShowMore}
+                className="px-8 py-3 bg-accent-color text-white rounded-lg font-medium hover:bg-accent-color/90 transition-colors transform hover:-translate-y-1 duration-200"
+              >
+                {language === 'de' ? 'Mehr Videos anzeigen' : language === 'sv' ? 'Visa fler videos' : 'Explore More'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
