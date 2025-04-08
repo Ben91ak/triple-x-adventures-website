@@ -11,11 +11,7 @@ export function Header() {
   const { language } = useLanguage();
   const t = useTranslation(language);
 
-  const Logo = () => (
-    <Link href="/">
-      <img src="/logo.png" alt="Triple X Adventures" className="h-12" />
-    </Link>
-  );
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,9 +65,9 @@ export function Header() {
                   {/* Logo */}
                   <div className="relative overflow-hidden h-10 transition-all">
                     <img 
-                      src="/images/Logo/Weiss grün.png" 
+                      src="/weiss-grun.png" 
                       alt="Triple X Adventures" 
-                      className="h-10 object-contain" 
+                      className="h-10 object-contain transition-transform group-hover:scale-105 duration-300" 
                     />
                   </div>
                 </div>

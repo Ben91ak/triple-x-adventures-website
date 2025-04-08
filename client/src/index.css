@@ -44,6 +44,15 @@
     backdrop-filter: blur(0px);
     background: transparent;
   }
+  
+  /* Glassmorphism without blur effect for better image visibility */
+  .glassmorphism-no-blur {
+    background: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
 
   /* Optimized glass card with conditional blur for better performance */
   .glass-card {

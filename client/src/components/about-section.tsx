@@ -10,30 +10,35 @@ const teamMembersByLanguage = {
       id: 1,
       name: "Janina JayJay Möller",
       role: "Founder & CEO",
+      bio: "Founded Triple X Adventures with a passion for authentic Arctic experiences.",
       image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Project Lead",
+      bio: "Manages our projects with precision and creativity.",
       image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Head Guide",
+      bio: "Expert guide with years of experience in the Arctic wilderness.",
       image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
       name: "Henni Bruhn",
       role: "Experience Coordinator",
+      bio: "Creates unforgettable customer journeys and adventure itineraries.",
       image: "/images/Team/Henni.jpg"
     },
     {
       id: 5,
       name: "Fanny Johannson",
       role: "Project Manager",
+      bio: "Ensures all our adventures run smoothly from start to finish.",
       image: "/images/Team/Fanny.jpg"
     }
   ],
@@ -42,30 +47,35 @@ const teamMembersByLanguage = {
       id: 1,
       name: "Janina JayJay Möller",
       role: "Gründerin & CEO",
+      bio: "Gründete Triple X Adventures mit einer Leidenschaft für authentische arktische Erlebnisse.",
       image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Projektmanager",
+      bio: "Leitet unsere Projekte mit Präzision und Kreativität.",
       image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Meister-Hundeschlittenführer",
+      bio: "Erfahrener Guide mit langjähriger Erfahrung in der arktischen Wildnis.",
       image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
       name: "Henni Eriksson",
       role: "Erlebniskoordinatorin",
+      bio: "Gestaltet unvergessliche Kundenerlebnisse und Abenteuer-Reisepläne.",
       image: "/images/Team/Henni.jpg"
     },
     {
       id: 5,
       name: "Fanny Johannson",
       role: "Projectmanager",
+      bio: "Sorgt dafür, dass alle unsere Abenteuer von Anfang bis Ende reibungslos verlaufen.",
       image: "/images/Team/Fanny.jpg"
     }
   ],
@@ -74,30 +84,35 @@ const teamMembersByLanguage = {
       id: 1,
       name: "Janina JayJay Möller",
       role: "Grundare & VD",
+      bio: "Grundade Triple X Adventures med en passion för autentiska arktiska upplevelser.",
       image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Projektledare",
+      bio: "Leder våra projekt med precision och kreativitet.",
       image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Mästare på Hundspann",
+      bio: "Erfaren guide med många års erfarenhet i den arktiska vildmarken.",
       image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
       name: "Henni Eriksson",
       role: "Upplevelsekoordinator",
+      bio: "Skapar oförglömliga kundresor och äventyrsplaner.",
       image: "/images/Team/Henni.jpg"
     },
     {
       id: 5,
       name: "Fanny Johannson",
       role: "Projektledare",
+      bio: "Ser till att alla våra äventyr löper smidigt från början till slut.",
       image: "/images/Team/Fanny.jpg"
     }
   ]
@@ -266,8 +281,8 @@ export function AboutSection() {
           </div>
           
           <div className="relative overflow-hidden rounded-xl shadow-2xl transform-gpu h-full min-h-[400px]">
-            {/* Image with gradient overlay and glass effect */}
-            <div className="relative h-full glassmorphism">
+            {/* Image with gradient overlay and glass effect - using no-blur variant for better visibility */}
+            <div className="relative h-full glassmorphism-no-blur">
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent z-10 transform-gpu"></div>
               <img 
                 src="/images/About TXA.jpg" 
@@ -277,7 +292,7 @@ export function AboutSection() {
                 width="500"
                 height="300"
               />
-              {/* Northern lights glow overlay */}
+              {/* Northern lights glow overlay with reduced opacity for better image visibility */}
               <div className="absolute inset-0 bg-gradient-to-br from-accent-color/10 via-transparent to-transparent opacity-20 mix-blend-overlay"></div>
             </div>
           </div>
