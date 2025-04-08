@@ -79,130 +79,178 @@ export function HeroSection() {
     // Only proceed if video support is adequate
     if (!checkVideoSupport()) return;
     
-    // More simplified video loading approach with error handling
-    const videoElement = videoRef.current;
-    if (!videoElement) return;
-    
-    // Set video properties for better performance
-    videoElement.playbackRate = 0.8;
-    
-    // Use lower resolution on mobile - improves scrolling performance
-    if (window.innerWidth < 768) {
-      videoElement.setAttribute('disablePictureInPicture', 'true');
-      videoElement.setAttribute('disableRemotePlayback', 'true');
-    }
-    
-    // Define a timeout to limit how long we wait for video to load
-    let videoLoadTimeout: ReturnType<typeof setTimeout>;
-    
-    // Create a small timeout to fallback if video takes too long to load
-    // This ensures we're not holding up the LCP (Largest Contentful Paint)
-    videoLoadTimeout = setTimeout(() => {
-      // If video hasn't loaded in 2 seconds, show the placeholder immediately
-      if (!videoLoaded) {
-        setVideoLoaded(true); // Show the poster image clearly
-      }
-    }, 2000);
-    
-    // Handle video loading errors
-    const handleVideoError = () => {
-      console.log("Video failed to load, showing fallback animation");
-      console.error("Video error details:", videoElement ? videoElement.error : "No video element");
-      setVideoError(true);
-      clearTimeout(videoLoadTimeout);
-    };
-    
-    // Handle when video can play
-    const handleCanPlay = () => {
-      setVideoLoaded(true);
-      clearTimeout(videoLoadTimeout);
-    };
-    
-    // Optimize video playback performance
-    const handleVisibilityChange = () => {
-      if (document.hidden && videoElement) {
-        // Pause video when tab is not visible to save resources
-        videoElement.pause();
-      } else if (videoElement && videoElement.paused && !videoError) {
-        // Resume playback when tab becomes visible
-        videoElement.play().catch(() => {
-          // Silent catch - we don't want to show error here
-        });
-      }
-    };
-    
-    // Handle scrolling past hero section - using a more efficient throttled approach
-    let lastScrollTime = 0;
-    const handleScroll = () => {
-      // Throttle scroll handling for better performance
-      const now = Date.now();
-      if (now - lastScrollTime < 50) return; // 50ms throttle
-      lastScrollTime = now;
+    // Early return - don't set up video until after we report LCP
+    // This is a critical optimization to ensure fast LCP times
+    const setupVideo = () => {
+      // More simplified video loading approach with error handling
+      const videoElement = videoRef.current;
+      if (!videoElement) return;
       
-      // Only run this check when scrolling down (performance optimization)
-      if (window.scrollY > window.innerHeight && videoElement && !videoElement.paused) {
-        // Pause video when scrolled out of view
-        videoElement.pause();
-      } else if (window.scrollY < window.innerHeight / 2 && videoElement && videoElement.paused && !document.hidden && !videoError) {
-        // Resume playback when scrolled back into view
-        videoElement.play().catch(() => {
-          // Silent catch - we don't want to show error here
-        });
-      }
-    };
-    
-    // Instead of HEAD request, use the ResourceTiming API to check if video is cached
-    // This avoids an extra network request
-    let isVideoCached = false;
-    
-    if (window.performance && window.performance.getEntriesByType) {
-      const resources = window.performance.getEntriesByType('resource');
-      const videoUrl = '/videos/TXA Teaser 2025 Homepage.mp4';
+      // Set video properties for better performance
+      videoElement.playbackRate = 0.8;
       
-      for (let i = 0; i < resources.length; i++) {
-        if (resources[i].name.includes(videoUrl)) {
-          isVideoCached = true;
-          break;
+      // Use lower resolution on mobile - improves scrolling performance
+      if (window.innerWidth < 768) {
+        videoElement.setAttribute('disablePictureInPicture', 'true');
+        videoElement.setAttribute('disableRemotePlayback', 'true');
+      }
+      
+      // Define a timeout to limit how long we wait for video to load
+      let videoLoadTimeout: ReturnType<typeof setTimeout>;
+      
+      // Create a small timeout to fallback if video takes too long to load
+      // This ensures we're not holding up the LCP (Largest Contentful Paint)
+      videoLoadTimeout = setTimeout(() => {
+        // If video hasn't loaded in 2 seconds, show the placeholder immediately
+        if (!videoLoaded) {
+          setVideoLoaded(true); // Show the poster image clearly
+        }
+      }, 2000);
+      
+      // Handle video loading errors
+      const handleVideoError = () => {
+        console.log("Video failed to load, showing fallback animation");
+        console.error("Video error details:", videoElement ? videoElement.error : "No video element");
+        setVideoError(true);
+        clearTimeout(videoLoadTimeout);
+      };
+      
+      // Handle when video can play
+      const handleCanPlay = () => {
+        setVideoLoaded(true);
+        clearTimeout(videoLoadTimeout);
+      };
+      
+      // Optimize video playback performance
+      const handleVisibilityChange = () => {
+        if (document.hidden && videoElement) {
+          // Pause video when tab is not visible to save resources
+          videoElement.pause();
+        } else if (videoElement && videoElement.paused && !videoError) {
+          // Resume playback when tab becomes visible
+          videoElement.play().catch(() => {
+            // Silent catch - we don't want to show error here
+          });
+        }
+      };
+      
+      // Handle scrolling past hero section - using a more efficient throttled approach
+      let lastScrollTime = 0;
+      const handleScroll = () => {
+        // Throttle scroll handling for better performance
+        const now = Date.now();
+        if (now - lastScrollTime < 50) return; // 50ms throttle
+        lastScrollTime = now;
+        
+        // Only run this check when scrolling down (performance optimization)
+        if (window.scrollY > window.innerHeight && videoElement && !videoElement.paused) {
+          // Pause video when scrolled out of view
+          videoElement.pause();
+        } else if (window.scrollY < window.innerHeight / 2 && videoElement && videoElement.paused && !document.hidden && !videoError) {
+          // Resume playback when scrolled back into view
+          videoElement.play().catch(() => {
+            // Silent catch - we don't want to show error here
+          });
+        }
+      };
+      
+      // Instead of HEAD request, use the ResourceTiming API to check if video is cached
+      // This avoids an extra network request
+      let isVideoCached = false;
+      
+      if (window.performance && window.performance.getEntriesByType) {
+        const resources = window.performance.getEntriesByType('resource');
+        const videoUrl = '/videos/TXA Teaser 2025 Homepage.mp4';
+        
+        for (let i = 0; i < resources.length; i++) {
+          if (resources[i].name.includes(videoUrl)) {
+            isVideoCached = true;
+            break;
+          }
         }
       }
-    }
-    
-    // Only do the fetch check if video isn't already cached
-    if (!isVideoCached) {
-      // Check if the file exists by making a HEAD request
-      fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' })
-        .then(response => {
-          console.log("Video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
-          
-          // If the response is not ok or content length is 0, consider it an error
-          if (!response.ok || (response.headers.get('Content-Length') === '0')) {
-            console.error("Video fetch error: invalid response or zero content length");
+      
+      // Only do the fetch check if video isn't already cached
+      if (!isVideoCached) {
+        // Check if the file exists by making a HEAD request
+        fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' })
+          .then(response => {
+            console.log("Video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
+            
+            // If the response is not ok or content length is 0, consider it an error
+            if (!response.ok || (response.headers.get('Content-Length') === '0')) {
+              console.error("Video fetch error: invalid response or zero content length");
+              handleVideoError();
+            } else {
+              console.log("Video file exists and is ready to be loaded");
+              
+              // Now that we know the video exists, start loading it
+              videoElement.preload = "auto";
+              
+              // Try to play the video
+              videoElement.play().catch((err) => {
+                console.log("Autoplay failed, will require user interaction:", err);
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Video fetch error:", error);
             handleVideoError();
-          } else {
-            console.log("Video file exists and is ready to be loaded");
-          }
-        })
-        .catch((error) => {
-          console.error("Video fetch error:", error);
-          handleVideoError();
+          });
+      } else {
+        // Video is cached, so we can start loading immediately
+        videoElement.preload = "auto";
+        videoElement.play().catch(() => {
+          // Silent catch - we don't want to show error here
         });
-    }
-    
-    // Add event listeners with passive option for better performance
-    videoElement.addEventListener('error', handleVideoError, { passive: true });
-    videoElement.addEventListener('canplay', handleCanPlay, { passive: true });
-    document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Clean up event listeners and timeout
-    return () => {
-      clearTimeout(videoLoadTimeout);
-      videoElement.removeEventListener('error', handleVideoError);
-      videoElement.removeEventListener('canplay', handleCanPlay);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('scroll', handleScroll);
+      }
+      
+      // Add event listeners with passive option for better performance
+      videoElement.addEventListener('error', handleVideoError, { passive: true });
+      videoElement.addEventListener('canplay', handleCanPlay, { passive: true });
+      document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // Clean up event listeners and timeout
+      return () => {
+        clearTimeout(videoLoadTimeout);
+        videoElement.removeEventListener('error', handleVideoError);
+        videoElement.removeEventListener('canplay', handleCanPlay);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        window.removeEventListener('scroll', handleScroll);
+      };
     };
-  }, [videoLoaded, videoError]);
+    
+    // CRITICAL OPTIMIZATION: Delay video initialization until after first render
+    // This ensures the image is used for LCP calculation, not the video loading
+    const delayVideoSetup = setTimeout(() => {
+      // Check for reduced motion preference
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      // Check for low-end device or data-saving mode
+      const isLowEndDevice = 
+        (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
+        ('deviceMemory' in navigator && (navigator as any).deviceMemory < 4) ||
+        ((navigator as any)?.connection?.saveData) ||
+        ((navigator as any)?.connection?.effectiveType === 'slow-2g' || 
+         (navigator as any)?.connection?.effectiveType === '2g');
+      
+      // Skip video for accessibility or performance reasons
+      if (prefersReducedMotion || isLowEndDevice) {
+        console.log("Skipping video load for reduced motion preference or low-end device");
+        setVideoError(true);
+        return;
+      }
+      
+      // If isTitleVisible is true, it means the user has already seen content
+      // Safe to start loading video now as LCP has already been registered
+      setupVideo();
+    }, 800); // Increased delay to ensure LCP completes first
+    
+    return () => {
+      clearTimeout(delayVideoSetup);
+    };
+  }, [videoLoaded, videoError, isTitleVisible]);
 
   // Content based on language
   const heroContent = {
@@ -245,31 +293,47 @@ export function HeroSection() {
         {!videoError ? (
           <>
             {/* Low-quality image poster that will show immediately while video loads */}
-            <img 
-              src="/images/TXA_fallback.jpg" 
-              alt="Arctic adventures" 
-              className="absolute w-full h-full object-cover transform-gpu"
-              style={{ 
-                objectFit: 'cover',
-                width: '100%',
-                height: '100%',
-                zIndex: 5,
-                position: 'absolute',
-                filter: 'brightness(0.8) blur(2px)'
-              }}
-              loading="eager"
-              fetchPriority="high"
-            />
+            {/* High-priority fallback image with proper attributes for LCP optimization */}
+            {/* Optimized fallback image with multiple format support - critical for fast LCP */}
+            <picture>
+              {/* AVIF format - best compression and quality */}
+              <source
+                srcSet="/images/TXA_fallback.avif"
+                type="image/avif"
+              />
+              {/* WebP format - good fallback for browsers without AVIF */}
+              <source
+                srcSet="/images/TXA_fallback.webp"
+                type="image/webp"
+              />
+              {/* Final JPEG fallback for maximum compatibility */}
+              <img 
+                src="/images/TXA_fallback_optimized.jpg" 
+                alt="Arctic adventures in the snow" 
+                className="absolute w-full h-full object-cover transform-gpu"
+                style={{ 
+                  objectFit: 'cover',
+                  width: '100%',
+                  height: '100%',
+                  zIndex: 5,
+                  position: 'absolute',
+                  filter: 'brightness(0.9)'
+                }}
+                loading="eager"
+                decoding="sync"
+              />
+            </picture>
             
+            {/* Delay loading the video to prioritize the background image for faster LCP */}
             <video 
               ref={videoRef}
-              className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 ${videoLoaded ? 'opacity-90' : 'opacity-0'}`}
               autoPlay 
               muted 
               loop 
               playsInline
-              poster="/images/TXA_fallback.jpg"
-              preload="metadata"
+              poster="/images/TXA_fallback_optimized.jpg"
+              preload="none" // Completely delay video loading initially
               onLoadedMetadata={() => {
                 // Once metadata is loaded, we can start loading the content
                 if (videoRef.current) {
