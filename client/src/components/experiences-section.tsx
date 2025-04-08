@@ -37,6 +37,7 @@ function ExperienceDetailModal({
 }) {
   const t = useTranslation(language as any);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   
   // Setup modal behaviors when opened/closed
   useEffect(() => {
@@ -100,7 +101,13 @@ function ExperienceDetailModal({
   // Reset active image index when experience changes
   useEffect(() => {
     setActiveImageIndex(0);
+    setIsImageLoading(true); // Reset loading state for new experience
   }, [experience]);
+  
+  // Reset loading state on image change
+  useEffect(() => {
+    setIsImageLoading(true);
+  }, [activeImageIndex]);
   
   if (!isOpen) return null;
   
@@ -184,6 +191,21 @@ function ExperienceDetailModal({
     gallery = galleryPaths.map(fixImagePath);
   }
   
+  // Preload gallery images for smoother transitions
+  useEffect(() => {
+    // Preload all gallery images immediately when modal opens
+    if (isOpen && gallery.length > 0) {
+      gallery.forEach((imagePath, index) => {
+        // Skip the active image since it's already loaded in the visible DOM
+        if (index !== activeImageIndex) {
+          const img = new Image();
+          img.src = imagePath;
+          console.log(`Preloading gallery image: ${imagePath}`);
+        }
+      });
+    }
+  }, [isOpen, gallery.length]);
+  
   // Navigation for next/previous image
   const nextImage = () => {
     setActiveImageIndex((prev) => (prev + 1) % gallery.length);
@@ -221,6 +243,13 @@ function ExperienceDetailModal({
         <div className="flex flex-col md:flex-row md:h-[500px] overflow-hidden">
           {/* Gallery section */}
           <div className="md:flex-1 relative overflow-hidden h-72 md:h-full">
+            {/* Loading spinner */}
+            {isImageLoading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 z-10">
+                <div className="w-12 h-12 border-t-2 border-b-2 border-accent-color rounded-full animate-spin"></div>
+              </div>
+            )}
+            
             {/* Main image */}
             <img 
               src={experience.title.toLowerCase().includes('husky') || 
@@ -242,7 +271,8 @@ function ExperienceDetailModal({
               decoding="async"
               width="800"
               height="600"
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
+              onLoad={() => setIsImageLoading(false)}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 const originalSrc = gallery[activeImageIndex];
