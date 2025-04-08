@@ -151,6 +151,15 @@ function ExperienceDetailModal({
       'images/Snowmobile/Snowmobile 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Snowmobile:', gallery);
+  } else if (experience.title.toLowerCase().includes('jayjays') || experience.title.toLowerCase().includes('restaurant')) {
+    // Skip path resolution and directly use WebP files for JayJays Restaurant
+    gallery = [
+      'images/JayJays Restaurant/Food 1_result.webp',
+      'images/JayJays Restaurant/Food 2_result.webp',
+      'images/JayJays Restaurant/Food 3_result.webp',
+      'images/JayJays Restaurant/Food 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for JayJays Restaurant:', gallery);
   } else {
     // Default gallery to the main image if no gallery is provided
     const galleryPaths = experience.gallery || [experience.image];
@@ -196,8 +205,11 @@ function ExperienceDetailModal({
           <div className="md:flex-1 relative overflow-hidden h-72 md:h-full">
             {/* Main image */}
             <img 
-              src={experience.title.toLowerCase().includes('husky') || experience.title.toLowerCase().includes('snowmobile')
-                ? gallery[activeImageIndex] // For Husky and Snowmobile, use the direct WebP file paths
+              src={experience.title.toLowerCase().includes('husky') || 
+                   experience.title.toLowerCase().includes('snowmobile') ||
+                   experience.title.toLowerCase().includes('jayjays') ||
+                   experience.title.toLowerCase().includes('restaurant')
+                ? gallery[activeImageIndex] // For specialized experiences, use the direct WebP file paths
                 : getOptimizedImageSrc(gallery[activeImageIndex], { 
                     quality: 'high',
                     forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
@@ -274,12 +286,18 @@ function ExperienceDetailModal({
                     target.src = `/images/optimized/drifting-${size}.jpg`;
                   }
                 } else if (originalSrc.toLowerCase().includes('jayjays') || originalSrc.toLowerCase().includes('restaurant')) {
-                  // Try WebP if supported
-                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                    target.src = `/images/restaurant/optimized/jayjays-exterior-${size}.webp`;
-                  } else {
-                    target.src = `/images/restaurant/optimized/jayjays-exterior-${size}.jpg`;
+                  console.log('Restaurant image failed to load:', originalSrc);
+                  // Extract the food number or default to 1
+                  let foodNum = 1;
+                  const match = originalSrc.match(/Food\s*(\d+)/i);
+                  if (match && match[1]) {
+                    foodNum = parseInt(match[1], 10);
                   }
+                  // Force to a known valid food file that exists
+                  if (foodNum < 1 || foodNum > 4) foodNum = 1;
+                  
+                  target.src = `/images/JayJays Restaurant/Food ${foodNum}_result.webp`;
+                  console.log('Fallback to:', `/images/JayJays Restaurant/Food ${foodNum}_result.webp`);
                 } else {
                   // If original fails too, use fallback
                   target.src = '/images/TXA_fallback.jpg';
