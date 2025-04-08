@@ -3,6 +3,7 @@ import { useTranslation } from "@/translations";
 import { useState, useRef, useEffect } from "react";
 import { Play, Pause, X, Volume2, VolumeX } from "lucide-react";
 import { useScrollAnimation, getAnimationClasses } from "@/hooks/use-scroll-animation";
+import { useVideo } from "@/contexts/VideoContext";
 
 // Section content by language
 const contentByLanguage = {
@@ -44,11 +45,6 @@ const videos = [
   { id: 8, src: "/videos/Reels/TXA Reels_8.mp4", title: "Snow Adventures" }
 ];
 
-// No need for the modal VideoPlayer anymore as videos play inline
-
-// Keep track of the currently playing video
-let currentlyPlayingVideo: HTMLVideoElement | null = null;
-
 // Video Thumbnail Component with inline playing
 function VideoThumbnail({ 
   video
@@ -61,6 +57,25 @@ function VideoThumbnail({
   });
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const { currentlyPlaying, playVideo, pauseAllVideos, registerVideo } = useVideo();
+  const videoId = `gallery-video-${video.id}`;
+  
+  // Register video with context when it's mounted
+  useEffect(() => {
+    if (videoRef.current) {
+      registerVideo?.(videoId, videoRef.current);
+      
+      // Clean up on unmount
+      return () => {
+        registerVideo?.(videoId, null);
+      };
+    }
+  }, [videoId, registerVideo]);
+  
+  // Update playing state based on context
+  useEffect(() => {
+    setIsPlaying(currentlyPlaying === videoId);
+  }, [currentlyPlaying, videoId]);
   
   // Effect to handle play and pause events to update UI state
   useEffect(() => {
@@ -84,28 +99,10 @@ function VideoThumbnail({
   
   // Toggle play/pause
   const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        // Pause this video
-        videoRef.current.pause();
-        setIsPlaying(false);
-        currentlyPlayingVideo = null;
-      } else {
-        // Pause any currently playing video first
-        if (currentlyPlayingVideo && currentlyPlayingVideo !== videoRef.current) {
-          currentlyPlayingVideo.pause();
-        }
-        
-        // Play this video
-        videoRef.current.play()
-          .then(() => {
-            setIsPlaying(true);
-            currentlyPlayingVideo = videoRef.current;
-          })
-          .catch(err => {
-            console.log("Could not play video:", err);
-          });
-      }
+    if (isPlaying) {
+      pauseAllVideos();
+    } else {
+      playVideo(videoId);
     }
   };
   

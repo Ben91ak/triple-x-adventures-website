@@ -12,15 +12,15 @@ export function HomeSEO() {
   };
   
   const descriptions = {
-    en: 'Experience authentic winter adventures in Swedish Lapland including snowmobile tours, husky sledding, ice drifting, and Northern Lights viewing with Triple X Adventures in Arvidsjaur.',
-    de: 'Erleben Sie authentische Winterabenteuer in Schwedisch-Lappland mit Schneemobiltouren, Husky-Schlittenfahrten, Ice Drifting und Nordlichter-Beobachtung mit Triple X Adventures in Arvidsjaur.',
-    sv: 'Upplev autentiska vinteräventyr i svenska Lappland, inklusive snöskoteråkning, hundspannsturer, isdrift och norrskensskådning med Triple X Adventures i Arvidsjaur.'
+    en: 'Experience unforgettable winter adventures in Swedish Lapland including premium snowmobile tours, husky sledding, ice drifting, and Northern Lights viewing. Discover the real Arctic with Triple X Adventures in Arvidsjaur.',
+    de: 'Erleben Sie unvergessliche Winterabenteuer in Schwedisch-Lappland mit Premium-Schneemobiltouren, Husky-Schlittenfahrten, Ice Drifting und Nordlichter-Beobachtung. Entdecken Sie die echte Arktis mit Triple X Adventures in Arvidsjaur.',
+    sv: 'Upplev oförglömliga vinteräventyr i svenska Lappland, inklusive premium snöskoteråkning, hundspannsturer, isdrift och norrskensskådning. Upptäck den verkliga Arktis med Triple X Adventures i Arvidsjaur.'
   };
   
   const keywords = {
-    en: 'snowmobile tours Swedish Lapland, Arctic adventures Sweden, Northern Lights tours Lapland, ice drifting experience Sweden, husky sledding Lapland, luxury adventure Lapland, winter activities Arvidsjaur',
-    de: 'Schneemobiltouren Schwedisch-Lappland, arktische Abenteuer Schweden, Nordlicht-Touren Lappland, Ice Drifting Erlebnis Schweden, Husky-Schlittenfahrten Lappland, Luxusabenteuer Lappland, Winteraktivitäten Arvidsjaur',
-    sv: 'snöskoteråkning svenska Lappland, arktiska äventyr Sverige, norrskenssturer Lappland, isdriftupplevelse Sverige, hundspannsturer Lappland, lyxäventyr Lappland, vinteraktiviteter Arvidsjaur'
+    en: 'premium snowmobile tours Swedish Lapland, luxury Arctic adventures Sweden, Northern Lights Arvidsjaur, ice drifting experience Sweden, husky sledding Lapland, exclusive winter experiences, Arctic tourism, adventure travel Sweden, luxury accommodation Lapland, Nordic cuisine',
+    de: 'Premium-Schneemobiltouren Schwedisch-Lappland, Luxus-Arktisabenteuer Schweden, Nordlichter Arvidsjaur, Ice-Drifting-Erlebnis Schweden, Husky-Schlittenfahrten Lappland, exklusive Wintererlebnisse, Arktis-Tourismus, Abenteuerreisen Schweden, Luxusunterkunft Lappland, nordische Küche',
+    sv: 'premium snöskoteråkning svenska Lappland, lyx arktiska äventyr Sverige, norrsken Arvidsjaur, isdriftupplevelse Sverige, hundspannsturer Lappland, exklusiva vinterupplevelser, arktisk turism, äventyrsresor Sverige, lyxboende Lappland, nordisk mat'
   };
   
   // Structured data for better search engine understanding (JSON-LD)
@@ -51,8 +51,21 @@ export function HomeSEO() {
     ],
     "offers": {
       "@type": "Offer",
-      "description": "Arctic adventure packages in Swedish Lapland",
-      "priceCurrency": "EUR"
+      "description": "Premium Arctic adventure experiences in Swedish Lapland",
+      "priceCurrency": "EUR",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "valueAddedTaxIncluded": true
+      }
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "Swedish Lapland",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "65.5910",
+        "longitude": "19.1751"
+      }
     }
   };
   

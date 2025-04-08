@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { lazy, Suspense, memo } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { HelmetProvider } from "react-helmet-async";
+import { VideoProvider } from "@/contexts/VideoContext";
 import "./styles/theme.css";
 
 // Lazy load pages for better performance
@@ -54,8 +55,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <LanguageProvider>
-          <Router />
-          <Toaster />
+          <VideoProvider>
+            <Router />
+            <Toaster />
+          </VideoProvider>
         </LanguageProvider>
       </HelmetProvider>
     </QueryClientProvider>
