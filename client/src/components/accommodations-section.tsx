@@ -239,7 +239,9 @@ export function AccommodationsSection() {
                     {accommodation.features.map((feature, index) => (
                       <div key={index} className="flex items-center">
                         <div className="flex-shrink-0 w-9 h-9 rounded-full border border-gray-700 bg-gray-900/90 flex items-center justify-center mr-3 text-white/80 shadow-sm">
-                          <div className="w-4 h-4">{iconMap[feature.icon]}</div>
+                          <div className="flex items-center justify-center w-5 h-5">
+                            {iconMap[feature.icon]}
+                          </div>
                         </div>
                         <span className="text-white text-opacity-90 text-sm">{feature.text}</span>
                       </div>
@@ -306,7 +308,9 @@ export function AccommodationsSection() {
                       {accommodation.features.map((feature, index) => (
                         <div key={index} className="flex items-center">
                           <div className="flex-shrink-0 w-8 h-8 rounded-full border border-gray-700 bg-gray-900/90 flex items-center justify-center mr-3 text-white/80 shadow-sm">
-                            <div className="w-3.5 h-3.5">{iconMap[feature.icon]}</div>
+                            <div className="flex items-center justify-center w-4 h-4">
+                              {iconMap[feature.icon]}
+                            </div>
                           </div>
                           <span className="text-white text-opacity-80 text-sm">{feature.text}</span>
                         </div>
