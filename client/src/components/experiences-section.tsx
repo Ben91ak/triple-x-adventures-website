@@ -184,6 +184,15 @@ function ExperienceDetailModal({
       '/images/Ice Kart/Icekart 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Ice Kart:', gallery);
+  } else if (experience.title.toLowerCase().includes('helicopter') || experience.title.toLowerCase().includes('helikopter')) {
+    // Skip path resolution and directly use WebP files for Helicopter
+    gallery = [
+      '/images/Helicopter/Helikopter 1_result.webp',
+      '/images/Helicopter/Helikopter 2_result.webp',
+      '/images/Helicopter/Helikopter 3_result.webp',
+      '/images/Helicopter/Helikopter 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Helicopter:', gallery);
   } else if (experience.title.toLowerCase().includes('reindeer') || experience.title.toLowerCase().includes('reindeers')) {
     // Skip path resolution and directly use WebP files for Reindeers
     gallery = [
@@ -267,6 +276,8 @@ function ExperienceDetailModal({
                    experience.title.toLowerCase().includes('ice kart') ||
                    experience.title.toLowerCase().includes('icekart') ||
                    experience.title.toLowerCase().includes('kart') ||
+                   experience.title.toLowerCase().includes('helicopter') ||
+                   experience.title.toLowerCase().includes('helikopter') ||
                    experience.title.toLowerCase().includes('reindeer')
                 ? gallery[activeImageIndex] // For specialized experiences, use the direct WebP file paths
                 : getOptimizedImageSrc(gallery[activeImageIndex], { 
@@ -364,6 +375,19 @@ function ExperienceDetailModal({
                   
                   target.src = `/images/JayJays Restaurant/Food ${foodNum}_result.webp`;
                   console.log('Fallback to:', `/images/JayJays Restaurant/Food ${foodNum}_result.webp`);
+                } else if (originalSrc.toLowerCase().includes('helicopter') || originalSrc.toLowerCase().includes('helikopter')) {
+                  console.log('Helicopter image failed to load:', originalSrc);
+                  // Extract the helicopter number or default to 1
+                  let helicopterNum = 1;
+                  const match = originalSrc.match(/[Hh]elikopter\s*(\d+)/i);
+                  if (match && match[1]) {
+                    helicopterNum = parseInt(match[1], 10);
+                  }
+                  // Force to a known valid helicopter file that exists
+                  if (helicopterNum < 1 || helicopterNum > 4) helicopterNum = 1;
+                  
+                  target.src = `/images/Helicopter/Helikopter ${helicopterNum}_result.webp`;
+                  console.log('Fallback to:', `/images/Helicopter/Helikopter ${helicopterNum}_result.webp`);
                 } else if (originalSrc.toLowerCase().includes('reindeer')) {
                   console.log('Reindeer image failed to load:', originalSrc);
                   // Extract the reindeer number or default to 1
