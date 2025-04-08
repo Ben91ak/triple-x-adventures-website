@@ -106,6 +106,12 @@ function ExperienceDetailModal({
   
   // Fix image paths if needed
   const fixImagePath = (path: string): string => {
+    // Handle Husky images specifically to use the new WebP format
+    if (path.includes('Husky') && path.includes('Huskys')) {
+      const huskySuffix = path.includes('Husky.jpg') ? '1' : path.match(/Husky (\d+)\.jpg/) ? path.match(/Husky (\d+)\.jpg/)[1] : '1';
+      return `images/Huskys/Husky ${huskySuffix}_result.webp`;
+    }
+    
     if (path.startsWith('/')) {
       // Remove leading slash to help with path resolution
       return path.substring(1);
