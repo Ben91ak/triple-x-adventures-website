@@ -136,7 +136,7 @@ function ExperienceDetailModal({
       
       {/* Modal content */}
       <div 
-        className="relative max-w-6xl w-full mx-3 max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
+        className="relative max-w-6xl w-[95%] mx-auto my-auto max-h-[90vh] overflow-y-auto glass-card bg-card-bg/95 rounded-xl border border-white/10 shadow-2xl fade-in transform-gpu transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button - enhanced for mobile touchability */}
@@ -150,9 +150,9 @@ function ExperienceDetailModal({
         </button>
         
         {/* Modal header */}
-        <div className="flex flex-col md:flex-row md:h-[500px]">
+        <div className="flex flex-col md:flex-row md:h-[500px] overflow-hidden">
           {/* Gallery section */}
-          <div className="md:flex-1 relative overflow-hidden h-64 md:h-full">
+          <div className="md:flex-1 relative overflow-hidden h-72 md:h-full">
             {/* Main image */}
             <img 
               src={getOptimizedImageSrc(gallery[activeImageIndex], { quality: 'high' })} 
@@ -229,7 +229,7 @@ function ExperienceDetailModal({
           </div>
           
           {/* Content section */}
-          <div className="md:flex-1 p-6 md:p-8 md:overflow-y-auto">
+          <div className="md:flex-1 p-6 md:p-8 overflow-y-auto max-h-[40vh] md:max-h-full">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
               {experience.title}
             </h2>
@@ -383,20 +383,22 @@ function ExperienceDetailModal({
                   {t.experiences.bookNow}
                 </a>
                 
-                <div className="flex space-x-3">
+                <div className="flex space-x-3 mt-4 md:mt-0 w-full justify-between md:justify-start md:w-auto">
                   <button 
                     onClick={onPrevious}
-                    className="btn-secondary inline-flex items-center justify-center gap-1 font-medium text-sm py-3 px-4"
+                    className="btn-secondary inline-flex items-center justify-center gap-1 font-medium text-sm py-3 px-3 md:px-4 flex-1 md:flex-initial"
                   >
                     <ChevronLeft size={18} />
-                    {t.experiences.previousExperience}
+                    <span className="hidden md:inline">{t.experiences.previousExperience}</span>
+                    <span className="md:hidden">Prev</span>
                   </button>
                   
                   <button 
                     onClick={onNext}
-                    className="btn-secondary inline-flex items-center justify-center gap-1 font-medium text-sm py-3 px-4"
+                    className="btn-secondary inline-flex items-center justify-center gap-1 font-medium text-sm py-3 px-3 md:px-4 flex-1 md:flex-initial"
                   >
-                    {t.experiences.nextExperience}
+                    <span className="hidden md:inline">{t.experiences.nextExperience}</span>
+                    <span className="md:hidden">Next</span>
                     <ChevronRight size={18} />
                   </button>
                 </div>

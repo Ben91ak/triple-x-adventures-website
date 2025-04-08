@@ -1387,3 +1387,36 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+/* Modal touch optimization for mobile */
+@media (max-width: 768px) {
+  /* Better touch handling for modal backdrop */
+  .modal-backdrop {
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation;
+  }
+  
+  /* Scroll indicators for modal content */
+  .max-h-\[40vh\] {
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .max-h-\[40vh\]:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  
+  /* Improved modal content scrolling */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+}
