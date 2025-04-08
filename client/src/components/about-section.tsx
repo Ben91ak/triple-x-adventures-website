@@ -368,14 +368,9 @@ export function AboutSection() {
                     <h4 className="font-bold text-lg mb-1 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-md">
                       {member.name}
                     </h4>
-                    <p className="text-accent-color font-medium mb-3 text-sm">
+                    <p className="text-accent-color font-medium text-sm">
                       {member.role}
                     </p>
-                    <div className="flex-grow flex items-center">
-                      <p className="text-white/70 text-sm text-shadow-sm min-h-[80px]">
-                        {member.bio}
-                      </p>
-                    </div>
                   </div>
                 </div>
               ))}
