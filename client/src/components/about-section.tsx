@@ -283,17 +283,17 @@ export function AboutSection() {
           <div className="relative overflow-hidden rounded-xl shadow-2xl transform-gpu h-full min-h-[400px]">
             {/* Image with gradient overlay and glass effect */}
             <div className="relative h-full glassmorphism">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 transform-gpu"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent z-10 transform-gpu"></div>
               <img 
                 src="/images/About TXA.jpg" 
                 alt={content.teamImageAlt} 
-                className="w-full h-full object-cover transform-gpu"
+                className="w-full h-full object-cover transform-gpu brightness-110"
                 loading="eager"
                 width="500"
                 height="300"
               />
               {/* Northern lights glow overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-accent-color/10 via-transparent to-transparent opacity-40 mix-blend-overlay"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-accent-color/10 via-transparent to-transparent opacity-20 mix-blend-overlay"></div>
             </div>
           </div>
         </div>

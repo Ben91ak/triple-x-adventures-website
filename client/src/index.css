@@ -39,6 +39,12 @@
 }
 
 @layer components {
+  /* Glassmorphism container for images */
+  .glassmorphism {
+    backdrop-filter: blur(0px);
+    background: transparent;
+  }
+
   /* Optimized glass card with conditional blur for better performance */
   .glass-card {
     background: rgba(26, 29, 31, 0.7);
