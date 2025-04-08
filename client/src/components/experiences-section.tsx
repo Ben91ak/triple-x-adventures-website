@@ -239,12 +239,16 @@ function ExperienceDetailModal({
   useEffect(() => {
     // Preload all gallery images immediately when modal opens
     if (isOpen && gallery.length > 0) {
+      console.log('Gallery images for current experience:', gallery);
+      
       gallery.forEach((imagePath, index) => {
         // Skip the active image since it's already loaded in the visible DOM
         if (index !== activeImageIndex) {
           const img = new Image();
           img.src = imagePath;
-          console.log(`Preloading gallery image: ${imagePath}`);
+          console.log(`Preloading gallery image ${index}: ${imagePath}`);
+        } else {
+          console.log(`Current active image ${index}: ${imagePath}`);
         }
       });
     }
@@ -252,11 +256,23 @@ function ExperienceDetailModal({
   
   // Navigation for next/previous image
   const nextImage = () => {
-    setActiveImageIndex((prev) => (prev + 1) % gallery.length);
+    setIsImageLoading(true); // Reset loading state before changing image
+    console.log(`Navigating to next image from index ${activeImageIndex}`);
+    setActiveImageIndex((prev) => {
+      const newIndex = (prev + 1) % gallery.length;
+      console.log(`New image index: ${newIndex}, src: ${gallery[newIndex]}`);
+      return newIndex;
+    });
   };
   
   const previousImage = () => {
-    setActiveImageIndex((prev) => (prev - 1 + gallery.length) % gallery.length);
+    setIsImageLoading(true); // Reset loading state before changing image
+    console.log(`Navigating to previous image from index ${activeImageIndex}`);
+    setActiveImageIndex((prev) => {
+      const newIndex = (prev - 1 + gallery.length) % gallery.length;
+      console.log(`New image index: ${newIndex}, src: ${gallery[newIndex]}`);
+      return newIndex;
+    });
   };
 
   return (
@@ -522,7 +538,11 @@ function ExperienceDetailModal({
                         ? 'bg-accent-color' 
                         : 'bg-white/50 hover:bg-white/70'
                     }`}
-                    onClick={() => setActiveImageIndex(index)}
+                    onClick={() => {
+                      console.log(`Setting active image to index ${index}: ${gallery[index]}`);
+                      setActiveImageIndex(index);
+                      setIsImageLoading(true); // Reset loading state for new image
+                    }}
                   />
                 ))}
               </div>
