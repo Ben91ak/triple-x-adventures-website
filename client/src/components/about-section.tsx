@@ -10,35 +10,30 @@ const teamMembersByLanguage = {
       id: 1,
       name: "Janina JayJay Möller",
       role: "Founder & CEO",
-      bio: "Meet JayJay, our adventurous CEO and founder, whose passion and vision inspire every unforgettable experience at Triple X Adventures.",
       image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Project Lead",
-      bio: "I'm Benni and I lead the organizational projects at Triple X Adventures.",
       image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Head Guide",
-      bio: "Jesper has been training huskies for over 15 years and treats every dog like family.",
       image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
       name: "Henni Bruhn",
       role: "Experience Coordinator",
-      bio: "Henni ensures every adventure is perfectly organized and exceeds your expectations.",
       image: "/images/Team/Henni.jpg"
     },
     {
       id: 5,
       name: "Fanny Johannson",
-      role: "Chef at JayJay's",
-      bio: "A culinary artist who specializes in traditional Arctic cuisine with a modern twist.",
+      role: "Project Manager",
       image: "/images/Team/Fanny.jpg"
     }
   ],
@@ -47,35 +42,30 @@ const teamMembersByLanguage = {
       id: 1,
       name: "Janina JayJay Möller",
       role: "Gründerin & CEO",
-      bio: "Lernen Sie JayJay kennen, unsere abenteuerlustige CEO und Gründerin, deren Leidenschaft und Vision jedes unvergessliche Erlebnis bei Triple X Adventures inspirieren.",
       image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Projektmanager",
-      bio: "Ich bin Benni und leite die organisatorischen Projekte bei Triple X Adventures.",
       image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Meister-Hundeschlittenführer",
-      bio: "Jesper trainiert seit über 15 Jahren Huskies und behandelt jeden Hund wie ein Familienmitglied.",
       image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
       name: "Henni Eriksson",
       role: "Erlebniskoordinatorin",
-      bio: "Henni sorgt dafür, dass jedes Abenteuer perfekt organisiert ist und Ihre Erwartungen übertrifft.",
       image: "/images/Team/Henni.jpg"
     },
     {
       id: 5,
       name: "Fanny Johannson",
-      role: "Küchenchefin bei JayJay's",
-      bio: "Eine kulinarische Künstlerin, die sich auf traditionelle arktische Küche mit modernem Twist spezialisiert hat.",
+      role: "Projectmanager",
       image: "/images/Team/Fanny.jpg"
     }
   ],
@@ -84,35 +74,30 @@ const teamMembersByLanguage = {
       id: 1,
       name: "Janina JayJay Möller",
       role: "Grundare & VD",
-      bio: "Möt JayJay, vår äventyrliga VD och grundare, vars passion och vision inspirerar varje oförglömlig upplevelse hos Triple X Adventures.",
       image: "/images/Team/jayjay.jpg"
     },
     {
       id: 2,
       name: "Benni Fichtner",
       role: "Projektledare",
-      bio: "Jag är Benni och leder de organisatoriska projekten på Triple X Adventures.",
       image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
       role: "Mästare på Hundspann",
-      bio: "Jesper har tränat huskies i över 15 år och behandlar varje hund som familj.",
       image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
       name: "Henni Eriksson",
       role: "Upplevelsekoordinator",
-      bio: "Henni ser till att varje äventyr är perfekt organiserat och överträffar dina förväntningar.",
       image: "/images/Team/Henni.jpg"
     },
     {
       id: 5,
       name: "Fanny Johannson",
-      role: "Kock på JayJay's",
-      bio: "En kulinarisk konstnär som specialiserar sig på traditionell arktisk mat med en modern twist.",
+      role: "Projektledare",
       image: "/images/Team/Fanny.jpg"
     }
   ]

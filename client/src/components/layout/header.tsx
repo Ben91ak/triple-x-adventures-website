@@ -69,7 +69,7 @@ export function Header() {
                   {/* Logo */}
                   <div className="relative overflow-hidden h-10 transition-all">
                     <img 
-                      src="/logo.png" 
+                      src="/images/Logo/Weiss grün.png" 
                       alt="Triple X Adventures" 
                       className="h-10 object-contain" 
                     />
