@@ -602,9 +602,9 @@ export function ExperiencesSection() {
                       if (originalSrc.toLowerCase().includes('husky')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                          target.src = `/images/Huskys/optimized/Husky-${size}.webp`;
+                          target.src = `/images/Huskys/Husky 1_result.webp`;
                         } else {
-                          target.src = `/images/Huskys/optimized/Husky-${size}.jpeg`;
+                          target.src = `/images/Huskys/Husky.jpg`;
                         }
                       } else if (originalSrc.toLowerCase().includes('snowmobile')) {
                         // Try WebP if supported

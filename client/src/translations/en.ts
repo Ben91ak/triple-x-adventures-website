@@ -52,12 +52,12 @@ export const en = {
         id: 2,
         title: "Husky Sledding Tour",
         description: "Guide your own team of Siberian and Alaskan huskies across untouched snowy landscapes. Experience both passive and active driving options.",
-        image: "/images/Huskys/Husky.jpg",
+        image: "/images/Huskys/Husky 1_result.webp",
         gallery: [
-          "/images/Huskys/Husky.jpg",
-          "/images/Huskys/Husky 2.jpg",
-          "/images/Huskys/Husky 3.jpg",
-          "/images/Huskys/Husky 4.jpg"
+          "/images/Huskys/Husky 1_result.webp",
+          "/images/Huskys/Husky 2_result.webp",
+          "/images/Huskys/Husky 3_result.webp",
+          "/images/Huskys/Husky 4_result.webp"
         ],
         fullDescription: "Experience the Magic of a Husky Sledding Tour!\n\nFeel the thrill of guiding your own team of enthusiastic Siberian and Alaskan huskies across untouched, snowy landscapes. After an informative introduction and safety briefing, you'll handle your own sled pulled by up to 12 eager huskies. Listen to their excited barks fade into focused silence as you glide through the stunning Arctic wilderness.\n\n━━━ CHOOSE YOUR HUSKY ADVENTURE ━━━\n\n• Passive Tour: Sit back, relax, and enjoy the ride! Up to 4 guests comfortably seated in one sled driven by an experienced musher.\n\n• Active Tour: Take turns driving! Two guests per sled, with one driving and one riding. Swap places during the tour to fully enjoy both experiences.\n\n━━━ TOUR DETAILS ━━━\n\n• Routes: Customized 10-15 km trails\n• Duration: 1.5-2 hours\n• Difficulty: Suitable for all skill levels\n• Equipment: Winter clothing and boots provided\n\nAn authentic Arctic adventure that connects you deeply with nature and leaves you with unforgettable memories!",
         tag: {
