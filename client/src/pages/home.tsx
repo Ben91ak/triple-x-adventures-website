@@ -14,7 +14,6 @@ const GallerySection = lazy(() => import("@/components/gallery-section").then(mo
 const TestimonialsSection = lazy(() => import("@/components/testimonials-section").then(module => ({ default: module.TestimonialsSection })));
 const ContactSection = lazy(() => import("@/components/contact-section").then(module => ({ default: module.ContactSection })));
 const CTASection = lazy(() => import("@/components/cta-section").then(module => ({ default: module.CTASection })));
-const AnimationsShowcase = lazy(() => import("@/components/animations-showcase").then(module => ({ default: module.AnimationsShowcase })));
 
 // Enhanced loading component for lazy-loaded sections
 const SectionLoader = () => (

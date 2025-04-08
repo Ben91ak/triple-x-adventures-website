@@ -16,22 +16,22 @@ const teamMembersByLanguage = {
     {
       id: 2,
       name: "Benni Fichtner",
-      role: "Project Manager",
-      bio: "I'm Benni, leading the organizational projects at Triple X Adventures.",
+      role: "Project Lead",
+      bio: "I'm Benni and I lead the organizational projects at Triple X Adventures.",
       image: "/images/Team/Benni.jpg"
     },
     {
       id: 3,
       name: "Jesper Axelsson",
-      role: "Master Dog Sledder",
-      bio: "Jesper has been training huskies for over 15 years and treats each dog as family.",
+      role: "Head Guide",
+      bio: "Jesper has been training huskies for over 15 years and treats every dog like family.",
       image: "/images/Team/Jeppe.jpg"
     },
     {
       id: 4,
-      name: "Henni Eriksson",
+      name: "Henni Bruhn",
       role: "Experience Coordinator",
-      bio: "Henni ensures that each adventure is perfectly organized and exceeds your expectations.",
+      bio: "Henni ensures every adventure is perfectly organized and exceeds your expectations.",
       image: "/images/Team/Henni.jpg"
     },
     {
@@ -124,7 +124,7 @@ const aboutContentByLanguage = {
     title: "WHY WE LIVE FOR THIS",
     subtitle: "Our story, our team, and our commitment to authentic Arctic adventures",
     storyTitle: "OUR STORY",
-    storyParagraph1: "Triple X Adventures was born from a simple passion: sharing the raw beauty and adventure of Swedish Lapland with those who seek authentic experiences. Founded by local adventurers who grew up in these forests and mountains, we started with just a few snowmobiles and a deep knowledge of the land.",
+    storyParagraph1: "Triple X Adventures was born from a simple passion: sharing the raw beauty and adventure of Swedish Lapland with those who seek authentic experiences. Founded by Janina Möller in 2017 with just a few snowmobiles and a dream to show our guests the magic of Swedish Lapland.",
     storyParagraph2: "Today, we've grown into a premium adventure company, but our heart remains the same. We still operate with small groups, still work with local partners, and still believe that the Arctic isn't just a destination—it's an experience that changes you.",
     storyParagraph3: "Unlike mass tourism operations, we've chosen to stay true to our roots: personal, exclusive, and deeply connected to the land we call home.",
     valuesTitle: "OUR VALUES",
@@ -152,7 +152,7 @@ const aboutContentByLanguage = {
     title: "WARUM WIR DAFÜR LEBEN",
     subtitle: "Unsere Geschichte, unser Team und unser Engagement für authentische arktische Abenteuer",
     storyTitle: "UNSERE GESCHICHTE",
-    storyParagraph1: "Triple X Adventures entstand aus einer einfachen Leidenschaft: die unberührte Schönheit und das Abenteuer von Schwedisch-Lappland mit denen zu teilen, die authentische Erlebnisse suchen. Gegründet von lokalen Abenteurern, die in diesen Wäldern und Bergen aufwuchsen, begannen wir mit nur wenigen Schneemobilen und einem tiefen Wissen über das Land.",
+    storyParagraph1: "Triple X Adventures entstand aus einer einfachen Leidenschaft: die unberührte Schönheit und das Abenteuer von Schwedisch-Lappland mit denen zu teilen, die authentische Erlebnisse suchen. Gegründet von Janina Möller im Jahr 2017 mit nur wenigen Schneemobilen und einem Traum, unseren Gästen die Magie von Schwedisch-Lappland zu zeigen.",
     storyParagraph2: "Heute sind wir zu einem Premium-Abenteuerunternehmen herangewachsen, aber unser Herz bleibt das gleiche. Wir arbeiten immer noch mit kleinen Gruppen, arbeiten immer noch mit lokalen Partnern zusammen und glauben immer noch, dass die Arktis nicht nur ein Reiseziel ist – es ist ein Erlebnis, das Sie verändert.",
     storyParagraph3: "Im Gegensatz zu Massentourismusunternehmen haben wir uns entschieden, unseren Wurzeln treu zu bleiben: persönlich, exklusiv und tief verbunden mit dem Land, das wir unser Zuhause nennen.",
     valuesTitle: "UNSERE WERTE",
@@ -180,7 +180,7 @@ const aboutContentByLanguage = {
     title: "VARFÖR VI LEVER FÖR DETTA",
     subtitle: "Vår historia, vårt team och vårt engagemang för autentiska arktiska äventyr",
     storyTitle: "VÅR HISTORIA",
-    storyParagraph1: "Triple X Adventures föddes ur en enkel passion: att dela den råa skönheten och äventyret i Svenska Lappland med dem som söker autentiska upplevelser. Grundat av lokala äventyrare som växte upp i dessa skogar och berg, började vi med bara några snöskotrar och en djup kunskap om landet.",
+    storyParagraph1: "Triple X Adventures föddes ur en enkel passion: att dela den råa skönheten och äventyret i Svenska Lappland med dem som söker autentiska upplevelser. Grundad av Janina Möller år 2017 med bara några snöskotrar och en dröm att visa våra gäster magin i Svenska Lappland.",
     storyParagraph2: "Idag har vi växt till ett premiumäventyrsföretag, men vårt hjärta förblir detsamma. Vi arbetar fortfarande med små grupper, arbetar fortfarande med lokala partners och tror fortfarande att Arktis inte bara är en destination – det är en upplevelse som förändrar dig.",
     storyParagraph3: "Till skillnad från massturismsverksamheter har vi valt att förbli trogna våra rötter: personliga, exklusiva och djupt anslutna till landet vi kallar hem.",
     valuesTitle: "VÅRA VÄRDERINGAR",
