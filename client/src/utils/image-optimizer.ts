@@ -259,36 +259,11 @@ export function getOptimizedImageSrc(
   const fileName = src.split('/').pop() || '';
   const fileNameWithoutExt = fileName.split('.')[0];
   
-  // Check for Husky images folder
-  if (src.includes('/images/Huskys/') && !src.includes('optimized')) {
-    const optimizedVersion = getOptimizedVersionForCollection('/images/Huskys', fileNameWithoutExt, bestFormat);
-    if (optimizedVersion) {
-      return optimizedVersion;
-    }
-    
-    // If best format failed or isn't cached yet, fallback to WebP which we know exists
-    if (bestFormat !== 'webp') {
-      const webpVersion = getOptimizedVersionForCollection('/images/Huskys', fileNameWithoutExt, 'webp');
-      if (webpVersion) {
-        return webpVersion;
-      }
-    }
-  }
-  
-  // Check for Snowmobile images folder
-  if (src.includes('/images/Snowmobile/') && !src.includes('optimized')) {
-    const optimizedVersion = getOptimizedVersionForCollection('/images/Snowmobile', fileNameWithoutExt, bestFormat);
-    if (optimizedVersion) {
-      return optimizedVersion;
-    }
-    
-    // If best format failed or isn't cached yet, fallback to WebP which we know exists
-    if (bestFormat !== 'webp') {
-      const webpVersion = getOptimizedVersionForCollection('/images/Snowmobile', fileNameWithoutExt, 'webp');
-      if (webpVersion) {
-        return webpVersion;
-      }
-    }
+  // For any specific collection, just return the original source
+  // Since we've seen errors with the optimized versions not existing
+  if (src.includes('/images/Huskys/') || src.includes('/images/Snowmobile/')) {
+    // Just return the original source to avoid 404 errors
+    return src;
   }
   
   // Generic optimization for any image in the images folder
