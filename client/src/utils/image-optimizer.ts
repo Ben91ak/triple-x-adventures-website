@@ -26,6 +26,23 @@ const formatSupportCache: FormatSupportCache = {
   png: true   // Always assume PNG support
 };
 
+// Check WebP support during initialization (client-side only)
+if (typeof window !== 'undefined') {
+  (async () => {
+    try {
+      const webpSupported = await supportsWebP();
+      console.log(`WebP support: ${webpSupported ? 'Yes' : 'No'}`);
+      
+      // Also try to check AVIF (newer format with better compression)
+      const avifSupported = await supportsFormat('avif');
+      console.log(`AVIF support: ${avifSupported ? 'Yes' : 'No'}`);
+    } catch (e) {
+      // Ignore errors in format detection and default to JPEG
+      console.warn('Error detecting image format support:', e);
+    }
+  })();
+}
+
 // Network condition detection
 interface NetworkInfo {
   connectionType: 'slow-2g' | '2g' | '3g' | '4g' | '5g' | 'unknown';
@@ -262,30 +279,74 @@ export function getOptimizedImageSrc(
   // Path normalization - handle various path inconsistencies
   // Fixed paths for adventure images using the original asset versions we've copied
   if (src.includes('/images/Huskys/') || src.toLowerCase().includes('husky')) {
-    // Use the direct path to the image we've copied from assets
-    return '/images/Huskys/Husky.jpg';
+    // Check WebP support and use the optimized version with appropriate size
+    const useWebP = formatSupportCache.webp === true;
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const size = screenWidth < 768 ? 'small' : 'medium';
+    
+    if (useWebP) {
+      return `/images/Huskys/optimized/Husky-${size}.webp`;
+    } else {
+      return `/images/Huskys/optimized/Husky-${size}.jpg`;
+    }
   }
   
   if (src.includes('/images/Snowmobile/') || src.toLowerCase().includes('snowmobile')) {
-    // Use the direct path to the image we've copied from assets
-    return '/images/Snowmobile/Snowmobile.jpg';
+    // Check WebP support and use the optimized version with appropriate size
+    const useWebP = formatSupportCache.webp === true;
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
+    
+    // Select image size based on screen width and device pixel ratio
+    let size = 'medium';
+    if (screenWidth < 768) {
+      size = 'small';
+    } else if (screenWidth > 1440 && devicePixelRatio > 1) {
+      size = 'large';
+    }
+    
+    if (useWebP) {
+      return `/images/Snowmobile/optimized/Snowmobile-${size}.webp`;
+    } else {
+      return `/images/Snowmobile/optimized/Snowmobile-${size}.jpg`;
+    }
   }
   
-  // Special cases for specific files with spaces
+  // Special cases for specific files with spaces - using optimized versions with sizing
   if (src.includes('Ice Kart') || src.includes('ice-kart') || src.includes('Ice-Kart')) {
-    return '/images/ice-kart.jpg';
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const size = screenWidth < 768 ? 'small' : 'medium';
+    return `/images/optimized/ice-kart-${size}.jpg`;
   }
   
   if (src.includes('Ice Fishing') || src.includes('Ice-Fishing') || src.includes('ice-fishing')) {
-    return '/images/Ice-Fishing.jpg';
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const size = screenWidth < 768 ? 'small' : 'medium';
+    return `/images/optimized/Ice-Fishing-${size}.jpg`;
   }
   
-  if (src.includes('Side By Side Buggy Drifting.jpg') || src.includes('Side-By-Side-Buggy-Drifting.jpg')) {
-    return '/images/buggy.jpg';
+  if (src.includes('Side By Side Buggy Drifting.jpg') || src.includes('Side-By-Side-Buggy-Drifting.jpg') || src.includes('buggy')) {
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const size = screenWidth < 768 ? 'small' : 'medium';
+    const useWebP = formatSupportCache.webp === true;
+    
+    if (useWebP) {
+      return `/images/optimized/buggy-${size}.webp`;
+    } else {
+      return `/images/optimized/buggy-${size}.jpg`;
+    }
   }
   
-  if (src.includes('JayJays Restaurant.jpg') || src.includes('JayJays-Restaurant.jpg')) {
-    return '/images/restaurant/jayjays-exterior.jpg';
+  if (src.includes('JayJays Restaurant.jpg') || src.includes('JayJays-Restaurant.jpg') || src.includes('jayjays')) {
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+    const size = screenWidth < 768 ? 'small' : 'medium';
+    const useWebP = formatSupportCache.webp === true;
+    
+    if (useWebP) {
+      return `/images/restaurant/optimized/jayjays-exterior-${size}.webp`;
+    } else {
+      return `/images/restaurant/optimized/jayjays-exterior-${size}.jpg`;
+    }
   }
   
   // Handle common path pattern issues with experiences
@@ -319,34 +380,85 @@ export function getOptimizedImageSrc(
     const fileNameWithoutExt = fileName.split('.')[0];
     
     // Check if we have an optimized version
-    const genericOptimizedPath = `${folderPath}/optimized/${fileNameWithoutExt}-${sizeSuffix}.${bestFormat}`;
-    const cacheKey = `generic-${folderPath}-${fileNameWithoutExt}-${sizeSuffix}-${bestFormat}`;
+    const useWebP = formatSupportCache.webp === true;
+    const useAvif = formatSupportCache.avif === true;
+    const deviceFormat = useAvif ? 'avif' : (useWebP ? 'webp' : 'jpg');
+    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
     
-    // Check cache first
+    // Choose size based on device width
+    let size = 'medium';
+    if (screenWidth < 768) {
+      size = 'small';
+    } else if (screenWidth > 1440 && devicePixelRatio > 1) {
+      size = 'large';
+    }
+    
+    // Try to use the optimized version with the most appropriate format and size
+    const genericOptimizedPath = `${folderPath}/optimized/${fileNameWithoutExt}-${size}.${deviceFormat}`;
+    const fallbackOptimizedPath = `${folderPath}/optimized/${fileNameWithoutExt}-${size}.jpg`;
+    const cacheKey = `generic-${folderPath}-${fileNameWithoutExt}-${size}-${deviceFormat}`;
+    const fallbackCacheKey = `generic-${folderPath}-${fileNameWithoutExt}-${size}-jpg`;
+    
+    // Check cache first for primary format
     if (imageLoadCache[cacheKey] === true) {
       return genericOptimizedPath;
     }
     
-    // If WebP is available and this is an image type that benefits from it (jpg/jpeg)
-    if ((bestFormat === 'webp' || bestFormat === 'avif') && 
-        (src.endsWith('.jpg') || src.endsWith('.jpeg'))) {
-      // Try to load optimized version to see if it exists
-      if (typeof window !== 'undefined') {
-        const img = new Image();
-        img.onload = () => {
+    // Check cache for fallback format
+    if (deviceFormat !== 'jpg' && imageLoadCache[fallbackCacheKey] === true) {
+      return fallbackOptimizedPath;
+    }
+    
+    // For images that we know should have optimized versions, use them
+    const knownOptimizedFolders = [
+      'experiences/', 
+      'accommodations/', 
+      'restaurant/', 
+      'activities/'
+    ];
+    
+    // Check if this is from a folder we know has optimized versions
+    const isKnownFolder = knownOptimizedFolders.some(folder => src.toLowerCase().includes(folder.toLowerCase()));
+    
+    // Try to load the appropriate version
+    if (typeof window !== 'undefined') {
+      // First try WebP/AVIF version
+      if (deviceFormat !== 'jpg') {
+        const modernImg = new Image();
+        modernImg.onload = () => {
           imageLoadCache[cacheKey] = true;
         };
-        img.onerror = () => {
+        modernImg.onerror = () => {
           imageLoadCache[cacheKey] = false;
+          
+          // If modern format fails, try JPG fallback
+          const fallbackImg = new Image();
+          fallbackImg.onload = () => {
+            imageLoadCache[fallbackCacheKey] = true;
+          };
+          fallbackImg.onerror = () => {
+            imageLoadCache[fallbackCacheKey] = false;
+          };
+          fallbackImg.src = fallbackOptimizedPath;
         };
-        img.src = genericOptimizedPath;
+        modernImg.src = genericOptimizedPath;
+      } else {
+        // Just try the JPG version
+        const img = new Image();
+        img.onload = () => {
+          imageLoadCache[fallbackCacheKey] = true;
+        };
+        img.onerror = () => {
+          imageLoadCache[fallbackCacheKey] = false;
+        };
+        img.src = fallbackOptimizedPath;
       }
-      
-      // For known image types, we'll gamble on the WebP existing
-      // The error handler on the actual <img> tag will catch failures
-      if (src.includes('experiences/') || src.includes('accommodations/')) {
-        return genericOptimizedPath;
-      }
+    }
+    
+    // For known image folders, we'll gamble on the optimized version existing
+    // The error handler on the actual <img> tag will catch failures and provide fallbacks
+    if (isKnownFolder) {
+      return deviceFormat !== 'jpg' ? genericOptimizedPath : fallbackOptimizedPath;
     }
   }
   
@@ -371,10 +483,33 @@ export function prefetchImages(
   // First prefetch any high-priority images immediately
   if (priorityImages.length > 0) {
     priorityImages.forEach(imagePath => {
-      // Try to use optimized version if available
-      const optimizedSrc = getOptimizedImageSrc(imagePath);
+      // Try to use optimized version if available - mark as high priority
+      const optimizedSrc = getOptimizedImageSrc(imagePath, { 
+        quality: 'high',
+        priority: true 
+      });
+      
+      // Create image and preload tag for high-priority images
       const img = new Image();
       img.src = optimizedSrc;
+      
+      // Also add a preload link to ensure browser prioritizes these images
+      if (typeof document !== 'undefined') {
+        const existingPreload = document.querySelector(`link[rel="preload"][href="${optimizedSrc}"]`);
+        if (!existingPreload) {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = optimizedSrc;
+          
+          // Add fetchpriority attribute if supported 
+          if ('fetchpriority' in HTMLLinkElement.prototype) {
+            link.setAttribute('fetchpriority', 'high');
+          }
+          
+          document.head.appendChild(link);
+        }
+      }
     });
   }
   
@@ -530,13 +665,23 @@ function optimizeImage(img: HTMLImageElement, isPriority: boolean): void {
     
     // Apply loading strategies based on priority
     if (isPriority) {
-      img.loading = 'eager';
-      img.decoding = 'async';
-      // TypeScript doesn't recognize fetchPriority yet, so we need to use any
-      (img as any).fetchPriority = 'high';
+      img.loading = 'eager'; // Load immediately
+      img.decoding = 'async'; // Process asynchronously
+      
+      // Set fetchpriority attribute using setAttribute for better compatibility
+      // This signals to the browser that this is a high-priority fetch
+      img.setAttribute('fetchpriority', 'high');
+      
+      // Also add importance attribute as a backup for older browsers (may be removed in future)
+      img.setAttribute('importance', 'high');
     } else {
-      img.loading = 'lazy';
-      img.decoding = 'async';
+      img.loading = 'lazy'; // Defer loading until near viewport
+      img.decoding = 'async'; // Process asynchronously
+      
+      // For low-priority images, explicitly mark as low priority if supported
+      if (networkInfo.saveData) {
+        img.setAttribute('fetchpriority', 'low');
+      }
     }
     
     // Set appropriate image quality based on priority and network conditions
@@ -637,7 +782,29 @@ function optimizeImage(img: HTMLImageElement, isPriority: boolean): void {
         link.rel = 'preload';
         link.as = 'image';
         link.href = img.src;
+        
+        // Set fetchpriority if supported
+        if ('fetchpriority' in HTMLLinkElement.prototype) {
+          link.setAttribute('fetchpriority', 'high');
+        }
+        
+        // If image is WebP format, add the 'type' attribute for better browser handling
+        if (img.src.endsWith('.webp')) {
+          link.setAttribute('type', 'image/webp');
+        } else if (img.src.endsWith('.avif')) {
+          link.setAttribute('type', 'image/avif');
+        }
+        
+        // Add to head for high priority loading
         document.head.appendChild(link);
+        
+        // For hero images or large above-the-fold images, consider prerendering if network is good
+        if (img.width > 600 && !networkInfo.saveData && networkInfo.effectiveBandwidth > 5) {
+          if ('fetchpriority' in HTMLLinkElement.prototype) {
+            img.setAttribute('fetchpriority', 'high');
+            img.setAttribute('importance', 'high');
+          }
+        }
       }
     }
     
