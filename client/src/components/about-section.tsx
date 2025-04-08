@@ -285,7 +285,7 @@ export function AboutSection() {
             <div className="relative h-full glassmorphism">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 transform-gpu"></div>
               <img 
-                src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" 
+                src="/images/About TXA.jpg" 
                 alt={content.teamImageAlt} 
                 className="w-full h-full object-cover transform-gpu"
                 loading="eager"
