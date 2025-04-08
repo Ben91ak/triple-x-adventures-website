@@ -211,6 +211,15 @@ function ExperienceDetailModal({
       '/images/Ice Fishing/Shoot 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Ice Fishing:', gallery);
+  } else if (experience.title.toLowerCase().includes('side by side') || experience.title.toLowerCase().includes('buggy') || experience.title.toLowerCase().includes('sbs')) {
+    // Skip path resolution and directly use WebP files for Side by Side
+    gallery = [
+      '/images/Side by Side/SBS 1_result.webp',
+      '/images/Side by Side/SBS 2_result.webp',
+      '/images/Side by Side/SBS 3_result.webp',
+      '/images/Side by Side/SBS 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Side by Side:', gallery);
   } else if (experience.title.toLowerCase().includes('reindeer') || experience.title.toLowerCase().includes('reindeers')) {
     // Skip path resolution and directly use WebP files for Reindeers
     gallery = [
@@ -300,7 +309,10 @@ function ExperienceDetailModal({
                    experience.title.toLowerCase().includes('drift') ||
                    experience.title.toLowerCase().includes('ice fishing') ||
                    experience.title.toLowerCase().includes('fishing') ||
-                   experience.title.toLowerCase().includes('reindeer')
+                   experience.title.toLowerCase().includes('reindeer') ||
+                   experience.title.toLowerCase().includes('buggy') ||
+                   experience.title.toLowerCase().includes('side by side') ||
+                   experience.title.toLowerCase().includes('sbs')
                 ? gallery[activeImageIndex] // For specialized experiences, use the direct WebP file paths
                 : getOptimizedImageSrc(gallery[activeImageIndex], { 
                     quality: 'high',
@@ -404,13 +416,19 @@ function ExperienceDetailModal({
                   } else {
                     target.src = `/images/optimized/Ice-Fishing-${size}.jpg`;
                   }
-                } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side')) {
-                  // Try WebP if supported
-                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                    target.src = `/images/optimized/buggy-${size}.webp`;
-                  } else {
-                    target.src = `/images/optimized/buggy-${size}.jpg`;
+                } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side') || originalSrc.toLowerCase().includes('sbs')) {
+                  console.log('Side by Side image failed to load:', originalSrc);
+                  // Extract the SBS number or default to 1
+                  let sbsNum = 1;
+                  const match = originalSrc.match(/SBS\s*(\d+)/i);
+                  if (match && match[1]) {
+                    sbsNum = parseInt(match[1], 10);
                   }
+                  // Force to a known valid SBS file that exists
+                  if (sbsNum < 1 || sbsNum > 4) sbsNum = 1;
+                  
+                  target.src = `/images/Side by Side/SBS ${sbsNum}_result.webp`;
+                  console.log('Fallback to:', `/images/Side by Side/SBS ${sbsNum}_result.webp`);
                 } else if (originalSrc.toLowerCase().includes('ice drift') || (originalSrc.toLowerCase().includes('drift') && originalSrc.toLowerCase().includes('cars'))) {
                   console.log('Ice Drift image failed to load:', originalSrc);
                   // Extract the car number or default to 1
@@ -870,13 +888,10 @@ export function ExperiencesSection() {
                         // Always use direct WebP files for Ice Fishing to ensure consistency
                         console.log('Ice Fishing card image fallback', originalSrc);
                         target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
-                      } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side')) {
-                        // Try WebP if supported
-                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                          target.src = `/images/optimized/buggy-${size}.webp`;
-                        } else {
-                          target.src = `/images/optimized/buggy-${size}.jpg`;
-                        }
+                      } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side') || originalSrc.toLowerCase().includes('sbs')) {
+                        // Always use direct WebP files for Side by Side
+                        console.log('Side by Side card image fallback', originalSrc);
+                        target.src = `/images/Side by Side/SBS 1_result.webp`;
                       } else if (originalSrc.toLowerCase().includes('helicopter') || originalSrc.toLowerCase().includes('helikopter')) {
                         // Use direct WebP files for Helicopter
                         target.src = `/images/Helicopter/Helikopter 1_result.webp`;
