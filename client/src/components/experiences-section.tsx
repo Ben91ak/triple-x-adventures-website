@@ -108,8 +108,20 @@ function ExperienceDetailModal({
   const fixImagePath = (path: string): string => {
     // Handle Husky images specifically to use the new WebP format
     if (path.includes('Husky') && path.includes('Huskys')) {
-      const huskySuffix = path.includes('Husky.jpg') ? '1' : path.match(/Husky (\d+)\.jpg/) ? path.match(/Husky (\d+)\.jpg/)[1] : '1';
-      return `images/Huskys/Husky ${huskySuffix}_result.webp`;
+      let imageNumber = 1;
+      
+      // Extract image number from filename if available
+      if (path.includes('Husky.jpg')) {
+        imageNumber = 1;
+      } else if (path.includes('Husky 2.jpg')) {
+        imageNumber = 2;
+      } else if (path.includes('Husky 3.jpg')) {
+        imageNumber = 3;
+      } else if (path.includes('Husky 4.jpg')) {
+        imageNumber = 4;
+      }
+      
+      return `images/Huskys/Husky ${imageNumber}_result.webp`;
     }
     
     if (path.startsWith('/')) {
@@ -119,8 +131,31 @@ function ExperienceDetailModal({
     return path;
   };
   
-  // Default gallery to the main image if no gallery is provided
-  const gallery = (experience.gallery || [experience.image]).map(fixImagePath);
+  // For specific experiences, directly use the WebP files we know exist
+  let gallery: string[] = [];
+  if (experience.title.toLowerCase().includes('husky')) {
+    // Skip path resolution and directly use WebP files for husky
+    gallery = [
+      'images/Huskys/Husky 1_result.webp',
+      'images/Huskys/Husky 2_result.webp',
+      'images/Huskys/Husky 3_result.webp',
+      'images/Huskys/Husky 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Husky:', gallery);
+  } else if (experience.title.toLowerCase().includes('snowmobile')) {
+    // Skip path resolution and directly use WebP files for snowmobile
+    gallery = [
+      'images/Snowmobile/Snowmobile 1_result.webp',
+      'images/Snowmobile/Snowmobile 2_result.webp',
+      'images/Snowmobile/Snowmobile 3_result.webp',
+      'images/Snowmobile/Snowmobile 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Snowmobile:', gallery);
+  } else {
+    // Default gallery to the main image if no gallery is provided
+    const galleryPaths = experience.gallery || [experience.image];
+    gallery = galleryPaths.map(fixImagePath);
+  }
   
   // Navigation for next/previous image
   const nextImage = () => {
@@ -161,10 +196,13 @@ function ExperienceDetailModal({
           <div className="md:flex-1 relative overflow-hidden h-72 md:h-full">
             {/* Main image */}
             <img 
-              src={getOptimizedImageSrc(gallery[activeImageIndex], { 
-                quality: 'high',
-                forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
-              })} 
+              src={experience.title.toLowerCase().includes('husky') || experience.title.toLowerCase().includes('snowmobile')
+                ? gallery[activeImageIndex] // For Husky and Snowmobile, use the direct WebP file paths
+                : getOptimizedImageSrc(gallery[activeImageIndex], { 
+                    quality: 'high',
+                    forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
+                  })
+              } 
               alt={experience.title}
               loading="eager"
               decoding="async"
@@ -182,19 +220,31 @@ function ExperienceDetailModal({
                 
                 // Special case handling for common experience images with WebP optimized versions
                 if (originalSrc.toLowerCase().includes('husky')) {
-                  // Try WebP if supported
-                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                    target.src = `/images/Huskys/Husky 1_result.webp`;
-                  } else {
-                    target.src = `/images/Huskys/Husky.jpg`;
+                  console.log('Husky image failed to load:', originalSrc);
+                  // Extract the husky number or default to 1
+                  let huskyNum = 1;
+                  const match = originalSrc.match(/Husky\s*(\d+)/i);
+                  if (match && match[1]) {
+                    huskyNum = parseInt(match[1], 10);
                   }
+                  // Force to a known valid husky file that exists
+                  if (huskyNum < 1 || huskyNum > 4) huskyNum = 1;
+                  
+                  target.src = `/images/Huskys/Husky ${huskyNum}_result.webp`;
+                  console.log('Fallback to:', `/images/Huskys/Husky ${huskyNum}_result.webp`);
                 } else if (originalSrc.toLowerCase().includes('snowmobile')) {
-                  // Try WebP if supported
-                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                    target.src = `/images/Snowmobile/optimized/Snowmobile-${size}.webp`;
-                  } else {
-                    target.src = `/images/Snowmobile/optimized/Snowmobile-${size}.jpeg`;
+                  console.log('Snowmobile image failed to load:', originalSrc);
+                  // Extract the snowmobile number or default to 1
+                  let snowmobileNum = 1;
+                  const match = originalSrc.match(/Snowmobile\s*(\d+)/i);
+                  if (match && match[1]) {
+                    snowmobileNum = parseInt(match[1], 10);
                   }
+                  // Force to a known valid snowmobile file that exists
+                  if (snowmobileNum < 1 || snowmobileNum > 4) snowmobileNum = 1;
+                  
+                  target.src = `/images/Snowmobile/Snowmobile ${snowmobileNum}_result.webp`;
+                  console.log('Fallback to:', `/images/Snowmobile/Snowmobile ${snowmobileNum}_result.webp`);
                 } else if (originalSrc.toLowerCase().includes('ice kart') || originalSrc.toLowerCase().includes('kart')) {
                   // Try WebP if supported
                   if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
