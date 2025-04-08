@@ -352,16 +352,22 @@ export function AboutSection() {
                   
                   <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl p-6 relative z-10 flex flex-col items-center text-center group-hover:border-accent-color/30 transition-colors duration-300 transform-gpu h-full"
                       style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)' }}>
-                    {/* Image with accent color glow */}
+                    {/* Image with accent color glow and circular frame */}
                     <div className="relative mb-5">
+                      {/* Outer glow ring */}
                       <div className="absolute -inset-1 bg-gradient-to-br from-accent-color via-accent-color/50 to-accent-color/30 rounded-full opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
-                      <div className="w-32 h-32 rounded-full overflow-hidden border border-white/20 p-1 relative transition-transform duration-300 group-hover:scale-105 transform-gpu">
-                        <img 
-                          src={member.image} 
-                          alt={member.name} 
-                          className="w-full h-full object-cover rounded-full"
-                          loading="lazy"
-                        />
+                      
+                      {/* Dark circular border */}
+                      <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gray-800/80 relative transition-transform duration-300 group-hover:scale-105 transform-gpu flex items-center justify-center bg-gray-900/80">
+                        {/* Inner white/translucent border */}
+                        <div className="w-[90%] h-[90%] rounded-full overflow-hidden border border-white/20 flex items-center justify-center">
+                          <img 
+                            src={member.image} 
+                            alt={member.name} 
+                            className="w-[90%] h-[90%] object-cover rounded-full"
+                            loading="lazy"
+                          />
+                        </div>
                       </div>
                     </div>
                     
