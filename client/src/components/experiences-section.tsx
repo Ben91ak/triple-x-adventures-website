@@ -160,6 +160,15 @@ function ExperienceDetailModal({
       '/images/JayJays Restaurant/Food 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for JayJays Restaurant:', gallery);
+  } else if (experience.title.toLowerCase().includes('ice kart') || experience.title.toLowerCase().includes('icekart') || experience.title.toLowerCase().includes('kart')) {
+    // Skip path resolution and directly use WebP files for Ice Kart
+    gallery = [
+      '/images/Ice Kart/Icekart 1_result.webp',
+      '/images/Ice Kart/Icekart 2_result.webp',
+      '/images/Ice Kart/Icekart 3_result.webp',
+      '/images/Ice Kart/Icekart 4_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Ice Kart:', gallery);
   } else {
     // Default gallery to the main image if no gallery is provided
     const galleryPaths = experience.gallery || [experience.image];
@@ -208,7 +217,10 @@ function ExperienceDetailModal({
               src={experience.title.toLowerCase().includes('husky') || 
                    experience.title.toLowerCase().includes('snowmobile') ||
                    experience.title.toLowerCase().includes('jayjays') ||
-                   experience.title.toLowerCase().includes('restaurant')
+                   experience.title.toLowerCase().includes('restaurant') ||
+                   experience.title.toLowerCase().includes('ice kart') ||
+                   experience.title.toLowerCase().includes('icekart') ||
+                   experience.title.toLowerCase().includes('kart')
                 ? gallery[activeImageIndex] // For specialized experiences, use the direct WebP file paths
                 : getOptimizedImageSrc(gallery[activeImageIndex], { 
                     quality: 'high',
@@ -257,13 +269,19 @@ function ExperienceDetailModal({
                   
                   target.src = `/images/Snowmobile/Snowmobile ${snowmobileNum}_result.webp`;
                   console.log('Fallback to:', `/images/Snowmobile/Snowmobile ${snowmobileNum}_result.webp`);
-                } else if (originalSrc.toLowerCase().includes('ice kart') || originalSrc.toLowerCase().includes('kart')) {
-                  // Try WebP if supported
-                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                    target.src = `/images/optimized/ice-kart-${size}.webp`;
-                  } else {
-                    target.src = `/images/optimized/ice-kart-${size}.jpg`;
+                } else if (originalSrc.toLowerCase().includes('ice kart') || originalSrc.toLowerCase().includes('icekart') || originalSrc.toLowerCase().includes('kart')) {
+                  console.log('Ice Kart image failed to load:', originalSrc);
+                  // Extract the kart number or default to 1
+                  let kartNum = 1;
+                  const match = originalSrc.match(/(?:Ice)?kart\s*(\d+)/i);
+                  if (match && match[1]) {
+                    kartNum = parseInt(match[1], 10);
                   }
+                  // Force to a known valid kart file that exists
+                  if (kartNum < 1 || kartNum > 4) kartNum = 1;
+                  
+                  target.src = `/images/Ice Kart/Icekart ${kartNum}_result.webp`;
+                  console.log('Fallback to:', `/images/Ice Kart/Icekart ${kartNum}_result.webp`);
                 } else if (originalSrc.toLowerCase().includes('fishing')) {
                   // Try WebP if supported
                   if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {

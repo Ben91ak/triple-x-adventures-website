@@ -351,10 +351,25 @@ export function getOptimizedImageSrc(
   }
   
   // Special cases for specific files with spaces - using optimized versions with sizing
-  if (src.includes('Ice Kart') || src.includes('ice-kart') || src.includes('Ice-Kart')) {
-    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    const size = screenWidth < 768 ? 'small' : 'medium';
-    return `/images/optimized/ice-kart-${size}.jpg`;
+  if (src.includes('Ice Kart') || src.includes('ice-kart') || src.includes('Ice-Kart') || src.toLowerCase().includes('icekart') || src.toLowerCase().includes('kart')) {
+    // Check if path already includes the _result.webp suffix (direct WebP file)
+    if (src.includes('_result.webp')) {
+      return src; // Already using the preferred format, don't modify it
+    }
+    
+    // Check for Icekart image patterns
+    if (src.includes('Icekart 1') || src.includes('Icekart1')) {
+      return `/images/Ice Kart/Icekart 1_result.webp`;
+    } else if (src.includes('Icekart 2') || src.includes('Icekart2')) {
+      return `/images/Ice Kart/Icekart 2_result.webp`;
+    } else if (src.includes('Icekart 3') || src.includes('Icekart3')) {
+      return `/images/Ice Kart/Icekart 3_result.webp`;
+    } else if (src.includes('Icekart 4') || src.includes('Icekart4')) {
+      return `/images/Ice Kart/Icekart 4_result.webp`;
+    }
+    
+    // Default to Icekart 1 for generic kart references
+    return `/images/Ice Kart/Icekart 1_result.webp`;
   }
   
   if (src.includes('Ice Fishing') || src.includes('Ice-Fishing') || src.includes('ice-fishing')) {
