@@ -866,13 +866,10 @@ export function ExperiencesSection() {
                         } else {
                           target.src = `/images/optimized/ice-kart-${size}.jpg`;
                         }
-                      } else if (originalSrc.toLowerCase().includes('fishing')) {
-                        // Try new direct WebP paths first for Ice Fishing
-                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                          target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
-                        } else {
-                          target.src = `/images/optimized/Ice-Fishing-${size}.jpg`;
-                        }
+                      } else if (originalSrc.toLowerCase().includes('ice fishing') || originalSrc.toLowerCase().includes('fishing')) {
+                        // Always use direct WebP files for Ice Fishing to ensure consistency
+                        console.log('Ice Fishing card image fallback', originalSrc);
+                        target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
                       } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
@@ -886,9 +883,6 @@ export function ExperiencesSection() {
                       } else if (originalSrc.toLowerCase().includes('ice drift') || (originalSrc.toLowerCase().includes('drift') && originalSrc.toLowerCase().includes('cars'))) {
                         // Use direct WebP files for Ice Drift
                         target.src = `/images/Ice Drift/Cars 1_result.webp`;
-                      } else if (originalSrc.toLowerCase().includes('ice fishing') || originalSrc.toLowerCase().includes('icefish')) {
-                        // Use direct WebP files for Ice Fishing
-                        target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
                       } else if (originalSrc.toLowerCase().includes('drift')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
