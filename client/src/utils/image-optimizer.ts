@@ -146,6 +146,7 @@ export function getOptimizedImageSrc(
   src: string, 
   options?: { 
     forceFormat?: ImageFormat, 
+    format?: ImageFormat, // Added format option as an alias to forceFormat
     quality?: 'low' | 'medium' | 'high',
     priority?: boolean
   }
@@ -171,7 +172,10 @@ export function getOptimizedImageSrc(
   }
   
   // Default options
-  const { forceFormat, quality = 'medium', priority = false } = options || {};
+  const { forceFormat, format, quality = 'medium', priority = false } = options || {};
+  
+  // Use format as an alias to forceFormat if provided
+  const effectiveFormat = format || forceFormat;
   
   // Get screen width to determine appropriate image size
   const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
@@ -205,9 +209,9 @@ export function getOptimizedImageSrc(
   // Determine best available format
   let bestFormat: ImageFormat = 'jpeg'; // Default fallback
   
-  // If format is forced, use that
-  if (forceFormat) {
-    bestFormat = forceFormat;
+  // If format is forced or provided, use that
+  if (effectiveFormat) {
+    bestFormat = effectiveFormat;
   } 
   // Otherwise determine based on browser support
   else {

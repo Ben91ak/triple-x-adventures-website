@@ -155,7 +155,10 @@ function ExperienceDetailModal({
           <div className="md:flex-1 relative overflow-hidden h-72 md:h-full">
             {/* Main image */}
             <img 
-              src={getOptimizedImageSrc(gallery[activeImageIndex], { quality: 'high' })} 
+              src={getOptimizedImageSrc(gallery[activeImageIndex], { 
+                quality: 'high',
+                forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
+              })} 
               alt={experience.title}
               loading="eager"
               decoding="async"
@@ -167,19 +170,60 @@ function ExperienceDetailModal({
                 const originalSrc = gallery[activeImageIndex];
                 console.warn(`Error loading modal image: ${gallery[activeImageIndex]}`);
                 
-                // Special case handling for common experience images
+                // Determine screen size for responsive images - high quality for modals
+                const screenWidth = window.innerWidth;
+                const size = screenWidth < 768 ? 'medium' : 'large'; // Use higher quality for modal
+                
+                // Special case handling for common experience images with WebP optimized versions
                 if (originalSrc.toLowerCase().includes('husky')) {
-                  target.src = '/images/Huskys/Husky.jpg';
+                  // Try WebP if supported
+                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                    target.src = `/images/Huskys/optimized/Husky-${size}.webp`;
+                  } else {
+                    target.src = `/images/Huskys/optimized/Husky-${size}.jpeg`;
+                  }
                 } else if (originalSrc.toLowerCase().includes('snowmobile')) {
-                  target.src = '/images/Snowmobile/Snowmobile.jpg';
+                  // Try WebP if supported
+                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                    target.src = `/images/Snowmobile/optimized/Snowmobile-${size}.webp`;
+                  } else {
+                    target.src = `/images/Snowmobile/optimized/Snowmobile-${size}.jpeg`;
+                  }
                 } else if (originalSrc.toLowerCase().includes('ice kart') || originalSrc.toLowerCase().includes('kart')) {
-                  target.src = '/images/ice-kart.jpg';
+                  // Try WebP if supported
+                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                    target.src = `/images/optimized/ice-kart-${size}.webp`;
+                  } else {
+                    target.src = `/images/optimized/ice-kart-${size}.jpg`;
+                  }
                 } else if (originalSrc.toLowerCase().includes('fishing')) {
-                  target.src = '/images/Ice-Fishing.jpg';
+                  // Try WebP if supported
+                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                    target.src = `/images/optimized/Ice-Fishing-${size}.webp`;
+                  } else {
+                    target.src = `/images/optimized/Ice-Fishing-${size}.jpg`;
+                  }
                 } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side')) {
-                  target.src = '/images/buggy.jpg';
+                  // Try WebP if supported
+                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                    target.src = `/images/optimized/buggy-${size}.webp`;
+                  } else {
+                    target.src = `/images/optimized/buggy-${size}.jpg`;
+                  }
                 } else if (originalSrc.toLowerCase().includes('drift')) {
-                  target.src = '/images/Drifting.jpg';
+                  // Try WebP if supported
+                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                    target.src = `/images/optimized/drifting-${size}.webp`;
+                  } else {
+                    target.src = `/images/optimized/drifting-${size}.jpg`;
+                  }
+                } else if (originalSrc.toLowerCase().includes('jayjays') || originalSrc.toLowerCase().includes('restaurant')) {
+                  // Try WebP if supported
+                  if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                    target.src = `/images/restaurant/optimized/jayjays-exterior-${size}.webp`;
+                  } else {
+                    target.src = `/images/restaurant/optimized/jayjays-exterior-${size}.jpg`;
+                  }
                 } else {
                   // If original fails too, use fallback
                   target.src = '/images/TXA_fallback.jpg';
@@ -536,7 +580,10 @@ export function ExperiencesSection() {
                 <div className="relative h-[225px] overflow-hidden">
                   {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
-                    src={getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { quality: 'medium' })}
+                    src={getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { 
+                      quality: 'medium',
+                      forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
+                    })}
                     alt={experience.title} 
                     loading={experience.id > 3 ? "lazy" : "eager"} /* Lazy load images that are likely below the fold */
                     decoding="async"
@@ -547,19 +594,60 @@ export function ExperiencesSection() {
                       const originalSrc = experience.image;
                       console.warn(`Error loading experience image: ${originalSrc}`);
                       
-                      // Special case handling for common experience images
+                      // Determine screen size for responsive images
+                      const screenWidth = window.innerWidth;
+                      const size = screenWidth < 768 ? 'small' : 'medium';
+                      
+                      // Special case handling for common experience images with WebP optimized versions
                       if (originalSrc.toLowerCase().includes('husky')) {
-                        target.src = '/images/Huskys/Husky.jpg';
+                        // Try WebP if supported
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/Huskys/optimized/Husky-${size}.webp`;
+                        } else {
+                          target.src = `/images/Huskys/optimized/Husky-${size}.jpeg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('snowmobile')) {
-                        target.src = '/images/Snowmobile/Snowmobile.jpg';
+                        // Try WebP if supported
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/Snowmobile/optimized/Snowmobile-${size}.webp`;
+                        } else {
+                          target.src = `/images/Snowmobile/optimized/Snowmobile-${size}.jpeg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('ice kart') || originalSrc.toLowerCase().includes('kart')) {
-                        target.src = '/images/ice-kart.jpg';
+                        // Try WebP if supported
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/optimized/ice-kart-${size}.webp`;
+                        } else {
+                          target.src = `/images/optimized/ice-kart-${size}.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('fishing')) {
-                        target.src = '/images/Ice-Fishing.jpg';
+                        // Try WebP if supported
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/optimized/Ice-Fishing-${size}.webp`;
+                        } else {
+                          target.src = `/images/optimized/Ice-Fishing-${size}.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side')) {
-                        target.src = '/images/buggy.jpg';
+                        // Try WebP if supported
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/optimized/buggy-${size}.webp`;
+                        } else {
+                          target.src = `/images/optimized/buggy-${size}.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('drift')) {
-                        target.src = '/images/Drifting.jpg';
+                        // Try WebP if supported
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/optimized/drifting-${size}.webp`;
+                        } else {
+                          target.src = `/images/optimized/drifting-${size}.jpg`;
+                        }
+                      } else if (originalSrc.toLowerCase().includes('jayjays') || originalSrc.toLowerCase().includes('restaurant')) {
+                        // Try WebP if supported
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/restaurant/optimized/jayjays-exterior-${size}.webp`;
+                        } else {
+                          target.src = `/images/restaurant/optimized/jayjays-exterior-${size}.jpg`;
+                        }
                       } else {
                         // If original fails too, use fallback
                         target.src = '/images/TXA_fallback.jpg';
