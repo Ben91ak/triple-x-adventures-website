@@ -104,7 +104,7 @@ export function RestaurantSection() {
             <div className="relative z-10 transform-gpu h-full glass-card border border-white/10 shadow-lg rounded-xl overflow-hidden flex flex-col">
               <div className="overflow-hidden flex-grow-0">
                 <img 
-                  src="/images/restaurant/jayjays-exterior.jpg" 
+                  src="/images/restaurant/Restaurant 1_result.webp" 
                   alt={content.imageAlt1} 
                   className="w-full h-[380px] object-cover object-center transition-transform duration-500 group-hover:scale-105 transform-gpu"
                   loading="eager"
@@ -115,7 +115,7 @@ export function RestaurantSection() {
               <div className="flex gap-4 p-6">
                 <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-44">
                   <img 
-                    src="/images/restaurant/dish.jpg" 
+                    src="/images/restaurant/Restaurant 2_result.webp" 
                     alt={content.imageAlt2} 
                     className="w-full h-full object-cover object-center rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
@@ -125,7 +125,7 @@ export function RestaurantSection() {
                 </div>
                 <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-44">
                   <img 
-                    src="/images/restaurant/meat-preparation.jpg" 
+                    src="/images/restaurant/Restaurant 3_result.webp" 
                     alt={content.imageAlt3} 
                     className="w-full h-full object-cover object-center rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
