@@ -260,32 +260,24 @@ export function getOptimizedImageSrc(
   const fileNameWithoutExt = fileName.split('.')[0];
   
   // Path normalization - handle various path inconsistencies
-  // Convert uppercase folder names to lowercase
-  if (src.includes('/images/Huskys/')) {
-    // Update path to match actual structure
-    const fileName = src.split('/').pop() || '';
-    const fileNameWithoutExt = fileName.split('.')[0];
-    
-    // Correct path structure 
-    return `/images/husky/${fileNameWithoutExt.toLowerCase()}.jpg`;
+  // Fixed paths for adventure images using the original asset versions we've copied
+  if (src.includes('/images/Huskys/') || src.toLowerCase().includes('husky')) {
+    // Use the direct path to the image we've copied from assets
+    return '/images/Huskys/Husky.jpg';
   }
   
-  if (src.includes('/images/Snowmobile/')) {
-    // Update path to match actual structure 
-    const fileName = src.split('/').pop() || '';
-    const fileNameWithoutExt = fileName.split('.')[0];
-    
-    // Correct path structure
-    return `/images/snowmobile/${fileNameWithoutExt.toLowerCase()}.jpg`;
+  if (src.includes('/images/Snowmobile/') || src.toLowerCase().includes('snowmobile')) {
+    // Use the direct path to the image we've copied from assets
+    return '/images/Snowmobile/Snowmobile.jpg';
   }
   
   // Special cases for specific files with spaces
-  if (src.includes('Ice Kart.jpg')) {
+  if (src.includes('Ice Kart') || src.includes('ice-kart') || src.includes('Ice-Kart')) {
     return '/images/ice-kart.jpg';
   }
   
-  if (src.includes('Ice Fishing.jpg') || src.includes('Ice-Fishing.jpg')) {
-    return '/images/ice-fishing.jpg';
+  if (src.includes('Ice Fishing') || src.includes('Ice-Fishing') || src.includes('ice-fishing')) {
+    return '/images/Ice-Fishing.jpg';
   }
   
   if (src.includes('Side By Side Buggy Drifting.jpg') || src.includes('Side-By-Side-Buggy-Drifting.jpg')) {

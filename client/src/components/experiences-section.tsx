@@ -167,14 +167,24 @@ function ExperienceDetailModal({
                 const originalSrc = gallery[activeImageIndex];
                 console.warn(`Error loading modal image: ${gallery[activeImageIndex]}`);
                 
-                // If using optimized version, fall back to original
-                if (target.src !== originalSrc) {
-                  target.src = originalSrc;
+                // Special case handling for common experience images
+                if (originalSrc.toLowerCase().includes('husky')) {
+                  target.src = '/images/Huskys/Husky.jpg';
+                } else if (originalSrc.toLowerCase().includes('snowmobile')) {
+                  target.src = '/images/Snowmobile/Snowmobile.jpg';
+                } else if (originalSrc.toLowerCase().includes('ice kart') || originalSrc.toLowerCase().includes('kart')) {
+                  target.src = '/images/ice-kart.jpg';
+                } else if (originalSrc.toLowerCase().includes('fishing')) {
+                  target.src = '/images/Ice-Fishing.jpg';
+                } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side')) {
+                  target.src = '/images/buggy.jpg';
+                } else if (originalSrc.toLowerCase().includes('drift')) {
+                  target.src = '/images/Drifting.jpg';
                 } else {
                   // If original fails too, use fallback
                   target.src = '/images/TXA_fallback.jpg';
-                  target.onerror = null; // Prevent infinite error loops
                 }
+                target.onerror = null; // Prevent infinite error loops
               }}
             />
             
@@ -537,14 +547,24 @@ export function ExperiencesSection() {
                       const originalSrc = experience.image;
                       console.warn(`Error loading experience image: ${originalSrc}`);
                       
-                      // If using optimized version, fall back to original
-                      if (target.src !== originalSrc) {
-                        target.src = originalSrc;
+                      // Special case handling for common experience images
+                      if (originalSrc.toLowerCase().includes('husky')) {
+                        target.src = '/images/Huskys/Husky.jpg';
+                      } else if (originalSrc.toLowerCase().includes('snowmobile')) {
+                        target.src = '/images/Snowmobile/Snowmobile.jpg';
+                      } else if (originalSrc.toLowerCase().includes('ice kart') || originalSrc.toLowerCase().includes('kart')) {
+                        target.src = '/images/ice-kart.jpg';
+                      } else if (originalSrc.toLowerCase().includes('fishing')) {
+                        target.src = '/images/Ice-Fishing.jpg';
+                      } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side')) {
+                        target.src = '/images/buggy.jpg';
+                      } else if (originalSrc.toLowerCase().includes('drift')) {
+                        target.src = '/images/Drifting.jpg';
                       } else {
                         // If original fails too, use fallback
                         target.src = '/images/TXA_fallback.jpg';
-                        target.onerror = null; // Prevent infinite error loops
                       }
+                      target.onerror = null; // Prevent infinite error loops
                     }}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
