@@ -116,6 +116,23 @@ function ExperienceDetailModal({
     }
   }, [activeImageIndex, isOpen]);
   
+  // Preload gallery images for smoother transitions
+  // This hook needs to be before any early returns
+  useEffect(() => {
+    // Preload all gallery images immediately when modal opens
+    if (isOpen && experience.gallery && experience.gallery.length > 0) {
+      const galleryToUse = experience.gallery;
+      
+      galleryToUse.forEach((imagePath, index) => {
+        // Skip the active image since it's already loaded in the visible DOM
+        if (index !== activeImageIndex) {
+          const img = new Image();
+          img.src = imagePath;
+        }
+      });
+    }
+  }, [isOpen, experience.gallery, activeImageIndex]);
+  
   // Exit early if the modal is not open
   if (!isOpen) return null;
   
@@ -234,25 +251,6 @@ function ExperienceDetailModal({
     const galleryPaths = experience.gallery || [experience.image];
     gallery = galleryPaths.map(fixImagePath);
   }
-  
-  // Preload gallery images for smoother transitions
-  useEffect(() => {
-    // Preload all gallery images immediately when modal opens
-    if (isOpen && gallery.length > 0) {
-      console.log('Gallery images for current experience:', gallery);
-      
-      gallery.forEach((imagePath, index) => {
-        // Skip the active image since it's already loaded in the visible DOM
-        if (index !== activeImageIndex) {
-          const img = new Image();
-          img.src = imagePath;
-          console.log(`Preloading gallery image ${index}: ${imagePath}`);
-        } else {
-          console.log(`Current active image ${index}: ${imagePath}`);
-        }
-      });
-    }
-  }, [isOpen, gallery.length, activeImageIndex]);
   
   // Navigation for next/previous image
   const nextImage = () => {
