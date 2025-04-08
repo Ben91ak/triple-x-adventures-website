@@ -29,7 +29,7 @@ const introContentByLanguage = {
   },
   de: {
     title: "Nicht nur ein weiteres Tourunternehmen",
-    description: "Triple X Adventures bietet authentische arktische Erlebnisse, verwurzelt in Schwedisch-Lappland. Mit Sitz in Akkavare nahe Arvidsjaur verbinden wir Nervenkitzel, Komfort und Authentizität in jedem Abenteuer. Ob beim Fahren durch schneebedeckte Wälder, beim Essen rund um ein knisterndes offenes Feuer oder beim Aufenthalt in unseren erstklassigen Unterkünften – Sie werden mit Geschichten und nicht nur mit Erinnerungen nach Hause gehen.",
+    description: "Triple X Adventures bietet authentische arktische Erlebnisse, verwurzelt in Schwedisch-Lappland. Mit Sitz in Arvidsjaur nahe dem Polarkreis verbinden wir Nervenkitzel, Komfort und Authentizität in jedem Abenteuer. Ob beim Fahren durch schneebedeckte Wälder, beim Essen rund um ein knisterndes offenes Feuer oder beim Aufenthalt in unseren erstklassigen Unterkünften – Sie werden mit Geschichten und nicht nur mit Erinnerungen nach Hause gehen.",
     features: [
       {
         icon: "users",
@@ -50,7 +50,7 @@ const introContentByLanguage = {
   },
   sv: {
     title: "Inte bara ett till turföretag",
-    description: "Triple X Adventures erbjuder autentiska arktiska upplevelser med rötter i Svenska Lappland. Med bas i Akkavare nära Arvidsjaur kombinerar vi spänning, komfort och autenticitet i varje äventyr. Oavsett om det handlar om att åka genom snötäckta skogar, äta runt en sprakande öppen eld eller bo i våra förstklassiga boenden, kommer du att lämna med berättelser, inte bara minnen.",
+    description: "Triple X Adventures erbjuder autentiska arktiska upplevelser med rötter i Svenska Lappland. Med bas i Arvidsjaur nära Polcirkeln kombinerar vi spänning, komfort och autenticitet i varje äventyr. Oavsett om det handlar om att åka genom snötäckta skogar, äta runt en sprakande öppen eld eller bo i våra förstklassiga boenden, kommer du att lämna med berättelser, inte bara minnen.",
     features: [
       {
         icon: "users",
