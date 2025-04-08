@@ -98,17 +98,25 @@ function ExperienceDetailModal({
     };
   }, [isOpen, onClose]);
   
+  // Declare variables and functions that will be used if the modal is open
+  // Important: All hooks must be called unconditionally, before any early returns
+  
   // Reset active image index when experience changes
   useEffect(() => {
-    setActiveImageIndex(0);
-    setIsImageLoading(true); // Reset loading state for new experience
-  }, [experience]);
+    if (isOpen) {
+      setActiveImageIndex(0);
+      setIsImageLoading(true); // Reset loading state for new experience
+    }
+  }, [experience, isOpen]);
   
   // Reset loading state on image change
   useEffect(() => {
-    setIsImageLoading(true);
-  }, [activeImageIndex]);
+    if (isOpen) {
+      setIsImageLoading(true);
+    }
+  }, [activeImageIndex, isOpen]);
   
+  // Exit early if the modal is not open
   if (!isOpen) return null;
   
   // Fix image paths if needed
@@ -204,7 +212,7 @@ function ExperienceDetailModal({
         }
       });
     }
-  }, [isOpen, gallery.length]);
+  }, [isOpen, gallery.length, activeImageIndex]);
   
   // Navigation for next/previous image
   const nextImage = () => {
