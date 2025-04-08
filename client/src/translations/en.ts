@@ -35,12 +35,12 @@ export const en = {
         id: 1,
         title: "Snowmobile Adventure",
         description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. Choose from 2hr, 4hr & 6hr tours for your perfect adventure.",
-        image: "/images/Snowmobile/Snowmobile.jpg",
+        image: "/images/Snowmobile/Snowmobile 1_result.webp",
         gallery: [
-          "/images/Snowmobile/Snowmobile.jpg",
-          "/images/Snowmobile/Snowmobile 2.jpg",
-          "/images/Snowmobile/Snowmobile 3.jpg",
-          "/images/Snowmobile/Snwomobile 4.jpg"
+          "/images/Snowmobile/Snowmobile 1_result.webp",
+          "/images/Snowmobile/Snowmobile 2_result.webp",
+          "/images/Snowmobile/Snowmobile 3_result.webp",
+          "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
         fullDescription: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.\n\n━━━ PICK YOUR ADVENTURE ━━━\n\n🔸 2-HOUR BACKCOUNTRY TOUR\nGreat if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 4-HOUR BACKCOUNTRY TOUR\nExplore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 6-HOUR BACKCOUNTRY ADVENTURE\nThe ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.\n• One-seater snowmobile\n• Two-seater available on request\n\n━━━ IMPORTANT INFORMATION ━━━\n\n• Children can join as passengers, making it perfect for family fun\n• Minimum age for drivers: 18 years with valid B driver's license\n• Two-seater snowmobiles available for families or couples\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMore than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!",
         tag: {

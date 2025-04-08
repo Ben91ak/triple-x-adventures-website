@@ -35,12 +35,12 @@ export const sv = {
         id: 1,
         title: "Snöskoter Äventyr",
         description: "Kör genom orörd snö i Svenska Lappland med toppmoderna Ski-doo skotrar. Välj mellan 2-, 4- eller 6-timmars turer för ditt perfekta äventyr.",
-        image: "/images/Snowmobile/Snowmobile.jpg",
+        image: "/images/Snowmobile/Snowmobile 1_result.webp",
         gallery: [
-          "/images/Snowmobile/Snowmobile.jpg",
-          "/images/Snowmobile/Snowmobile 2.jpg",
-          "/images/Snowmobile/Snowmobile 3.jpg",
-          "/images/Snowmobile/Snwomobile 4.jpg"
+          "/images/Snowmobile/Snowmobile 1_result.webp",
+          "/images/Snowmobile/Snowmobile 2_result.webp",
+          "/images/Snowmobile/Snowmobile 3_result.webp",
+          "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
         fullDescription: "Känn pirret när du navigerar genom orörd snö och fantastiska vinterlandskap. Ta in frisk arktisk luft och njut av vackra vyer över Svenska Lappland. Våra turer är designade för att låta dig uppleva magien i området med vänliga, lokala guider som visar dig speciella platser och hjälper dig att skapa fantastiska minnen. Vi använder de senaste Ski-doo Backcountry modellerna som gör din resa säker, bekväm och rolig.\n\n━━━ VÄLJ DITT ÄVENTYR ━━━\n\n🔸 2-TIMMARS BACKCOUNTRY TUR\nPerfekt för dig som söker en kort, spännande utflykt i vildmarken. Inkluderar te och en god munsbit.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n🔸 4-TIMMARS BACKCOUNTRY TUR\nDyk djupare in i naturen med extra tid att slappna av och njuta av vyerna. Ta en paus för te och en söt munsbit i vacker miljö.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n🔸 6-TIMMARS BACKCOUNTRY ÄVENTYR\nDet ultimata äventyret för äventyrssökaren! Tillbringa dagen med att utforska olika terrängtyper och hisnande vyer. Denna tur inkluderar te, en söt munsbit och en läcker utomhuslunch.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n━━━ VIKTIG INFORMATION ━━━\n\n• Barn kan delta som passagerare, vilket gör detta perfekt för familjekul\n• Minimiålder för förare: 18 år med giltigt B-körkort\n• Dubbelskotrar tillgängliga för familjer eller par\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMer än bara en åktur - det handlar om oförglömliga stunder och spännande äventyr i Lapplands vackra vildmark!",
         tag: {

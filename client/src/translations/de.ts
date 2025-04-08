@@ -35,12 +35,12 @@ export const de = {
         id: 1,
         title: "Snowmobile Abenteuer",
         description: "Fahren Sie mit modernen Ski-doo Modellen durch verschneiten Lappland. Wählen Sie aus 2-, 4- oder 6-Stunden-Touren für Ihr perfektes Abenteuer.",
-        image: "/images/Snowmobile/Snowmobile.jpg",
+        image: "/images/Snowmobile/Snowmobile 1_result.webp",
         gallery: [
-          "/images/Snowmobile/Snowmobile.jpg",
-          "/images/Snowmobile/Snowmobile 2.jpg",
-          "/images/Snowmobile/Snowmobile 3.jpg",
-          "/images/Snowmobile/Snwomobile 4.jpg"
+          "/images/Snowmobile/Snowmobile 1_result.webp",
+          "/images/Snowmobile/Snowmobile 2_result.webp",
+          "/images/Snowmobile/Snowmobile 3_result.webp",
+          "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
         fullDescription: "Spüren Sie die Aufregung, während Sie über unberührten Schnee und wunderschöne Winterlandschaften fahren. Genießen Sie die frische arktische Luft und atemberaubende Ausblicke auf Schwedisch-Lappland. Unsere Touren sind so konzipiert, dass Sie die Magie der Gegend mit freundlichen, lokalen Guides erleben können, die Ihnen besondere Orte zeigen und Ihnen helfen, tolle Erinnerungen zu schaffen. Wir verwenden die neuesten Ski-doo Backcountry Adrenalin-Modelle, die Ihre Fahrt sicher, komfortabel und spaßig machen.\n\n━━━ WÄHLEN SIE IHR ABENTEUER ━━━\n\n🔸 2-STUNDEN BACKCOUNTRY TOUR\nIdeal, wenn Sie einen kurzen, aufregenden Ausflug in die Wildnis suchen. Inklusive Tee und einem leckeren Snack.\n• Ein-Sitzer Schneemobil\n• Zwei-Sitzer auf Anfrage verfügbar\n\n🔸 4-STUNDEN BACKCOUNTRY TOUR\nTauchen Sie tiefer in die Natur ein, mit zusätzlicher Zeit zum Entspannen und Genießen der Ausblicke. Machen Sie eine Pause für Tee und einen süßen Snack in wunderschöner Umgebung.\n• Ein-Sitzer Schneemobil\n• Zwei-Sitzer auf Anfrage verfügbar\n\n🔸 6-STUNDEN BACKCOUNTRY ABENTEUER\nDas ultimative Erlebnis für Abenteuerliebhaber! Verbringen Sie den Tag damit, verschiedene Terrains und atemberaubende Ausblicke zu erkunden. Diese Tour beinhaltet Tee, einen süßen Snack und ein leckeres Outdoor-Mittagessen.\n• Ein-Sitzer Schneemobil\n• Zwei-Sitzer auf Anfrage verfügbar\n\n━━━ WICHTIGE INFORMATIONEN ━━━\n\n• Kinder können als Passagiere teilnehmen, was es perfekt für Familienspaß macht\n• Mindestalter für Fahrer: 18 Jahre mit gültigem B-Führerschein\n• Zwei-Sitzer Schneemobile verfügbar für Familien oder Paare\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMehr als nur eine Fahrt - es geht um unvergessliche Momente und aufregende Abenteuer in der wunderschönen Wildnis Lapplands!",
         tag: {

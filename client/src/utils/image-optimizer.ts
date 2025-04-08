@@ -296,7 +296,12 @@ export function getOptimizedImageSrc(
   }
   
   if (src.includes('/images/Snowmobile/') || src.toLowerCase().includes('snowmobile')) {
-    // Check WebP support and use the optimized version with appropriate size
+    // Check if path already includes the _result.webp suffix
+    if (src.includes('_result.webp')) {
+      return src; // Already using the preferred format, don't modify it
+    }
+    
+    // Check WebP support
     const useWebP = formatSupportCache.webp === true;
     const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
     const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
@@ -309,10 +314,39 @@ export function getOptimizedImageSrc(
       size = 'large';
     }
     
-    if (useWebP) {
-      return `/images/Snowmobile/optimized/Snowmobile-${size}.webp`;
+    // If it's not one of our new _result.webp files, check file numbering
+    if (src.includes('Snowmobile.jpg') || src.includes('Snowmobile 1')) {
+      // Main snowmobile image
+      if (useWebP) {
+        return `/images/Snowmobile/Snowmobile 1_result.webp`;
+      } else {
+        return `/images/Snowmobile/Snowmobile.jpg`;
+      }
+    } else if (src.includes('Snowmobile 2')) {
+      if (useWebP) {
+        return `/images/Snowmobile/Snowmobile 2_result.webp`;
+      } else {
+        return `/images/Snowmobile/Snowmobile 2.jpg`;
+      }
+    } else if (src.includes('Snowmobile 3')) {
+      if (useWebP) {
+        return `/images/Snowmobile/Snowmobile 3_result.webp`;
+      } else {
+        return `/images/Snowmobile/Snowmobile 3.jpg`;
+      }
+    } else if (src.includes('Snowmobile 4') || src.includes('Snwomobile 4')) {
+      if (useWebP) {
+        return `/images/Snowmobile/Snowmobile 4_result.webp`;
+      } else {
+        return `/images/Snowmobile/Snowmobile 4.jpg`;
+      }
     } else {
-      return `/images/Snowmobile/optimized/Snowmobile-${size}.jpg`;
+      // Generic Snowmobile path using optimized version
+      if (useWebP) {
+        return `/images/Snowmobile/optimized/Snowmobile-${size}.webp`;
+      } else {
+        return `/images/Snowmobile/optimized/Snowmobile-${size}.jpg`;
+      }
     }
   }
   

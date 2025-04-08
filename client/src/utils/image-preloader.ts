@@ -161,11 +161,19 @@ function tryPathAlternatives(
       alternativePaths.push('/images/Husky.jpg');
     } 
     else if (baseName.includes('snowmobile')) {
+      // WebP versions first (preferable)
+      alternativePaths.push('/images/Snowmobile/Snowmobile 1_result.webp');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 3_result.webp');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 4_result.webp');
+      
+      // JPG fallbacks
       alternativePaths.push('/images/Snowmobile/Snowmobile.jpg');
       alternativePaths.push('/images/snowmobile.jpg');
       alternativePaths.push('/images/Snowmobile.jpg');
       alternativePaths.push('/images/Snowmobile/Snowmobile 2.jpg');
       alternativePaths.push('/images/Snowmobile/Snowmobile 3.jpg');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 4.jpg');
     }
     else if (baseName.includes('drift')) {
       alternativePaths.push('/images/drifting.jpg');
@@ -194,11 +202,19 @@ function tryPathAlternatives(
       alternativePaths.push('/images/Husky.jpg');
     } 
     else if (baseName.includes('snowmobile')) {
+      // WebP versions first (preferable)
+      alternativePaths.push('/images/Snowmobile/Snowmobile 1_result.webp');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 3_result.webp');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 4_result.webp');
+      
+      // JPG fallbacks
       alternativePaths.push('/images/Snowmobile/Snowmobile.jpg');
       alternativePaths.push('/images/experiences/snowmobile.jpg');
       alternativePaths.push('/images/Snowmobile.jpg');
       alternativePaths.push('/images/Snowmobile/Snowmobile 2.jpg');
       alternativePaths.push('/images/Snowmobile/Snowmobile 3.jpg');
+      alternativePaths.push('/images/Snowmobile/Snowmobile 4.jpg');
     }
     else if (baseName.includes('drift')) {
       alternativePaths.push('/images/experiences/drifting.jpg');
@@ -262,7 +278,6 @@ export function preloadExperienceImages() {
   const experienceImages = [
     // Primary images with verified paths
     '/images/Huskys/Husky.jpg',
-    '/images/Snowmobile/Snowmobile.jpg',
     '/images/Reindeers.jpg',
     
     // Images with both capitalization variants
@@ -282,17 +297,43 @@ export function preloadExperienceImages() {
     '/images/experiences/drifting.jpg',
     '/images/experiences/ice-kart.jpg',
     '/images/experiences/helicopter.jpg',
-    '/images/experiences/buggy.jpg',
-    
-    // Alternative snowmobile images
-    '/images/Snowmobile/Snowmobile 2.jpg',
-    '/images/Snowmobile/Snowmobile 3.jpg'
+    '/images/experiences/buggy.jpg'
   ];
   
-  // Simply preload the images
+  // WebP Snowmobile images with result suffix
+  const webpSnowmobileImages = [
+    '/images/Snowmobile/Snowmobile 1_result.webp',
+    '/images/Snowmobile/Snowmobile 2_result.webp',
+    '/images/Snowmobile/Snowmobile 3_result.webp',
+    '/images/Snowmobile/Snowmobile 4_result.webp'
+  ];
+  
+  // Fallback JPG Snowmobile images
+  const jpgSnowmobileImages = [
+    '/images/Snowmobile/Snowmobile.jpg',
+    '/images/Snowmobile/Snowmobile 2.jpg',
+    '/images/Snowmobile/Snowmobile 3.jpg',
+    '/images/Snowmobile/Snowmobile 4.jpg'
+  ];
+  
+  // WebP versions first (higher priority)
+  webpSnowmobileImages.forEach(path => {
+    preloadImage(path, {
+      priority: 'high'
+    });
+  });
+  
+  // Standard images next
   experienceImages.forEach(path => {
     preloadImage(path, {
       priority: 'high'
+    });
+  });
+  
+  // JPG fallbacks last
+  jpgSnowmobileImages.forEach(path => {
+    preloadImage(path, {
+      priority: 'medium'
     });
   });
 }
