@@ -169,6 +169,15 @@ function ExperienceDetailModal({
       '/images/Ice Kart/Icekart 4_result.webp'
     ];
     console.log('Using hardcoded WebP gallery for Ice Kart:', gallery);
+  } else if (experience.title.toLowerCase().includes('reindeer') || experience.title.toLowerCase().includes('reindeers')) {
+    // Skip path resolution and directly use WebP files for Reindeers
+    gallery = [
+      '/images/Reindeers/Reindeers 1_result.webp',
+      '/images/Reindeers/Reindeers 2_result.webp',
+      '/images/Reindeers/Reindeers 3_result.webp',
+      '/images/Reindeers/Reindeers 5_result.webp'
+    ];
+    console.log('Using hardcoded WebP gallery for Reindeers:', gallery);
   } else {
     // Default gallery to the main image if no gallery is provided
     const galleryPaths = experience.gallery || [experience.image];
@@ -220,7 +229,8 @@ function ExperienceDetailModal({
                    experience.title.toLowerCase().includes('restaurant') ||
                    experience.title.toLowerCase().includes('ice kart') ||
                    experience.title.toLowerCase().includes('icekart') ||
-                   experience.title.toLowerCase().includes('kart')
+                   experience.title.toLowerCase().includes('kart') ||
+                   experience.title.toLowerCase().includes('reindeer')
                 ? gallery[activeImageIndex] // For specialized experiences, use the direct WebP file paths
                 : getOptimizedImageSrc(gallery[activeImageIndex], { 
                     quality: 'high',
@@ -316,6 +326,19 @@ function ExperienceDetailModal({
                   
                   target.src = `/images/JayJays Restaurant/Food ${foodNum}_result.webp`;
                   console.log('Fallback to:', `/images/JayJays Restaurant/Food ${foodNum}_result.webp`);
+                } else if (originalSrc.toLowerCase().includes('reindeer')) {
+                  console.log('Reindeer image failed to load:', originalSrc);
+                  // Extract the reindeer number or default to 1
+                  let reindeerNum = 1;
+                  const match = originalSrc.match(/Reindeers?\s*(\d+)/i);
+                  if (match && match[1]) {
+                    reindeerNum = parseInt(match[1], 10);
+                  }
+                  // Force to a known valid reindeer file that exists (1, 2, 3, or 5)
+                  if (![1, 2, 3, 5].includes(reindeerNum)) reindeerNum = 1;
+                  
+                  target.src = `/images/Reindeers/Reindeers ${reindeerNum}_result.webp`;
+                  console.log('Fallback to:', `/images/Reindeers/Reindeers ${reindeerNum}_result.webp`);
                 } else {
                   // If original fails too, use fallback
                   target.src = '/images/TXA_fallback.jpg';

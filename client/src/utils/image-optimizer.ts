@@ -411,6 +411,27 @@ export function getOptimizedImageSrc(
     return `/images/JayJays Restaurant/Food 1_result.webp`;
   }
   
+  if (src.includes('Reindeers') || src.toLowerCase().includes('reindeer')) {
+    // Check if path already includes the _result.webp suffix (direct WebP file)
+    if (src.includes('_result.webp')) {
+      return src; // Already using the preferred format, don't modify it
+    }
+    
+    // Check for Reindeers image patterns
+    if (src.includes('Reindeers 1') || src.includes('Reindeers1')) {
+      return `/images/Reindeers/Reindeers 1_result.webp`;
+    } else if (src.includes('Reindeers 2') || src.includes('Reindeers2')) {
+      return `/images/Reindeers/Reindeers 2_result.webp`;
+    } else if (src.includes('Reindeers 3') || src.includes('Reindeers3')) {
+      return `/images/Reindeers/Reindeers 3_result.webp`;
+    } else if (src.includes('Reindeers 5') || src.includes('Reindeers5')) {
+      return `/images/Reindeers/Reindeers 5_result.webp`;
+    }
+    
+    // Default to Reindeers 1 for generic reindeer references
+    return `/images/Reindeers/Reindeers 1_result.webp`;
+  }
+  
   // Handle common path pattern issues with experiences
   if (src.includes('experiences/') || src.includes('Experiences/')) {
     // Make path lowercase for consistency
