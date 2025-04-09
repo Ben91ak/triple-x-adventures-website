@@ -301,10 +301,11 @@ export function HeroSection() {
       };
     };
     
-    // Initialize video without delay for testing purposes
-    // (We would normally delay this to optimize the LCP)
-    const delayVideoSetup = setTimeout(() => {
-      console.log("Starting video setup...");
+    // Initialize video immediately without any delay
+    // This is a critical optimization to ensure fast video playback
+    console.log("Starting video setup immediately...");
+    // Use immediate execution instead of setTimeout
+    (function() {
       // Check for reduced motion preference
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
@@ -326,11 +327,10 @@ export function HeroSection() {
       // If isTitleVisible is true, it means the user has already seen content
       // Safe to start loading video now as LCP has already been registered
       setupVideo();
-    }, 0); // Load immediately for testing
+    })(); // Execute immediately
     
-    return () => {
-      clearTimeout(delayVideoSetup);
-    };
+    // No need for cleanup since we're using immediate execution
+    return () => {};
   }, [videoLoaded, videoError, isTitleVisible]);
 
   // Content based on language
