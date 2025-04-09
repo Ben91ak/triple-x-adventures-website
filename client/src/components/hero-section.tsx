@@ -84,7 +84,13 @@ export function HeroSection() {
     const setupVideo = () => {
       // More simplified video loading approach with error handling
       const videoElement = videoRef.current;
-      if (!videoElement) return;
+      if (!videoElement) {
+        console.error("Video element not found in the DOM");
+        return;
+      }
+      
+      // Log that we're setting up the video
+      console.log("Setting up video element:", videoElement);
       
       // Set video properties for better performance
       videoElement.playbackRate = 0.8;
@@ -295,9 +301,10 @@ export function HeroSection() {
       };
     };
     
-    // CRITICAL OPTIMIZATION: Delay video initialization until after first render
-    // This ensures the image is used for LCP calculation, not the video loading
+    // Initialize video without delay for testing purposes
+    // (We would normally delay this to optimize the LCP)
     const delayVideoSetup = setTimeout(() => {
+      console.log("Starting video setup...");
       // Check for reduced motion preference
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
@@ -319,7 +326,7 @@ export function HeroSection() {
       // If isTitleVisible is true, it means the user has already seen content
       // Safe to start loading video now as LCP has already been registered
       setupVideo();
-    }, 800); // Increased delay to ensure LCP completes first
+    }, 0); // Load immediately for testing
     
     return () => {
       clearTimeout(delayVideoSetup);
@@ -411,7 +418,7 @@ export function HeroSection() {
               loop 
               playsInline
               poster="/images/TXA_fallback_optimized.jpg"
-              preload="none" // Completely delay video loading initially
+              preload="auto" // Load video immediately for testing
               aria-label="Background video of Arctic adventures"
               aria-hidden="true" // Background video is decorative
               onLoadedMetadata={() => {
