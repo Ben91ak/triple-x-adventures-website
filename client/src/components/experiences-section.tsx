@@ -166,14 +166,14 @@ function ExperienceDetailModal({
   // For specific experiences, directly use the WebP files we know exist
   let gallery: string[] = [];
   if (experience.title.toLowerCase().includes('husky')) {
-    // Skip path resolution and directly use WebP files for husky
+    // Use new Husky.jpg and existing WebP files
     gallery = [
+      '/images/Huskys/Husky.jpg', // Use the new Husky.jpg as primary image
       '/images/Huskys/Husky 1_result.webp',
       '/images/Huskys/Husky 2_result.webp',
-      '/images/Huskys/Husky 3_result.webp',
-      '/images/Huskys/Husky 4_result.webp'
+      '/images/Huskys/Husky 3_result.webp'
     ];
-    console.log('Using hardcoded WebP gallery for Husky:', gallery);
+    console.log('Using updated gallery for Husky:', gallery);
   } else if (experience.title.toLowerCase().includes('snowmobile')) {
     // Skip path resolution and directly use WebP files for snowmobile
     gallery = [
@@ -352,17 +352,24 @@ function ExperienceDetailModal({
                 // Special case handling for common experience images with WebP optimized versions
                 if (originalSrc.toLowerCase().includes('husky')) {
                   console.log('Husky image failed to load:', originalSrc);
-                  // Extract the husky number or default to 1
-                  let huskyNum = 1;
-                  const match = originalSrc.match(/Husky\s*(\d+)/i);
-                  if (match && match[1]) {
-                    huskyNum = parseInt(match[1], 10);
-                  }
-                  // Force to a known valid husky file that exists
-                  if (huskyNum < 1 || huskyNum > 4) huskyNum = 1;
+                  // First try the new Husky.jpg as the primary fallback
+                  target.src = `/images/Huskys/Husky.jpg`;
+                  console.log('Fallback to primary image:', `/images/Huskys/Husky.jpg`);
                   
-                  target.src = `/images/Huskys/Husky ${huskyNum}_result.webp`;
-                  console.log('Fallback to:', `/images/Huskys/Husky ${huskyNum}_result.webp`);
+                  // Add an onerror handler to this image as well for a secondary fallback
+                  target.onerror = () => {
+                    // Extract the husky number or default to 1
+                    let huskyNum = 1;
+                    const match = originalSrc.match(/Husky\s*(\d+)/i);
+                    if (match && match[1]) {
+                      huskyNum = parseInt(match[1], 10);
+                    }
+                    // Force to a known valid husky file that exists
+                    if (huskyNum < 1 || huskyNum > 4) huskyNum = 1;
+                    
+                    target.src = `/images/Huskys/Husky ${huskyNum}_result.webp`;
+                    console.log('Secondary fallback to:', `/images/Huskys/Husky ${huskyNum}_result.webp`);
+                  };
                 } else if (originalSrc.toLowerCase().includes('snowmobile')) {
                   console.log('Snowmobile image failed to load:', originalSrc);
                   // Extract the snowmobile number or default to 1
@@ -882,13 +889,18 @@ export function ExperiencesSection() {
                       
                       // Special case handling for common experience images with WebP optimized versions
                       if (originalSrc.toLowerCase().includes('husky')) {
-                        // Use WebP if supported, otherwise try JPG
+                        // Use the new Husky.jpg as the main image
                         console.log('Husky card image fallback', originalSrc);
-                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                          target.src = `/images/Huskys/Husky 1_result.webp`;
-                        } else {
-                          target.src = `/images/Huskys/Husky.jpg`;
-                        }
+                        target.src = `/images/Huskys/Husky.jpg`;
+                        
+                        // Add a secondary fallback
+                        target.onerror = () => {
+                          if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                            target.src = `/images/Huskys/Husky 1_result.webp`;
+                          } else {
+                            target.src = `/images/Huskys/Husky.jpg`;
+                          }
+                        };
                       } else if (originalSrc.toLowerCase().includes('snowmobile')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
