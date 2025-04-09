@@ -172,7 +172,7 @@ export function HeroSection() {
       
       // Only do the fetch check if video isn't already cached
       if (!isVideoCached) {
-        // Check if the file exists by making a HEAD request
+        // Check if the file exists first to make sure it's accessible
         fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' })
           .then(response => {
             console.log("Video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
@@ -184,13 +184,24 @@ export function HeroSection() {
             } else {
               console.log("Video file exists and is ready to be loaded");
               
+              // Initialize the video manually with a direct source
+              if (videoElement.getElementsByTagName('source').length > 0) {
+                const sourceElement = videoElement.getElementsByTagName('source')[0];
+                sourceElement.src = "/videos/TXA Teaser 2025 Homepage.mp4";
+              }
+              
+              // Force the browser to recognize the new source
+              videoElement.load();
+              
               // Now that we know the video exists, start loading it
               videoElement.preload = "auto";
               
               // Try to play the video
-              videoElement.play().catch((err) => {
-                console.log("Autoplay failed, will require user interaction:", err);
-              });
+              setTimeout(() => {
+                videoElement.play().catch((err) => {
+                  console.log("Autoplay failed, will require user interaction:", err);
+                });
+              }, 100); // Small delay to ensure load() completes
             }
           })
           .catch((error) => {
@@ -199,10 +210,26 @@ export function HeroSection() {
           });
       } else {
         // Video is cached, so we can start loading immediately
+        console.log("Video is cached, loading immediately");
+        
+        // Make sure source is set correctly even for cached videos
+        if (videoElement.getElementsByTagName('source').length > 0) {
+          const sourceElement = videoElement.getElementsByTagName('source')[0];
+          sourceElement.src = "/videos/TXA Teaser 2025 Homepage.mp4";
+        }
+        
+        // Force the browser to recognize the source
+        videoElement.load();
+        
+        // Set preload to auto to start loading
         videoElement.preload = "auto";
-        videoElement.play().catch(() => {
-          // Silent catch - we don't want to show error here
-        });
+        
+        // Try to play after a short delay to ensure load completes
+        setTimeout(() => {
+          videoElement.play().catch(() => {
+            // Silent catch - we don't want to show error here
+          });
+        }, 100);
       }
       
       // Add event listeners with passive option for better performance
