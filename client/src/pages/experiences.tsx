@@ -5,7 +5,7 @@ import { useTranslation } from "@/translations";
 import { GlobalBackground } from "@/components/layout/background-fixed";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { ExperiencesSection } from "@/components/experiences-section";
+import { ExperiencesSection } from "@/components/experiences-section-new";
 import { CTASection } from "@/components/cta-section";
 import SectionLoader from "../components/ui/section-loader";
 import { optimizePageImages } from "@/utils/performance-optimizer";
