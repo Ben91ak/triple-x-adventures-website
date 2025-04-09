@@ -280,7 +280,7 @@ export function HeroSection() {
   const content = heroContent[language];
 
   return (
-    <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16">
+    <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16" aria-labelledby="hero-heading">
       {/* BASE LAYER - Using the global background - complemented with section-specific elements */}
       <div className="absolute inset-0 overflow-hidden transform-gpu will-change-transform" style={{ zIndex: 5 }}>
         {/* Using the global background - complemented with a subtle overlay */}
@@ -321,6 +321,9 @@ export function HeroSection() {
                 }}
                 loading="eager"
                 decoding="sync"
+                fetchPriority="high"
+                width="1920"
+                height="1080"
               />
             </picture>
             
@@ -334,6 +337,8 @@ export function HeroSection() {
               playsInline
               poster="/images/TXA_fallback_optimized.jpg"
               preload="none" // Completely delay video loading initially
+              aria-label="Background video of Arctic adventures"
+              aria-hidden="true" // Background video is decorative
               onLoadedMetadata={() => {
                 // Once metadata is loaded, we can start loading the content
                 if (videoRef.current) {
@@ -369,7 +374,7 @@ export function HeroSection() {
                 type="video/mp4"
               />
               {/* Fallback text in case browser doesn't support video element */}
-              Your browser does not support the video tag.
+              <p>Your browser does not support HTML5 video playback.</p>
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
@@ -392,10 +397,10 @@ export function HeroSection() {
       </div>
       
       {/* Dark overlay for text contrast - reduced opacity for brighter video */}
-      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.2)' }}></div>
+      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.2)' }} aria-hidden="true"></div>
       
       {/* Grid pattern overlay - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 20 }}></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 20 }} aria-hidden="true"></div>
 
       {/* No transition overlay between sections - removed as requested */}
       
@@ -520,10 +525,20 @@ export function HeroSection() {
             className={`flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-2 md:mb-16 fade-in transform-gpu ${isButtonsVisible ? 'visible' : ''}`}
             ref={buttonsRef as React.RefObject<HTMLDivElement>}
           >
-            <a href="#pakete" className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-colors transform-gpu">
+            <a 
+              href="#pakete" 
+              className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-colors transform-gpu"
+              role="button"
+              aria-label="Explore adventures"
+            >
               {t.hero.cta}
             </a>
-            <a href="#contact" className="btn-ghost inline-flex items-center justify-center gap-2 text-sm uppercase tracking-wide font-medium transition-colors transform-gpu">
+            <a 
+              href="#contact" 
+              className="btn-ghost inline-flex items-center justify-center gap-2 text-sm uppercase tracking-wide font-medium transition-colors transform-gpu"
+              role="button"
+              aria-label="Contact us"
+            >
               {t.nav.contact}
             </a>
           </div>
