@@ -882,12 +882,8 @@ export function ExperiencesSection() {
                       
                       // Special case handling for common experience images with WebP optimized versions
                       if (originalSrc.toLowerCase().includes('husky')) {
-                        // Try WebP if supported
-                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                          target.src = `/images/Huskys/Husky 1_result.webp`;
-                        } else {
-                          target.src = `/images/Huskys/Husky.jpg`;
-                        }
+                        // Use WebP since we have those files
+                        target.src = `/images/Huskys/Husky 1_result.webp`;
                       } else if (originalSrc.toLowerCase().includes('snowmobile')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
