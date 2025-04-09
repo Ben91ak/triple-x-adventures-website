@@ -52,12 +52,12 @@ export const de = {
         id: 2,
         title: "Husky Schlittentour",
         description: "Führen Sie Ihr eigenes Hundeschlittenteam durch die atemberaubende arktische Wildnis. Wählen Sie zwischen passiv oder aktiv fahren auf 1,5-2 Stunden Touren.",
-        image: "/images/Huskys/Husky.jpg",
+        image: "/images/Huskys/Husky 1_result.webp",
         gallery: [
-          "/images/Huskys/Husky.jpg",
           "/images/Huskys/Husky 1_result.webp",
           "/images/Huskys/Husky 2_result.webp",
-          "/images/Huskys/Husky 3_result.webp"
+          "/images/Huskys/Husky 3_result.webp",
+          "/images/Huskys/Husky 4_result.webp"
         ],
         fullDescription: "Erleben Sie den Zauber einer Husky-Schlittentour!\n\nSpüren Sie den Nervenkitzel, Ihr eigenes Team aus begeisterten sibirischen und Alaska-Huskys durch unberührte, verschneite Landschaften zu führen. Nach einer informativen Einführung und Sicherheitseinweisung steuern Sie Ihren eigenen Schlitten, der von bis zu 12 eifrigen Huskys gezogen wird. Hören Sie, wie ihr aufgeregtes Bellen in konzentrierte Stille übergeht, während Sie durch die atemberaubende arktische Wildnis gleiten.\n\n━━━ WÄHLEN SIE IHR HUSKY-ABENTEUER ━━━\n\n• Passive Tour: Lehnen Sie sich zurück, entspannen Sie sich und genießen Sie die Fahrt! Bis zu 4 Gäste bequem in einem Schlitten, gefahren von einem erfahrenen Musher.\n\n• Aktive Tour: Wechseln Sie sich beim Fahren ab! Zwei Gäste pro Schlitten, einer fährt und einer sitzt. Tauschen Sie während der Tour die Plätze, um beide Erlebnisse vollständig zu genießen.\n\n━━━ TOUR-DETAILS ━━━\n\n• Routen: Maßgeschneiderte 10-15 km Pfade\n• Dauer: 1,5-2 Stunden\n• Schwierigkeit: Geeignet für alle Könnensstufen\n• Ausrüstung: Winterkleidung und Stiefel werden gestellt\n\nEin authentisches arktisches Abenteuer, das Sie tief mit der Natur verbindet und unvergessliche Erinnerungen hinterlässt!"
       },
