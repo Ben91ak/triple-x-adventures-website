@@ -870,14 +870,14 @@ export function ExperiencesSection() {
                   {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
                     src={experience.title.toLowerCase().includes('husky') 
-                        ? `/images/Huskys/Husky 1_result.webp` // Directly use the Husky 1_result.webp without optimization for Husky experience
+                        ? `/images/Huskys/Husky.jpg` // Use the direct JPG file for better compatibility
                         : getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { 
                             quality: 'medium',
                             forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
                           })
                     }
                     alt={experience.title} 
-                    loading={experience.id > 3 ? "lazy" : "eager"} /* Lazy load images that are likely below the fold */
+                    loading={experience.id > 3 ? "lazy" : "eager"}
                     decoding="async"
                     width="640" 
                     height="480"

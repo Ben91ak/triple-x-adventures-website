@@ -52,286 +52,50 @@ export function HeroSection() {
   });
   
   useEffect(() => {
-    // Check if the browser can handle video efficiently 
-    // or if we should use the image fallback
-    const checkVideoSupport = () => {
-      // On very low-end devices or with Data Saver enabled, don't load video at all
-      if ((navigator as any)?.connection?.saveData ||
-          (navigator as any)?.connection?.effectiveType === 'slow-2g') {
-        console.log("Using image fallback due to network conditions");
-        setVideoError(true);
-        return false;
-      }
-      
-      // Check if device is likely too slow for smooth video
-      const isMobileOrTablet = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      const isLowEndDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2;
-      
-      if (isMobileOrTablet && isLowEndDevice) {
-        console.log("Using image fallback due to low-end device detection");
-        setVideoError(true);
-        return false;
-      }
-      
-      return true;
+    // Simplified video loading
+    const videoElement = videoRef.current;
+    if (!videoElement) {
+      console.error("Video element not found in the DOM");
+      setVideoError(true);
+      return;
+    }
+    
+    console.log("Setting up video element");
+    
+    // Set video properties
+    videoElement.playbackRate = 0.8;
+    videoElement.preload = "auto";
+    
+    // Handle errors
+    const handleVideoError = () => {
+      console.error("Video failed to load:", videoElement ? videoElement.error : "No video element");
+      setVideoError(true);
     };
     
-    // Only proceed if video support is adequate
-    if (!checkVideoSupport()) return;
-    
-    // Early return - don't set up video until after we report LCP
-    // This is a critical optimization to ensure fast LCP times
-    const setupVideo = () => {
-      // More simplified video loading approach with error handling
-      const videoElement = videoRef.current;
-      if (!videoElement) {
-        console.error("Video element not found in the DOM");
-        return;
-      }
+    // Handle successful loading
+    const handleCanPlay = () => {
+      console.log("Video can play now");
+      setVideoLoaded(true);
       
-      // Log that we're setting up the video
-      console.log("Setting up video element:", videoElement);
-      
-      // Set video properties for better performance
-      videoElement.playbackRate = 0.8;
-      
-      // Use lower resolution on mobile - improves scrolling performance
-      if (window.innerWidth < 768) {
-        videoElement.setAttribute('disablePictureInPicture', 'true');
-        videoElement.setAttribute('disableRemotePlayback', 'true');
-      }
-      
-      // Define a timeout to limit how long we wait for video to load
-      let videoLoadTimeout: ReturnType<typeof setTimeout>;
-      
-      // Create a small timeout to fallback if video takes too long to load
-      // This ensures we're not holding up the LCP (Largest Contentful Paint)
-      videoLoadTimeout = setTimeout(() => {
-        // If video hasn't loaded in 2 seconds, show the placeholder immediately
-        if (!videoLoaded) {
-          setVideoLoaded(true); // Show the poster image clearly
-        }
-      }, 2000);
-      
-      // Handle video loading errors
-      const handleVideoError = () => {
-        console.log("Video failed to load, showing fallback animation");
-        console.error("Video error details:", videoElement ? videoElement.error : "No video element");
-        setVideoError(true);
-        clearTimeout(videoLoadTimeout);
-      };
-      
-      // Handle when video can play
-      const handleCanPlay = () => {
-        setVideoLoaded(true);
-        clearTimeout(videoLoadTimeout);
-      };
-      
-      // Optimize video playback performance
-      const handleVisibilityChange = () => {
-        if (document.hidden && videoElement) {
-          // Pause video when tab is not visible to save resources
-          videoElement.pause();
-        } else if (videoElement && videoElement.paused && !videoError) {
-          // Resume playback when tab becomes visible
-          videoElement.play().catch(() => {
-            // Silent catch - we don't want to show error here
-          });
-        }
-      };
-      
-      // Handle scrolling past hero section - using a more efficient throttled approach
-      let lastScrollTime = 0;
-      const handleScroll = () => {
-        // Throttle scroll handling for better performance
-        const now = Date.now();
-        if (now - lastScrollTime < 50) return; // 50ms throttle
-        lastScrollTime = now;
-        
-        // Only run this check when scrolling down (performance optimization)
-        if (window.scrollY > window.innerHeight && videoElement && !videoElement.paused) {
-          // Pause video when scrolled out of view
-          videoElement.pause();
-        } else if (window.scrollY < window.innerHeight / 2 && videoElement && videoElement.paused && !document.hidden && !videoError) {
-          // Resume playback when scrolled back into view
-          videoElement.play().catch(() => {
-            // Silent catch - we don't want to show error here
-          });
-        }
-      };
-      
-      // Instead of HEAD request, use the ResourceTiming API to check if video is cached
-      // This avoids an extra network request
-      let isVideoCached = false;
-      
-      if (window.performance && window.performance.getEntriesByType) {
-        const resources = window.performance.getEntriesByType('resource');
-        // Check for either the WebM or MP4 version
-        const videoUrls = ['/videos/TXA Teaser 2025 Homepage.webm', '/videos/TXA Teaser 2025 Homepage.mp4'];
-        
-        for (let i = 0; i < resources.length; i++) {
-          // Check if the resource matches any of our video URLs
-          if (videoUrls.some(url => resources[i].name.includes(url))) {
-            isVideoCached = true;
-            break;
-          }
-        }
-      }
-      
-      // Only do the fetch check if video isn't already cached
-      if (!isVideoCached) {
-        // Check if the WebM file exists first, as it's our preferred format
-        fetch("/videos/TXA Teaser 2025 Homepage.webm", { method: 'HEAD' })
-          .then(response => {
-            console.log("WebM video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
-            
-            if (!response.ok || (response.headers.get('Content-Length') === '0')) {
-              console.log("WebM not available, trying MP4 fallback");
-              
-              // Try MP4 fallback if WebM is not available
-              return fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' });
-            } else {
-              console.log("WebM video exists and is ready to be loaded");
-              
-              // Initialize the video with WebM source
-              if (videoElement.getElementsByTagName('source').length > 0) {
-                const webmSource = videoElement.getElementsByTagName('source')[0];
-                webmSource.src = "/videos/TXA Teaser 2025 Homepage.webm";
-                
-                // Make sure MP4 fallback is also set
-                if (videoElement.getElementsByTagName('source').length > 1) {
-                  const mp4Source = videoElement.getElementsByTagName('source')[1];
-                  mp4Source.src = "/videos/TXA Teaser 2025 Homepage.mp4";
-                }
-              }
-              
-              // Return a successful response to continue processing
-              return response;
-            }
-          })
-          .then(response => {
-            // Only needed if we had to fall back to MP4
-            if (response.url.includes('.mp4')) {
-              console.log("MP4 video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
-              
-              if (!response.ok || (response.headers.get('Content-Length') === '0')) {
-                console.error("MP4 video fetch error: invalid response or zero content length");
-                handleVideoError();
-                return;
-              }
-              
-              console.log("MP4 video exists and is ready to be loaded");
-              
-              // Initialize video with MP4 source since WebM wasn't available
-              if (videoElement.getElementsByTagName('source').length > 0) {
-                // Update both sources to ensure browser uses MP4
-                const webmSource = videoElement.getElementsByTagName('source')[0];
-                webmSource.src = ""; // Clear WebM source to skip it
-                
-                if (videoElement.getElementsByTagName('source').length > 1) {
-                  const mp4Source = videoElement.getElementsByTagName('source')[1];
-                  mp4Source.src = "/videos/TXA Teaser 2025 Homepage.mp4";
-                }
-              }
-            }
-            
-            console.log("Video is ready to be loaded");
-              
-            // Force the browser to recognize the new source
-            videoElement.load();
-            
-            // Now that we know the video exists, start loading it
-            videoElement.preload = "auto";
-            
-            // Try to play the video
-            setTimeout(() => {
-              videoElement.play().catch((err) => {
-                console.log("Autoplay failed, will require user interaction:", err);
-              });
-            }, 100); // Small delay to ensure load() completes
-          })
-          .catch((error) => {
-            console.error("Video fetch error:", error);
-            handleVideoError();
-          });
-      } else {
-        // Video is cached, so we can start loading immediately
-        console.log("Video is cached, loading immediately");
-        
-        // Make sure sources are set correctly even for cached videos
-        if (videoElement.getElementsByTagName('source').length > 0) {
-          // Set WebM as primary source
-          const webmSource = videoElement.getElementsByTagName('source')[0];
-          webmSource.src = "/videos/TXA Teaser 2025 Homepage.webm";
-          
-          // Also set MP4 fallback
-          if (videoElement.getElementsByTagName('source').length > 1) {
-            const mp4Source = videoElement.getElementsByTagName('source')[1];
-            mp4Source.src = "/videos/TXA Teaser 2025 Homepage.mp4";
-          }
-        }
-        
-        // Force the browser to recognize the source
-        videoElement.load();
-        
-        // Set preload to auto to start loading
-        videoElement.preload = "auto";
-        
-        // Try to play after a short delay to ensure load completes
-        setTimeout(() => {
-          videoElement.play().catch(() => {
-            // Silent catch - we don't want to show error here
-          });
-        }, 100);
-      }
-      
-      // Add event listeners with passive option for better performance
-      videoElement.addEventListener('error', handleVideoError, { passive: true });
-      videoElement.addEventListener('canplay', handleCanPlay, { passive: true });
-      document.addEventListener('visibilitychange', handleVisibilityChange, { passive: true });
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      
-      // Clean up event listeners and timeout
-      return () => {
-        clearTimeout(videoLoadTimeout);
-        videoElement.removeEventListener('error', handleVideoError);
-        videoElement.removeEventListener('canplay', handleCanPlay);
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
-        window.removeEventListener('scroll', handleScroll);
-      };
+      // Try to play the video
+      videoElement.play().catch(err => {
+        console.log("Autoplay failed:", err);
+      });
     };
     
-    // Initialize video immediately without any delay
-    // This is a critical optimization to ensure fast video playback
-    console.log("Starting video setup immediately...");
-    // Use immediate execution instead of setTimeout
-    (function() {
-      // Check for reduced motion preference
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      // Check for low-end device or data-saving mode
-      const isLowEndDevice = 
-        (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
-        ('deviceMemory' in navigator && (navigator as any).deviceMemory < 4) ||
-        ((navigator as any)?.connection?.saveData) ||
-        ((navigator as any)?.connection?.effectiveType === 'slow-2g' || 
-         (navigator as any)?.connection?.effectiveType === '2g');
-      
-      // Skip video for accessibility or performance reasons
-      if (prefersReducedMotion || isLowEndDevice) {
-        console.log("Skipping video load for reduced motion preference or low-end device");
-        setVideoError(true);
-        return;
-      }
-      
-      // If isTitleVisible is true, it means the user has already seen content
-      // Safe to start loading video now as LCP has already been registered
-      setupVideo();
-    })(); // Execute immediately
+    // Add event listeners
+    videoElement.addEventListener('error', handleVideoError);
+    videoElement.addEventListener('canplay', handleCanPlay);
     
-    // No need for cleanup since we're using immediate execution
-    return () => {};
-  }, [videoLoaded, videoError, isTitleVisible]);
+    // Start loading immediately
+    videoElement.load();
+    
+    // Clean up
+    return () => {
+      videoElement.removeEventListener('error', handleVideoError);
+      videoElement.removeEventListener('canplay', handleCanPlay);
+    };
+  }, []);
 
   // Content based on language
   const heroContent = {
@@ -452,13 +216,13 @@ export function HeroSection() {
             >
               {/* Provide multiple source formats for faster loading based on browser support */}
               <source 
-                src="/videos/TXA Teaser 2025 Homepage.webm" 
-                type="video/webm"
-              />
-              {/* MP4 fallback for browsers that don't support WebM */}
-              <source 
                 src="/videos/TXA Teaser 2025 Homepage.mp4" 
                 type="video/mp4"
+              />
+              {/* WebM as secondary source since we're having issues with it */}
+              <source 
+                src="/videos/TXA Teaser 2025 Homepage.webm" 
+                type="video/webm"
               />
               {/* Fallback text in case browser doesn't support video element */}
               <p>Your browser does not support HTML5 video playback.</p>
