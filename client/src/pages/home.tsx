@@ -35,13 +35,14 @@ const Home = memo(function Home() {
   }, [language]);
 
   return (
-    <div className="font-opensans text-slate relative">
+    <article className="font-opensans text-slate relative" itemScope itemType="https://schema.org/TouristAttraction">
       <Helmet>
         <title>Triple X Adventures | Premium Arctic Experiences</title>
         <meta name="description" content={t.hero.subtitle} />
         <meta property="og:title" content="Triple X Adventures | Premium Arctic Experiences" />
         <meta property="og:description" content={t.hero.subtitle} />
         <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://triplexadventures.com" />
       </Helmet>
       
       {/* Enhanced unified animated background with starry night effect */}
@@ -51,46 +52,75 @@ const Home = memo(function Home() {
       <div className="relative z-10">
         {/* Critical path section - load immediately */}
         <Header />
-        <HeroSection />
         
-        {/* Non-critical sections - lazy loaded */}
-        <Suspense fallback={<SectionLoader />}>
-          <IntroductionSection />
-        </Suspense>
+        {/* Main content sections with proper HTML5 structure */}
+        <main>
+          {/* Hero section - first visible content */}
+          <HeroSection />
+          
+          {/* Non-critical sections - lazy loaded with proper section elements */}
+          <Suspense fallback={<SectionLoader />}>
+            <IntroductionSection />
+          </Suspense>
+          
+          <Suspense fallback={<SectionLoader />}>
+            <ExperiencesSection />
+          </Suspense>
+          
+          <Suspense fallback={<SectionLoader />}>
+            <AccommodationsSection />
+          </Suspense>
+          
+          <Suspense fallback={<SectionLoader />}>
+            <RestaurantSection />
+          </Suspense>
+          
+          <Suspense fallback={<SectionLoader />}>
+            <AboutSection />
+          </Suspense>
+          
+          {/* Gallery section removed per request */}
+          
+          <Suspense fallback={<SectionLoader />}>
+            <TestimonialsSection />
+          </Suspense>
+          
+          <Suspense fallback={<SectionLoader />}>
+            <ContactSection />
+          </Suspense>
+          
+          <Suspense fallback={<SectionLoader />}>
+            <CTASection />
+          </Suspense>
+        </main>
         
-        <Suspense fallback={<SectionLoader />}>
-          <ExperiencesSection />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <AccommodationsSection />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <RestaurantSection />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <AboutSection />
-        </Suspense>
-        
-        {/* Gallery section removed per request */}
-        
-        <Suspense fallback={<SectionLoader />}>
-          <TestimonialsSection />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <ContactSection />
-        </Suspense>
-        
-        <Suspense fallback={<SectionLoader />}>
-          <CTASection />
-        </Suspense>
-        
+        {/* Footer with site information and navigation */}
         <Footer />
       </div>
-    </div>
+      
+      {/* Structured data for search engines */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "TouristAttraction",
+          "name": "Triple X Adventures",
+          "description": t.hero.subtitle,
+          "url": "https://triplexadventures.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Arvidsjaur",
+            "addressRegion": "Swedish Lapland",
+            "addressCountry": "Sweden"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "65.5856",
+            "longitude": "19.1764"
+          },
+          "tourBookingPage": "https://triplexadventures.com/booking"
+        })
+      }} />
+    </article>
   );
 });
 

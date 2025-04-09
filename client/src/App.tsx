@@ -2,7 +2,7 @@ import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
-import { lazy, Suspense, memo } from "react";
+import { lazy, Suspense, memo, useEffect } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { HelmetProvider } from "react-helmet-async";
 import { VideoProvider } from "@/contexts/VideoContext";
@@ -12,16 +12,17 @@ import "./styles/theme.css";
 const Home = lazy(() => import("@/pages/home"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
-// Loading fallback component for lazy-loaded pages
+// Loading fallback component for lazy-loaded pages with improved HTML5 semantics
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen bg-dark-bg">
+  <article className="flex items-center justify-center min-h-screen bg-dark-bg" aria-live="polite" role="status">
     <div className="text-primary-text">
-      <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-accent-color" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <svg className="animate-spin -ml-1 mr-3 h-10 w-10 text-accent-color" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
+      <span className="sr-only">Loading page content...</span>
     </div>
-  </div>
+  </article>
 );
 
 // Memoize Router component to prevent unnecessary re-renders
@@ -50,6 +51,17 @@ function App() {
       refetchOnWindowFocus: false,
     },
   });
+
+  // Register a service worker for offline capabilities
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch(error => {
+          console.log('Service Worker registration failed:', error);
+        });
+      });
+    }
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

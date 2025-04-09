@@ -1,0 +1,23 @@
+{
+  "name": "Triple X Adventures",
+  "short_name": "TXA",
+  "description": "Premium Arctic experiences in Swedish Lapland",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F2D40",
+  "theme_color": "#0F2D40",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

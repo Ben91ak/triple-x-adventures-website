@@ -3,40 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Triple X Adventures - The Real Arctic Deal</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#0F2D40">
   <meta name="description" content="Triple X Adventures offers authentic, premium Arctic experiences in Swedish Lapland including snowmobiling, dog sledding, and wilderness adventures.">
   
-  <!-- Meta tags for better performance -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="theme-color" content="#0F1112">
+  <!-- Open Graph metadata for social sharing -->
+  <meta property="og:title" content="Triple X Adventures - The Real Arctic Deal">
+  <meta property="og:description" content="Triple X Adventures offers authentic, premium Arctic experiences in Swedish Lapland including snowmobiling, dog sledding, and wilderness adventures.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/images/TXA_fallback.jpg">
   
-  <!-- DNS prefetch for external domains -->
+  <!-- Favicon and app icons -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Resource hints for performance optimization -->
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   
-  <!-- Preconnect to external domains -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   
-  <!-- Performance optimization: Preload critical assets -->
-  <link rel="preload" href="/images/TXA_fallback.jpg" as="image" type="image/jpeg">
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/images/TXA_fallback.jpg" as="image" type="image/jpeg" fetchpriority="high">
   
-  <!-- Preload critical fonts with proper MIME types and crossorigin attributes -->
+  <!-- Preload critical fonts -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" as="style">
-  <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVI.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
+  <link rel="preload" href="https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0B4gaVI.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high">
   
   <!-- Load fonts with display swap to prevent FOIT (Flash of Invisible Text) -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"></noscript>
   
-  <!-- Load non-critical CSS asynchronously using media query trick -->
+  <!-- Load non-critical CSS asynchronously -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
   
-  <!-- Inline critical CSS to improve LCP -->
+  <!-- Inline critical CSS -->
   <style>
     /* Critical CSS for above-the-fold content */
     :root {
@@ -60,10 +67,11 @@
     img {
       max-width: 100%;
       height: auto;
+      display: block; /* Prevents bottom margin space */
     }
     
     /* Heading font */
-    h1, h2, h3, h4, h5 {
+    h1, h2, h3, h4, h5, h6 {
       font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
       margin-top: 0;
     }
@@ -80,19 +88,13 @@
     }
   </style>
   
-  <!-- Enable fetch priority hints for critical resources -->
-  <script>
-    // Dynamically set fetchpriority for critical resources
-    window.addEventListener('DOMContentLoaded', () => {
-      const heroImages = document.querySelectorAll('.hero-section img');
-      if (heroImages.length > 0) {
-        heroImages[0].fetchPriority = 'high';
-      }
-    });
-  </script>
+  <title>Triple X Adventures - The Real Arctic Deal</title>
 </head>
 <body>
-  <div id="root"></div>
+  <!-- Application root with proper HTML5 semantics -->
+  <main id="root"></main>
+  
+  <!-- Application scripts -->
   <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
