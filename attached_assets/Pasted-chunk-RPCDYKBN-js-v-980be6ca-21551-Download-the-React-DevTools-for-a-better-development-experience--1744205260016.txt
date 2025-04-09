@@ -1,0 +1,206 @@
+chunk-RPCDYKBN.js?v=980be6ca:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+image-optimizer.ts:34 WebP support: Yes
+image-optimizer.ts:38 AVIF support: Yes
+main.tsx:40 Web Vitals: TTFB = 635.8
+main.tsx:50 Poor Web Vital: TTFB = 635.8
+vitalsCallback @ main.tsx:50
+(index):204 Service worker registration failed: DOMException: Failed to register a ServiceWorker for scope ('https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/') with script ('https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/service-worker.js'): The script has an unsupported MIME type ('text/html').
+(anonymous) @ (index):204
+App.tsx:60 Service Worker registration failed: DOMException: Failed to register a ServiceWorker for scope ('https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/') with script ('https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/service-worker.js'): The script has an unsupported MIME type ('text/html').
+chunk-RPCDYKBN.js?v=980be6ca:521 Warning: React does not recognize the `fetchPriority` prop on a DOM element. If you intentionally want it to appear in the DOM as a custom attribute, spell it as lowercase `fetchpriority` instead. If you accidentally passed it from a parent component, remove it from the DOM element.
+    at img
+    at picture
+    at div
+    at section
+    at HeroSection (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/src/components/hero-section.tsx:24:20)
+    at main
+    at div
+    at article
+    at Home2 (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/src/pages/home.tsx:47:24)
+    at Route (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=980be6ca:323:16)
+    at Switch (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=980be6ca:379:17)
+    at Suspense
+    at Router2
+    at VideoProvider (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/src/contexts/VideoContext.tsx:20:33)
+    at LanguageProvider (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/src/contexts/LanguageContext.tsx:20:36)
+    at _a (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-helmet-async.js?v=980be6ca:624:5)
+    at QueryClientProvider (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=980be6ca:2805:3)
+    at App (https://6e88f239-af43-4b28-9ed8-99fd3ad9ddf8-00-10k29fesgl3j5.riker.replit.dev/src/App.tsx?v=CAsllNmvcKVAsvvFNdiU4:104:3)
+printWarning @ chunk-RPCDYKBN.js?v=980be6ca:521
+Show 1 more frame
+Show less
+image-preloader.ts:33 Image preloaded successfully: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/Reindeers/Reindeers 1_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/Drifting.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/Helikopter.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/TXA_fallback.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/Snowmobile/Snowmobile 3_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/Snowmobile/Snowmobile 4_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/Ice Drift/Cars 1_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/Side by Side/SBS 1_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/Snowmobile/Snowmobile 2_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/Ice Kart.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/Reindeers.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/Ice-Fishing.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/Huskys/Husky 1_result.webp
+image-optimizer.ts:34 WebP support: Yes
+image-optimizer.ts:38 AVIF support: Yes
+hero-section.tsx:358 Video error: SyntheticBaseEvent
+onError @ hero-section.tsx:358
+hero-section.tsx:112 Video failed to load, showing fallback animation
+hero-section.tsx:113 Video error details: null
+handleVideoError @ hero-section.tsx:113
+performance-optimizer.ts:97 Autoplay prevented by browser policy
+image-preloader.ts:38 Failed to preload image: /images/Snowmobile/Snowmobile.jpg
+img.onerror @ image-preloader.ts:38
+image-preloader.ts:102 Trying WebP alternative: /images/Snowmobile/Snowmobile.webp
+image-preloader.ts:33 Image preloaded successfully: /images/txa-chalet.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/ood-hotel.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/hotel-laponia.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/Restaurant 1_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/Restaurant 2_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/Restaurant 3_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/Restaurant 4_result.webp
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/dish.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/dining-area.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/jayjays-exterior.jpg
+image-preloader.ts:33 Image preloaded successfully: /images/restaurant/meat-preparation.jpg
+image-preloader.ts:38 Failed to preload image: /images/Snowmobile/Snowmobile 2.jpg
+img.onerror @ image-preloader.ts:38
+image-preloader.ts:102 Trying WebP alternative: /images/Snowmobile/Snowmobile 2.webp
+image-preloader.ts:38 Failed to preload image: /images/Snowmobile/Snowmobile 4.jpg
+img.onerror @ image-preloader.ts:38
+image-preloader.ts:102 Trying WebP alternative: /images/Snowmobile/Snowmobile 4.webp
+image-preloader.ts:38 Failed to preload image: /images/Snowmobile/Snowmobile 3.jpg
+img.onerror @ image-preloader.ts:38
+image-preloader.ts:102 Trying WebP alternative: /images/Snowmobile/Snowmobile 3.webp
+hero-section.tsx:178 Video fetch response: 200 true Content-Length: 31074088
+hero-section.tsx:185 Video file exists and is ready to be loaded
+experiences-section.tsx:877 Error loading experience image: /images/Huskys/Husky 1_result.webp
+onError @ experiences-section.tsx:877
+image-preloader.ts:113 Trying AVIF alternative: /images/Snowmobile/Snowmobile.avif
+image-preloader.ts:113 Trying AVIF alternative: /images/Snowmobile/Snowmobile 2.avif
+image-preloader.ts:113 Trying AVIF alternative: /images/Snowmobile/Snowmobile 4.avif
+image-preloader.ts:113 Trying AVIF alternative: /images/Snowmobile/Snowmobile 3.avif
+image-preloader.ts:258 Trying alternative path: /images/experiences/Snowmobile.jpg
+image-preloader.ts:258 Trying alternative path: /images/experiences/Snowmobile 2.jpg
+image-preloader.ts:258 Trying alternative path: /images/experiences/Snowmobile 4.jpg
+12The resource <URL> was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.
+image-preloader.ts:258 Trying alternative path: /images/experiences/Snowmobile 3.jpg
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile.jpg
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile 2.jpg
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile 4.jpg
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile 3.jpg
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:262 Alternative path loaded successfully: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:262 Alternative path loaded successfully: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:262 Alternative path loaded successfully: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:258 Trying alternative path: /images/Snowmobile/Snowmobile 1_result.webp
+image-preloader.ts:262 Alternative path loaded successfully: /images/Snowmobile/Snowmobile 1_result.webp
+/manifest.json:1 
+        
+        
+       Failed to load resource: the server responded with a status of 500 (Internal Server Error)
+experiences-section.tsx:877 Error loading experience image: /images/Ice-Fishing.jpg
+onError @ experiences-section.tsx:877
+callCallback2 @ chunk-RPCDYKBN.js?v=980be6ca:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=980be6ca:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=980be6ca:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=980be6ca:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=980be6ca:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=980be6ca:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=980be6ca:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=980be6ca:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=980be6ca:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=980be6ca:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=980be6ca:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=980be6ca:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=980be6ca:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=980be6ca:5472
+Show 14 more frames
+Show less
+experiences-section.tsx:903 Ice Fishing card image fallback /images/Ice-Fishing.jpg
+experiences-section.tsx:877 Error loading experience image: /images/Side-By-Side-Buggy-Drifting.jpg
+onError @ experiences-section.tsx:877
+callCallback2 @ chunk-RPCDYKBN.js?v=980be6ca:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=980be6ca:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=980be6ca:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=980be6ca:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=980be6ca:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=980be6ca:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=980be6ca:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=980be6ca:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=980be6ca:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=980be6ca:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=980be6ca:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=980be6ca:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=980be6ca:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=980be6ca:5472
+Show 14 more frames
+Show less
+experiences-section.tsx:907 Side by Side card image fallback /images/Side-By-Side-Buggy-Drifting.jpg
+experiences-section.tsx:877 Error loading experience image: /images/Huskys/Husky 1_result.webp
+onError @ experiences-section.tsx:877
+callCallback2 @ chunk-RPCDYKBN.js?v=980be6ca:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=980be6ca:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=980be6ca:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=980be6ca:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=980be6ca:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=980be6ca:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=980be6ca:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=980be6ca:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=980be6ca:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=980be6ca:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=980be6ca:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=980be6ca:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=980be6ca:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=980be6ca:5472
+Show 14 more frames
+Show less
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+main.tsx:40 Web Vitals: LCP = 4291.3
+main.tsx:50 Poor Web Vital: LCP = 4291.3
+vitalsCallback @ main.tsx:50
+(anonymous) @ web-vitals.js?v=980be6ca:46
+(anonymous) @ web-vitals.js?v=980be6ca:205
+(anonymous) @ web-vitals.js?v=980be6ca:64
+(anonymous) @ web-vitals.js?v=980be6ca:64
+Show 4 more frames
+Show less
+main.tsx:40 Web Vitals: FID = 1.9
+experiences-section.tsx:258 Navigating to next image from index 0
+experiences-section.tsx:261 New image index: 1, src: /images/Snowmobile/Snowmobile 2_result.webp
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:258 Navigating to next image from index 1
+experiences-section.tsx:261 New image index: 2, src: /images/Snowmobile/Snowmobile 3_result.webp
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:258 Navigating to next image from index 2
+experiences-section.tsx:261 New image index: 3, src: /images/Snowmobile/Snowmobile 4_result.webp
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:258 Navigating to next image from index 3
+experiences-section.tsx:261 New image index: 0, src: /images/Snowmobile/Snowmobile 1_result.webp
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:185 Using hardcoded WebP gallery for Snowmobile: Array(4)
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:258 Navigating to next image from index 0
+experiences-section.tsx:261 New image index: 1, src: /images/Huskys/Husky 2_result.webp
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:258 Navigating to next image from index 1
+experiences-section.tsx:261 New image index: 2, src: /images/Huskys/Husky 3_result.webp
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)
+experiences-section.tsx:176 Using hardcoded WebP gallery for Husky: Array(4)

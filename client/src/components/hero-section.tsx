@@ -321,9 +321,10 @@ export function HeroSection() {
                 }}
                 loading="eager"
                 decoding="sync"
-                fetchPriority="high"
                 width="1920"
                 height="1080"
+                // Use data attribute instead to avoid TypeScript errors
+                data-fetchpriority="high"
               />
             </picture>
             
