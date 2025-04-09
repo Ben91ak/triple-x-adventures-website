@@ -160,10 +160,12 @@ export function HeroSection() {
       
       if (window.performance && window.performance.getEntriesByType) {
         const resources = window.performance.getEntriesByType('resource');
-        const videoUrl = '/videos/TXA Teaser 2025 Homepage.mp4';
+        // Check for either the WebM or MP4 version
+        const videoUrls = ['/videos/TXA Teaser 2025 Homepage.webm', '/videos/TXA Teaser 2025 Homepage.mp4'];
         
         for (let i = 0; i < resources.length; i++) {
-          if (resources[i].name.includes(videoUrl)) {
+          // Check if the resource matches any of our video URLs
+          if (videoUrls.some(url => resources[i].name.includes(url))) {
             isVideoCached = true;
             break;
           }
@@ -172,37 +174,75 @@ export function HeroSection() {
       
       // Only do the fetch check if video isn't already cached
       if (!isVideoCached) {
-        // Check if the file exists first to make sure it's accessible
-        fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' })
+        // Check if the WebM file exists first, as it's our preferred format
+        fetch("/videos/TXA Teaser 2025 Homepage.webm", { method: 'HEAD' })
           .then(response => {
-            console.log("Video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
+            console.log("WebM video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
             
-            // If the response is not ok or content length is 0, consider it an error
             if (!response.ok || (response.headers.get('Content-Length') === '0')) {
-              console.error("Video fetch error: invalid response or zero content length");
-              handleVideoError();
-            } else {
-              console.log("Video file exists and is ready to be loaded");
+              console.log("WebM not available, trying MP4 fallback");
               
-              // Initialize the video manually with a direct source
+              // Try MP4 fallback if WebM is not available
+              return fetch("/videos/TXA Teaser 2025 Homepage.mp4", { method: 'HEAD' });
+            } else {
+              console.log("WebM video exists and is ready to be loaded");
+              
+              // Initialize the video with WebM source
               if (videoElement.getElementsByTagName('source').length > 0) {
-                const sourceElement = videoElement.getElementsByTagName('source')[0];
-                sourceElement.src = "/videos/TXA Teaser 2025 Homepage.mp4";
+                const webmSource = videoElement.getElementsByTagName('source')[0];
+                webmSource.src = "/videos/TXA Teaser 2025 Homepage.webm";
+                
+                // Make sure MP4 fallback is also set
+                if (videoElement.getElementsByTagName('source').length > 1) {
+                  const mp4Source = videoElement.getElementsByTagName('source')[1];
+                  mp4Source.src = "/videos/TXA Teaser 2025 Homepage.mp4";
+                }
               }
               
-              // Force the browser to recognize the new source
-              videoElement.load();
-              
-              // Now that we know the video exists, start loading it
-              videoElement.preload = "auto";
-              
-              // Try to play the video
-              setTimeout(() => {
-                videoElement.play().catch((err) => {
-                  console.log("Autoplay failed, will require user interaction:", err);
-                });
-              }, 100); // Small delay to ensure load() completes
+              // Return a successful response to continue processing
+              return response;
             }
+          })
+          .then(response => {
+            // Only needed if we had to fall back to MP4
+            if (response.url.includes('.mp4')) {
+              console.log("MP4 video fetch response:", response.status, response.ok, "Content-Length:", response.headers.get('Content-Length'));
+              
+              if (!response.ok || (response.headers.get('Content-Length') === '0')) {
+                console.error("MP4 video fetch error: invalid response or zero content length");
+                handleVideoError();
+                return;
+              }
+              
+              console.log("MP4 video exists and is ready to be loaded");
+              
+              // Initialize video with MP4 source since WebM wasn't available
+              if (videoElement.getElementsByTagName('source').length > 0) {
+                // Update both sources to ensure browser uses MP4
+                const webmSource = videoElement.getElementsByTagName('source')[0];
+                webmSource.src = ""; // Clear WebM source to skip it
+                
+                if (videoElement.getElementsByTagName('source').length > 1) {
+                  const mp4Source = videoElement.getElementsByTagName('source')[1];
+                  mp4Source.src = "/videos/TXA Teaser 2025 Homepage.mp4";
+                }
+              }
+            }
+            
+            console.log("Video is ready to be loaded");
+              
+            // Force the browser to recognize the new source
+            videoElement.load();
+            
+            // Now that we know the video exists, start loading it
+            videoElement.preload = "auto";
+            
+            // Try to play the video
+            setTimeout(() => {
+              videoElement.play().catch((err) => {
+                console.log("Autoplay failed, will require user interaction:", err);
+              });
+            }, 100); // Small delay to ensure load() completes
           })
           .catch((error) => {
             console.error("Video fetch error:", error);
@@ -212,10 +252,17 @@ export function HeroSection() {
         // Video is cached, so we can start loading immediately
         console.log("Video is cached, loading immediately");
         
-        // Make sure source is set correctly even for cached videos
+        // Make sure sources are set correctly even for cached videos
         if (videoElement.getElementsByTagName('source').length > 0) {
-          const sourceElement = videoElement.getElementsByTagName('source')[0];
-          sourceElement.src = "/videos/TXA Teaser 2025 Homepage.mp4";
+          // Set WebM as primary source
+          const webmSource = videoElement.getElementsByTagName('source')[0];
+          webmSource.src = "/videos/TXA Teaser 2025 Homepage.webm";
+          
+          // Also set MP4 fallback
+          if (videoElement.getElementsByTagName('source').length > 1) {
+            const mp4Source = videoElement.getElementsByTagName('source')[1];
+            mp4Source.src = "/videos/TXA Teaser 2025 Homepage.mp4";
+          }
         }
         
         // Force the browser to recognize the source
@@ -397,6 +444,11 @@ export function HeroSection() {
               }}
             >
               {/* Provide multiple source formats for faster loading based on browser support */}
+              <source 
+                src="/videos/TXA Teaser 2025 Homepage.webm" 
+                type="video/webm"
+              />
+              {/* MP4 fallback for browsers that don't support WebM */}
               <source 
                 src="/videos/TXA Teaser 2025 Homepage.mp4" 
                 type="video/mp4"
