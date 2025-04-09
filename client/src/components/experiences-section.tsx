@@ -882,8 +882,13 @@ export function ExperiencesSection() {
                       
                       // Special case handling for common experience images with WebP optimized versions
                       if (originalSrc.toLowerCase().includes('husky')) {
-                        // Use WebP since we have those files
-                        target.src = `/images/Huskys/Husky 1_result.webp`;
+                        // Use WebP if supported, otherwise try JPG
+                        console.log('Husky card image fallback', originalSrc);
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/Huskys/Husky 1_result.webp`;
+                        } else {
+                          target.src = `/images/Huskys/Husky.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('snowmobile')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
@@ -901,17 +906,37 @@ export function ExperiencesSection() {
                       } else if (originalSrc.toLowerCase().includes('ice fishing') || originalSrc.toLowerCase().includes('fishing')) {
                         // Always use direct WebP files for Ice Fishing to ensure consistency
                         console.log('Ice Fishing card image fallback', originalSrc);
-                        target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/Ice Fishing/Icefish 1_result.webp`;
+                        } else {
+                          // Fall back to JPG if WebP not supported
+                          target.src = `/images/Ice-Fishing.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('buggy') || originalSrc.toLowerCase().includes('side by side') || originalSrc.toLowerCase().includes('sbs')) {
                         // Always use direct WebP files for Side by Side
                         console.log('Side by Side card image fallback', originalSrc);
-                        target.src = `/images/Side by Side/SBS 1_result.webp`;
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/Side by Side/SBS 1_result.webp`;
+                        } else {
+                          // Fall back to JPG if WebP not supported
+                          target.src = `/images/Side-By-Side-Buggy-Drifting.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('helicopter') || originalSrc.toLowerCase().includes('helikopter')) {
-                        // Use direct WebP files for Helicopter
-                        target.src = `/images/Helicopter/Helikopter 1_result.webp`;
+                        // Use WebP if supported, otherwise use JPG
+                        console.log('Helicopter card image fallback', originalSrc);
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/Helicopter/Helikopter 1_result.webp`;
+                        } else {
+                          target.src = `/images/Helikopter.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('ice drift') || (originalSrc.toLowerCase().includes('drift') && originalSrc.toLowerCase().includes('cars'))) {
-                        // Use direct WebP files for Ice Drift
-                        target.src = `/images/Ice Drift/Cars 1_result.webp`;
+                        // Use WebP if supported, otherwise use JPG
+                        console.log('Ice Drift card image fallback', originalSrc);
+                        if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
+                          target.src = `/images/Ice Drift/Cars 1_result.webp`;
+                        } else {
+                          target.src = `/images/Drifting.jpg`;
+                        }
                       } else if (originalSrc.toLowerCase().includes('drift')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
