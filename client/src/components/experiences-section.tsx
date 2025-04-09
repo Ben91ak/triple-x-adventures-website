@@ -870,7 +870,7 @@ export function ExperiencesSection() {
                   {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
                     src={experience.title.toLowerCase().includes('husky') 
-                        ? `/images/Huskys/Husky.jpg` // Directly use the Husky.jpg without optimization for Husky experience
+                        ? `/images/Huskys/Husky 1_result.webp` // Directly use the Husky 1_result.webp without optimization for Husky experience
                         : getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { 
                             quality: 'medium',
                             forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
@@ -892,14 +892,20 @@ export function ExperiencesSection() {
                       
                       // Special case handling for common experience images with WebP optimized versions
                       if (originalSrc.toLowerCase().includes('husky')) {
-                        // Use the plain Husky.jpg as fallback without any path manipulation
+                        // Try the Husky WebP files directly
                         console.log('Husky card image fallback', originalSrc);
-                        target.src = `/images/Huskys/Husky.jpg`;
+                        target.src = `/images/Huskys/Husky 1_result.webp`;
                         
-                        // Add a secondary fallback that doesn't use the webp version
+                        // Add a secondary fallback that uses JPG if WebP fails
                         target.onerror = () => {
-                          console.log('Using universal fallback image for Husky experience');
-                          target.src = `/images/TXA_fallback.jpg`;
+                          console.log('WebP fallback failed, trying JPG');
+                          target.src = `/images/Huskys/Husky.jpg`;
+                          
+                          // Final fallback if JPG also fails
+                          target.onerror = () => {
+                            console.log('Using universal fallback image for Husky experience');
+                            target.src = `/images/TXA_fallback.jpg`;
+                          };
                         };
                       } else if (originalSrc.toLowerCase().includes('snowmobile')) {
                         // Try WebP if supported
