@@ -869,10 +869,13 @@ export function ExperiencesSection() {
                 <div className="relative h-[225px] overflow-hidden">
                   {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
-                    src={getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { 
-                      quality: 'medium',
-                      forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
-                    })}
+                    src={experience.title.toLowerCase().includes('husky') 
+                        ? `/images/Huskys/Husky.jpg` // Directly use the Husky.jpg without optimization for Husky experience
+                        : getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { 
+                            quality: 'medium',
+                            forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
+                          })
+                    }
                     alt={experience.title} 
                     loading={experience.id > 3 ? "lazy" : "eager"} /* Lazy load images that are likely below the fold */
                     decoding="async"
@@ -889,17 +892,14 @@ export function ExperiencesSection() {
                       
                       // Special case handling for common experience images with WebP optimized versions
                       if (originalSrc.toLowerCase().includes('husky')) {
-                        // Use the new Husky.jpg as the main image
+                        // Use the plain Husky.jpg as fallback without any path manipulation
                         console.log('Husky card image fallback', originalSrc);
                         target.src = `/images/Huskys/Husky.jpg`;
                         
-                        // Add a secondary fallback
+                        // Add a secondary fallback that doesn't use the webp version
                         target.onerror = () => {
-                          if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
-                            target.src = `/images/Huskys/Husky 1_result.webp`;
-                          } else {
-                            target.src = `/images/Huskys/Husky.jpg`;
-                          }
+                          console.log('Using universal fallback image for Husky experience');
+                          target.src = `/images/TXA_fallback.jpg`;
                         };
                       } else if (originalSrc.toLowerCase().includes('snowmobile')) {
                         // Try WebP if supported
