@@ -122,7 +122,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // Prefetch remaining important images for fast navigation
     const secondaryImagePaths = [
       // Use existing verified image paths with full range of experience types
-      '/images/Huskys/Husky 1_result.webp',
       '/images/Snowmobile/Snowmobile 1_result.webp',
       '/images/Ice Drift/Cars 1_result.webp',
       '/images/Side by Side/SBS 1_result.webp',

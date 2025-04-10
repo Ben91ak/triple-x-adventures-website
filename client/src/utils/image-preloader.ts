@@ -132,7 +132,6 @@ function tryFormatAlternatives(
 /**
  * Try different path structures as a last resort
  * Enhanced with more comprehensive alternatives based on actual filesystem scan
- * FIXED: Husky image paths to use single JPG instead of multiple webps
  */
 function tryPathAlternatives(
   originalPath: string,
@@ -156,10 +155,7 @@ function tryPathAlternatives(
     alternativePaths.push(`/images/${capitalizedName}.jpg`);
     
     // Handle special cases with verified paths
-    if (baseName.includes('husky')) {
-      alternativePaths.push('/images/Huskys/Husky.jpg');
-    } 
-    else if (baseName.includes('snowmobile')) {
+    if (baseName.includes('snowmobile')) {
       // WebP versions first (preferable)
       alternativePaths.push('/images/Snowmobile/Snowmobile 1_result.webp');
       alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
@@ -200,10 +196,7 @@ function tryPathAlternatives(
     alternativePaths.push(`/images/${capitalizedName}.jpg`);
     
     // Handle special cases with verified paths
-    if (baseName.includes('husky')) {
-      alternativePaths.push('/images/Huskys/Husky.jpg');
-    } 
-    else if (baseName.includes('snowmobile')) {
+    if (baseName.includes('snowmobile')) {
       // WebP versions first (preferable)
       alternativePaths.push('/images/Snowmobile/Snowmobile 1_result.webp');
       alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
@@ -279,7 +272,6 @@ export function preloadImages(paths: string[], options: ImagePreloadOptions = {}
 /**
  * Preload all critical images for the experiences section
  * Updated with correct capitalization and paths based on filesystem check
-
  */
 export function preloadExperienceImages() {
   // Use actual verified image paths based on filesystem check
