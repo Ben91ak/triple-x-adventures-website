@@ -126,6 +126,23 @@ export const sv = {
           text: "Ny",
           type: "new"
         }
+      },
+      {
+        id: 10,
+        title: "Huskyturer Äventyr",
+        description: "Upplev spänningen med hundspann genom orörda arktiska landskap med våra vänliga huskyteam. Känn kopplingen till traditionell nordlig transport.",
+        image: "/images/Huskys/Husky 1_result.webp",
+        gallery: [
+          "/images/Huskys/Husky 1_result.webp",
+          "/images/Huskys/Husky 2_result.webp",
+          "/images/Huskys/Husky 3_result.webp",
+          "/images/Huskys/Husky 4_result.webp"
+        ],
+        fullDescription: "Ge dig ut på en oförglömlig resa genom de snötäckta landskapen i svenska Lappland med våra fantastiska huskyteam. Denna traditionella arktiska upplevelse kombinerar äventyr med det unika bandet mellan människor och hundar som har varit viktigt för nordlig transport i århundraden.\n\nUnder ledning av erfarna mushers kommer du att lära dig hur du hanterar ditt eget team av energiska sibiriska och alaskan huskies. Känn spänningen när hundarna ivrigt väntar på turen, och upplev sedan den fridfulla glidan över orörda snöleder, med endast ljudet av tassar och medar som bryter den arktiska tystnaden.\n\nVåra huskyturer erbjuder olika alternativ från korta 1-timmars upplevelser som är perfekta för nybörjare till halvdagsäventyr som låter dig ta dig längre in i vildmarken. Alla turer inkluderar instruktion, lämplig vinterklädutrustning och gott om tid att interagera med och fotografera dessa otroliga arbetshundar.\n\nTuren avslutas med varma drycker och traditionell svensk fika vid en öppen eld, där din guide delar berättelser om livet med dessa anmärkningsvärda djur och hundspanningens roll i nordisk kultur.",
+        tag: {
+          text: "Ny",
+          type: "new"
+        }
       }
     ]
   },

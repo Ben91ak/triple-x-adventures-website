@@ -126,6 +126,23 @@ export const de = {
           text: "Neu",
           type: "new"
         }
+      },
+      {
+        id: 10,
+        title: "Husky Touren Abenteuer",
+        description: "Erleben Sie den Nervenkitzel des Hundeschlittenfahrens durch unberührte arktische Landschaften mit unseren freundlichen Husky-Teams. Spüren Sie die Verbindung zum traditionellen Transport im Norden.",
+        image: "/images/Huskys/Husky 1_result.webp",
+        gallery: [
+          "/images/Huskys/Husky 1_result.webp",
+          "/images/Huskys/Husky 2_result.webp",
+          "/images/Huskys/Husky 3_result.webp",
+          "/images/Huskys/Husky 4_result.webp"
+        ],
+        fullDescription: "Begeben Sie sich auf eine unvergessliche Reise durch die schneebedeckten Landschaften von Schwedisch-Lappland mit unseren erstaunlichen Husky-Teams. Dieses traditionelle arktische Erlebnis verbindet Abenteuer mit der einzigartigen Bindung zwischen Mensch und Hund, die seit Jahrhunderten für den Transport im Norden unerlässlich ist.\n\nUnter der Leitung erfahrener Musher lernen Sie, wie Sie Ihr eigenes Team energiegeladener sibirischer und alaskischer Huskys steuern. Spüren Sie die Aufregung, wenn die Hunde gespannt auf den Lauf warten, und erleben Sie dann das friedliche Gleiten über unberührte Schneepfade, wobei nur das Geräusch von Pfoten und Kufen die arktische Stille durchbricht.\n\nUnsere Husky-Touren bieten verschiedene Optionen von kurzen 1-Stunden-Erlebnissen, die perfekt für Anfänger sind, bis hin zu halbtägigen Abenteuern, die es Ihnen ermöglichen, tiefer in die Wildnis einzutauchen. Alle Touren beinhalten Anleitung, angemessene Winterkleidung und ausreichend Zeit, um mit diesen unglaublichen Arbeitshunden zu interagieren und sie zu fotografieren.\n\nDie Tour endet mit heißen Getränken und traditioneller schwedischer Fika an einem offenen Feuer, wo Ihr Guide Geschichten über das Leben mit diesen bemerkenswerten Tieren und die Rolle des Hundeschlittenfahrens in der nordischen Kultur teilt.",
+        tag: {
+          text: "Neu",
+          type: "new"
+        }
       }
     ]
   },
