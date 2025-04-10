@@ -107,10 +107,10 @@ function ExperienceDetailModal({
     
     if (title.includes('husky')) {
       return [
-        '/images/Huskys/Husky.jpg',
-        '/images/Huskys/Husky 1_result.webp',
-        '/images/Huskys/Husky 2_result.webp',
-        '/images/Huskys/Husky 3_result.webp'
+        '/images/Husky.jpg',
+        '/images/Huskys/optimized/Husky-medium.webp',
+        '/images/Huskys/optimized/Husky-small.webp',
+        '/images/Huskys/optimized/Husky-medium.jpg'
       ];
     } 
     else if (title.includes('snowmobile')) {
@@ -502,7 +502,7 @@ export function ExperiencesSection() {
     const title = experience.title.toLowerCase();
     
     if (title.includes('husky')) {
-      return '/images/Huskys/Husky.jpg';
+      return '/images/Husky.jpg'; // Use the root images folder Husky.jpg
     } 
     else if (title.includes('snowmobile')) {
       return '/images/Snowmobile/Snowmobile.jpg';
