@@ -651,12 +651,20 @@ export function ExperiencesSection() {
   const { language } = useLanguage();
   const t = useTranslation(language);
   
-  // Get experiences data from translations
-  const experiences: Experience[] = t.experiences.list.map(exp => ({
-    ...exp,
-    // Add empty fullDescription if not provided in translations
-    fullDescription: exp.fullDescription || exp.description
-  }));
+  // Get experiences data from translations and filter out any husky-related experiences
+  const experiences: Experience[] = t.experiences.list
+    .filter(exp => {
+      const title = exp.title.toLowerCase();
+      const desc = exp.description.toLowerCase();
+      // Filter out husky-related experiences and ID 2 which was the husky card
+      return !title.includes('husky') && !desc.includes('husky') && 
+             !title.includes('dog') && !desc.includes('dog') && exp.id !== 2;
+    })
+    .map(exp => ({
+      ...exp,
+      // Add empty fullDescription if not provided in translations
+      fullDescription: exp.fullDescription || exp.description
+    }));
   
   // State for the selected experience and modal visibility
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);

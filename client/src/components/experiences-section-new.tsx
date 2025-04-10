@@ -403,8 +403,12 @@ export function ExperiencesSection() {
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   
-  // Get experiences from the translation
-  const experiences = t.experiences.list as Experience[];
+  // Get experiences from the translation and filter out any that might have husky in the title or description
+  const experiences = (t.experiences.list as Experience[]).filter(exp => {
+    const title = exp.title.toLowerCase();
+    const desc = exp.description.toLowerCase();
+    return !title.includes('husky') && !desc.includes('husky') && !title.includes('dog') && !desc.includes('dog') && exp.id !== 2;
+  });
   
   // Navigation handlers
   const navigateToNext = () => {
