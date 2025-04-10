@@ -670,19 +670,36 @@ export function ExperiencesSection() {
   const t = useTranslation(language);
   
   // Get experiences data from translations and filter out any husky-related experiences
-  const experiences: Experience[] = t.experiences.list
-    .filter(exp => {
-      const title = exp.title.toLowerCase();
-      const desc = exp.description.toLowerCase();
-      // Filter out husky-related experiences and ID 2 which was the husky card
-      return !title.includes('husky') && !desc.includes('husky') && 
-             !title.includes('dog') && !desc.includes('dog') && exp.id !== 2;
-    })
-    .map(exp => ({
+  // First ensure we start with a clean array
+  let experienceList = t.experiences.list;
+  
+  // Make a completely new array without reference to husky experiences
+  const experiences: Experience[] = experienceList.reduce((filtered: any[], exp) => {
+    // Explicitly exclude ID 2 - the husky card
+    if (exp.id === 2) {
+      console.log('Excluding husky experience ID 2');
+      return filtered;
+    }
+    
+    // Also exclude by keyword
+    const title = (exp.title || '').toLowerCase();
+    const desc = (exp.description || '').toLowerCase();
+    
+    if (title.includes('husky') || desc.includes('husky') || 
+        title.includes('dog') || desc.includes('dog') ||
+        (exp.image && exp.image.toLowerCase().includes('husky'))) {
+      console.log(`Excluding experience by keyword: ${exp.title}`);
+      return filtered;
+    }
+    
+    // It passed all filters, so add it with modified properties
+    filtered.push({
       ...exp,
       // Add empty fullDescription if not provided in translations
       fullDescription: exp.fullDescription || exp.description
-    }));
+    });
+    return filtered;
+  }, []);
   
   // State for the selected experience and modal visibility
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);

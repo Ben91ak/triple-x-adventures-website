@@ -403,12 +403,33 @@ export function ExperiencesSection() {
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   
-  // Get experiences from the translation and filter out any that might have husky in the title or description
-  const experiences = (t.experiences.list as Experience[]).filter(exp => {
-    const title = exp.title.toLowerCase();
-    const desc = exp.description.toLowerCase();
-    return !title.includes('husky') && !desc.includes('husky') && !title.includes('dog') && !desc.includes('dog') && exp.id !== 2;
-  });
+  // Get experiences from the translation and filter out husky-related experiences
+  // First ensure we start with a clean array
+  let experienceList = t.experiences.list as Experience[];
+  
+  // Make a completely new array without reference to any husky experiences
+  const experiences = experienceList.reduce((filtered: Experience[], exp) => {
+    // Explicitly exclude ID 2 - the husky card
+    if (exp.id === 2) {
+      console.log('Excluding husky experience ID 2');
+      return filtered;
+    }
+    
+    // Also exclude by keyword
+    const title = (exp.title || '').toLowerCase();
+    const desc = (exp.description || '').toLowerCase();
+    
+    if (title.includes('husky') || desc.includes('husky') || 
+        title.includes('dog') || desc.includes('dog') ||
+        (exp.image && exp.image.toLowerCase().includes('husky'))) {
+      console.log(`Excluding experience by keyword: ${exp.title}`);
+      return filtered;
+    }
+    
+    // It passed all filters, so add it
+    filtered.push(exp);
+    return filtered;
+  }, []);
   
   // Navigation handlers
   const navigateToNext = () => {
