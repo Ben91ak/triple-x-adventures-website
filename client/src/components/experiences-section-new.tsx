@@ -107,8 +107,9 @@ function ExperienceDetailModal({
     
     if (title.includes('husky')) {
       return [
+        '/images/Huskys/Husky.jpg', // Using the main jpg file first
         '/images/Huskys/Husky 1_result.webp',
-        '/images/Huskys/Husky 2_result.webp',
+        '/images/Huskys/Husky 2_result.webp', 
         '/images/Huskys/Husky 3_result.webp',
         '/images/Huskys/Husky 4_result.webp'
       ];
@@ -502,7 +503,7 @@ export function ExperiencesSection() {
     const title = experience.title.toLowerCase();
     
     if (title.includes('husky')) {
-      return '/images/Huskys/Husky 1_result.webp';
+      return '/images/Huskys/Husky.jpg';
     } 
     else if (title.includes('snowmobile')) {
       return '/images/Snowmobile/Snowmobile.jpg';
