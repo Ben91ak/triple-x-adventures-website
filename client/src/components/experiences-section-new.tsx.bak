@@ -169,14 +169,6 @@ function ExperienceDetailModal({
         '/images/Side by Side/SBS 3_result.webp'
       ];
     }
-    else if (title.includes('husky') || title.includes('dog')) {
-      return [
-        '/images/Huskys/Husky 1_result.webp',
-        '/images/Huskys/Husky 2_result.webp',
-        '/images/Huskys/Husky 3_result.webp',
-        '/images/Huskys/Husky 4_result.webp'
-      ];
-    }
     
     // Fallback to the experience's gallery or just the main image
     return experience.gallery && experience.gallery.length > 0 
@@ -472,9 +464,6 @@ export function ExperiencesSection() {
     } 
     else if (title.includes('buggy') || title.includes('side')) {
       return '/images/Side-By-Side-Buggy-Drifting.jpg';
-    }
-    else if (title.includes('husky') || title.includes('dog')) {
-      return '/images/Huskys/Husky 1_result.webp';
     }
     
     // If no specific image was found, use the one from the translation file

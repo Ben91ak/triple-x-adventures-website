@@ -126,6 +126,23 @@ export const en = {
           text: "New",
           type: "new"
         }
+      },
+      {
+        id: 10,
+        title: "Husky Tours Adventure",
+        description: "Experience the thrill of dog sledding through pristine Arctic landscapes with our friendly husky teams. Feel the connection to traditional northern transportation.",
+        image: "/images/Huskys/Husky 1_result.webp",
+        gallery: [
+          "/images/Huskys/Husky 1_result.webp",
+          "/images/Huskys/Husky 2_result.webp",
+          "/images/Huskys/Husky 3_result.webp",
+          "/images/Huskys/Husky 4_result.webp"
+        ],
+        fullDescription: "Embark on an unforgettable journey through the snow-covered landscapes of Swedish Lapland with our amazing husky teams. This traditional Arctic experience combines adventure with the unique bond between humans and dogs that has been essential for northern transportation for centuries.\n\nLed by experienced mushers, you'll learn how to handle your own team of energetic Siberian and Alaskan huskies. Feel the excitement as the dogs eagerly anticipate the run, then experience the peaceful glide across pristine snow trails, with only the sound of paws and runners breaking the Arctic silence.\n\nOur Husky Tours offer various options from short 1-hour experiences perfect for beginners to half-day adventures that allow you to venture deeper into the wilderness. All tours include instruction, proper winter gear, and plenty of time to interact with and photograph these incredible working dogs.\n\nThe tour concludes with hot drinks and traditional Swedish fika by an open fire, where your guide will share stories of life with these remarkable animals and the role of dog sledding in northern culture.",
+        tag: {
+          text: "New",
+          type: "new"
+        }
       }
     ]
   },
