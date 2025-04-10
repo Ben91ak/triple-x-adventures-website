@@ -138,22 +138,10 @@ function ExperienceDetailModal({
   
   // Fix image paths if needed
   const fixImagePath = (path: string): string => {
-    // Handle Husky images specifically to use the new WebP format
+    // Handle Husky images specifically to use the main JPG file
     if (path.includes('Husky') && path.includes('Huskys')) {
-      let imageNumber = 1;
-      
-      // Extract image number from filename if available
-      if (path.includes('Husky.jpg')) {
-        imageNumber = 1;
-      } else if (path.includes('Husky 2.jpg')) {
-        imageNumber = 2;
-      } else if (path.includes('Husky 3.jpg')) {
-        imageNumber = 3;
-      } else if (path.includes('Husky 4.jpg')) {
-        imageNumber = 4;
-      }
-      
-      return `images/Huskys/Husky ${imageNumber}_result.webp`;
+      // Always use the main Husky.jpg file which we know exists
+      return 'images/Huskys/Husky.jpg';
     }
     
     if (path.startsWith('/')) {
@@ -166,14 +154,11 @@ function ExperienceDetailModal({
   // For specific experiences, directly use the WebP files we know exist
   let gallery: string[] = [];
   if (experience.title.toLowerCase().includes('husky')) {
-    // Use new Husky.jpg and existing WebP files
+    // Use only the Husky.jpg file that we know exists
     gallery = [
-      '/images/Huskys/Husky.jpg', // Use the new Husky.jpg as primary image
-      '/images/Huskys/Husky 1_result.webp',
-      '/images/Huskys/Husky 2_result.webp',
-      '/images/Huskys/Husky 3_result.webp'
+      '/images/Huskys/Husky.jpg'
     ];
-    console.log('Using updated gallery for Husky:', gallery);
+    console.log('Using updated gallery for Husky (single image):', gallery);
   } else if (experience.title.toLowerCase().includes('snowmobile')) {
     // Skip path resolution and directly use WebP files for snowmobile
     gallery = [
