@@ -52,12 +52,12 @@ export const sv = {
         id: 2,
         title: "Husky Slädhundstur",
         description: "Led ditt eget hundspann genom den hisnande arktiska vildmarken. Välj mellan passiv eller aktiv körning på 1,5-2 timmars turer.",
-        image: "/images/Husky.jpg",
+        image: "/images/Huskys/Husky 1_result.webp",
         gallery: [
-          "/images/Husky.jpg",
-          "/images/Huskys/optimized/Husky-medium.webp",
-          "/images/Huskys/optimized/Husky-small.webp",
-          "/images/Huskys/optimized/Husky-medium.jpg"
+          "/images/Huskys/Husky 1_result.webp",
+          "/images/Huskys/Husky 2_result.webp",
+          "/images/Huskys/Husky 3_result.webp",
+          "/images/Huskys/Husky 4_result.webp"
         ],
         fullDescription: "Upplev magin med en slädhundstur!\n\nKänn spänningen av att leda ditt eget team av entusiastiska sibiriska och alaskan huskies genom orörda, snötäckta landskap. Efter en informativ introduktion och säkerhetsgenomgång styr du din egen släde, dragen av upp till 12 ivriga huskies. Hör hur deras upphetsade skall övergår till koncentrerad tystnad medan ni glider genom den hisnande arktiska vildmarken.\n\n━━━ VÄLJ DITT HUSKY-ÄVENTYR ━━━\n\n• Passiv tur: Luta dig tillbaka, slappna av och njut av färden! Upp till 4 gäster bekvämt placerade i en släde, körd av en erfaren musher.\n\n• Aktiv tur: Turas om att köra! Två gäster per släde, en kör och en sitter. Byt plats under turen för att fullt ut uppleva båda upplevelserna.\n\n━━━ TURDETALJER ━━━\n\n• Rutter: Skräddarsydda 10-15 km spår\n• Längd: 1,5-2 timmar\n• Svårighetsgrad: Lämplig för alla nivåer\n• Utrustning: Vinterkläder och stövlar tillhandahålls\n\nEtt autentiskt arktiskt äventyr som kopplar dig djupt till naturen och skapar oförglömliga minnen!"
       },
