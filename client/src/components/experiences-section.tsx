@@ -138,12 +138,6 @@ function ExperienceDetailModal({
   
   // Fix image paths if needed
   const fixImagePath = (path: string): string => {
-    // Handle Husky images specifically to use the main JPG file
-    if (path.includes('Husky') && path.includes('Huskys')) {
-      // Always use the main Husky.jpg file which we know exists
-      return 'images/Huskys/Husky.jpg';
-    }
-    
     if (path.startsWith('/')) {
       // Remove leading slash to help with path resolution
       return path.substring(1);
@@ -153,13 +147,7 @@ function ExperienceDetailModal({
   
   // For specific experiences, directly use the WebP files we know exist
   let gallery: string[] = [];
-  if (experience.title.toLowerCase().includes('husky')) {
-    // Use only the Husky.jpg file that we know exists
-    gallery = [
-      '/images/Huskys/Husky.jpg'
-    ];
-    console.log('Using updated gallery for Husky (single image):', gallery);
-  } else if (experience.title.toLowerCase().includes('snowmobile')) {
+  if (experience.title.toLowerCase().includes('snowmobile')) {
     // Skip path resolution and directly use WebP files for snowmobile
     gallery = [
       '/images/Snowmobile/Snowmobile 1_result.webp',
@@ -295,8 +283,7 @@ function ExperienceDetailModal({
             
             {/* Main image */}
             <img 
-              src={experience.title.toLowerCase().includes('husky') || 
-                   experience.title.toLowerCase().includes('snowmobile') ||
+              src={experience.title.toLowerCase().includes('snowmobile') ||
                    experience.title.toLowerCase().includes('jayjays') ||
                    experience.title.toLowerCase().includes('restaurant') ||
                    experience.title.toLowerCase().includes('ice kart') ||
@@ -335,27 +322,7 @@ function ExperienceDetailModal({
                 const size = screenWidth < 768 ? 'medium' : 'large'; // Use higher quality for modal
                 
                 // Special case handling for common experience images with WebP optimized versions
-                if (originalSrc.toLowerCase().includes('husky')) {
-                  console.log('Husky image failed to load:', originalSrc);
-                  // First try the new Husky.jpg as the primary fallback
-                  target.src = `/images/Huskys/Husky.jpg`;
-                  console.log('Fallback to primary image:', `/images/Huskys/Husky.jpg`);
-                  
-                  // Add an onerror handler to this image as well for a secondary fallback
-                  target.onerror = () => {
-                    // Extract the husky number or default to 1
-                    let huskyNum = 1;
-                    const match = originalSrc.match(/Husky\s*(\d+)/i);
-                    if (match && match[1]) {
-                      huskyNum = parseInt(match[1], 10);
-                    }
-                    // Force to a known valid husky file that exists
-                    if (huskyNum < 1 || huskyNum > 4) huskyNum = 1;
-                    
-                    target.src = `/images/Huskys/Husky ${huskyNum}_result.webp`;
-                    console.log('Secondary fallback to:', `/images/Huskys/Husky ${huskyNum}_result.webp`);
-                  };
-                } else if (originalSrc.toLowerCase().includes('snowmobile')) {
+                if (originalSrc.toLowerCase().includes('snowmobile')) {
                   console.log('Snowmobile image failed to load:', originalSrc);
                   // Extract the snowmobile number or default to 1
                   let snowmobileNum = 1;
