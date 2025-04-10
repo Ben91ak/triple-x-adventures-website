@@ -416,6 +416,9 @@ export function ExperiencesSection() {
   
   // Log all experiences for debugging
   console.log("All experiences:", experienceList.map(exp => ({ id: exp.id, title: exp.title })));
+  console.log("Current language:", language);
+  console.log("Has husky experience:", experienceList.some(exp => 
+    exp.title.toLowerCase().includes('husky') || exp.description.toLowerCase().includes('husky')));
   
   // Use all experiences
   const experiences = experienceList;
