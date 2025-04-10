@@ -39,7 +39,6 @@ export function ContactSection() {
   // Activities with translation support
   const activityOptions = [
     { id: "snowmobile-tour", label: language === "de" ? "Schneemobil Tour" : language === "sv" ? "Snöskoter Tur" : "Snowmobile Tour" },
-    { id: "husky-tour", label: language === "de" ? "Husky Tour" : language === "sv" ? "Husky Tur" : "Husky Tour" },
     { id: "reindeer-visit", label: language === "de" ? "Rentier Besuch" : language === "sv" ? "Besök Renarna" : "Visit the Reindeers" },
     { id: "snowshoe-hike", label: language === "de" ? "Schneeschuh Wanderung" : language === "sv" ? "Snösko Vandring" : "Snowshoe Hike" },
     { id: "arctic-spa", label: language === "de" ? "Arctic Spa" : language === "sv" ? "Arctic Spa" : "Arctic Spa" },

@@ -821,9 +821,7 @@ export function ExperiencesSection() {
                 <div className="relative h-[225px] overflow-hidden">
                   {/* Image with overlay - using loading=lazy for images below the fold */}
                   <img 
-                    src={experience.title.toLowerCase().includes('husky') 
-                        ? `/images/Huskys/Husky.jpg` // Use the direct JPG file for better compatibility
-                        : getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { 
+                    src={getOptimizedImageSrc(experience.image.startsWith('/') ? experience.image.substring(1) : experience.image, { 
                             quality: 'medium',
                             forceFormat: window.hasOwnProperty('webpSupported') && (window as any).webpSupported ? 'webp' : 'jpeg'
                           })
@@ -842,24 +840,8 @@ export function ExperiencesSection() {
                       const screenWidth = window.innerWidth;
                       const size = screenWidth < 768 ? 'small' : 'medium';
                       
-                      // Special case handling for common experience images with WebP optimized versions
-                      if (originalSrc.toLowerCase().includes('husky')) {
-                        // Try the Husky WebP files directly
-                        console.log('Husky card image fallback', originalSrc);
-                        target.src = `/images/Huskys/Husky 1_result.webp`;
-                        
-                        // Add a secondary fallback that uses JPG if WebP fails
-                        target.onerror = () => {
-                          console.log('WebP fallback failed, trying JPG');
-                          target.src = `/images/Huskys/Husky.jpg`;
-                          
-                          // Final fallback if JPG also fails
-                          target.onerror = () => {
-                            console.log('Using universal fallback image for Husky experience');
-                            target.src = `/images/TXA_fallback.jpg`;
-                          };
-                        };
-                      } else if (originalSrc.toLowerCase().includes('snowmobile')) {
+                      // Special case handling for common experience images with WebP optimized versions 
+                      if (originalSrc.toLowerCase().includes('snowmobile')) {
                         // Try WebP if supported
                         if (window.hasOwnProperty('webpSupported') && (window as any).webpSupported) {
                           target.src = `/images/Snowmobile/optimized/Snowmobile-${size}.webp`;
