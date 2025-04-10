@@ -17,6 +17,13 @@ interface ImagePreloadOptions {
 export function preloadImage(path: string, options: ImagePreloadOptions = {}) {
   const { priority = 'medium', fallback, onLoad, onError } = options;
   
+  // Skip any husky-related images to avoid errors
+  if (path.toLowerCase().includes('husky') || path.toLowerCase().includes('huskys') || path.toLowerCase().includes('dog')) {
+    console.log(`Skipping husky image preload: ${path}`);
+    if (onError) onError();
+    return null;
+  }
+  
   // Create a new image element
   const img = new Image();
   
@@ -138,6 +145,13 @@ function tryPathAlternatives(
   onSuccess?: () => void,
   onFail?: () => void
 ) {
+  // Skip any husky-related images
+  if (originalPath.toLowerCase().includes('husky') || originalPath.toLowerCase().includes('huskys') || originalPath.toLowerCase().includes('dog')) {
+    console.log(`Skipping husky image alternative paths: ${originalPath}`);
+    if (onFail) onFail();
+    return;
+  }
+  
   // Try paths that we know exist in the filesystem
   let alternativePaths: string[] = [];
   

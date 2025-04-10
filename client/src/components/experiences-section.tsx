@@ -121,7 +121,11 @@ function ExperienceDetailModal({
   useEffect(() => {
     // Preload all gallery images immediately when modal opens
     if (isOpen && experience.gallery && experience.gallery.length > 0) {
-      const galleryToUse = experience.gallery;
+      // Filter out any husky-related images from gallery
+      const galleryToUse = experience.gallery.filter(path => {
+        const pathLower = path.toLowerCase();
+        return !pathLower.includes('husky') && !pathLower.includes('huskys') && !pathLower.includes('dog');
+      });
       
       galleryToUse.forEach((imagePath, index) => {
         // Skip the active image since it's already loaded in the visible DOM
@@ -222,7 +226,21 @@ function ExperienceDetailModal({
   } else {
     // Default gallery to the main image if no gallery is provided
     const galleryPaths = experience.gallery || [experience.image];
-    gallery = galleryPaths.map(fixImagePath);
+    
+    // Filter out any husky-related images from the gallery
+    const filteredGalleryPaths = galleryPaths.filter(path => {
+      const pathLower = path.toLowerCase();
+      return !pathLower.includes('husky') && !pathLower.includes('huskys') && !pathLower.includes('dog');
+    });
+    
+    // Use the filtered gallery, or if it's empty after filtering, use a default fallback
+    if (filteredGalleryPaths.length > 0) {
+      gallery = filteredGalleryPaths.map(fixImagePath);
+    } else {
+      // If all images were filtered (which shouldn't happen with our current logic),
+      // provide a fallback to prevent issues
+      gallery = ['/images/TXA_fallback.jpg'];
+    }
   }
   
   // Navigation for next/previous image
