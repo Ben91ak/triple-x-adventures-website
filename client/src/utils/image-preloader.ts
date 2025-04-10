@@ -132,6 +132,7 @@ function tryFormatAlternatives(
 /**
  * Try different path structures as a last resort
  * Enhanced with more comprehensive alternatives based on actual filesystem scan
+ * FIXED: Husky image paths to use single JPG instead of multiple webps
  */
 function tryPathAlternatives(
   originalPath: string,
@@ -156,9 +157,7 @@ function tryPathAlternatives(
     
     // Handle special cases with verified paths
     if (baseName.includes('husky')) {
-      alternativePaths.push('/images/Huskys/Husky 1_result.webp');
-      alternativePaths.push('/images/Huskys/Husky 2_result.webp');
-      alternativePaths.push('/images/Huskys/Husky 3_result.webp');
+      alternativePaths.push('/images/Huskys/Husky.jpg');
     } 
     else if (baseName.includes('snowmobile')) {
       // WebP versions first (preferable)
@@ -202,9 +201,7 @@ function tryPathAlternatives(
     
     // Handle special cases with verified paths
     if (baseName.includes('husky')) {
-      alternativePaths.push('/images/Huskys/Husky 1_result.webp');
-      alternativePaths.push('/images/Huskys/Husky 2_result.webp');
-      alternativePaths.push('/images/Huskys/Husky 3_result.webp');
+      alternativePaths.push('/images/Huskys/Husky.jpg');
     } 
     else if (baseName.includes('snowmobile')) {
       // WebP versions first (preferable)
@@ -282,12 +279,13 @@ export function preloadImages(paths: string[], options: ImagePreloadOptions = {}
 /**
  * Preload all critical images for the experiences section
  * Updated with correct capitalization and paths based on filesystem check
+ * FIXED: Updated to use JPG image for Husky images
  */
 export function preloadExperienceImages() {
   // Use actual verified image paths based on filesystem check
   const experienceImages = [
-    // Primary WebP images from verified directories - limit to 1 image per type for initial preload to improve performance
-    '/images/Huskys/Husky 1_result.webp',
+    // Primary images with verified paths
+    '/images/Huskys/Husky.jpg',
     '/images/Reindeers/Reindeers 1_result.webp',
     '/images/Ice Drift/Cars 1_result.webp',
     '/images/Side by Side/SBS 1_result.webp',
