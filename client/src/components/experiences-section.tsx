@@ -411,36 +411,33 @@ export function ExperiencesSection() {
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   
-  // Get experiences data from translations and filter out any husky-related experiences
+  // Get all experiences from the translation
   let experienceList = t.experiences.list as Experience[];
   
-  // Make a completely new array without reference to husky experiences
-  const experiences: Experience[] = experienceList.reduce((filtered: any[], exp) => {
-    // Explicitly exclude ID 2 - the husky card
-    if (exp.id === 2) {
-      console.log('Excluding husky experience ID 2');
-      return filtered;
-    }
-    
-    // Also exclude by keyword
-    const title = (exp.title || '').toLowerCase();
-    const desc = (exp.description || '').toLowerCase();
-    
-    if (title.includes('husky') || desc.includes('husky') || 
-        title.includes('dog') || desc.includes('dog') ||
-        (exp.image && exp.image.toLowerCase().includes('husky'))) {
-      console.log(`Excluding experience by keyword: ${exp.title}`);
-      return filtered;
-    }
-    
-    // It passed all filters, so add it with modified properties
-    filtered.push({
-      ...exp,
-      // Add empty fullDescription if not provided in translations
-      fullDescription: exp.fullDescription || exp.description
-    });
-    return filtered;
-  }, []);
+  // Include all experiences - don't filter out husky anymore
+  let experiences: Experience[] = experienceList.map(exp => ({
+    ...exp,
+    // Add empty fullDescription if not provided in translations
+    fullDescription: exp.fullDescription || exp.description
+  }));
+  
+  // Custom order to display cards in desired sequence with Husky after Side-by-Side
+  // Create a custom ordered array that will explicitly place the husky card after the side-by-side
+  const customOrder: Record<number, number> = {};
+  
+  // First, assign default ordering based on ID
+  experienceList.forEach(exp => {
+    customOrder[exp.id] = exp.id;
+  });
+  
+  // Specifically place husky card (ID 10) right after side-by-side card (ID 9)
+  // by swapping its position in sort order
+  customOrder[10] = 9.5; // Place between 9 and 10
+  
+  // Sort using the custom order
+  experiences = experiences.sort((a, b) => {
+    return (customOrder[a.id] || a.id) - (customOrder[b.id] || b.id);
+  });
   
   // Navigation handlers
   const navigateToNext = () => {
