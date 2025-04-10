@@ -438,10 +438,7 @@ export function ExperiencesSection() {
   const getExperienceImage = (experience: Experience): string => {
     const title = experience.title.toLowerCase();
     
-    if (title.includes('husky')) {
-      return '/images/Huskys/Husky.jpg';
-    } 
-    else if (title.includes('snowmobile')) {
+    if (title.includes('snowmobile')) {
       return '/images/Snowmobile/Snowmobile.jpg';
     } 
     else if (title.includes('restaurant') || title.includes('jayjay')) {

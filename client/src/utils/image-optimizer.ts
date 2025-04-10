@@ -282,18 +282,6 @@ export function getOptimizedImageSrc(
   
   // Path normalization - handle various path inconsistencies
   // Fixed paths for adventure images using the original asset versions we've copied
-  if (src.includes('/images/Huskys/') || src.toLowerCase().includes('husky')) {
-    // Check WebP support and use the optimized version with appropriate size
-    const useWebP = formatSupportCache.webp === true;
-    const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    const size = screenWidth < 768 ? 'small' : 'medium';
-    
-    if (useWebP) {
-      return `/images/Huskys/optimized/Husky-${size}.webp`;
-    } else {
-      return `/images/Huskys/optimized/Husky-${size}.jpg`;
-    }
-  }
   
   if (src.includes('/images/Snowmobile/') || src.toLowerCase().includes('snowmobile')) {
     // Check if path already includes the _result.webp suffix

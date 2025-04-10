@@ -279,13 +279,12 @@ export function preloadImages(paths: string[], options: ImagePreloadOptions = {}
 /**
  * Preload all critical images for the experiences section
  * Updated with correct capitalization and paths based on filesystem check
- * FIXED: Updated to use JPG image for Husky images
+
  */
 export function preloadExperienceImages() {
   // Use actual verified image paths based on filesystem check
   const experienceImages = [
     // Primary images with verified paths
-    '/images/Huskys/Husky.jpg',
     '/images/Reindeers/Reindeers 1_result.webp',
     '/images/Ice Drift/Cars 1_result.webp',
     '/images/Side by Side/SBS 1_result.webp',
