@@ -19,13 +19,13 @@ interface SEOProps {
 
 export function SEO({
   title = 'Premium Arctic Adventures | Triple X Adventures',
-  description = 'Experience unforgettable winter adventures in Swedish Lapland including snowmobile tours, husky sledding, ice drifting, and Northern Lights viewing. Discover the real Arctic with Triple X Adventures in Arvidsjaur.',
+  description = 'Experience unforgettable winter adventures in Swedish Lapland including snowmobile tours, ice drifting, and Northern Lights viewing. Discover the real Arctic with Triple X Adventures in Arvidsjaur.',
   canonicalUrl = 'https://triple-x-adventures.com',
   ogImage = '/images/triple-x-adventures-og.jpg',
   ogType = 'website',
   twitterCard = 'summary_large_image',
   structuredData,
-  keywords = 'snowmobile tours Swedish Lapland, Arctic adventures Sweden, Northern Lights tours Lapland, ice drifting experience Sweden, husky sledding Lapland, luxury adventure Lapland, winter activities Arvidsjaur',
+  keywords = 'snowmobile tours Swedish Lapland, Arctic adventures Sweden, Northern Lights tours Lapland, ice drifting experience Sweden, luxury adventure Lapland, winter activities Arvidsjaur',
   noIndex = false,
   lang = 'en',
   altLangLinks = [],

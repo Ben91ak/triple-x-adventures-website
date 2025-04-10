@@ -603,65 +603,6 @@ function ExperienceDetailModal({
                     </ul>
                   </div>
                 </div>
-              ) : experience.fullDescription && experience.fullDescription.includes('CHOOSE YOUR HUSKY ADVENTURE') ? (
-                <div className="leading-relaxed">
-                  {/* Introduction text */}
-                  <p className="mb-6">
-                    {experience.fullDescription.split('━━━ CHOOSE YOUR HUSKY ADVENTURE ━━━')[0].trim()}
-                  </p>
-                  
-                  {/* Husky Adventure section */}
-                  <div className="mb-6">
-                    <h3 className="text-white font-bold text-lg flex items-center gap-2 mb-4">
-                      <span className="h-px w-6 bg-accent-color"></span>
-                      <span>CHOOSE YOUR HUSKY ADVENTURE</span>
-                      <span className="h-px flex-grow bg-accent-color"></span>
-                    </h3>
-                    
-                    <div className="space-y-6">
-                      {/* Passive Tour */}
-                      <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
-                        <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
-                          <span className="inline-block w-4 h-4 bg-accent-color/70 rotate-45"></span>
-                          <span>PASSIVE TOUR</span>
-                        </h4>
-                        <p className="ml-6 mb-2">Sit back, relax, and enjoy the ride! Up to 4 guests comfortably seated in one sled driven by an experienced musher.</p>
-                      </div>
-                      
-                      {/* Active Tour */}
-                      <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
-                        <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
-                          <span className="inline-block w-4 h-4 bg-accent-color/90 rotate-45"></span>
-                          <span>ACTIVE TOUR</span>
-                        </h4>
-                        <p className="ml-6 mb-2">Take turns driving! Two guests per sled, with one driving and one riding. Swap places during the tour to fully enjoy both experiences.</p>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Tour Details section */}
-                  <div>
-                    <h3 className="text-white font-bold text-lg flex items-center gap-2 mb-4">
-                      <span className="h-px w-6 bg-accent-color"></span>
-                      <span>TOUR DETAILS</span>
-                      <span className="h-px flex-grow bg-accent-color"></span>
-                    </h3>
-                    
-                    <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
-                      <ul className="ml-6 list-disc list-inside space-y-2 text-sm text-white/90">
-                        <li>Routes: Customized 10-15 km trails</li>
-                        <li>Duration: 1.5-2 hours</li>
-                        <li>Difficulty: Suitable for all skill levels</li>
-                        <li>Equipment: Winter clothing and boots provided</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  {/* Final note */}
-                  <p className="mt-6 text-center text-accent-color font-medium">
-                    An authentic Arctic adventure that connects you deeply with nature and leaves you with unforgettable memories!
-                  </p>
-                </div>
               ) : (
                 <p className="leading-relaxed">
                   {experience.fullDescription || experience.description}

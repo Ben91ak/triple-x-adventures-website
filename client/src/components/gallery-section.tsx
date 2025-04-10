@@ -37,7 +37,6 @@ const contentByLanguage = {
 const videos = [
   { id: 1, src: "/videos/Reels/TXA Reels_1.mp4", title: "Snowmobile Adventure" },
   { id: 2, src: "/videos/Reels/TXA Reels_2.mp4", title: "Arctic Landscapes" },
-  { id: 3, src: "/videos/Reels/TXA Reels_3.mp4", title: "Husky Experience" },
   { id: 4, src: "/videos/Reels/TXA Reels_4.mp4", title: "Winter Activities" },
   { id: 5, src: "/videos/Reels/TXA Reels_5.mp4", title: "Northern Lights" },
   { id: 6, src: "/videos/Reels/TXA Reels_6.mp4", title: "Ice Fishing" },
