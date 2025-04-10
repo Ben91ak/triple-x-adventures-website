@@ -414,6 +414,9 @@ export function ExperiencesSection() {
   // Get all experiences from the translation
   let experienceList = t.experiences.list as Experience[];
   
+  // Log all experiences for debugging
+  console.log("All experiences:", experienceList.map(exp => ({ id: exp.id, title: exp.title })));
+  
   // Use all experiences
   const experiences = experienceList;
   
