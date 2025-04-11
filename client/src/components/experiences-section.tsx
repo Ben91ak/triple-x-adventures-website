@@ -107,74 +107,56 @@ function ExperienceDetailModal({
     
     if (title.includes('snowmobile')) {
       return [
-        '/images/Snowmobile/Snowmobile.jpg',
-        '/images/Snowmobile/Snowmobile 1_result.webp',
-        '/images/Snowmobile/Snowmobile 2_result.webp',
-        '/images/Snowmobile/Snowmobile 3_result.webp'
+        '/images/Snowmobile.jpg',
+        '/images/Snowmobile.jpg'
       ];
     } 
     else if (title.includes('restaurant') || title.includes('jayjay')) {
       return [
-        '/images/restaurant/jayjays-exterior.jpg',
-        '/images/JayJays Restaurant/Food 1_result.webp',
-        '/images/JayJays Restaurant/Food 2_result.webp',
-        '/images/JayJays Restaurant/Food 3_result.webp'
+        '/images/JayJays restaurant .jpg',
+        '/images/JayJays restaurant .jpg'
       ];
     } 
     else if (title.includes('kart')) {
       return [
-        '/images/ice-kart.jpg',
-        '/images/Ice Kart/Icekart 1_result.webp',
-        '/images/Ice Kart/Icekart 2_result.webp',
-        '/images/Ice Kart/Icekart 3_result.webp'
+        '/images/Ice Kart.jpg',
+        '/images/Ice Kart.jpg'
       ];
     } 
     else if (title.includes('reindeer')) {
       return [
         '/images/Reindeers.jpg',
-        '/images/Reindeers/Reindeers 1_result.webp',
-        '/images/Reindeers/Reindeers 2_result.webp',
-        '/images/Reindeers/Reindeers 3_result.webp'
+        '/images/Reindeers.jpg'
       ];
     } 
     else if (title.includes('helicopter') || title.includes('helikopter')) {
       return [
         '/images/Helikopter.jpg',
-        '/images/Helicopter/Helikopter 1_result.webp',
-        '/images/Helicopter/Helikopter 2_result.webp',
-        '/images/Helicopter/Helikopter 3_result.webp'
+        '/images/Helikopter.jpg'
       ];
     } 
     else if (title.includes('drift')) {
       return [
         '/images/Drifting.jpg',
-        '/images/Ice Drift/Cars 1_result.webp',
-        '/images/Ice Drift/Cars 2_result.webp',
-        '/images/Ice Drift/Cars 3_result.webp'
+        '/images/Drifting.jpg'
       ];
     } 
     else if (title.includes('fishing')) {
       return [
-        '/images/Ice-Fishing.jpg',
-        '/images/Ice Fishing/Icefish 1_result.webp',
-        '/images/Ice Fishing/Icefish 2_result.webp',
-        '/images/Ice Fishing/Shoot 3_result.webp'
+        '/images/Ice Fishing.JPG',
+        '/images/Ice Fishing.JPG'
       ];
     } 
     else if (title.includes('buggy') || title.includes('side')) {
       return [
-        '/images/Side-By-Side-Buggy-Drifting.jpg',
-        '/images/Side by Side/SBS 1_result.webp',
-        '/images/Side by Side/SBS 2_result.webp',
-        '/images/Side by Side/SBS 3_result.webp'
+        '/images/Side By Side Buggy Drifting .jpg',
+        '/images/Side By Side Buggy Drifting .jpg'
       ];
     }
     else if (title.includes('husky') || title.includes('dog')) {
       return [
-        '/images/Huskys/Husky 1_result.webp',
-        '/images/Huskys/Husky 2_result.webp',
-        '/images/Huskys/Husky 3_result.webp',
-        '/images/Huskys/Husky 4_result.webp'
+        '/images/Husky.jpg',
+        '/images/Husky.jpg'
       ];
     }
     
@@ -472,13 +454,13 @@ export function ExperiencesSection() {
     const title = experience.title.toLowerCase();
     
     if (title.includes('snowmobile')) {
-      return '/images/Snowmobile/Snowmobile.jpg';
+      return '/images/Snowmobile.jpg';
     } 
     else if (title.includes('restaurant') || title.includes('jayjay')) {
       return '/images/restaurant/jayjays-exterior.jpg';
     } 
     else if (title.includes('kart')) {
-      return '/images/ice-kart.jpg';
+      return '/images/Ice Kart.jpg';
     } 
     else if (title.includes('reindeer')) {
       return '/images/Reindeers.jpg';
@@ -490,13 +472,13 @@ export function ExperiencesSection() {
       return '/images/Drifting.jpg';
     } 
     else if (title.includes('fishing')) {
-      return '/images/Ice-Fishing.jpg';
+      return '/images/Ice Fishing.JPG';
     } 
     else if (title.includes('buggy') || title.includes('side')) {
-      return '/images/Side-By-Side-Buggy-Drifting.jpg';
+      return '/images/Side By Side Buggy Drifting .jpg';
     }
     else if (title.includes('husky') || title.includes('dog')) {
-      return '/images/Huskys/Husky 1_result.webp';
+      return '/images/Husky.jpg';
     }
     
     // If no specific image was found, use the one from the translation file
