@@ -101,63 +101,71 @@ function ExperienceDetailModal({
   // Exit early if the modal is not open
   if (!isOpen) return null;
   
-  // Get the correct gallery images based on experience type
+  // Get the correct gallery images based on experience type (improved)
   const getGalleryImages = (): string[] => {
     const title = experience.title.toLowerCase();
     
-    if (title.includes('snowmobile')) {
-      return [
-        '/images/Snowmobile.jpg',
-        '/images/Snowmobile.jpg'
-      ];
-    } 
-    else if (title.includes('restaurant') || title.includes('jayjay')) {
-      return [
+    // Define gallery mappings with correct paths
+    const galleryMappings: Record<string, string[]> = {
+      'snowmobile': [
+        '/images/Snowmobile/Snowmobile.jpg',
+        '/images/Snowmobile/Snowmobile.jpg'
+      ],
+      'restaurant': [
         '/images/JayJays restaurant .jpg',
         '/images/JayJays restaurant .jpg'
-      ];
-    } 
-    else if (title.includes('kart')) {
-      return [
+      ],
+      'jayjay': [
+        '/images/JayJays restaurant .jpg',
+        '/images/JayJays restaurant .jpg'
+      ],
+      'kart': [
         '/images/Ice Kart.jpg',
         '/images/Ice Kart.jpg'
-      ];
-    } 
-    else if (title.includes('reindeer')) {
-      return [
+      ],
+      'reindeer': [
         '/images/Reindeers.jpg',
         '/images/Reindeers.jpg'
-      ];
-    } 
-    else if (title.includes('helicopter') || title.includes('helikopter')) {
-      return [
+      ],
+      'helicopter': [
         '/images/Helikopter.jpg',
         '/images/Helikopter.jpg'
-      ];
-    } 
-    else if (title.includes('drift')) {
-      return [
+      ],
+      'helikopter': [
+        '/images/Helikopter.jpg',
+        '/images/Helikopter.jpg'
+      ],
+      'drift': [
         '/images/Drifting.jpg',
         '/images/Drifting.jpg'
-      ];
-    } 
-    else if (title.includes('fishing')) {
-      return [
+      ],
+      'fishing': [
         '/images/Ice Fishing.JPG',
         '/images/Ice Fishing.JPG'
-      ];
-    } 
-    else if (title.includes('buggy') || title.includes('side')) {
-      return [
+      ],
+      'buggy': [
         '/images/Side By Side Buggy Drifting .jpg',
         '/images/Side By Side Buggy Drifting .jpg'
-      ];
-    }
-    else if (title.includes('husky') || title.includes('dog')) {
-      return [
+      ],
+      'side': [
+        '/images/Side By Side Buggy Drifting .jpg',
+        '/images/Side By Side Buggy Drifting .jpg'
+      ],
+      'husky': [
         '/images/Husky.jpg',
         '/images/Husky.jpg'
-      ];
+      ],
+      'dog': [
+        '/images/Husky.jpg',
+        '/images/Husky.jpg'
+      ]
+    };
+    
+    // Find the matching gallery
+    for (const [keyword, gallery] of Object.entries(galleryMappings)) {
+      if (title.includes(keyword)) {
+        return gallery;
+      }
     }
     
     // Fallback to the experience's gallery or just the main image
@@ -449,36 +457,32 @@ export function ExperiencesSection() {
     setModalOpen(false);
   };
 
-  // Helper function to get the correct image path for each experience
+  // Improved helper function to get the correct image path for each experience
   const getExperienceImage = (experience: Experience): string => {
     const title = experience.title.toLowerCase();
     
-    if (title.includes('snowmobile')) {
-      return '/images/Snowmobile.jpg';
-    } 
-    else if (title.includes('restaurant') || title.includes('jayjay')) {
-      return '/images/restaurant/jayjays-exterior.jpg';
-    } 
-    else if (title.includes('kart')) {
-      return '/images/Ice Kart.jpg';
-    } 
-    else if (title.includes('reindeer')) {
-      return '/images/Reindeers.jpg';
-    } 
-    else if (title.includes('helicopter') || title.includes('helikopter')) {
-      return '/images/Helikopter.jpg';
-    } 
-    else if (title.includes('drift')) {
-      return '/images/Drifting.jpg';
-    } 
-    else if (title.includes('fishing')) {
-      return '/images/Ice Fishing.JPG';
-    } 
-    else if (title.includes('buggy') || title.includes('side')) {
-      return '/images/Side By Side Buggy Drifting .jpg';
-    }
-    else if (title.includes('husky') || title.includes('dog')) {
-      return '/images/Husky.jpg';
+    // Mapping of experience types to correct image paths
+    const imageMappings = {
+      'snowmobile': '/images/Snowmobile/Snowmobile.jpg',
+      'restaurant': '/images/restaurant/jayjays-exterior.jpg',
+      'jayjay': '/images/restaurant/jayjays-exterior.jpg',
+      'kart': '/images/Ice Kart.jpg',
+      'reindeer': '/images/Reindeers.jpg',
+      'helicopter': '/images/Helikopter.jpg',
+      'helikopter': '/images/Helikopter.jpg',
+      'drift': '/images/Drifting.jpg',
+      'fishing': '/images/Ice Fishing.JPG',
+      'buggy': '/images/Side By Side Buggy Drifting .jpg',
+      'side': '/images/Side By Side Buggy Drifting .jpg',
+      'husky': '/images/Husky.jpg',
+      'dog': '/images/Husky.jpg'
+    };
+    
+    // Find the matching image path
+    for (const [keyword, path] of Object.entries(imageMappings)) {
+      if (title.includes(keyword)) {
+        return path;
+      }
     }
     
     // If no specific image was found, use the one from the translation file

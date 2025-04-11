@@ -5,11 +5,51 @@ import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  
   // Maintain video loading and error states
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const { language } = useLanguage();
   const t = useTranslation(language);
+  
+  // Handle visibility changes to pause/play video
+  useEffect(() => {
+    function handleVisibilityChange() {
+      if (videoRef.current) {
+        if (document.hidden) {
+          videoRef.current.pause();
+        } else {
+          videoRef.current.play().catch(e => {
+            console.log('Autoplay prevented by browser:', e);
+          });
+        }
+      }
+    }
+    
+    // Add event listener for visibility changes
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Cleanup any dynamically added preload links that might cause warnings
+    function cleanupUnusedPreloads() {
+      const preloads = document.head.querySelectorAll('link[rel="preload"]');
+      preloads.forEach(link => {
+        // Keep only our explicitly defined video preload
+        if (!link.href.includes('TXA Teaser 2025 Homepage.mp4') && 
+            !link.href.includes('TXA Teaser 2025 Homepage.webm')) {
+          link.remove();
+          console.log('Removed unnecessary preload:', link.href);
+        }
+      });
+    }
+    
+    // Run cleanup after a short delay to catch any dynamically added preloads
+    setTimeout(cleanupUnusedPreloads, 100);
+    
+    // Clean up the event listener on component unmount
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
   
   // Create animation hooks for various hero elements with staggered timing
   // Set initiallyVisible to true to ensure elements show immediately on page load
@@ -252,7 +292,10 @@ export function HeroSection() {
                   videoRef.current.playbackRate = 0.8;
                 }
               }}
-              onError={() => setVideoError(true)}
+              onError={(e) => {
+                console.error('Video loading error:', e);
+                setVideoError(true);
+              }}
               onCanPlay={() => setVideoLoaded(true)}
               onPlaying={() => console.log("Video is playing")}
               style={{ 
@@ -269,6 +312,9 @@ export function HeroSection() {
                 transform: 'translateX(-50%) translateY(-50%)'
               }}
             >
+              {/* Try WebM format first for better performance */}
+              <source src="/videos/TXA Teaser 2025 Homepage.webm" type="video/webm" />
+              {/* MP4 fallback for broader compatibility */}
               <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
               {/* Fallback message */}
               <p>Your browser does not support HTML5 video playback.</p>
