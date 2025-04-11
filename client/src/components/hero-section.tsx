@@ -1,15 +1,13 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  // For simplicity, we'll just use one state for video loading
-  const [videoState, setVideoState] = useState({
-    loaded: false,
-    error: false
-  });
+  // Maintain video loading and error states
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const { language } = useLanguage();
   const t = useTranslation(language);
   
@@ -54,16 +52,32 @@ export function HeroSection() {
     animationDelay: 1500
   });
   
-  // Simplified video handling
-  const handleVideoCanPlay = () => {
-    console.log("Video can play now");
-    setVideoState(prev => ({ ...prev, loaded: true }));
-  };
-  
-  const handleVideoError = () => {
-    console.error("Video failed to load");
-    setVideoState({ loaded: false, error: true });
-  };
+  // Add effect to handle video loading
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    
+    // Set up event listeners for video
+    const handleCanPlay = () => {
+      console.log("Video can play");
+      setVideoLoaded(true);
+    };
+    
+    const handleError = () => {
+      console.error("Video loading error");
+      setVideoError(true);
+    };
+    
+    // Add event listeners
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
+    
+    // Clean up event listeners on unmount
+    return () => {
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('error', handleError);
+    };
+  }, []);
 
   // Content based on language
   const heroContent = {
@@ -103,7 +117,7 @@ export function HeroSection() {
         </div>
         
         {/* Video with fallback animation */}
-        {!videoState.error ? (
+        {!videoError ? (
           <>
             {/* Low-quality image poster that will show immediately while video loads */}
             {/* High-priority fallback image with proper attributes for LCP optimization */}
@@ -144,7 +158,7 @@ export function HeroSection() {
             {/* Video element with simplified loading strategy */}
             <video 
               ref={videoRef}
-              className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 ${videoState.loaded ? 'opacity-90' : 'opacity-0'}`}
+              className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 ${videoLoaded ? 'opacity-90' : 'opacity-0'}`}
               autoPlay 
               muted 
               loop 
@@ -152,7 +166,7 @@ export function HeroSection() {
               controls={false}
               poster="/images/TXA_fallback_optimized.jpg"
               preload="auto"
-              src="/videos/TXA Teaser 2025 Homepage.webm"
+              src="/videos/TXA Teaser 2025 Homepage.mp4"
               aria-label="Background video of Arctic adventures"
               aria-hidden="true"
               onLoadedMetadata={() => {
@@ -161,8 +175,8 @@ export function HeroSection() {
                   videoRef.current.playbackRate = 0.8;
                 }
               }}
-              onError={handleVideoError}
-              onCanPlay={handleVideoCanPlay}
+              onError={() => setVideoError(true)}
+              onCanPlay={() => setVideoLoaded(true)}
               onPlaying={() => console.log("Video is playing")}
               style={{ 
                 objectFit: 'cover',
@@ -178,7 +192,7 @@ export function HeroSection() {
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
-            {!videoState.loaded && (
+            {!videoLoaded && (
               <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-dark-bg/90 to-dark-bg/80 opacity-100 transform-gpu">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent-color/10 via-dark-bg/5 to-accent-color/5 opacity-60 animate-aurora-slow"></div>
                 <div className="absolute inset-0 bg-gradient-to-tr from-accent-color/5 via-dark-bg/5 to-accent-color/15 opacity-50 animate-aurora-medium"></div>

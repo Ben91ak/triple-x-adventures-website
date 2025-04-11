@@ -1,0 +1,161 @@
+# Responsive Hero Video Implementation
+
+## Overview
+Create a responsive hero video section for a website that loads quickly and adapts to all screen sizes. The video should be the centerpiece of the landing page and create an impactful first impression.
+
+## Source File
+- Video location: `public/videos/TXA Teaser 2025 Homepage.webm`
+
+## Requirements
+
+### Performance
+- Optimize for quick loading times
+- Implement lazy loading
+- Consider preloading for improved performance
+- Use appropriate compression techniques
+
+### Responsiveness
+- Video must adapt to all screen sizes (mobile, tablet, desktop, ultra-wide)
+- Maintain aspect ratio while filling the container appropriately
+- Implement different loading strategies for mobile vs. desktop
+
+### Technical Implementation
+1. Create an HTML structure with fallback for browsers that don't support WebM
+2. Implement responsive CSS using modern techniques
+3. Add JavaScript for enhanced functionality and performance
+4. Ensure accessibility compliance
+
+## Implementation Steps
+
+### HTML Structure
+```html
+<div class="hero-container">
+  <video class="hero-video" playsinline autoplay muted loop poster="path/to/poster-image.jpg">
+    <source src="public/videos/TXA Teaser 2025 Homepage.webm" type="video/webm">
+    <!-- Add fallback formats if available -->
+    <img src="path/to/fallback-image.jpg" alt="TXA 2025 Teaser Visual" class="fallback-img">
+  </video>
+  <div class="hero-content">
+    <!-- Overlay text/buttons go here -->
+  </div>
+</div>
+```
+
+### CSS Implementation
+```css
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translateX(-50%) translateY(-50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Media queries for different screen sizes */
+@media (max-width: 768px) {
+  .hero-container {
+    height: 60vh; /* Smaller height on mobile */
+  }
+  
+  /* Consider different video quality for mobile */
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  /* Style overlay content */
+}
+
+.fallback-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+```
+
+### JavaScript Enhancements
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('.hero-video');
+  
+  // Check if browser supports IntersectionObserver for lazy loading
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Video is visible, start loading/playing
+          const source = video.querySelector('source');
+          source.src = source.dataset.src;
+          video.load();
+          video.play();
+          observer.unobserve(video);
+        }
+      });
+    });
+    
+    observer.observe(video);
+  } else {
+    // Fallback for browsers without IntersectionObserver
+    video.load();
+    video.play();
+  }
+  
+  // Check connection speed and adapt video quality if needed
+  if (navigator.connection) {
+    const connection = navigator.connection;
+    if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+      // Load lower quality video or poster image for slow connections
+      video.style.display = 'none';
+      document.querySelector('.fallback-img').style.display = 'block';
+    }
+  }
+  
+  // Pause video when not visible to save resources
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      video.pause();
+    } else {
+      video.play();
+    }
+  });
+});
+```
+
+## Advanced Options
+
+### Video Format Optimization
+Consider creating multiple formats for better browser compatibility:
+- WebM (modern browsers)
+- MP4 (wider compatibility)
+- Poster image for initial load
+
+### Progressive Enhancement
+- Start with a static image that loads immediately
+- Replace with video once page has loaded
+- Consider reduced motion preferences for accessibility
+
+### Performance Tips
+- Host video on a CDN for faster delivery
+- Use `preload="metadata"` to only load video metadata initially
+- Consider using a compressed poster image for immediate display
+
+## Testing Requirements
+- Test across multiple devices and screen sizes
+- Verify loading performance with throttled connections
+- Ensure correct aspect ratio maintenance
+- Check behavior when JavaScript is disabled
