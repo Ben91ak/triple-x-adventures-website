@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TXA 2025 - Adventure Tours</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Hero Section Styles */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000; /* Fallback background */
+    }
+    
+    /* This is the main video container */
+    .video-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    /* Background color in case video fails */
+    .video-fallback {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #2c3e50, #4ca1af);
+      z-index: 0;
+    }
+    
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover;
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-content p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-button {
+      padding: 12px 24px;
+      background-color: #ff4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .hero-button:hover {
+      background-color: #ff6a33;
+    }
+    
+    /* Media queries */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-container {
+        height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section with robust error handling -->
+  <div class="hero-container">
+    <!-- Fallback background if video fails -->
+    <div class="video-fallback"></div>
+    
+    <!-- Video wrapper with error handling -->
+    <div class="video-wrapper">
+      <!-- No autoplay initially - we'll handle this with JavaScript -->
+      <video id="hero-video" class="hero-video" playsinline muted loop>
+        <!-- Try multiple sources and formats -->
+        <source src="/public/videos/TXA Teaser 2025 Homepage.webm" type="video/webm">
+        <source src="/public/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4">
+        <!-- No fallback text to prevent it from showing in DOM -->
+      </video>
+    </div>
+    
+    <div class="hero-content">
+      <h1>TXA 2025 Adventures</h1>
+      <p>Experience the thrill of adventure with our premium guided tours.</p>
+      <a href="#experiences" class="hero-button">Explore Adventures</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Variables for error handling
+      let videoAttempts = 0;
+      const maxAttempts = 3;
+      const video = document.getElementById('hero-video');
+      const videoWrapper = document.querySelector('.video-wrapper');
+      const videoFallback = document.querySelector('.video-fallback');
+      
+      // Function to safely play video
+      function attemptPlayVideo() {
+        if (!video) {
+          console.error('Video element not found');
+          showFallback();
+          return;
+        }
+        
+        // Reset video errors
+        video.addEventListener('error', handleVideoError, true);
+        
+        // Play video with promise to detect auto-play blocking
+        const playPromise = video.play();
+        
+        // Handle play promise
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            // Video started playing successfully
+            console.log('Video playing successfully');
+            hideErrorMessage();
+          }).catch(error => {
+            console.warn('Auto-play was prevented:', error);
+            
+            // Check if it's a user interaction issue
+            if (error.name === 'NotAllowedError') {
+              // This is often due to autoplay policies
+              // Keep the video element but don't autoplay
+              addPlayButton();
+            } else {
+              // For other errors, try again or show fallback
+              handleVideoError(error);
+            }
+          });
+        }
+      }
+      
+      // Handle video error events
+      function handleVideoError(error) {
+        console.error('Video error:', error);
+        videoAttempts++;
+        
+        if (videoAttempts < maxAttempts) {
+          console.log(`Retrying video load (${videoAttempts}/${maxAttempts})...`);
+          
+          // Try with different paths if first attempt failed
+          if (videoAttempts === 1) {
+            // Try without the leading slash
+            video.querySelector('source').src = 'public/videos/TXA Teaser 2025 Homepage.webm';
+            video.load();
+            setTimeout(attemptPlayVideo, 1000);
+          } else {
+            // Try relative path
+            video.querySelector('source').src = '../videos/TXA Teaser 2025 Homepage.webm';
+            video.load();
+            setTimeout(attemptPlayVideo, 1000);
+          }
+        } else {
+          // Give up and show fallback
+          showFallback();
+        }
+      }
+      
+      // Show fallback when video fails
+      function showFallback() {
+        if (video) video.style.display = 'none';
+        if (videoFallback) videoFallback.style.zIndex = 2;
+        
+        // Add a console message for debugging
+        console.log('Using fallback background due to video loading failures');
+      }
+      
+      // Add play button for browsers that block autoplay
+      function addPlayButton() {
+        const playButton = document.createElement('button');
+        playButton.innerHTML = 'Play Video';
+        playButton.className = 'hero-button';
+        playButton.style.position = 'absolute';
+        playButton.style.zIndex = '3';
+        playButton.style.top = '70%';
+        
+        playButton.addEventListener('click', function() {
+          video.play();
+          this.remove();
+        });
+        
+        videoWrapper.appendChild(playButton);
+      }
+      
+      // Hide any error messages
+      function hideErrorMessage() {
+        // Remove any error messages if they exist
+        const errorMessages = document.querySelectorAll('.video-error-message');
+        errorMessages.forEach(msg => msg.remove());
+      }
+      
+      // Try to initialize the video
+      attemptPlayVideo();
+      
+      // Handle visibility changes
+      document.addEventListener('visibilitychange', function() {
+        if (!video) return;
+        
+        if (document.hidden) {
+          video.pause();
+        } else {
+          // Only try to play if not in an error state
+          if (videoAttempts < maxAttempts) {
+            video.play().catch(err => console.log('Play prevented on visibility change'));
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

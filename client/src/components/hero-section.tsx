@@ -31,15 +31,24 @@ export function HeroSection() {
     
     // Cleanup any dynamically added preload links that might cause warnings
     function cleanupUnusedPreloads() {
-      const preloads = document.head.querySelectorAll('link[rel="preload"]');
-      preloads.forEach(link => {
-        // Keep only our explicitly defined video preload
-        if (!link.href.includes('TXA Teaser 2025 Homepage.mp4') && 
-            !link.href.includes('TXA Teaser 2025 Homepage.webm')) {
-          link.remove();
-          console.log('Removed unnecessary preload:', link.href);
-        }
-      });
+      try {
+        // Get all preload links
+        const preloads = document.head.querySelectorAll('link[rel="preload"]');
+        
+        // Convert to array and filter properly typed link elements
+        Array.from(preloads)
+          .filter((link): link is HTMLLinkElement => link instanceof HTMLLinkElement)
+          .forEach(link => {
+            // Now TypeScript knows this is an HTMLLinkElement with an href
+            if (!link.href.includes('TXA Teaser 2025 Homepage.mp4') && 
+                !link.href.includes('TXA Teaser 2025 Homepage.webm')) {
+              link.remove();
+              console.log('Removed unnecessary preload:', link.href);
+            }
+          });
+      } catch (err) {
+        console.error('Error cleaning up preloads:', err);
+      }
     }
     
     // Run cleanup after a short delay to catch any dynamically added preloads
@@ -97,6 +106,38 @@ export function HeroSection() {
     const video = videoRef.current;
     if (!video) return;
     
+    // Try different path formats if the video fails to load
+    let videoAttempts = 0;
+    const maxAttempts = 3;
+    
+    // Function to try alternate paths
+    const tryAlternateVideoPath = () => {
+      videoAttempts++;
+      console.log(`Trying alternate video path (${videoAttempts}/${maxAttempts})...`);
+      
+      // Try with relative paths if first attempt failed
+      if (videoAttempts === 1) {
+        // Update all source elements
+        const sources = video.querySelectorAll('source');
+        sources.forEach(source => {
+          if (source.src.includes('/videos/')) {
+            source.src = source.src.replace('/videos/', 'videos/');
+          }
+        });
+        video.load();
+      } else if (videoAttempts === 2) {
+        // Try with public prefix
+        const sources = video.querySelectorAll('source');
+        sources.forEach(source => {
+          source.src = source.src.replace('videos/', '/public/videos/');
+        });
+        video.load();
+      } else {
+        // If we've tried all paths and still failed, show the fallback
+        setVideoError(true);
+      }
+    };
+    
     // Set up event listeners for video
     const handleCanPlay = () => {
       console.log("Video can play");
@@ -105,11 +146,15 @@ export function HeroSection() {
     
     const handleError = (e: Event) => {
       console.error("Video loading error:", e);
-      setVideoError(true);
       
-      // Hide video element if it fails to load
-      if (video) {
-        video.style.display = 'none';
+      if (videoAttempts < maxAttempts) {
+        tryAlternateVideoPath();
+      } else {
+        setVideoError(true);
+        // Hide video element if it fails to load
+        if (video) {
+          video.style.display = 'none';
+        }
       }
     };
     
@@ -314,10 +359,10 @@ export function HeroSection() {
             >
               {/* Try WebM format first for better performance */}
               <source src="/videos/TXA Teaser 2025 Homepage.webm" type="video/webm" />
+              <source src="videos/TXA Teaser 2025 Homepage.webm" type="video/webm" />
               {/* MP4 fallback for broader compatibility */}
               <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
-              {/* Fallback message */}
-              <p>Your browser does not support HTML5 video playback.</p>
+              <source src="videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
