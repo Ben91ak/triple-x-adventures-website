@@ -216,13 +216,13 @@ export function HeroSection() {
             >
               {/* Provide multiple source formats for faster loading based on browser support */}
               <source 
-                src="/videos/TXA Teaser 2025 Homepage.mp4" 
-                type="video/mp4"
-              />
-              {/* WebM as secondary source since we're having issues with it */}
-              <source 
                 src="/videos/TXA Teaser 2025 Homepage.webm" 
                 type="video/webm"
+              />
+              {/* MP4 as secondary source for broader compatibility */}
+              <source 
+                src="/videos/TXA Teaser 2025 Homepage.mp4" 
+                type="video/mp4"
               />
               {/* Fallback text in case browser doesn't support video element */}
               <p>Your browser does not support HTML5 video playback.</p>
