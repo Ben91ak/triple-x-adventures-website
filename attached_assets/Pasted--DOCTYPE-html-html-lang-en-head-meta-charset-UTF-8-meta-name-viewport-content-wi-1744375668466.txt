@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TXA 2025 - Hero Video</title>
+  
+  <!-- Only preload the hero video - no other preloads -->
+  <link rel="preload" href="public/videos/TXA Teaser 2025 Homepage.webm" as="video" fetchpriority="high">
+  
+  <!-- Load fonts directly without preloading -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000; /* Fallback background */
+    }
+    
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-content p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-button {
+      padding: 12px 24px;
+      background-color: #ff4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .hero-button:hover {
+      background-color: #ff6a33;
+    }
+    
+    /* Media queries */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-container {
+        height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-container">
+    <video id="hero-video" class="hero-video" playsinline autoplay muted loop>
+      <source src="public/videos/TXA Teaser 2025 Homepage.webm" type="video/webm">
+      <!-- Your browser does not support the video tag. -->
+    </video>
+    
+    <div class="hero-content">
+      <h1>TXA 2025</h1>
+      <p>Experience the future of innovation with our groundbreaking technology.</p>
+      <a href="#learn-more" class="hero-button">Learn More</a>
+    </div>
+  </div>
+
+  <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the video element
+      const video = document.getElementById('hero-video');
+      
+      // If video element exists
+      if (video) {
+        // Load video with high priority
+        video.setAttribute('fetchpriority', 'high');
+        
+        // Handle video loading errors
+        video.addEventListener('error', function(e) {
+          console.error('Video loading error:', e);
+          video.style.display = 'none';
+        });
+        
+        // Optimize video playback when tab is not visible
+        document.addEventListener('visibilitychange', function() {
+          if (document.hidden) {
+            video.pause();
+          } else {
+            video.play().catch(function(e) {
+              console.log('Autoplay prevented by browser:', e);
+            });
+          }
+        });
+      } else {
+        console.error('Video element with ID "hero-video" not found');
+      }
+      
+      // Remove any dynamically added preload links that might cause issues
+      function cleanupUnusedPreloads() {
+        const preloads = document.head.querySelectorAll('link[rel="preload"]');
+        preloads.forEach(link => {
+          // Keep only our explicitly defined preload
+          if (!link.href.includes('TXA Teaser 2025 Homepage.webm')) {
+            link.remove();
+            console.log('Removed unnecessary preload:', link.href);
+          }
+        });
+      }
+      
+      // Run cleanup after a short delay to catch any dynamically added preloads
+      setTimeout(cleanupUnusedPreloads, 100);
+      
+      // Run again after full page load
+      window.addEventListener('load', function() {
+        setTimeout(cleanupUnusedPreloads, 100);
+      });
+    });
+  </script>
+</body>
+</html>

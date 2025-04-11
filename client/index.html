@@ -27,13 +27,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   
-  <!-- Preload critical resources -->
-  <link rel="preload" href="/images/TXA_fallback.jpg" as="image" type="image/jpeg" fetchpriority="high">
+  <!-- Only preload hero video - other resources loaded on demand -->
   <link rel="preload" href="/videos/TXA Teaser 2025 Homepage.mp4" as="video" type="video/mp4" fetchpriority="high">
   
-  <!-- Critical fonts loaded with display swap to prevent FOIT (Flash of Invisible Text) -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"></noscript>
+  <!-- Critical fonts loaded directly for better performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   
   <!-- Load non-critical CSS asynchronously -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
@@ -93,8 +91,31 @@
   <!-- Application scripts -->
   <script type="module" src="/src/main.tsx"></script>
   
-  <!-- Service worker registration with proper error handling -->
+  <!-- Cleanup script for preloads and service worker registration with proper error handling -->
   <script>
+    // Wait for DOM to be loaded to clean up any potential preload issues
+    document.addEventListener('DOMContentLoaded', function() {
+      // Remove any dynamically added preload links that might cause warnings
+      function cleanupUnusedPreloads() {
+        const preloads = document.head.querySelectorAll('link[rel="preload"]');
+        preloads.forEach(link => {
+          // Keep only our explicitly defined video preload
+          if (!link.href.includes('TXA Teaser 2025 Homepage.mp4')) {
+            link.remove();
+            console.log('Removed unnecessary preload:', link.href);
+          }
+        });
+      }
+      
+      // Run cleanup after a short delay to catch any dynamically added preloads
+      setTimeout(cleanupUnusedPreloads, 100);
+      
+      // Run again after full page load
+      window.addEventListener('load', function() {
+        setTimeout(cleanupUnusedPreloads, 100);
+      });
+    });
+    
     // Check if service worker is supported
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', async () => {
