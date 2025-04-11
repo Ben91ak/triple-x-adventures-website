@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TXA 2025 - Hero Video</title>
+  
+  <!-- Only preload critical resources that will be used immediately -->
+  <link rel="preload" href="public/videos/TXA Teaser 2025 Homepage.webm" as="video" type="video/webm">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000; /* Fallback background */
+    }
+    
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-content p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-button {
+      padding: 12px 24px;
+      background-color: #ff4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .hero-button:hover {
+      background-color: #ff6a33;
+    }
+    
+    .fallback-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    
+    /* Media queries */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-container {
+        height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-container">
+    <video id="hero-video" class="hero-video" playsinline autoplay muted loop>
+      <source src="public/videos/TXA Teaser 2025 Homepage.webm" type="video/webm">
+      <!-- Your browser does not support the video tag. -->
+    </video>
+    
+    <div class="hero-content">
+      <h1>TXA 2025</h1>
+      <p>Experience the future of innovation with our groundbreaking technology.</p>
+      <a href="#learn-more" class="hero-button">Learn More</a>
+    </div>
+  </div>
+
+  <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the video element
+      const video = document.getElementById('hero-video');
+      
+      // If video element exists
+      if (video) {
+        // Handle video loading errors
+        video.addEventListener('error', function(e) {
+          console.error('Video loading error:', e);
+          // Hide video element if it fails to load
+          video.style.display = 'none';
+        });
+        
+        // Network Information API
+        if ('connection' in navigator) {
+          const connection = navigator.connection;
+          
+          // For slow connections, consider not autoplaying the video
+          if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+            video.autoplay = false;
+            console.log('Autoplay disabled due to slow connection');
+          }
+          
+          // Monitor connection changes
+          connection.addEventListener('change', function() {
+            console.log('Connection type changed to ' + connection.effectiveType);
+          });
+        }
+        
+        // Optimize video playback when tab is not visible
+        document.addEventListener('visibilitychange', function() {
+          if (document.hidden) {
+            video.pause();
+          } else {
+            // Try to play but catch errors (browsers may block autoplay)
+            video.play().catch(function(e) {
+              console.log('Autoplay prevented by browser:', e);
+            });
+          }
+        });
+      } else {
+        console.error('Video element with ID "hero-video" not found');
+      }
+      
+      // Resource timing analysis
+      if (window.performance && window.performance.getEntriesByType) {
+        // Check which resources were preloaded but not used
+        window.addEventListener('load', function() {
+          setTimeout(function() {
+            const resources = window.performance.getEntriesByType('resource');
+            resources.forEach(function(resource) {
+              // Check if resource was preloaded
+              if (resource.initiatorType === 'link' && resource.name.includes('preload')) {
+                console.log('Preloaded resource:', resource.name);
+              }
+            });
+          }, 5000); // Check 5 seconds after load
+        });
+      }
+    });
+  </script>
+</body>
+</html>

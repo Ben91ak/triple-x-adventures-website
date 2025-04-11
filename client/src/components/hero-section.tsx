@@ -52,7 +52,7 @@ export function HeroSection() {
     animationDelay: 1500
   });
   
-  // Enhanced effect to handle video loading with improved strategies
+  // Enhanced effect to handle video loading with improved strategies from examples
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -66,6 +66,11 @@ export function HeroSection() {
     const handleError = (e: Event) => {
       console.error("Video loading error:", e);
       setVideoError(true);
+      
+      // Hide video element if it fails to load
+      if (video) {
+        video.style.display = 'none';
+      }
     };
     
     // Add event listeners
@@ -75,7 +80,7 @@ export function HeroSection() {
     // Check if browser is mobile
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
-    // For mobile devices, we could load a different quality video
+    // For mobile devices, optimize playback
     if (isMobile) {
       console.log("Mobile device detected, optimizing video playback");
       // The playbackRate is already set in the onLoadedMetadata handler
@@ -86,25 +91,64 @@ export function HeroSection() {
       if (document.hidden) {
         video.pause();
       } else {
-        // Try to play but don't force it if autoplay is blocked
-        video.play().catch(e => console.log('Auto-play prevented:', e));
+        // Try to play but catch errors (browsers may block autoplay)
+        video.play().catch(e => {
+          console.log('Auto-play prevented by browser:', e);
+        });
       }
     };
     
     document.addEventListener('visibilitychange', handleVisibilityChange);
     
-    // Check connection speed (if the API is available)
-    if ('connection' in navigator && (navigator as any).connection?.effectiveType) {
-      const connectionType = (navigator as any).connection.effectiveType;
+    // Network Information API
+    if ('connection' in navigator && (navigator as any).connection) {
+      const connection = (navigator as any).connection;
       
-      // For very slow connections, consider showing the fallback immediately
-      if (connectionType === 'slow-2g' || connectionType === '2g') {
+      // For slow connections, disable autoplay and use fallback
+      if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
         console.log("Slow connection detected, using fallback image");
+        video.autoplay = false;
         setVideoError(true); // Skip video loading on very slow connections
       }
+      
+      // Monitor connection changes
+      const handleConnectionChange = () => {
+        console.log('Connection type changed to ' + connection.effectiveType);
+        // Could update video quality based on new connection type
+      };
+      
+      connection.addEventListener('change', handleConnectionChange);
+      
+      // Add to cleanup function
+      return () => {
+        video.removeEventListener('canplay', handleCanPlay);
+        video.removeEventListener('error', handleError);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+        connection.removeEventListener('change', handleConnectionChange);
+      };
     }
     
-    // Clean up event listeners on unmount
+    // Resource timing analysis
+    if (window.performance && window.performance.getEntriesByType) {
+      // Check resource loading performance
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          try {
+            const resources = window.performance.getEntriesByType('resource');
+            resources.forEach(resource => {
+              // Log video resource loading time for optimization
+              if ((resource as any).name && (resource as any).name.includes('TXA Teaser')) {
+                console.log('Video resource loading time:', (resource as any).duration, 'ms');
+              }
+            });
+          } catch (e) {
+            console.error('Error analyzing resource timing:', e);
+          }
+        }, 3000); // Check after page load
+      });
+    }
+    
+    // Regular cleanup without connection API
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
@@ -199,7 +243,7 @@ export function HeroSection() {
               playsInline
               controls={false}
               poster="/images/TXA_fallback_optimized.jpg"
-              preload="auto"
+              preload="metadata"
               aria-label="Background video of Arctic adventures"
               aria-hidden="true"
               onLoadedMetadata={() => {
