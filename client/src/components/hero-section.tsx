@@ -52,7 +52,7 @@ export function HeroSection() {
     animationDelay: 1500
   });
   
-  // Add effect to handle video loading
+  // Enhanced effect to handle video loading with improved strategies
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -63,8 +63,8 @@ export function HeroSection() {
       setVideoLoaded(true);
     };
     
-    const handleError = () => {
-      console.error("Video loading error");
+    const handleError = (e: Event) => {
+      console.error("Video loading error:", e);
       setVideoError(true);
     };
     
@@ -72,10 +72,43 @@ export function HeroSection() {
     video.addEventListener('canplay', handleCanPlay);
     video.addEventListener('error', handleError);
     
+    // Check if browser is mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    // For mobile devices, we could load a different quality video
+    if (isMobile) {
+      console.log("Mobile device detected, optimizing video playback");
+      // The playbackRate is already set in the onLoadedMetadata handler
+    }
+    
+    // Handle visibility changes to save resources
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        // Try to play but don't force it if autoplay is blocked
+        video.play().catch(e => console.log('Auto-play prevented:', e));
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Check connection speed (if the API is available)
+    if ('connection' in navigator && (navigator as any).connection?.effectiveType) {
+      const connectionType = (navigator as any).connection.effectiveType;
+      
+      // For very slow connections, consider showing the fallback immediately
+      if (connectionType === 'slow-2g' || connectionType === '2g') {
+        console.log("Slow connection detected, using fallback image");
+        setVideoError(true); // Skip video loading on very slow connections
+      }
+    }
+    
     // Clean up event listeners on unmount
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
       video.removeEventListener('error', handleError);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
 
@@ -155,8 +188,9 @@ export function HeroSection() {
               />
             </picture>
             
-            {/* Video element with simplified loading strategy */}
+            {/* Video element with improved loading strategy based on provided example */}
             <video 
+              id="hero-video"
               ref={videoRef}
               className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 ${videoLoaded ? 'opacity-90' : 'opacity-0'}`}
               autoPlay 
@@ -166,7 +200,6 @@ export function HeroSection() {
               controls={false}
               poster="/images/TXA_fallback_optimized.jpg"
               preload="auto"
-              src="/videos/TXA Teaser 2025 Homepage.mp4"
               aria-label="Background video of Arctic adventures"
               aria-hidden="true"
               onLoadedMetadata={() => {
@@ -184,9 +217,15 @@ export function HeroSection() {
                 height: '100%',
                 filter: 'brightness(1.0) contrast(1.05)',
                 zIndex: 6,
-                position: 'absolute'
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                minWidth: '100%',
+                minHeight: '100%',
+                transform: 'translateX(-50%) translateY(-50%)'
               }}
             >
+              <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
               {/* Fallback message */}
               <p>Your browser does not support HTML5 video playback.</p>
             </video>

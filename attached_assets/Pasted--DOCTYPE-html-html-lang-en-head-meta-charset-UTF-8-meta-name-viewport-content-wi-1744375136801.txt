@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero Video Example</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000; /* Fallback background */
+    }
+    
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-content p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-button {
+      padding: 12px 24px;
+      background-color: #ff4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .hero-button:hover {
+      background-color: #ff6a33;
+    }
+    
+    .fallback-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+    
+    /* Media queries */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-container {
+        height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-container">
+    <video id="hero-video" class="hero-video" playsinline autoplay muted loop>
+      <source src="public/videos/TXA Teaser 2025 Homepage.webm" type="video/webm">
+      <!-- Your browser does not support the video tag. -->
+    </video>
+    <img src="public/images/fallback-image.jpg" alt="TXA 2025 Teaser" class="fallback-img">
+    
+    <div class="hero-content">
+      <h1>TXA 2025</h1>
+      <p>Experience the future of innovation with our groundbreaking technology.</p>
+      <a href="#learn-more" class="hero-button">Learn More</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get video element
+      const video = document.getElementById('hero-video');
+      const fallbackImg = document.querySelector('.fallback-img');
+      
+      // Error handling for video loading
+      if (video) {
+        video.addEventListener('error', function(e) {
+          console.error('Video error:', e);
+          // Show fallback image if video fails to load
+          video.style.display = 'none';
+          fallbackImg.style.display = 'block';
+        });
+      } else {
+        console.error('Video element not found');
+        // Show fallback image if video element doesn't exist
+        if (fallbackImg) {
+          fallbackImg.style.display = 'block';
+        }
+      }
+      
+      // Check if browser is mobile
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      // Adjust video quality or loading strategy based on device
+      if (isMobile && video) {
+        // Optional: Load a lower quality video for mobile
+        // video.querySelector('source').src = 'public/videos/TXA_Teaser_2025_Homepage_mobile.webm';
+        // video.load();
+      }
+      
+      // Pause video when not visible to save resources
+      document.addEventListener('visibilitychange', function() {
+        if (video) {
+          if (document.hidden) {
+            video.pause();
+          } else {
+            video.play().catch(e => console.log('Auto-play prevented:', e));
+          }
+        }
+      });
+      
+      // Check connection speed (if the API is available)
+      if ('connection' in navigator && navigator.connection.effectiveType) {
+        const connectionType = navigator.connection.effectiveType;
+        
+        // For slow connections, use fallback image instead of video
+        if (connectionType === 'slow-2g' || connectionType === '2g') {
+          if (video) video.style.display = 'none';
+          fallbackImg.style.display = 'block';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
