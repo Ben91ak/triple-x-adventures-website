@@ -1,12 +1,15 @@
-import { useRef, useEffect, useState, memo } from "react";
+import { useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoError, setVideoError] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  // For simplicity, we'll just use one state for video loading
+  const [videoState, setVideoState] = useState({
+    loaded: false,
+    error: false
+  });
   const { language } = useLanguage();
   const t = useTranslation(language);
   
@@ -51,104 +54,16 @@ export function HeroSection() {
     animationDelay: 1500
   });
   
-  useEffect(() => {
-    // Enhanced video loading with better error handling and debug logs
-    // We'll use a short delay to make sure the DOM is ready before accessing the ref
-    const initVideo = () => {
-      const videoElement = videoRef.current;
-      if (!videoElement) {
-        console.error("Video element not found in the DOM");
-        console.log("videoRef state:", videoRef);
-        console.log("Will retry in 500ms");
-        
-        // Try again if DOM isn't ready yet
-        setTimeout(initVideo, 500);
-        return;
-      }
-      
-      console.log("Setting up video element for TXA Teaser 2025 Homepage.webm");
-      
-      try {
-        // Set video properties
-        videoElement.playbackRate = 0.8;
-        videoElement.preload = "auto";
-        
-        // Handle errors
-        const handleVideoError = (e: Event) => {
-          console.error("Video failed to load:", videoElement.error);
-          console.error("Error event:", e);
-          setVideoError(true);
-        };
-        
-        // Handle successful loading
-        const handleCanPlay = () => {
-          console.log("Video can play now - ready state:", videoElement.readyState);
-          setVideoLoaded(true);
-          
-          // Try to play the video with retry logic
-          const attemptPlay = () => {
-            videoElement.play().catch(err => {
-              console.warn("Autoplay attempt failed:", err);
-              // Try again after a short delay (autoplay policies sometimes require user interaction)
-              setTimeout(() => {
-                console.log("Retrying video playback...");
-                if (videoElement) {
-                  videoElement.play().catch(e => console.warn("Retry also failed:", e));
-                }
-              }, 1000);
-            });
-          };
-          
-          attemptPlay();
-        };
-        
-        // Add event listeners
-        videoElement.addEventListener('error', handleVideoError);
-        videoElement.addEventListener('canplay', handleCanPlay);
-        
-        // Log loading progress
-        const loadStartHandler = () => console.log("Video loading started");
-        const metadataHandler = () => console.log("Video metadata loaded");
-        const dataHandler = () => console.log("Video data loaded");
-        const progressHandler = () => console.log("Video loading progress...");
-        
-        videoElement.addEventListener('loadstart', loadStartHandler);
-        videoElement.addEventListener('loadedmetadata', metadataHandler);
-        videoElement.addEventListener('loadeddata', dataHandler);
-        videoElement.addEventListener('progress', progressHandler);
-        
-        // Force video to load after a slight delay to ensure DOM is fully ready
-        setTimeout(() => {
-          console.log("Initiating video load");
-          if (videoElement) {
-            videoElement.load();
-          }
-        }, 200);
-        
-        // Clean up
-        return () => {
-          if (videoElement) {
-            videoElement.removeEventListener('error', handleVideoError);
-            videoElement.removeEventListener('canplay', handleCanPlay);
-            videoElement.removeEventListener('loadstart', loadStartHandler);
-            videoElement.removeEventListener('loadedmetadata', metadataHandler);
-            videoElement.removeEventListener('loadeddata', dataHandler);
-            videoElement.removeEventListener('progress', progressHandler);
-          }
-        };
-      } catch (err) {
-        console.error("Error setting up video:", err);
-        setVideoError(true);
-      }
-    };
-    
-    // Start initialization with a small delay to ensure component is fully mounted
-    const timerId = setTimeout(initVideo, 100);
-    
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, []);
+  // Simplified video handling
+  const handleVideoCanPlay = () => {
+    console.log("Video can play now");
+    setVideoState(prev => ({ ...prev, loaded: true }));
+  };
+  
+  const handleVideoError = () => {
+    console.error("Video failed to load");
+    setVideoState({ loaded: false, error: true });
+  };
 
   // Content based on language
   const heroContent = {
@@ -188,7 +103,7 @@ export function HeroSection() {
         </div>
         
         {/* Video with fallback animation */}
-        {!videoError ? (
+        {!videoState.error ? (
           <>
             {/* Low-quality image poster that will show immediately while video loads */}
             {/* High-priority fallback image with proper attributes for LCP optimization */}
@@ -226,10 +141,10 @@ export function HeroSection() {
               />
             </picture>
             
-            {/* Video element with optimized loading strategy */}
+            {/* Video element with simplified loading strategy */}
             <video 
               ref={videoRef}
-              className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 ${videoLoaded ? 'opacity-90' : 'opacity-0'}`}
+              className={`absolute w-full h-full object-cover transform-gpu transition-opacity duration-700 ${videoState.loaded ? 'opacity-90' : 'opacity-0'}`}
               autoPlay 
               muted 
               loop 
@@ -237,36 +152,17 @@ export function HeroSection() {
               controls={false}
               poster="/images/TXA_fallback_optimized.jpg"
               preload="auto"
+              src="/videos/TXA Teaser 2025 Homepage.webm"
               aria-label="Background video of Arctic adventures"
               aria-hidden="true"
-              onLoadedMetadata={(e: React.SyntheticEvent<HTMLVideoElement>) => {
+              onLoadedMetadata={() => {
                 console.log("Video metadata loaded");
                 if (videoRef.current) {
-                  // Set playback rate
                   videoRef.current.playbackRate = 0.8;
-                  
-                  // Force refresh the video element
-                  const currentSrc = videoRef.current.currentSrc;
-                  console.log("Current video source:", currentSrc);
-                  
-                  // Log video details for debugging
-                  console.log("Video readyState:", videoRef.current.readyState);
-                  console.log("Video networkState:", videoRef.current.networkState);
-                  console.log("Video error:", videoRef.current.error);
                 }
               }}
-              onError={(e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-                console.error("Video error event triggered:", e);
-                if (videoRef.current && videoRef.current.error) {
-                  console.error("Video error code:", videoRef.current.error.code);
-                  console.error("Video error message:", videoRef.current.error.message);
-                }
-                setVideoError(true);
-              }}
-              onCanPlay={() => {
-                console.log("Video can play event triggered");
-                setVideoLoaded(true);
-              }}
+              onError={handleVideoError}
+              onCanPlay={handleVideoCanPlay}
               onPlaying={() => console.log("Video is playing")}
               style={{ 
                 objectFit: 'cover',
@@ -277,22 +173,12 @@ export function HeroSection() {
                 position: 'absolute'
               }}
             >
-              {/* Primary source: WebM format for modern browsers with better compression */}
-              <source 
-                src="/videos/TXA Teaser 2025 Homepage.webm" 
-                type="video/webm"
-              />
-              {/* Fallback MP4 source for broader compatibility */}
-              <source 
-                src="/videos/TXA Teaser 2025 Homepage.mp4" 
-                type="video/mp4"
-              />
               {/* Fallback message */}
               <p>Your browser does not support HTML5 video playback.</p>
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
-            {!videoLoaded && (
+            {!videoState.loaded && (
               <div className="absolute inset-0 bg-gradient-to-b from-dark-bg via-dark-bg/90 to-dark-bg/80 opacity-100 transform-gpu">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent-color/10 via-dark-bg/5 to-accent-color/5 opacity-60 animate-aurora-slow"></div>
                 <div className="absolute inset-0 bg-gradient-to-tr from-accent-color/5 via-dark-bg/5 to-accent-color/15 opacity-50 animate-aurora-medium"></div>
