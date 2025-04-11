@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TXA 2025 - Adventure Tours</title>
+  
+  <!-- Load fonts directly -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', Arial, sans-serif;
+      overflow-x: hidden;
+      color: #333;
+      line-height: 1.6;
+    }
+    
+    /* Hero Section Styles */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #000; /* Fallback background */
+    }
+    
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      object-fit: cover;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-content p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .hero-button {
+      padding: 12px 24px;
+      background-color: #ff4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    
+    .hero-button:hover {
+      background-color: #ff6a33;
+    }
+    
+    /* Experiences Section Styles */
+    .experiences-section {
+      padding: 4rem 2rem;
+      background-color: #f8f9fa;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      color: #333;
+    }
+    
+    .experiences-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .experience-card {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .experience-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .experience-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background-color: #eee; /* Placeholder color */
+    }
+    
+    .experience-content {
+      padding: 1.5rem;
+    }
+    
+    .experience-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    
+    .experience-description {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    
+    .experience-button {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #ff4500;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    
+    .experience-button:hover {
+      background-color: #ff6a33;
+    }
+    
+    /* Media queries */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .hero-content p {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .experiences-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-container {
+        height: 60vh;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <div class="hero-container">
+    <video id="hero-video" class="hero-video" playsinline autoplay muted loop>
+      <source src="public/videos/TXA Teaser 2025 Homepage.webm" type="video/webm">
+      <!-- Your browser does not support the video tag. -->
+    </video>
+    
+    <div class="hero-content">
+      <h1>TXA 2025 Adventures</h1>
+      <p>Experience the thrill of adventure with our premium guided tours.</p>
+      <a href="#experiences" class="hero-button">Explore Adventures</a>
+    </div>
+  </div>
+
+  <!-- Experiences Section -->
+  <section id="experiences" class="experiences-section">
+    <h2 class="section-title">Our Adventures</h2>
+    
+    <div class="experiences-grid">
+      <!-- Snowmobile Adventure -->
+      <div class="experience-card">
+        <div class="experience-image" id="snowmobile-img" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 400 200"><rect width="100%" height="100%" fill="%23f0f0f0"/><text x="50%" y="50%" font-family="Arial" font-size="20" text-anchor="middle" fill="%23999">Snowmobile Adventure</text></svg>');"></div>
+        <div class="experience-content">
+          <h3 class="experience-title">Snowmobile Adventure</h3>
+          <p class="experience-description">Speed across snow-covered landscapes on our guided snowmobile tours.</p>
+          <a href="#" class="experience-button">Book Now</a>
+        </div>
+      </div>
+      
+      <!-- Ice Fishing Adventure -->
+      <div class="experience-card">
+        <div class="experience-image" id="ice-fishing-img" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 400 200"><rect width="100%" height="100%" fill="%23f0f0f0"/><text x="50%" y="50%" font-family="Arial" font-size="20" text-anchor="middle" fill="%23999">Ice Fishing Adventure</text></svg>');"></div>
+        <div class="experience-content">
+          <h3 class="experience-title">Ice Fishing Adventure</h3>
+          <p class="experience-description">Enjoy a peaceful day fishing on a frozen lake with expert guides.</p>
+          <a href="#" class="experience-button">Book Now</a>
+        </div>
+      </div>
+      
+      <!-- Side-by-Side Buggy Adventure -->
+      <div class="experience-card">
+        <div class="experience-image" id="buggy-img" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 400 200"><rect width="100%" height="100%" fill="%23f0f0f0"/><text x="50%" y="50%" font-family="Arial" font-size="20" text-anchor="middle" fill="%23999">Side-by-Side Buggy Adventure</text></svg>');"></div>
+        <div class="experience-content">
+          <h3 class="experience-title">Side-by-Side Buggy Adventure</h3>
+          <p class="experience-description">Navigate rugged terrain in our powerful side-by-side buggies.</p>
+          <a href="#" class="experience-button">Book Now</a>
+        </div>
+      </div>
+      
+      <!-- Husky Tours Adventure -->
+      <div class="experience-card">
+        <div class="experience-image" id="husky-img" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 400 200"><rect width="100%" height="100%" fill="%23f0f0f0"/><text x="50%" y="50%" font-family="Arial" font-size="20" text-anchor="middle" fill="%23999">Husky Tours Adventure</text></svg>');"></div>
+        <div class="experience-content">
+          <h3 class="experience-title">Husky Tours Adventure</h3>
+          <p class="experience-description">Experience the traditional way of Arctic travel with our friendly huskies.</p>
+          <a href="#" class="experience-button">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Handle hero video
+      const video = document.getElementById('hero-video');
+      if (video) {
+        // Handle video loading errors
+        video.addEventListener('error', function(e) {
+          console.error('Video loading error:', e);
+          video.style.display = 'none';
+        });
+        
+        // Optimize video playback when tab is not visible
+        document.addEventListener('visibilitychange', function() {
+          if (document.hidden) {
+            video.pause();
+          } else {
+            video.play().catch(function(e) {
+              console.log('Autoplay prevented by browser:', e);
+            });
+          }
+        });
+      } else {
+        console.error('Video element with ID "hero-video" not found');
+      }
+      
+      // Handle experience images with proper error handling
+      function loadExperienceImages() {
+        // Define correct image paths
+        const imagePaths = {
+          'snowmobile-img': '/public/images/adventures/snowmobile.jpg',
+          'ice-fishing-img': '/public/images/adventures/ice-fishing.jpg',
+          'buggy-img': '/public/images/adventures/side-by-side.jpg',
+          'husky-img': '/public/images/adventures/husky-tours.jpg'
+        };
+        
+        // Try to load each image with fallback
+        Object.entries(imagePaths).forEach(([id, path]) => {
+          const element = document.getElementById(id);
+          if (!element) return;
+          
+          // Create an image object to test loading
+          const img = new Image();
+          img.onload = function() {
+            // Image loaded successfully, update background
+            element.style.backgroundImage = `url('${path}')`;
+          };
+          img.onerror = function() {
+            // Image failed to load, use the SVG fallback already in place
+            console.warn(`Failed to load image: ${path} - using fallback`);
+          };
+          img.src = path;
+        });
+      }
+      
+      // Attempt to load the experience images
+      loadExperienceImages();
+      
+      // Clean up any problematic preload tags
+      function cleanupUnusedPreloads() {
+        const preloads = document.head.querySelectorAll('link[rel="preload"]');
+        preloads.forEach(link => {
+          // Keep only essential preloads, remove others
+          if (link.href.includes('experiences-section') || 
+              link.href.includes('image-preloader') || 
+              link.href.includes('Snowmobile')) {
+            link.remove();
+            console.log('Removed unnecessary preload:', link.href);
+          }
+        });
+      }
+      
+      // Run cleanup immediately and after load
+      cleanupUnusedPreloads();
+      window.addEventListener('load', cleanupUnusedPreloads);
+    });
+  </script>
+</body>
+</html>
