@@ -431,11 +431,94 @@ export function ExperiencesSection() {
   let experienceList = t.experiences.list as Experience[];
   
   // Include all experiences - don't filter out husky anymore
-  let experiences: Experience[] = experienceList.map(exp => ({
-    ...exp,
-    // Add empty fullDescription if not provided in translations
-    fullDescription: exp.fullDescription || exp.description
-  }));
+  let experiences: Experience[] = experienceList.map(exp => {
+    // Create a new experience with updated properties
+    const updatedExp = {
+      ...exp,
+      // Add empty fullDescription if not provided in translations
+      fullDescription: exp.fullDescription || exp.description
+    };
+    
+    // Override image path based on title for consistent image loading
+    const title = updatedExp.title.toLowerCase();
+    
+    // Map titles to correct image paths
+    if (title.includes('snowmobile')) {
+      updatedExp.image = '/images/Snowmobile/Snowmobile 1_result.webp';
+      updatedExp.gallery = [
+        '/images/Snowmobile/Snowmobile 1_result.webp',
+        '/images/Snowmobile/Snowmobile 2_result.webp',
+        '/images/Snowmobile/Snowmobile 3_result.webp',
+        '/images/Snowmobile/Snowmobile 4_result.webp'
+      ];
+    } else if (title.includes('restaurant') || title.includes('jayjay')) {
+      updatedExp.image = '/images/JayJays-Restaurant.jpg';
+      updatedExp.gallery = [
+        '/images/JayJays-Restaurant.jpg',
+        '/images/restaurant/jayjays-exterior.jpg',
+        '/images/restaurant/dish.jpg',
+        '/images/restaurant/dining-area.jpg'
+      ];
+    } else if (title.includes('kart')) {
+      updatedExp.image = '/images/Ice Kart.jpg';
+      updatedExp.gallery = [
+        '/images/Ice Kart.jpg',
+        '/images/Ice Kart/Icekart 1_result.webp',
+        '/images/Ice Kart/Icekart 2_result.webp',
+        '/images/Ice Kart/Icekart 3_result.webp'
+      ];
+    } else if (title.includes('reindeer')) {
+      updatedExp.image = '/images/Reindeers.jpg';
+      updatedExp.gallery = [
+        '/images/Reindeers.jpg',
+        '/images/Reindeers/Reindeers 1_result.webp',
+        '/images/Reindeers/Reindeers 2_result.webp',
+        '/images/Reindeers/Reindeers 3_result.webp'
+      ];
+    } else if (title.includes('helicopter') || title.includes('helikopter')) {
+      updatedExp.image = '/images/Helikopter.jpg';
+      updatedExp.gallery = [
+        '/images/Helikopter.jpg',
+        '/images/Helicopter/Helikopter 1_result.webp',
+        '/images/Helicopter/Helikopter 2_result.webp',
+        '/images/Helicopter/Helikopter 3_result.webp'
+      ];
+    } else if (title.includes('drift')) {
+      updatedExp.image = '/images/Drifting.jpg';
+      updatedExp.gallery = [
+        '/images/Drifting.jpg',
+        '/images/Ice Drift/Cars 1_result.webp',
+        '/images/Ice Drift/Cars 2_result.webp',
+        '/images/Ice Drift/Cars 3_result.webp'
+      ];
+    } else if (title.includes('fishing')) {
+      updatedExp.image = '/images/Ice-Fishing.jpg';
+      updatedExp.gallery = [
+        '/images/Ice-Fishing.jpg',
+        '/images/Ice Fishing/Icefish 1_result.webp',
+        '/images/Ice Fishing/Icefish 2_result.webp',
+        '/images/Ice Fishing/Shoot 3_result.webp'
+      ];
+    } else if (title.includes('buggy') || title.includes('side')) {
+      updatedExp.image = '/images/Side-By-Side-Buggy-Drifting.jpg';
+      updatedExp.gallery = [
+        '/images/Side-By-Side-Buggy-Drifting.jpg',
+        '/images/Side by Side/SBS 1_result.webp',
+        '/images/Side by Side/SBS 2_result.webp',
+        '/images/Side by Side/SBS 3_result.webp'
+      ];
+    } else if (title.includes('husky') || title.includes('dog')) {
+      updatedExp.image = '/images/Huskys/Husky 1_result.webp';
+      updatedExp.gallery = [
+        '/images/Huskys/Husky 1_result.webp',
+        '/images/Huskys/Husky 2_result.webp',
+        '/images/Huskys/Husky 3_result.webp',
+        '/images/Huskys/Husky 4_result.webp'
+      ];
+    }
+    
+    return updatedExp;
+  });
   
   // Custom order to display cards in desired sequence with Husky after Side-by-Side
   // Create a custom ordered array that will explicitly place the husky card after the side-by-side
