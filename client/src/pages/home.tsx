@@ -11,7 +11,7 @@ import { preloadAllCriticalImages } from "@/utils/image-preloader";
 
 // Lazy-load non-critical sections for better performance
 const IntroductionSection = lazy(() => import("@/components/introduction-section").then(module => ({ default: module.IntroductionSection })));
-const ExperiencesSection = lazy(() => import("@/components/experiences-section-fixed").then(module => ({ default: module.ExperiencesSectionFixed })));
+const ExperiencesSection = lazy(() => import("@/components/experiences-section").then(module => ({ default: module.ExperiencesSection })));
 const AccommodationsSection = lazy(() => import("@/components/accommodations-section").then(module => ({ default: module.AccommodationsSection })));
 const RestaurantSection = lazy(() => import("@/components/restaurant-section").then(module => ({ default: module.RestaurantSection })));
 const AboutSection = lazy(() => import("@/components/about-section").then(module => ({ default: module.AboutSection })));
