@@ -311,14 +311,6 @@ export function preloadExperienceImages() {
     '/images/Snowmobile/Snowmobile 4_result.webp'
   ];
   
-  // Fallback JPG Snowmobile images
-  const jpgSnowmobileImages = [
-    '/images/Snowmobile/Snowmobile.jpg',
-    '/images/Snowmobile/Snowmobile 2.jpg',
-    '/images/Snowmobile/Snowmobile 3.jpg',
-    '/images/Snowmobile/Snowmobile 4.jpg'
-  ];
-  
   // WebP versions first (higher priority)
   webpSnowmobileImages.forEach(path => {
     preloadImage(path, {
@@ -330,13 +322,6 @@ export function preloadExperienceImages() {
   experienceImages.forEach(path => {
     preloadImage(path, {
       priority: 'high'
-    });
-  });
-  
-  // JPG fallbacks last
-  jpgSnowmobileImages.forEach(path => {
-    preloadImage(path, {
-      priority: 'medium'
     });
   });
 }
