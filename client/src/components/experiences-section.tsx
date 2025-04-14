@@ -23,66 +23,68 @@ function ExperienceDetailModal({
   const t = useTranslation(language as any);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(true);
-  
+
   // Setup modal behaviors when opened/closed
   useEffect(() => {
     const handleEscapeKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
-    
-    // Add a click handler for iOS/mobile to ensure modal can be closed
+
+    // FIXED: Improved modal handling to prevent background page movement
+    // Add a click handler that properly handles the modal backdrop
     const handleBackdropClick = (e: MouseEvent) => {
-      // Only handle clicks on the backdrop (outside the modal)
+      // Check if clicked element has the modal-backdrop class
       if ((e.target as HTMLElement).classList.contains('modal-backdrop')) {
+        e.preventDefault(); // Prevent default to stop page jumping
+        e.stopPropagation(); // Stop event propagation
         onClose();
       }
     };
-    
-    // Handle touch events for iOS devices where click events might be problematic
+
+    // Improved touch handling for mobile devices
     const handleTouchEnd = (e: TouchEvent) => {
-      // If touch ends on the backdrop class, treat it as a close action
       const target = document.elementFromPoint(
         e.changedTouches[0].clientX, 
         e.changedTouches[0].clientY
       ) as HTMLElement;
-      
+
       if (target && target.classList.contains('modal-backdrop')) {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default to stop page jumping
+        e.stopPropagation(); // Stop event propagation
         onClose();
       }
     };
-    
+
     if (isOpen) {
       document.addEventListener('keydown', handleEscapeKey);
-      document.addEventListener('click', handleBackdropClick);
-      document.addEventListener('touchend', handleTouchEnd);
-      
-      // Prevent body scrolling when modal is open
+      document.addEventListener('click', handleBackdropClick, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+      // FIXED: Prevent scrolling while maintaining scroll position
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
-      
-      // For iOS - prevent bouncing/scrolling
-      document.documentElement.style.position = 'fixed';
-      document.documentElement.style.width = '100%';
-      document.documentElement.style.height = '100%';
-      document.documentElement.style.overflowY = 'scroll';
     }
-    
+
     return () => {
       document.removeEventListener('keydown', handleEscapeKey);
       document.removeEventListener('click', handleBackdropClick);
       document.removeEventListener('touchend', handleTouchEnd);
-      
-      // Re-enable scrolling when modal is closed
-      document.body.style.overflow = '';
-      
-      // Reset iOS fixes
-      document.documentElement.style.position = '';
-      document.documentElement.style.width = '';
-      document.documentElement.style.height = '';
-      document.documentElement.style.overflowY = '';
+
+      // FIXED: Restore scroll position when modal closes
+      if (isOpen) {
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     };
   }, [isOpen, onClose]);
-  
+
   // Reset active image index when experience changes
   useEffect(() => {
     if (isOpen) {
@@ -90,21 +92,21 @@ function ExperienceDetailModal({
       setIsImageLoading(true);
     }
   }, [experience, isOpen]);
-  
+
   // Reset loading state on image change
   useEffect(() => {
     if (isOpen) {
       setIsImageLoading(true);
     }
   }, [activeImageIndex, isOpen]);
-  
+
   // Exit early if the modal is not open
   if (!isOpen) return null;
-  
-  // Get the correct gallery images based on experience type (improved)
+
+  // Get the correct gallery images based on experience type (simplified)
   const getGalleryImages = (): string[] => {
     const title = experience.title.toLowerCase();
-    
+
     // Define gallery mappings with correct paths
     const galleryMappings: Record<string, string[]> = {
       'snowmobile': [
@@ -186,44 +188,203 @@ function ExperienceDetailModal({
         '/images/Huskys/Husky 4_result.webp'
       ]
     };
-    
+
     // Find the matching gallery
     for (const [keyword, gallery] of Object.entries(galleryMappings)) {
       if (title.includes(keyword)) {
         return gallery;
       }
     }
-    
+
     // Fallback to the experience's gallery or just the main image
     return experience.gallery && experience.gallery.length > 0 
       ? experience.gallery 
       : [experience.image];
   };
-  
+
   const gallery = getGalleryImages();
-  
+
+  // FIXED: Standardized experience content display function
+  const renderExperienceContent = () => {
+    // Create a consistent experience presentation structure
+    const title = experience.title.toLowerCase();
+
+    // Extract potential sections from description
+    const description = experience.fullDescription || experience.description;
+
+    // Determine if the experience has different sections (like "PICK YOUR ADVENTURE" for snowmobile)
+    const hasSections = description.includes('━━━');
+
+    if (hasSections) {
+      // For experiences with sections, split and format them properly
+      const sections = description.split('━━━').map(section => section.trim());
+      const introduction = sections[0];
+
+      // Extract section titles and content
+      const sectionTitles = sections.slice(1).map(section => {
+        const titleMatch = section.match(/^(.*?)(?:\n|$)/);
+        return titleMatch ? titleMatch[1].trim() : '';
+      });
+
+      const sectionContents = sections.slice(1).map(section => {
+        const contentMatch = section.match(/^.*?\n([\s\S]*)/);
+        return contentMatch ? contentMatch[1].trim() : section;
+      });
+
+      return (
+        <div className="leading-relaxed">
+          {/* Introduction text */}
+          <p className="mb-6">{introduction}</p>
+
+          {/* Render each section */}
+          {sectionTitles.map((sectionTitle, index) => (
+            <div key={index} className="mb-6">
+              <h3 className="text-white font-bold text-lg flex items-center gap-2 mb-4">
+                <span className="h-px w-6 bg-accent-color"></span>
+                <span>{sectionTitle}</span>
+                <span className="h-px flex-grow bg-accent-color"></span>
+              </h3>
+
+              <div className="space-y-4">
+                {/* Parse section content into cards if it contains subsections */}
+                {renderSectionContent(sectionContents[index], title)}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      // For experiences without sections, present in a simple format
+      return (
+        <div className="prose prose-invert max-w-none">
+          <div className="text-white text-opacity-90 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+            {description}
+          </div>
+        </div>
+      );
+    }
+  };
+
+  // Helper function to render section content
+  const renderSectionContent = (content: string, experienceType: string) => {
+    // Check if content has subsections (denoted by specific format)
+    const hasSubsections = content.includes('★') || 
+                           content.includes('•') || 
+                           experienceType.includes('snowmobile');
+
+    if (hasSubsections) {
+      // Split by common subsection indicators
+      let subsections: string[] = [];
+
+      if (experienceType.includes('snowmobile')) {
+        // Special handling for snowmobile experience
+        return (
+          <div className="space-y-6">
+            {/* 2-HOUR TOUR */}
+            <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
+              <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
+                <span className="inline-block w-4 h-4 bg-accent-color/70 rotate-45"></span>
+                <span>2-HOUR BACKCOUNTRY TOUR</span>
+              </h4>
+              <p className="ml-6 mb-2">Great if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.</p>
+              <ul className="ml-6 list-disc list-inside space-y-1 text-sm text-white/90">
+                <li>One-seater snowmobile</li>
+                <li>Two-seater available on request</li>
+              </ul>
+            </div>
+
+            {/* ALL-DAY ADVENTURE */}
+            <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
+              <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
+                <span className="inline-block w-4 h-4 bg-accent-color/70 rotate-45"></span>
+                <span>ALL-DAY ADVENTURE</span>
+              </h4>
+              <p className="ml-6 mb-2">The ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.</p>
+              <ul className="ml-6 list-disc list-inside space-y-1 text-sm text-white/90">
+                <li>One-seater snowmobile</li>
+                <li>Two-seater available on request</li>
+              </ul>
+            </div>
+          </div>
+        );
+      } else if (content.includes('★')) {
+        subsections = content.split('★').filter(s => s.trim().length > 0);
+
+        return (
+          <div className="space-y-4">
+            {subsections.map((subsection, idx) => (
+              <div key={idx} className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
+                <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
+                  <span className="inline-block w-4 h-4 bg-accent-color/70 rotate-45"></span>
+                  <span>{subsection.split('\n')[0].trim()}</span>
+                </h4>
+                <div className="ml-6">
+                  {subsection.split('\n').slice(1).map((line, lineIdx) => (
+                    <p key={lineIdx} className="mb-2">{line.trim()}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      } else if (content.includes('•')) {
+        // Format bullet point lists
+        return (
+          <div>
+            <ul className="list-disc list-inside space-y-2 ml-4 text-white/90">
+              {content.split('•').filter(item => item.trim().length > 0).map((item, idx) => (
+                <li key={idx}>{item.trim()}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+    }
+
+    // Default rendering for simple text content
+    return (
+      <div className="space-y-2">
+        {content.split('\n').map((paragraph, idx) => (
+          <p key={idx} className="text-white/90">{paragraph.trim()}</p>
+        ))}
+      </div>
+    );
+  };
+
   return (
-    // Modal Container - Full screen with background overlay
+    // FIXED: Modal Container with improved mobile handling
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop bg-black/75 backdrop-blur-sm overflow-y-auto transform-gpu"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop bg-black/80 backdrop-blur-sm overflow-y-auto will-change-transform"
       role="dialog"
       aria-modal="true"
       aria-labelledby={`modal-title-${experience.id}`}
+      onClick={(e) => {
+        // Only close if clicking directly on the backdrop
+        if ((e.target as HTMLElement).classList.contains('modal-backdrop')) {
+          e.preventDefault();
+          onClose();
+        }
+      }}
     >
-      {/* Modal Content */}
+      {/* FIXED: Modal Content with improved mobile handling */}
       <div 
-        className="bg-card-bg/90 backdrop-blur-md border border-white/20 rounded-xl w-full max-w-5xl p-4 md:p-6 shadow-xl transform-gpu"
+        className="bg-card-bg/90 backdrop-blur-md border border-white/20 rounded-xl w-full max-w-5xl p-4 md:p-6 shadow-xl will-change-transform"
         style={{ maxHeight: 'calc(100vh - 40px)', overflowY: 'auto' }}
+        onClick={(e) => e.stopPropagation()} // Prevent clicks inside from closing
       >
         {/* Close Button */}
         <button 
-          onClick={onClose}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onClose();
+          }}
           className="absolute right-4 top-4 z-10 text-white p-1 hover:text-accent-color transition-colors"
           aria-label="Close modal"
         >
           <X size={24} />
         </button>
-        
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Left Column - Images Gallery */}
           <div className="lg:w-1/2">
@@ -235,7 +396,7 @@ function ExperienceDetailModal({
                   <div className="w-12 h-12 border-t-2 border-b-2 border-accent-color rounded-full animate-spin"></div>
                 </div>
               )}
-              
+
               {/* Main image */}
               <img 
                 src={gallery[activeImageIndex]}
@@ -250,12 +411,13 @@ function ExperienceDetailModal({
                   setIsImageLoading(false);
                 }}
               />
-              
+
               {/* Navigation Arrows - Only show if we have more than 1 image */}
               {gallery.length > 1 && (
                 <>
                   <button 
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       setActiveImageIndex((prev) => (prev === 0 ? gallery.length - 1 : prev - 1));
                     }}
@@ -264,9 +426,10 @@ function ExperienceDetailModal({
                   >
                     <ChevronLeft size={20} />
                   </button>
-                  
+
                   <button 
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       setActiveImageIndex((prev) => (prev === gallery.length - 1 ? 0 : prev + 1));
                     }}
@@ -277,7 +440,7 @@ function ExperienceDetailModal({
                   </button>
                 </>
               )}
-              
+
               {/* Image Counter */}
               {gallery.length > 1 && (
                 <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 text-white text-xs rounded-full">
@@ -285,14 +448,18 @@ function ExperienceDetailModal({
                 </div>
               )}
             </div>
-            
-            {/* Thumbnail Gallery */}
+
+            {/* Thumbnail Gallery - FIXED: Improved mobile handling */}
             {gallery.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
                 {gallery.map((img, index) => (
                   <button
                     key={index}
-                    onClick={() => setActiveImageIndex(index)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setActiveImageIndex(index);
+                    }}
                     className={`relative aspect-square rounded overflow-hidden border-2 transition-all ${
                       activeImageIndex === index ? 'border-accent-color ring-2 ring-accent-color/50' : 'border-transparent'
                     }`}
@@ -314,8 +481,8 @@ function ExperienceDetailModal({
               </div>
             )}
           </div>
-          
-          {/* Right Column - Experience Details */}
+
+          {/* Right Column - Experience Details - FIXED: Standardized experience content */}
           <div className="lg:w-1/2">
             <h2 
               id={`modal-title-${experience.id}`}
@@ -323,89 +490,31 @@ function ExperienceDetailModal({
             >
               {experience.title}
             </h2>
-            
-            {/* Different layouts based on experience type */}
-            {experience.fullDescription && experience.fullDescription.includes('snowmobile') ? (
-              <div className="leading-relaxed">
-                {/* Introduction text */}
-                <p className="mb-6">
-                  {experience.fullDescription.split('━━━ PICK YOUR ADVENTURE ━━━')[0].trim()}
-                </p>
-                
-                {/* Adventure section */}
-                <div className="mb-6">
-                  <h3 className="text-white font-bold text-lg flex items-center gap-2 mb-4">
-                    <span className="h-px w-6 bg-accent-color"></span>
-                    <span>PICK YOUR ADVENTURE</span>
-                    <span className="h-px flex-grow bg-accent-color"></span>
-                  </h3>
-                  
-                  <div className="space-y-6">
-                    {/* 2-HOUR TOUR */}
-                    <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
-                      <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
-                        <span className="inline-block w-4 h-4 bg-accent-color/70 rotate-45"></span>
-                        <span>2-HOUR BACKCOUNTRY TOUR</span>
-                      </h4>
-                      <p className="ml-6 mb-2">Great if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.</p>
-                      <ul className="ml-6 list-disc list-inside space-y-1 text-sm text-white/90">
-                        <li>One-seater snowmobile</li>
-                        <li>Two-seater available on request</li>
-                      </ul>
-                    </div>
-                    
-                    {/* ALL-DAY ADVENTURE */}
-                    <div className="bg-card-bg/20 rounded-lg p-4 border border-white/10">
-                      <h4 className="text-accent-color font-semibold mb-2 flex items-center gap-2">
-                        <span className="inline-block w-4 h-4 bg-accent-color/70 rotate-45"></span>
-                        <span>ALL-DAY ADVENTURE</span>
-                      </h4>
-                      <p className="ml-6 mb-2">The ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.</p>
-                      <ul className="ml-6 list-disc list-inside space-y-1 text-sm text-white/90">
-                        <li>One-seater snowmobile</li>
-                        <li>Two-seater available on request</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Important information section */}
-                <div>
-                  <h3 className="text-white font-bold text-lg flex items-center gap-2 mb-4">
-                    <span className="h-px w-6 bg-accent-color"></span>
-                    <span>IMPORTANT INFORMATION</span>
-                    <span className="h-px flex-grow bg-accent-color"></span>
-                  </h3>
-                  
-                  <ul className="list-disc list-inside space-y-2 ml-4 text-white/90">
-                    <li>Children can join as passengers, making it perfect for family fun</li>
-                    <li>Minimum age for drivers: 18 years</li>
-                    <li>Valid B driving license required for drivers</li>
-                  </ul>
-                </div>
-              </div>
 
-            ) : (
-              <div className="prose prose-invert max-w-none">
-                <div className="text-white text-opacity-90 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
-                  {experience.fullDescription || experience.description}
-                </div>
-              </div>
-            )}
-            
+            {/* FIXED: Standardized experience content structure */}
+            {renderExperienceContent()}
+
             {/* Experience Navigation */}
             <div className="flex justify-between mt-8 pt-4 border-t border-white/10">
               <button 
-                onClick={onPrevious}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onPrevious();
+                }}
                 className="flex items-center text-white/80 hover:text-accent-color transition-colors"
                 aria-label="View previous experience"
               >
                 <ChevronLeft size={20} />
                 <span className="ml-1">{t.experiences.previousExperience}</span>
               </button>
-              
+
               <button 
-                onClick={onNext}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onNext();
+                }}
                 className="flex items-center text-white/80 hover:text-accent-color transition-colors"
                 aria-label="View next experience"
               >
@@ -426,10 +535,10 @@ export function ExperiencesSection() {
   const t = useTranslation(language as any);
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  
+
   // Get all experiences from the translation
   let experienceList = t.experiences.list as Experience[];
-  
+
   // Include all experiences - don't filter out husky anymore
   let experiences: Experience[] = experienceList.map(exp => {
     // Create a new experience with updated properties
@@ -438,10 +547,10 @@ export function ExperiencesSection() {
       // Add empty fullDescription if not provided in translations
       fullDescription: exp.fullDescription || exp.description
     };
-    
+
     // Override image path based on title for consistent image loading
     const title = updatedExp.title.toLowerCase();
-    
+
     // Map titles to correct image paths
     if (title.includes('snowmobile')) {
       updatedExp.image = '/images/Snowmobile/Snowmobile 1_result.webp';
@@ -516,51 +625,53 @@ export function ExperiencesSection() {
         '/images/Huskys/Husky 4_result.webp'
       ];
     }
-    
+
     return updatedExp;
   });
-  
+
   // Custom order to display cards in desired sequence with Husky after Side-by-Side
   // Create a custom ordered array that will explicitly place the husky card after the side-by-side
   const customOrder: Record<number, number> = {};
-  
+
   // First, assign default ordering based on ID
   experienceList.forEach(exp => {
     customOrder[exp.id] = exp.id;
   });
-  
+
   // Specifically place husky card (ID 10) right after side-by-side card (ID 9)
   // by swapping its position in sort order
   customOrder[10] = 9.5; // Place between 9 and 10
-  
+
   // Sort using the custom order
   experiences = experiences.sort((a, b) => {
     return (customOrder[a.id] || a.id) - (customOrder[b.id] || b.id);
   });
-  
+
   // Navigation handlers
   const navigateToNext = () => {
     if (!selectedExperience) return;
-    
+
     const currentIndex = experiences.findIndex(exp => exp.id === selectedExperience.id);
     const nextIndex = (currentIndex + 1) % experiences.length;
     setSelectedExperience(experiences[nextIndex]);
   };
-  
+
   const navigateToPrevious = () => {
     if (!selectedExperience) return;
-    
+
     const currentIndex = experiences.findIndex(exp => exp.id === selectedExperience.id);
     const previousIndex = (currentIndex - 1 + experiences.length) % experiences.length;
     setSelectedExperience(experiences[previousIndex]);
   };
-  
-  // Function to open modal with selected experience
-  const openExperienceDetail = (experience: Experience) => {
+
+  // FIXED: Function to open modal with selected experience - preventing page jump
+  const openExperienceDetail = (experience: Experience, e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent default link behavior
+    e.stopPropagation(); // Stop event propagation
     setSelectedExperience(experience);
     setModalOpen(true);
   };
-  
+
   // Function to close modal
   const closeModal = () => {
     setModalOpen(false);
@@ -569,165 +680,31 @@ export function ExperiencesSection() {
   // Improved helper function to get the correct image path for each experience
   const getExperienceImage = (experience: Experience): string => {
     const title = experience.title.toLowerCase();
-    
+
     // Mapping of experience types to correct image paths
     const imageMappings = {
       'snowmobile': '/images/Snowmobile/Snowmobile 1_result.webp',
       'restaurant': '/images/restaurant/jayjays-exterior.jpg',
-      'jayjay': '/images/JayJays-Restaurant.jpg',
-      'kart': '/images/Ice Kart.jpg',
-      'reindeer': '/images/Reindeers.jpg',
-      'helicopter': '/images/Helikopter.jpg',
-      'helikopter': '/images/Helikopter.jpg',
-      'drift': '/images/Drifting.jpg',
-      'fishing': '/images/Ice-Fishing.jpg',
-      'buggy': '/images/Side-By-Side-Buggy-Drifting.jpg',
-      'side': '/images/Side-By-Side-Buggy-Drifting.jpg',
+      'jayjay': '/images/restaurant/jayjays-exterior.jpg',
+      'kart': '/images/Ice Kart/Icekart 1_result.webp',
+      'reindeer': '/images/Reindeers/Reindeers 1_result.webp',
+      'helicopter': '/images/Helicopter/Helikopter 1_result.webp',
+      'helikopter': '/images/Helicopter/Helikopter 1_result.webp',
+      'drift': '/images/Ice Drift/Cars 1_result.webp',
+      'fishing': '/images/Ice Fishing/Icefish 1_result.webp',
+      'buggy': '/images/Side by Side/SBS 3_result.webp',
+      'side': '/images/Side by Side/SBS 3_result.webp',
       'husky': '/images/Huskys/Husky 1_result.webp',
       'dog': '/images/Huskys/Husky 1_result.webp'
     };
-    
+
     // Find the matching image path
     for (const [keyword, path] of Object.entries(imageMappings)) {
       if (title.includes(keyword)) {
         return path;
       }
     }
-    
+
     // If no specific image was found, use the one from the translation file
     return experience.image;
   };
-
-  return (
-    <section id="pakete" className="py-16 md:py-28 relative overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        <div className="aurora-glow absolute inset-0 opacity-30"></div>
-        <div className="absolute inset-0 transform-gpu">
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-accent-color/5 to-transparent opacity-30 transform-gpu"></div>
-        </div>
-        <div className="stars absolute inset-0 z-1 opacity-40 transform-gpu will-change-opacity"></div>
-      </div>
-      
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Section header */}
-        <div className="flex flex-col md:flex-row items-start justify-between mb-16">
-          <div className="text-center md:text-left mb-8 md:mb-0 flex-grow">
-            <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
-              {language === 'de' ? 'Unsere Erlebnisse' : language === 'sv' ? 'Våra Upplevelser' : 'Our Experiences'}
-            </span>
-            <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
-              {t.experiences.title}
-            </h2>
-            <p className="text-lg md:max-w-2xl text-white text-opacity-80">
-              {t.experiences.subtitle}
-            </p>
-          </div>
-        </div>
-        
-        {/* Experience cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 will-change-transform transform-gpu">
-          {experiences.map((experience) => (
-            <div 
-              key={experience.id} 
-              className="group relative will-change-transform transition-all duration-300 hover:translate-y-[-5px] transform-gpu"
-            >
-              {/* Card glow effect on hover */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-300 blur-md transform-gpu will-change-opacity"></div>
-              
-              {/* Card content */}
-              <div className="glass-card relative z-10 overflow-hidden bg-card-bg/70 backdrop-blur-md border border-white/20 rounded-xl hover:shadow-lg hover:border-accent-color/30 hover:shadow-accent-color/10 transition-all duration-300 transform-gpu">
-                {/* Card image section */}
-                <div className="relative h-[225px] overflow-hidden">
-                  <img 
-                    src={getExperienceImage(experience)}
-                    alt={experience.title} 
-                    loading={experience.id > 3 ? "lazy" : "eager"}
-                    decoding="async"
-                    width="640" 
-                    height="480"
-                    onError={(e) => {
-                      console.warn(`Error loading image for: ${experience.title}`);
-                      (e.target as HTMLImageElement).src = '/images/TXA_fallback.jpg';
-                    }}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  
-                  {/* Dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                  
-                  {/* Tag (bestseller/new) */}
-                  {experience.tag && (
-                    <div className="absolute top-4 left-4">
-                      <span 
-                        className={`inline-block px-3 py-1.5 rounded-full text-xs uppercase font-semibold tracking-wide backdrop-blur-sm ${
-                          experience.tag.type === 'bestseller' 
-                            ? 'bg-success-color/90 text-white' 
-                            : 'bg-accent-color/90 text-white'
-                        }`}
-                      >
-                        {experience.tag.text}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Card text content */}
-                <div className="p-6 flex flex-col h-[220px]">
-                  <h3 className="font-bold text-xl mb-3 text-white group-hover:text-accent-color transition-colors">
-                    {experience.title}
-                  </h3>
-                  <div className="mb-4 text-white text-opacity-80 text-sm flex-grow overflow-hidden">
-                    <div className="h-full overflow-y-auto pr-2 pb-2">
-                      {experience.description}
-                    </div>
-                  </div>
-                  <div className="flex justify-end items-center mt-auto">
-                    <button 
-                      onClick={() => openExperienceDetail(experience)}
-                      className="inline-flex items-center gap-1.5 text-accent-color hover:text-white transition-colors font-medium text-sm px-3 py-2"
-                      aria-label={`View details for ${experience.title}`}
-                    >
-                      {t.experiences.viewDetails}
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        {/* Call to action */}
-        <div className="text-center mt-16">
-          <a 
-            href="#contact" 
-            className="btn-primary inline-flex items-center justify-center gap-2 font-medium text-sm uppercase tracking-wide"
-          >
-            {t.experiences.sendInquiry}
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M7 17l9.2-9.2M17 17V7H7"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      
-      {/* Experience Detail Modal */}
-      {selectedExperience && (
-        <ExperienceDetailModal
-          experience={selectedExperience}
-          isOpen={modalOpen}
-          onClose={closeModal}
-          onNext={navigateToNext}
-          onPrevious={navigateToPrevious}
-          language={language}
-        />
-      )}
-    </section>
-  );
-}
