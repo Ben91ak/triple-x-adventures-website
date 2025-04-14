@@ -30,8 +30,7 @@ function ExperienceDetailModal({
       if (e.key === 'Escape') onClose();
     };
 
-    // FIXED: Improved modal handling to prevent background page movement
-    // Add a click handler that properly handles the modal backdrop
+    // Prevent background page movement
     const handleBackdropClick = (e: MouseEvent) => {
       // Check if clicked element has the modal-backdrop class
       if ((e.target as HTMLElement).classList.contains('modal-backdrop')) {
@@ -60,7 +59,7 @@ function ExperienceDetailModal({
       document.addEventListener('click', handleBackdropClick, { passive: false });
       document.addEventListener('touchend', handleTouchEnd, { passive: false });
 
-      // FIXED: Prevent scrolling while maintaining scroll position
+      // IMPORTANT: Fix for scrolling issue when modal opens
       const scrollY = window.scrollY;
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollY}px`;
@@ -73,7 +72,7 @@ function ExperienceDetailModal({
       document.removeEventListener('click', handleBackdropClick);
       document.removeEventListener('touchend', handleTouchEnd);
 
-      // FIXED: Restore scroll position when modal closes
+      // IMPORTANT: Restore scroll position when modal closes
       if (isOpen) {
         const scrollY = document.body.style.top;
         document.body.style.position = '';
@@ -103,7 +102,7 @@ function ExperienceDetailModal({
   // Exit early if the modal is not open
   if (!isOpen) return null;
 
-  // Get the correct gallery images based on experience type (simplified)
+  // Get the correct gallery images based on experience type
   const getGalleryImages = (): string[] => {
     const title = experience.title.toLowerCase();
 
@@ -204,7 +203,7 @@ function ExperienceDetailModal({
 
   const gallery = getGalleryImages();
 
-  // FIXED: Standardized experience content display function
+  // Standardized experience content display function
   const renderExperienceContent = () => {
     // Create a consistent experience presentation structure
     const title = experience.title.toLowerCase();
@@ -352,7 +351,7 @@ function ExperienceDetailModal({
   };
 
   return (
-    // FIXED: Modal Container with improved mobile handling
+    // Modal Container with improved mobile handling
     <div 
       className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop bg-black/80 backdrop-blur-sm overflow-y-auto will-change-transform"
       role="dialog"
@@ -366,7 +365,7 @@ function ExperienceDetailModal({
         }
       }}
     >
-      {/* FIXED: Modal Content with improved mobile handling */}
+      {/* Modal Content with improved mobile handling */}
       <div 
         className="bg-card-bg/90 backdrop-blur-md border border-white/20 rounded-xl w-full max-w-5xl p-4 md:p-6 shadow-xl will-change-transform"
         style={{ maxHeight: 'calc(100vh - 40px)', overflowY: 'auto' }}
@@ -419,58 +418,48 @@ function ExperienceDetailModal({
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      setActiveImageIndex((prev) => (prev === 0 ? gallery.length - 1 : prev - 1));
-                    }}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-accent-color/70 transition-colors z-10"
+                      const newIndex = (activeImageIndex - 1 + gallery.length) % gallery.length;
+                      setActiveImageIndex(newIndex);
+                    }} 
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all"
                     aria-label="Previous image"
                   >
                     <ChevronLeft size={20} />
                   </button>
-
+                  
                   <button 
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      setActiveImageIndex((prev) => (prev === gallery.length - 1 ? 0 : prev + 1));
-                    }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-accent-color/70 transition-colors z-10"
+                      const newIndex = (activeImageIndex + 1) % gallery.length;
+                      setActiveImageIndex(newIndex);
+                    }} 
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all"
                     aria-label="Next image"
                   >
                     <ChevronRight size={20} />
                   </button>
                 </>
               )}
-
-              {/* Image Counter */}
-              {gallery.length > 1 && (
-                <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 text-white text-xs rounded-full">
-                  {activeImageIndex + 1} / {gallery.length}
-                </div>
-              )}
             </div>
 
-            {/* Thumbnail Gallery - FIXED: Improved mobile handling */}
+            {/* Thumbnail Gallery */}
             {gallery.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
-                {gallery.map((img, index) => (
+                {gallery.map((image, index) => (
                   <button
                     key={index}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setActiveImageIndex(index);
-                    }}
-                    className={`relative aspect-square rounded overflow-hidden border-2 transition-all ${
-                      activeImageIndex === index ? 'border-accent-color ring-2 ring-accent-color/50' : 'border-transparent'
+                    onClick={() => setActiveImageIndex(index)}
+                    className={`relative aspect-[4/3] overflow-hidden rounded-md ${
+                      index === activeImageIndex ? 'ring-2 ring-accent-color' : 'opacity-70 hover:opacity-100'
                     }`}
                     aria-label={`View image ${index + 1}`}
-                    aria-current={activeImageIndex === index ? 'true' : 'false'}
+                    aria-current={index === activeImageIndex ? 'true' : 'false'}
                   >
                     <img 
-                      src={img}
-                      alt={`${experience.title} thumbnail ${index + 1}`}
+                      src={image} 
+                      alt={`${experience.title} thumbnail ${index + 1}`} 
                       className="w-full h-full object-cover"
-                      loading="lazy"
                       onError={(e) => {
                         console.error("Failed to load thumbnail:", (e.target as HTMLImageElement).src);
                         (e.target as HTMLImageElement).src = '/images/TXA_fallback.jpg';
@@ -482,41 +471,44 @@ function ExperienceDetailModal({
             )}
           </div>
 
-          {/* Right Column - Experience Details - FIXED: Standardized experience content */}
+          {/* Right Column - Experience Details */}
           <div className="lg:w-1/2">
+            {/* Experience Title */}
             <h2 
               id={`modal-title-${experience.id}`}
-              className="text-3xl font-bold mb-4 text-white"
+              className="text-2xl md:text-3xl font-bold text-white mb-4"
             >
               {experience.title}
             </h2>
-
-            {/* FIXED: Standardized experience content structure */}
-            {renderExperienceContent()}
-
-            {/* Experience Navigation */}
-            <div className="flex justify-between mt-8 pt-4 border-t border-white/10">
+            
+            {/* Experience Content */}
+            <div className="space-y-6">
+              {renderExperienceContent()}
+            </div>
+            
+            {/* Bottom Navigation for browsing experiences */}
+            <div className="flex justify-between items-center mt-8 pt-4 border-t border-white/10">
               <button 
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   onPrevious();
                 }}
-                className="flex items-center text-white/80 hover:text-accent-color transition-colors"
-                aria-label="View previous experience"
+                className="text-white hover:text-accent-color transition-colors flex items-center"
+                aria-label="Previous experience"
               >
                 <ChevronLeft size={20} />
                 <span className="ml-1">{t.experiences.previousExperience}</span>
               </button>
-
+              
               <button 
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   onNext();
                 }}
-                className="flex items-center text-white/80 hover:text-accent-color transition-colors"
-                aria-label="View next experience"
+                className="text-white hover:text-accent-color transition-colors flex items-center"
+                aria-label="Next experience"
               >
                 <span className="mr-1">{t.experiences.nextExperience}</span>
                 <ChevronRight size={20} />
@@ -631,16 +623,8 @@ export function ExperiencesSection() {
 
   // Custom order to display cards in desired sequence with Husky after Side-by-Side
   // Create a custom ordered array that will explicitly place the husky card after the side-by-side
-  const customOrder: Record<number, number> = {};
-
-  // First, assign default ordering based on ID
-  experienceList.forEach(exp => {
-    customOrder[exp.id] = exp.id;
-  });
-
   // Specifically place husky card (ID 10) right after side-by-side card (ID 9)
-  // by swapping its position in sort order
-  customOrder[10] = 9.5; // Place between 9 and 10
+  const customOrder: Record<number, number> = { 10: 9.5 };
 
   // Sort using the custom order
   experiences = experiences.sort((a, b) => {
@@ -708,3 +692,80 @@ export function ExperiencesSection() {
     // If no specific image was found, use the one from the translation file
     return experience.image;
   };
+
+  // Return the component JSX
+  return (
+    <section id="experiences" className="py-24 bg-gradient-to-b from-black to-card-bg relative">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            {t.experiences.title}
+          </h2>
+          <p className="text-white/70 max-w-2xl mx-auto">
+            {t.experiences.description}
+          </p>
+        </div>
+
+        {/* FIXED: Standardized Experience Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+          {experiences.map((experience) => (
+            <div 
+              key={experience.id} 
+              className="relative group overflow-hidden rounded-xl bg-card-bg/40 shadow-lg border border-white/5 hover:border-white/20 transition-all duration-300 h-full flex flex-col"
+            >
+              {/* Card Image Container - Fixed aspect ratio for all cards */}
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img 
+                  src={getExperienceImage(experience)} 
+                  alt={experience.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={(e) => {
+                    console.error("Failed to load card image:", (e.target as HTMLImageElement).src);
+                    (e.target as HTMLImageElement).src = '/images/TXA_fallback.jpg';
+                  }}
+                />
+                
+                {/* Gradient overlay for better text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                
+                {/* Experience title (displayed over the image) */}
+                <h3 className="absolute bottom-0 left-0 right-0 p-4 text-white text-xl font-bold">
+                  {experience.title}
+                </h3>
+              </div>
+              
+              {/* Card Content */}
+              <div className="p-4 flex-grow flex flex-col">
+                {/* Short description */}
+                <div className="text-white/80 mb-4 line-clamp-3 flex-grow">
+                  {experience.description.substring(0, 120)}
+                  {experience.description.length > 120 ? '...' : ''}
+                </div>
+                
+                {/* Details button */}
+                <button
+                  onClick={(e) => openExperienceDetail(experience, e)}
+                  className="w-full py-2 px-4 bg-accent-color hover:bg-accent-color/80 text-black font-medium rounded-md transition-colors mt-auto"
+                >
+                  {t.experiences.viewDetailsButton}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Detail Modal */}
+      {selectedExperience && (
+        <ExperienceDetailModal
+          experience={selectedExperience}
+          isOpen={modalOpen}
+          onClose={closeModal}
+          onNext={navigateToNext}
+          onPrevious={navigateToPrevious}
+          language={language}
+        />
+      )}
+    </section>
+  );
+}

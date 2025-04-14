@@ -294,13 +294,16 @@ export function preloadExperienceImages() {
     '/images/Reindeers/Reindeers 1_result.webp',
     '/images/Ice Drift/Cars 1_result.webp',
     '/images/Side by Side/SBS 1_result.webp',
+    '/images/Ice Fishing/Icefish 1_result.webp',
+    '/images/Huskys/Husky 1_result.webp',
     
     // Verified JPG images in the root images directory
     '/images/Drifting.jpg',
     '/images/Helikopter.jpg',
     '/images/Ice Kart.jpg',
     '/images/Reindeers.jpg',
-    '/images/Ice-Fishing.jpg'
+    '/images/Ice-Fishing.jpg',
+    '/images/Side-By-Side-Buggy-Drifting.jpg'
   ];
   
   // WebP Snowmobile images with result suffix
