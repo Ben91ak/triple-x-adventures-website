@@ -154,52 +154,91 @@ function ExperienceDetailModal({
     }
   }, [isOpen]);
 
-  // Handle scroll locking properly
+  // Enhanced scroll locking to prevent all jumping
   useEffect(() => {
     if (!isOpen) return;
+
+    // Immediately capture scroll position before any DOM updates
+    const scrollY = window.scrollY || window.pageYOffset;
+    const scrollX = window.scrollX || window.pageXOffset;
+    const htmlStyle = document.documentElement.style;
     
-    // Store the current scroll position
-    const scrollY = window.scrollY;
+    // Save original styles to restore later
+    const originalStyles = {
+      html: {
+        overflow: htmlStyle.overflow,
+        height: htmlStyle.height,
+      },
+      body: {
+        overflow: document.body.style.overflow,
+        height: document.body.style.height,
+        position: document.body.style.position,
+        left: document.body.style.left,
+        top: document.body.style.top,
+        width: document.body.style.width,
+      }
+    };
     
-    // Apply scroll lock without jumping
+    // Calculate scrollbar width to prevent layout shift
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    
+    // Completely lock all scrolling on the page
+    htmlStyle.overflow = 'hidden';
+    htmlStyle.height = '100%';
+    
+    // Fix body in place with exact dimensions
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100%';
     document.body.style.position = 'fixed';
+    document.body.style.left = `-${scrollX}px`;
     document.body.style.top = `-${scrollY}px`;
     document.body.style.width = '100%';
-    document.body.style.overflowY = 'scroll'; // Keep scrollbar to prevent layout shifts
+    
+    // Compensate for scrollbar disappearance (prevents content shift)
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
     
     // Handle escape key
     const handleEscapeKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
 
-    // Handle preventing background scroll but allow modal content scroll
-    const preventBackgroundScroll = (e: TouchEvent | WheelEvent) => {
-      // If we're inside the modal content, allow native scrolling
+    // Handle wheel and touch events correctly
+    const preventScrollOutsideModal = (e: TouchEvent | WheelEvent) => {
       if (modalRef.current && modalRef.current.contains(e.target as Node)) {
-        return true;
+        // Allow scrolling inside the modal
+        e.stopPropagation();
+      } else {
+        // Prevent any scrolling outside the modal
+        e.preventDefault();
       }
-      // Otherwise prevent scroll events on the background
-      e.preventDefault();
-      return false;
     };
     
-    // Add event listeners
     document.addEventListener('keydown', handleEscapeKey);
-    document.addEventListener('wheel', preventBackgroundScroll, { passive: false });
-    document.addEventListener('touchmove', preventBackgroundScroll, { passive: false });
+    document.addEventListener('wheel', preventScrollOutsideModal, { passive: false });
+    document.addEventListener('touchmove', preventScrollOutsideModal, { passive: false });
     
     return () => {
-      // Cleanup event listeners
-      document.removeEventListener('keydown', handleEscapeKey);
-      document.removeEventListener('wheel', preventBackgroundScroll);
-      document.removeEventListener('touchmove', preventBackgroundScroll);
+      // Restore all original styles
+      htmlStyle.overflow = originalStyles.html.overflow;
+      htmlStyle.height = originalStyles.html.height;
       
-      // Restore scroll position on close
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflowY = '';
-      window.scrollTo(0, scrollY);
+      document.body.style.overflow = originalStyles.body.overflow;
+      document.body.style.height = originalStyles.body.height;
+      document.body.style.position = originalStyles.body.position;
+      document.body.style.left = originalStyles.body.left;
+      document.body.style.top = originalStyles.body.top;
+      document.body.style.width = originalStyles.body.width;
+      document.body.style.paddingRight = '';
+      
+      // Restore exact scroll position
+      window.scrollTo(scrollX, scrollY);
+      
+      // Clean up event listeners
+      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener('wheel', preventScrollOutsideModal);
+      document.removeEventListener('touchmove', preventScrollOutsideModal);
     };
   }, [isOpen, onClose]);
 
@@ -448,8 +487,15 @@ function ExperienceDetailModal({
               <button 
                 onClick={(e) => {
                   e.preventDefault();
-                  window.location.href = `#contact`;
+                  // First close the modal to restore the scroll position
                   onClose();
+                  // Then scroll to contact section with a slight delay
+                  setTimeout(() => {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }, 100);
                 }}
                 className="flex-1 py-3 px-6 bg-accent-color hover:bg-accent-color/90 text-black font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-color"
               >
