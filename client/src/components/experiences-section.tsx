@@ -108,56 +108,82 @@ function ExperienceDetailModal({
     // Define gallery mappings with correct paths
     const galleryMappings: Record<string, string[]> = {
       'snowmobile': [
-        '/images/Snowmobile/Snowmobile.jpg',
-        '/images/Snowmobile/Snowmobile.jpg'
+        '/images/Snowmobile/Snowmobile 1_result.webp',
+        '/images/Snowmobile/Snowmobile 2_result.webp',
+        '/images/Snowmobile/Snowmobile 3_result.webp',
+        '/images/Snowmobile/Snowmobile 4_result.webp'
       ],
       'restaurant': [
-        '/images/JayJays restaurant .jpg',
-        '/images/JayJays restaurant .jpg'
+        '/images/JayJays-Restaurant.jpg',
+        '/images/restaurant/jayjays-exterior.jpg',
+        '/images/restaurant/dish.jpg',
+        '/images/restaurant/dining-area.jpg'
       ],
       'jayjay': [
-        '/images/JayJays restaurant .jpg',
-        '/images/JayJays restaurant .jpg'
+        '/images/JayJays-Restaurant.jpg',
+        '/images/restaurant/jayjays-exterior.jpg',
+        '/images/restaurant/dish.jpg',
+        '/images/restaurant/dining-area.jpg'
       ],
       'kart': [
         '/images/Ice Kart.jpg',
-        '/images/Ice Kart.jpg'
+        '/images/Ice Kart/Icekart 1_result.webp',
+        '/images/Ice Kart/Icekart 2_result.webp',
+        '/images/Ice Kart/Icekart 3_result.webp'
       ],
       'reindeer': [
         '/images/Reindeers.jpg',
-        '/images/Reindeers.jpg'
+        '/images/Reindeers/Reindeers 1_result.webp',
+        '/images/Reindeers/Reindeers 2_result.webp',
+        '/images/Reindeers/Reindeers 3_result.webp'
       ],
       'helicopter': [
         '/images/Helikopter.jpg',
-        '/images/Helikopter.jpg'
+        '/images/Helicopter/Helikopter 1_result.webp',
+        '/images/Helicopter/Helikopter 2_result.webp',
+        '/images/Helicopter/Helikopter 3_result.webp'
       ],
       'helikopter': [
         '/images/Helikopter.jpg',
-        '/images/Helikopter.jpg'
+        '/images/Helicopter/Helikopter 1_result.webp',
+        '/images/Helicopter/Helikopter 2_result.webp',
+        '/images/Helicopter/Helikopter 3_result.webp'
       ],
       'drift': [
         '/images/Drifting.jpg',
-        '/images/Drifting.jpg'
+        '/images/Ice Drift/Cars 1_result.webp',
+        '/images/Ice Drift/Cars 2_result.webp',
+        '/images/Ice Drift/Cars 3_result.webp'
       ],
       'fishing': [
-        '/images/Ice Fishing.JPG',
-        '/images/Ice Fishing.JPG'
+        '/images/Ice-Fishing.jpg',
+        '/images/Ice Fishing/Icefish 1_result.webp',
+        '/images/Ice Fishing/Icefish 2_result.webp',
+        '/images/Ice Fishing/Shoot 3_result.webp'
       ],
       'buggy': [
-        '/images/Side By Side Buggy Drifting .jpg',
-        '/images/Side By Side Buggy Drifting .jpg'
+        '/images/Side-By-Side-Buggy-Drifting.jpg',
+        '/images/Side by Side/SBS 1_result.webp',
+        '/images/Side by Side/SBS 2_result.webp',
+        '/images/Side by Side/SBS 3_result.webp'
       ],
       'side': [
-        '/images/Side By Side Buggy Drifting .jpg',
-        '/images/Side By Side Buggy Drifting .jpg'
+        '/images/Side-By-Side-Buggy-Drifting.jpg',
+        '/images/Side by Side/SBS 1_result.webp',
+        '/images/Side by Side/SBS 2_result.webp',
+        '/images/Side by Side/SBS 3_result.webp'
       ],
       'husky': [
-        '/images/Husky.jpg',
-        '/images/Husky.jpg'
+        '/images/Huskys/Husky 1_result.webp',
+        '/images/Huskys/Husky 2_result.webp',
+        '/images/Huskys/Husky 3_result.webp',
+        '/images/Huskys/Husky 4_result.webp'
       ],
       'dog': [
-        '/images/Husky.jpg',
-        '/images/Husky.jpg'
+        '/images/Huskys/Husky 1_result.webp',
+        '/images/Huskys/Husky 2_result.webp',
+        '/images/Huskys/Husky 3_result.webp',
+        '/images/Huskys/Husky 4_result.webp'
       ]
     };
     
@@ -463,19 +489,19 @@ export function ExperiencesSection() {
     
     // Mapping of experience types to correct image paths
     const imageMappings = {
-      'snowmobile': '/images/Snowmobile/Snowmobile.jpg',
+      'snowmobile': '/images/Snowmobile/Snowmobile 1_result.webp',
       'restaurant': '/images/restaurant/jayjays-exterior.jpg',
-      'jayjay': '/images/restaurant/jayjays-exterior.jpg',
+      'jayjay': '/images/JayJays-Restaurant.jpg',
       'kart': '/images/Ice Kart.jpg',
       'reindeer': '/images/Reindeers.jpg',
       'helicopter': '/images/Helikopter.jpg',
       'helikopter': '/images/Helikopter.jpg',
       'drift': '/images/Drifting.jpg',
-      'fishing': '/images/Ice Fishing.JPG',
-      'buggy': '/images/Side By Side Buggy Drifting .jpg',
-      'side': '/images/Side By Side Buggy Drifting .jpg',
-      'husky': '/images/Husky.jpg',
-      'dog': '/images/Husky.jpg'
+      'fishing': '/images/Ice-Fishing.jpg',
+      'buggy': '/images/Side-By-Side-Buggy-Drifting.jpg',
+      'side': '/images/Side-By-Side-Buggy-Drifting.jpg',
+      'husky': '/images/Huskys/Husky 1_result.webp',
+      'dog': '/images/Huskys/Husky 1_result.webp'
     };
     
     // Find the matching image path
