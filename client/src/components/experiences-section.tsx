@@ -24,13 +24,15 @@ function ExperienceDetailModal({
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isImageLoading, setIsImageLoading] = useState(true);
 
-  // Setup modal behaviors when opened/closed
+  // Setup modal behaviors when opened/closed with enhanced scroll locking
   useEffect(() => {
+    let savedScrollY = 0;
+    
     const handleEscapeKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
 
-    // Prevent background page movement
+    // Prevent background page movement with more precise handling
     const handleBackdropClick = (e: MouseEvent) => {
       // Check if clicked element has the modal-backdrop class
       if ((e.target as HTMLElement).classList.contains('modal-backdrop')) {
@@ -55,31 +57,56 @@ function ExperienceDetailModal({
     };
 
     if (isOpen) {
+      // Save current scroll position before locking scroll
+      savedScrollY = window.scrollY;
+      
+      // Add event listeners
       document.addEventListener('keydown', handleEscapeKey);
       document.addEventListener('click', handleBackdropClick, { passive: false });
       document.addEventListener('touchend', handleTouchEnd, { passive: false });
 
-      // IMPORTANT: Fix for scrolling issue when modal opens
-      const scrollY = window.scrollY;
+      // ENHANCED: Fixed position technique that prevents page jumping
+      // This approach maintains the visual position while preventing scrolling
       document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.bottom = '0';
       document.body.style.width = '100%';
       document.body.style.overflow = 'hidden';
+      
+      // Store the scroll position in a data attribute for more reliable retrieval
+      document.body.setAttribute('data-scroll-position', savedScrollY.toString());
     }
 
     return () => {
+      // Clean up event listeners
       document.removeEventListener('keydown', handleEscapeKey);
       document.removeEventListener('click', handleBackdropClick);
       document.removeEventListener('touchend', handleTouchEnd);
 
-      // IMPORTANT: Restore scroll position when modal closes
+      // ENHANCED: Restore scroll position when modal closes
       if (isOpen) {
-        const scrollY = document.body.style.top;
+        // Get the saved position from data attribute (more reliable than style.top)
+        const savedPosition = parseInt(document.body.getAttribute('data-scroll-position') || '0');
+        
+        // Reset all position-related styles
         document.body.style.position = '';
         document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.bottom = '';
         document.body.style.width = '';
         document.body.style.overflow = '';
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        
+        // Restore scroll position
+        window.scrollTo({
+          top: savedPosition,
+          behavior: 'auto' // Use 'auto' instead of 'smooth' to prevent visual jumps
+        });
+        
+        // Clean up the data attribute
+        document.body.removeAttribute('data-scroll-position');
       }
     };
   }, [isOpen, onClose]);
@@ -664,20 +691,23 @@ export function ExperiencesSection() {
   // Improved helper function to get the correct image path for each experience
   const getExperienceImage = (experience: Experience): string => {
     const title = experience.title.toLowerCase();
+    
+    // Check console logs for debugging
+    console.log(`Finding image for experience: ${title}`);
 
-    // Mapping of experience types to correct image paths
+    // Mapping of experience types to correct image paths - using verified paths from the filesystem
     const imageMappings = {
       'snowmobile': '/images/Snowmobile/Snowmobile 1_result.webp',
-      'restaurant': '/images/restaurant/jayjays-exterior.jpg',
-      'jayjay': '/images/restaurant/jayjays-exterior.jpg',
+      'restaurant': '/images/JayJays-Restaurant.jpg',
+      'jayjay': '/images/JayJays-Restaurant.jpg',
       'kart': '/images/Ice Kart/Icekart 1_result.webp',
-      'reindeer': '/images/Reindeers/Reindeers 1_result.webp',
-      'helicopter': '/images/Helicopter/Helikopter 1_result.webp',
-      'helikopter': '/images/Helicopter/Helikopter 1_result.webp',
-      'drift': '/images/Ice Drift/Cars 1_result.webp',
-      'fishing': '/images/Ice Fishing/Icefish 1_result.webp',
-      'buggy': '/images/Side by Side/SBS 3_result.webp',
-      'side': '/images/Side by Side/SBS 3_result.webp',
+      'reindeer': '/images/Reindeers.jpg',
+      'helicopter': '/images/Helikopter.jpg',
+      'helikopter': '/images/Helikopter.jpg',
+      'drift': '/images/Drifting.jpg',
+      'fishing': '/images/Ice-Fishing.jpg',
+      'buggy': '/images/Side-By-Side-Buggy-Drifting.jpg',
+      'side': '/images/Side-By-Side-Buggy-Drifting.jpg',
       'husky': '/images/Huskys/Husky 1_result.webp',
       'dog': '/images/Huskys/Husky 1_result.webp'
     };
