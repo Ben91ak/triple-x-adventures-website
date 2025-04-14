@@ -1,8 +1,15 @@
+// Import HMR error handler first to intercept WebSocket errors
+import './hmr-error-handler';
+
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { supportsFormat, optimizePageImages, prefetchImages } from "./utils/image-optimizer";
 import { applyPerformanceOptimizations } from "./utils/performance-optimizer";
+import { initGlobalErrorHandlers } from "./utils/error-handlers";
+
+// Initialize global error handlers to catch and suppress WebSocket errors
+initGlobalErrorHandlers();
 
 // Initialize image format detection early
 // This runs immediately before the app renders to detect WebP/AVIF support
