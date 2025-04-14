@@ -106,34 +106,25 @@ export function HeroSection() {
     const video = videoRef.current;
     if (!video) return;
     
-    // Try different path formats if the video fails to load
+    // Simplified path retry mechanism
     let videoAttempts = 0;
-    const maxAttempts = 3;
+    const maxAttempts = 2;
     
     // Function to try alternate paths
     const tryAlternateVideoPath = () => {
       videoAttempts++;
       console.log(`Trying alternate video path (${videoAttempts}/${maxAttempts})...`);
       
-      // Try with relative paths if first attempt failed
       if (videoAttempts === 1) {
-        // Update all source elements
-        const sources = video.querySelectorAll('source');
-        sources.forEach(source => {
-          if (source.src.includes('/videos/')) {
-            source.src = source.src.replace('/videos/', 'videos/');
-          }
-        });
-        video.load();
-      } else if (videoAttempts === 2) {
         // Try with public prefix
         const sources = video.querySelectorAll('source');
         sources.forEach(source => {
-          source.src = source.src.replace('videos/', '/public/videos/');
+          source.src = source.src.replace('/videos/', '/public/videos/');
         });
         video.load();
       } else {
         // If we've tried all paths and still failed, show the fallback
+        console.error('All video loading attempts failed, showing fallback');
         setVideoError(true);
       }
     };
@@ -357,12 +348,10 @@ export function HeroSection() {
                 transform: 'translateX(-50%) translateY(-50%)'
               }}
             >
-              {/* Try WebM format first for better performance */}
+              {/* WebM format - primary source for better performance */}
               <source src="/videos/TXA Teaser 2025 Homepage.webm" type="video/webm" />
-              <source src="videos/TXA Teaser 2025 Homepage.webm" type="video/webm" />
               {/* MP4 fallback for broader compatibility */}
               <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
-              <source src="videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
