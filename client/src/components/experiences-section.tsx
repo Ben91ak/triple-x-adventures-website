@@ -702,7 +702,7 @@ export function ExperiencesSection() {
             {t.experiences.title}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto">
-            {t.experiences.description}
+            {t.experiences.subtitle}
           </p>
         </div>
 
@@ -747,7 +747,7 @@ export function ExperiencesSection() {
                   onClick={(e) => openExperienceDetail(experience, e)}
                   className="w-full py-2 px-4 bg-accent-color hover:bg-accent-color/80 text-black font-medium rounded-md transition-colors mt-auto"
                 >
-                  {t.experiences.viewDetailsButton}
+                  {t.experiences.viewDetails}
                 </button>
               </div>
             </div>
