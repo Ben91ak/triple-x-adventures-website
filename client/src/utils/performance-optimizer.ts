@@ -57,7 +57,7 @@ export function preloadAllCriticalImages(): void {
   const criticalImageUrls = [
     '/weiss-grun.png', // Logo
     '/images/TXA_fallback_optimized.jpg', // Hero background fallback
-    '/videos/TXA Teaser 2025 Homepage.webm', // Hero video
+    'https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Teaser%202025%20Homepage-Fnb2gpMVOnfP0UDwuU6elWEDJehxL3.webm', // Hero video
     '/images/experiences/Snowmobile 1_result.webp', // First experience image
   ];
   
@@ -78,7 +78,7 @@ export function preloadAllCriticalImages(): void {
   const videoLink = document.createElement('link');
   videoLink.rel = 'preload';
   videoLink.as = 'video';
-  videoLink.href = '/videos/TXA Teaser 2025 Homepage.webm';
+  videoLink.href = 'https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Teaser%202025%20Homepage-Fnb2gpMVOnfP0UDwuU6elWEDJehxL3.webm';
   videoLink.type = 'video/webm';
   
   // Only add if it doesn't already exist

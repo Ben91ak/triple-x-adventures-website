@@ -40,8 +40,8 @@ export function HeroSection() {
           .filter((link): link is HTMLLinkElement => link instanceof HTMLLinkElement)
           .forEach(link => {
             // Now TypeScript knows this is an HTMLLinkElement with an href
-            if (!link.href.includes('TXA Teaser 2025 Homepage.mp4') && 
-                !link.href.includes('TXA Teaser 2025 Homepage.webm')) {
+            if (!link.href.includes('TXA%20Teaser%202025%20Homepage-d5kHXNSaQibOJdx9cKc2PK1vXNlLgp.mp4') && 
+                !link.href.includes('TXA%20Teaser%202025%20Homepage-Fnb2gpMVOnfP0UDwuU6elWEDJehxL3.webm')) {
               link.remove();
               console.log('Removed unnecessary preload:', link.href);
             }
@@ -275,9 +275,9 @@ export function HeroSection() {
               }}
             >
               {/* WebM format - primary source for better performance */}
-              <source src="/videos/TXA Teaser 2025 Homepage.webm" type="video/webm" />
-              {/* MP4 fallback for broader compatibility */}
-              <source src="/videos/TXA Teaser 2025 Homepage.mp4" type="video/mp4" />
+              <source src="https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Teaser%202025%20Homepage-Fnb2gpMVOnfP0UDwuU6elWEDJehxL3.webm" type="video/webm" />
+              {/* MP4 fallback for browsers that don't support WebM */}
+              <source src="https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Teaser%202025%20Homepage-d5kHXNSaQibOJdx9cKc2PK1vXNlLgp.mp4" type="video/mp4" />
             </video>
             
             {/* Temporary aurora animation while waiting for video to load */}
