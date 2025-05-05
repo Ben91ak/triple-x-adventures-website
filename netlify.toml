@@ -1,16 +1,29 @@
 [build]
   command = "npm run build"
-  publish = "dist/public"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
 
+# Redirect API requests to the server
 [[redirects]]
   from = "/api/*"
   to = "/api/server.js"
   status = 200
 
+# Handle admin routes
+[[redirects]]
+  from = "/admin"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/index.html"
+  status = 200
+
+# Handle all routes for SPA
 [[redirects]]
   from = "/*"
-  to = "/"
+  to = "/index.html"
   status = 200
