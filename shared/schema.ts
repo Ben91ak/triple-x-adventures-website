@@ -2,16 +2,25 @@ import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-// Original user schema
+// Enhanced user schema with roles and security features
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
+  role: text("role").notNull().default('user'),
+  email: text("email").unique(),
+  lastLogin: timestamp("last_login"),
+  failedLoginAttempts: integer("failed_login_attempts").default(0),
+  accountLocked: boolean("account_locked").default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
+  role: true,
+  email: true,
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -36,13 +45,26 @@ export const insertContactSchema = createInsertSchema(contactSubmissions).omit({
 });
 
 export const contactFormSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  visitDate: z.string().optional(),
-  interests: z.array(z.string()).optional(),
-  message: z.string().optional(),
+  firstName: z.string().min(1, "First name is required")
+    .max(50, "First name cannot exceed 50 characters")
+    .regex(/^[a-zA-Z\s-']+$/, "First name can only contain letters, spaces, hyphens and apostrophes"),
+  lastName: z.string().min(1, "Last name is required")
+    .max(50, "Last name cannot exceed 50 characters")
+    .regex(/^[a-zA-Z\s-']+$/, "Last name can only contain letters, spaces, hyphens and apostrophes"),
+  email: z.string().email("Invalid email address")
+    .max(100, "Email cannot exceed 100 characters"),
+  phone: z.string().optional()
+    .transform(val => val ? val.replace(/[^\d+\-\s()]/g, '') : val), // Sanitize phone number
+  visitDate: z.string().optional()
+    .transform(val => val ? val.trim() : val),
+  interests: z.array(z.string()
+    .max(100, "Interest cannot exceed 100 characters")
+    .transform(val => val.trim())).optional(),
+  message: z.string().optional()
+    .transform(val => val ? val.trim() : val)
+    .pipe(z.string().max(2000, "Message cannot exceed 2000 characters").optional()),
+  // Add CSRF token validation
+  _csrf: z.string().optional(),
 });
 
 export type InsertContact = z.infer<typeof insertContactSchema>;
@@ -73,19 +95,43 @@ export const insertAdventureSchema = createInsertSchema(adventureSubmissions).om
 });
 
 export const adventureFormSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  startDate: z.string().optional(),
-  endDate: z.string().optional(),
-  departureAirport: z.string().min(1, "Departure airport is required"),
-  groupSize: z.number().min(1, "Group size must be at least 1"),
-  selectedPackages: z.array(z.string()).optional(),
-  selectedAccommodations: z.array(z.string()).optional(),
-  selectedActivities: z.array(z.string()).optional(),
-  additionalRequests: z.string().optional(),
-  preferredLanguage: z.string().min(1, "Preferred language is required"),
+  firstName: z.string().min(1, "First name is required")
+    .max(50, "First name cannot exceed 50 characters")
+    .regex(/^[a-zA-Z\s-']+$/, "First name can only contain letters, spaces, hyphens and apostrophes"),
+  lastName: z.string().min(1, "Last name is required")
+    .max(50, "Last name cannot exceed 50 characters")
+    .regex(/^[a-zA-Z\s-']+$/, "Last name can only contain letters, spaces, hyphens and apostrophes"),
+  email: z.string().email("Invalid email address")
+    .max(100, "Email cannot exceed 100 characters"),
+  phone: z.string().optional()
+    .transform(val => val ? val.replace(/[^\d+\-\s()]/g, '') : val), // Sanitize phone number
+  startDate: z.string().optional()
+    .transform(val => val ? val.trim() : val),
+  endDate: z.string().optional()
+    .transform(val => val ? val.trim() : val),
+  departureAirport: z.string().min(1, "Departure airport is required")
+    .max(100, "Departure airport cannot exceed 100 characters")
+    .transform(val => val.trim()),
+  groupSize: z.number().min(1, "Group size must be at least 1")
+    .max(50, "Group size cannot exceed 50")
+    .int("Group size must be a whole number"),
+  selectedPackages: z.array(z.string()
+    .max(100, "Package name cannot exceed 100 characters")
+    .transform(val => val.trim())).optional(),
+  selectedAccommodations: z.array(z.string()
+    .max(100, "Accommodation name cannot exceed 100 characters")
+    .transform(val => val.trim())).optional(),
+  selectedActivities: z.array(z.string()
+    .max(100, "Activity name cannot exceed 100 characters")
+    .transform(val => val.trim())).optional(),
+  additionalRequests: z.string().optional()
+    .transform(val => val ? val.trim() : val)
+    .pipe(z.string().max(2000, "Additional requests cannot exceed 2000 characters").optional()),
+  preferredLanguage: z.string().min(1, "Preferred language is required")
+    .max(50, "Preferred language cannot exceed 50 characters")
+    .transform(val => val.trim()),
+  // Add CSRF token validation
+  _csrf: z.string().optional(),
 });
 
 export type InsertAdventure = z.infer<typeof insertAdventureSchema>;

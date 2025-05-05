@@ -6,11 +6,20 @@ import { lazy, Suspense, memo, useEffect } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { HelmetProvider } from "react-helmet-async";
 import { VideoProvider } from "@/contexts/VideoContext";
+import applyAllOptimizations from "@/utils/performance-optimizer";
+import { initImagePreloading } from "@/utils/image-preloader";
 import "./styles/theme.css";
 
 // Lazy load pages for better performance
 const Home = lazy(() => import("@/pages/home"));
+const ProfessionalServices = lazy(() => import("@/pages/professional-services"));
 const NotFound = lazy(() => import("@/pages/not-found"));
+const About = lazy(() => import("@/pages/about"));
+const Accommodations = lazy(() => import("@/pages/accommodations"));
+const Contact = lazy(() => import("@/pages/contact"));
+const Restaurant = lazy(() => import("@/pages/restaurant"));
+const AdventureMap = lazy(() => import("@/pages/adventure-map"));
+const Admin = lazy(() => import("@/pages/admin"));
 
 // Loading fallback component for lazy-loaded pages with improved HTML5 semantics
 const PageLoader = () => (
@@ -31,6 +40,16 @@ const Router = memo(function Router() {
     <Suspense fallback={<PageLoader />}>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/professional-services" component={ProfessionalServices} />
+        <Route path="/about" component={About} />
+        <Route path="/accommodations" component={Accommodations} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/restaurant" component={Restaurant} />
+        <Route path="/adventure-map" component={AdventureMap} />
+        
+        {/* Admin route */}
+        <Route path="/admin" component={Admin} />
+        
         <Route component={NotFound} />
       </Switch>
     </Suspense>
@@ -52,8 +71,15 @@ function App() {
     },
   });
 
-  // Register a service worker for offline capabilities
+  // Apply performance optimizations when app loads
   useEffect(() => {
+    // Apply all performance optimizations
+    applyAllOptimizations();
+    
+    // Initialize image preloading system
+    initImagePreloading();
+    
+    // Register a service worker for offline capabilities
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/service-worker.js').catch(error => {

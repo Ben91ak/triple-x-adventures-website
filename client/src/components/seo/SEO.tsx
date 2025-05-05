@@ -1,79 +1,74 @@
 import { Helmet } from 'react-helmet-async';
 
 interface SEOProps {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
   canonicalUrl?: string;
   ogImage?: string;
-  ogType?: 'website' | 'article' | 'profile';
-  twitterCard?: 'summary' | 'summary_large_image';
+  ogType?: 'website' | 'article';
   structuredData?: Record<string, any>;
-  keywords?: string;
-  noIndex?: boolean;
-  lang?: string;
-  altLangLinks?: {
-    lang: string;
-    url: string;
-  }[];
+  children?: React.ReactNode;
 }
 
 export function SEO({
-  title = 'Premium Arctic Adventures | Triple X Adventures',
-  description = 'Experience unforgettable winter adventures in Swedish Lapland including snowmobile tours, ice drifting, and Northern Lights viewing. Discover the real Arctic with Triple X Adventures in Arvidsjaur.',
-  canonicalUrl = 'https://triple-x-adventures.com',
-  ogImage = '/images/triple-x-adventures-og.jpg',
-  ogType = 'website',
-  twitterCard = 'summary_large_image',
+  title,
+  description,
+  canonicalUrl = "https://triplexadventures.com",
+  ogImage = "/images/TXA_fallback_optimized.jpg",
+  ogType = "website",
   structuredData,
-  keywords = 'snowmobile tours Swedish Lapland, Arctic adventures Sweden, Northern Lights tours Lapland, ice drifting experience Sweden, luxury adventure Lapland, winter activities Arvidsjaur',
-  noIndex = false,
-  lang = 'en',
-  altLangLinks = [],
+  children
 }: SEOProps) {
-  const siteName = 'Triple X Adventures';
-  const baseUrl = 'https://triple-x-adventures.com';
-  const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+  // Default site name to append to titles
+  const siteName = "Triple X Adventures";
+  
+  // Format the title with site name
+  const formattedTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
+  
+  // Format canonical URL correctly
+  const fullCanonicalUrl = canonicalUrl.startsWith('http') 
+    ? canonicalUrl
+    : `https://triplexadventures.com${canonicalUrl.startsWith('/') ? canonicalUrl : `/${canonicalUrl}`}`;
+  
+  // Format OG image URL correctly  
+  const fullOgImageUrl = ogImage.startsWith('http') 
+    ? ogImage
+    : `https://triplexadventures.com${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
   
   return (
     <Helmet>
-      {/* Basic Meta Tags */}
-      <html lang={lang} />
-      <title>{fullTitle}</title>
+      {/* Primary Meta Tags */}
+      <title>{formattedTitle}</title>
+      <meta name="title" content={formattedTitle} />
       <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
       
-      {/* Canonical URL */}
-      <link rel="canonical" href={canonicalUrl} />
+      {/* Canonical Link */}
+      <link rel="canonical" href={fullCanonicalUrl} />
       
-      {/* Indexing Control */}
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
-      
-      {/* Open Graph Meta Tags */}
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`} />
+      {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={fullCanonicalUrl} />
+      <meta property="og:title" content={formattedTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={fullOgImageUrl} />
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content={lang === 'en' ? 'en_US' : lang === 'de' ? 'de_DE' : 'sv_SE'} />
       
-      {/* Twitter Card Meta Tags */}
-      <meta name="twitter:card" content={twitterCard} />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`} />
+      {/* Twitter */}
+      <meta property="twitter:card" content="summary_large_image" />
+      <meta property="twitter:url" content={fullCanonicalUrl} />
+      <meta property="twitter:title" content={formattedTitle} />
+      <meta property="twitter:description" content={description} />
+      <meta property="twitter:image" content={fullOgImageUrl} />
       
-      {/* Alternate Language Links */}
-      {altLangLinks.map(({ lang, url }) => (
-        <link key={lang} rel="alternate" hrefLang={lang} href={url} />
-      ))}
-      
-      {/* Structured Data (JSON-LD) */}
+      {/* Structured Data */}
       {structuredData && (
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
       )}
+      
+      {/* Additional meta tags */}
+      {children}
     </Helmet>
   );
 }

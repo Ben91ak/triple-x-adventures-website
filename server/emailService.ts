@@ -1,11 +1,24 @@
 import nodemailer, { SentMessageInfo } from 'nodemailer';
 import { type Contact } from '@shared/schema';
 import { type Adventure } from '@shared/schema';
+import DOMPurify from 'dompurify';
+import { createHash } from 'crypto';
 
 // Extend the SentMessageInfo to include the previewUrl for Ethereal
 interface ExtendedSentMessageInfo extends SentMessageInfo {
   previewUrl?: string;
 }
+
+// Sanitize input for email content to prevent XSS and email injection
+const sanitizeForEmail = (input: string | null | undefined): string => {
+  if (!input) return '';
+  return DOMPurify.sanitize(input.trim());
+};
+
+// Hash sensitive data for logging
+const hashForLogging = (value: string): string => {
+  return createHash('sha256').update(value).digest('hex').substring(0, 8) + '...';
+};
 
 // Create a transporter for sending emails
 // For production, we would use real SMTP settings
@@ -16,7 +29,12 @@ const createTransporter = async () => {
   try {
     // Use environment variables for SMTP settings if available
     if (process.env.EMAIL_HOST && process.env.EMAIL_PORT) {
-      console.log('Using configured email settings');
+      // Log email configuration without exposing credentials
+      console.log(`Using configured email settings: ${process.env.EMAIL_HOST}:${process.env.EMAIL_PORT}`);
+      if (process.env.EMAIL_USER) {
+        console.log(`Email user: ${process.env.EMAIL_USER}`);
+      }
+      
       return nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: parseInt(process.env.EMAIL_PORT),
@@ -25,6 +43,13 @@ const createTransporter = async () => {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASS,
         },
+        // Add TLS options for security
+        tls: {
+          // Reject unauthorized certificates in production
+          rejectUnauthorized: process.env.NODE_ENV === 'production',
+          // Minimum TLS version
+          minVersion: 'TLSv1.2'
+        }
       });
     }
 
@@ -52,26 +77,38 @@ export const sendContactEmail = async (contact: Contact): Promise<{ success: boo
   try {
     const transporter = await createTransporter();
     
-    // Format interests for better readability
-    const formattedInterests = (contact.interests || []).join(', ');
+    // Sanitize all input fields to prevent email injection and XSS
+    const sanitizedFirstName = sanitizeForEmail(contact.firstName);
+    const sanitizedLastName = sanitizeForEmail(contact.lastName);
+    const sanitizedEmail = sanitizeForEmail(contact.email);
+    const sanitizedPhone = sanitizeForEmail(contact.phone || '');
+    const sanitizedVisitDate = sanitizeForEmail(contact.visitDate || '');
+    const sanitizedMessage = sanitizeForEmail(contact.message || '');
     
-    // Construct email content
+    // Format interests for better readability, sanitizing each item
+    const sanitizedInterests = (contact.interests || []).map(interest => sanitizeForEmail(interest));
+    const formattedInterests = sanitizedInterests.join(', ');
+    
+    // Log email sending with masked personal information
+    console.log(`Sending contact form email for ${sanitizedFirstName} ${sanitizedLastName.charAt(0)}. (${hashForLogging(contact.email)})`); 
+    
+    // Construct email content with sanitized inputs
     const mailOptions = {
       from: `"Triple X Adventures Website" <${process.env.EMAIL_USER || 'no-reply@triple-x-adventures.com'}>`,
       to: 'info@triple-x-adventures.com',
-      subject: `New Contact Form Submission from ${contact.firstName} ${contact.lastName}`,
+      subject: `New Contact Form Submission from ${sanitizedFirstName} ${sanitizedLastName}`,
       text: `
 Contact Information:
 -------------------
-Name: ${contact.firstName} ${contact.lastName}
-Email: ${contact.email}
-Phone: ${contact.phone || 'Not provided'}
-Preferred Visit Date: ${contact.visitDate || 'Not specified'}
+Name: ${sanitizedFirstName} ${sanitizedLastName}
+Email: ${sanitizedEmail}
+Phone: ${sanitizedPhone || 'Not provided'}
+Preferred Visit Date: ${sanitizedVisitDate || 'Not specified'}
 
 Interests: ${formattedInterests || 'None selected'}
 
 Message:
-${contact.message || 'No message provided'}
+${sanitizedMessage || 'No message provided'}
 
 This email was sent automatically from the Triple X Adventures website contact form.
       `,
@@ -81,10 +118,10 @@ This email was sent automatically from the Triple X Adventures website contact f
   
   <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
     <h3 style="margin-top: 0;">Contact Information</h3>
-    <p><strong>Name:</strong> ${contact.firstName} ${contact.lastName}</p>
-    <p><strong>Email:</strong> ${contact.email}</p>
-    <p><strong>Phone:</strong> ${contact.phone || 'Not provided'}</p>
-    <p><strong>Preferred Visit Date:</strong> ${contact.visitDate || 'Not specified'}</p>
+    <p><strong>Name:</strong> ${sanitizedFirstName} ${sanitizedLastName}</p>
+    <p><strong>Email:</strong> ${sanitizedEmail}</p>
+    <p><strong>Phone:</strong> ${sanitizedPhone || 'Not provided'}</p>
+    <p><strong>Preferred Visit Date:</strong> ${sanitizedVisitDate || 'Not specified'}</p>
   </div>
   
   <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
@@ -94,7 +131,7 @@ This email was sent automatically from the Triple X Adventures website contact f
   
   <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">
     <h3 style="margin-top: 0;">Message</h3>
-    <p>${contact.message ? contact.message.replace(/\n/g, '<br>') : 'No message provided'}</p>
+    <p>${sanitizedMessage ? sanitizedMessage.replace(/\n/g, '<br>') : 'No message provided'}</p>
   </div>
   
   <p style="font-size: 12px; color: #666; margin-top: 30px;">
@@ -102,6 +139,12 @@ This email was sent automatically from the Triple X Adventures website contact f
   </p>
 </div>
       `,
+      // Add security headers
+      headers: {
+        'X-Priority': '1', // High priority
+        'X-MSMail-Priority': 'High',
+        'Importance': 'High'
+      }
     };
     
     // Send the email
@@ -130,29 +173,47 @@ export const sendAdventureEmail = async (adventure: Adventure): Promise<{ succes
   try {
     const transporter = await createTransporter();
     
-    // Format selected options for better readability
-    const formattedPackages = (adventure.selectedPackages || []).join(', ');
-    const formattedAccommodations = (adventure.selectedAccommodations || []).join(', ');
-    const formattedActivities = (adventure.selectedActivities || []).join(', ');
+    // Sanitize all input fields to prevent email injection and XSS
+    const sanitizedFirstName = sanitizeForEmail(adventure.firstName);
+    const sanitizedLastName = sanitizeForEmail(adventure.lastName);
+    const sanitizedEmail = sanitizeForEmail(adventure.email);
+    const sanitizedPhone = sanitizeForEmail(adventure.phone || '');
+    const sanitizedStartDate = sanitizeForEmail(adventure.startDate || '');
+    const sanitizedEndDate = sanitizeForEmail(adventure.endDate || '');
+    const sanitizedDepartureAirport = sanitizeForEmail(adventure.departureAirport);
+    const sanitizedPreferredLanguage = sanitizeForEmail(adventure.preferredLanguage);
+    const sanitizedAdditionalRequests = sanitizeForEmail(adventure.additionalRequests || '');
     
-    // Construct email content
+    // Format selected options for better readability, sanitizing each item
+    const sanitizedPackages = (adventure.selectedPackages || []).map(pkg => sanitizeForEmail(pkg));
+    const sanitizedAccommodations = (adventure.selectedAccommodations || []).map(acc => sanitizeForEmail(acc));
+    const sanitizedActivities = (adventure.selectedActivities || []).map(act => sanitizeForEmail(act));
+    
+    const formattedPackages = sanitizedPackages.join(', ');
+    const formattedAccommodations = sanitizedAccommodations.join(', ');
+    const formattedActivities = sanitizedActivities.join(', ');
+    
+    // Log email sending with masked personal information
+    console.log(`Sending adventure package email for ${sanitizedFirstName} ${sanitizedLastName.charAt(0)}. (${hashForLogging(adventure.email)})`); 
+    
+    // Construct email content with sanitized inputs
     const mailOptions = {
       from: `"Triple X Adventures Website" <${process.env.EMAIL_USER || 'no-reply@triple-x-adventures.com'}>`,
       to: 'info@triple-x-adventures.com',
-      subject: `New Adventure Package Request from ${adventure.firstName} ${adventure.lastName}`,
+      subject: `New Adventure Package Request from ${sanitizedFirstName} ${sanitizedLastName}`,
       text: `
 Adventure Package Request:
 -------------------------
-Name: ${adventure.firstName} ${adventure.lastName}
-Email: ${adventure.email}
-Phone: ${adventure.phone || 'Not provided'}
-Preferred Language: ${adventure.preferredLanguage}
+Name: ${sanitizedFirstName} ${sanitizedLastName}
+Email: ${sanitizedEmail}
+Phone: ${sanitizedPhone || 'Not provided'}
+Preferred Language: ${sanitizedPreferredLanguage}
 
 Travel Information:
 -----------------
-Start Date: ${adventure.startDate || 'Not specified'}
-End Date: ${adventure.endDate || 'Not specified'}
-Departure Airport: ${adventure.departureAirport}
+Start Date: ${sanitizedStartDate || 'Not specified'}
+End Date: ${sanitizedEndDate || 'Not specified'}
+Departure Airport: ${sanitizedDepartureAirport}
 Group Size: ${adventure.groupSize} persons
 
 Selected Packages: ${formattedPackages || 'None selected'}
@@ -160,7 +221,7 @@ Selected Accommodations: ${formattedAccommodations || 'None selected'}
 Selected Activities: ${formattedActivities || 'None selected'}
 
 Additional Requests:
-${adventure.additionalRequests || 'No additional requests provided'}
+${sanitizedAdditionalRequests || 'No additional requests provided'}
 
 This email was sent automatically from the Triple X Adventures website adventure package form.
       `,
@@ -170,17 +231,17 @@ This email was sent automatically from the Triple X Adventures website adventure
   
   <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
     <h3 style="margin-top: 0;">Contact Information</h3>
-    <p><strong>Name:</strong> ${adventure.firstName} ${adventure.lastName}</p>
-    <p><strong>Email:</strong> ${adventure.email}</p>
-    <p><strong>Phone:</strong> ${adventure.phone || 'Not provided'}</p>
-    <p><strong>Preferred Language:</strong> ${adventure.preferredLanguage}</p>
+    <p><strong>Name:</strong> ${sanitizedFirstName} ${sanitizedLastName}</p>
+    <p><strong>Email:</strong> ${sanitizedEmail}</p>
+    <p><strong>Phone:</strong> ${sanitizedPhone || 'Not provided'}</p>
+    <p><strong>Preferred Language:</strong> ${sanitizedPreferredLanguage}</p>
   </div>
   
   <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
     <h3 style="margin-top: 0;">Travel Information</h3>
-    <p><strong>Start Date:</strong> ${adventure.startDate || 'Not specified'}</p>
-    <p><strong>End Date:</strong> ${adventure.endDate || 'Not specified'}</p>
-    <p><strong>Departure Airport:</strong> ${adventure.departureAirport}</p>
+    <p><strong>Start Date:</strong> ${sanitizedStartDate || 'Not specified'}</p>
+    <p><strong>End Date:</strong> ${sanitizedEndDate || 'Not specified'}</p>
+    <p><strong>Departure Airport:</strong> ${sanitizedDepartureAirport}</p>
     <p><strong>Group Size:</strong> ${adventure.groupSize} persons</p>
   </div>
   
@@ -201,7 +262,7 @@ This email was sent automatically from the Triple X Adventures website adventure
   
   <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px;">
     <h3 style="margin-top: 0;">Additional Requests</h3>
-    <p>${adventure.additionalRequests ? adventure.additionalRequests.replace(/\n/g, '<br>') : 'No additional requests provided'}</p>
+    <p>${sanitizedAdditionalRequests ? sanitizedAdditionalRequests.replace(/\n/g, '<br>') : 'No additional requests provided'}</p>
   </div>
   
   <p style="font-size: 12px; color: #666; margin-top: 30px;">
@@ -209,6 +270,12 @@ This email was sent automatically from the Triple X Adventures website adventure
   </p>
 </div>
       `,
+      // Add security headers
+      headers: {
+        'X-Priority': '1', // High priority
+        'X-MSMail-Priority': 'High',
+        'Importance': 'High'
+      }
     };
     
     // Send the email

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+  import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { LanguageSelector } from "@/components/ui/language-selector";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight, Calendar } from "lucide-react";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,20 +52,23 @@ export function Header() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // Updated menu structure with better organization and logical grouping
   const navItems = [
     { href: "/", label: t.nav.home },
-    { href: "#about", label: t.nav.about },
-    { href: "#pakete", label: t.nav.packages },
-    { href: "#accommodations", label: t.nav.accommodations },
-    { href: "#contact", label: t.nav.contact }
+    { href: "/#about", label: t.nav.about },
+    { href: "/#experiences", label: t.nav.experiences || "Experiences" }, // Updated from "packages" to "experiences"
+    { href: "/#accommodations", label: t.nav.accommodations },
+    { href: "/professional-services", label: "Professional Services" },
+    // Restaurant section removed per user request
+    { href: "/#contact", label: t.nav.contact }
   ];
 
   return (
     <header 
       className={`fixed w-full z-[90] transition-all duration-300 ${
         isScrolled 
-          ? 'py-3 bg-dark-bg/95 shadow-md shadow-black/10 border-b border-white/5' 
-          : 'py-5 bg-gradient-to-b from-black/80 to-transparent'
+          ? 'py-2 bg-dark-bg/95 shadow-md shadow-black/20 backdrop-blur-lg border-b border-white/10' 
+          : 'py-4 bg-gradient-to-b from-black/80 to-transparent'
       }`} 
       id="navbar"
       role="banner"
@@ -98,30 +101,79 @@ export function Header() {
             </div>
             
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center relative z-20">
-              <ul className="mr-6 flex items-center flex-wrap justify-center list-none" role="menu">
+            <div className="hidden lg:flex items-center space-x-6 relative z-20">
+              <ul className="flex items-center flex-wrap justify-center list-none mr-6" role="menu">
                 {navItems.map((item, index) => (
                   <li key={index} role="none">
-                    {item.href.startsWith('#') ? (
+                    {item.href.startsWith('/#') ? (
                       <a 
                         href={item.href} 
-                        className="relative px-2 lg:px-4 py-2 text-xs lg:text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
+                        className="relative px-3 lg:px-4 py-2 text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
                         role="menuitem"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Check if we're already on the home page
+                          if (window.location.pathname === '/') {
+                            const targetId = item.href.split('#')[1];
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                              targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                          } else {
+                            // Navigate to home page with the anchor
+                            window.location.href = item.href;
+                          }
+                        }}
                       >
                         {item.label}
                       </a>
                     ) : (
-                      <Link 
-                        href={item.href} 
-                        className="relative px-2 lg:px-4 py-2 text-xs lg:text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
-                        role="menuitem"
-                      >
-                        {item.label}
-                      </Link>
+                      item.href.startsWith('/') ? (
+                        <Link
+                          href={item.href}
+                          className="relative px-3 lg:px-4 py-2 text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
+                          role="menuitem"
+                        >
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <a 
+                          href="#"
+                          className="relative px-3 lg:px-4 py-2 text-sm tracking-wide font-medium text-white whitespace-nowrap transition-all duration-200 hover:text-accent-color rounded-md hover:bg-white/5"
+                          role="menuitem"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            // Add a class to the body to indicate scrolling to top
+                            document.body.classList.add('scrolling-to-top');
+                            // Remove the class after animation completes
+                            setTimeout(() => {
+                              document.body.classList.remove('scrolling-to-top');
+                            }, 1000);
+                          }}
+                        >
+                          {item.label}
+                        </a>
+                      )
                     )}
-                  </li>
+                  </li>   
                 ))}
               </ul>
+              
+              {/* Book Now CTA Button */}
+              <a 
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Booking system will be integrated later');
+                  alert('Our booking system will be integrated soon!');
+                }}
+                href="#"
+                className="bg-accent-color hover:bg-accent-color/90 text-white font-medium px-5 py-2 rounded-md transition-all duration-300 flex items-center shadow-glow-sm cursor-pointer"
+                title="Booking system coming soon"
+              >
+                <Calendar size={16} className="mr-2" />
+                <span>{t.nav.bookNow || "Book Now"}</span>
+              </a>
               
               <div className="pl-4 border-l border-white/10">
                 <LanguageSelector />
@@ -130,6 +182,21 @@ export function Header() {
             
             {/* Mobile Menu Button */}
             <div className="lg:hidden flex items-center space-x-3 relative z-20">
+              {/* Mobile Book Now button - smaller version */}
+              <a 
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Booking system will be integrated later');
+                  alert('Our booking system will be integrated soon!');
+                }}
+                href="#"
+                className="bg-accent-color hover:bg-accent-color/90 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-all duration-300 shadow-glow-sm hidden sm:flex items-center cursor-pointer"
+                title="Booking system coming soon"
+              >
+                <Calendar size={14} className="mr-1.5" />
+                <span>{t.nav.bookNow || "Book Now"}</span>
+              </a>
+              
               <LanguageSelector className="mr-1" />
               <button 
                 type="button" 
@@ -169,19 +236,33 @@ export function Header() {
           aria-hidden={!mobileMenuOpen}
         >
           <nav className="py-5 mx-auto max-w-md rounded-xl space-y-1 bg-dark-bg border border-white/10 shadow-2xl" aria-label="Mobile Navigation">
-            <ul role="menu">
-              {navItems.map((item, index) => (
-                <li key={index} role="none">
-                  {item.href.startsWith('#') ? (
-                    <a 
-                      href={item.href} 
-                      className="block px-4 py-3 rounded-lg hover:bg-accent-color/10 text-white hover:text-accent-color group transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setMobileMenuOpen(false);
-                      }}
-                      role="menuitem"
-                    >
+            <ul role="menu" className="mb-4">
+                {navItems.map((item, index) => (
+                  <li key={index} role="none">
+                    {item.href.startsWith('/#') ? (
+                      <a 
+                        href={item.href} 
+                        className="block px-4 py-3 rounded-lg hover:bg-accent-color/10 text-white hover:text-accent-color group transition-colors"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setMobileMenuOpen(false);
+                          // Check if we're already on the home page
+                          if (window.location.pathname === '/') {
+                            const targetId = item.href.split('#')[1];
+                            const targetElement = document.getElementById(targetId);
+                            if (targetElement) {
+                              setTimeout(() => {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                              }, 150); 
+                            }
+                          } else {
+                            // Navigate to home page with the anchor
+                            window.location.href = item.href;
+                          }
+                        }}
+                        role="menuitem"
+                      >
                       <div className="flex items-center">
                         <ChevronRight 
                           size={18} 
@@ -194,11 +275,8 @@ export function Header() {
                   ) : (
                     <Link 
                       href={item.href} 
+                      onClick={() => setMobileMenuOpen(false)} 
                       className="block px-4 py-3 rounded-lg hover:bg-accent-color/10 text-white hover:text-accent-color group transition-colors"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setMobileMenuOpen(false);
-                      }}
                       role="menuitem"
                     >
                       <div className="flex items-center">
@@ -214,6 +292,24 @@ export function Header() {
                 </li>
               ))}
             </ul>
+            
+            {/* Mobile Book Now CTA */}
+            <div className="px-4 pt-2 border-t border-white/5">
+              <a 
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('Booking system will be integrated later');
+                  alert('Our booking system will be integrated soon!');
+                  setMobileMenuOpen(false);
+                }}
+                href="#"
+                className="flex w-full items-center justify-center bg-accent-color hover:bg-accent-color/90 text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 shadow-glow-sm cursor-pointer"
+                title="Booking system coming soon"
+              >
+                <Calendar size={18} className="mr-2" />
+                <span>{t.nav.bookNow || "Book Now"}</span>
+              </a>
+            </div>
           </nav>
         </div>
       </nav>

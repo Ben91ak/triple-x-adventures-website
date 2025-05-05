@@ -8,19 +8,30 @@ export const sv = {
     restaurant: "Restaurang",
     gallery: "Galleri",
     contact: "Kontakt",
+    experiences: "Upplevelser",
+    bookNow: "Boka nu"
   },
   
   // Hero Section
   hero: {
-    title: "UPPTÄCK DEN ÄKTA ARKTIS",
-    subtitle: "Oförglömliga äventyr i Svenska Lappland",
+    title: "DISCOVER THE REAL ARCTIC",
+    subtitle: "Unforgettable Adventures in Swedish Lapland",
     cta: "Utforska Paket",
+  },
+  
+  // Hero Section - Adding paragraphs
+  heroSection: {
+    welcome: "VÄLKOMMEN TILL VÄRLDEN AV",
+    adventure: "Ditt äventyr i <strong>Arvidsjaur Svenska Lappland</strong>",
+    paragraph1: "Upptäck oförglömliga äventyr nära polcirkeln. Upplev hisnande <strong>utomhusäventyr</strong> och exceptionell mat i en av världens vackraste regioner.",
+    paragraph2: "Se fram emot en mängd <strong>actionfyllda och adrenalinstinna aktiviteter</strong> som får ditt hjärta att slå snabbare.",
+    paragraph3: "Koppla av efter en spännande dag i vårt spa och njut av naturens lugn. Våra <strong>utomhus-bubbelpooler och bastur</strong> erbjuder den perfekta reträtten. Till sist, se de vackra <strong>norrskenen</strong> dansa på himlen."
   },
   
   // Experiences/Packages Section
   experiences: {
-    title: "VÅRA PAKET",
-    subtitle: "Autentiska Arktiska Äventyr",
+    title: "OUR EXPERIENCES",
+    subtitle: "Authentic Arctic Adventures",
     viewAll: "Visa Alla Paket",
     sendInquiry: "Skicka Förfrågan",
     nextExperience: "Nästa",
@@ -35,6 +46,10 @@ export const sv = {
         id: 1,
         title: "Snöskoter Äventyr",
         description: "Kör genom orörd snö i Svenska Lappland med toppmoderna Ski-doo skotrar. Välj mellan 2-, 4- eller 6-timmars turer för ditt perfekta äventyr.",
+        price: 299,
+        duration: "2-6 Timmar",
+        intensityLevel: "Spännande",
+        keyHighlights: ["Backcountry Exploration", "Modern Ski-doo Fleet", "Scenic Routes"],
         image: "/images/Snowmobile/Snowmobile 1_result.webp",
         gallery: [
           "/images/Snowmobile/Snowmobile 1_result.webp",
@@ -42,11 +57,45 @@ export const sv = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
-        fullDescription: "Känn pirret när du navigerar genom orörd snö och fantastiska vinterlandskap. Ta in frisk arktisk luft och njut av vackra vyer över Svenska Lappland. Våra turer är designade för att låta dig uppleva magien i området med vänliga, lokala guider som visar dig speciella platser och hjälper dig att skapa fantastiska minnen. Vi använder de senaste Ski-doo Backcountry modellerna som gör din resa säker, bekväm och rolig.\n\n━━━ VÄLJ DITT ÄVENTYR ━━━\n\n🔸 2-TIMMARS BACKCOUNTRY TUR\nPerfekt för dig som söker en kort, spännande utflykt i vildmarken. Inkluderar te och en god munsbit.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n🔸 4-TIMMARS BACKCOUNTRY TUR\nDyk djupare in i naturen med extra tid att slappna av och njuta av vyerna. Ta en paus för te och en söt munsbit i vacker miljö.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n🔸 6-TIMMARS BACKCOUNTRY ÄVENTYR\nDet ultimata äventyret för äventyrssökaren! Tillbringa dagen med att utforska olika terrängtyper och hisnande vyer. Denna tur inkluderar te, en söt munsbit och en läcker utomhuslunch.\n• Enkel snöskoter\n• Dubbelskoter tillgänglig på begäran\n\n━━━ VIKTIG INFORMATION ━━━\n\n• Barn kan delta som passagerare, vilket gör detta perfekt för familjekul\n• Minimiålder för förare: 18 år med giltigt B-körkort\n• Dubbelskotrar tillgängliga för familjer eller par\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMer än bara en åktur - det handlar om oförglömliga stunder och spännande äventyr i Lapplands vackra vildmark!",
+        detailedInfo: {
+          introduction: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.",
+          adventureOptionsTitle: "VÄLJ DITT ÄVENTYR",
+          tours: [
+            {
+              title: "2-TIMMARS BACKCOUNTRY TUR",
+              description: "Great if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.",
+              details: ["En-sits snöskoter", "Två-sits finns på begäran"]
+            },
+            {
+              title: "4-TIMMARS BACKCOUNTRY TUR",
+              description: "Explore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.",
+              details: ["En-sits snöskoter", "Två-sits finns på begäran"]
+            },
+            {
+              title: "6-TIMMARS BACKCOUNTRY ÄVENTYR",
+              description: "The ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.",
+              details: ["En-sits snöskoter", "Två-sits finns på begäran"]
+            }
+          ],
+          importantInfoTitle: "VIKTIG INFORMATION",
+          importantInfo: [
+            "Children can join as passengers, making it perfect for family fun",
+            "Minimum age for drivers: 18 years with valid B driver's license",
+            "Two-seater snowmobiles available for families or couples"
+          ],
+          closingRemark: "More than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!"
+        },
         tag: {
-          text: "Mest populär",
+          text: "Bästsäljare",
           type: "bestseller"
-        }
+        },
+        features: [
+          "Guided Tour",
+          "High-Performance Snowmobiles",
+          "Warm Clothing & Gear Provided",
+          "Fika (Kaffe & Snack) Inkluderat",
+          "Multiple Duration Options"
+        ]
       },
 
       {
@@ -149,15 +198,15 @@ export const sv = {
   
   // Accommodations Section
   accommodations: {
-    title: "BO HOS OSS",
-    subtitle: "Komfort i Vildmarken",
+    title: "STAY WITH US",
+    subtitle: "Comfort in the Wilderness",
     viewAll: "Visa Alla Boenden",
   },
   
   // Restaurant Section
   restaurant: {
-    title: "SMAKA PÅ ARKTIS",
-    subtitle: "Lokala Smaker & Varm Gästvänlighet",
+    title: "TASTE THE ARCTIC",
+    subtitle: "Local Flavors & Warm Hospitality",
     description: "Upplev autentisk nordisk mat tillagad med färska, lokala råvaror.",
     menu: "Visa Meny",
     book: "Boka Bord",
@@ -165,16 +214,35 @@ export const sv = {
   
   // About Section
   about: {
-    title: "VÅR HISTORIA",
-    subtitle: "Passion för Äventyr",
-    description: "Grundat av lokalbefolkning med en djup kärlek till Arktis, ger Triple X Adventures dig autentiska upplevelser i hjärtat av Svenska Lappland.",
-    team: "Möt Vårt Team",
+    title: "VARFÖR VI LEVER FÖR DETTA",
+    subtitle: "Vår historia, vårt team och vårt engagemang för autentiska arktiska äventyr",
+    storyTitle: "VÅR HISTORIA",
+    story: {
+      paragraph1: "Triple X Adventures föddes ur en enkel passion: att dela den råa skönheten och äventyret i Svenska Lappland med dem som söker autentiska upplevelser. Grundad av Janina Möller år 2017 med bara några snöskotrar och en dröm att visa våra gäster magin i Svenska Lappland.",
+      paragraph2: "Idag har vi växt till ett premiumäventyrsföretag, men vårt hjärta förblir detsamma. Vi arbetar fortfarande med små grupper, arbetar fortfarande med lokala partners och tror fortfarande att Arktis inte bara är en destination – det är en upplevelse som förändrar dig.",
+      paragraph3: "Till skillnad från massturismsverksamheter har vi valt att förbli trogna våra rötter: personliga, exklusiva och djupt anslutna till landet vi kallar hem."
+    },
+    valuesTitle: "VÅRA VÄRDERINGAR",
+    values: [
+      { title: "Autenticitet", description: "Vi visar upp den verkliga Arktis, utan filter eller låtsas. Vad du upplever med oss är genuina Lappland.", icon: "mountain" },
+      { title: "Hållbarhet", description: "Vi går lätt på landet vi älskar och använder hållbara metoder som bevarar Arktis för framtida generationer.", icon: "leaf" },
+      { title: "Passion", description: "Våra guider är inte bara anställda – de är entusiaster som älskar att dela sin kunskap och spänning för Arktis.", icon: "heart" }
+    ],
+    teamTitle: "TRÄFFA VÅRT TEAM",
+    teamImageAlt: "Teammedlemmar i arktisk utrustning",
+    teamMembers: [
+      { id: 1, name: "Janina JayJay Möller", role: "Grundare & VD", bio: "Grundade Triple X Adventures med en passion för autentiska arktiska upplevelser.", image: "/images/Team/jayjay.jpg" },
+      { id: 2, name: "Benni Fichtner", role: "Projektledare", bio: "Leder våra projekt med precision och kreativitet.", image: "/images/Team/Benni.jpg" },
+      { id: 3, name: "Jesper Axelsson", role: "Tourguide", bio: "Erfaren guide med många års erfarenhet i den arktiska vildmarken.", image: "/images/Team/Jeppe.jpg" },
+      { id: 4, name: "Henni Eriksson", role: "Upplevelsekoordinator", bio: "Skapar oförglömliga kundresor och äventyrsplaner.", image: "/images/Team/Henni.jpg" },
+      { id: 5, name: "Fanny Johannson", role: "Projektledare", bio: "Ser till att alla våra äventyr löper smidigt från början till slut.", image: "/images/Team/Fanny.jpg" }
+    ]
   },
   
   // Contact Section
   contact: {
-    title: "LÅTOM OSS GÖRA VINTERN LEGENDARISK",
-    subtitle: "Redo att uppleva den verkliga Arktis? Kontakta oss för att börja planera ditt äventyr",
+    title: "LET'S MAKE WINTER LEGENDARY",
+    subtitle: "Ready to experience the real Arctic? Contact us to start planning your adventure",
     formTitle: "Kontakta Oss",
     firstName: "Förnamn",
     lastName: "Efternamn",
@@ -193,9 +261,35 @@ export const sv = {
     sending: "Skickar...",
     send: "Skicka Meddelande",
     successTitle: "Meddelandet har skickats",
-    successMessage: "Vi har mottagit din förfrågan och återkommer till dig inom kort.",
+    successMessage: "Vi har mottaget din förfrågan och återkommer till dig inom kort.",
     errorTitle: "Skickandet misslyckades",
     errorMessage: "Vänligen försök igen senare.",
+    
+    // Adding keys for the form itself
+    form: {
+      contactUsLabel: "Kontakt",
+      desiredPackagesLabel: "Önskade paket",
+      desiredActivitiesLabel: "Önskade aktiviteter",
+      packages: {
+        arcticWeek: "Arctic Adventure (Vecka)",
+        arcticWeekend: "Arctic Adventure (Helg)",
+        sidewaysWeek: "Sideways Adventure (Vecka)",
+        sidewaysWeekend: "Sideways Adventure (Helg)",
+        performanceWeek: "Performance Paket (Vecka)",
+        performanceWeekend: "Performance Paket (Helg)",
+        incentive: "Incentive Events",
+        custom: "Skräddarsydda Event"
+      },
+      activities: {
+        snowmobile: "Snöskoter Tur",
+        reindeer: "Besök Renarna",
+        snowshoe: "Snösko Vandring",
+        spa: "Arctic Spa",
+        restaurant: "Jay Jays Restaurang",
+        helicopter: "Helikopter Flygningar",
+        aurora: "Norrskensjakt"
+      }
+    },
     
     // Contact Info Section
     info: {
@@ -286,4 +380,62 @@ export const sv = {
     staggeredAnimations: "Sekvenserade Element",
     specialEffects: "Specialeffekter",
   },
+  
+  // Adventure Map Page
+  adventureMap: {
+    pageTitle: "Äventyrskarta",
+    pageSubtitle: "Utforska den arktiska vildmarken med vår interaktiva karta",
+    interactive: "INTERAKTIV",
+    locationCount: "Upptäck alla",
+    locationsText: "äventyrsplatser",
+    description: "Vår äventyrskarta visar alla otroliga platser i och runt Arvidsjaur där vi erbjuder våra förstklassiga arktiska upplevelser. Från vårt huvudkontor på Storgatan 6F till Sameland restaurang och stugor på Karlavagnen 1, och våra förstklassiga boenden på Hotel Laponia - denna interaktiva guide hjälper dig att visualisera din ultimata resa genom svenska Lappland.",
+    legendText: "Klicka på en markör för att lära dig mer om platsen. Färgen indikerar typen av plats: grön för boenden, blå för upplevelser och lila för intressepunkter."
+  },
+  
+  // CTA Section
+  ctaSection: {
+    title: "REDO FÖR ETT ÄKTA ARKTISKT ÄVENTYR?",
+    description: "Följ med oss till Svenska Lappland för en upplevelse som går bortom turism – en resa som kommer att stanna hos dig för alltid.",
+    buttonText: "Låt oss göra vintern legendarisk",
+    adventureAwaits: "Ditt äventyr väntar"
+  },
+  
+  // Booking Section
+  bookingSection: {
+    title: "BOKA DITT ÄVENTYR",
+    subtitle: "Säkra din plats för en oförglömlig upplevelse",
+    nameLabel: "Namn",
+    namePlaceholder: "Ditt namn",
+    emailLabel: "E-post",
+    emailPlaceholder: "Din e-post",
+    phoneLabel: "Telefon",
+    phonePlaceholder: "Telefonnummer",
+    dateLabel: "Datum",
+    datePlaceholder: "Önskat datum",
+    participantsLabel: "Deltagare",
+    participantsPlaceholder: "Antal deltagare",
+    experienceLabel: "Upplevelse",
+    experiencePlaceholder: "Välj upplevelse",
+    messageLabel: "Meddelande",
+    messagePlaceholder: "Ytterligare önskemål eller frågor",
+    submitButton: "Boka Nu",
+    successMessage: "Tack! Din bokningsförfrågan har tagits emot.",
+    successConfirmation: "Vi kontaktar dig inom kort för att bekräfta dina bokningsuppgifter.",
+    experiences: {
+      snowmobile: "Snöskotersafari",
+      husky: "Hundspannsäventyr",
+      aurora: "Norrskenstur",
+      iceFishing: "Isfiskeupplevelse",
+      survival: "Arktisk överlevnadskurs"
+    }
+  },
+
+  // Adventure Locations Data (Types)
+  adventureLocations: {
+    types: {
+      accommodation: "Boende",
+      experience: "Upplevelse",
+      landmark: "Intressepunkt"
+    }
+  }
 };

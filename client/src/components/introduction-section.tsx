@@ -1,8 +1,9 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/translations";
+import { useTranslation } from "@/hooks/use-translation";
 import { Users, Mountain, Crown } from "lucide-react";
 import { useScrollAnimation, useParallax } from "@/hooks/use-scroll-animation";
 import { useRef } from "react";
+import { translations } from "@/translations";
 
 // Introduction content by language
 const introContentByLanguage = {
@@ -71,11 +72,24 @@ const introContentByLanguage = {
   }
 };
 
+// Define the type for a feature explicitly
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
 export function IntroductionSection() {
   const { language } = useLanguage();
   
-  // Get content based on the current language
-  const content = introContentByLanguage[language];
+  // Use content directly from our predefined content by language
+  const content = introContentByLanguage[language] || introContentByLanguage.en;
+  
+  // Get the features array and text content
+  const features: Feature[] = content.features;
+  const tagline = 'ABOUT US';
+  const title = content.title;
+  const description = content.description;
 
   // Create scroll animation refs with different animation delays
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -110,18 +124,7 @@ export function IntroductionSection() {
 
   return (
     <section id="about" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Using the global background - no need for section-specific background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Simple glow effect to complement global background */}
-        <div className="aurora-glow absolute inset-0 opacity-30"></div>
-      </div>
-      
-      {/* Subtle dot pattern overlay */}
-      <div 
-        className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-10 pointer-events-none transform-gpu"
-        ref={parallaxRef as React.RefObject<HTMLDivElement>}
-        style={parallaxStyle} // Apply parallax effect to background pattern
-      ></div>
+      {/* Remove any background overlays that might be causing issues */}
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -130,14 +133,14 @@ export function IntroductionSection() {
             className={`inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2 fade-in ${isTitleVisible ? 'visible' : ''}`}
             ref={titleAnimRef as React.RefObject<HTMLSpanElement>}
           >
-            {language === 'de' ? 'Über Uns' : language === 'sv' ? 'Om Oss' : 'About Us'}
+            {tagline}
           </span>
           
           <h2 
             className={`font-bold text-3xl md:text-5xl mb-8 text-white fade-in ${isTitleVisible ? 'visible' : ''}`}
             ref={titleAnimRef as React.RefObject<HTMLHeadingElement>}
           >
-            {content.title}
+            {title}
           </h2>
           
           {/* Description with delayed fade-in - text color changed to white */}
@@ -145,12 +148,12 @@ export function IntroductionSection() {
             className={`text-lg md:text-xl mb-16 leading-relaxed text-white max-w-3xl mx-auto fade-in ${isDescriptionVisible ? 'visible' : ''}`}
             ref={descriptionAnimRef as React.RefObject<HTMLParagraphElement>}
           >
-            {content.description}
+            {description}
           </p>
           
           {/* Feature cards with staggered fade-in effect */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {content.features.map((feature, index) => {
+            {features.map((feature, index) => {
               // Create separate animation hooks for each feature with staggered delays
               const { ref: featureRef, isVisible: isFeatureVisible } = useScrollAnimation({
                 threshold: 0.1,

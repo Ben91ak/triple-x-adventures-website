@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/translations";
+import { useTranslation } from "@/hooks/use-translation";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 export function HeroSection() {
@@ -10,7 +10,7 @@ export function HeroSection() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const { language } = useLanguage();
-  const t = useTranslation(language);
+  const { t } = useTranslation();
   
   // Handle visibility changes to pause/play video
   useEffect(() => {
@@ -106,29 +106,6 @@ export function HeroSection() {
     const video = videoRef.current;
     if (!video) return;
     
-    // Simplified path retry mechanism
-    let videoAttempts = 0;
-    const maxAttempts = 2;
-    
-    // Function to try alternate paths
-    const tryAlternateVideoPath = () => {
-      videoAttempts++;
-      console.log(`Trying alternate video path (${videoAttempts}/${maxAttempts})...`);
-      
-      if (videoAttempts === 1) {
-        // Try with public prefix
-        const sources = video.querySelectorAll('source');
-        sources.forEach(source => {
-          source.src = source.src.replace('/videos/', '/public/videos/');
-        });
-        video.load();
-      } else {
-        // If we've tried all paths and still failed, show the fallback
-        console.error('All video loading attempts failed, showing fallback');
-        setVideoError(true);
-      }
-    };
-    
     // Set up event listeners for video
     const handleCanPlay = () => {
       console.log("Video can play");
@@ -137,15 +114,10 @@ export function HeroSection() {
     
     const handleError = (e: Event) => {
       console.error("Video loading error:", e);
-      
-      if (videoAttempts < maxAttempts) {
-        tryAlternateVideoPath();
-      } else {
-        setVideoError(true);
-        // Hide video element if it fails to load
-        if (video) {
-          video.style.display = 'none';
-        }
+      setVideoError(true);
+      // Hide video element if it fails to load
+      if (video) {
+        video.style.display = 'none';
       }
     };
     
@@ -177,8 +149,9 @@ export function HeroSection() {
     document.addEventListener('visibilitychange', handleVisibilityChange);
     
     // Network Information API
+    let connection: any = null;
     if ('connection' in navigator && (navigator as any).connection) {
-      const connection = (navigator as any).connection;
+      connection = (navigator as any).connection;
       
       // For slow connections, disable autoplay and use fallback
       if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
@@ -204,26 +177,6 @@ export function HeroSection() {
       };
     }
     
-    // Resource timing analysis
-    if (window.performance && window.performance.getEntriesByType) {
-      // Check resource loading performance
-      window.addEventListener('load', () => {
-        setTimeout(() => {
-          try {
-            const resources = window.performance.getEntriesByType('resource');
-            resources.forEach(resource => {
-              // Log video resource loading time for optimization
-              if ((resource as any).name && (resource as any).name.includes('TXA Teaser')) {
-                console.log('Video resource loading time:', (resource as any).duration, 'ms');
-              }
-            });
-          } catch (e) {
-            console.error('Error analyzing resource timing:', e);
-          }
-        }, 3000); // Check after page load
-      });
-    }
-    
     // Regular cleanup without connection API
     return () => {
       video.removeEventListener('canplay', handleCanPlay);
@@ -231,33 +184,6 @@ export function HeroSection() {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
-
-  // Content based on language
-  const heroContent = {
-    en: {
-      welcome: "WELCOME TO THE WORLD OF",
-      adventure: "Your adventure in <strong>Arvidsjaur Swedish Lapland</strong>",
-      paragraph1: "Discover unforgettable adventures near the Arctic Circle. Experience breathtaking <strong>outdoor adventures</strong> and exceptional cuisine in one of the most beautiful regions in the world.",
-      paragraph2: "Look forward to a variety of <strong>action-packed and adrenaline-fueled activities</strong> that will make your heart beat faster.",
-      paragraph3: "Relax after an exciting day in our spa and enjoy the tranquility of nature. Our <strong>outdoor hot tubs and saunas</strong> offer the perfect retreat. Finally, watch the beautiful <strong>Northern Lights</strong> dance in the sky."
-    },
-    de: {
-      welcome: "WILLKOMMEN IN DER WELT VON",
-      adventure: "Dein Abenteuer in <strong>Arvidsjaur Schwedisch-Lappland</strong>",
-      paragraph1: "Entdecke unvergessliche Abenteuer in der Nähe des Polarkreises. Erlebe atemberaubende <strong>Outdoor-Abenteuer</strong> und eine außergewöhnliche Küche in einer der schönsten Regionen der Welt.",
-      paragraph2: "Freue dich auf eine Vielzahl von <strong>actionreichen und adrenalingeladenen Aktivitäten</strong>, die dein Herz höher schlagen lassen.",
-      paragraph3: "Entspanne nach einem aufregenden Tag in unserem Spa und genieße die Ruhe der Natur. Unser <strong>Außen-Whirlpools und Saunen</strong> bieten den perfekten Rückzugsort. Beobachten Sie schließlich die wunderschönen <strong>Polarlichter</strong> am Himmel tanzen."
-    },
-    sv: {
-      welcome: "VÄLKOMMEN TILL VÄRLDEN AV",
-      adventure: "Ditt äventyr i <strong>Arvidsjaur Svenska Lappland</strong>",
-      paragraph1: "Upptäck oförglömliga äventyr nära polcirkeln. Upplev hisnande <strong>utomhusäventyr</strong> och exceptionell mat i en av världens vackraste regioner.",
-      paragraph2: "Se fram emot en mängd <strong>actionfyllda och adrenalinstinna aktiviteter</strong> som får ditt hjärta att slå snabbare.",
-      paragraph3: "Koppla av efter en spännande dag i vårt spa och njut av naturens lugn. Våra <strong>utomhus-bubbelpooler och bastur</strong> erbjuder den perfekta reträtten. Till sist, se de vackra <strong>norrskenen</strong> dansa på himlen."
-    }
-  }
-
-  const content = heroContent[language];
 
   return (
     <section className="relative flex items-center justify-center text-primary-text h-screen overflow-hidden pt-16" aria-labelledby="hero-heading">
@@ -373,16 +299,10 @@ export function HeroSection() {
         )}
       </div>
       
-      {/* Dark overlay for text contrast - reduced opacity for brighter video */}
-      <div className="absolute inset-0 bg-dark-bg transform-gpu" style={{ zIndex: 10, backgroundColor: 'rgba(0, 0, 0, 0.2)' }} aria-hidden="true"></div>
-      
-      {/* Grid pattern overlay - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 pointer-events-none transform-gpu" style={{ zIndex: 20 }} aria-hidden="true"></div>
-
-      {/* No transition overlay between sections - removed as requested */}
+      {/* Section content uses global background without local overlays */}
       
       {/* TOP LAYER - Content (highest z-index) - optimized with transform-gpu */}
-      <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full transform-gpu" style={{ zIndex: 50 }}>
+      <div className="container mx-auto px-4 relative z-50 flex items-center justify-center h-full transform-gpu">
         {/* Hero Content with animated entrance - optimized for performance */}
         <div className="text-center max-w-4xl mx-auto py-8 md:py-0 transform-gpu">
           {/* Desktop/tablet content - show full content */}
@@ -393,7 +313,7 @@ export function HeroSection() {
               ref={titleRef as React.RefObject<HTMLDivElement>}
               style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             >
-              {content.welcome}
+              {t('heroSection.welcome')}
             </div>
             
             <h1 
@@ -410,7 +330,7 @@ export function HeroSection() {
             
             <div 
               className={`text-base sm:text-lg md:text-xl mb-3 md:mb-4 max-w-2xl mx-auto font-semibold text-white text-shadow-lg fade-in transform-gpu ${isSubtitleVisible ? 'visible' : ''}`}
-              dangerouslySetInnerHTML={{ __html: content.adventure }}
+              dangerouslySetInnerHTML={{ __html: t('heroSection.adventure') }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
               style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             />
@@ -428,20 +348,9 @@ export function HeroSection() {
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
               style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(8px)' }}
             >
-              <p 
-                className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu"
-                dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
-              />
-              
-              <p 
-                className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu"
-                dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
-              />
-              
-              <p 
-                className="text-white text-sm md:text-base leading-relaxed transform-gpu"
-                dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
-              />
+              <p className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph1') }} />
+              <p className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph2') }} />
+              <p className="text-white text-sm md:text-base leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph3') }} />
             </div>
           </div>
           
@@ -461,7 +370,7 @@ export function HeroSection() {
             
             <div 
               className={`text-base sm:text-lg mb-3 max-w-xs mx-auto font-semibold text-white text-shadow-lg fade-in transform-gpu ${isSubtitleVisible ? 'visible' : ''}`}
-              dangerouslySetInnerHTML={{ __html: content.adventure }}
+              dangerouslySetInnerHTML={{ __html: t('heroSection.adventure') }}
               ref={subtitleRef as React.RefObject<HTMLDivElement>}
               style={{ color: '#FFFFFF', textShadow: '0 4px 8px rgba(0, 0, 0, 0.9)' }}
             />
@@ -480,20 +389,9 @@ export function HeroSection() {
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
               style={{ maxHeight: 'calc(60vh - 200px)', overflowY: 'auto', backgroundColor: 'rgba(26, 29, 31, 0.75)', backdropFilter: 'blur(6px)' }}
             >
-              <p 
-                className="mb-2 text-white text-xs leading-relaxed transform-gpu"
-                dangerouslySetInnerHTML={{ __html: content.paragraph1 }}
-              />
-              
-              <p 
-                className="mb-2 text-white text-xs leading-relaxed transform-gpu"
-                dangerouslySetInnerHTML={{ __html: content.paragraph2 }}
-              />
-              
-              <p 
-                className="text-white text-xs leading-relaxed transform-gpu"
-                dangerouslySetInnerHTML={{ __html: content.paragraph3 }}
-              />
+              <p className="mb-2 text-white text-xs leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph1') }} />
+              <p className="mb-2 text-white text-xs leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph2') }} />
+              <p className="text-white text-xs leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph3') }} />
             </div>
           </div>
           
@@ -508,7 +406,7 @@ export function HeroSection() {
               role="button"
               aria-label="Explore adventures"
             >
-              {t.hero.cta}
+              {t('hero.cta')}
             </a>
             <a 
               href="#contact" 
@@ -516,7 +414,7 @@ export function HeroSection() {
               role="button"
               aria-label="Contact us"
             >
-              {t.nav.contact}
+              {t('nav.contact')}
             </a>
           </div>
         </div>

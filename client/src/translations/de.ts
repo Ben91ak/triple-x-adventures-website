@@ -8,19 +8,30 @@ export const de = {
     restaurant: "Restaurant",
     gallery: "Galerie",
     contact: "Kontakt",
+    experiences: "Erlebnisse",
+    bookNow: "Jetzt Buchen"
   },
   
   // Hero Section
   hero: {
-    title: "ENTDECKE DIE WAHRE ARKTIS",
-    subtitle: "Unvergessliche Abenteuer in Schwedisch Lappland",
+    title: "DISCOVER THE REAL ARCTIC",
+    subtitle: "Unforgettable Adventures in Swedish Lapland",
     cta: "Pakete Erkunden",
+  },
+  
+  // Hero Section - Adding paragraphs
+  heroSection: {
+    welcome: "WILLKOMMEN IN DER WELT VON",
+    adventure: "Dein Abenteuer in <strong>Arvidsjaur Schwedisch-Lappland</strong>",
+    paragraph1: "Entdecke unvergessliche Abenteuer in der Nähe des Polarkreises. Erlebe atemberaubende <strong>Outdoor-Abenteuer</strong> und eine außergewöhnliche Küche in einer der schönsten Regionen der Welt.",
+    paragraph2: "Freue dich auf eine Vielzahl von <strong>actionreichen und adrenalingeladenen Aktivitäten</strong>, die dein Herz höher schlagen lassen.",
+    paragraph3: "Entspanne nach einem aufregenden Tag in unserem Spa und genieße die Ruhe der Natur. Unser <strong>Außen-Whirlpools und Saunen</strong> bieten den perfekten Rückzugsort. Beobachten Sie schließlich die wunderschönen <strong>Polarlichter</strong> am Himmel tanzen."
   },
   
   // Experiences/Packages Section
   experiences: {
-    title: "UNSERE PAKETE",
-    subtitle: "Authentische Arktische Abenteuer",
+    title: "OUR EXPERIENCES",
+    subtitle: "Authentic Arctic Adventures",
     viewAll: "Alle Pakete ansehen",
     sendInquiry: "Anfrage Senden",
     nextExperience: "Weiter",
@@ -33,8 +44,9 @@ export const de = {
     list: [
       {
         id: 1,
-        title: "Snowmobile Abenteuer",
-        description: "Fahren Sie mit modernen Ski-doo Modellen durch verschneiten Lappland. Wählen Sie aus 2-, 4- oder 6-Stunden-Touren für Ihr perfektes Abenteuer.",
+        title: "Schneemobil Abenteuer",
+        description: "Fahren Sie über unberührten Schnee in Schwedisch Lappland mit topmodernen Ski-doo Modellen. Wählen Sie aus 2-, 4- & 6-Stunden-Touren für Ihr perfektes Abenteuer.",
+        keyHighlights: ["Backcountry Exploration", "Modern Ski-doo Fleet", "Scenic Routes"],
         image: "/images/Snowmobile/Snowmobile 1_result.webp",
         gallery: [
           "/images/Snowmobile/Snowmobile 1_result.webp",
@@ -42,11 +54,45 @@ export const de = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
-        fullDescription: "Spüren Sie die Aufregung, während Sie über unberührten Schnee und wunderschöne Winterlandschaften fahren. Genießen Sie die frische arktische Luft und atemberaubende Ausblicke auf Schwedisch-Lappland. Unsere Touren sind so konzipiert, dass Sie die Magie der Gegend mit freundlichen, lokalen Guides erleben können, die Ihnen besondere Orte zeigen und Ihnen helfen, tolle Erinnerungen zu schaffen. Wir verwenden die neuesten Ski-doo Backcountry Adrenalin-Modelle, die Ihre Fahrt sicher, komfortabel und spaßig machen.\n\n━━━ WÄHLEN SIE IHR ABENTEUER ━━━\n\n🔸 2-STUNDEN BACKCOUNTRY TOUR\nIdeal, wenn Sie einen kurzen, aufregenden Ausflug in die Wildnis suchen. Inklusive Tee und einem leckeren Snack.\n• Ein-Sitzer Schneemobil\n• Zwei-Sitzer auf Anfrage verfügbar\n\n🔸 4-STUNDEN BACKCOUNTRY TOUR\nTauchen Sie tiefer in die Natur ein, mit zusätzlicher Zeit zum Entspannen und Genießen der Ausblicke. Machen Sie eine Pause für Tee und einen süßen Snack in wunderschöner Umgebung.\n• Ein-Sitzer Schneemobil\n• Zwei-Sitzer auf Anfrage verfügbar\n\n🔸 6-STUNDEN BACKCOUNTRY ABENTEUER\nDas ultimative Erlebnis für Abenteuerliebhaber! Verbringen Sie den Tag damit, verschiedene Terrains und atemberaubende Ausblicke zu erkunden. Diese Tour beinhaltet Tee, einen süßen Snack und ein leckeres Outdoor-Mittagessen.\n• Ein-Sitzer Schneemobil\n• Zwei-Sitzer auf Anfrage verfügbar\n\n━━━ WICHTIGE INFORMATIONEN ━━━\n\n• Kinder können als Passagiere teilnehmen, was es perfekt für Familienspaß macht\n• Mindestalter für Fahrer: 18 Jahre mit gültigem B-Führerschein\n• Zwei-Sitzer Schneemobile verfügbar für Familien oder Paare\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMehr als nur eine Fahrt - es geht um unvergessliche Momente und aufregende Abenteuer in der wunderschönen Wildnis Lapplands!",
+        detailedInfo: {
+          introduction: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.",
+          adventureOptionsTitle: "PICK YOUR ADVENTURE",
+          tours: [
+            {
+              title: "2-HOUR BACKCOUNTRY TOUR",
+              description: "Great if you\'re looking for a short, exciting trip into the wild. Includes tea and a tasty snack.",
+              details: ["One-seater snowmobile", "Two-seater available on request"]
+            },
+            {
+              title: "4-HOUR BACKCOUNTRY TOUR",
+              description: "Explore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.",
+              details: ["One-seater snowmobile", "Two-seater available on request"]
+            },
+            {
+              title: "6-HOUR BACKCOUNTRY ADVENTURE",
+              description: "The ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.",
+              details: ["One-seater snowmobile", "Two-seater available on request"]
+            }
+          ],
+          importantInfoTitle: "IMPORTANT INFORMATION",
+          importantInfo: [
+            "Children can join as passengers, making it perfect for family fun",
+            "Minimum age for drivers: 18 years with valid B driver\'s license",
+            "Two-seater snowmobiles available for families or couples"
+          ],
+          closingRemark: "More than just a ride—it\'s about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!"
+        },
         tag: {
-          text: "Beliebt",
+          text: "Bestseller",
           type: "bestseller"
-        }
+        },
+        features: [
+          "Guided Tour",
+          "High-Performance Snowmobiles",
+          "Warm Clothing & Gear Provided",
+          "Fika (Coffee & Snack) Included",
+          "Multiple Duration Options"
+        ]
       },
 
       {
@@ -149,15 +195,15 @@ export const de = {
   
   // Accommodations Section
   accommodations: {
-    title: "ÜBERNACHTE BEI UNS",
-    subtitle: "Komfort in der Wildnis",
+    title: "STAY WITH US",
+    subtitle: "Comfort in the Wilderness",
     viewAll: "Alle Unterkünfte ansehen",
   },
   
   // Restaurant Section
   restaurant: {
-    title: "SCHMECKE DIE ARKTIS",
-    subtitle: "Lokale Aromen & Herzliche Gastfreundschaft",
+    title: "TASTE THE ARCTIC",
+    subtitle: "Local Flavors & Warm Hospitality",
     description: "Erlebe authentische nordische Küche mit frischen, lokalen Zutaten.",
     menu: "Speisekarte anzeigen",
     book: "Tisch reservieren",
@@ -165,16 +211,35 @@ export const de = {
   
   // About Section
   about: {
-    title: "UNSERE GESCHICHTE",
-    subtitle: "Leidenschaft für Abenteuer",
-    description: "Gegründet von Einheimischen mit einer tiefen Liebe zur Arktis, bietet Triple X Adventures authentische Erlebnisse im Herzen von Schwedisch Lappland.",
-    team: "Unser Team kennenlernen",
+    title: "WARUM WIR DAFÜR LEBEN",
+    subtitle: "Unsere Geschichte, unser Team und unser Engagement für authentische arktische Abenteuer",
+    storyTitle: "UNSERE GESCHICHTE",
+    story: {
+      paragraph1: "Triple X Adventures entstand aus einer einfachen Leidenschaft: die unberührte Schönheit und das Abenteuer von Schwedisch-Lappland mit denen zu teilen, die authentische Erlebnisse suchen. Gegründet von Janina Möller im Jahr 2017 mit nur wenigen Schneemobilen und einem Traum, unseren Gästen die Magie von Schwedisch-Lappland zu zeigen.",
+      paragraph2: "Heute sind wir zu einem Premium-Abenteuerunternehmen herangewachsen, aber unser Herz bleibt das gleiche. Wir arbeiten immer noch mit kleinen Gruppen, arbeiten immer noch mit lokalen Partnern zusammen und glauben immer noch, dass die Arktis nicht nur ein Reiseziel ist – es ist ein Erlebnis, das Sie verändert.",
+      paragraph3: "Im Gegensatz zu Massentourismusunternehmen haben wir uns entschieden, unseren Wurzeln treu zu bleiben: persönlich, exklusiv und tief verbunden mit dem Land, das wir unser Zuhause nennen."
+    },
+    valuesTitle: "UNSERE WERTE",
+    values: [
+      { title: "Authentizität", description: "Wir präsentieren die echte Arktis, ohne Filter oder Vorwand. Was Sie mit uns erleben, ist echtes Lappland.", icon: "mountain" },
+      { title: "Nachhaltigkeit", description: "Wir gehen behutsam mit dem Land um, das wir lieben, und setzen nachhaltige Praktiken ein, die die Arktis für zukünftige Generationen bewahren.", icon: "leaf" },
+      { title: "Leidenschaft", description: "Unsere Guides sind nicht nur Mitarbeiter – sie sind Enthusiasten, die ihr Wissen und ihre Begeisterung für die Arktis gerne teilen.", icon: "heart" }
+    ],
+    teamTitle: "LERNEN SIE UNSER TEAM KENNEN",
+    teamImageAlt: "Teammitglieder in arktischer Ausrüstung",
+    teamMembers: [
+      { id: 1, name: "Janina JayJay Möller", role: "Gründerin & CEO", bio: "Gründete Triple X Adventures mit einer Leidenschaft für authentische arktische Erlebnisse.", image: "/images/Team/jayjay.jpg" },
+      { id: 2, name: "Benni Fichtner", role: "Projektmanager", bio: "Leitet unsere Projekte mit Präzision und Kreativität.", image: "/images/Team/Benni.jpg" },
+      { id: 3, name: "Jesper Axelsson", role: "Tourguide", bio: "Erfahrener Guide mit langjähriger Erfahrung in der arktischen Wildnis.", image: "/images/Team/Jeppe.jpg" },
+      { id: 4, name: "Henni Eriksson", role: "Erlebniskoordinatorin", bio: "Gestaltet unvergessliche Kundenerlebnisse und Abenteuer-Reisepläne.", image: "/images/Team/Henni.jpg" },
+      { id: 5, name: "Fanny Johannson", role: "Projectmanager", bio: "Sorgt dafür, dass alle unsere Abenteuer von Anfang bis Ende reibungslos verlaufen.", image: "/images/Team/Fanny.jpg" }
+    ]
   },
   
   // Contact Section
   contact: {
-    title: "MACHEN WIR DEN WINTER LEGENDÄR",
-    subtitle: "Bereit für ein echtes arktisches Erlebnis? Kontaktiere uns, um dein Abenteuer zu planen",
+    title: "LET'S MAKE WINTER LEGENDARY",
+    subtitle: "Ready to experience the real Arctic? Contact us to start planning your adventure",
     formTitle: "Kontakt",
     firstName: "Vorname",
     lastName: "Nachname",
@@ -196,6 +261,32 @@ export const de = {
     successMessage: "Wir haben deine Anfrage erhalten und werden uns in Kürze bei dir melden.",
     errorTitle: "Übermittlung Fehlgeschlagen",
     errorMessage: "Bitte versuche es später noch einmal.",
+    
+    // Adding keys for the form itself
+    form: {
+      contactUsLabel: "Kontakt",
+      desiredPackagesLabel: "Gewünschte Pakete",
+      desiredActivitiesLabel: "Gewünschte Aktivitäten",
+      packages: {
+        arcticWeek: "Arctic Adventure (Woche)",
+        arcticWeekend: "Arctic Adventure (Wochenende)",
+        sidewaysWeek: "Sideways Adventure (Woche)",
+        sidewaysWeekend: "Sideways Adventure (Wochenende)",
+        performanceWeek: "Performance Paket (Woche)",
+        performanceWeekend: "Performance Paket (Wochenende)",
+        incentive: "Incentive Events",
+        custom: "Maßgeschneiderte Events"
+      },
+      activities: {
+        snowmobile: "Schneemobil Tour",
+        reindeer: "Rentier Besuch",
+        snowshoe: "Schneeschuh Wanderung",
+        spa: "Arctic Spa",
+        restaurant: "Jay Jays Restaurant",
+        helicopter: "Hubschrauber Flüge",
+        aurora: "Nordlicht Jagd"
+      }
+    },
     
     // Contact Info Section
     info: {
@@ -286,4 +377,62 @@ export const de = {
     staggeredAnimations: "Sequenzierte Elemente",
     specialEffects: "Spezialeffekte",
   },
+  
+  // Adventure Map Page
+  adventureMap: {
+    pageTitle: "Abenteuerkarte",
+    pageSubtitle: "Erkunden Sie die arktische Wildnis mit unserer interaktiven Karte",
+    interactive: "INTERAKTIVE",
+    locationCount: "Entdecken Sie alle",
+    locationsText: "Abenteuerorte",
+    description: "Unsere Abenteuerkarte zeigt alle unglaublichen Orte in und um Arvidsjaur, an denen wir unsere erstklassigen arktischen Erlebnisse anbieten. Von unserem Hauptbüro in der Storgatan 6F bis zum Sameland Restaurant und den Hütten in der Karlavagnen 1 und unseren Premium-Unterkünften im Hotel Laponia - dieser interaktive Führer hilft Ihnen, Ihre ultimative Reise durch Schwedisch-Lappland zu visualisieren.",
+    legendText: "Klicken Sie auf einen beliebigen Marker, um mehr über den Ort zu erfahren. Die Farbe gibt die Art des Ortes an: Grün für Unterkünfte, Blau für Erlebnisse und Lila für Sehenswürdigkeiten."
+  },
+  
+  // CTA Section
+  ctaSection: {
+    title: "BEREIT FÜR EIN ECHTES ARKTISCHES ABENTEUER?",
+    description: "Begleiten Sie uns nach Schwedisch-Lappland für ein Erlebnis, das über Tourismus hinausgeht – eine Reise, die für immer bei Ihnen bleiben wird.",
+    buttonText: "Machen wir den Winter legendär",
+    adventureAwaits: "Dein Abenteuer wartet"
+  },
+  
+  // Booking Section
+  bookingSection: {
+    title: "BUCHE DEIN ABENTEUER",
+    subtitle: "Sichere dir deinen Platz für ein unvergessliches Erlebnis",
+    nameLabel: "Name",
+    namePlaceholder: "Dein Name",
+    emailLabel: "E-Mail",
+    emailPlaceholder: "Deine E-Mail",
+    phoneLabel: "Telefon",
+    phonePlaceholder: "Telefonnummer",
+    dateLabel: "Datum",
+    datePlaceholder: "Bevorzugtes Datum",
+    participantsLabel: "Teilnehmer",
+    participantsPlaceholder: "Anzahl der Teilnehmer",
+    experienceLabel: "Erlebnis",
+    experiencePlaceholder: "Erlebnis auswählen",
+    messageLabel: "Nachricht",
+    messagePlaceholder: "Zusätzliche Anfragen oder Fragen",
+    submitButton: "Jetzt Buchen",
+    successMessage: "Vielen Dank! Deine Buchungsanfrage wurde empfangen.",
+    successConfirmation: "Wir werden Sie in Kürze kontaktieren, um Ihre Buchungsdetails zu bestätigen.",
+    experiences: {
+      snowmobile: "Schneemobil-Safari",
+      husky: "Hundeschlittenfahrt",
+      aurora: "Nordlicht-Tour",
+      iceFishing: "Eisfischen-Erlebnis",
+      survival: "Arktischer Überlebenskurs"
+    }
+  },
+
+  // Adventure Locations Data (Types)
+  adventureLocations: {
+    types: {
+      accommodation: "Unterkunft",
+      experience: "Erlebnis",
+      landmark: "Sehenswürdigkeit"
+    }
+  }
 };

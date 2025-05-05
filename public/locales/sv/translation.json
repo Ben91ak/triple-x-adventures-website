@@ -1,0 +1,102 @@
+{
+  "common": {
+    "appName": "Triple X Adventures",
+    "loading": "Laddar...",
+    "error": "Ett fel inträffade",
+    "submit": "Skicka",
+    "bookNow": "Boka Nu"
+  },
+  "navbar": {
+    "home": "Hem",
+    "experiences": "Upplevelser",
+    "accommodation": "Boende",
+    "gallery": "Galleri",
+    "about": "Om oss",
+    "contact": "Kontakt"
+  },
+  "footer": {
+    "contactInfo": "Kontaktinformation",
+    "quickLinks": "Snabblänkar",
+    "legal": "Juridik",
+    "address": "Adress: Poikkijärvi 117, 98199 Jukkasjärvi, Sverige",
+    "email": "E-post: info@triplexadventures.com",
+    "phone": "Telefon: +46 76 106 61 19",
+    "privacyPolicy": "Integritetspolicy",
+    "termsOfService": "Användarvillkor",
+    "copyright": "© 2024 Triple X Adventures. Alla rättigheter förbehållna."
+  },
+  "hero": {
+    "title": "SLÄPP LOSS DIN ARKTISKA ANDA",
+    "subtitle": "Premium snöskoterturer & vildmarksäventyr i Svenska Lappland",
+    "ctaButton": "Upptäck våra äventyr"
+  },
+  "experiencesSection": {
+    "title": "Våra upplevelser",
+    "tagline": "Välj ditt äventyr, skapat av arktiska experter",
+    "duration": "Varaktighet",
+    "intensity": "Intensitet",
+    "highlights": "Höjdpunkter",
+    "exploreAll": "Utforska alla upplevelser"
+  },
+  "accommodationSection": {
+    "title": "Vildmarksboende",
+    "tagline": "Komfort möter Arktis: ditt hem hemifrån",
+    "pricePerNight": "Från {{price}} SEK / natt",
+    "exploreAll": "Visa alla boenden"
+  },
+  "testimonialSection": {
+    "title": "VAD VÅRA GÄSTER SÄGER",
+    "tagline": "Verkliga berättelser från oförglömliga arktiska resor"
+  },
+  "about": {
+    "title": "VARFÖR VI LEVER FÖR DETTA",
+    "subtitle": "Vår historia, vårt team och vårt engagemang för autentiska arktiska äventyr",
+    "storyTitle": "VÅR HISTORIA",
+    "story": {
+        "paragraph1": "Triple X Adventures föddes ur en enkel passion: att dela den råa skönheten och äventyret i Svenska Lappland med dem som söker autentiska upplevelser. Grundad av Janina Möller år 2017 med bara några snöskotrar och en dröm att visa våra gäster magin i Svenska Lappland.",
+        "paragraph2": "Idag har vi växt till ett premiumäventyrsföretag, men vårt hjärta förblir detsamma. Vi arbetar fortfarande med små grupper, arbetar fortfarande med lokala partners och tror fortfarande att Arktis inte bara är en destination – det är en upplevelse som förändrar dig.",
+        "paragraph3": "Till skillnad från massturismsverksamheter har vi valt att förbli trogna våra rötter: personliga, exklusiva och djupt anslutna till landet vi kallar hem."
+    },
+    "valuesTitle": "VÅRA VÄRDERINGAR",
+    "values": [
+        { "title": "Autenticitet", "description": "Vi visar upp den verkliga Arktis, utan filter eller låtsas. Vad du upplever med oss är genuina Lappland.", "icon": "mountain" },
+        { "title": "Hållbarhet", "description": "Vi går lätt på landet vi älskar och använder hållbara metoder som bevarar Arktis för framtida generationer.", "icon": "leaf" },
+        { "title": "Passion", "description": "Våra guider är inte bara anställda – de är entusiaster som älskar att dela sin kunskap och spänning för Arktis.", "icon": "heart" }
+    ],
+    "teamTitle": "TRÄFFA VÅRT TEAM",
+    "teamImageAlt": "Teammedlemmar i arktisk utrustning",
+    "teamMembers": [
+        { "id": 1, "name": "Janina JayJay Möller", "role": "Grundare & VD", "bio": "Grundade Triple X Adventures med en passion för autentiska arktiska upplevelser.", "image": "/images/Team/jayjay.jpg" },
+        { "id": 2, "name": "Benni Fichtner", "role": "Projektledare", "bio": "Leder våra projekt med precision och kreativitet.", "image": "/images/Team/Benni.jpg" },
+        { "id": 3, "name": "Jesper Axelsson", "role": "Tourguide", "bio": "Erfaren guide med många års erfarenhet i den arktiska vildmarken.", "image": "/images/Team/Jeppe.jpg" },
+        { "id": 4, "name": "Henni Eriksson", "role": "Upplevelsekoordinator", "bio": "Skapar oförglömliga kundresor och äventyrsplaner.", "image": "/images/Team/Henni.jpg" },
+        { "id": 5, "name": "Fanny Johannson", "role": "Projektledare", "bio": "Ser till att alla våra äventyr löper smidigt från början till slut.", "image": "/images/Team/Fanny.jpg" }
+    ]
+  },
+  "contactSection": {
+    "title": "KONTAKTA OSS",
+    "subtitle": "Redo att planera ditt arktiska äventyr? Låt oss ansluta!",
+    "formTitle": "Skicka oss ett meddelande",
+    "firstName": "Förnamn",
+    "lastName": "Efternamn",
+    "email": "E-postadress",
+    "phone": "Telefonnummer (Valfritt)",
+    "visitDate": "Planerat besöksdatum (Valfritt)",
+    "interests": "Intresseområden (Valfritt)",
+    "interestsPlaceholder": "Välj intressen...",
+    "snowmobileTours": "Snöskoterturer",
+    "northernLights": "Norrskensjakter",
+    "iceFishing": "Isfiske",
+    "dogSledding": "Hundspann",
+    "accommodation": "Boende",
+    "other": "Annat",
+    "message": "Ditt meddelande",
+    "submitButton": "Skicka förfrågan",
+    "successMessage": "Tack för ditt meddelande! Vi hör av oss snart.",
+    "errorMessage": "Kunde inte skicka meddelande. Försök igen senare eller kontakta oss direkt."
+  },
+  "gallerySection": {
+    "title": "GALLERI",
+    "subtitle": "Ögonblick fångade från hjärtat av Arktis"
+  }
+} 

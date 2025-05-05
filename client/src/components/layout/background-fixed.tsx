@@ -139,10 +139,6 @@ export const GlobalBackground = memo(function GlobalBackground({
         <div className="northern-lights-gradient absolute inset-0">
           <div className="northern-glow"></div>
         </div>
-        
-        {/* Dark overlay for text contrast */}
-        <div className="absolute inset-0 bg-dark-bg transform-gpu" 
-             style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}></div>
       </div>
     );
   }
@@ -180,14 +176,6 @@ export const GlobalBackground = memo(function GlobalBackground({
         <div className="aurora-band"></div>
       </div>
       
-      {/* Dark overlay for text contrast - slightly reduced opacity for better star visibility */}
-      <div className="absolute inset-0 bg-dark-bg transform-gpu" 
-           style={{ backgroundColor: 'rgba(0, 0, 0, 0.35)' }}></div>
-      
-      {/* Subtle grid pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')] 
-           opacity-50 pointer-events-none transform-gpu"></div>
-           
       {/* Additional atmospheric effects for premium feel */}
       <div className="absolute inset-0 opacity-20">
         <div className="aurora-particles"></div>

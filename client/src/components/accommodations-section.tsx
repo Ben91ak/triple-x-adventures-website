@@ -8,18 +8,18 @@ const accommodationsByLanguage = {
   en: [
     {
       id: 1,
-      title: "ÖÖD HOTEL SAMELAND",
-      description: "Experience luxury in our premium ÖÖD Hotel, featuring floor-to-ceiling glass walls that provide uninterrupted views of the Arctic wilderness and Northern Lights. A truly unforgettable stay in nature.",
+      title: "CABIN HOTEL SAMELAND",
+      description: "Experience luxury in our premium Mirror Glass Cabins, featuring floor-to-ceiling glass walls that provide uninterrupted views of the Arctic wilderness and Northern Lights. A truly unforgettable stay in nature.",
       pricePerNight: 5995,
       image: "/images/ood-hotel.jpg",
       featured: true,
       features: [
         { icon: "fas fa-user-group", text: "For 2-4 guests" },
-        { icon: "fas fa-hot-tub", text: "Private outdoor hot tub" },
+        { icon: "fas fa-hot-tub", text: "13 Cabins" },
         { icon: "fas fa-snowflake", text: "Climate controlled" },
         { icon: "fas fa-bed", text: "Luxury king bed" },
-        { icon: "fas fa-utensils", text: "Gourmet breakfast included" },
-        { icon: "fas fa-location-dot", text: "Prime Northern Lights viewing" }
+        { icon: "fas fa-utensils", text: "own kitchen" },
+        { icon: "fas fa-location-dot", text: "Sameland, Arvidsjaur" }
       ]
     },
     {
@@ -29,10 +29,10 @@ const accommodationsByLanguage = {
       pricePerNight: 3995,
       image: "/images/txa-chalet.jpg",
       features: [
-        { icon: "fas fa-user-group", text: "Up to 8 guests" },
-        { icon: "fas fa-bed", text: "4 bedrooms" },
+        { icon: "fas fa-user-group", text: "Up to 24 guests" },
+        { icon: "fas fa-bed", text: "12 bedrooms" },
         { icon: "fas fa-hot-tub", text: "Private sauna" },
-        { icon: "fas fa-utensils", text: "Fully equipped kitchen" }
+        { icon: "fas fa-utensils", text: "Private lounge / restaurant" }
       ]
     },
     {
@@ -44,26 +44,26 @@ const accommodationsByLanguage = {
       features: [
         { icon: "fas fa-location-dot", text: "Central location" },
         { icon: "fas fa-snowflake", text: "Arctic ambiance" },
-        { icon: "fas fa-shuttle-van", text: "Transfer included" },
-        { icon: "fas fa-concierge-bell", text: "Concierge service" }
+        { icon: "fas fa-shuttle-van", text: "only 10 km from the Airport" },
+        { icon: "fas fa-concierge-bell", text: "Fjälls Pub & Bistro" }
       ]
     }
   ],
   de: [
     {
       id: 1,
-      title: "ÖÖD HOTEL SAMELAND",
-      description: "Erleben Sie Luxus in unserem Premium-ÖÖD-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die arktische Wildnis und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
+      title: "CABIN HOTEL SAMELAND",
+      description: "Erleben Sie Luxus in unserem Premium-Mirror-Glass-Cabin-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die arktische Wildnis und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
       pricePerNight: 5995,
       image: "/images/ood-hotel.jpg",
       featured: true,
       features: [
         { icon: "fas fa-user-group", text: "Für 2-4 Gäste" },
-        { icon: "fas fa-hot-tub", text: "Privater Außen-Whirlpool" },
+        { icon: "fas fa-hot-tub", text: "13 Cabins" },
         { icon: "fas fa-snowflake", text: "Klimatisiert" },
         { icon: "fas fa-bed", text: "Luxuriöses Kingsize-Bett" },
-        { icon: "fas fa-utensils", text: "Gourmet-Frühstück inklusive" },
-        { icon: "fas fa-location-dot", text: "Beste Nordlicht-Sicht" }
+        { icon: "fas fa-utensils", text: "eigene Küche" },
+        { icon: "fas fa-location-dot", text: "SameLand, Arvidsjaur" }
       ]
     },
     {
@@ -73,10 +73,10 @@ const accommodationsByLanguage = {
       pricePerNight: 3995,
       image: "/images/txa-chalet.jpg",
       features: [
-        { icon: "fas fa-user-group", text: "Bis zu 8 Gäste" },
-        { icon: "fas fa-bed", text: "4 Schlafzimmer" },
+        { icon: "fas fa-user-group", text: "Bis zu 24 Gäste" },
+        { icon: "fas fa-bed", text: "12 Schlafzimmer" },
         { icon: "fas fa-hot-tub", text: "Private Sauna" },
-        { icon: "fas fa-utensils", text: "Voll ausgestattete Küche" }
+        { icon: "fas fa-utensils", text: "Private Lounge / Restaurant" }
       ]
     },
     {
@@ -88,26 +88,26 @@ const accommodationsByLanguage = {
       features: [
         { icon: "fas fa-location-dot", text: "Zentrale Lage" },
         { icon: "fas fa-snowflake", text: "Arktisches Ambiente" },
-        { icon: "fas fa-shuttle-van", text: "Transfer inklusive" },
-        { icon: "fas fa-concierge-bell", text: "Concierge-Service" }
+        { icon: "fas fa-shuttle-van", text: "nur 10km vom Flughafen entfernt" },
+        { icon: "fas fa-concierge-bell", text: "Fjälls Pub & Bistro" }
       ]
     }
   ],
   sv: [
     {
       id: 1,
-      title: "ÖÖD HOTEL SAMELAND",
-      description: "Upplev lyx i vårt premium ÖÖD Hotel, med glasväggar från golv till tak som ger obrutna vyer över den arktiska vildmarken och norrskenet. En verkligt oförglömlig vistelse i naturen.",
+      title: "CABIN HOTEL SAMELAND",
+      description: "Upplev lyx i vårt premium Glass Cabin Hotel, med glasväggar från golv till tak som ger obrutna vyer över den arktiska vildmarken och norrskenet. En verkligt oförglömlig vistelse i naturen.",
       pricePerNight: 5995,
       image: "/images/ood-hotel.jpg",
       featured: true,
       features: [
         { icon: "fas fa-user-group", text: "För 2-4 gäster" },
-        { icon: "fas fa-hot-tub", text: "Privat utomhus badtunna" },
+        { icon: "fas fa-hot-tub", text: "13 Cabins" },
         { icon: "fas fa-snowflake", text: "Klimatkontrollerad" },
-        { icon: "fas fa-bed", text: "Lyxig king-size säng" },
-        { icon: "fas fa-utensils", text: "Gourmetfrukost ingår" },
-        { icon: "fas fa-location-dot", text: "Bästa läget för norrsken" }
+        { icon: "fas fa-bed", text: "Lyxig kingsize-säng" },
+        { icon: "fas fa-utensils", text: "eget kök" },
+        { icon: "fas fa-location-dot", text: "SameLand, Arvidsjaur" }
       ]
     },
     {
@@ -117,10 +117,10 @@ const accommodationsByLanguage = {
       pricePerNight: 3995,
       image: "/images/txa-chalet.jpg",
       features: [
-        { icon: "fas fa-user-group", text: "Upp till 8 gäster" },
-        { icon: "fas fa-bed", text: "4 sovrum" },
+        { icon: "fas fa-user-group", text: "Upp till 24 gäster" },
+        { icon: "fas fa-bed", text: "12 sovrum" },
         { icon: "fas fa-hot-tub", text: "Privat bastu" },
-        { icon: "fas fa-utensils", text: "Fullt utrustat kök" }
+        { icon: "fas fa-utensils", text: "Privat lounge / restaurang" }
       ]
     },
     {
@@ -132,8 +132,8 @@ const accommodationsByLanguage = {
       features: [
         { icon: "fas fa-location-dot", text: "Centralt läge" },
         { icon: "fas fa-snowflake", text: "Arktisk atmosfär" },
-        { icon: "fas fa-shuttle-van", text: "Transfer ingår" },
-        { icon: "fas fa-concierge-bell", text: "Concierge-tjänst" }
+        { icon: "fas fa-shuttle-van", text: "Endast 10 km från flygplatsen" },
+        { icon: "fas fa-concierge-bell", text: "Fjälls Pub & Bistro" }
       ]
     }
   ]

@@ -1,0 +1,102 @@
+{
+  "common": {
+    "appName": "Triple X Adventures",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "submit": "Submit",
+    "bookNow": "Book Now"
+  },
+  "navbar": {
+    "home": "Home",
+    "experiences": "Experiences",
+    "accommodation": "Accommodation",
+    "gallery": "Gallery",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "footer": {
+    "contactInfo": "Contact Info",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "address": "Address: Poikkijärvi 117, 98199 Jukkasjärvi, Sweden",
+    "email": "Email: info@triplexadventures.com",
+    "phone": "Phone: +46 76 106 61 19",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "copyright": "© 2024 Triple X Adventures. All rights reserved."
+  },
+  "hero": {
+    "title": "UNLEASH YOUR ARCTIC SPIRIT",
+    "subtitle": "Premium Snowmobile Tours & Wilderness Adventures in Swedish Lapland",
+    "ctaButton": "Discover Our Adventures"
+  },
+  "experiencesSection": {
+    "title": "Signature Experiences",
+    "tagline": "Choose your adventure, crafted by Arctic experts",
+    "duration": "Duration",
+    "intensity": "Intensity",
+    "highlights": "Highlights",
+    "exploreAll": "Explore All Experiences"
+  },
+  "accommodationSection": {
+    "title": "Wilderness Lodging",
+    "tagline": "Comfort meets the Arctic: your home away from home",
+    "pricePerNight": "From {{price}} SEK / night",
+    "exploreAll": "View All Accommodation"
+  },
+  "testimonialSection": {
+    "title": "WHAT OUR GUESTS SAY",
+    "tagline": "Real stories from unforgettable Arctic journeys"
+  },
+  "about": {
+    "title": "WHY WE LIVE FOR THIS",
+    "subtitle": "Our story, our team, and our commitment to authentic Arctic adventures",
+    "storyTitle": "OUR STORY",
+    "story": {
+      "paragraph1": "Triple X Adventures was born from a simple passion: sharing the raw beauty and adventure of Swedish Lapland with those who seek authentic experiences. Founded by Janina Möller in 2017 with just a few snowmobiles and a dream to show our guests the magic of Swedish Lapland.",
+      "paragraph2": "Today, we've grown into a premium adventure company, but our heart remains the same. We still operate with small groups, still work with local partners, and still believe that the Arctic isn't just a destination—it's an experience that changes you.",
+      "paragraph3": "Unlike mass tourism operations, we've chosen to stay true to our roots: personal, exclusive, and deeply connected to the land we call home."
+    },
+    "valuesTitle": "OUR VALUES",
+    "values": [
+      { "title": "Authenticity", "description": "We showcase the real Arctic, without filters or pretense. What you experience with us is genuine Lapland.", "icon": "mountain" },
+      { "title": "Sustainability", "description": "We tread lightly on the land we love, employing sustainable practices that preserve the Arctic for future generations.", "icon": "leaf" },
+      { "title": "Passion", "description": "Our guides aren't just employees—they're enthusiasts who love sharing their knowledge and excitement for the Arctic.", "icon": "heart" }
+    ],
+    "teamTitle": "MEET OUR TEAM",
+    "teamImageAlt": "Team members in Arctic gear",
+    "teamMembers": [
+      { "id": 1, "name": "Janina JayJay Möller", "role": "Founder & CEO", "bio": "Founded Triple X Adventures with a passion for authentic Arctic experiences.", "image": "/images/Team/jayjay.jpg" },
+      { "id": 2, "name": "Benni Fichtner", "role": "Project Lead", "bio": "Manages our projects with precision and creativity.", "image": "/images/Team/Benni.jpg" },
+      { "id": 3, "name": "Jesper Axelsson", "role": "Head Guide", "bio": "Expert guide with years of experience in the Arctic wilderness.", "image": "/images/Team/Jeppe.jpg" },
+      { "id": 4, "name": "Henni Bruhn", "role": "Experience Coordinator", "bio": "Creates unforgettable customer journeys and adventure itineraries.", "image": "/images/Team/Henni.jpg" },
+      { "id": 5, "name": "Fanny Johannson", "role": "Project Manager", "bio": "Ensures all our adventures run smoothly from start to finish.", "image": "/images/Team/Fanny.jpg" }
+    ]
+  },
+  "contactSection": {
+    "title": "GET IN TOUCH",
+    "subtitle": "Ready to plan your Arctic adventure? Let's connect!",
+    "formTitle": "Send us a message",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone Number (Optional)",
+    "visitDate": "Planned Visit Date (Optional)",
+    "interests": "Areas of Interest (Optional)",
+    "interestsPlaceholder": "Select interests...",
+    "snowmobileTours": "Snowmobile Tours",
+    "northernLights": "Northern Lights Hunts",
+    "iceFishing": "Ice Fishing",
+    "dogSledding": "Dog Sledding",
+    "accommodation": "Accommodation",
+    "other": "Other",
+    "message": "Your Message",
+    "submitButton": "Send Inquiry",
+    "successMessage": "Thank you for your message! We'll be in touch soon.",
+    "errorMessage": "Failed to send message. Please try again later or contact us directly."
+  },
+  "gallerySection": {
+    "title": "GALLERY",
+    "subtitle": "Moments captured from the heart of the Arctic"
+  }
+} 

@@ -1,388 +1,199 @@
 /**
- * Image preloader utility to ensure critical images are preloaded
- * This helps fix the "Optimized image not found" errors seen in the console
+ * Image preloading utilities to enhance user experience by preloading critical images
+ * This helps reduce layout shifts and provides a smoother visual experience
  */
 
-interface ImagePreloadOptions {
-  priority?: 'high' | 'medium' | 'low';
-  fallback?: string;
-  onLoad?: () => void;
-  onError?: () => void;
-}
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined';
 
-/**
- * Preload an image with specified options
- * Enhanced with format alternatives and better fallback mechanisms
- */
-export function preloadImage(path: string, options: ImagePreloadOptions = {}) {
-  const { priority = 'medium', fallback, onLoad, onError } = options;
+// Critical images that should be preloaded for the best experience
+const criticalImagePaths = [
+  // Logo and branding
+  '/weiss-grun.png',
   
-  // Skip any husky-related images to avoid errors
-  if (path.toLowerCase().includes('husky') || path.toLowerCase().includes('huskys') || path.toLowerCase().includes('dog')) {
-    console.log(`Skipping husky image preload: ${path}`);
-    if (onError) onError();
-    return null;
-  }
+  // Hero section background
+  '/images/TXA_fallback_optimized.jpg',
+  '/images/TXA_fallback.webp',
   
-  // Create a new image element
-  const img = new Image();
+  // Experience featured images (first visible)
+  '/images/experiences/Snowmobile 1_result.webp',
+  '/images/experiences/Dog Sledding 1_result.webp',
   
-  // Set loading priority (high = fetch immediately, low = lazy load)
-  if (priority === 'high') {
-    img.fetchPriority = 'high';
-    img.loading = 'eager';
-  } else if (priority === 'low') {
-    img.loading = 'lazy';
-  }
-  
-  // Set up event handlers
-  img.onload = () => {
-    console.log(`Image preloaded successfully: ${path}`);
-    if (onLoad) onLoad();
-  };
-  
-  img.onerror = () => {
-    console.warn(`Failed to preload image: ${path}`);
-    
-    // Try alternative formats and paths when the main image fails
-    tryAlternatives(path, onLoad, onError, fallback);
-  };
-  
-  // Start loading the image
-  img.src = path;
-  
-  return img;
-}
+  // UI elements
+  '/images/pattern-dots.png'
+];
 
 /**
- * Try alternative image formats and paths when the main image fails to load
+ * Preloads all critical images for faster initial rendering
  */
-function tryAlternatives(
-  originalPath: string, 
-  onSuccess?: () => void, 
-  onFail?: () => void,
-  initialFallback?: string
-) {
-  // First try the explicit fallback if provided
-  if (initialFallback) {
-    console.log(`Attempting to load fallback: ${initialFallback}`);
-    const fallbackImg = new Image();
-    
-    fallbackImg.onload = () => {
-      console.log(`Fallback image loaded successfully: ${initialFallback}`);
-      if (onSuccess) onSuccess();
-    };
-    
-    fallbackImg.onerror = () => {
-      console.error(`Failed to load fallback image: ${initialFallback}`);
-      tryFormatAlternatives(originalPath, onSuccess, onFail);
-    };
-    
-    fallbackImg.src = initialFallback;
+export function preloadAllCriticalImages(): void {
+  if (!isBrowser) return;
+  
+  // Check if preloading is already in progress or completed
+  if (window.sessionStorage && window.sessionStorage.getItem('imagesPreloaded') === 'true') {
+    console.log('Critical images already preloaded in this session');
     return;
   }
   
-  // If no explicit fallback, try format alternatives
-  tryFormatAlternatives(originalPath, onSuccess, onFail);
+  // Preload all critical images
+  const preloadPromises = criticalImagePaths.map(path => preloadImage(path));
+  
+  // Mark as completed once all images are preloaded
+  Promise.all(preloadPromises)
+    .then(() => {
+      console.log('All critical images preloaded successfully');
+      if (window.sessionStorage) {
+        window.sessionStorage.setItem('imagesPreloaded', 'true');
+      }
+    })
+    .catch(error => {
+      console.error('Error preloading images:', error);
+    });
 }
 
 /**
- * Try different file formats and path variations
+ * Preloads a single image
+ * @param src Image source URL
+ * @returns Promise that resolves when the image is loaded
  */
-function tryFormatAlternatives(
-  originalPath: string,
-  onSuccess?: () => void,
-  onFail?: () => void
-) {
-  // Extract path components
-  const pathParts = originalPath.split('.');
-  if (pathParts.length < 2) {
-    if (onFail) onFail();
-    return;
-  }
-  
-  const extension = pathParts.pop() || '';
-  const basePath = pathParts.join('.');
-  
-  // Try WebP format first
-  const webpPath = `${basePath}.webp`;
-  console.log(`Trying WebP alternative: ${webpPath}`);
-  
-  const webpImg = new Image();
-  webpImg.onload = () => {
-    console.log(`WebP alternative loaded successfully: ${webpPath}`);
-    if (onSuccess) onSuccess();
-  };
-  
-  webpImg.onerror = () => {
-    // Try AVIF format next
-    const avifPath = `${basePath}.avif`;
-    console.log(`Trying AVIF alternative: ${avifPath}`);
-    
-    const avifImg = new Image();
-    avifImg.onload = () => {
-      console.log(`AVIF alternative loaded successfully: ${avifPath}`);
-      if (onSuccess) onSuccess();
-    };
-    
-    avifImg.onerror = () => {
-      // Try different path formations as a last resort
-      tryPathAlternatives(originalPath, onSuccess, onFail);
-    };
-    
-    avifImg.src = avifPath;
-  };
-  
-  webpImg.src = webpPath;
-}
-
-/**
- * Try different path structures as a last resort
- * Enhanced with more comprehensive alternatives based on actual filesystem scan
- */
-function tryPathAlternatives(
-  originalPath: string,
-  onSuccess?: () => void,
-  onFail?: () => void
-) {
-  // Skip any husky-related images
-  if (originalPath.toLowerCase().includes('husky') || originalPath.toLowerCase().includes('huskys') || originalPath.toLowerCase().includes('dog')) {
-    console.log(`Skipping husky image alternative paths: ${originalPath}`);
-    if (onFail) onFail();
-    return;
-  }
-  
-  // Try paths that we know exist in the filesystem
-  let alternativePaths: string[] = [];
-  
-  // Extract filename and handle special cases
-  const fileName = originalPath.split('/').pop() || '';
-  const baseName = fileName.split('.')[0].toLowerCase();
-  
-  // Try different path formats based on what we found in filesystem
-  if (originalPath.includes('/experiences/')) {
-    // If path has /experiences/ subfolder, try the root /images/ versions
-    alternativePaths.push(`/images/${fileName}`);
-    
-    // Try with different capitalization
-    const capitalizedName = baseName.charAt(0).toUpperCase() + baseName.slice(1);
-    alternativePaths.push(`/images/${capitalizedName}.jpg`);
-    
-    // Handle special cases with verified paths
-    if (baseName.includes('snowmobile')) {
-      // WebP versions first (preferable)
-      alternativePaths.push('/images/Snowmobile/Snowmobile 1_result.webp');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 3_result.webp');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 4_result.webp');
-    }
-    else if (baseName.includes('drift')) {
-      alternativePaths.push('/images/Ice Drift/Cars 1_result.webp');
-      alternativePaths.push('/images/Ice Drift/Cars 2_result.webp');
-      alternativePaths.push('/images/Ice Drift/Cars 3_result.webp');
-      alternativePaths.push('/images/Drifting.jpg');
-    }
-    else if (baseName.includes('kart') || baseName.includes('ice-kart')) {
-      alternativePaths.push('/images/Ice Kart.jpg');
-      alternativePaths.push('/images/Ice-Fishing.jpg');
-    }
-    else if (baseName.includes('helicopter') || baseName.includes('heli')) {
-      alternativePaths.push('/images/Helikopter.jpg');
-    }
-    else if (baseName.includes('buggy') || baseName.includes('side')) {
-      alternativePaths.push('/images/Side by Side/SBS 1_result.webp');
-      alternativePaths.push('/images/Side by Side/SBS 2_result.webp');
-      alternativePaths.push('/images/Side by Side/SBS 3_result.webp');
-      alternativePaths.push('/images/Side-By-Side-Buggy-Drifting.jpg');
-    }
-    else if (baseName.includes('reindeer')) {
-      alternativePaths.push('/images/Reindeers/Reindeers 1_result.webp');
-      alternativePaths.push('/images/Reindeers/Reindeers 2_result.webp');
-      alternativePaths.push('/images/Reindeers/Reindeers 3_result.webp');
-      alternativePaths.push('/images/Reindeers.jpg');
-    }
-  } else {
-    // If not in experiences folder, check if we have other variants
-    alternativePaths.push(`/images/experiences/${fileName}`);
-    
-    // Try with different capitalization
-    const capitalizedName = baseName.charAt(0).toUpperCase() + baseName.slice(1);
-    alternativePaths.push(`/images/${capitalizedName}.jpg`);
-    
-    // Handle special cases with verified paths
-    if (baseName.includes('snowmobile')) {
-      // WebP versions first (preferable)
-      alternativePaths.push('/images/Snowmobile/Snowmobile 1_result.webp');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 2_result.webp');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 3_result.webp');
-      alternativePaths.push('/images/Snowmobile/Snowmobile 4_result.webp');
-    }
-    else if (baseName.includes('drift')) {
-      alternativePaths.push('/images/Ice Drift/Cars 1_result.webp');
-      alternativePaths.push('/images/Ice Drift/Cars 2_result.webp');
-      alternativePaths.push('/images/Ice Drift/Cars 3_result.webp');
-      alternativePaths.push('/images/Drifting.jpg');
-    }
-    else if (baseName.includes('kart') || baseName.includes('ice-kart')) {
-      alternativePaths.push('/images/Ice Kart.jpg');
-      alternativePaths.push('/images/Ice-Fishing.jpg');
-    }
-    else if (baseName.includes('helicopter') || baseName.includes('heli')) {
-      alternativePaths.push('/images/Helikopter.jpg');
-    }
-    else if (baseName.includes('buggy') || baseName.includes('side')) {
-      alternativePaths.push('/images/Side by Side/SBS 1_result.webp');
-      alternativePaths.push('/images/Side by Side/SBS 2_result.webp');
-      alternativePaths.push('/images/Side by Side/SBS 3_result.webp');
-      alternativePaths.push('/images/Side-By-Side-Buggy-Drifting.jpg');
-    }
-    else if (baseName.includes('reindeer')) {
-      alternativePaths.push('/images/Reindeers/Reindeers 1_result.webp');
-      alternativePaths.push('/images/Reindeers/Reindeers 2_result.webp');
-      alternativePaths.push('/images/Reindeers/Reindeers 3_result.webp');
-      alternativePaths.push('/images/Reindeers.jpg');
-    }
-  }
-  
-  // Always try the fallback as last resort
-  alternativePaths.push('/images/TXA_fallback.jpg');
-  alternativePaths.push('/images/TXA_fallback_optimized.jpg');
-  
-  // Try each alternative path in sequence
-  tryNextPath(0);
-  
-  function tryNextPath(index: number) {
-    if (index >= alternativePaths.length) {
-      // We've tried all alternatives without success
-      if (onFail) onFail();
+export function preloadImage(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (!isBrowser) {
+      resolve();
       return;
     }
     
-    const altPath = alternativePaths[index];
-    console.log(`Trying alternative path: ${altPath}`);
+    // Check if image is already cached
+    const img = new Image();
     
-    const altImg = new Image();
-    altImg.onload = () => {
-      console.log(`Alternative path loaded successfully: ${altPath}`);
-      if (onSuccess) onSuccess();
+    img.onload = () => {
+      resolve();
     };
     
-    altImg.onerror = () => {
-      // Try the next alternative path
-      tryNextPath(index + 1);
+    img.onerror = () => {
+      console.warn(`Failed to preload image: ${src}`);
+      reject(new Error(`Failed to preload: ${src}`));
     };
     
-    altImg.src = altPath;
+    img.src = src;
+  });
+}
+
+/**
+ * Preloads images for a specific section to improve user experience as they scroll
+ * @param section Section name to preload images for
+ */
+export function preloadSectionImages(section: 'experiences' | 'accommodations' | 'restaurant'): void {
+  if (!isBrowser) return;
+  
+  // Define section-specific images
+  const sectionImages: Record<string, string[]> = {
+    experiences: [
+      '/images/Snowmobile/Snowmobile 1_result.webp',
+      '/images/Huskys/Husky 1_result.webp',
+      '/images/Ice-Fishing.jpg',
+      '/images/Reindeers.jpg',
+      '/images/Side-By-Side-Buggy-Drifting.jpg'
+    ],
+    accommodations: [
+      '/images/accommodations/Cabin 1_result.webp',
+      '/images/accommodations/Cabin 2_result.webp',
+      '/images/accommodations/Cabin 3_result.webp'
+    ],
+    restaurant: [
+      '/images/restaurant/Restaurant 1_result.webp',
+      '/images/restaurant/Restaurant 2_result.webp',
+      '/images/restaurant/Restaurant 3_result.webp'
+    ]
+  };
+  
+  // Get images for the specified section
+  const images = sectionImages[section] || [];
+  
+  // Preload images with lower priority
+  if (images.length > 0) {
+    console.log(`Preloading ${images.length} images for ${section} section`);
+    
+    // Use requestIdleCallback for non-critical preloading if available
+    if ('requestIdleCallback' in window) {
+      (window as any).requestIdleCallback(() => {
+        images.forEach(image => preloadImage(image));
+      }, { timeout: 2000 });
+    } else {
+      // Fallback to setTimeout for browsers without requestIdleCallback
+      setTimeout(() => {
+        images.forEach(image => preloadImage(image));
+      }, 200);
+    }
   }
 }
 
 /**
- * Preload a set of images
+ * Uses IntersectionObserver to preload images just before they come into view
  */
-export function preloadImages(paths: string[], options: ImagePreloadOptions = {}) {
-  return paths.map(path => preloadImage(path, options));
-}
-
-/**
- * Preload all critical images for the experiences section
- * Updated with correct capitalization and paths based on filesystem check
- */
-export function preloadExperienceImages() {
-  // Use actual verified image paths based on filesystem check
-  const experienceImages = [
-    // Primary images with verified paths
-    '/images/Reindeers/Reindeers 1_result.webp',
-    '/images/Ice Drift/Cars 1_result.webp',
-    '/images/Side by Side/SBS 1_result.webp',
-    '/images/Ice Fishing/Icefish 1_result.webp',
-    '/images/Huskys/Husky 1_result.webp',
-    
-    // Verified JPG images in the root images directory
-    '/images/Drifting.jpg',
-    '/images/Helikopter.jpg',
-    '/images/Ice Kart.jpg',
-    '/images/Reindeers.jpg',
-    '/images/Ice-Fishing.jpg',
-    '/images/Side-By-Side-Buggy-Drifting.jpg'
+export function setupLazyPreloading(): void {
+  if (!isBrowser || !('IntersectionObserver' in window)) return;
+  
+  // Sections to observe for preloading
+  const sections = [
+    { id: 'experiences', threshold: 0.2 },
+    { id: 'accommodations', threshold: 0.2 },
+    { id: 'restaurant', threshold: 0.2 }
   ];
   
-  // WebP Snowmobile images with result suffix
-  const webpSnowmobileImages = [
-    '/images/Snowmobile/Snowmobile 1_result.webp',
-    '/images/Snowmobile/Snowmobile 2_result.webp',
-    '/images/Snowmobile/Snowmobile 3_result.webp',
-    '/images/Snowmobile/Snowmobile 4_result.webp'
-  ];
+  // Track which sections have been preloaded
+  const preloadedSections = new Set<string>();
   
-  // WebP versions first (higher priority)
-  webpSnowmobileImages.forEach(path => {
-    preloadImage(path, {
-      priority: 'high'
+  // Create observer
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const sectionId = entry.target.id;
+        
+        // Only preload each section once
+        if (!preloadedSections.has(sectionId)) {
+          preloadedSections.add(sectionId);
+          
+          // Preload section images
+          if (sectionId === 'experiences' || 
+              sectionId === 'accommodations' || 
+              sectionId === 'restaurant') {
+            preloadSectionImages(sectionId);
+          }
+          
+          // Stop observing once preloaded
+          sectionObserver.unobserve(entry.target);
+        }
+      }
     });
+  }, {
+    rootMargin: '200px 0px', // Start loading 200px before section comes into view
+    threshold: 0.1
   });
   
-  // Standard images next
-  experienceImages.forEach(path => {
-    preloadImage(path, {
-      priority: 'high'
-    });
-  });
-}
-
-/**
- * Preload all critical images for the accommodations section
- */
-export function preloadAccommodationImages() {
-  const accommodationImages = [
-    '/images/txa-chalet.jpg',
-    '/images/ood-hotel.jpg',
-    '/images/hotel-laponia.jpg'
-  ];
-  
-  // Preload accommodation images
-  accommodationImages.forEach(path => {
-    preloadImage(path, {
-      priority: 'medium'
-    });
+  // Start observing sections
+  sections.forEach(section => {
+    const element = document.getElementById(section.id);
+    if (element) {
+      sectionObserver.observe(element);
+    }
   });
 }
 
 /**
- * Preload all restaurant images
+ * Initialize all image preloading features
  */
-export function preloadRestaurantImages() {
-  const restaurantImages = [
-    // Use the WebP versions for better performance
-    '/images/restaurant/Restaurant 1_result.webp',
-    '/images/restaurant/Restaurant 2_result.webp',
-    '/images/restaurant/Restaurant 3_result.webp',
-    '/images/restaurant/Restaurant 4_result.webp',
-    // Keep the JPGs as fallbacks
-    '/images/restaurant/dish.jpg',
-    '/images/restaurant/jayjays-exterior.jpg',
-    '/images/restaurant/meat-preparation.jpg',
-    '/images/restaurant/dining-area.jpg'
-  ];
+export function initImagePreloading(): void {
+  if (!isBrowser) return;
   
-  restaurantImages.forEach(path => {
-    preloadImage(path, { priority: 'medium' });
-  });
-}
-
-/**
- * Preload all critical images for proper website function
- */
-export function preloadAllCriticalImages() {
-  preloadExperienceImages();
-  preloadAccommodationImages();
-  preloadRestaurantImages();
+  // Preload critical images immediately
+  preloadAllCriticalImages();
   
-  // Preload logo and other critical UI elements
-  const uiImages = [
-    '/images/TXA_fallback.jpg' // Use the fallback as a reliable image
-  ];
-  
-  uiImages.forEach(path => {
-    preloadImage(path, { priority: 'high' });
-  });
+  // Set up lazy preloading for section images
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupLazyPreloading);
+  } else {
+    setupLazyPreloading();
+  }
 }

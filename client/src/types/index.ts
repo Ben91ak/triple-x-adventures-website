@@ -1,19 +1,21 @@
-// Experience type
-export interface Experience {
-  id: number;
-  title: string;
-  description: string;
-  price?: number;
-  image: string;
-  // Gallery images for the expanded view
-  gallery: string[];
-  // Longer, more detailed description for the expanded view
-  fullDescription?: string;
-  tag?: {
-    text: string;
-    type: string;
-  };
+// Define nested types for detailedInfo
+export interface TourType {
+  title?: string;
+  description?: string;
+  details?: string[];
 }
+
+export interface DetailedInfoType {
+  introduction?: string;
+  adventureOptionsTitle?: string;
+  tours?: TourType[];
+  importantInfoTitle?: string;
+  importantInfo?: string[];
+  closingRemark?: string;
+}
+
+// Experience type
+export { Experience } from '../types';
 
 // Accommodation type
 export interface Accommodation {

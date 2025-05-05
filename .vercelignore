@@ -1,0 +1,21 @@
+# Dependencies
+node_modules
+dist/node_modules
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.example
+
+# Version control
+.git
+.github
+
+# Assets not needed for deployment
+attached_assets
+
+# Misc
+.DS_Store
+README.md
+*.log

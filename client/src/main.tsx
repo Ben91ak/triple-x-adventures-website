@@ -5,7 +5,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { supportsFormat, optimizePageImages, prefetchImages } from "./utils/image-optimizer";
-import { applyPerformanceOptimizations } from "./utils/performance-optimizer";
+import applyAllOptimizations from "./utils/performance-optimizer";
 import { initGlobalErrorHandlers } from "./utils/error-handlers";
 
 // Initialize global error handlers to catch and suppress WebSocket errors
@@ -95,7 +95,7 @@ window.addEventListener('DOMContentLoaded', () => {
     reportWebVitals();
     
     // Apply the new comprehensive performance optimizations
-    applyPerformanceOptimizations();
+    applyAllOptimizations();
   };
   
   // Run critical optimizations right away

@@ -1,0 +1,102 @@
+{
+  "common": {
+    "appName": "Triple X Adventures",
+    "loading": "Wird geladen...",
+    "error": "Ein Fehler ist aufgetreten",
+    "submit": "Senden",
+    "bookNow": "Jetzt Buchen"
+  },
+  "navbar": {
+    "home": "Startseite",
+    "experiences": "Erlebnisse",
+    "accommodation": "Unterkunft",
+    "gallery": "Galerie",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "footer": {
+    "contactInfo": "Kontaktinformationen",
+    "quickLinks": "Schnelllinks",
+    "legal": "Rechtliches",
+    "address": "Adresse: Poikkijärvi 117, 98199 Jukkasjärvi, Schweden",
+    "email": "E-Mail: info@triplexadventures.com",
+    "phone": "Telefon: +46 76 106 61 19",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsOfService": "Nutzungsbedingungen",
+    "copyright": "© 2024 Triple X Adventures. Alle Rechte vorbehalten."
+  },
+  "hero": {
+    "title": "ENTFESSLE DEINEN ARKTISCHEN GEIST",
+    "subtitle": "Premium-Schneemobiltouren & Wildnisabenteuer in Schwedisch-Lappland",
+    "ctaButton": "Entdecke unsere Abenteuer"
+  },
+  "experiencesSection": {
+    "title": "Unsere Erlebnisse",
+    "tagline": "Wählen Sie Ihr Abenteuer, gestaltet von Arktis-Experten",
+    "duration": "Dauer",
+    "intensity": "Intensität",
+    "highlights": "Höhepunkte",
+    "exploreAll": "Alle Erlebnisse entdecken"
+  },
+  "accommodationSection": {
+    "title": "Wildnis-Unterkünfte",
+    "tagline": "Komfort trifft Arktis: Ihr Zuhause fern von Zuhause",
+    "pricePerNight": "Ab {{price}} SEK / Nacht",
+    "exploreAll": "Alle Unterkünfte ansehen"
+  },
+  "testimonialSection": {
+    "title": "WAS UNSERE GÄSTE SAGEN",
+    "tagline": "Echte Geschichten von unvergesslichen Arktisreisen"
+  },
+  "about": {
+    "title": "WARUM WIR DAFÜR LEBEN",
+    "subtitle": "Unsere Geschichte, unser Team und unser Engagement für authentische arktische Abenteuer",
+    "storyTitle": "UNSERE GESCHICHTE",
+    "story": {
+        "paragraph1": "Triple X Adventures entstand aus einer einfachen Leidenschaft: die unberührte Schönheit und das Abenteuer von Schwedisch-Lappland mit denen zu teilen, die authentische Erlebnisse suchen. Gegründet von Janina Möller im Jahr 2017 mit nur wenigen Schneemobilen und einem Traum, unseren Gästen die Magie von Schwedisch-Lappland zu zeigen.",
+        "paragraph2": "Heute sind wir zu einem Premium-Abenteuerunternehmen herangewachsen, aber unser Herz bleibt das gleiche. Wir arbeiten immer noch mit kleinen Gruppen, arbeiten immer noch mit lokalen Partnern zusammen und glauben immer noch, dass die Arktis nicht nur ein Reiseziel ist – es ist ein Erlebnis, das Sie verändert.",
+        "paragraph3": "Im Gegensatz zu Massentourismusunternehmen haben wir uns entschieden, unseren Wurzeln treu zu bleiben: persönlich, exklusiv und tief verbunden mit dem Land, das wir unser Zuhause nennen."
+    },
+    "valuesTitle": "UNSERE WERTE",
+    "values": [
+        { "title": "Authentizität", "description": "Wir präsentieren die echte Arktis, ohne Filter oder Vorwand. Was Sie mit uns erleben, ist echtes Lappland.", "icon": "mountain" },
+        { "title": "Nachhaltigkeit", "description": "Wir gehen behutsam mit dem Land um, das wir lieben, und setzen nachhaltige Praktiken ein, die die Arktis für zukünftige Generationen bewahren.", "icon": "leaf" },
+        { "title": "Leidenschaft", "description": "Unsere Guides sind nicht nur Mitarbeiter – sie sind Enthusiasten, die ihr Wissen und ihre Begeisterung für die Arktis gerne teilen.", "icon": "heart" }
+    ],
+    "teamTitle": "LERNEN SIE UNSER TEAM KENNEN",
+    "teamImageAlt": "Teammitglieder in arktischer Ausrüstung",
+    "teamMembers": [
+        { "id": 1, "name": "Janina JayJay Möller", "role": "Gründerin & CEO", "bio": "Gründete Triple X Adventures mit einer Leidenschaft für authentische arktische Erlebnisse.", "image": "/images/Team/jayjay.jpg" },
+        { "id": 2, "name": "Benni Fichtner", "role": "Projektmanager", "bio": "Leitet unsere Projekte mit Präzision und Kreativität.", "image": "/images/Team/Benni.jpg" },
+        { "id": 3, "name": "Jesper Axelsson", "role": "Tourguide", "bio": "Erfahrener Guide mit langjähriger Erfahrung in der arktischen Wildnis.", "image": "/images/Team/Jeppe.jpg" },
+        { "id": 4, "name": "Henni Eriksson", "role": "Erlebniskoordinatorin", "bio": "Gestaltet unvergessliche Kundenerlebnisse und Abenteuer-Reisepläne.", "image": "/images/Team/Henni.jpg" },
+        { "id": 5, "name": "Fanny Johannson", "role": "Projectmanager", "bio": "Sorgt dafür, dass alle unsere Abenteuer von Anfang bis Ende reibungslos verlaufen.", "image": "/images/Team/Fanny.jpg" }
+    ]
+  },
+  "contactSection": {
+    "title": "KONTAKT",
+    "subtitle": "Bereit, Ihr arktisches Abenteuer zu planen? Lassen Sie uns verbinden!",
+    "formTitle": "Schicken Sie uns eine Nachricht",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefonnummer (Optional)",
+    "visitDate": "Geplantes Besuchsdatum (Optional)",
+    "interests": "Interessengebiete (Optional)",
+    "interestsPlaceholder": "Interessen auswählen...",
+    "snowmobileTours": "Schneemobiltouren",
+    "northernLights": "Nordlichtjagden",
+    "iceFishing": "Eisfischen",
+    "dogSledding": "Hundeschlittenfahrten",
+    "accommodation": "Unterkunft",
+    "other": "Andere",
+    "message": "Ihre Nachricht",
+    "submitButton": "Anfrage senden",
+    "successMessage": "Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen melden.",
+    "errorMessage": "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt."
+  },
+  "gallerySection": {
+    "title": "GALERIE",
+    "subtitle": "Momente festgehalten aus dem Herzen der Arktis"
+  }
+} 

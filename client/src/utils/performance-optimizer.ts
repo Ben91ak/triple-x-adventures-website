@@ -1,218 +1,268 @@
 /**
- * Performance optimizer utilities for detecting scrolling, visibility,
- * device capabilities, and optimizing resource usage across the application.
+ * Performance optimization utilities for Triple X Adventures website
+ * 
+ * This module contains functions to optimize various aspects of website performance,
+ * including image loading, third-party script management, and general best practices.
  */
 
+// Check if we're in a browser environment
+const isBrowser = typeof window !== 'undefined';
+
 /**
- * Pauses all video playback when the tab is not visible to reduce CPU/battery usage
+ * Optimizes page images by applying best practices
+ * - Sets loading attributes
+ * - Adds decoding attributes
+ * - Sets fetchpriority for important images
  */
-export function setupVisibilityBasedOptimizations() {
-  // Find all video elements on the page
-  const videos = document.querySelectorAll('video');
+export function optimizePageImages(): void {
+  if (!isBrowser) return;
   
-  // Handle visibility change
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      // Tab is hidden, pause all videos
-      videos.forEach(video => {
-        if (!video.paused) {
-          video.pause();
-          // Mark the video as auto-paused so we can resume it when visible again
-          video.setAttribute('data-auto-paused', 'true');
-        }
-      });
-    } else {
-      // Tab is visible again, resume videos that were auto-paused
-      videos.forEach(video => {
-        if (video.getAttribute('data-auto-paused') === 'true') {
-          // Only resume if the video was auto-paused by our code
-          video.play().catch(() => {
-            // Handle potential autoplay restrictions
-            console.log('Auto-resume prevented by browser policy');
-          });
-          // Clear the auto-paused flag
-          video.removeAttribute('data-auto-paused');
-        }
-      });
+  // Wait for the DOM to be ready
+  setTimeout(() => {
+    // Hero section and above-the-fold images
+    const criticalImages = document.querySelectorAll('img[critical="true"], .hero-section img, header img');
+    criticalImages.forEach(img => {
+      if (img instanceof HTMLImageElement) {
+        img.loading = 'eager';
+        img.decoding = 'sync';
+        img.setAttribute('fetchpriority', 'high');
+      }
+    });
+    
+    // Below the fold images
+    const nonCriticalImages = document.querySelectorAll('img:not([critical="true"]):not(.hero-section img):not(header img)');
+    nonCriticalImages.forEach(img => {
+      if (img instanceof HTMLImageElement) {
+        img.loading = 'lazy';
+        img.decoding = 'async';
+      }
+    });
+    
+    // Set proper sizes attributes for responsive images
+    const responsiveImages = document.querySelectorAll('img[srcset]');
+    responsiveImages.forEach(img => {
+      if (img instanceof HTMLImageElement && !img.sizes) {
+        img.sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw';
+      }
+    });
+  }, 100);
+}
+
+/**
+ * Preloads critical images for faster rendering
+ */
+export function preloadAllCriticalImages(): void {
+  if (!isBrowser) return;
+  
+  const criticalImageUrls = [
+    '/weiss-grun.png', // Logo
+    '/images/TXA_fallback_optimized.jpg', // Hero background fallback
+    '/videos/TXA Teaser 2025 Homepage.webm', // Hero video
+    '/images/experiences/Snowmobile 1_result.webp', // First experience image
+  ];
+  
+  criticalImageUrls.forEach(url => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = url;
+    link.crossOrigin = 'anonymous';
+    
+    // Only add if it doesn't already exist
+    if (!document.querySelector(`link[rel="preload"][href="${url}"]`)) {
+      document.head.appendChild(link);
     }
+  });
+  
+  // Preload first few seconds of video for hero section
+  const videoLink = document.createElement('link');
+  videoLink.rel = 'preload';
+  videoLink.as = 'video';
+  videoLink.href = '/videos/TXA Teaser 2025 Homepage.webm';
+  videoLink.type = 'video/webm';
+  
+  // Only add if it doesn't already exist
+  if (!document.querySelector('link[rel="preload"][as="video"]')) {
+    document.head.appendChild(videoLink);
+  }
+}
+
+/**
+ * Manages third-party scripts by loading them with appropriate strategy
+ * @param url Script URL to load
+ * @param priority 'high' for critical scripts, 'low' for non-essential
+ * @param callback Optional callback function when script loads
+ */
+export function loadThirdPartyScript(url: string, priority: 'high' | 'low', callback?: () => void): void {
+  if (!isBrowser) return;
+  
+  const script = document.createElement('script');
+  script.src = url;
+  
+  // Set appropriate attributes based on priority
+  if (priority === 'low') {
+    script.async = true;
+    script.defer = true;
+  }
+  
+  // Add callback if provided
+  if (callback) {
+    script.onload = callback;
+  }
+  
+  // Add script to document
+  document.body.appendChild(script);
+}
+
+/**
+ * Defers non-critical CSS loading
+ * @param href CSS file URL
+ */
+export function loadDeferredCSS(href: string): void {
+  if (!isBrowser) return;
+  
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = href;
+  link.media = 'print';
+  link.onload = () => {
+    link.media = 'all';
+  };
+  
+  document.head.appendChild(link);
+}
+
+/**
+ * Monitors performance metrics and logs them
+ */
+export function monitorPerformance(): void {
+  if (!isBrowser || !('performance' in window) || !('getEntriesByType' in performance)) return;
+  
+  // This will run after the page has loaded
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      // Get performance metrics
+      const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+      
+      if (navigationEntry) {
+        // Calculate key metrics
+        const pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.startTime;
+        const timeToFirstByte = navigationEntry.responseStart - navigationEntry.requestStart;
+        const domContentLoaded = navigationEntry.domContentLoadedEventEnd - navigationEntry.startTime;
+        
+        // Log metrics
+        console.log(`Performance metrics:
+- Page load time: ${Math.round(pageLoadTime)}ms
+- Time to first byte: ${Math.round(timeToFirstByte)}ms
+- DOM Content Loaded: ${Math.round(domContentLoaded)}ms`);
+        
+        // Send to analytics if needed
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'performance', {
+            pageLoadTime: Math.round(pageLoadTime),
+            timeToFirstByte: Math.round(timeToFirstByte),
+            domContentLoaded: Math.round(domContentLoaded)
+          });
+        }
+      }
+      
+      // Get Largest Contentful Paint if available
+      try {
+        const lcpEntries = performance.getEntriesByType('largest-contentful-paint');
+        if (lcpEntries && lcpEntries.length > 0) {
+          const lcp = lcpEntries[lcpEntries.length - 1];
+          console.log(`Largest Contentful Paint: ${Math.round(lcp.startTime)}ms`);
+        }
+      } catch (e) {
+        // LCP API might not be supported
+      }
+      
+      // Clear entries to avoid memory leaks
+      performance.clearMarks();
+      performance.clearMeasures();
+      performance.clearResourceTimings();
+    }, 3000);
   });
 }
 
 /**
- * Optimizes performance during scroll by temporarily reducing animations
- * and other resource-intensive operations
+ * Dynamically loads web fonts with appropriate strategy
  */
-export function setupScrollOptimizations() {
-  let scrollTimeout: ReturnType<typeof setTimeout>;
-  let isScrolling = false;
-  const html = document.documentElement;
+export function optimizeFonts(): void {
+  if (!isBrowser) return;
   
-  // Throttled scroll handler to avoid excessive DOM operations
-  function handleScroll() {
-    if (!isScrolling) {
-      isScrolling = true;
-      html.classList.add('is-scrolling');
-      
-      // Use requestAnimationFrame for better performance
-      requestAnimationFrame(() => {
-        isScrolling = false;
-      });
+  // Create font preconnect links
+  const fontDomains = ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'];
+  
+  fontDomains.forEach(domain => {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = domain;
+    link.crossOrigin = 'anonymous';
+    
+    // Only add if it doesn't already exist
+    if (!document.querySelector(`link[rel="preconnect"][href="${domain}"]`)) {
+      document.head.appendChild(link);
     }
-    
-    // Clear the timeout on every scroll event
-    clearTimeout(scrollTimeout);
-    
-    // Set a timeout to remove the scrolling class after scrolling stops
-    scrollTimeout = setTimeout(() => {
-      html.classList.remove('is-scrolling');
-    }, 150); // Wait 150ms after scrolling stops before re-enabling animations
-  }
+  });
   
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  // Add font display swap for better CLS
+  if ('fonts' in document) {
+    (document as any).fonts.ready.then(() => {
+      document.documentElement.classList.add('fonts-loaded');
+    });
+  }
 }
 
-/**
- * Optimize video playback based on visibility in the viewport
- * Only plays videos when they're visible and pauses them when scrolled out of view
- */
-export function setupIntersectionObserverForVideos() {
-  // Skip if IntersectionObserver is not supported
-  if (!('IntersectionObserver' in window)) return;
+// Configure Intersection Observer for improved lazy loading
+export function setupIntersectionObserver(): void {
+  if (!isBrowser || !('IntersectionObserver' in window)) return;
   
-  const videos = document.querySelectorAll('video');
-  if (videos.length === 0) return;
-  
-  const videoObserver = new IntersectionObserver((entries) => {
+  const lazyImageObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
-      const video = entry.target as HTMLVideoElement;
-      
-      // Don't interfere with videos that have controls (user-controlled)
-      if (video.hasAttribute('controls')) return;
-      
       if (entry.isIntersecting) {
-        // Video is visible in the viewport
-        if (video.paused && !video.getAttribute('data-user-paused')) {
-          // Only play if it wasn't manually paused by the user
-          video.play().catch(() => {
-            console.log('Autoplay prevented by browser policy');
-          });
+        const lazyImage = entry.target as HTMLImageElement;
+        
+        // Replace src with data-src
+        if (lazyImage.dataset.src) {
+          lazyImage.src = lazyImage.dataset.src;
         }
-      } else {
-        // Video is not visible in the viewport
-        if (!video.paused) {
-          video.pause();
-          // Mark as auto-paused so we can distinguish from user-paused
-          video.setAttribute('data-auto-paused', 'true');
+        
+        // Replace srcset with data-srcset
+        if (lazyImage.dataset.srcset) {
+          lazyImage.srcset = lazyImage.dataset.srcset;
         }
+        
+        lazyImage.classList.remove('lazy');
+        lazyImageObserver.unobserve(lazyImage);
       }
     });
   }, {
-    root: null, // viewport
-    rootMargin: '0px',
-    threshold: 0.1 // At least 10% of the video needs to be visible
+    rootMargin: '300px 0px', // Start loading when image is 300px away
+    threshold: 0
   });
   
-  // Observe all videos
-  videos.forEach(video => {
-    videoObserver.observe(video);
-    
-    // Track user-initiated pause events
-    video.addEventListener('pause', () => {
-      if (!document.hidden && !video.getAttribute('data-auto-paused')) {
-        // User manually paused the video
-        video.setAttribute('data-user-paused', 'true');
-      }
-    });
-    
-    // Clear user-paused flag when user plays the video
-    video.addEventListener('play', () => {
-      video.removeAttribute('data-user-paused');
-    });
+  // Observe all images with the 'lazy' class
+  const lazyImages = document.querySelectorAll('img.lazy');
+  lazyImages.forEach(image => {
+    lazyImageObserver.observe(image);
   });
 }
 
-/**
- * Optimizes images on a page by applying lazy loading and proper sizing
- */
-export function optimizePageImages() {
-  // Wait for DOM to be fully loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initImageOptimizations);
-  } else {
-    initImageOptimizations();
-  }
-  
-  function initImageOptimizations() {
-    // Find all images not already optimized
-    const images = document.querySelectorAll('img:not([data-optimized])');
-    
-    // Set up IntersectionObserver if supported
-    if ('IntersectionObserver' in window) {
-      const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target as HTMLImageElement;
-            
-            // For images without explicit loading attribute, add lazy loading
-            if (!img.hasAttribute('loading')) {
-              img.loading = 'lazy';
-            }
-            
-            // Set decoding to async for better performance
-            if (!img.hasAttribute('decoding')) {
-              img.decoding = 'async';
-            }
-            
-            // Mark as optimized
-            img.setAttribute('data-optimized', 'true');
-            
-            // Stop observing this image
-            imageObserver.unobserve(img);
-          }
-        });
-      }, {
-        rootMargin: '200px', // Start loading when within 200px of viewport
-      });
-      
-      // Start observing images
-      images.forEach(img => {
-        imageObserver.observe(img);
-      });
-    } else {
-      // Fallback for browsers without IntersectionObserver
-      images.forEach(img => {
-        const imgElement = img as HTMLImageElement;
-        if (!imgElement.hasAttribute('loading')) {
-          imgElement.loading = 'lazy';
-        }
-        if (!imgElement.hasAttribute('decoding')) {
-          imgElement.decoding = 'async';
-        }
-        imgElement.setAttribute('data-optimized', 'true');
-      });
-    }
+// This type definition is for gtag
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
   }
 }
 
-/**
- * Apply all performance optimizations
- */
-export function applyPerformanceOptimizations() {
-  // Wait for DOM to be fully loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initOptimizations);
-  } else {
-    initOptimizations();
-  }
+// Export a default function that applies all optimizations
+export default function applyAllOptimizations(): void {
+  if (!isBrowser) return;
   
-  function initOptimizations() {
-    setupVisibilityBasedOptimizations();
-    setupScrollOptimizations();
-    optimizePageImages();
-    
-    // Use a short delay to ensure all videos are initialized
-    setTimeout(() => {
-      setupIntersectionObserverForVideos();
-    }, 1000);
-  }
+  optimizePageImages();
+  preloadAllCriticalImages();
+  optimizeFonts();
+  setupIntersectionObserver();
+  monitorPerformance();
 }

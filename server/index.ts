@@ -1,12 +1,73 @@
+// Load environment variables from .env file
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const envPath = path.resolve(__dirname, "../.env");
+
+console.log("Loading environment variables from:", envPath);
+dotenv.config({ path: envPath });
+
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { initializeTables } from "./db";
 import compression from "compression";
+import helmet from "helmet";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import rateLimit from "express-rate-limit";
+import { Server } from "http";
 
 const app = express();
-app.use(express.json());
+
+// Security middleware
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "*.googleapis.com", "*.gstatic.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "*.googleapis.com"],
+      imgSrc: ["'self'", "data:", "*.googleapis.com", "*.gstatic.com", "*.google.com"],
+      connectSrc: ["'self'", "*.googleapis.com"],
+      fontSrc: ["'self'", "*.gstatic.com", "*.googleapis.com"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'self'"],
+    }
+  },
+  xssFilter: true,
+  noSniff: true,
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
+}));
+
+// CORS configuration
+app.use(cors({
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://triple-x-adventures.com', 'https://www.triple-x-adventures.com'] 
+    : 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
+// Rate limiting
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: 'Too many requests from this IP, please try again after 15 minutes'
+});
+
+// Apply rate limiting to API routes
+app.use('/api/', apiLimiter);
+
+// Body parsers
+app.use(express.json({ limit: '1mb' })); // Limit request size
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.SESSION_SECRET || 'default-secret-key'));
 
 // Enable GZIP compression for all responses
 app.use(compression({
@@ -44,6 +105,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Secure logging middleware - avoid logging sensitive data
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -51,7 +113,22 @@ app.use((req, res, next) => {
 
   const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {
-    capturedJsonResponse = bodyJson;
+    // Create a sanitized copy of the response for logging
+    let sanitizedResponse = { ...bodyJson };
+    
+    // Remove sensitive fields from logs
+    if (sanitizedResponse) {
+      // List of fields to redact from logs
+      const sensitiveFields = ['password', 'token', 'email', 'phone', 'firstName', 'lastName'];
+      
+      for (const field of sensitiveFields) {
+        if (sanitizedResponse[field]) {
+          sanitizedResponse[field] = '[REDACTED]';
+        }
+      }
+    }
+    
+    capturedJsonResponse = sanitizedResponse;
     return originalResJson.apply(res, [bodyJson, ...args]);
   };
 
@@ -59,7 +136,9 @@ app.use((req, res, next) => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
+      
+      // Only log response data in development environment
+      if (process.env.NODE_ENV === 'development' && capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
@@ -74,46 +153,54 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
+// Initialize database and routes
+async function initializeApp() {
   try {
-    // Initialize database and tables
     log("Initializing database connection and tables");
-    await initializeTables();
-    log("Database initialization complete");
+    
+    // Check if we should skip database initialization in development mode
+    const skipDB = process.env.NODE_ENV === 'development' && !process.env.DATABASE_URL;
+    
+    if (!skipDB) {
+      await initializeTables();
+      log("Database initialization complete");
+    } else {
+      log("Skipping database initialization in development mode");
+    }
+
+    // Register API routes
+    const server = await registerRoutes(app);
+
+    // Setup Vite development server or serve static files
+    if (process.env.NODE_ENV === 'production') {
+      serveStatic(app);
+    } else {
+      await setupVite(app, server);
+    }
+
+    const port = parseInt(process.env.PORT || '3000', 10);
+    server.listen(port, '127.0.0.1', () => {
+      log(`Server running at http://localhost:${port}`);
+    });
   } catch (error) {
-    log(`Error initializing database: ${error}`);
-    // Continue with application startup even if database initialization fails
-    // The storage implementation will fall back to memory storage
+    console.error('Failed to initialize application:', error);
+    process.exit(1);
   }
+}
 
-  const server = await registerRoutes(app);
-
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
-    res.status(status).json({ message });
-    throw err;
+// Global error handler
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error('Unhandled error:', err);
+  
+  // Don't expose error details in production
+  const message = process.env.NODE_ENV === 'production' 
+    ? 'An unexpected error occurred' 
+    : err.message;
+    
+  res.status(500).json({ 
+    success: false, 
+    message
   });
+});
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
-
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
-})();
+initializeApp();

@@ -1,180 +1,199 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/translations";
-import { Utensils, Wine, Award } from "lucide-react";
+import { Utensils, Wine, Award, ChefHat, Star, Clock } from "lucide-react";
+import { translations } from "@/translations";
 
-// Restaurant content by language
-const restaurantContentByLanguage = {
-  en: {
-    title: "TRIPLE X TASTE",
-    subtitle: "Enjoy authentic Arctic cuisine in our cozy live-cooking restaurant",
-    heading: "A CULINARY JOURNEY THROUGH LAPLAND",
-    description1: "End your evening at our own live-cooking restaurant, where delicious dishes are prepared for you in a unique atmosphere.",
-    description2: "We celebrate the flavors of Swedish Lapland with a menu that focuses on local, seasonal ingredients. From freshly caught Arctic char to wild berries and game meats, our dishes tell the story of our region's rich culinary heritage.",
-    specialtiesHeading: "OUR SPECIALTIES:",
-    specialties: [
-      "Traditional Swedish cuisine with a modern twist",
-      "Experience Culinary Magic – BBQ & Open-Fire Dining",
-      "Local Ingredients, Legendary Moments – Welcome to JayJays"
-    ],
-    reserveButton: "Reserve a table",
-    imageAlt1: "Rustic restaurant interior with fireplace",
-    imageAlt2: "Traditional Swedish cuisine",
-    imageAlt3: "Candlelight dinner"
-  },
-  de: {
-    title: "TRIPLE X TASTE",
-    subtitle: "Genießen Sie authentische arktische Küche in unserem gemütlichen Live-Cooking-Restaurant",
-    heading: "EINE KULINARISCHE REISE DURCH LAPPLAND",
-    description1: "Lass den Abend in unserem eigenen Live-Cooking-Restaurant ausklingen, wo köstliche Gerichte in einer einzigartigen Atmosphäre für dich zubereitet werden.",
-    description2: "Wir feiern die Aromen Schwedisch-Lapplands mit einem Menü, das sich auf lokale, saisonale Zutaten konzentriert. Von frisch gefangenem arktischen Saibling bis hin zu Wildbeeren und Wildfleisch erzählen unsere Gerichte die Geschichte des reichen kulinarischen Erbes unserer Region.",
-    specialtiesHeading: "UNSERE SPEZIALITÄTEN:",
-    specialties: [
-      "Traditionelle schwedische Küche mit modernem Twist",
-      "Erleben Sie kulinarische Magie – BBQ & Kochen am offenen Feuer",
-      "Lokale Zutaten, legendäre Momente – Willkommen bei JayJays"
-    ],
-    reserveButton: "Tisch reservieren",
-    imageAlt1: "Rustikales Restaurant-Interieur mit Kamin",
-    imageAlt2: "Traditionelle schwedische Küche",
-    imageAlt3: "Abendessen bei Kerzenschein"
-  },
-  sv: {
-    title: "TRIPLE X TASTE",
-    subtitle: "Njut av autentisk arktisk mat i vår mysiga live-cooking restaurang",
-    heading: "EN KULINARISK RESA GENOM LAPPLAND",
-    description1: "Avsluta kvällen på vår egen live-cooking restaurang, där läckra rätter tillagas för dig i en unik atmosfär.",
-    description2: "Vi firar smakerna från Svenska Lappland med en meny som fokuserar på lokala, säsongsbetonade ingredienser. Från nyligen fångad röding till vilda bär och viltkött, berättar våra rätter historien om vår regions rika kulinariska arv.",
-    specialtiesHeading: "VÅRA SPECIALITETER:",
-    specialties: [
-      "Traditionell svensk mat med modern twist",
-      "Upplev kulinarisk magi – BBQ & matlagning över öppen eld",
-      "Lokala ingredienser, legendariska stunder – Välkommen till JayJays"
-    ],
-    reserveButton: "Reservera ett bord",
-    imageAlt1: "Rustik restauranginteriör med öppen spis",
-    imageAlt2: "Traditionell svensk mat",
-    imageAlt3: "Middag i levande ljus"
-  }
-};
+// Define types for Menu Item and Specialty if needed
+interface MenuItem {
+  name: string;
+  description: string;
+  price: string;
+}
+
+interface Specialty {
+  text: string; // Assuming specialties are just strings now
+  // Add icon property if icons are part of translations
+}
 
 export function RestaurantSection() {
   const { language } = useLanguage();
-  const t = useTranslation(language);
   
-  // Get content based on the current language
-  const content = restaurantContentByLanguage[language];
+  // Select the correct translation object based on the current language
+  const currentTranslations = translations[language];
+  const content = (currentTranslations as any)?.restaurantSection;
 
-  // Specialties icons
+  // Provide fallbacks for content fields
+  const tagline = content?.tagline ?? 'Arctic Cuisine';
+  const title = content?.title ?? "JAYJAY'S RESTAURANT";
+  const subtitle = content?.subtitle ?? "Enjoy authentic Arctic cuisine...";
+  const heading = content?.heading ?? "A CULINARY JOURNEY...";
+  const description1 = content?.description1 ?? "";
+  const description2 = content?.description2 ?? "";
+  const specialtiesHeading = content?.specialtiesHeading ?? "OUR SPECIALTIES:";
+  const specialties: string[] = content?.specialties || []; // Expecting array of strings
+  const reserveButton = content?.reserveButton ?? "Reserve a table";
+  const imageAlt1 = content?.imageAlt1 ?? "Restaurant interior";
+  const imageAlt2 = content?.imageAlt2 ?? "Swedish cuisine";
+  const imageAlt3 = content?.imageAlt3 ?? "Candlelight dinner";
+  const hours = content?.hours ?? "Opening Hours";
+  const openingTimes: string[] = content?.openingTimes || [];
+  const menuHighlights = content?.menuHighlights ?? "Menu Highlights";
+  const menuItems: MenuItem[] = content?.menuItems || [];
+  const fullMenuDescription = content?.fullMenuDescription ?? "";
+
+  // Specialties icons (keep hardcoded or move to translations if needed)
   const specialtyIcons = [
-    <Utensils size={18} />,
+    <ChefHat size={18} />,
     <Award size={18} />,
     <Wine size={18} />
   ];
 
   return (
     <section id="restaurant" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Using the global background - no need for section-specific background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-        {/* Simple glow effect to complement global background */}
-        <div className="aurora-glow absolute inset-0 opacity-30"></div>
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-dark-bg/90 via-dark-bg to-dark-bg/90 opacity-95"></div>
+        <div className="absolute inset-0 bg-[url('/images/pattern-dots.png')] opacity-10"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-accent-color/5 to-transparent"></div>
       </div>
       
-      {/* Subtle texture overlay - optimized with transform-gpu */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMTIxMjEiIGZpbGwtb3BhY2l0eT0iMC4wNCIgZmlsbC1ydWxlPSJub256ZXJvIj48cGF0aCBkPSJNMjkgNTguNWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1em0wIDFhNi41IDYuNSAwIDEgMCAwIDEzIDYuNSA2LjUgMCAwIDAgMC0xM3ptMS0uMDg3YTcuNSA3LjUgMCAxIDEgMCAxNSA3LjUgNy41IDAgMCAxIDAtMTV6TTIwIDU5LjVhNy41IDcuNSAwIDEgMSAwIDE1IDcuNSA3LjUgMCAwIDEgMC0xNXptMCAxYTYuNSA2LjUgMCAxIDAgMCAxMyA2LjUgNi41IDAgMCAwIDAtMTN6bTAtMWE3LjUgNy41IDAgMSAxIDAgMTUgNy41IDcuNSAwIDAgMSAwLTE1eiIvPjwvZz48L2c+PC9zdmc+')]  opacity-60 z-0 pointer-events-none transform-gpu"></div>
-      
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-20">
-          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2 text-shadow-sm">
-            {language === 'de' ? 'Arktische Kulinarik' : language === 'sv' ? 'Arktisk Matlagning' : 'Arctic Cuisine'}
+        <div className="text-center mb-16">
+          <span className="inline-block bg-accent-color/20 text-accent-color text-sm font-medium tracking-wider uppercase mb-2 py-1 px-3 rounded-full">
+            {tagline}
           </span>
-          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white text-shadow-lg">
-            {content.title}
+          <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
+            {title}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80 text-shadow-sm">
-            {content.subtitle}
+          <p className="text-lg max-w-3xl mx-auto text-white/80">
+            {subtitle}
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Left column - Images with glass effect borders - optimized for performance */}
-          <div className="group relative transform-gpu h-full flex flex-col">
-            {/* Decorative background element - optimized with reduced blur and transform-gpu */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-7xl mx-auto">
+          {/* Left column - Images with glass effect borders */}
+          <div className="lg:col-span-5 group relative transform-gpu h-full flex flex-col">
+            {/* Decorative background element */}
             <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/20 to-transparent rounded-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
             
             <div className="relative z-10 transform-gpu h-full glass-card border border-white/10 shadow-lg rounded-xl overflow-hidden flex flex-col">
               <div className="overflow-hidden flex-grow-0">
                 <img 
                   src="/images/restaurant/Restaurant 1_result.webp" 
-                  alt={content.imageAlt1} 
-                  className="w-full h-[380px] object-cover object-center transition-transform duration-500 group-hover:scale-105 transform-gpu"
+                  alt={imageAlt1} 
+                  className="w-full h-[280px] object-cover object-center transition-transform duration-500 group-hover:scale-105 transform-gpu"
                   loading="eager"
                   width="600"
                   height="400"
                 />
               </div>
               <div className="flex gap-4 p-6">
-                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-44">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-36">
                   <img 
                     src="/images/restaurant/Restaurant 2_result.webp" 
-                    alt={content.imageAlt2} 
+                    alt={imageAlt2} 
                     className="w-full h-full object-cover object-center rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
                     width="300"
                     height="200"
                   />
                 </div>
-                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-44">
+                <div className="overflow-hidden rounded-xl glass-card border border-white/10 shadow-lg transform-gpu flex-1 h-36">
                   <img 
                     src="/images/restaurant/Restaurant 3_result.webp" 
-                    alt={content.imageAlt3} 
+                    alt={imageAlt3} 
                     className="w-full h-full object-cover object-center rounded-lg transition-transform duration-500 hover:scale-105 transform-gpu"
                     loading="lazy"
                     width="300"
                     height="200"
                   />
+                </div>
+              </div>
+              
+              {/* Hours section */}
+              <div className="p-6 pt-2">
+                <div className="bg-dark-bg/50 border border-white/5 rounded-lg p-4">
+                  <h4 className="flex items-center text-lg font-medium mb-3 text-white">
+                    <Clock size={18} className="mr-2 text-accent-color" />
+                    {hours}
+                  </h4>
+                  <ul className="space-y-2">
+                    {openingTimes.map((time, index) => (
+                      <li key={index} className="text-sm text-white/70">{time}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
           </div>
           
-          {/* Right column - Content with glass card effect - optimized for performance */}
-          <div className="relative group transform-gpu h-full">
-            {/* Glass card effect - optimized with reduced blur and transform-gpu */}
-            <div className="absolute -inset-1 bg-gradient-to-l from-accent-color/10 to-transparent rounded-xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 transform-gpu"></div>
-            
-            <div className="glass-card relative z-10 p-8 rounded-xl shadow-lg transform-gpu h-full flex flex-col">
-              <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors duration-300 text-shadow-sm">
-                {content.heading}
-              </h3>
-              <p className="mb-6 text-white text-opacity-80 text-shadow-sm">
-                {content.description1}
-              </p>
-              <p className="mb-8 text-white text-opacity-80 text-shadow-sm">
-                {content.description2}
-              </p>
-              
-              <div className="mb-8 flex-grow">
-                <h4 className="font-medium text-lg mb-5 text-white text-shadow-sm">
-                  {content.specialtiesHeading}
-                </h4>
-                <ul className="space-y-4">
-                  {content.specialties.map((specialty, index) => (
-                    <li key={index} className="flex items-start transform-gpu">
-                      <div className="w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center mr-3 text-accent-color transform-gpu">
-                        {specialtyIcons[index]}
-                      </div>
-                      <span className="text-white text-opacity-80 text-shadow-sm">{specialty}</span>
-                    </li>
-                  ))}
-                </ul>
+          {/* Right column with text content and menu highlights */}
+          <div className="lg:col-span-7 flex flex-col">
+            {/* Main restaurant description */}
+            <div className="relative group transform-gpu mb-8">
+              <div className="glass-card relative p-8 rounded-xl shadow-lg transform-gpu flex flex-col bg-card-bg border border-white/10 h-full">
+                <h3 className="font-bold text-2xl mb-6 text-white group-hover:text-accent-color transition-colors duration-300">
+                  {heading}
+                </h3>
+                <p className="mb-6 text-white/80">
+                  {description1}
+                </p>
+                <p className="mb-8 text-white/80">
+                  {description2}
+                </p>
+                
+                <div className="mb-8">
+                  <h4 className="font-medium text-lg mb-5 text-white">
+                    {specialtiesHeading}
+                  </h4>
+                  <ul className="space-y-4">
+                    {specialties.map((specialty, index) => (
+                      <li key={index} className="flex items-start transform-gpu">
+                        <div className="w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center mr-3 text-accent-color transform-gpu">
+                          {specialtyIcons[index]}
+                        </div>
+                        <span className="text-white/80">{specialty}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <a 
+                  href="#contact" 
+                  className="mt-auto self-start px-6 py-3 bg-accent-color hover:bg-accent-color/90 text-white font-medium rounded-lg transition-all duration-300 flex items-center shadow-glow-sm"
+                >
+                  <Utensils size={18} className="mr-2" />
+                  <span>{reserveButton}</span>
+                </a>
               </div>
-              
-              <a 
-                href="#contact" 
-                className="glass-button text-center inline-flex items-center justify-center transition-colors duration-300 mt-auto"
-              >
-                <span className="text-shadow-sm">{content.reserveButton}</span>
-              </a>
+            </div>
+            
+            {/* Menu highlights card */}
+            <div className="relative group transform-gpu">
+              <div className="glass-card relative p-8 rounded-xl shadow-lg transform-gpu flex flex-col bg-card-bg border border-white/10 h-full">
+                <h3 className="font-bold text-2xl mb-6 text-white flex items-center">
+                  <Star size={20} className="mr-3 text-accent-color" />
+                  {menuHighlights}
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {menuItems.map((item, index) => (
+                    <div 
+                      key={index} 
+                      className="p-4 border border-white/10 rounded-lg hover:border-accent-color/30 transition-colors bg-dark-bg/30 backdrop-blur-sm"
+                    >
+                      <div className="flex justify-between items-center mb-2">
+                        <h4 className="font-medium text-white">{item.name}</h4>
+                        <span className="font-medium text-accent-color">{item.price}</span>
+                      </div>
+                      <p className="text-sm text-white/70">{item.description}</p>
+                    </div>
+                  ))}
+                  
+                  <div className="md:col-span-2 p-4 border border-white/10 rounded-lg bg-dark-bg/30 backdrop-blur-sm text-center">
+                    <p className="text-white/70 text-sm italic">{fullMenuDescription}</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

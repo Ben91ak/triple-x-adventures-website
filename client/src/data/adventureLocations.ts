@@ -75,21 +75,11 @@ export const adventureLocations: AdventureLocation[] = [
   }
 ];
 
-// This can be translated later if needed
-export const typeLabels = {
-  accommodation: {
-    en: "Accommodation",
-    de: "Unterkunft",
-    sv: "Boende"
-  },
-  experience: {
-    en: "Experience",
-    de: "Erlebnis",
-    sv: "Upplevelse"
-  },
-  landmark: {
-    en: "Point of Interest",
-    de: "Sehenswürdigkeit",
-    sv: "Intressepunkt"
-  }
+// Remove translations from here, keep only the keys
+// The actual text will be retrieved using t('adventureLocations.types.<key>')
+// where <key> is accommodation, experience, or landmark
+export const typeLabels: { [key in AdventureLocation['type']]: string } = {
+  accommodation: "accommodation",
+  experience: "experience",
+  landmark: "landmark"
 };

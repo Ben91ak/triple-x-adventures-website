@@ -8,6 +8,8 @@ export const en = {
     restaurant: "Restaurant",
     gallery: "Gallery",
     contact: "Contact",
+    experiences: "Experiences",
+    bookNow: "Book Now"
   },
   
   // Hero Section
@@ -15,6 +17,15 @@ export const en = {
     title: "DISCOVER THE REAL ARCTIC",
     subtitle: "Unforgettable Adventures in Swedish Lapland",
     cta: "Explore Packages",
+  },
+  
+  // Hero Section - Adding paragraphs
+  heroSection: {
+    welcome: "WELCOME TO THE WORLD OF",
+    adventure: "Your adventure in <strong>Arvidsjaur Swedish Lapland</strong>",
+    paragraph1: "Discover unforgettable adventures near the Arctic Circle. Experience breathtaking <strong>outdoor adventures</strong> and exceptional cuisine in one of the most beautiful regions in the world.",
+    paragraph2: "Look forward to a variety of <strong>action-packed and adrenaline-fueled activities</strong> that will make your heart beat faster.",
+    paragraph3: "Relax after an exciting day in our spa and enjoy the tranquility of nature. Our <strong>outdoor hot tubs and saunas</strong> offer the perfect retreat. Finally, watch the beautiful <strong>Northern Lights</strong> dance in the sky."
   },
   
   // Experiences/Packages Section
@@ -35,6 +46,10 @@ export const en = {
         id: 1,
         title: "Snowmobile Adventure",
         description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. Choose from 2hr, 4hr & 6hr tours for your perfect adventure.",
+        price: 299,
+        duration: "2-6 Hours",
+        intensityLevel: "Thrilling",
+        keyHighlights: ["Backcountry Exploration", "Modern Ski-doo Fleet", "Scenic Routes"],
         image: "/images/Snowmobile/Snowmobile 1_result.webp",
         gallery: [
           "/images/Snowmobile/Snowmobile 1_result.webp",
@@ -42,95 +57,54 @@ export const en = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
-        fullDescription: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.\n\n━━━ PICK YOUR ADVENTURE ━━━\n\n🔸 2-HOUR BACKCOUNTRY TOUR\nGreat if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 4-HOUR BACKCOUNTRY TOUR\nExplore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.\n• One-seater snowmobile\n• Two-seater available on request\n\n🔸 6-HOUR BACKCOUNTRY ADVENTURE\nThe ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.\n• One-seater snowmobile\n• Two-seater available on request\n\n━━━ IMPORTANT INFORMATION ━━━\n\n• Children can join as passengers, making it perfect for family fun\n• Minimum age for drivers: 18 years with valid B driver's license\n• Two-seater snowmobiles available for families or couples\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMore than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!",
+        detailedInfo: {
+          introduction: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.",
+          adventureOptionsTitle: "PICK YOUR ADVENTURE",
+          tours: [
+            {
+              title: "2-HOUR BACKCOUNTRY TOUR",
+              description: "Great if you're looking for a short, exciting trip into the wild. Includes tea and a tasty snack.",
+              details: ["One-seater snowmobile", "Two-seater available on request"]
+            },
+            {
+              title: "4-HOUR BACKCOUNTRY TOUR",
+              description: "Explore deeper into nature, with extra time to relax and enjoy the views. Take a break for tea and a sweet snack in beautiful surroundings.",
+              details: ["One-seater snowmobile", "Two-seater available on request"]
+            },
+            {
+              title: "6-HOUR BACKCOUNTRY ADVENTURE",
+              description: "The ultimate tour for adventure lovers! Spend the day exploring different terrains and breathtaking sights. This tour includes tea, a sweet snack, and a tasty outdoor lunch.",
+              details: ["One-seater snowmobile", "Two-seater available on request"]
+            }
+          ],
+          importantInfoTitle: "IMPORTANT INFORMATION",
+          importantInfo: [
+            "Children can join as passengers, making it perfect for family fun",
+            "Minimum age for drivers: 18 years with valid B driver's license",
+            "Two-seater snowmobiles available for families or couples"
+          ],
+          closingRemark: "More than just a ride—it's about unforgettable moments and exciting adventures in the beautiful Lapland wilderness!"
+        },
         tag: {
           text: "Bestseller",
           type: "bestseller"
-        }
-      },
-
-      {
-        id: 3,
-        title: "JayJay's Restaurant",
-        description: "Fine Lapland cuisine in Sameland, Arvidsjaur. Experience local flavors from the Arctic prepared by expert chefs.",
-        image: "/images/JayJays-Restaurant.jpg",
-        gallery: [
-          "/images/JayJays-Restaurant.jpg"
-        ],
-        fullDescription: "JayJay's Restaurant offers an unforgettable culinary experience in the heart of Swedish Lapland. Located in Sameland, the home base of Triple X Adventures, you can enjoy gourmet meals cooked of open fire. Our talented chefs create exquisite dishes using fresh, locally-sourced ingredients including Arctic char, reindeer, wild berries, and forest mushrooms. The intimate atmosphere combines rustic charm with elegant dining, making it perfect for both casual meals and special occasions. Our menu changes seasonally to showcase the best flavors of Lapland, and each dish tells a story of the region's rich culinary heritage. Complete your dining experience with our selection of fine wines and craft cocktails featuring local spirits."
+        },
+        features: [
+          "Guided Tour",
+          "High-Performance Snowmobiles",
+          "Warm Clothing & Gear Provided",
+          "Fika (Coffee & Snack) Included",
+          "Multiple Duration Options"
+        ]
       },
       {
-        id: 4,
-        title: "Ice Karting Experience",
-        description: "Race in our Ice karts on a frozen lake circuit. Feel the rush of driving on ice in this thrilling winter activity.",
-        image: "/images/Ice Kart.jpg",
-        gallery: [
-          "/images/Ice Kart.jpg"
-        ],
-        fullDescription: "Experience the unique thrill of racing on ice with our specialized Ice Karting Adventure.Feel the excitement as you drift around corners and master the art of controlling a vehicle in challenging winter conditions. This experience is suitable for all skill levels, from complete beginners to experienced drivers looking to test their skills. All necessary equipment is provided, including helmets, FXR Overalls, and gloves. Compete against friends and family for the fastest lap time in this unforgettable Arctic motorsport experience."
-      },
-      {
-        id: 5,
-        title: "Visit the Reindeers",
-        description: "Meet Lapland's iconic reindeer and learn about Sami traditions. Feed the animals and learn about the true locals in Swedish Lapland.",
-        image: "/images/Reindeers.jpg",
-        gallery: [
-          "/images/Reindeers.jpg"
-        ],
-        fullDescription: "Step into the world of the Sami people and their most cherished animal - the reindeer. Visit our reindeers and have the chance to snap a true memory with these magnificent creatures. Get up close with the reindeer, feed them, and learn about their seasonal migration and adaptation to the harsh Arctic climate."
-      },
-      {
-        id: 6,
-        title: "Helicopter Scenic Flight",
-        description: "Soar above pristine Arctic wilderness for stunning aerial views. Expert pilots guide you over mountains, forests, and frozen lakes.",
-        image: "/images/Helikopter.jpg",
-        gallery: [
-          "/images/Helikopter.jpg"
-        ],
-        fullDescription: "Take to the skies for an unforgettable perspective of Swedish Lapland's breathtaking landscapes on our scenic helicopter flight. From your privileged vantage point, you'll witness the vastness of the Arctic wilderness stretching to the horizon - snow-covered forests, frozen lakes, mountain ranges, and perhaps even wildlife. Your pilot will provide informative commentary through your headset, pointing out notable landmarks and sharing interesting facts about the region. This exclusive experience offers unparalleled photo opportunities and a sense of the true scale and beauty of Lapland that cannot be appreciated from the ground. Each flight path is carefully planned to showcase the most spectacular scenery while ensuring minimal environmental impact.",
-        tag: {
-          text: "New",
-          type: "new"
-        }
-      },
-      {
-        id: 7,
-        title: "Ice Drifting Experience",
-        description: "Learn performance driving on ice with pro instructors. Master controlled drifts in specially equipped cars on our frozen lake circuit.",
-        image: "/images/Drifting.jpg",
-        gallery: [
-          "/images/Drifting.jpg"
-        ],
-        fullDescription: "Feel the exhilaration of sliding sideways on ice in our Ice Drifting Experience. Under the guidance of professional driving instructors, you'll learn the techniques of controlling a vehicle in extreme winter conditions. Using specially prepared performance cars equipped with studded tires, you'll practice drifting techniques on our purpose-built ice course. Start with basic exercises and progress to more complex maneuvers as your confidence grows. This experience is perfect for driving enthusiasts looking to improve their winter driving skills in a safe and controlled environment. All drivers receive thorough instruction and have the opportunity for multiple driving sessions to perfect their technique."
-      },
-      {
-        id: 8,
-        title: "Ice Fishing Adventure",
-        description: "Experience the facination of ice fishing on a secluded frozen lake. Learn traditional techniques and enjoy your fresh catch cooked over an open fire.",
-        image: "/images/Ice-Fishing.jpg",
-        gallery: [
-          "/images/Ice-Fishing.jpg"
-        ],
-        fullDescription: "Experience the peaceful tradition of ice fishing in the heart of Lapland's winter wonderland. Your adventure begins with a snowmobile or to a secluded frozen lake surrounded by pristine forest scenery. Our experienced guides will teach you traditional ice fishing techniques and help you drill holes in the thick ice. As you wait for Arctic fish species like perch and Arctic char to bite, warm yourself by a crackling fire and listen to tales of local fishing traditions. This mindful experience connects you with nature while enjoying the serene beauty of the Arctic wilderness. The highlight of the tour is enjoying your fresh catch, prepared and cooked by your guide over an open fire - the ultimate wild food experience."
-      },
-      {
-        id: 9,
-        title: "Side-by-Side Buggy Adventure",
-        description: "Drive powerful off-road buggies on a frozen lake.",
-        image: "/images/Side-By-Side-Buggy-Drifting.jpg",
-        gallery: [
-          "/images/Side-By-Side-Buggy-Drifting.jpg"
-        ],
-        fullDescription: "Experience the ultimate Arctic off-road adventure in our powerful side-by-side buggies. These specialized all-terrain vehicles are designed to conquer the challenging winter landscape with ease, allowing you to access remote areas and enjoy the pristine wilderness. After a comprehensive safety briefing, you'll take the wheel of your own buggy and follow our expert guides along specially designed trails through forests, across frozen lakes, and over snowy hills. Feel the exhilaration as you drift around corners and power through snow drifts in these agile, responsive vehicles. The tour includes stops at scenic viewpoints and a wilderness lunch break. This adventure offers a perfect blend of excitement and natural beauty, suitable for drivers of all skill levels.",
-        tag: {
-          text: "New",
-          type: "new"
-        }
-      },
-      {
-        id: 10,
-        title: "Husky Tours Adventure",
-        description: "Experience the thrill of dog sledding through pristine Arctic landscapes with our friendly husky teams. Feel the connection to traditional northern transportation.",
+        id: 2,
+        title: "Husky Sledding Expedition",
+        description: "Lead your own team of eager huskies through silent, snow-covered forests. An authentic and unforgettable Arctic experience.",
+        price: 450,
+        duration: "4 Hours",
+        intensityLevel: "Moderate",
+        keyHighlights: ["Drive Your Own Sled", "Friendly Husky Team", "Forest Trails"],
         image: "/images/Huskys/Husky 1_result.webp",
         gallery: [
           "/images/Huskys/Husky 1_result.webp",
@@ -138,11 +112,121 @@ export const en = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
-        fullDescription: "Embark on an unforgettable journey through the snow-covered landscapes of Swedish Lapland with our amazing husky teams. This traditional Arctic experience combines adventure with the unique bond between humans and dogs that has been essential for northern transportation for centuries.\n\nLed by experienced mushers, you'll learn how to handle your own team of energetic Siberian and Alaskan huskies. Feel the excitement as the dogs eagerly anticipate the run, then experience the peaceful glide across pristine snow trails, with only the sound of paws and runners breaking the Arctic silence.\n\nOur Husky Tours offer various options from short 1-hour experiences perfect for beginners to half-day adventures that allow you to venture deeper into the wilderness. All tours include instruction, proper winter gear, and plenty of time to interact with and photograph these incredible working dogs.\n\nThe tour concludes with hot drinks and traditional Swedish fika by an open fire, where your guide will share stories of life with these remarkable animals and the role of dog sledding in northern culture.",
+        fullDescription: "Experience the pure joy and power of husky sledding. After a brief introduction to your team and the sled, you'll embark on a journey through magical winter landscapes. The silence is broken only by the panting of the dogs and the runners gliding over the snow. This tour offers a deep connection with nature and these incredible animals. A warming break with hot drinks and snacks is included halfway."
+      },
+      {
+        id: 3,
+        title: "Snowshoe Hike and Torchwalk",
+        description: "Experience the magic of the Arctic forest on snowshoes, followed by a mesmerizing evening torchlight walk under the stars.",
+        price: 149,
+        duration: "3 Hours",
+        intensityLevel: "Moderate",
+        keyHighlights: ["Guided Snowshoe Adventure", "Evening Torchlight Walk", "Warm Drinks & Snacks"],
+        image: "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+        gallery: [
+          "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch2.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch4.webp"
+        ],
+        fullDescription: "Discover the serene beauty of the Arctic forest on our guided snowshoe adventure. As daylight fades, we'll transition to a magical torchlight walk under the stars. Our expert guides will lead you through pristine snow-covered landscapes, sharing stories of local culture and wildlife. No prior experience needed - just a sense of adventure! Warm drinks and traditional snacks will be provided to keep your energy up throughout this unforgettable winter experience.",
         tag: {
           text: "New",
-          type: "new"
+          type: "featured"
         }
+      },
+      {
+        id: 4,
+        title: "Ice Fishing Adventure",
+        description: "Drill through the ice on a frozen lake and try your luck catching Arctic char or perch. A peaceful and traditional Lapland activity.",
+        price: 149,
+        duration: "3 Hours",
+        intensityLevel: "Relaxed",
+        keyHighlights: ["Traditional Arctic Activity", "Fishing Equipment Provided", "Hot Drinks Included"],
+        image: "/images/Ice-Fishing.jpg",
+        gallery: [
+          "/images/Ice Fishing/Icefish 1_result.webp",
+          "/images/Ice Fishing/Icefish 2_result.webp",
+          "/images/Ice Fishing/Shoot 3_result.webp",
+          "/images/Ice Fishing/Shoot 4_result.webp"
+        ],
+        fullDescription: "Experience the tranquility of ice fishing on a secluded frozen lake. We'll provide all the necessary equipment, including augers, rods, and bait. Your guide will teach you the techniques and share stories about life in the Arctic. Enjoy the crisp winter air and the silence of the wilderness. Warm drinks are provided to keep you comfortable."
+      },
+      {
+        id: 5,
+        title: "Visit a Reindeer",
+        description: "Meet these gentle Arctic animals up close, take photos, and feed them. If you're lucky, you might even get to pet them!",
+        price: 89,
+        duration: "1 Hour",
+        intensityLevel: "Relaxed",
+        keyHighlights: ["Reindeer Feeding", "Photo Opportunities", "Hot Drinks"],
+        image: "/images/Reindeers.jpg",
+        gallery: [
+          "/images/Reindeers/Reindeers 1_result.webp",
+          "/images/Reindeers/Reindeers 2_result.webp",
+          "/images/Reindeers/Reindeers 3_result.webp",
+          "/images/Reindeers/Reindeers 5_result.webp"
+        ],
+        fullDescription: "Get up close with these beautiful Arctic animals during this short but memorable experience. You'll have the chance to feed the reindeer, take plenty of photos, and if you're very lucky, you might even get to pet them. Our guide will share interesting facts about reindeer and their importance in the Arctic region. Hot drinks are provided to keep you warm during your visit. This activity is perfect for families and animal lovers of all ages.",
+        tag: {
+          text: "Family Friendly",
+          type: "featured"
+        }
+      },
+      {
+        id: 6,
+        title: "Helicopter Sightseeing Tour",
+        description: "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter.",
+        price: 599, // Example price, adjust as needed
+        duration: "30 Minutes Flight",
+        intensityLevel: "Thrilling",
+        keyHighlights: ["Panoramic Arctic Views", "Unique Perspective", "Experienced Pilot"],
+        image: "/images/Helikopter.jpg",
+        gallery: [
+          "/images/Helicopter/Helicopter 1_result.webp",
+          "/images/Helicopter/Helicopter 2_result.webp",
+          "/images/Helicopter/Helicopter 3_result.webp",
+          "/images/Helicopter/Helicopter 4_result.webp"
+        ],
+        fullDescription: "Soar above the stunning landscapes of Swedish Lapland on an unforgettable helicopter tour. Witness the scale of the wilderness, spot wildlife from above, and gain a unique perspective on the frozen world below. Our experienced pilots provide commentary on the points of interest. This is a truly spectacular way to appreciate the beauty of the Arctic."
+      },
+      {
+        id: 7,
+        title: "Ice Drifting Experience",
+        description: "Learn performance driving on ice with pro instructors. Master controlled drifts in specially equipped cars on our frozen lake circuit.",
+        price: 349,
+        duration: "Half Day",
+        intensityLevel: "Extreme",
+        keyHighlights: ["Performance Driving", "Pro Instructors", "Frozen Lake Track"],
+        image: "/images/Drifting.jpg",
+        gallery: [
+          "/images/Drifting.jpg",
+          "/images/Ice Drift/Cars 1_result.webp",
+          "/images/Ice Drift/Cars 2_result.webp",
+          "/images/Ice Drift/Cars 3_result.webp"
+        ],
+        fullDescription: "Feel the exhilaration of sliding sideways on ice in our Ice Drifting Experience. Under the guidance of professional driving instructors, you'll learn the techniques of controlling a vehicle in extreme winter conditions. Using specially prepared performance cars equipped with studded tires, you'll practice drifting techniques on our purpose-built ice course. Start with basic exercises and progress to more complex maneuvers as your confidence grows. This experience is perfect for driving enthusiasts looking to improve their winter driving skills in a safe and controlled environment. All drivers receive thorough instruction and have the opportunity for multiple driving sessions to perfect their technique.",
+        tag: {
+          text: "Featured",
+          type: "featured"
+        }
+      },
+      {
+        id: 8,
+        title: "Side-By-Side Buggy Adventure",
+        description: "Navigate snowy trails and frozen terrain in a powerful Side-By-Side (SBS) buggy. Thrills and fun for pairs or solo drivers.",
+        price: 249,
+        duration: "2 Hours",
+        intensityLevel: "Thrilling",
+        keyHighlights: ["Off-Road Buggy Fun", "Snowy Trail Navigation", "Heated Cabin Option"],
+        image: "/images/Side-By-Side-Buggy-Drifting.jpg",
+        gallery: [
+          "/images/Side by Side/SBS 1_result.webp",
+          "/images/Side by Side/SBS 2_result.webp",
+          "/images/Side by Side/SBS 3_result.webp",
+          "/images/Side by Side/SBS 4_result.webp"
+        ],
+        fullDescription: "Embark on an exciting off-road adventure in our Side-By-Side buggies. These versatile vehicles are perfect for navigating the challenging winter terrain. Follow your guide through forests and across frozen grounds, enjoying the power and agility of the buggy. Suitable for drivers and passengers looking for an adrenaline-fueled exploration."
       }
     ]
   },
@@ -165,10 +249,29 @@ export const en = {
   
   // About Section
   about: {
-    title: "OUR STORY",
-    subtitle: "Passion for Adventure",
-    description: "Founded by locals with a deep love for the Arctic, Triple X Adventures brings you authentic experiences in the heart of Swedish Lapland.",
-    team: "Meet Our Team",
+    title: "WHY WE LIVE FOR THIS",
+    subtitle: "Our story, our team, and our commitment to authentic Arctic adventures",
+    storyTitle: "OUR STORY",
+    story: {
+      paragraph1: "Triple X Adventures was born from a simple passion: sharing the raw beauty and adventure of Swedish Lapland with those who seek authentic experiences. Founded by Janina Möller in 2017 with just a few snowmobiles and a dream to show our guests the magic of Swedish Lapland.",
+      paragraph2: "Today, we've grown into a premium adventure company, but our heart remains the same. We still operate with small groups, still work with local partners, and still believe that the Arctic isn't just a destination—it's an experience that changes you.",
+      paragraph3: "Unlike mass tourism operations, we've chosen to stay true to our roots: personal, exclusive, and deeply connected to the land we call home."
+    },
+    valuesTitle: "OUR VALUES",
+    values: [
+      { title: "Authenticity", description: "We showcase the real Arctic, without filters or pretense. What you experience with us is genuine Lapland.", icon: "mountain" },
+      { title: "Sustainability", description: "We tread lightly on the land we love, employing sustainable practices that preserve the Arctic for future generations.", icon: "leaf" },
+      { title: "Passion", description: "Our guides aren't just employees—they're enthusiasts who love sharing their knowledge and excitement for the Arctic.", icon: "heart" }
+    ],
+    teamTitle: "MEET OUR TEAM",
+    teamImageAlt: "Team members in Arctic gear",
+    teamMembers: [
+      { id: 1, name: "Janina JayJay Möller", role: "Founder & CEO", bio: "Founded Triple X Adventures with a passion for authentic Arctic experiences.", image: "/images/Team/jayjay.jpg" },
+      { id: 2, name: "Benni Fichtner", role: "Project Lead", bio: "Manages our projects with precision and creativity.", image: "/images/Team/Benni.jpg" },
+      { id: 3, name: "Jesper Axelsson", role: "Head Guide", bio: "Expert guide with years of experience in the Arctic wilderness.", image: "/images/Team/Jeppe.jpg" },
+      { id: 4, name: "Henni Bruhn", role: "Experience Coordinator", bio: "Creates unforgettable customer journeys and adventure itineraries.", image: "/images/Team/Henni.jpg" },
+      { id: 5, name: "Fanny Johannson", role: "Project Manager", bio: "Ensures all our adventures run smoothly from start to finish.", image: "/images/Team/Fanny.jpg" }
+    ]
   },
   
   // Contact Section
@@ -196,6 +299,32 @@ export const en = {
     successMessage: "We've received your inquiry and will get back to you shortly.",
     errorTitle: "Submission Failed",
     errorMessage: "Please try again later.",
+    
+    // Adding keys for the form itself
+    form: {
+      contactUsLabel: "Contact Us",
+      desiredPackagesLabel: "Desired Packages",
+      desiredActivitiesLabel: "Desired Activities",
+      packages: {
+        arcticWeek: "Arctic Adventure (Week)",
+        arcticWeekend: "Arctic Adventure (Weekend)",
+        sidewaysWeek: "Sideways Adventure (Week)",
+        sidewaysWeekend: "Sideways Adventure (Weekend)",
+        performanceWeek: "Performance Package (Week)",
+        performanceWeekend: "Performance Package (Weekend)",
+        incentive: "Incentive Events",
+        custom: "Customized Events"
+      },
+      activities: {
+        snowmobile: "Snowmobile Tour",
+        reindeer: "Visit the Reindeers",
+        snowshoe: "Snowshoe Hike",
+        spa: "Arctic Spa",
+        restaurant: "Jay Jays Restaurant",
+        helicopter: "Helicopter Flights",
+        aurora: "Northern Lights"
+      }
+    },
     
     // Contact Info Section
     info: {
@@ -286,4 +415,62 @@ export const en = {
     staggeredAnimations: "Sequenced Elements",
     specialEffects: "Special Effects",
   },
+  
+  // Adventure Map Page
+  adventureMap: {
+    pageTitle: "Adventure Map",
+    pageSubtitle: "Explore the Arctic wilderness with our interactive map",
+    interactive: "INTERACTIVE",
+    locationCount: "Discover all",
+    locationsText: "adventure locations",
+    description: "Our adventure map showcases all the incredible locations in and around Arvidsjaur where we offer our premium Arctic experiences. From our main office at Storgatan 6F to Sameland restaurant and cabins at Karlavagnen 1, and our premium accommodations at Hotel Laponia - this interactive guide will help you visualize your ultimate Swedish Lapland journey.",
+    legendText: "Click on any marker to learn more about the location. The color indicates the type of location: green for accommodations, blue for experiences, and purple for points of interest."
+  },
+  
+  // CTA Section
+  ctaSection: {
+    title: "READY FOR A REAL ARCTIC ADVENTURE?",
+    description: "Join us in Swedish Lapland for an experience that goes beyond tourism—a journey that will stay with you forever.",
+    buttonText: "Let's Make Winter Legendary",
+    adventureAwaits: "Your Adventure Awaits"
+  },
+  
+  // Booking Section
+  bookingSection: {
+    title: "BOOK YOUR ADVENTURE",
+    subtitle: "Secure your spot for an unforgettable experience",
+    nameLabel: "Name",
+    namePlaceholder: "Your name",
+    emailLabel: "Email",
+    emailPlaceholder: "Your email",
+    phoneLabel: "Phone",
+    phonePlaceholder: "Phone number",
+    dateLabel: "Date",
+    datePlaceholder: "Preferred date",
+    participantsLabel: "Participants",
+    participantsPlaceholder: "Number of participants",
+    experienceLabel: "Experience",
+    experiencePlaceholder: "Select experience",
+    messageLabel: "Message",
+    messagePlaceholder: "Additional requests or questions",
+    submitButton: "Book Now",
+    successMessage: "Thank you! Your booking request has been received.",
+    successConfirmation: "We'll contact you shortly to confirm your booking details.",
+    experiences: {
+      snowmobile: "Snowmobile Safari",
+      husky: "Dog Sledding Adventure",
+      aurora: "Northern Lights Tour",
+      iceFishing: "Ice Fishing Experience",
+      survival: "Arctic Survival Course"
+    }
+  },
+  
+  // Adventure Locations Data (Types)
+  adventureLocations: {
+    types: {
+      accommodation: "Accommodation",
+      experience: "Experience",
+      landmark: "Point of Interest"
+    }
+  }
 };

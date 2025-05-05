@@ -11,10 +11,10 @@ import { useMutation } from "@tanstack/react-query";
 import { contactFormSchema } from "@shared/schema";
 import { api } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
-import { ContactFormData } from "@/types";
+import { ContactFormData } from "@/types/index";
 import { z } from "zod";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/translations";
+import { useTranslation } from "@/hooks/use-translation";
 import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from "lucide-react";
 
 export function ContactSection() {
@@ -22,29 +22,29 @@ export function ContactSection() {
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const { language } = useLanguage();
-  const t = useTranslation(language);
+  const { t } = useTranslation();
 
-  // Packages with translation support
+  // Package options using translation keys
   const packageOptions = [
-    { id: "arctic-adventure-week", label: language === "de" ? "Arctic Adventure (Woche)" : language === "sv" ? "Arctic Adventure (Vecka)" : "Arctic Adventure (Week)" },
-    { id: "arctic-adventure-weekend", label: language === "de" ? "Arctic Adventure (Wochenende)" : language === "sv" ? "Arctic Adventure (Helg)" : "Arctic Adventure (Weekend)" },
-    { id: "sideways-adventure-week", label: language === "de" ? "Sideways Adventure (Woche)" : language === "sv" ? "Sideways Adventure (Vecka)" : "Sideways Adventure (Week)" },
-    { id: "sideways-adventure-weekend", label: language === "de" ? "Sideways Adventure (Wochenende)" : language === "sv" ? "Sideways Adventure (Helg)" : "Sideways Adventure (Weekend)" },
-    { id: "performance-package-week", label: language === "de" ? "Performance Paket (Woche)" : language === "sv" ? "Performance Paket (Vecka)" : "Performance Package (Week)" },
-    { id: "performance-package-weekend", label: language === "de" ? "Performance Paket (Wochenende)" : language === "sv" ? "Performance Paket (Helg)" : "Performance Package (Weekend)" },
-    { id: "incentive-events", label: language === "de" ? "Incentive Events" : language === "sv" ? "Incentive Events" : "Incentive Events" },
-    { id: "customized-events", label: language === "de" ? "Maßgeschneiderte Events" : language === "sv" ? "Skräddarsydda Event" : "Customized Events" },
+    { id: "arctic-adventure-week", label: t('contact.form.packages.arcticWeek') },
+    { id: "arctic-adventure-weekend", label: t('contact.form.packages.arcticWeekend') },
+    { id: "sideways-adventure-week", label: t('contact.form.packages.sidewaysWeek') },
+    { id: "sideways-adventure-weekend", label: t('contact.form.packages.sidewaysWeekend') },
+    { id: "performance-package-week", label: t('contact.form.packages.performanceWeek') },
+    { id: "performance-package-weekend", label: t('contact.form.packages.performanceWeekend') },
+    { id: "incentive-events", label: t('contact.form.packages.incentive') },
+    { id: "customized-events", label: t('contact.form.packages.custom') },
   ];
   
-  // Activities with translation support
+  // Activity options using translation keys
   const activityOptions = [
-    { id: "snowmobile-tour", label: language === "de" ? "Schneemobil Tour" : language === "sv" ? "Snöskoter Tur" : "Snowmobile Tour" },
-    { id: "reindeer-visit", label: language === "de" ? "Rentier Besuch" : language === "sv" ? "Besök Renarna" : "Visit the Reindeers" },
-    { id: "snowshoe-hike", label: language === "de" ? "Schneeschuh Wanderung" : language === "sv" ? "Snösko Vandring" : "Snowshoe Hike" },
-    { id: "arctic-spa", label: language === "de" ? "Arctic Spa" : language === "sv" ? "Arctic Spa" : "Arctic Spa" },
-    { id: "restaurant", label: language === "de" ? "Jay Jays Restaurant" : language === "sv" ? "Jay Jays Restaurang" : "Jay Jays Restaurant" },
-    { id: "helicopter-flight", label: language === "de" ? "Hubschrauber Flüge" : language === "sv" ? "Helikopter Flygningar" : "Helicopter Flights" },
-    { id: "northern-lights", label: language === "de" ? "Nordlicht Jagd" : language === "sv" ? "Norrskensjakt" : "Northern Lights" },
+    { id: "snowmobile-tour", label: t('contact.form.activities.snowmobile') },
+    { id: "reindeer-visit", label: t('contact.form.activities.reindeer') },
+    { id: "snowshoe-hike", label: t('contact.form.activities.snowshoe') },
+    { id: "arctic-spa", label: t('contact.form.activities.spa') },
+    { id: "restaurant", label: t('contact.form.activities.restaurant') },
+    { id: "helicopter-flight", label: t('contact.form.activities.helicopter') },
+    { id: "northern-lights", label: t('contact.form.activities.aurora') },
   ];
 
   // Set up form with zod validation
@@ -68,8 +68,8 @@ export function ContactSection() {
     },
     onSuccess: () => {
       toast({
-        title: t.contact.successTitle,
-        description: t.contact.successMessage,
+        title: t('contact.successTitle'),
+        description: t('contact.successMessage'),
       });
       form.reset();
       setSelectedPackages([]);
@@ -77,8 +77,8 @@ export function ContactSection() {
     },
     onError: (error) => {
       toast({
-        title: t.contact.errorTitle,
-        description: error instanceof Error ? error.message : t.contact.errorMessage,
+        title: t('contact.errorTitle'),
+        description: error instanceof Error ? error.message : t('contact.errorMessage'),
         variant: "destructive",
       });
     },
@@ -112,22 +112,18 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-24 md:py-32 relative overflow-hidden">
-      {/* Using the global background - no section-specific background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu" style={{ zIndex: 1 }}>
-        {/* Enhanced aurora effect for better visibility */}
-        <div className="aurora-glow-strong absolute inset-0 opacity-30"></div>
-      </div>
+      {/* Remove section-specific background to use global background only */}
       
-      <div className="container mx-auto px-4 relative" style={{ zIndex: 10 }}>
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
-            {language === 'de' ? 'Kontakt' : language === 'sv' ? 'Kontakt' : 'Contact Us'}
+            {t('contact.form.contactUsLabel')}
           </span>
           <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
-            {t.contact.title}
+            {t('contact.title')}
           </h2>
           <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
-            {t.contact.subtitle}
+            {t('contact.subtitle')}
           </p>
         </div>
         
@@ -139,7 +135,7 @@ export function ContactSection() {
             
             <div className="glass-card relative z-10 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl">
               <div className="p-8">
-                <h3 className="font-medium text-xl mb-6 text-white">{t.contact.formTitle}</h3>
+                <h3 className="font-medium text-xl mb-6 text-white">{t('contact.formTitle')}</h3>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -148,7 +144,7 @@ export function ContactSection() {
                         name="firstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white">{t.contact.firstName}</FormLabel>
+                            <FormLabel className="text-white">{t('contact.firstName')}</FormLabel>
                             <FormControl>
                               <Input {...field} className="bg-card-bg/50 border-white/10" />
                             </FormControl>
@@ -161,7 +157,7 @@ export function ContactSection() {
                         name="lastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-white">{t.contact.lastName}</FormLabel>
+                            <FormLabel className="text-white">{t('contact.lastName')}</FormLabel>
                             <FormControl>
                               <Input {...field} className="bg-card-bg/50 border-white/10" />
                             </FormControl>
@@ -176,7 +172,7 @@ export function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t.contact.email}</FormLabel>
+                          <FormLabel className="text-white">{t('contact.email')}</FormLabel>
                           <FormControl>
                             <Input {...field} type="email" className="bg-card-bg/50 border-white/10" />
                           </FormControl>
@@ -190,7 +186,7 @@ export function ContactSection() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t.contact.phone}</FormLabel>
+                          <FormLabel className="text-white">{t('contact.phone')}</FormLabel>
                           <FormControl>
                             <Input {...field} type="tel" className="bg-card-bg/50 border-white/10" />
                           </FormControl>
@@ -204,18 +200,18 @@ export function ContactSection() {
                       name="visitDate"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t.contact.visitDate}</FormLabel>
+                          <FormLabel className="text-white">{t('contact.visitDate')}</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger className="bg-card-bg/50 border-white/10">
-                                <SelectValue placeholder={t.contact.visitDatePlaceholder} />
+                                <SelectValue placeholder={t('contact.visitDatePlaceholder')} />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="december-january">{t.contact.visitDateOptions.decJan}</SelectItem>
-                              <SelectItem value="february-march">{t.contact.visitDateOptions.febMar}</SelectItem>
-                              <SelectItem value="april-may">{t.contact.visitDateOptions.aprMay}</SelectItem>
-                              <SelectItem value="other">{t.contact.visitDateOptions.other}</SelectItem>
+                              <SelectItem value="dec-jan">{t('contact.visitDateOptions.decJan')}</SelectItem>
+                              <SelectItem value="feb-mar">{t('contact.visitDateOptions.febMar')}</SelectItem>
+                              <SelectItem value="apr-may">{t('contact.visitDateOptions.aprMay')}</SelectItem>
+                              <SelectItem value="other">{t('contact.visitDateOptions.other')}</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -224,7 +220,7 @@ export function ContactSection() {
                     />
                     
                     <div>
-                      <FormLabel className="text-white">{language === "de" ? "Gewünschte Pakete" : language === "sv" ? "Önskade paket" : "Desired Packages"}</FormLabel>
+                      <FormLabel className="text-white">{t('contact.form.desiredPackagesLabel')}</FormLabel>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                         {packageOptions.map((option) => (
                           <div key={option.id} className="flex items-center space-x-2">
@@ -246,7 +242,7 @@ export function ContactSection() {
                     </div>
                     
                     <div>
-                      <FormLabel className="text-white">{language === "de" ? "Gewünschte Aktivitäten" : language === "sv" ? "Önskade aktiviteter" : "Desired Activities"}</FormLabel>
+                      <FormLabel className="text-white">{t('contact.form.desiredActivitiesLabel')}</FormLabel>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                         {activityOptions.map((option) => (
                           <div key={option.id} className="flex items-center space-x-2">
@@ -272,7 +268,7 @@ export function ContactSection() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t.contact.message}</FormLabel>
+                          <FormLabel className="text-white">{t('contact.message')}</FormLabel>
                           <FormControl>
                             <Textarea 
                               rows={4} 
@@ -290,7 +286,7 @@ export function ContactSection() {
                       className="w-full bg-accent-color hover:bg-accent-hover text-white font-medium py-3 px-6 rounded-md transition-all flex items-center justify-center gap-2"
                       disabled={mutation.isPending}
                     >
-                      {mutation.isPending ? t.contact.sending : t.contact.send}
+                      {mutation.isPending ? t('contact.sending') : t('contact.send')}
                       {!mutation.isPending && <Send size={16} />}
                     </Button>
                   </form>
@@ -304,7 +300,7 @@ export function ContactSection() {
             {/* Contact info */}
             <div className="mb-12">
               <h3 className="font-medium text-xl mb-6 text-white group-hover:text-accent-color transition-colors">
-                {t.contact.info.title}
+                {t('contact.info.title')}
               </h3>
               <div className="space-y-8">
                 <div className="flex items-start">
@@ -312,7 +308,7 @@ export function ContactSection() {
                     <MapPin size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-white">{t.contact.info.location}</h4>
+                    <h4 className="font-medium mb-1 text-white">{t('contact.info.location')}</h4>
                     <p className="text-white text-opacity-80">Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden</p>
                   </div>
                 </div>
@@ -322,10 +318,11 @@ export function ContactSection() {
                     <Phone size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-white">{t.contact.info.phone}</h4>
+                    <h4 className="font-medium mb-1 text-white">{t('contact.info.phone')}</h4>
                     <p className="text-white text-opacity-80">
-                      {t.contact.info.phoneText1}<br />
-                      {t.contact.info.phoneText2}
+                      {t('contact.info.phoneText1')}
+                      <br />
+                      {t('contact.info.phoneText2')}
                     </p>
                   </div>
                 </div>
@@ -335,8 +332,8 @@ export function ContactSection() {
                     <Mail size={20} />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-white">{t.contact.info.email}</h4>
-                    <p className="text-white text-opacity-80">{t.contact.info.emailText}</p>
+                    <h4 className="font-medium mb-1 text-white">{t('contact.info.email')}</h4>
+                    <p className="text-white text-opacity-80">{t('contact.info.emailText')}</p>
                   </div>
                 </div>
               </div>
@@ -346,64 +343,64 @@ export function ContactSection() {
             <div className="mb-12">
               <div className="glass-card border border-white/10 rounded-xl p-6 backdrop-blur-sm">
                 <h3 className="font-medium text-xl mb-6 text-white">
-                  {t.contact.faq.title}
+                  {t('contact.faq.title')}
                 </h3>
                 <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q1}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a1}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q1')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a1')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q2}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a2}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q2')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a2')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q3}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a3}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q3')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a3')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q4}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a4}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q4')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a4')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q5}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a5}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q5')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a5')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q6}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a6}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q6')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a6')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q7}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a7}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q7')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a7')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q8}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a8}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q8')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a8')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q9}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a9}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q9')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a9')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q10}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a10}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q10')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a10')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q11}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a11}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q11')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a11')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q12}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a12}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q12')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a12')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q13}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a13}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q13')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a13')}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-2 text-white">{t.contact.faq.q14}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t.contact.faq.a14}</p>
+                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q14')}</h4>
+                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a14')}</p>
                   </div>
                 </div>
               </div>
@@ -412,7 +409,7 @@ export function ContactSection() {
             {/* Social Media */}
             <div>
               <h3 className="font-medium text-xl mb-6 text-white">
-                {t.contact.social.title}
+                {t('contact.social.title')}
               </h3>
               <div className="flex space-x-4">
                 <a 

@@ -194,12 +194,18 @@ export class MemStorage implements IStorage {
 // Use the database storage implementation, falling back to memory storage if there's an issue
 let storageImpl: IStorage;
 
-try {
-  storageImpl = new DbStorage();
-  console.log("Using PostgreSQL database storage");
-} catch (error) {
-  console.warn("Failed to initialize database storage, falling back to memory storage:", error);
+// If we're in development mode and no DATABASE_URL is provided, use memory storage
+if (process.env.NODE_ENV === 'development' && !process.env.DATABASE_URL) {
+  console.log("Development mode with no DATABASE_URL, using memory storage");
   storageImpl = new MemStorage();
+} else {
+  try {
+    storageImpl = new DbStorage();
+    console.log("Using PostgreSQL database storage");
+  } catch (error) {
+    console.warn("Failed to initialize database storage, falling back to memory storage:", error);
+    storageImpl = new MemStorage();
+  }
 }
 
 export const storage = storageImpl;
