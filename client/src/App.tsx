@@ -20,6 +20,7 @@ const Contact = lazy(() => import("@/pages/contact"));
 const Restaurant = lazy(() => import("@/pages/restaurant"));
 const AdventureMap = lazy(() => import("@/pages/adventure-map"));
 const Admin = lazy(() => import("@/pages/admin"));
+const MediaManager = lazy(() => import("@/pages/admin/media"));
 
 // Loading fallback component for lazy-loaded pages with improved HTML5 semantics
 const PageLoader = () => (
@@ -47,8 +48,9 @@ const Router = memo(function Router() {
         <Route path="/restaurant" component={Restaurant} />
         <Route path="/adventure-map" component={AdventureMap} />
         
-        {/* Admin route */}
+        {/* Admin routes */}
         <Route path="/admin" component={Admin} />
+        <Route path="/admin/media" component={MediaManager} />
         
         <Route component={NotFound} />
       </Switch>
