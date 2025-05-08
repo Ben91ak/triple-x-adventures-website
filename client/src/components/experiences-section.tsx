@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Experience } from "@/types";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { 
   X, ChevronLeft, ChevronRight, ArrowRight, Filter, Snowflake, Play, Compass, Tag, 
@@ -109,10 +109,10 @@ const getIntensityColor = (level: Experience['intensityLevel']) => {
   }
 };
 
-// ----- EXPERIENCE CARD COMPONENT -----
+// ----- TRAVEL PACKAGE CARD COMPONENT -----
 interface ExperienceCardProps {
   experience: Experience;
-  language: string;
+  language: Language;
   onOpenDetail: (experience: Experience, e: React.MouseEvent) => void;
   delay?: number;
 }
@@ -123,7 +123,7 @@ function ExperienceCard({
   onOpenDetail, 
   delay = 0
 }: ExperienceCardProps) {
-  const t = useTranslation(language as any);
+  const t = useTranslation(language);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [fallbackUsed, setFallbackUsed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -294,7 +294,7 @@ interface ExperienceDetailModalProps {
   onClose: () => void;
   onNext: () => void;
   onPrevious: () => void;
-  language: string;
+  language: Language;
 }
 
 const ExperienceDetailModal = React.memo(function ExperienceDetailModal({ 
@@ -307,7 +307,7 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
 }: ExperienceDetailModalProps) {
   if (!experience || !isOpen) return null;
   
-  const t = useTranslation(language as any);
+  const t = useTranslation(language);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [fallbackUsed, setFallbackUsed] = useState(false);
@@ -672,7 +672,7 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                 {/* Structured Key Info */} 
                 <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-5 border-y border-white/10 py-4">
                   {experience.duration && (
-                    <div className="flex items-center text-sm text-white/90">
+                    <div className="flex items-center text-sm text-white/70 mb-1.5">
                       {iconMap.duration}
                       <div>
                         <span className="block text-xs text-white/60">Duration</span>
@@ -684,13 +684,12 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                     <div className="flex items-center text-sm text-white/90">
                       {iconMap.intensity}
                       <div>
-                        <span className="block text-xs text-white/60">Intensity</span>
                         <span className={getIntensityColor(experience.intensityLevel)}>{experience.intensityLevel}</span>
                       </div>
                     </div>
                   )}
-                   {/* Add Price display if available */}
-                   {experience.price && (
+                  {/* Add Price display if available */}
+                  {experience.price && (
                     <div className="flex items-center text-sm text-white/90">
                       <span className="text-accent-color/80 mr-1.5">€</span>
                       <div>
@@ -828,16 +827,15 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
 // ----- MAIN COMPONENT -----
 export function ExperiencesSection() {
   const { language } = useLanguage();
-  const t = useTranslation(language as any);
+  const t = useTranslation(language);
   const sectionRef = useRef<HTMLDivElement>(null);
   
   // State for experience data and UI interaction
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<ExperienceCategory>('all');
   const [isLoaded, setIsLoaded] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const [hoveredExperience, setHoveredExperience] = useState<number | null>(null);
+  const [showAllActivities, setShowAllActivities] = useState(false);
   
   // Get experiences from translations
   const experiences: Experience[] = t.experiences.list.map((exp: any) => ({ // Use 'any' temporarily if types mismatch during transition
@@ -852,44 +850,20 @@ export function ExperiencesSection() {
     keyHighlights: exp.keyHighlights,
   }));
   
-  // Filter experiences based on active category and search
-  const filteredExperiences = experiences.filter(experience => {
-    // First apply category filter
-    if (activeCategory !== 'all') {
-      const categories = getCategoryFromExperience(experience);
-      if (!categories.includes(activeCategory)) {
-        return false;
-      }
-    }
-    
-    // Then apply search filter if there's a query
-    if (searchQuery.trim() !== '') {
-      const query = searchQuery.toLowerCase();
-      const matchTitle = experience.title.toLowerCase().includes(query);
-      const matchDesc = experience.description.toLowerCase().includes(query);
-      const matchKeyHighlights = experience.keyHighlights?.some(h => h.toLowerCase().includes(query));
-      return matchTitle || matchDesc || matchKeyHighlights;
-    }
-    
-    return true;
-  });
-
-  // Get all unique categories from experiences
-  const allCategories = ['all', ...Array.from(new Set(
-    experiences.flatMap(exp => getCategoryFromExperience(exp))
-  ))] as ExperienceCategory[];
+  // Separate packages from regular activities
+  // Packages have IDs 0, 9, 10 (Arctic Adventure, Sideways, Ice Performance)
+  const packageIds = [0, 9, 10];
+  const packages = experiences.filter(exp => packageIds.includes(exp.id));
+  const activities = experiences.filter(exp => !packageIds.includes(exp.id));
   
-  // Count experiences per category for the filter
-  const categoryCounts = allCategories.reduce((acc, category) => {
-    if (category === 'all') {
-      acc[category] = experiences.length;
-    } else {
-      acc[category] = experiences.filter(exp => 
-        getCategoryFromExperience(exp).includes(category)
-      ).length;
-    }
-    return acc;
-  }, {} as Record<string, number>);
+  // No filtering needed, just separate packages and activities
+  const filteredPackages = packages;
+  const filteredActivities = activities;
+  
+  // Combine experiences based on UI state
+  const filteredExperiences = showAllActivities 
+    ? [...filteredPackages, ...filteredActivities]
+    : filteredPackages;
   
   // Pre-load images on component mount
   useEffect(() => {
@@ -980,7 +954,7 @@ export function ExperiencesSection() {
   return (
     <section 
       id="experiences" 
-      className="relative py-24 lg:py-32 overflow-hidden" 
+      className="relative py-16 lg:py-24 overflow-hidden" 
       aria-labelledby="experiences-title"
       ref={sectionRef}
     >
@@ -998,133 +972,121 @@ export function ExperiencesSection() {
           animate={isLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
             {t.experiences.title}
           </h2>
-          <p className="text-white/70 max-w-2xl mx-auto text-lg">
-            {t.experiences.subtitle}
-          </p>
         </motion.div>
 
-        {/* Filter and search controls */}
-        <motion.div 
-          className="mb-12 flex flex-col md:flex-row justify-between items-center gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isLoaded ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Category filters */}
-          <div className="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-hide w-full md:w-auto">
-            {allCategories.map((category, index) => (
-              categoryCounts[category] > 0 && (
-                <motion.button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium 
-                    flex items-center whitespace-nowrap
-                    transition-colors duration-300
-                    ${activeCategory === category 
-                      ? 'bg-accent-color text-black' 
-                      : 'bg-black/40 text-white hover:bg-black/60'}
-                  `}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isLoaded ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
-                >
-                  {getCategoryIcon(category)}
-                  <span className="ml-2 capitalize">{category}</span>
-                  <span className="ml-1.5 bg-black/20 px-1.5 py-0.5 rounded-full text-xs">
-                    {categoryCounts[category]}
-                  </span>
-                </motion.button>
-              )
-            ))}
-          </div>
-          
-          {/* Search input */}
-          <motion.div 
-            className="relative w-full md:w-72"
-            initial={{ opacity: 0, x: 20 }}
-            animate={isLoaded ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-            </div>
-            <input
-              type="text"
-              className="w-full pl-10 pr-4 py-2 rounded-lg bg-black/30 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent-color"
-              placeholder="Search experiences..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            {searchQuery && (
-              <button
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white"
-                onClick={() => setSearchQuery('')}
-              >
-                <X className="w-5 h-5" />
-              </button>
-            )}
-          </motion.div>
-        </motion.div>
+        {/* Spacer for better layout */}
+        <div className="mb-12"></div>
 
-        {/* Experience Grid with featured items */}
-        {filteredExperiences.length > 0 ? (
+        {/* Packages Section - Always visible and prominently displayed */}
+        {filteredPackages.length > 0 ? (
           <>
-            {/* Main grid for all experiences */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
-              {/* If we have 8 items (which means 2 in the last row), show only the first 6 */}
-              {(filteredExperiences.length === 8) ? 
-                filteredExperiences.slice(0, 6).map((experience, index) => (
-                  <motion.div key={experience.id} layout animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }}>
+            {/* Packages Header */}
+            <motion.div 
+              className="text-center mb-8 mt-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isLoaded ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+            >
+              <h3 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
+                <span className="bg-gradient-to-r from-accent-color to-accent-color/70 px-6 py-2 rounded-lg">
+                  Premium Packages
+                </span>
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-accent-color/50 rounded-full"></div>
+              </h3>
+              <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+                Our all-inclusive premium packages combine multiple activities with luxury accommodations for the ultimate Arctic experience
+              </p>
+            </motion.div>
+
+            {/* Packages Grid - Special styling to make them stand out */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 mb-12">
+              {filteredPackages.map((experience, index) => (
+                <motion.div 
+                  key={experience.id} 
+                  className="relative"
+                  layout 
+                  animate={{ opacity: 1 }} 
+                  initial={{ opacity: 0 }} 
+                  exit={{ opacity: 0 }}
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                >
+                  {/* Add a glow effect behind the card */}
+                  <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/30 to-accent-color/10 rounded-xl blur-lg opacity-75"></div>
+                  <div className="relative">
                     <ExperienceCard
                       experience={experience}
                       language={language}
                       onOpenDetail={openExperienceDetail}
                       delay={index}
                     />
-                  </motion.div>
-                )) : 
-                // Otherwise show all experiences normally
-                filteredExperiences.map((experience, index) => (
-                  <motion.div key={experience.id} layout animate={{ opacity: 1 }} initial={{ opacity: 0 }} exit={{ opacity: 0 }}>
-                    <ExperienceCard
-                      experience={experience}
-                      language={language}
-                      onOpenDetail={openExperienceDetail}
-                      delay={index}
-                    />
-                  </motion.div>
-                ))
-              }
+                  </div>
+                </motion.div>
+              ))}
             </div>
-            
-            {/* Special centered container just for the last 2 cards when we have 8 total */}
-            {filteredExperiences.length === 8 && (
-              <div className="mt-6 xl:mt-8 flex justify-center gap-6 xl:gap-8">
-                {filteredExperiences.slice(6).map((experience, index) => (
-                  <motion.div 
-                    key={experience.id} 
-                    className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
-                    layout 
-                    animate={{ opacity: 1 }} 
-                    initial={{ opacity: 0 }} 
-                    exit={{ opacity: 0 }}
-                  >
-                    <ExperienceCard
-                      experience={experience}
-                      language={language}
-                      onOpenDetail={openExperienceDetail}
-                      delay={index + 6}
-                    />
-                  </motion.div>
-                ))}
-              </div>
+
+            {/* Explore Activities Button */}
+            <div className="flex justify-center mb-16">
+              <motion.button
+                onClick={() => setShowAllActivities(!showAllActivities)}
+                className="group px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full flex items-center gap-2 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="text-white font-medium">
+                  {showAllActivities ? 'Hide Activities' : 'Explore Our Activities'}
+                </span>
+                <motion.div
+                  animate={{ rotate: showAllActivities ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronRight className="w-5 h-5 text-accent-color group-hover:text-white transition-colors" />
+                </motion.div>
+              </motion.button>
+            </div>
+
+            {/* Activities Section - Only visible when showAllActivities is true */}
+            {showAllActivities && filteredActivities.length > 0 && (
+              <>
+                {/* Activities Header */}
+                <motion.div 
+                  className="text-center mb-8 mt-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <h3 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
+                    <span className="bg-white/10 px-6 py-2 rounded-lg">
+                      Individual Activities
+                    </span>
+                  </h3>
+                  <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+                    Choose from our selection of exciting individual activities to customize your Arctic adventure
+                  </p>
+                </motion.div>
+
+                {/* Activities Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+                  {filteredActivities.map((experience, index) => (
+                    <motion.div 
+                      key={experience.id} 
+                      layout 
+                      animate={{ opacity: 1 }} 
+                      initial={{ opacity: 0 }} 
+                      exit={{ opacity: 0 }}
+                    >
+                      <ExperienceCard
+                        experience={experience}
+                        language={language}
+                        onOpenDetail={openExperienceDetail}
+                        delay={index}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </>
             )}
           </>
         ) : (
@@ -1138,15 +1100,12 @@ export function ExperiencesSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
             <h3 className="text-xl text-white mb-2">No experiences found</h3>
-            <p className="text-white/60">Try adjusting your search or filter criteria</p>
+            <p className="text-white/60">Something went wrong while loading experiences</p>
             <button 
               className="mt-4 px-4 py-2 bg-accent-color text-black rounded-lg font-medium"
-              onClick={() => {
-                setActiveCategory('all');
-                setSearchQuery('');
-              }}
+              onClick={() => window.location.reload()}
             >
-              Reset filters
+              Refresh page
             </button>
           </motion.div>
         )}

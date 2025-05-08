@@ -344,13 +344,13 @@ export function HeroSection() {
             </p>
             
             <div 
-              className={`glass-card p-4 sm:p-6 md:p-8 mb-8 md:mb-12 max-w-3xl mx-auto text-left shadow-xl fade-in scale-up transform-gpu ${isDescriptionVisible ? 'visible' : ''}`}
+              className={`glass-card p-4 sm:p-6 md:p-8 mb-8 md:mb-12 max-w-3xl mx-auto text-center shadow-xl fade-in scale-up transform-gpu ${isDescriptionVisible ? 'visible' : ''}`}
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
               style={{ backgroundColor: 'rgba(26, 29, 31, 0.7)', backdropFilter: 'blur(8px)' }}
             >
-              <p className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph1') }} />
-              <p className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph2') }} />
-              <p className="text-white text-sm md:text-base leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph3') }} />
+              <p className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu text-center" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph1') }} />
+              <p className="mb-3 md:mb-4 text-white text-sm md:text-base leading-relaxed transform-gpu text-center" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph2') }} />
+              <p className="text-white text-sm md:text-base leading-relaxed transform-gpu text-center" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph3') }} />
             </div>
           </div>
           
@@ -385,13 +385,13 @@ export function HeroSection() {
             
             {/* Full content for mobile with smaller text - optimized blur effect */}
             <div 
-              className={`glass-card p-3 mb-4 mx-auto text-left shadow-lg fade-in scale-up transform-gpu ${isDescriptionVisible ? 'visible' : ''}`}
+              className={`glass-card p-3 mb-4 mx-auto text-center shadow-lg fade-in scale-up transform-gpu ${isDescriptionVisible ? 'visible' : ''}`}
               ref={descriptionRef as React.RefObject<HTMLDivElement>}
               style={{ maxHeight: 'calc(60vh - 200px)', overflowY: 'auto', backgroundColor: 'rgba(26, 29, 31, 0.75)', backdropFilter: 'blur(6px)' }}
             >
-              <p className="mb-2 text-white text-xs leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph1') }} />
-              <p className="mb-2 text-white text-xs leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph2') }} />
-              <p className="text-white text-xs leading-relaxed transform-gpu" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph3') }} />
+              <p className="mb-2 text-white text-xs leading-relaxed transform-gpu text-center" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph1') }} />
+              <p className="mb-2 text-white text-xs leading-relaxed transform-gpu text-center" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph2') }} />
+              <p className="text-white text-xs leading-relaxed transform-gpu text-center" dangerouslySetInnerHTML={{ __html: t('heroSection.paragraph3') }} />
             </div>
           </div>
           
@@ -401,7 +401,7 @@ export function HeroSection() {
             ref={buttonsRef as React.RefObject<HTMLDivElement>}
           >
             <a 
-              href="#pakete" 
+              href="#experiences" 
               className="btn-primary inline-flex items-center justify-center gap-2 text-sm uppercase bg-accent-color tracking-wide font-medium transition-colors transform-gpu"
               role="button"
               aria-label="Explore adventures"

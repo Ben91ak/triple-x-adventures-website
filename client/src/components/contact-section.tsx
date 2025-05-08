@@ -111,7 +111,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
       {/* Remove section-specific background to use global background only */}
       
       <div className="container mx-auto px-4 relative z-10">

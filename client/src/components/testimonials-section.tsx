@@ -150,7 +150,7 @@ export function TestimonialsSection() {
   }, [language]);
 
   return (
-    <section id="testimonials" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="testimonials" className="py-16 md:py-24 relative overflow-hidden">
       {/* Using global background without additional overlays */}
       
       <div className="container mx-auto px-4 relative z-50">

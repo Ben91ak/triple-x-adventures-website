@@ -123,7 +123,7 @@ export function IntroductionSection() {
   };
 
   return (
-    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
       {/* Remove any background overlays that might be causing issues */}
       
       <div className="container mx-auto px-4 relative z-10">

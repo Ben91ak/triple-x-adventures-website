@@ -7,7 +7,7 @@ export function CTASection() {
   const { t } = useTranslation();
 
   return (
-    <section id="cta" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="cta" className="py-16 md:py-24 relative overflow-hidden">
       {/* Using global background without additional overlays */}
       
       {/* Content */}

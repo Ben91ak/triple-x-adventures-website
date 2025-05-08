@@ -18,7 +18,6 @@ const About = lazy(() => import("@/pages/about"));
 const Accommodations = lazy(() => import("@/pages/accommodations"));
 const Contact = lazy(() => import("@/pages/contact"));
 const Restaurant = lazy(() => import("@/pages/restaurant"));
-const AdventureMap = lazy(() => import("@/pages/adventure-map"));
 const Admin = lazy(() => import("@/pages/admin"));
 const MediaManager = lazy(() => import("@/pages/admin/media"));
 
@@ -46,7 +45,6 @@ const Router = memo(function Router() {
         <Route path="/accommodations" component={Accommodations} />
         <Route path="/contact" component={Contact} />
         <Route path="/restaurant" component={Restaurant} />
-        <Route path="/adventure-map" component={AdventureMap} />
         
         {/* Admin routes */}
         <Route path="/admin" component={Admin} />

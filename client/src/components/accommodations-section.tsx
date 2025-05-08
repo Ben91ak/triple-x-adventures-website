@@ -159,7 +159,7 @@ export function AccommodationsSection() {
   };
 
   return (
-    <section id="accommodations" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="accommodations" className="py-16 md:py-24 relative overflow-hidden">
       {/* Using the global background - no need for section-specific background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
         {/* Simple glow effect to complement global background */}

@@ -30,18 +30,177 @@ export const en = {
   
   // Experiences/Packages Section
   experiences: {
-    title: "OUR EXPERIENCES",
-    subtitle: "Authentic Arctic Adventures",
-    viewAll: "View All Experiences",
+    title: "OUR TRAVEL PACKAGES",
+    subtitle: "All-Inclusive Arctic Adventures",
+    viewAll: "View All Packages",
     sendInquiry: "Send Inquiry",
     nextExperience: "Next",
     previousExperience: "Previous",
     closeModal: "Close",
     viewDetails: "View details",
     bookNow: "Book Now",
+    durationOptions: ["3 Nights", "4 Nights"],
+    weekendWeekText: "Available on weekdays and weekends",
     
     // Experience List
     list: [
+      {
+        id: 0,
+        title: "Arctic Adventure Package",
+        description: "Our signature all-inclusive package featuring the best winter activities Swedish Lapland has to offer. Experience snowmobiling, husky sledding, and more in one comprehensive package.",
+        price: 1299,
+        duration: "3-4 Nights",
+        intensityLevel: "Moderate",
+        keyHighlights: ["All-Inclusive Experience", "Premium Accommodations", "Multiple Activities", "Professional Guides"],
+        image: "/images/Snowmobile/Snowmobile 2_result.webp",
+        gallery: [
+          "/images/Snowmobile/Snowmobile 2_result.webp",
+          "/images/Husky/Husky 1_result.webp",
+          "/images/Snowmobile/Snowmobile 3_result.webp",
+          "/images/Snowmobile/Snowmobile 4_result.webp"
+        ],
+        detailedInfo: {
+          introduction: "The Arctic Adventure Package is our most comprehensive offering, giving you the complete Swedish Lapland experience. This all-inclusive package combines the best activities with premium accommodations and authentic local cuisine.",
+          adventureOptionsTitle: "PACKAGE INCLUDES",
+          tours: [
+            {
+              title: "3-NIGHT PACKAGE",
+              description: "Perfect for a long weekend getaway. Experience the highlights of Swedish Lapland in a compact timeframe.",
+              details: ["2-hour Snowmobile Tour", "Husky Sledding Experience", "Northern Lights Viewing", "3 Nights Premium Accommodation", "All Meals Included"]
+            },
+            {
+              title: "4-NIGHT PACKAGE",
+              description: "Our extended package allows you to fully immerse in the Arctic experience with additional activities and relaxation time.",
+              details: ["4-hour Snowmobile Tour", "Husky Sledding Experience", "Ice Fishing Adventure", "Northern Lights Viewing", "4 Nights Premium Accommodation", "All Meals Included"]
+            }
+          ],
+          importantInfoTitle: "IMPORTANT INFORMATION",
+          importantInfo: [
+            "3-NIGHT PACKAGE available on selected Weekends Friday - Monday",
+            "4-NIGHT PACKAGE available on selected Weeks Monday - Friday",
+            "Airport transfers included",
+            "All necessary equipment and clothing provided",
+            "Suitable for all experience levels",
+            "Customization options available upon request"
+          ],
+          closingRemark: "The Arctic Adventure Package offers the perfect balance of excitement, relaxation, and authentic Arctic experiences in one convenient package!"
+        },
+        tag: {
+          text: "Bestseller",
+          type: "bestseller"
+        },
+        features: [
+          "All-Inclusive",
+          "Multiple Activities",
+          "Premium Accommodations",
+          "Authentic Cuisine",
+          "Professional Guides"
+        ]
+      },
+      {
+        id: 9,
+        title: "Sideways Package",
+        description: "For driving enthusiasts who want to master the art of drifting on ice. This package combines our ice driving experiences with premium accommodations for the ultimate winter driving adventure.",
+        price: 1499,
+        duration: "3-4 Nights",
+        intensityLevel: "Thrilling",
+        keyHighlights: ["Professional Driving Instructors", "Various Vehicle Options", "Progressive Skill Development", "Premium Accommodations"],
+        image: "/images/Experiences/ice-driving.jpg",
+        gallery: [
+          "/images/Experiences/ice-driving.jpg",
+          "/images/Experiences/ice-driving2.jpg",
+          "/images/Accommodations/hotel-room1.jpg",
+          "/images/Restaurant/restaurant-interior.jpg"
+        ],
+        detailedInfo: {
+          introduction: "The Sideways Package is designed for driving enthusiasts who want to experience the thrill of ice driving in Swedish Lapland. Learn professional techniques for controlling vehicles on ice while enjoying premium accommodations and excellent cuisine.",
+          adventureOptionsTitle: "PACKAGE INCLUDES",
+          tours: [
+            {
+              title: "3-NIGHT SIDEWAYS PACKAGE",
+              description: "A concentrated ice driving experience with professional instruction and premium accommodations.",
+              details: ["1 Day of Ice Driving with Professional Instruction", "3 Nights Premium Accommodation", "All Meals Included", "Adventure Side Program"]
+            },
+            {
+              title: "4-NIGHT SIDEWAYS PACKAGE",
+              description: "Our extended package provides more track time and additional vehicle experiences for a comprehensive ice driving adventure.",
+              details: ["1 Day of Ice Driving with Professional Instruction", "4 Nights Premium Accommodation", "All Meals Included", "Adventure Side Program"]
+            }
+          ],
+          importantInfoTitle: "IMPORTANT INFORMATION",
+          importantInfo: [
+            "Valid driver's license required",
+            "Suitable for all driving skill levels",
+            "All necessary safety equipment provided",
+            "Airport transfers included",
+            "Insurance included in package price"
+          ],
+          closingRemark: "The Sideways Package offers a perfect blend of adrenaline-pumping ice driving experiences and luxurious Arctic comfort!"
+        },
+        tag: {
+          text: "Featured",
+          type: "featured"
+        },
+        features: [
+          "Professional Instruction",
+          "Multiple Vehicle Types",
+          "Premium Accommodations",
+          "All-Inclusive Meals",
+          "Airport Transfers"
+        ]
+      },
+      {
+        id: 10,
+        title: "Ice Performance Package",
+        description: "Our premium winter driving experience designed for automotive enthusiasts. Master the art of ice driving with high-performance vehicles on our specially designed ice tracks.",
+        price: 1799,
+        duration: "3-4 Nights",
+        intensityLevel: "Extreme",
+        keyHighlights: ["High-Performance Vehicles", "Professional Racing Instructors", "Exclusive Track Access", "Luxury Accommodations"],
+        image: "/images/Experiences/ice-performance.jpg",
+        gallery: [
+          "/images/Experiences/ice-performance.jpg",
+          "/images/Experiences/ice-performance2.jpg",
+          "/images/Accommodations/luxury-suite.jpg",
+          "/images/Restaurant/dining-experience.jpg"
+        ],
+        detailedInfo: {
+          introduction: "The Ice Performance Package is our most exclusive driving experience, designed for those who want to push their limits with high-performance vehicles on ice. Learn from professional racing drivers while enjoying luxury accommodations and gourmet dining.",
+          adventureOptionsTitle: "PACKAGE INCLUDES",
+          tours: [
+            {
+              title: "3-NIGHT ICE PERFORMANCE PACKAGE",
+              description: "An intensive high-performance driving experience with professional instruction and luxury accommodations.",
+              details: ["2 Full Days with Performance Vehicles", "3 Nights Luxury Accommodation", "Gourmet Dining Experience", "optional Side Activities"]
+            },
+            {
+              title: "4-NIGHT ICE PERFORMANCE PACKAGE",
+              description: "Our extended package provides more track time with additional vehicle options and advanced techniques for the ultimate ice driving experience.",
+              details: ["2.5 Days with Performance Vehicles", "Advanced Driving Techniques", "Exclusive Track Time", "4 Nights Luxury Accommodation", "Gourmet Dining Experience", "optional Side Activities"]
+            }
+          ],
+          importantInfoTitle: "IMPORTANT INFORMATION",
+          importantInfo: [
+            "Valid driver's license required",
+            "Previous performance driving experience recommended",
+            "All necessary safety equipment provided",
+            "Premium insurance package included",
+            "Helicopter transfers available upon request"
+          ],
+          closingRemark: "The Ice Performance Package offers the ultimate combination of high-performance driving thrills and Arctic luxury for the discerning enthusiast!"
+        },
+        tag: {
+          text: "Premium",
+          type: "featured"
+        },
+        features: [
+          "High-Performance Vehicles",
+          "Professional Racing Instructors",
+          "Luxury Accommodations",
+          "Gourmet Dining",
+          "Exclusive Track Access"
+        ]
+      },
       {
         id: 1,
         title: "Snowmobile Adventure",
@@ -471,6 +630,147 @@ export const en = {
       accommodation: "Accommodation",
       experience: "Experience",
       landmark: "Point of Interest"
+    }
+  },
+  
+  // Professional Services Page
+  professionalServices: {
+    hero: {
+      title: "Professional Services in Swedish Lapland",
+      subtitle: "Tailored solutions for corporate groups, film productions, and exclusive collaborations in the Arctic wilderness.",
+      cta: {
+        contact: "GET IN TOUCH",
+        explore: "EXPLORE SERVICES"
+      }
+    },
+    services: {
+      title: "OUR SERVICES",
+      subtitle: "Tailored Arctic solutions for brands, productions & events in the far north",
+      corporate: {
+        title: "Corporate & Industry Events",
+        description: "Full-service planning and execution for companies, teams, and automotive brands.",
+        subtitle: "From creative concepts to on-ground logistics – we bring Arctic dreams to life.",
+        drivingEvents: {
+          title: "Driving Events & Vehicle Testing",
+          items: [
+            "Ice tracks, snow-covered courses, and custom circuits for winter driving experiences",
+            "Vehicle testing in extreme Arctic conditions",
+            "Support with permits, safety, and local partnerships"
+          ]
+        },
+        teambuilding: {
+          title: "Teambuilding Adventures",
+          items: [
+            "Snowmobile safaris, survival training, dog sledding - designed for team building and challenge",
+            "Customized group programs with tailored itineraries"
+          ]
+        },
+        retreats: {
+          title: "Winter Retreats & Leadership Training",
+          items: [
+            "Cozy cabin stays, fireside dinners at JayJay's, and wilderness workshops",
+            "Designed to build trust, resilience, and team spirit"
+          ]
+        },
+        productLaunches: {
+          title: "Product Launches & Masterclasses",
+          items: [
+            "Outstanding venues, full event planning, Arctic logistics & media support",
+            "Create unforgettable brand moments under the Northern Lights"
+          ]
+        }
+      },
+      production: {
+        title: "Production Support",
+        description: "The perfect Arctic backdrop – and everything behind the scenes to make it work.",
+        items: [
+          "Location Scouting & Permits (Frozen lakes, forests, remote wilderness)",
+          "Arctic logistics: Transportation, fuel, satellite communications & heated facilities",
+          "Experienced guides & safety experts for remote filming support",
+          "Snowmobiles and all-terrain vehicles designed for harsh conditions"
+        ]
+      },
+      vip: {
+        title: "Custom VIP Experiences",
+        description: "Exclusive experiences for brand ambassadors, high-profile clients, and press.",
+        items: [
+          "Luxury Arctic adventures with private guides & premium details",
+          "Access to pristine nature & secret locations",
+          "Brand collaborations & Event hosting",
+          "Ambassador trips, content creation, and Arctic storytelling"
+        ]
+      },
+      consulting: {
+        title: "Consulting Services & Planning",
+        description: "Your strategic partner for projects in the north.",
+        items: [
+          "Concept development & logistics for Arctic events",
+          "Expertise in handling harsh climates and remote environments",
+          "Local partnerships with landowners and suppliers",
+          "Full-service coordination from idea to execution"
+        ]
+      }
+    },
+    stats: {
+      clients: {
+        number: "500+",
+        text: "Satisfied clients and adventure enthusiasts"
+      },
+      services: {
+        number: "25+",
+        text: "Professional services and tailored experiences"
+      },
+      satisfaction: {
+        number: "98.3%",
+        text: "Customer satisfaction rating"
+      }
+    },
+    drivecenter: {
+      title: "Partnership with Drivecenter Arena",
+      subtitle: "Elevated Arctic Motorsport Experiences",
+      description: "We're excited to partner with Drivecenter Arena, Scandinavia's longest and most versatile racing facility, located in Fällfors, Västerbotten County. Transformed from a former military airbase, this 4,270-meter track stands as Sweden's premier motorsport destination.",
+      highlights: {
+        title: "Key Highlights:",
+        items: [
+          "<strong>Scandinavia's longest track:</strong> A 4,270-meter track designed by TTI GmbH, featuring 16 challenging curves that test the skills of even the most experienced drivers.",
+          "<strong>Year-round motorsport center:</strong> From events like the Midnight Sun Race under the midnight sun to the FIM Snowcross World Championship, Drivecenter Arena is a hub for motorsport enthusiasts year-round.",
+          "<strong>State-of-the-art facilities:</strong> Equipped with 24 modern pit garages, grandstands accommodating 5,000 spectators, and on-site accommodations including a 76-room hotel, ensuring a comprehensive experience for both participants and visitors.",
+          "<strong>Multiple driving experiences:</strong> From high-speed trackdays and drift challenges to off-road adventures with Polaris RZRs, the arena offers a wide range of activities and services for all adrenaline levels.",
+          "<strong>Comprehensive training programs:</strong> Providing risk and safety training, driver education, and vehicle testing services, making it a hub for both recreational and professional development."
+        ]
+      },
+      experience: {
+        title: "Experience the fusion of speed and Arctic wilderness",
+        description: "Thanks to our partnership with Drivecenter Arena, we can offer unique motorsport experiences in northern Sweden's stunning nature. Whether you're seeking high-speed action or peaceful Arctic views, this collaboration gives you a perfect blend of both."
+      },
+      cta: {
+        title: "Ready to experience Drivecenter Arena?",
+        subtitle: "Contact us to plan your motorsport adventure",
+        button: "CONTACT US"
+      }
+    },
+    contact: {
+      title: "Let's talk Arctic business",
+      description: "Have an idea, a team, or a project? We're ready to build it together in the Arctic.",
+      form: {
+        name: {
+          label: "Your name",
+          placeholder: "John Smith"
+        },
+        email: {
+          label: "Your email",
+          placeholder: "your@email.com"
+        },
+        message: {
+          label: "Your message",
+          placeholder: "Tell us about your project or idea..."
+        },
+        button: "Send Message",
+        directEmail: "Or email us directly at"
+      }
+    },
+    partners: {
+      title: "Our Trusted Partners"
     }
   }
 };

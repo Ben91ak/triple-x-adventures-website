@@ -126,3 +126,18 @@ const Home = memo(function Home() {
 });
 
 export default Home;
+
+// Enable Static Site Generation with Incremental Static Regeneration
+export async function getStaticProps() {
+  // You can fetch any data needed for the home page here
+  // For example, fetch testimonials, experiences, etc.
+  
+  return {
+    props: {
+      // Any props you want to pass to the Home component
+    },
+    // Revalidate every 60 seconds (1 minute)
+    // Adjust this value based on how frequently your content changes
+    revalidate: 60,
+  };
+}

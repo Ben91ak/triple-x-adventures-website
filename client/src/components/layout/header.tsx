@@ -3,7 +3,8 @@ import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { LanguageSelector } from "@/components/ui/language-selector";
-import { Menu, X, ChevronRight, Calendar } from "lucide-react";
+import { Calendar, ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
+import { CSSProperties } from 'react';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -48,6 +49,7 @@ export function Header() {
     }
   }, [mobileMenuOpen]);
 
+  // Enhanced toggle function with improved touch area
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
@@ -62,6 +64,24 @@ export function Header() {
     // Restaurant section removed per user request
     { href: "/#contact", label: t.nav.contact }
   ];
+  
+  // Determine if we should use compact menu (for medium screens)
+  const [useCompactMenu, setUseCompactMenu] = useState(false);
+  
+  // Check screen width on mount and resize
+  useEffect(() => {
+    const checkScreenWidth = () => {
+      // Medium screens: between 768px and 1023px
+      setUseCompactMenu(window.innerWidth >= 768 && window.innerWidth < 1024);
+    };
+    
+    // Initial check
+    checkScreenWidth();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkScreenWidth);
+    return () => window.removeEventListener('resize', checkScreenWidth);
+  }, []);
 
   return (
     <header 
@@ -100,7 +120,7 @@ export function Header() {
               </Link>
             </div>
             
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - Only visible on large screens (1024px+) */}
             <div className="hidden lg:flex items-center space-x-6 relative z-20">
               <ul className="flex items-center flex-wrap justify-center list-none mr-6" role="menu">
                 {navItems.map((item, index) => (
@@ -180,8 +200,78 @@ export function Header() {
               </div>
             </div>
             
-            {/* Mobile Menu Button */}
-            <div className="lg:hidden flex items-center space-x-3 relative z-20">
+            {/* Compact Menu - Only visible on medium screens (768px-1023px) */}
+            {useCompactMenu && (
+              <div className="flex items-center space-x-4 relative z-20">
+                <div className="relative group">
+                  <button 
+                    className="flex items-center space-x-1 px-3 py-2 text-white hover:text-accent-color rounded-md hover:bg-white/5 transition-all"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                  >
+                    <span className="font-medium text-sm">Menu</span>
+                    <ChevronDown size={16} />
+                  </button>
+                  
+                  {/* Dropdown menu */}
+                  <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-dark-bg/95 border border-white/10 backdrop-blur-lg py-1 hidden group-hover:block">
+                    {navItems.map((item, index) => (
+                      <div key={index}>
+                        {item.href.startsWith('/#') ? (
+                          <a 
+                            href={item.href} 
+                            className="block px-4 py-2 text-sm text-white hover:bg-white/5 hover:text-accent-color"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (window.location.pathname === '/') {
+                                const targetId = item.href.split('#')[1];
+                                const targetElement = document.getElementById(targetId);
+                                if (targetElement) {
+                                  targetElement.scrollIntoView({ behavior: 'smooth' });
+                                }
+                              } else {
+                                window.location.href = item.href;
+                              }
+                            }}
+                          >
+                            {item.label}
+                          </a>
+                        ) : (
+                          <Link 
+                            href={item.href} 
+                            className="block px-4 py-2 text-sm text-white hover:bg-white/5 hover:text-accent-color"
+                          >
+                            {item.label}
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Book Now CTA Button */}
+                <a 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log('Booking system will be integrated later');
+                    alert('Our booking system will be integrated soon!');
+                  }}
+                  href="#"
+                  className="bg-accent-color hover:bg-accent-color/90 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-all duration-300 flex items-center shadow-glow-sm cursor-pointer"
+                  title="Booking system coming soon"
+                >
+                  <Calendar size={14} className="mr-1.5" />
+                  <span>{t.nav.bookNow || "Book Now"}</span>
+                </a>
+                
+                <div className="pl-3 border-l border-white/10">
+                  <LanguageSelector />
+                </div>
+              </div>
+            )}
+            
+            {/* Mobile Menu Button - Only visible on small screens (<768px) */}
+            <div className={`${useCompactMenu ? 'hidden' : 'flex'} lg:hidden items-center space-x-3 relative z-20`}>
               {/* Mobile Book Now button - smaller version */}
               <a 
                 onClick={(e) => {
@@ -197,19 +287,19 @@ export function Header() {
                 <span>{t.nav.bookNow || "Book Now"}</span>
               </a>
               
-              <LanguageSelector className="mr-1" />
+              <LanguageSelector className="mr-2" />
               <button 
                 type="button" 
-                className="flex items-center justify-center w-10 h-10 rounded-lg bg-card-bg/50 border border-white/5 hover:bg-card-bg hover:border-white/10 transition-colors"
+                className="flex items-center justify-center w-12 h-12 p-3 rounded-lg bg-card-bg/50 border border-white/5 hover:bg-card-bg hover:border-white/10 transition-colors touch-manipulation"
                 onClick={toggleMobileMenu}
                 aria-label="Toggle mobile menu"
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
               >
                 {mobileMenuOpen ? (
-                  <X size={18} className="text-accent-color" aria-hidden="true" />
+                  <X size={24} className="text-accent-color" aria-hidden="true" />
                 ) : (
-                  <Menu size={18} className="text-white" aria-hidden="true" />
+                  <Menu size={24} className="text-white" aria-hidden="true" />
                 )}
                 <span className="sr-only">{mobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
               </button>
@@ -229,7 +319,7 @@ export function Header() {
         {/* Mobile menu panel */}
         <div 
           id="mobile-menu"
-          className={`mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out fixed top-20 left-0 right-0 z-[101] px-4 ${
+          className={`mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out fixed top-24 left-0 right-0 z-[101] px-4 ${
             mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
           style={{ pointerEvents: mobileMenuOpen ? 'auto' : 'none' }}

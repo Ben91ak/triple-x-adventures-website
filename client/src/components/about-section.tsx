@@ -38,7 +38,7 @@ export function AboutSection() {
             ABOUT US
           </span>
           <h2 className="font-bold text-4xl md:text-5xl mb-6 text-white leading-tight">
-            Not Just Another Tour Company
+            Not just another tour company
           </h2>
           <p className="text-lg text-slate-300 leading-relaxed">
             Triple X Adventures offers authentic Arctic experiences rooted in Swedish Lapland. 

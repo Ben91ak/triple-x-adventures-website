@@ -308,13 +308,15 @@ export function Footer() {
               <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
                 <p className="text-white text-opacity-70 text-sm text-center md:text-left">{t.footer.copyright}</p>
                 <nav aria-label="Legal Links">
-                  <ul className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-2 list-none p-0">
+                  <ul className="flex flex-wrap justify-center md:justify-end gap-x-6 sm:gap-x-8 gap-y-4 list-none p-0">
                     {legalLinks.map((link, index) => (
                       <li key={index}>
                         <a 
                           href={link.href} 
-                          className="text-white text-opacity-70 text-sm hover:text-accent-color transition-colors"
+                          className="text-white text-opacity-70 text-sm hover:text-accent-color transition-colors py-2 px-3 -mx-3 rounded-lg hover:bg-white/5 block"
                           onClick={link.onClick}
+                          role="button"
+                          aria-haspopup="dialog"
                         >
                           {link.text}
                         </a>
@@ -334,7 +336,7 @@ export function Footer() {
         onClose={() => setIsImprintOpen(false)}
         title="Imprint"
       >
-        <div className="text-white space-y-6">
+        <div className="text-white space-y-6 text-sm sm:text-base">
           <div>
             <h3 className="text-lg font-semibold mb-2">TRIPLE X ADVENTURES AB</h3>
             <p className="text-white/80">
@@ -386,7 +388,7 @@ export function Footer() {
         onClose={() => setIsTermsOpen(false)}
         title="Terms and Conditions"
       >
-        <div className="text-white space-y-6 max-h-[70vh] overflow-y-auto pr-2">
+        <div className="text-white space-y-6 max-h-[70vh] overflow-y-auto pr-2 text-sm sm:text-base">
           <div>
             <h3 className="text-lg font-semibold mb-4">TERMS AND CONDITIONS</h3>
             <p className="text-white/80 text-sm">
@@ -529,7 +531,7 @@ export function Footer() {
         onClose={() => setIsPrivacyOpen(false)}
         title="Privacy Policy"
       >
-        <div className="text-white space-y-6 max-h-[70vh] overflow-y-auto pr-2">
+        <div className="text-white space-y-6 max-h-[70vh] overflow-y-auto pr-2 text-sm sm:text-base">
           <div>
             <h3 className="text-lg font-semibold mb-4">PRIVACY POLICY</h3>
             <p className="text-white/80 text-sm">
