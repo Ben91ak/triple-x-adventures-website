@@ -1,5 +1,7 @@
-import { useLanguage } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/translations";
+// Direct imports to avoid path alias issues during type checking
+import { useLanguage } from "../contexts/LanguageContext";
+import { useTranslation } from "../translations";
+// Import Lucide icons with type assertion to avoid TypeScript errors
 import { Users, MapPin, Crown } from 'lucide-react'; // Using Lucide icons
 
 // No need for TeamMember type here

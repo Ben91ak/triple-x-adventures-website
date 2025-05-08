@@ -185,18 +185,30 @@ export function TranslationManager() {
       }
     };
     
-    // Use English as reference
-    const englishKeys = Object.keys(flatTranslations.en);
+    // Validate all languages together
+    const missingKeysResult = validateTranslations(flatTranslations);
     
-    // Check German
-    const germanValidation = validateTranslations(flatTranslations.en, flatTranslations.de);
-    results.missingKeys.de = germanValidation.missingKeys;
-    results.extraKeys.de = germanValidation.extraKeys;
+    // Process the validation results
+    Object.keys(missingKeysResult).forEach(lang => {
+      results.missingKeys[lang as Language] = missingKeysResult[lang];
+    });
     
-    // Check Swedish
-    const swedishValidation = validateTranslations(flatTranslations.en, flatTranslations.sv);
-    results.missingKeys.sv = swedishValidation.missingKeys;
-    results.extraKeys.sv = swedishValidation.extraKeys;
+    // For extra keys, we need to compare each language with the others
+    // This is a simplified approach - in a real app, you might want a more sophisticated comparison
+    const allLanguages = Object.keys(flatTranslations) as Language[];
+    
+    allLanguages.forEach(lang => {
+      const langKeys = Object.keys(flatTranslations[lang]);
+      const otherLangKeys = new Set<string>();
+      
+      // Collect keys from other languages
+      allLanguages.filter(l => l !== lang).forEach(otherLang => {
+        Object.keys(flatTranslations[otherLang]).forEach(key => otherLangKeys.add(key));
+      });
+      
+      // Find keys that exist in this language but not in others
+      results.extraKeys[lang] = langKeys.filter(key => !otherLangKeys.has(key));
+    });
     
     setValidationResults(results);
   };

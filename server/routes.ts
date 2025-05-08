@@ -102,7 +102,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Apply CSRF protection to all routes that need it
   const csrfRoutes = express.Router();
-  csrfRoutes.use(csrfProtection);
+  // Apply CSRF protection as middleware to all routes in this router
+  // Cast to unknown first to avoid TypeScript errors with incompatible RequestHandler types
+  csrfRoutes.use(csrfProtection as unknown as express.RequestHandler);
 
   // Authentication routes
   router.post("/auth/login", authLimiter, login);

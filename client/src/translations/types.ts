@@ -1,4 +1,6 @@
-import { Language } from '@/contexts/LanguageContext';
+// Define the Language type directly instead of importing from LanguageContext
+// to avoid JSX-related TypeScript errors
+export type Language = "en" | "de" | "sv";
 
 /**
  * Type for translation keys
@@ -10,7 +12,7 @@ export type TranslationKey = string;
  * Type for translation values
  * Can be a string or a nested object of strings
  */
-export type TranslationValue = string | Record<string, TranslationValue>;
+export type TranslationValue = string | { [key: string]: string | any };
 
 /**
  * Type for a flat translation dictionary

@@ -1,56 +1,22 @@
 import { FlatTranslations, NestedTranslations } from './types';
 
 /**
- * Flattens a nested translations object into a flat object with dot notation keys
- * Example: { a: { b: 'c' } } -> { 'a.b': 'c' }
+ * Gets a value from a nested object using a dot notation path
+ * Example: getNestedValue({ a: { b: 'c' } }, 'a.b') -> 'c'
  */
-export function flattenTranslations(
+export function getNestedValue(
   obj: NestedTranslations,
-  prefix: string = '',
-  result: FlatTranslations = {}
-): FlatTranslations {
-  for (const key in obj) {
-    const value = obj[key];
-    const newKey = prefix ? `${prefix}.${key}` : key;
+  path: string
+): string | undefined {
+  const keys = path.split('.');
+  let current: any = obj;
 
-    if (typeof value === 'string') {
-      result[newKey] = value;
-    } else if (value !== null && typeof value === 'object') {
-      flattenTranslations(value as NestedTranslations, newKey, result);
-    }
+  for (const key of keys) {
+    if (current === undefined || current === null) return undefined;
+    current = (current as Record<string, any>)[key];
   }
 
-  return result;
-}
-
-/**
- * Unflattens a flat translations object with dot notation keys into a nested object
- * Example: { 'a.b': 'c' } -> { a: { b: 'c' } }
- */
-export function unflattenTranslations(
-  flatObj: FlatTranslations
-): NestedTranslations {
-  const result: NestedTranslations = {};
-
-  for (const key in flatObj) {
-    const value = flatObj[key];
-    const keys = key.split('.');
-    let current: any = result;
-
-    for (let i = 0; i < keys.length; i++) {
-      const k = keys[i];
-      if (i === keys.length - 1) {
-        // Last key, set the value
-        current[k] = value;
-      } else {
-        // Not the last key, create nested object if it doesn't exist
-        current[k] = current[k] || {};
-        current = current[k];
-      }
-    }
-  }
-
-  return result;
+  return typeof current === 'string' ? current : undefined;
 }
 
 /**
@@ -69,71 +35,80 @@ export function interpolate(
 }
 
 /**
- * Gets a value from a nested object using a dot notation path
- * Example: getNestedValue({ a: { b: 'c' } }, 'a.b') -> 'c'
+ * Flattens a nested translations object into a flat key-value object
+ * Example: flattenTranslations({ a: { b: 'c' } }) -> { 'a.b': 'c' }
  */
-export function getNestedValue(
-  obj: NestedTranslations,
-  path: string
-): string | undefined {
-  const keys = path.split('.');
-  let current: any = obj;
-
-  for (const key of keys) {
-    if (current === undefined || current === null) return undefined;
-    current = current[key];
-  }
-
-  return typeof current === 'string' ? current : undefined;
+export function flattenTranslations(obj: NestedTranslations, prefix = ''): FlatTranslations {
+  return Object.keys(obj).reduce((acc: FlatTranslations, key) => {
+    const prefixedKey = prefix ? `${prefix}.${key}` : key;
+    
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      const flattened = flattenTranslations(obj[key] as NestedTranslations, prefixedKey);
+      Object.assign(acc, flattened);
+    } else if (typeof obj[key] === 'string') {
+      acc[prefixedKey] = obj[key] as string;
+    }
+    
+    return acc;
+  }, {});
 }
 
 /**
- * Validates that all keys in the reference object exist in the target object
- * Useful for ensuring all translations exist in all languages
+ * Unflattens a flat key-value object into a nested translations object
+ * Example: unflattenTranslations({ 'a.b': 'c' }) -> { a: { b: 'c' } }
  */
-export function validateTranslations(
-  reference: FlatTranslations,
-  target: FlatTranslations
-): { missingKeys: string[]; extraKeys: string[] } {
-  const referenceKeys = Object.keys(reference);
-  const targetKeys = Object.keys(target);
-
-  const missingKeys = referenceKeys.filter(key => !targetKeys.includes(key));
-  const extraKeys = targetKeys.filter(key => !referenceKeys.includes(key));
-
-  return { missingKeys, extraKeys };
+export function unflattenTranslations(flatObj: FlatTranslations): NestedTranslations {
+  const result: NestedTranslations = {};
+  
+  Object.keys(flatObj).forEach(key => {
+    const keys = key.split('.');
+    let current: any = result;
+    
+    keys.forEach((k, i) => {
+      if (i === keys.length - 1) {
+        // Last key, set the value
+        current[k] = flatObj[key];
+      } else {
+        // Not the last key, create nested object if it doesn't exist
+        current[k] = current[k] || {};
+        current = current[k];
+      }
+    });
+  });
+  
+  return result;
 }
 
 /**
- * Exports translations to a CSV format for easy editing
+ * Exports translations to CSV format
  */
 export function exportTranslationsToCSV(
   translations: Record<string, FlatTranslations>
 ): string {
   const languages = Object.keys(translations);
+  if (!languages.length) return '';
+  
+  // Get all unique keys across all languages
   const allKeys = new Set<string>();
-
-  // Collect all keys from all languages
-  for (const lang of languages) {
+  languages.forEach(lang => {
     Object.keys(translations[lang]).forEach(key => allKeys.add(key));
-  }
-
-  // Sort keys for better readability
-  const sortedKeys = Array.from(allKeys).sort();
-
+  });
+  
+  const keys = Array.from(allKeys).sort();
+  
   // Create CSV header
-  let csv = `Key,${languages.join(',')}\n`;
-
-  // Add rows for each key
-  for (const key of sortedKeys) {
-    const values = languages.map(lang => {
+  let csv = `key,${languages.join(',')}`;
+  
+  // Add each row
+  keys.forEach(key => {
+    csv += `\n"${key.replace(/"/g, '""')}"`; // Escape quotes in key
+    
+    languages.forEach(lang => {
       const value = translations[lang][key] || '';
-      // Escape quotes and commas for CSV format
-      return `"${value.replace(/"/g, '""')}"`;
+      csv += `,"${value.replace(/"/g, '""')}"`; // Escape quotes in value
     });
-    csv += `"${key}",${values.join(',')}\n`;
-  }
-
+  });
+  
   return csv;
 }
 
@@ -143,11 +118,22 @@ export function exportTranslationsToCSV(
 export function importTranslationsFromCSV(
   csv: string
 ): Record<string, FlatTranslations> {
+  // Handle empty input
+  if (!csv || !csv.trim()) {
+    return {};
+  }
+
   const lines = csv.split('\n');
+  
+  // Handle empty CSV or just header
+  if (lines.length <= 1) {
+    return {};
+  }
+  
   const header = lines[0].split(',');
   
   // First column is the key, the rest are languages
-  const languages = header.slice(1);
+  const languages = header.slice(1).filter(Boolean);
   const result: Record<string, FlatTranslations> = {};
   
   // Initialize result object
@@ -157,21 +143,67 @@ export function importTranslationsFromCSV(
   
   // Parse each line
   for (let i = 1; i < lines.length; i++) {
-    if (!lines[i].trim()) continue;
+    if (!lines[i] || !lines[i].trim()) continue;
     
     // Split by comma, but respect quoted values
     const values = lines[i].match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g) || [];
     
-    // First value is the key
-    const key = values[0].replace(/^"|"$/g, '').replace(/""/g, '"');
+    // Skip if no values or first value (key) is missing
+    if (!values.length) continue;
+    
+    // First value is the key - with additional type safety
+    // TypeScript should know values[0] exists because of the check above, but let's be extra safe
+    const key = values[0] ? values[0].replace(/^"|"$/g, '').replace(/""/g, '"') : '';
+    if (!key) continue; // Skip if key is empty
     
     // The rest are translations for each language
     for (let j = 0; j < languages.length; j++) {
       const lang = languages[j];
-      const value = values[j + 1]?.replace(/^"|"$/g, '').replace(/""/g, '"') || '';
+      
+      // Skip if language is undefined or not in result
+      if (!lang || !result[lang]) continue;
+      
+      // Handle the value with null check
+      let value = '';
+      if (values[j + 1]) {
+        value = values[j + 1].replace(/^"|"$/g, '').replace(/""/g, '"');
+      }
+      
+      // Now we can safely assign the value
       result[lang][key] = value;
     }
   }
   
   return result;
+}
+
+/**
+ * Validates translations across languages
+ * Returns an object with missing keys for each language
+ */
+export function validateTranslations(
+  translations: Record<string, FlatTranslations>
+): Record<string, string[]> {
+  const languages = Object.keys(translations);
+  if (languages.length <= 1) return {};
+  
+  // Get all unique keys across all languages
+  const allKeys = new Set<string>();
+  languages.forEach(lang => {
+    Object.keys(translations[lang]).forEach(key => allKeys.add(key));
+  });
+  
+  // Check each language for missing keys
+  const missingKeys: Record<string, string[]> = {};
+  
+  languages.forEach(lang => {
+    const langKeys = Object.keys(translations[lang]);
+    const missing = Array.from(allKeys).filter(key => !langKeys.includes(key));
+    
+    if (missing.length > 0) {
+      missingKeys[lang] = missing;
+    }
+  });
+  
+  return missingKeys;
 }

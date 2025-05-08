@@ -21,10 +21,10 @@ export default function ContactPage() {
   return (
     <div className="font-opensans text-slate relative">
       <Helmet>
-        <title>{`${t.contact.title} | Triple X Adventures`}</title>
-        <meta name="description" content={t.contact.subtitle} />
-        <meta property="og:title" content={`${t.contact.title} | Triple X Adventures`} />
-        <meta property="og:description" content={t.contact.subtitle} />
+        <title>{`${(t as any).contact?.title || 'Contact Us'} | Triple X Adventures`}</title>
+        <meta name="description" content={(t as any).contact?.subtitle || 'Contact Triple X Adventures for your next adventure in Swedish Lapland'} />
+        <meta property="og:title" content={`${(t as any).contact?.title || 'Contact Us'} | Triple X Adventures`} />
+        <meta property="og:description" content={(t as any).contact?.subtitle || 'Contact Triple X Adventures for your next adventure in Swedish Lapland'} />
         <meta property="og:type" content="website" />
       </Helmet>
 

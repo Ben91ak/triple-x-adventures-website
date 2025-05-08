@@ -1,4 +1,4 @@
-import { ContactFormData } from "../types";
+import { ContactFormData } from "../types/index";
 import { apiRequest } from "./queryClient";
 
 // Adventure form data interface (mirrors schema in shared/schema.ts)

@@ -1,4 +1,15 @@
-import { useContext } from 'react';
+npm error code ERR_INVALID_ARG_TYPE
+npm error The "from" argument must be of type string. Received undefined
+npm error A complete log of this run can be found in: /Users/triplex/.npm/_logs/2025-05-08T09_10_18_453Z-debug-0.log
+triplex@Benjamins-MacBook-Pro-2 Triple-X-Adventures-Website-1 % npm audit fix
+npm error code ENOTEMPTY
+npm error syscall rename
+npm error path /Users/triplex/Downloads/Triple-X-Adventures-Website-1/node_modules/vercel
+npm error dest /Users/triplex/Downloads/Triple-X-Adventures-Website-1/node_modules/.vercel-NG6ErkUp
+npm error errno -66
+npm error ENOTEMPTY: directory not empty, rename '/Users/triplex/Downloads/Triple-X-Adventures-Website-1/node_modules/vercel' -> '/Users/triplex/Downloads/Triple-X-Adventures-Website-1/node_modules/.vercel-NG6ErkUp'
+npm error A complete log of this run can be found in: /Users/triplex/.npm/_logs/2025-05-08T09_10_27_237Z-debug-0.log
+triplex@Benjamins-MacBook-Pro-2 Triple-X-Adventures-Website-1 % import { useContext } from 'react';
 import { LanguageContext, Language } from '@/contexts/LanguageContext';
 import { translations } from '@/translations';
 
@@ -26,14 +37,16 @@ export function useTranslation() {
     // Traverse the nested objects
     for (const k of keys) {
       if (result && typeof result === 'object' && k in result) {
-        result = result[k];
+        // Use type assertion to tell TypeScript this is a valid access
+        result = (result as Record<string, any>)[k];
       } else {
         // If key not found in current language, try English
         if (language !== 'en') {
           let fallback = translations['en'];
           for (const fk of keys) {
             if (fallback && typeof fallback === 'object' && fk in fallback) {
-              fallback = fallback[fk];
+              // Use type assertion for fallback as well
+              fallback = (fallback as Record<string, any>)[fk];
             } else {
               return key; // Key not found even in English
             }

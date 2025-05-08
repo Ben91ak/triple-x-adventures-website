@@ -1,12 +1,22 @@
 import { Helmet } from 'react-helmet-async';
 
+type Language = 'en' | 'de' | 'sv';
+
+interface AltLangLink {
+  lang: string;
+  url: string;
+}
+
 interface SEOProps {
   title: string;
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
+  keywords?: string;
   structuredData?: Record<string, any>;
+  lang?: Language;
+  altLangLinks?: AltLangLink[];
   children?: React.ReactNode;
 }
 
@@ -16,7 +26,10 @@ export function SEO({
   canonicalUrl = "https://triplexadventures.com",
   ogImage = "/images/TXA_fallback_optimized.jpg",
   ogType = "website",
+  keywords,
   structuredData,
+  lang,
+  altLangLinks,
   children
 }: SEOProps) {
   // Default site name to append to titles
@@ -41,9 +54,21 @@ export function SEO({
       <title>{formattedTitle}</title>
       <meta name="title" content={formattedTitle} />
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
+      {lang && <meta property="og:locale" content={lang} />}
       
       {/* Canonical Link */}
       <link rel="canonical" href={fullCanonicalUrl} />
+      
+      {/* Alternate Language Links */}
+      {altLangLinks && altLangLinks.map(link => (
+        <link 
+          key={link.lang}
+          rel="alternate" 
+          hrefLang={link.lang} 
+          href={link.url} 
+        />
+      ))}
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
