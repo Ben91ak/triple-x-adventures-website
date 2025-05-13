@@ -6,7 +6,7 @@ export interface DetailSection {
 
 // Define the tag interface for experiences
 export interface ExperienceTag {
-  type: 'bestseller' | 'new' | 'featured';
+  type: 'bestseller' | 'new' | 'featured' | 'nature' | 'adrenaline' | 'scenic';
   text: string;
 }
 

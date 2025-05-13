@@ -63,6 +63,13 @@ export function preloadImage(src: string): Promise<void> {
       return;
     }
     
+    // Skip if the source is empty or invalid
+    if (!src || typeof src !== 'string') {
+      console.warn('Invalid image source provided to preloadImage');
+      resolve(); // Resolve instead of reject to prevent chain failures
+      return;
+    }
+    
     // Check if image is already cached
     const img = new Image();
     
@@ -72,7 +79,8 @@ export function preloadImage(src: string): Promise<void> {
     
     img.onerror = () => {
       console.warn(`Failed to preload image: ${src}`);
-      reject(new Error(`Failed to preload: ${src}`));
+      // Resolve with a warning instead of rejecting to prevent chain failures
+      resolve();
     };
     
     img.src = src;

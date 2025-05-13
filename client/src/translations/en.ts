@@ -205,7 +205,7 @@ export const en = {
         id: 1,
         title: "Snowmobile Adventure",
         description: "Ride across pristine snow in Swedish Lapland with top-of-the-line Ski-doo models. Choose from 2hr, 4hr & 6hr tours for your perfect adventure.",
-        price: 299,
+        price: 295,
         duration: "2-6 Hours",
         intensityLevel: "Thrilling",
         keyHighlights: ["Backcountry Exploration", "Modern Ski-doo Fleet", "Scenic Routes"],
@@ -260,10 +260,10 @@ export const en = {
         id: 2,
         title: "Husky Sledding Expedition",
         description: "Lead your own team of eager huskies through silent, snow-covered forests. An authentic and unforgettable Arctic experience.",
-        price: 450,
-        duration: "4 Hours",
-        intensityLevel: "Moderate",
-        keyHighlights: ["Drive Your Own Sled", "Friendly Husky Team", "Forest Trails"],
+        price: 220,
+        duration: "1.5 Hours",
+        intensityLevel: "Active / Relaxed",
+        keyHighlights: ["Lead Your Own Team", "Cozy Passenger Ride", "Authentic Arctic Tradition"],
         image: "/images/Huskys/Husky 1_result.webp",
         gallery: [
           "/images/Huskys/Husky 1_result.webp",
@@ -271,37 +271,151 @@ export const en = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
-        fullDescription: "Experience the pure joy and power of husky sledding. After a brief introduction to your team and the sled, you'll embark on a journey through magical winter landscapes. The silence is broken only by the panting of the dogs and the runners gliding over the snow. This tour offers a deep connection with nature and these incredible animals. A warming break with hot drinks and snacks is included halfway."
-      },
+        "detailedInfo": {
+            "introduction": "Get ready to feel the power of sled dogs as you glide through snowy forests and frozen lakes. Whether you want to lead your own team or relax as a passenger, our husky experiences offer the perfect balance of excitement and serenity.",
+            "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+            "tours": [
+                {
+                    "title": "ACTIVE HUSKY TOUR",
+                    "description": "Drive your own sled and lead a team of energetic huskies through the Arctic wilderness.",
+                    "details": ["Guided by expert mushers", "No prior experience needed"]
+                },
+                {
+                    "title": "PASSIVE HUSKY TOUR",
+                    "description": "Sit back and enjoy the ride while our experienced mushers guide you through breathtaking scenery.",
+                    "details": ["Guided by expert mushers", "Family-friendly"]
+                }
+            ],
+            "importantInfoTitle": "IMPORTANT INFORMATION",
+            "importantInfo": [
+                "Suitable for beginners and experienced guests",
+                "Children welcome as passengers",
+                "Warm clothing provided if needed",
+                "Guided by professional mushers"
+            ],
+            "closingRemark": "More than just a ride—it’s an authentic Arctic experience you’ll never forget!"
+        },
+        "tag": {
+            "text": "Family Favorite",
+            "type": "family"
+        },
+        "features": [
+            "Guided by Mushers",
+            "Drive or Ride Options",
+            "Warm Clothing Provided",
+            "Small Group Experience"
+        ]
+    },
       {
         id: 3,
-        title: "Snowshoe Hike and Torchwalk",
-        description: "Experience the magic of the Arctic forest on snowshoes, followed by a mesmerizing evening torchlight walk under the stars.",
-        price: 149,
-        duration: "3 Hours",
+        title: "Snowshoe Hike Adventure",
+        description: "Experience the magic of the Arctic forest on snowshoes as you trek through pristine snow-covered landscapes and discover the beauty of Lapland's winter wilderness.",
+        price: 40,
+        duration: "1.5 Hours",
         intensityLevel: "Moderate",
-        keyHighlights: ["Guided Snowshoe Adventure", "Evening Torchlight Walk", "Warm Drinks & Snacks"],
-        image: "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+        keyHighlights: ["Guided Snowshoe Adventure", "Pristine Forest Trails", "Warm Drinks & Snacks"],
+        image: "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
         gallery: [
           "/images/Snowshoe_Torchwalk/snowtorch1.webp",
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
-        fullDescription: "Discover the serene beauty of the Arctic forest on our guided snowshoe adventure. As daylight fades, we'll transition to a magical torchlight walk under the stars. Our expert guides will lead you through pristine snow-covered landscapes, sharing stories of local culture and wildlife. No prior experience needed - just a sense of adventure! Warm drinks and traditional snacks will be provided to keep your energy up throughout this unforgettable winter experience.",
-        tag: {
-          text: "New",
-          type: "featured"
+    "detailedInfo": {
+      "introduction": "Experience the magic of Lapland's forests on snowshoes as you trek through pristine snow-covered landscapes. This daytime adventure is perfect for nature lovers of all ages who want to explore the winter wilderness.",
+      "adventureOptionsTitle": "ADVENTURE DETAILS",
+      "tours": [
+        {
+          "title": "GUIDED SNOWSHOE ADVENTURE",
+          "description": "Daytime tour through snowy forests and frozen lakes on snowshoes.",
+          "details": [
+            "Professional guide with local knowledge",
+            "High-quality snowshoes provided",
+            "Hot drinks and snacks included",
+            "Photo opportunities in pristine nature"
+          ]
         }
+      ],
+      "importantInfoTitle": "IMPORTANT INFORMATION",
+      "importantInfo": [
+        "Suitable for all ages and fitness levels",
+        "No prior experience needed",
+        "All equipment provided",
+        "Warm clothing recommended",
+        "Small groups for personalized experience"
+      ],
+      "closingRemark": "Our Snowshoe Hike Adventure offers a peaceful way to explore the Arctic wilderness and connect with nature in its purest winter form."
+    },
+    "tag": {
+      "text": "Nature Experience",
+      "type": "nature"
+    },
+    "features": [
+      "Guided Snowshoe Walk",
+      "All Equipment Provided",
+      "Hot Drinks & Snacks Included",
+      "Family-Friendly"
+    ]
+      },
+      {
+        id: 11,
+        title: "Evening Torchwalk",
+        description: "Join a mesmerizing evening torchlight walk under the stars, where the dark Arctic sky and the warm glow of torches create a magical atmosphere in the winter forest.",
+        price: 40,
+        duration: "1.5 Hours",
+        intensityLevel: "Easy",
+        keyHighlights: ["Evening Torchlight Experience", "Stargazing Opportunity", "Warm Drinks by the Fire"],
+        image: "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+        gallery: [
+          "/images/Snowshoe_Torchwalk/snowtorch4.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch2.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch1.webp"
+        ],
+    "detailedInfo": {
+      "introduction": "Join an atmospheric evening walk with torches under the Arctic sky. As darkness falls, the forest transforms into a magical realm lit by the warm glow of torches, creating unforgettable memories of your Arctic adventure.",
+      "adventureOptionsTitle": "ADVENTURE DETAILS",
+      "tours": [
+        {
+          "title": "EVENING TORCHLIGHT WALK",
+          "description": "Evening walk through the winter forest, lit by torches, with warm drinks by the fire.",
+          "details": [
+            "Traditional torches provided",
+            "Professional guide with local stories",
+            "Hot drinks and snacks by the campfire",
+            "Potential Northern Lights viewing (weather permitting)"
+          ]
+        }
+      ],
+      "importantInfoTitle": "IMPORTANT INFORMATION",
+      "importantInfo": [
+        "Suitable for all ages",
+        "No special skills required",
+        "All equipment provided",
+        "Warm clothing essential",
+        "Activity runs regardless of weather conditions"
+      ],
+      "closingRemark": "Our Evening Torchwalk offers a peaceful yet magical way to experience the Arctic night, combining tradition with the natural beauty of Lapland's winter landscape."
+    },
+    "tag": {
+      "text": "Evening Activity",
+      "type": "nature"
+    },
+    "features": [
+      "Guided Torch Walk",
+      "Torches Provided",
+      "Hot Drinks & Snacks Included",
+      "Family-Friendly"
+    ]
       },
       {
         id: 4,
         title: "Ice Fishing Adventure",
         description: "Drill through the ice on a frozen lake and try your luck catching Arctic char or perch. A peaceful and traditional Lapland activity.",
         price: 149,
-        duration: "3 Hours",
-        intensityLevel: "Relaxed",
-        keyHighlights: ["Traditional Arctic Activity", "Fishing Equipment Provided", "Hot Drinks Included"],
+        duration: "3-4 Hours",
+        intensityLevel: "Relaxed / Exciting",
+        keyHighlights: ["True Arctic Lifestyle", "Fishing Equipment Provided", "Test Your Aim"],
         image: "/images/Ice-Fishing.jpg",
         gallery: [
           "/images/Ice Fishing/Icefish 1_result.webp",
@@ -309,16 +423,47 @@ export const en = {
           "/images/Ice Fishing/Shoot 3_result.webp",
           "/images/Ice Fishing/Shoot 4_result.webp"
         ],
-        fullDescription: "Experience the tranquility of ice fishing on a secluded frozen lake. We'll provide all the necessary equipment, including augers, rods, and bait. Your guide will teach you the techniques and share stories about life in the Arctic. Enjoy the crisp winter air and the silence of the wilderness. Warm drinks are provided to keep you comfortable."
+        "detailedInfo": {
+      "introduction": "Start your day on a frozen lake with a traditional ice fishing session, guided by locals. Then switch gears and challenge yourself with clay shooting in the snowy wilderness. This is the perfect Arctic combo experience for all levels.",
+      "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+      "tours": [
+        {
+          "title": "HALF-DAY ARCTIC OUTDOOR EXPERIENCE",
+          "description": "Start with ice fishing, then enjoy a clay shooting session in the Arctic wilderness. Includes guiding, equipment, and snacks.",
+          "details": [
+            "All equipment provided",
+            "Hot drinks included"
+          ]
+        }
+      ],
+      "importantInfoTitle": "IMPORTANT INFORMATION",
+      "importantInfo": [
+        "Suitable for all levels",
+        "Guided by experienced locals",
+        "All equipment provided",
+        "Warm outdoor clothing recommended"
+      ],
+      "closingRemark": "A true Arctic day—fishing, shooting, and creating unforgettable memories in Swedish Lapland!"
+    },
+    "tag": {
+      "text": "Local Favorite",
+      "type": "local"
+    },
+    "features": [
+      "Guided by Locals",
+      "Fishing & Shooting Combo",
+      "All Equipment Provided",
+      "Hot Drinks Included"
+    ]
       },
       {
         id: 5,
-        title: "Visit a Reindeer",
-        description: "Meet these gentle Arctic animals up close, take photos, and feed them. If you're lucky, you might even get to pet them!",
-        price: 89,
-        duration: "1 Hour",
+        title: "Reindeer Experience",
+        description: "Meet and feed Lapland’s most iconic animal by hand and capture unforgettable photos with our friendly reindeer.",
+        price: 45,
+        duration: "40 Minutes",
         intensityLevel: "Relaxed",
-        keyHighlights: ["Reindeer Feeding", "Photo Opportunities", "Hot Drinks"],
+        keyHighlights: ["Feed Reindeer by Hand", "Photo Opportunity", "Family-Friendly Activity"],
         image: "/images/Reindeers.jpg",
         gallery: [
           "/images/Reindeers/Reindeers 1_result.webp",
@@ -326,11 +471,37 @@ export const en = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
-        fullDescription: "Get up close with these beautiful Arctic animals during this short but memorable experience. You'll have the chance to feed the reindeer, take plenty of photos, and if you're very lucky, you might even get to pet them. Our guide will share interesting facts about reindeer and their importance in the Arctic region. Hot drinks are provided to keep you warm during your visit. This activity is perfect for families and animal lovers of all ages.",
-        tag: {
-          text: "Family Friendly",
-          type: "featured"
-        }
+        "detailedInfo": {
+          "introduction": "Get up close with our friendly reindeer, feed them by hand, and capture unforgettable memories in the heart of Lapland.",
+          "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+          "tours": [
+            {
+              "title": "REINDEER FEEDING EXPERIENCE",
+              "description": "Meet, feed, and photograph reindeer in a cozy natural setting.",
+              "details": [
+                "Animal feed included",
+                "Great photo opportunities"
+              ]
+            }
+          ],
+          "importantInfoTitle": "IMPORTANT INFORMATION",
+          "importantInfo": [
+            "Suitable for all ages",
+            "Animal feed included",
+            "Perfect for families and couples",
+            "No special equipment needed"
+          ],
+          "closingRemark": "Short, simple, and unforgettable—come meet the reindeer and make your Arctic experience complete!"
+        },
+        "tag": {
+          "text": "Family Favorite",
+          "type": "family"
+        },
+        "features": [
+          "Meet & Feed Reindeer",
+          "Photo Opportunity",
+          "Family-Friendly"
+        ]
       },
       {
         id: 6,
@@ -347,16 +518,48 @@ export const en = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
-        fullDescription: "Soar above the stunning landscapes of Swedish Lapland on an unforgettable helicopter tour. Witness the scale of the wilderness, spot wildlife from above, and gain a unique perspective on the frozen world below. Our experienced pilots provide commentary on the points of interest. This is a truly spectacular way to appreciate the beauty of the Arctic."
+        "detailedInfo": {
+            "introduction": "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter. Experience the landscape like never before as you soar above Swedish Lapland.",
+            "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+            "tours": [
+                {
+                    "title": "30-MINUTE SCENIC FLIGHT",
+                    "description": "Our standard tour offering panoramic views of Arctic Lapland’s winter wonderland.",
+                    "details": ["Experienced pilot", "Headsets provided"]
+                },
+                {
+                    "title": "CUSTOM FLIGHT OR PRIVATE SHUTTLE",
+                    "description": "Looking for something longer or more exclusive? Contact us for tailored flight durations or private transport.",
+                    "details": ["Private booking on request", "Subject to availability"]
+                }
+            ],
+            "importantInfoTitle": "IMPORTANT INFORMATION",
+            "importantInfo": [
+                "Minimum 4 passengers required for standard flight",
+                "Weather-dependent activity",
+                "Private flights available on request",
+            ],
+            "closingRemark": "Soar above the Arctic and capture views that few ever get to see—an unforgettable highlight of your trip."
+        },
+        "tag": {
+            "text": "Scenic",
+            "type": "scenic"
+        },
+        "features": [
+            "Professional Pilot",
+            "Scenic Aerial Tour",
+            "Winter Exclusive",
+            "Custom Flights Available"
+        ]
       },
       {
         id: 7,
         title: "Ice Drifting Experience",
-        description: "Learn performance driving on ice with pro instructors. Master controlled drifts in specially equipped cars on our frozen lake circuit.",
-        price: 349,
-        duration: "Half Day",
+        description: "Master the art of drifting on ice with our professional instructors on specially prepared frozen tracks in Swedish Lapland.",
+        price: 1800,
+        duration: "Full Day",
         intensityLevel: "Extreme",
-        keyHighlights: ["Performance Driving", "Pro Instructors", "Frozen Lake Track"],
+        keyHighlights: ["Performance Driving", "Pro Instructors", "High-Speed Arctic Action"],
         image: "/images/Drifting.jpg",
         gallery: [
           "/images/Drifting.jpg",
@@ -364,18 +567,52 @@ export const en = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
-        fullDescription: "Feel the exhilaration of sliding sideways on ice in our Ice Drifting Experience. Under the guidance of professional driving instructors, you'll learn the techniques of controlling a vehicle in extreme winter conditions. Using specially prepared performance cars equipped with studded tires, you'll practice drifting techniques on our purpose-built ice course. Start with basic exercises and progress to more complex maneuvers as your confidence grows. This experience is perfect for driving enthusiasts looking to improve their winter driving skills in a safe and controlled environment. All drivers receive thorough instruction and have the opportunity for multiple driving sessions to perfect their technique.",
-        tag: {
-          text: "Featured",
-          type: "featured"
-        }
+        "detailedInfo": {
+          "introduction": "Feel the thrill of sliding and drifting on the ice with expert instructors guiding you every step of the way. Suitable for all levels, this is your chance to push your limits on frozen lakes.",
+          "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+          "tours": [
+            {
+              "title": "1-HOUR ICE DRIFTING SESSION",
+              "description": "Get introduced to ice drifting with expert guidance on our frozen tracks.",
+              "details": [
+                "Professional instructor included",
+                "Vehicles prepared for drifting"
+              ]
+            },
+            {
+              "title": "HALF-DAY ICE DRIFTING EXPERIENCE",
+              "description": "Take your skills further with extended track time and professional coaching.",
+              "details": [
+                "Safety equipment provided",
+                "Multiple track layouts available"
+              ]
+            }
+          ],
+          "importantInfoTitle": "IMPORTANT INFORMATION",
+          "importantInfo": [
+            "No prior drifting experience required",
+            "Safety equipment provided",
+            "Hot beverages included",
+            "Perfect for individuals, groups, or corporate events"
+          ],
+          "closingRemark": "Book your spot now and experience the Arctic’s most exciting motorsport adventure!"
+        },
+        "tag": {
+          "text": "Adrenaline Rush",
+          "type": "adrenaline"
+        },
+        "features": [
+          "Professional Instruction",
+          "Prepared Ice Tracks",
+          "Safety Equipment Provided",
+        ]
       },
       {
         id: 8,
-        title: "Side-By-Side Buggy Adventure",
-        description: "Navigate snowy trails and frozen terrain in a powerful Side-By-Side (SBS) buggy. Thrills and fun for pairs or solo drivers.",
+        title: "Buggy Drift Adventure",
+        description: "Race and drift buggies on snow-covered tracks with instant acceleration and maximum control—perfect for adrenaline seekers.",
         price: 249,
-        duration: "2 Hours",
+        duration: "1 Hour",
         intensityLevel: "Thrilling",
         keyHighlights: ["Off-Road Buggy Fun", "Snowy Trail Navigation", "Heated Cabin Option"],
         image: "/images/Side-By-Side-Buggy-Drifting.jpg",
@@ -385,7 +622,38 @@ export const en = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        fullDescription: "Embark on an exciting off-road adventure in our Side-By-Side buggies. These versatile vehicles are perfect for navigating the challenging winter terrain. Follow your guide through forests and across frozen grounds, enjoying the power and agility of the buggy. Suitable for drivers and passengers looking for an adrenaline-fueled exploration."
+        "detailedInfo": {
+          "introduction": "Experience the rush of buggy drifting on prepared snow tracks. Challenge yourself or bring a friend as a co-driver for extra fun.",
+          "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+          "tours": [
+            {
+              "title": "1-HOUR BUGGY DRIFT SESSION",
+              "description": "One hour of racing and drifting action on snow tracks.",
+              "details": [
+                "Safety belts and instructions included",
+                "Co-driver option available"
+              ]
+            }
+          ],
+          "importantInfoTitle": "IMPORTANT INFORMATION",
+          "importantInfo": [
+            "One or two persons per buggy (driver + co-driver)",
+            "Suitable for all experience levels",
+            "Safety belts and instructions provided",
+            "Warm outdoor clothing recommended"
+          ],
+          "closingRemark": "Get ready to drift, race, and feel the Arctic rush—book your buggy adventure today!"
+        },
+        "tag": {
+          "text": "Adrenaline Rush",
+          "type": "adrenaline"
+        },
+        "features": [
+          "One or Two Persons per Buggy",
+          "Safety Equipment Provided",
+          "Prepared Snow Tracks",
+          "Adrenaline-Filled Experience"
+        ] 
       }
     ]
   },

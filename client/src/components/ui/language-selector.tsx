@@ -14,7 +14,7 @@ import { useTranslation } from "@/translations";
 export function LanguageSelector({ className }: { className?: string }) {
   const { language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const divRef = useRef<HTMLDivElement>(null);
   const t = useTranslation(language);
   
   // Effect to remove focus from the button when language changes
@@ -26,8 +26,8 @@ export function LanguageSelector({ className }: { className?: string }) {
     }
     
     // Also directly blur our button if it exists
-    if (buttonRef.current) {
-      buttonRef.current.blur();
+    if (divRef.current) {
+      divRef.current.blur();
     }
   }, [language]);
   
@@ -91,7 +91,7 @@ export function LanguageSelector({ className }: { className?: string }) {
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <div
-          ref={buttonRef}
+          ref={divRef}
           style={buttonStyle}
           className={cn(
             "relative group inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg",

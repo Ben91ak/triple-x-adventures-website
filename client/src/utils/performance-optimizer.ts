@@ -54,36 +54,61 @@ export function optimizePageImages(): void {
 export function preloadAllCriticalImages(): void {
   if (!isBrowser) return;
   
+  // Check if preloading is already in progress or completed
+  if (window.sessionStorage && window.sessionStorage.getItem('imagesPreloaded') === 'true') {
+    console.log('Critical images already preloaded in this session');
+    return;
+  }
+  
+  // Only include images that are known to exist
   const criticalImageUrls = [
     '/weiss-grun.png', // Logo
     '/images/TXA_fallback_optimized.jpg', // Hero background fallback
-    'https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Teaser%202025%20Homepage-Fnb2gpMVOnfP0UDwuU6elWEDJehxL3.webm', // Hero video
-    '/images/experiences/Snowmobile 1_result.webp', // First experience image
   ];
   
+  // Validate each image exists before preloading
   criticalImageUrls.forEach(url => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = url;
-    link.crossOrigin = 'anonymous';
-    
-    // Only add if it doesn't already exist
-    if (!document.querySelector(`link[rel="preload"][href="${url}"]`)) {
-      document.head.appendChild(link);
+    try {
+      // Skip video URLs which might cause MIME type errors
+      if (url.includes('.webm') || url.includes('.mp4')) return;
+      
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = url;
+      link.crossOrigin = 'anonymous';
+      
+      // Only add if it doesn't already exist
+      if (!document.querySelector(`link[rel="preload"][href="${url}"]`)) {
+        document.head.appendChild(link);
+      }
+    } catch (error) {
+      console.warn(`Error preloading image: ${url}`, error);
+      // Continue with other images
     }
   });
   
-  // Preload first few seconds of video for hero section
-  const videoLink = document.createElement('link');
-  videoLink.rel = 'preload';
-  videoLink.as = 'video';
-  videoLink.href = 'https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Teaser%202025%20Homepage-Fnb2gpMVOnfP0UDwuU6elWEDJehxL3.webm';
-  videoLink.type = 'video/webm';
+  try {
+    // Preload first few seconds of video for hero section
+    const videoUrl = 'https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Teaser%202025%20Homepage-Fnb2gpMVOnfP0UDwuU6elWEDJehxL3.webm';
+    const videoLink = document.createElement('link');
+    videoLink.rel = 'preload';
+    videoLink.as = 'video';
+    videoLink.href = videoUrl;
+    videoLink.type = 'video/webm';
+    
+    // Only add if it doesn't already exist
+    if (!document.querySelector('link[rel="preload"][as="video"]')) {
+      document.head.appendChild(videoLink);
+    }
+  } catch (error) {
+    console.warn('Error preloading video:', error);
+    // Continue execution
+  }
   
-  // Only add if it doesn't already exist
-  if (!document.querySelector('link[rel="preload"][as="video"]')) {
-    document.head.appendChild(videoLink);
+  // Mark as completed
+  if (window.sessionStorage) {
+    window.sessionStorage.setItem('imagesPreloaded', 'true');
   }
 }
 

@@ -28,8 +28,8 @@ export function Footer() {
   const footerContent = {
     en: {
       description: "Authentic Arctic experiences in the heart of Swedish Lapland. Small groups, local expertise, and unforgettable adventures.",
-      quickLinks: "Quick Links",
-      popularAdventures: "Popular Adventures",
+
+
       contactInfo: "Contact Information",
       ourExperiences: "Our Experiences",
       accommodations: "Accommodations",
@@ -48,8 +48,8 @@ export function Footer() {
     },
     de: {
       description: "Authentische arktische Erlebnisse im Herzen von Schwedisch-Lappland. Kleine Gruppen, lokale Expertise und unvergessliche Abenteuer.",
-      quickLinks: "Schnelllinks",
-      popularAdventures: "Beliebte Abenteuer",
+
+
       contactInfo: "Kontaktinformationen",
       ourExperiences: "Unsere Erlebnisse",
       accommodations: "Unterkünfte",
@@ -68,8 +68,8 @@ export function Footer() {
     },
     sv: {
       description: "Autentiska arktiska upplevelser i hjärtat av Svenska Lappland. Små grupper, lokal expertis och oförglömliga äventyr.",
-      quickLinks: "Snabblänkar",
-      popularAdventures: "Populära Äventyr",
+
+
       contactInfo: "Kontaktinformation",
       ourExperiences: "Våra Upplevelser",
       accommodations: "Boende",
@@ -110,23 +110,6 @@ export function Footer() {
       label: "TripAdvisor", 
       href: "#" 
     }
-  ];
-
-  // Quick links
-  const quickLinks: FooterLink[] = [
-    { href: "#experiences", text: content.ourExperiences },
-    { href: "#accommodations", text: content.accommodations },
-    { href: "#restaurant", text: content.restaurant },
-    { href: "#team", text: content.aboutUs },
-    { href: "#contact", text: content.contact }
-  ];
-
-  // Popular adventures
-  const popularAdventures: FooterLink[] = [
-    { href: "#experiences", text: content.adventures.snowmobile },
-    { href: "#experiences", text: content.adventures.dogSledding },
-    { href: "#experiences", text: content.adventures.northernLights },
-    { href: "#experiences", text: content.adventures.iceFishing }
   ];
 
   // Legal links
@@ -173,8 +156,8 @@ export function Footer() {
           {/* Main footer content */}
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-              {/* Logo and company info - 4 columns on desktop */}
-              <div className="md:col-span-4 flex flex-col items-center md:items-start">
+              {/* Logo and company info - 6 columns on desktop */}
+              <div className="md:col-span-6 flex flex-col items-center md:items-start">
                 <Link href="/" className="inline-block mb-5">
                   <img 
                     src="/weiss-grun.png" 
@@ -207,72 +190,14 @@ export function Footer() {
                 </nav>
               </div>
               
-              {/* Spacer column for better layout */}
-              <div className="hidden md:block md:col-span-1"></div>
-              
-              {/* Links columns - 7 columns total on desktop */}
-              <div className="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8">
-                {/* Quick Links */}
-                <div className="col-span-1">
-                  <nav aria-labelledby="quick-links-heading">
-                    <h2 id="quick-links-heading" className="text-lg font-semibold mb-5 text-white flex items-center">
-                      <span className="bg-accent-color/20 w-1.5 h-6 mr-2.5 rounded-full inline-block" aria-hidden="true"></span>
-                      <span>{content.quickLinks}</span>
-                    </h2>
-                    <ul className="space-y-3 list-none p-0">
-                      {quickLinks.map((link, index) => (
-                        <li key={index}>
-                          <a 
-                            href={link.href} 
-                            className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group"
-                          >
-                            <ChevronRight 
-                              size={14} 
-                              className="mr-2 text-accent-color/50 group-hover:translate-x-1 transition-transform" 
-                              aria-hidden="true"
-                            />
-                            <span>{link.text}</span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </div>
-                
-                {/* Popular Adventures */}
-                <div className="col-span-1">
-                  <nav aria-labelledby="adventures-heading">
-                    <h2 id="adventures-heading" className="text-lg font-semibold mb-5 text-white flex items-center">
-                      <span className="bg-accent-color/20 w-1.5 h-6 mr-2.5 rounded-full inline-block" aria-hidden="true"></span>
-                      <span>{content.popularAdventures}</span>
-                    </h2>
-                    <ul className="space-y-3 list-none p-0">
-                      {popularAdventures.map((adventure, index) => (
-                        <li key={index}>
-                          <a 
-                            href={adventure.href} 
-                            className="text-white text-opacity-80 hover:text-accent-color transition-colors flex items-center group"
-                          >
-                            <ChevronRight 
-                              size={14} 
-                              className="mr-2 text-accent-color/50 group-hover:translate-x-1 transition-transform" 
-                              aria-hidden="true"
-                            />
-                            <span>{adventure.text}</span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </div>
-                
-                {/* Contact Info */}
-                <div className="col-span-1">
-                  <section aria-labelledby="contact-heading">
-                    <h2 id="contact-heading" className="text-lg font-semibold mb-5 text-white flex items-center">
-                      <span className="bg-accent-color/20 w-1.5 h-6 mr-2.5 rounded-full inline-block" aria-hidden="true"></span>
-                      <span>{content.contactInfo}</span>
-                    </h2>
+              {/* Contact Info - 6 columns on desktop */}
+              <div className="md:col-span-6">
+                <section aria-labelledby="contact-heading">
+                  <h2 id="contact-heading" className="text-lg font-semibold mb-5 text-white flex items-center">
+                    <span className="bg-accent-color/20 w-1.5 h-6 mr-2.5 rounded-full inline-block" aria-hidden="true"></span>
+                    <span>{content.contactInfo}</span>
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <address className="not-italic">
                       <ul className="space-y-4 list-none p-0">
                         <li className="flex items-start">
@@ -298,95 +223,40 @@ export function Footer() {
                         </li>
                       </ul>
                     </address>
-                  </section>
-                </div>
-              </div>
-            </div>
-            
-            {/* Copyright Section */}
-            <div className="border-t border-white/10 pt-8 mt-12">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
-                <p className="text-white text-opacity-70 text-sm text-center md:text-left">{t.footer.copyright}</p>
-                <nav aria-label="Legal Links">
-                  <ul className="flex flex-wrap justify-center md:justify-end gap-x-6 sm:gap-x-8 gap-y-4 list-none p-0">
-                    {legalLinks.map((link, index) => (
-                      <li key={index}>
-                        <a 
-                          href={link.href} 
-                          className="text-white text-opacity-70 text-sm hover:text-accent-color transition-colors py-2 px-3 -mx-3 rounded-lg hover:bg-white/5 block"
-                          onClick={link.onClick}
-                          role="button"
-                          aria-haspopup="dialog"
-                        >
-                          {link.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
+                    <div>
+                      <h3 className="text-white text-base font-medium mb-3">Opening Hours</h3>
+                      <ul className="space-y-2 list-none p-0">
+                        <li className="text-white text-opacity-80">
+                          <span className="font-medium">Monday - Friday:</span> 9:00 - 17:00
+                        </li>
+                        <li className="text-white text-opacity-80">
+                          <span className="font-medium">Saturday:</span> By appointment
+                        </li>
+                        <li className="text-white text-opacity-80">
+                          <span className="font-medium">Sunday:</span> By appointment
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Imprint Modal */}
+      {/* Modals for legal links */}
       <Modal
         isOpen={isImprintOpen}
         onClose={() => setIsImprintOpen(false)}
-        title="Imprint"
+        title={t.footer.imprint}
       >
-        <div className="text-white space-y-6 text-sm sm:text-base">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">TRIPLE X ADVENTURES AB</h3>
-            <p className="text-white/80">
-              Storgatan 6F<br />
-              93331 Arvidsjaur<br />
-              Sweden
-            </p>
-            <p className="mt-2 text-white/80">
-              Email: <a href="mailto:info@triple-x-adventures.com" className="text-accent-color hover:underline">info@triple-x-adventures.com</a><br />
-              Website: <a href="https://www.triple-x-adventures.com" className="text-accent-color hover:underline" target="_blank" rel="noreferrer">www.triple-x-adventures.com</a>
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Authorized representative managing directors:</h3>
-            <p className="text-white/80">Janina Möller, Roberth Möller</p>
-          </div>
-
-          <div>
-            <p className="text-white/80">
-              Organization number: 559122-4745<br />
-              Sales Tax Identification number: SE 559122474501
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Content disclaimer</h3>
-            <p className="text-white/80 text-sm">
-              The information provided on www.triple-x-adventures.com is for general informational purposes only. 
-              All information on the site is provided in good faith, however, we make no representation or warranty 
-              of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability, 
-              or completeness of any information on the site. Under no circumstance shall we have any liability to you 
-              for any loss or damage of any kind incurred as a result of the use of the site or reliance on any information 
-              provided on the site. Your use of the site and your reliance on any information on the site is solely at 
-              your own risk. The site may contain (or you may be sent through the site) links to other websites or content 
-              belonging to or originating from third parties or links to websites and features. Such external links are not 
-              investigated, monitored, or checked for accuracy, adequacy, validity, reliability, availability or completeness by us.
-            </p>
-            <p className="mt-4 text-white/80">
-              For any queries, please contact us at <a href="mailto:info@triple-x-adventures.com" className="text-accent-color hover:underline">info@triple-x-adventures.com</a>.
-            </p>
-          </div>
-        </div>
+        <div />
       </Modal>
-
-      {/* Terms and Conditions Modal */}
       <Modal
         isOpen={isTermsOpen}
         onClose={() => setIsTermsOpen(false)}
-        title="Terms and Conditions"
+        title={t.footer.termsConditions}
       >
         <div className="text-white space-y-6 max-h-[70vh] overflow-y-auto pr-2 text-sm sm:text-base">
           <div>
@@ -525,7 +395,6 @@ export function Footer() {
         </div>
       </Modal>
 
-      {/* Privacy Policy Modal */}
       <Modal
         isOpen={isPrivacyOpen}
         onClose={() => setIsPrivacyOpen(false)}

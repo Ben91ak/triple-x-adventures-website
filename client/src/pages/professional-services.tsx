@@ -104,6 +104,52 @@ const ProfessionalServices = memo(function ProfessionalServices() {
             </div>
           </section>
 
+          {/* Partners and Sponsors Section */}
+          <section className="py-16">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="flex items-center my-12">
+                  <div className="flex-grow h-px bg-white/10"></div>
+                  <h3 className="mx-4 text-xl text-white/60 font-medium">{t.professionalServices.partners.title}</h3>
+                  <div className="flex-grow h-px bg-white/10"></div>
+                </div>
+                
+                <div className="flex flex-wrap justify-center gap-8 mt-6">
+                  {/* Partner Logo Images */}
+                  {[
+                    { name: 'AE', src: '/images/Partnerlogos/AE.svg' },
+                    { name: 'AMG', src: '/images/Partnerlogos/AMG.svg' },
+                    { name: 'Audi', src: '/images/Partnerlogos/Audi.svg' },
+                    { name: 'BGE', src: '/images/Partnerlogos/BGE.svg' },
+                    { name: 'Laponia Resort', src: '/images/Partnerlogos/Laponia resort.svg' },
+                    { name: 'Latitude', src: '/images/Partnerlogos/Latitude web.svg' },
+                    { name: 'Porsche Experience', src: '/images/Partnerlogos/Porsche exp.svg' },
+                    { name: 'Skidoo', src: '/images/Partnerlogos/Skidoo.svg' },
+                    { name: 'TCB', src: '/images/Partnerlogos/TCB.svg' },
+                    { name: 'TH', src: '/images/Partnerlogos/TH.svg' },
+                    { name: 'Volkswagen', src: '/images/Partnerlogos/VW Logo.svg' },
+                    { name: 'Drivecenter Arena', src: '/images/Drivecenter/Drivecenter-Arena-white-logo-small-web.svg' }
+                  ].map((partner, index) => (
+                    <div 
+                      key={index}
+                      className="opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center justify-center w-[40%] sm:w-[30%] md:w-[15%] h-[80px] bg-white/5 rounded-lg p-4"
+                    >
+                      <img 
+                        src={partner.src} 
+                        alt={`${partner.name} logo`} 
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
           {/* Services Grid - Redesigned with modern gradient cards */}
           <section id="services" className="py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -125,8 +171,8 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="w-full"
                 >
-                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300">
-                    <div className="flex items-center mb-6">
+                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300 text-center">
+                    <div className="flex items-center justify-center mb-6">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{ backgroundColor: 'rgba(149, 204, 47, 0.2)' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="rgb(149, 204, 47)" style={{ color: 'rgb(149, 204, 47)' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -143,7 +189,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                     <div className="space-y-6">
                       <div>
                         <h4 className="text-lg font-semibold text-white">{t.professionalServices.services.corporate.drivingEvents.title}</h4>
-                        <ul className="list-disc list-inside text-slate-300 space-y-2">
+                        <ul className="list-disc text-slate-300 space-y-2 pl-0 inline-block text-left">
                           {t.professionalServices.services.corporate.drivingEvents.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -152,7 +198,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       
                       <div>
                         <h4 className="text-xl font-semibold text-white mb-2">{t.professionalServices.services.corporate.teambuilding.title}</h4>
-                        <ul className="list-disc pl-5 space-y-1 text-slate-200">
+                        <ul className="list-disc space-y-1 text-slate-200 pl-0 inline-block text-left">
                           {t.professionalServices.services.corporate.teambuilding.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -161,7 +207,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       
                       <div>
                         <h4 className="text-xl font-semibold text-white mb-2">{t.professionalServices.services.corporate.retreats.title}</h4>
-                        <ul className="list-disc pl-5 space-y-1 text-slate-200">
+                        <ul className="list-disc space-y-1 text-slate-200 pl-0 inline-block text-left">
                           {t.professionalServices.services.corporate.retreats.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -170,7 +216,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       
                       <div>
                         <h4 className="text-xl font-semibold text-white mb-2">{t.professionalServices.services.corporate.productLaunches.title}</h4>
-                        <ul className="list-disc pl-5 space-y-1 text-slate-200">
+                        <ul className="list-disc space-y-1 text-slate-200 pl-0 inline-block text-left">
                           {t.professionalServices.services.corporate.productLaunches.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -192,8 +238,8 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                   transition={{ duration: 0.5, delay: 0.3 }}
                   className="w-full"
                 >
-                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300">
-                    <div className="flex items-center mb-6">
+                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300 text-center">
+                    <div className="flex items-center justify-center mb-6">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{ backgroundColor: 'rgba(149, 204, 47, 0.2)' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="rgb(149, 204, 47)" style={{ color: 'rgb(149, 204, 47)' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -206,7 +252,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       <p className="text-slate-200">{t.professionalServices.services.production.description}</p>
                     </div>
                     
-                    <ul className="list-disc pl-5 space-y-2 text-slate-200">
+                    <ul className="list-disc space-y-2 text-slate-200 pl-0 inline-block text-left">
                       {t.professionalServices.services.production.items.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
@@ -226,8 +272,8 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                   transition={{ duration: 0.5, delay: 0.4 }}
                   className="w-full"
                 >
-                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300">
-                    <div className="flex items-center mb-6">
+                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300 text-center">
+                    <div className="flex items-center justify-center mb-6">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{ backgroundColor: 'rgba(149, 204, 47, 0.2)' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="rgb(149, 204, 47)" style={{ color: 'rgb(149, 204, 47)' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
@@ -240,7 +286,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       <p className="text-slate-200">{t.professionalServices.services.vip.description}</p>
                     </div>
                     
-                    <ul className="list-disc pl-5 space-y-2 text-slate-200">
+                    <ul className="list-disc space-y-2 text-slate-200 pl-0 inline-block text-left">
                       {t.professionalServices.services.vip.items.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
@@ -260,8 +306,8 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="w-full"
                 >
-                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300">
-                    <div className="flex items-center mb-6">
+                  <div className="bg-gradient-to-br from-midnight to-[#1a3f50] p-8 rounded-2xl shadow-xl border border-white/5 hover:shadow-2xl transition-all duration-300 text-center">
+                    <div className="flex items-center justify-center mb-6">
                       <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4" style={{ backgroundColor: 'rgba(149, 204, 47, 0.2)' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="rgb(149, 204, 47)" style={{ color: 'rgb(149, 204, 47)' }}>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -274,7 +320,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       <p className="text-slate-200">{t.professionalServices.services.consulting.description}</p>
                     </div>
                     
-                    <ul className="list-disc pl-5 space-y-2 text-slate-200">
+                    <ul className="list-disc space-y-2 text-slate-200 pl-0 inline-block text-left">
                       {t.professionalServices.services.consulting.items.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
@@ -379,7 +425,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                     <div className="col-span-2">
                       <div className="relative py-8 px-4 flex justify-center items-center">
                         <img 
-                          src="/images/Drivecenter-Arena-Karta-Omrade-Detaljerad-Responsiv.svg" 
+                          src="/images/Drivecenter/Drivecenter-Arena-Karta-Omrade-Detaljerad-Responsiv-Vit-Bakg-2023-03.svg" 
                           alt="Drivecenter Arena track map" 
                           className="w-full max-w-4xl transition-transform duration-700 hover:scale-105"
                         />
@@ -530,51 +576,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
             </div>
           </section>
           
-          {/* Partners and Sponsors Section */}
-          <section className="pb-24">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="flex items-center my-12">
-                  <div className="flex-grow h-px bg-white/10"></div>
-                  <h3 className="mx-4 text-xl text-white/60 font-medium">{t.professionalServices.partners.title}</h3>
-                  <div className="flex-grow h-px bg-white/10"></div>
-                </div>
-                
-                <div className="flex flex-wrap justify-center gap-8 mt-6">
-                  {/* Partner Logo Images */}
-                  {[
-                    { name: 'AE', src: '/images/Partnerlogos/AE.svg' },
-                    { name: 'AMG', src: '/images/Partnerlogos/AMG.svg' },
-                    { name: 'Audi', src: '/images/Partnerlogos/Audi.svg' },
-                    { name: 'BGE', src: '/images/Partnerlogos/BGE.svg' },
-                    { name: 'Laponia Resort', src: '/images/Partnerlogos/Laponia resort.svg' },
-                    { name: 'Latitude', src: '/images/Partnerlogos/Latitude web.svg' },
-                    { name: 'Porsche Experience', src: '/images/Partnerlogos/Porsche exp.svg' },
-                    { name: 'Skidoo', src: '/images/Partnerlogos/Skidoo.svg' },
-                    { name: 'TCB', src: '/images/Partnerlogos/TCB.svg' },
-                    { name: 'TH', src: '/images/Partnerlogos/TH.svg' },
-                    { name: 'Volkswagen', src: '/images/Partnerlogos/VW Logo.svg' },
-                    { name: 'Drivecenter Arena', src: '/images/Drivecenter/Drivecenter-Arena-white-logo-small-web.svg' }
-                  ].map((partner, index) => (
-                    <div 
-                      key={index}
-                      className="opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center justify-center w-[40%] sm:w-[30%] md:w-[15%] h-[80px] bg-white/5 rounded-lg p-4"
-                    >
-                      <img 
-                        src={partner.src} 
-                        alt={`${partner.name} logo`} 
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-          </section>
+          {/* Placeholder for removed Partners section - it's now above the Services section */}
         </main>
 
         <Footer />

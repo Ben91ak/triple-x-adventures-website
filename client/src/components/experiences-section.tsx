@@ -39,24 +39,50 @@ function useParallax(speed = 0.03) {
 
 // ----- ICON MAPPING ----- 
 const iconMap = {
+  // Experience details icons
   duration: <Clock className="w-4 h-4 mr-1.5 text-accent-color/80" />,
   intensity: <Zap className="w-4 h-4 mr-1.5 text-accent-color/80" />,
   highlight: <Star className="w-4 h-4 mr-1.5 text-accent-color/80" />,
+  
+  // Tag icons
   bestseller: <Star className="w-4 h-4 text-yellow-400" />,
   featured: <Sun className="w-4 h-4 text-orange-400" />,
   new: <Sparkles className="w-4 h-4 text-blue-400" />,
+  nature: <Trees className="w-4 h-4 text-white" />,
+  adrenaline: <Zap className="w-4 h-4 text-white" />,
+  scenic: <Mountain className="w-4 h-4 text-white" />,
+  
   // Category Icons
   winter: <Snowflake className="w-4 h-4 mr-1.5 text-blue-300" />,
   adventure: <Mountain className="w-4 h-4 mr-1.5 text-orange-400" />,
   culture: <Users className="w-4 h-4 mr-1.5 text-purple-400" />,
   water: <Fish className="w-4 h-4 mr-1.5 text-cyan-400" />,
   dining: <Utensils className="w-4 h-4 mr-1.5 text-amber-400" />,
-  scenic: <Trees className="w-4 h-4 mr-1.5 text-green-400" />,
   all: <MapPin className="w-4 h-4 mr-1.5" />,
 };
 
 // Category types for filtering
 type ExperienceCategory = 'all' | 'adventure' | 'winter' | 'culture' | 'water' | 'dining' | 'scenic';
+
+// Helper function to get tag gradient styles based on tag type
+function getTagStyles(tagType: string): string {
+  switch (tagType) {
+    case 'bestseller':
+      return 'bg-gradient-to-r from-yellow-500 to-amber-600 text-white';
+    case 'new':
+      return 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white';
+    case 'nature':
+      return 'bg-gradient-to-r from-green-500 to-emerald-600 text-white';
+    case 'adrenaline':
+      return 'bg-gradient-to-r from-red-500 to-rose-600 text-white';
+    case 'scenic':
+      return 'bg-gradient-to-r from-purple-500 to-violet-600 text-white';
+    case 'featured':
+      return 'bg-gradient-to-r from-accent-color to-purple-600 text-white';
+    default:
+      return 'bg-gradient-to-r from-accent-color to-purple-600 text-white';
+  }
+}
 
 // Function to determine category based on experience title/description
 function getCategoryFromExperience(experience: Experience): ExperienceCategory[] {
@@ -127,7 +153,24 @@ function ExperienceCard({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [fallbackUsed, setFallbackUsed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { ref, position } = useParallax(0.03);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Get experience categories for display
   const categories = getCategoryFromExperience(experience);
@@ -192,8 +235,10 @@ function ExperienceCard({
       transition={{ duration: 0.5, delay: delay * 0.1, ease: "easeOut" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setTimeout(() => setIsHovered(false), 1000)}
     >
-      <div className="glass-card relative overflow-hidden flex flex-col flex-grow border border-white/10 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <div className="glass-card relative overflow-hidden flex flex-col flex-grow border border-white/10 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 touch-manipulation">
         {/* Image Section */}
         <div className="relative h-64 overflow-hidden">
           {/* Loading State */}
@@ -209,8 +254,8 @@ function ExperienceCard({
             className="w-full h-full object-cover transition-transform duration-500 ease-out"
             style={{
               scale: isHovered ? 1.05 : 1,
-              x: isHovered ? position.x : 0,
-              y: isHovered ? position.y : 0,
+              x: !isMobile && isHovered ? position.x : 0,
+              y: !isMobile && isHovered ? position.y : 0,
             }}
             onLoad={() => setImageLoaded(true)}
             onError={handleImageError}
@@ -221,32 +266,33 @@ function ExperienceCard({
           
           {/* Tag */}
           {experience.tag && (
-            <div className={`absolute top-3 right-3 z-20 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center shadow-lg backdrop-blur-sm
-              ${experience.tag.type === 'bestseller' ? 'bg-yellow-500/95 text-black' : 
-               experience.tag.type === 'new' ? 'bg-blue-500/95 text-white' : 
-               'bg-accent-color/95 text-black'}
-            `}>
-              {iconMap[experience.tag.type]}
-              <span className="ml-1 font-bold">{experience.tag.text}</span>
+            <div className="absolute top-3 right-3 z-20">
+              <div className="relative">
+                <span className={`flex items-center gap-2 ${getTagStyles(experience.tag.type)} px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl border border-white/20 backdrop-blur-sm`}>
+                  {iconMap[experience.tag.type]}
+                  <span className="font-medium">{experience.tag.text}</span>
+                </span>
+                <span className="absolute inset-0 bg-accent-color/20 rounded-full blur-lg -z-10"></span>
+              </div>
             </div>
           )}
         </div>
         
         {/* Content Section */}
         <div className="p-5 flex flex-col flex-grow bg-gradient-to-b from-black/70 to-black/90 backdrop-blur-sm">
-          <h3 className="font-bold text-lg mb-2 text-white group-hover:text-accent-color transition-colors duration-200 drop-shadow-md">
+          <h3 className="font-semibold text-lg mb-2 text-white group-hover:text-accent-color transition-colors duration-200 drop-shadow-md">
             {experience.title}
           </h3>
           
           {/* Key Info Row */}
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-white mb-3">
+          <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs text-white mb-3">
             {experience.duration && (
-              <span className="flex items-center bg-white/10 backdrop-blur-sm px-2 py-1 rounded-md"> 
+              <span className="flex items-center bg-white/10 backdrop-blur-sm px-2 py-1 rounded-md font-normal"> 
                 {iconMap.duration} {experience.duration} 
               </span>
             )}
             {experience.intensityLevel && (
-              <span className={`flex items-center bg-white/10 backdrop-blur-sm px-2 py-1 rounded-md ${getIntensityColor(experience.intensityLevel)}`}>
+              <span className={`flex items-center bg-white/10 backdrop-blur-sm px-2 py-1 rounded-md font-normal ${getIntensityColor(experience.intensityLevel)}`}>
                 {iconMap.intensity}
                 {experience.intensityLevel}
               </span>
@@ -254,17 +300,17 @@ function ExperienceCard({
           </div>
 
           {/* Short Description */}
-          <p className="text-sm text-white/90 mb-4 line-clamp-3 flex-grow">
+          <p className="text-sm text-white/90 mb-4 line-clamp-2 sm:line-clamp-3 flex-grow font-normal">
             {experience.description}
           </p>
           
           {/* Key Highlights (optional) */}
           {experience.keyHighlights && experience.keyHighlights.length > 0 && (
-            <div className="mb-4 flex flex-wrap gap-3">
-              {experience.keyHighlights.slice(0, 2).map((highlight, idx) => (
-                <span key={idx} className="flex items-center text-xs text-white/80">
+            <div className="mb-4 flex flex-wrap gap-2">
+              {experience.keyHighlights.slice(0, isMobile ? 1 : 2).map((highlight, idx) => (
+                <span key={idx} className="flex items-center text-xs text-white/80 font-normal truncate max-w-full">
                   {iconMap.highlight}
-                  {highlight}
+                  <span className="truncate">{highlight}</span>
                 </span>
               ))}
             </div>
@@ -273,7 +319,7 @@ function ExperienceCard({
           {/* Action Button */}
           <motion.button
             onClick={(e) => onOpenDetail(experience, e)}
-            className="btn-primary text-center w-full inline-flex items-center justify-center text-sm py-3 mt-auto font-bold shadow-lg"
+            className="btn-primary text-center w-full inline-flex items-center justify-center text-sm py-3 mt-auto font-medium shadow-lg active:scale-95 active:bg-accent-color/90 touch-manipulation"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             aria-label={`View details for ${experience.title}`}
@@ -295,6 +341,7 @@ interface ExperienceDetailModalProps {
   onNext: () => void;
   onPrevious: () => void;
   language: Language;
+  isMobile?: boolean;
 }
 
 const ExperienceDetailModal = React.memo(function ExperienceDetailModal({ 
@@ -303,7 +350,8 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
   onClose, 
   onNext, 
   onPrevious,
-  language
+  language,
+  isMobile = false
 }: ExperienceDetailModalProps) {
   if (!experience || !isOpen) return null;
   
@@ -312,19 +360,42 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
   const [imageLoaded, setImageLoaded] = useState(false);
   const [fallbackUsed, setFallbackUsed] = useState(false);
   const [showFullGallery, setShowFullGallery] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   
   const galleryLength = experience.gallery?.length || 0;
   const hasGallery = galleryLength > 0;
   const categories = getCategoryFromExperience(experience);
   
+  // Check if this is a husky, helicopter, drift, reindeer, buggy, snowshoe, torchwalk, or snowmobile experience
+  const title = experience.title.toLowerCase();
+  const isBuggyExperience = title.includes('buggy') || title.includes('side by side');
+  const isHuskyExperience = title.includes('husky');
+  const isHelicopterExperience = title.includes('helicopter') || title.includes('helikopter');
+  const isDriftExperience = !isBuggyExperience && (title.includes('drift') || title.includes('ice driving'));
+  const isReindeerExperience = title.includes('reindeer') || title.includes('sami');
+  const isSnowshoeExperience = title.includes('snowshoe');
+  const isTorchwalkExperience = title.includes('torchwalk') || title.includes('torch walk');
+  const isSnowmobileExperience = title.includes('snowmobile') && !title.includes('husky') && !title.includes('reindeer');
+  
+  // Modal ref for scrolling
+  const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (isOpen && experience) {
       setCurrentImageIndex(0);
       setImageLoaded(false);
       setFallbackUsed(false);
       setShowFullGallery(false);
+      setVideoLoaded(false);
+      
+      // Scroll to modal on mobile
+      if (isMobile && modalRef.current) {
+        setTimeout(() => {
+          modalRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
     }
-  }, [isOpen, experience]);
+  }, [isOpen, experience, isMobile]);
 
   // Define types for the fallback image mapping
   type ExperienceType = 'snowmobile' | 'husky' | 'snowshoe' | 'fishing' | 'reindeer' | 'helicopter' | 'drift' | 'buggy' | 'restaurant' | 'kart' | 'aurora';
@@ -471,6 +542,16 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
   };
 
   const currentImage = hasGallery ? experience.gallery![currentImageIndex] : experience.image;
+  
+  // Video URLs from Vercel Blob
+  const huskyVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Husky_1-ADzspahuC5SAcoFtHDDKf7QQSciUu7.webm";
+  const helicopterVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Heli_1-bPmUhpk0y2nC855JeuMT96zkqdypJh.webm";
+  const driftVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Drift1_1-wAPR67alYuim94rcVwbhHMgqyF8zvh.webm";
+  const reindeerVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm";
+  const buggyVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm";
+  const snowshoeVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Snowshoe_1-gi2MZ9BExMXQGMoaguetW7SnZFJRtr.webm";
+  const torchwalkVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Torch_1-iYTmeOUkhsqtaPGqywbvGZMHAhlmrs.webm";
+  const snowmobileVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_18_Snowmobile-srTrl5j9qWeqtBxh4OaDgzQC7oT9Ab.webm";
 
   return (
     <AnimatePresence>
@@ -493,6 +574,7 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
 
           {/* Modal */}
           <motion.div 
+            ref={modalRef}
             className="glass-card relative max-w-6xl w-full max-h-[90vh] overflow-hidden rounded-xl border border-white/10 shadow-2xl flex flex-col lg:flex-row"
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -557,89 +639,119 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
               </motion.div>
             )}
 
-            {/* Left: Image section (slightly adjusted for better space) */}
-            <div className="relative w-full lg:w-3/5 h-64 lg:h-auto flex-shrink-0">
+            {/* Left: Image/Video section (slightly adjusted for better space) */}
+            <div className="relative w-full lg:w-3/5 h-72 sm:h-80 md:h-96 lg:h-auto flex-shrink-0">
               {/* Loading state */} 
-              {!imageLoaded && (
+              {!imageLoaded && !videoLoaded && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && (
                 <div className="absolute inset-0 flex items-center justify-center bg-card-bg/80 z-10">
                   <div className="w-10 h-10 border-t-2 border-accent-color rounded-full animate-spin"></div>
                 </div>
               )}
-              {/* Main Image */} 
-              <motion.div className="relative h-full overflow-hidden">
-                <motion.img
-                  src={currentImage}
-                  alt={`${experience.title} - Image ${currentImageIndex + 1}`}
-                  className="w-full h-full object-cover"
-                  onLoad={() => setImageLoaded(true)}
-                  onError={handleImageError}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.4 }}
-                  key={currentImage}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              {/* Video for Husky, Helicopter, Drift, Reindeer, or Buggy experience */}
+              {isHuskyExperience || isHelicopterExperience || isDriftExperience || isReindeerExperience || isBuggyExperience || isSnowshoeExperience || isTorchwalkExperience || isSnowmobileExperience ? (
+                <motion.div className="relative h-full overflow-hidden">
+                  <motion.video
+                    src={
+                      isBuggyExperience ? buggyVideoUrl :
+                      isHuskyExperience ? huskyVideoUrl : 
+                      isHelicopterExperience ? helicopterVideoUrl : 
+                      isDriftExperience ? driftVideoUrl :
+                      isReindeerExperience ? reindeerVideoUrl :
+                      isSnowshoeExperience ? snowshoeVideoUrl :
+                      isTorchwalkExperience ? torchwalkVideoUrl :
+                      isSnowmobileExperience ? snowmobileVideoUrl :
+                      buggyVideoUrl
+                    }
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                    onLoadedData={() => setVideoLoaded(true)}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                </motion.div>
+              ) : (
+                /* Main Image for non-video experiences */
+                <motion.div className="relative h-full overflow-hidden">
+                  <motion.img
+                    src={currentImage}
+                    alt={`${experience.title} - Image ${currentImageIndex + 1}`}
+                    className="w-full h-full object-cover"
+                    onLoad={() => setImageLoaded(true)}
+                    onError={handleImageError}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4 }}
+                    key={currentImage}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              
                 
-                {/* Navigation Buttons */} 
-                {hasGallery && galleryLength > 1 && (
-                  <>
-                    <motion.button /* Previous */
-                      onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/50 hover:bg-accent-color/80 transition-colors z-20"
-                      whileHover={{ scale: 1.1, x: -2 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <ChevronLeft className="w-5 h-5 text-white" />
-                    </motion.button>
-                    <motion.button /* Next */
-                      onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/50 hover:bg-accent-color/80 transition-colors z-20"
-                      whileHover={{ scale: 1.1, x: 2 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <ChevronRight className="w-5 h-5 text-white" />
-                    </motion.button>
-                  </>
-                )}
-                
-                {/* Counter & View All */} 
-                {hasGallery && galleryLength > 1 && (
-                  <div className="absolute bottom-3 right-3 flex items-center z-30 space-x-2">
-                    <motion.button
-                      onClick={() => setShowFullGallery(true)}
-                      className="px-3 py-1 bg-black/70 text-white text-xs rounded-md hover:bg-accent-color/90 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      View All
-                    </motion.button>
-                    <div className="bg-black/70 text-white text-xs px-2.5 py-1 rounded-md">
-                      {currentImageIndex + 1} / {galleryLength}
+                  {/* Navigation Buttons - Only show for non-video experiences with galleries */} 
+                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && (
+                    <>
+                      <motion.button /* Previous */
+                        onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/50 hover:bg-accent-color/80 transition-colors z-20"
+                        whileHover={{ scale: 1.1, x: -2 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <ChevronLeft className="w-5 h-5 text-white" />
+                      </motion.button>
+                      <motion.button /* Next */
+                        onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/50 hover:bg-accent-color/80 transition-colors z-20"
+                        whileHover={{ scale: 1.1, x: 2 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <ChevronRight className="w-5 h-5 text-white" />
+                      </motion.button>
+                    </>
+                  )}
+                  
+                  {/* Counter & View All - Only show for non-video experiences with galleries */} 
+                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && (
+                    <div className="absolute bottom-3 right-3 flex items-center z-30 space-x-2">
+                      <motion.button
+                        onClick={() => setShowFullGallery(true)}
+                        className="px-3 py-1 bg-black/70 text-white text-xs rounded-md hover:bg-accent-color/90 transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        View All
+                      </motion.button>
+                      <div className="bg-black/70 text-white text-xs px-2.5 py-1 rounded-md">
+                        {currentImageIndex + 1} / {galleryLength}
+                      </div>
                     </div>
-                  </div>
-                )}
-                
-                {/* Thumbnails */}
-                {hasGallery && galleryLength > 1 && (
-                  <div className="absolute bottom-12 left-3 right-3 overflow-x-auto scrollbar-hide z-20">
-                    <motion.div className="flex space-x-2 p-1">
-                      {experience.gallery!.map((thumb, idx) => (
-                        <motion.div
-                          key={idx}
-                          className={`flex-shrink-0 w-14 h-14 rounded-md overflow-hidden cursor-pointer border-2 transition-all duration-200
-                            ${idx === currentImageIndex ? 'border-accent-color opacity-100 scale-105' : 'border-transparent opacity-60 hover:opacity-90'}
-                          `}
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          onClick={() => handleThumbnailClick(idx)}
-                        >
-                          <img src={thumb} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" onError={handleImageError}/>
-                        </motion.div>
-                      ))}
-                    </motion.div>
-                  </div>
-                )}
-              </motion.div>
+                  )}
+                  
+                  {/* Thumbnails - Only show for non-video experiences with galleries */}
+                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && (
+                    <div className="absolute bottom-12 left-3 right-3 overflow-x-auto scrollbar-hide z-20">
+                      <motion.div className="flex space-x-2 p-1">
+                        {experience.gallery!.map((thumb, idx) => (
+                          <motion.div
+                            key={idx}
+                            className={`flex-shrink-0 w-14 h-14 rounded-md overflow-hidden cursor-pointer border-2 transition-all duration-200
+                              ${idx === currentImageIndex ? 'border-accent-color opacity-100 scale-105' : 'border-transparent opacity-60 hover:opacity-90'}
+                            `}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            onClick={() => handleThumbnailClick(idx)}
+                          >
+                            <img src={thumb} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" onError={handleImageError}/>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    </div>
+                  )}
+                </motion.div>
+              )}
             </div>
 
             {/* Right: Details section - Reworked for structured data */}
@@ -659,13 +771,13 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                     </span>
                   ))}
                   {experience.tag && (
-                    <span className={`px-2.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider flex items-center ml-auto
-                      ${experience.tag.type === 'bestseller' ? 'bg-yellow-500/90 text-black' : 
-                      experience.tag.type === 'new' ? 'bg-blue-500/90 text-white' : 
-                      'bg-accent-color/90 text-black'}
-                    `}>
-                      {iconMap[experience.tag.type]} <span className="ml-1">{experience.tag.text}</span>
-                    </span>
+                    <div className="relative ml-auto">
+                      <span className={`flex items-center gap-2 ${getTagStyles(experience.tag.type)} px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest shadow-md border border-white/20 backdrop-blur-sm`}>
+                        {iconMap[experience.tag.type]}
+                        <span className="font-medium">{experience.tag.text}</span>
+                      </span>
+                      <span className="absolute inset-0 bg-accent-color/20 rounded-full blur-lg -z-10"></span>
+                    </div>
                   )}
                 </div>
                 
@@ -836,13 +948,30 @@ export function ExperiencesSection() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hoveredExperience, setHoveredExperience] = useState<number | null>(null);
   const [showAllActivities, setShowAllActivities] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   // Get experiences from translations
   const experiences: Experience[] = t.experiences.list.map((exp: any) => ({ // Use 'any' temporarily if types mismatch during transition
     ...exp,
     tag: exp.tag ? {
       ...exp.tag,
-      type: exp.tag.type as "bestseller" | "featured" | "new"
+      type: exp.tag.type as "bestseller" | "featured" | "new" | "nature" | "adrenaline" | "scenic"
     } : undefined,
     // Ensure new fields are present, even if undefined
     duration: exp.duration,
@@ -1002,7 +1131,7 @@ export function ExperiencesSection() {
             </motion.div>
 
             {/* Packages Grid - Special styling to make them stand out */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 xl:gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 xl:gap-8 mb-12">
               {filteredPackages.map((experience, index) => (
                 <motion.div 
                   key={experience.id} 
@@ -1068,7 +1197,7 @@ export function ExperiencesSection() {
                 </motion.div>
 
                 {/* Activities Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
                   {filteredActivities.map((experience, index) => (
                     <motion.div 
                       key={experience.id} 
@@ -1119,6 +1248,7 @@ export function ExperiencesSection() {
         onNext={navigateToNext}
         onPrevious={navigateToPrevious}
         language={language}
+        isMobile={isMobile}
       />
     </section>
   );

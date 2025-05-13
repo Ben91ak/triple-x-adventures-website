@@ -4,7 +4,6 @@ import { Link } from 'wouter';
 import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { GlobalBackground } from '@/components/layout/background-fixed';
-import { TranslationManager } from '@/components/admin/translation-manager';
 
 export default function AdminPage() {
   return (
@@ -41,7 +40,10 @@ export default function AdminPage() {
             </div>
             
             <div className="max-w-6xl mx-auto">
-              <TranslationManager />
+              <div className="bg-gray-800 p-6 rounded-lg text-white text-center">
+                <h2 className="text-xl mb-4">Translation Manager Removed</h2>
+                <p>The translation manager component has been removed from the application.</p>
+              </div>
             </div>
           </div>
         </main>
