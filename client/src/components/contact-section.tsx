@@ -17,6 +17,23 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/use-translation";
 import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from "lucide-react";
 
+// Custom CSS for equal-sized containers
+const equalHeightContainerStyle: React.CSSProperties = {
+  height: '600px',
+};
+
+// Custom CSS for scrollable container
+const scrollableContainerStyle: React.CSSProperties = {
+  height: '520px', // Adjusted to fit within the container with padding
+  overflowY: 'auto',
+  paddingRight: '10px',
+  // Using non-standard properties with type assertion
+  ...({
+    scrollbarWidth: 'thin',
+    scrollbarColor: 'rgba(255, 255, 255, 0.2) transparent',
+  } as React.CSSProperties),
+};
+
 export function ContactSection() {
   const { toast } = useToast();
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
@@ -90,7 +107,7 @@ export function ContactSection() {
     onError: (error) => {
       toast({
         title: t('contact.errorTitle'),
-        description: error instanceof Error ? error.message : t('contact.errorMessage'),
+        description: t('contact.errorMessage'),
         variant: "destructive",
       });
     },
@@ -98,10 +115,8 @@ export function ContactSection() {
 
   // Form submission handler
   const onSubmit = (data: z.infer<typeof contactFormSchema>) => {
-    mutation.mutate({
-      ...data,
-      interests: [...selectedPackages, ...selectedActivities], // Combine both selections
-    });
+    data.interests = [...selectedPackages, ...selectedActivities];
+    mutation.mutate(data as ContactFormData);
   };
 
   // Handle package checkbox changes
@@ -112,7 +127,7 @@ export function ContactSection() {
       setSelectedPackages(prev => prev.filter(item => item !== value));
     }
   };
-  
+
   // Handle activity checkbox changes
   const handleActivityChange = (checked: boolean, value: string) => {
     if (checked) {
@@ -127,7 +142,7 @@ export function ContactSection() {
       {/* Remove section-specific background to use global background only */}
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {t('contact.form.contactUsLabel')}
           </span>
@@ -139,13 +154,53 @@ export function ContactSection() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        {/* Contact Information Section */}
+        <div className="glass-card border border-white/10 rounded-xl backdrop-blur-sm mb-12 max-w-6xl mx-auto">
+          <div className="p-8">
+            <h3 className="font-medium text-xl mb-6 text-white text-center">{t('contact.info.title')}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Phone */}
+              <div className="flex items-center space-x-4">
+                <div className="bg-[#1D1D1D] p-3 rounded-full">
+                  <Phone className="w-6 h-6 text-[#D4AF37]" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg text-gray-200">Phone</h4>
+                  <p className="text-gray-400">+49 171 1234567</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center space-x-4">
+                <div className="bg-[#1D1D1D] p-3 rounded-full">
+                  <Mail className="w-6 h-6 text-[#D4AF37]" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg text-gray-200">Email</h4>
+                  <p className="text-gray-400">info@triple-x-adventures.com</p>
+                </div>
+              </div>
+
+              {/* Address */}
+              <div className="flex items-center space-x-4">
+                <div className="bg-[#1D1D1D] p-3 rounded-full">
+                  <MapPin className="w-6 h-6 text-[#D4AF37]" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-lg text-gray-200">Address</h4>
+                  <p className="text-gray-400">Arvidsjaur, Sweden</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Form and FAQ Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto" style={{ alignItems: 'stretch' }}>
           {/* Contact Form with glass effect */}
           <div className="group relative">
-            {/* Decorative background element */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/30 to-purple-600/30 rounded-xl blur-xl opacity-40 group-hover:opacity-70 transition-all duration-700"></div>
             
-            <div className="glass-card relative z-10 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl">
+            <div className="glass-card relative z-10 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl" style={equalHeightContainerStyle}>
               <div className="p-8">
                 <h3 className="font-medium text-xl mb-6 text-white">{t('contact.formTitle')}</h3>
                 <Form {...form}>
@@ -305,13 +360,12 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-white">{t('contact.message')}</FormLabel>
                           <FormControl>
-                            <Textarea
-                              rows={4}
-                              {...field}
-                              id="message"
+                            <Textarea 
+                              {...field} 
+                              id="message" 
                               name="message"
-                              className="bg-card-bg/50 border-white/10 resize-none"
-                              placeholder={t('contact.messagePlaceholder') || 'Your message...'}
+                              placeholder={t('contact.messagePlaceholder')}
+                              className="min-h-[120px] bg-card-bg/50 border-white/10" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -321,11 +375,23 @@ export function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-accent-color hover:bg-accent-hover text-white font-medium py-3 px-6 rounded-md transition-all flex items-center justify-center gap-2"
+                      className="w-full bg-accent-color hover:bg-accent-color/90 text-black font-medium"
                       disabled={mutation.isPending}
                     >
-                      {mutation.isPending ? t('contact.sending') : t('contact.send')}
-                      {!mutation.isPending && <Send size={16} />}
+                      {mutation.isPending ? (
+                        <span className="flex items-center">
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          {t('contact.form.sending')}
+                        </span>
+                      ) : (
+                        <span className="flex items-center">
+                          <Send className="mr-2 h-4 w-4" />
+                          {t('contact.form.submit')}
+                        </span>
+                      )}
                     </Button>
                   </form>
                 </Form>
@@ -333,111 +399,68 @@ export function ContactSection() {
             </div>
           </div>
           
-          {/* Right side information */}
-          <div className="group">
-            {/* Contact info */}
-            <div className="mb-12">
-              <h3 className="font-medium text-xl mb-6 text-white group-hover:text-accent-color transition-colors">
-                {t('contact.info.title')}
-              </h3>
-              <div className="space-y-8 md:space-y-0 md:flex md:space-x-12 px-4 md:px-0">
-                {/* Phone */}
-                <div className="flex items-start space-x-4 md:w-1/3">
-                  <div className="bg-[#1D1D1D] p-3 rounded-full">
-                    <Phone className="w-6 h-6 text-[#D4AF37]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-200">Phone</h3>
-                    <p className="text-gray-400">+49 171 1234567</p>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex items-start space-x-4 md:w-1/3">
-                  <div className="bg-[#1D1D1D] p-3 rounded-full">
-                    <Mail className="w-6 h-6 text-[#D4AF37]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-200">Email</h3>
-                    <p className="text-gray-400">info@triple-x-adventures.com</p>
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div className="flex items-start space-x-4 md:w-1/3">
-                  <div className="bg-[#1D1D1D] p-3 rounded-full">
-                    <MapPin className="w-6 h-6 text-[#D4AF37]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-200">Adresse</h3>
-                    <p className="text-gray-400">Musterstraße 1, 12345 Musterstadt, Deutschland</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* FAQ Section */}
+          <div className="group relative">
             
-            {/* FAQ */}
-            <div className="mb-12">
-              <div className="glass-card border border-white/10 rounded-xl p-6 backdrop-blur-sm">
-                <h3 className="font-medium text-xl mb-6 text-white">
-                  {t('contact.faq.title')}
-                </h3>
-                <div className="space-y-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="glass-card relative z-10 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl" style={equalHeightContainerStyle}>
+              <div className="p-8">
+                <h3 className="font-medium text-xl mb-6 text-white">{t('contact.faq.title')}</h3>
+                <div style={scrollableContainerStyle} className="space-y-3">
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q1')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a1')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a1')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q2')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a2')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a2')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q3')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a3')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a3')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q4')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a4')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a4')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q5')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a5')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a5')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q6')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a6')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a6')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q7')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a7')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a7')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q8')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a8')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a8')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q9')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a9')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a9')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q10')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a10')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a10')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q11')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a11')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a11')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q12')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a12')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a12')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q13')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a13')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a13')}</p>
                   </div>
                   <div>
                     <h4 className="font-medium mb-2 text-white">{t('contact.faq.q14')}</h4>
-                    <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a14')}</p>
+                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a14')}</p>
                   </div>
                 </div>
               </div>

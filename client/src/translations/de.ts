@@ -490,7 +490,8 @@ export const de = {
       other: "Andere / Noch nicht sicher", 
     },
     interests: "Ich interessiere mich für (zutreffendes auswählen)", 
-    charterFlight: "Wählen Sie Ihren Abflugort", 
+    charterFlight: "Wählen Sie Ihren Abflugort",
+    charterFlightPlaceholder: "Wählen Sie eine Charterflug-Option",
     message: "Ihre Nachricht", 
     messagePlaceholder: "Haben Sie Fragen, Ideen oder sind Sie bereit, Ihr Abenteuer zu planen? Schreiben Sie uns eine Nachricht – wir melden uns schneller bei Ihnen als ein Schneemobil im Neuschnee!", 
     sending: "Wird gesendet...", 
@@ -527,6 +528,13 @@ export const de = {
         none: "Kein Charterflug benötigt",
         privateJet: "Privatjet"
       }
+    },
+    
+    // FAQ Section
+    faq: {
+      title: "Häufig gestellte Fragen",
+      showMore: "Mehr anzeigen",
+      showLess: "Weniger anzeigen"
     }
   },
 

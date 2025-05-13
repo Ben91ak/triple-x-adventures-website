@@ -720,6 +720,7 @@ export const en = {
     },
     interests: "I'm interested in (select all that apply)",
     charterFlight: "Choose Your Departure Location",
+    charterFlightPlaceholder: "Select a charter flight option",
     message: "Your Message",
     messagePlaceholder: "Got questions, ideas, or ready to plan your adventure? Drop us a message – we'll get back to you faster than a snowmobile in fresh powder!",
     sending: "Sending...",
@@ -762,6 +763,8 @@ export const en = {
     // FAQ Section
     faq: {
       title: "Frequently Asked Questions",
+      showMore: "Show More",
+      showLess: "Show Less",
       q1: "What's the best time to visit?",
       a1: "The prime season runs from December to April, with January to March offering the best snow conditions and northern lights visibility.",
       q2: "How do I get to Arvidsjaur?",
