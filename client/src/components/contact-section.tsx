@@ -47,6 +47,17 @@ export function ContactSection() {
     { id: "northern-lights", label: t('contact.form.activities.aurora') },
   ];
 
+  // Charter flight options
+  const flightOptions = [
+    { value: "none", label: t('contact.form.flight.none') || "No charter flight needed" },
+    { value: "stuttgart", label: "Stuttgart" },
+    { value: "munich", label: "Munich" },
+    { value: "cologne-bonn", label: "Cologne/Bonn" },
+    { value: "hannover", label: "Hannover" },
+    { value: "stockholm", label: "Stockholm" },
+    { value: "private-jet", label: t('contact.form.flight.privateJet') || "Private Jet" },
+  ];
+
   // Set up form with zod validation
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
@@ -57,6 +68,7 @@ export function ContactSection() {
       phone: "",
       visitDate: "",
       interests: [],
+      charterFlight: "",
       message: "",
     },
   });
@@ -146,7 +158,7 @@ export function ContactSection() {
                           <FormItem>
                             <FormLabel className="text-white">{t('contact.firstName')}</FormLabel>
                             <FormControl>
-                              <Input {...field} className="bg-card-bg/50 border-white/10" />
+                              <Input {...field} id="firstName" name="firstName" autoComplete="given-name" className="bg-card-bg/50 border-white/10" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -159,7 +171,7 @@ export function ContactSection() {
                           <FormItem>
                             <FormLabel className="text-white">{t('contact.lastName')}</FormLabel>
                             <FormControl>
-                              <Input {...field} className="bg-card-bg/50 border-white/10" />
+                              <Input {...field} id="lastName" name="lastName" autoComplete="family-name" className="bg-card-bg/50 border-white/10" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -174,7 +186,7 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-white">{t('contact.email')}</FormLabel>
                           <FormControl>
-                            <Input {...field} type="email" className="bg-card-bg/50 border-white/10" />
+                            <Input {...field} id="email" name="email" type="email" autoComplete="email" className="bg-card-bg/50 border-white/10" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -188,7 +200,7 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-white">{t('contact.phone')}</FormLabel>
                           <FormControl>
-                            <Input {...field} type="tel" className="bg-card-bg/50 border-white/10" />
+                            <Input {...field} id="phone" name="phone" type="tel" autoComplete="tel" className="bg-card-bg/50 border-white/10" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -265,15 +277,41 @@ export function ContactSection() {
                     
                     <FormField
                       control={form.control}
+                      name="charterFlight"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">{t('contact.charterFlight') || 'Charter Flight Options'}</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="bg-card-bg/50 border-white/10">
+                                <SelectValue placeholder={t('contact.charterFlightPlaceholder') || 'Select a charter flight option'} />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {flightOptions.map((option) => (
+                                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
                       name="message"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-white">{t('contact.message')}</FormLabel>
                           <FormControl>
-                            <Textarea 
-                              rows={4} 
-                              {...field} 
+                            <Textarea
+                              rows={4}
+                              {...field}
+                              id="message"
+                              name="message"
                               className="bg-card-bg/50 border-white/10 resize-none"
+                              placeholder={t('contact.messagePlaceholder') || 'Your message...'}
                             />
                           </FormControl>
                           <FormMessage />
@@ -302,38 +340,37 @@ export function ContactSection() {
               <h3 className="font-medium text-xl mb-6 text-white group-hover:text-accent-color transition-colors">
                 {t('contact.info.title')}
               </h3>
-              <div className="space-y-8">
-                <div className="flex items-start">
-                  <div className="mr-5 w-12 h-12 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color">
-                    <MapPin size={20} />
+              <div className="space-y-8 md:space-y-0 md:flex md:space-x-12 px-4 md:px-0">
+                {/* Phone */}
+                <div className="flex items-start space-x-4 md:w-1/3">
+                  <div className="bg-[#1D1D1D] p-3 rounded-full">
+                    <Phone className="w-6 h-6 text-[#D4AF37]" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-white">{t('contact.info.location')}</h4>
-                    <p className="text-white text-opacity-80">Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden</p>
+                    <h3 className="font-bold text-lg text-gray-200">Phone</h3>
+                    <p className="text-gray-400">+49 171 1234567</p>
                   </div>
                 </div>
-                
-                <div className="flex items-start">
-                  <div className="mr-5 w-12 h-12 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color">
-                    <Phone size={20} />
+
+                {/* Email */}
+                <div className="flex items-start space-x-4 md:w-1/3">
+                  <div className="bg-[#1D1D1D] p-3 rounded-full">
+                    <Mail className="w-6 h-6 text-[#D4AF37]" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-white">{t('contact.info.phone')}</h4>
-                    <p className="text-white text-opacity-80">
-                      {t('contact.info.phoneText1')}
-                      <br />
-                      {t('contact.info.phoneText2')}
-                    </p>
+                    <h3 className="font-bold text-lg text-gray-200">Email</h3>
+                    <p className="text-gray-400">info@triple-x-adventures.com</p>
                   </div>
                 </div>
-                
-                <div className="flex items-start">
-                  <div className="mr-5 w-12 h-12 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color">
-                    <Mail size={20} />
+
+                {/* Address */}
+                <div className="flex items-start space-x-4 md:w-1/3">
+                  <div className="bg-[#1D1D1D] p-3 rounded-full">
+                    <MapPin className="w-6 h-6 text-[#D4AF37]" />
                   </div>
                   <div>
-                    <h4 className="font-medium mb-1 text-white">{t('contact.info.email')}</h4>
-                    <p className="text-white text-opacity-80">{t('contact.info.emailText')}</p>
+                    <h3 className="font-bold text-lg text-gray-200">Adresse</h3>
+                    <p className="text-gray-400">Musterstraße 1, 12345 Musterstadt, Deutschland</p>
                   </div>
                 </div>
               </div>
@@ -403,55 +440,6 @@ export function ContactSection() {
                     <p className="text-white text-opacity-80 text-sm">{t('contact.faq.a14')}</p>
                   </div>
                 </div>
-              </div>
-            </div>
-            
-            {/* Social Media */}
-            <div>
-              <h3 className="font-medium text-xl mb-6 text-white">
-                {t('contact.social.title')}
-              </h3>
-              <div className="flex space-x-4">
-                <a 
-                  href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
-                >
-                  <Facebook size={18} />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
-                >
-                  <Instagram size={18} />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
-                >
-                  <Youtube size={18} />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-12 h-12 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
-                >
-                  <svg 
-                    width="18" 
-                    height="18" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round"
-                  >
-                    <path d="M9 12a3 3 0 1 0 6 0 3 3 0 0 0 -6 0"/>
-                    <path d="M12.5 8.5l-1 -1.5h-2l-1 1.5"/>
-                    <path d="M17.5 6.5l-1 2l2 1c1 -1 2 -3 0 -4s-4 1 -4 3c0 .3 .3 1 1 2"/>
-                    <path d="M3.5 14.5c.5 .5 1.5 -.5 2 -1.5"/>
-                    <path d="M9.5 16.5l-1 1c-1 1 -2 1 -2.5 .5s0 -1.5 1 -2"/>
-                    <path d="M16.5 17.5l3 -2s1 -1.5 0 -2.5s-3 1 -3.5 3s1 4 3 3"/>
-                  </svg>
-                </a>
               </div>
             </div>
           </div>

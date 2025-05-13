@@ -22,13 +22,23 @@ export interface AdventureFormData {
 export const api = {
   // Submit contact form
   submitContactForm: async (formData: ContactFormData) => {
-    const response = await apiRequest("POST", "/api/contact", formData);
-    return response.json();
+    try {
+      const response = await apiRequest('POST', '/api/contact', formData);
+      return await response.json();
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      throw error;
+    }
   },
   
   // Submit adventure package form
   submitAdventureForm: async (formData: AdventureFormData) => {
-    const response = await apiRequest("POST", "/api/adventure", formData);
-    return response.json();
+    try {
+      const response = await apiRequest('POST', '/api/adventure', formData);
+      return await response.json();
+    } catch (error) {
+      console.error('Error submitting adventure form:', error);
+      throw error;
+    }
   }
 };

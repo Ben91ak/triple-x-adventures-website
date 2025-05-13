@@ -35,6 +35,7 @@ export const contactSubmissions = pgTable("contact_submissions", {
   phone: text("phone"),
   visitDate: text("visit_date"),
   interests: text("interests").array(),
+  charterFlight: text("charter_flight"),
   message: text("message"),
   submittedAt: timestamp("submitted_at").defaultNow().notNull(),
 });
@@ -60,6 +61,8 @@ export const contactFormSchema = z.object({
   interests: z.array(z.string()
     .max(100, "Interest cannot exceed 100 characters")
     .transform(val => val.trim())).optional(),
+  charterFlight: z.string().optional()
+    .transform(val => val ? val.trim() : val),
   message: z.string().optional()
     .transform(val => val ? val.trim() : val)
     .pipe(z.string().max(2000, "Message cannot exceed 2000 characters").optional()),

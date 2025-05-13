@@ -171,7 +171,7 @@ export const de = {
       {
         id: 9,
         title: "Seitwärts-Paket",
-        description: "Erleben Sie den ultimativen Adrenalinkick mit unserem Eisfahrtraining. Meistern Sie das Driften auf Eis mit professionellen Instruktoren und verschiedenen Fahrzeugen.",
+        description: "Erleben Sie den ultimativen Adrenalinkick mit unserem Eisfahrtraining. Meistern Sie das Driften auf Eis unter Anleitung von Rennprofis in einer exklusiven Umgebung.",
         price: 1499,
         duration: "3-4 Nächte",
         intensityLevel: "Fortgeschritten",
@@ -466,9 +466,73 @@ export const de = {
     },
   },
   
+  // Testimonials Section
+  testimonials: {
+    title: "WAS UNSERE GÄSTE SAGEN",
+    subtitle: "Erfahrungen aus erster Hand von unseren Abenteurern"
+  },
+
+  // This is a new section for the main contact form, mirroring en.ts structure
+  contact: {
+    title: "MACHEN WIR DEN WINTER LEGENDÄR", 
+    subtitle: "Bereit, die echte Arktis zu erleben? Kontaktieren Sie uns, um Ihr Abenteuer zu planen", 
+    formTitle: "Kontaktieren Sie Uns", 
+    firstName: "Vorname", 
+    lastName: "Nachname", 
+    email: "E-Mail-Adresse", 
+    phone: "Telefonnummer", 
+    visitDate: "Wann planen Sie Ihren Besuch?", 
+    visitDatePlaceholder: "Wählen Sie einen Zeitraum", 
+    visitDateOptions: {
+      decJan: "Dezember - Januar", 
+      febMar: "Februar - März", 
+      aprMay: "April - Mai", 
+      other: "Andere / Noch nicht sicher", 
+    },
+    interests: "Ich interessiere mich für (zutreffendes auswählen)", 
+    charterFlight: "Wählen Sie Ihren Abflugort", 
+    message: "Ihre Nachricht", 
+    messagePlaceholder: "Haben Sie Fragen, Ideen oder sind Sie bereit, Ihr Abenteuer zu planen? Schreiben Sie uns eine Nachricht – wir melden uns schneller bei Ihnen als ein Schneemobil im Neuschnee!", 
+    sending: "Wird gesendet...", 
+    send: "Nachricht Senden", 
+    successTitle: "Nachricht Gesendet", 
+    successMessage: "Wir haben Ihre Anfrage erhalten und werden uns in Kürze bei Ihnen melden.", 
+    errorTitle: "Übermittlung Fehlgeschlagen", 
+    errorMessage: "Bitte versuchen Sie es später erneut.", 
+    // Form subsection with nested objects
+    form: {
+      contactUsLabel: "Kontaktieren Sie Uns",
+      desiredPackagesLabel: "Gewünschte Pakete",
+      desiredActivitiesLabel: "Gewünschte Aktivitäten",
+      packages: {
+        arcticWeek: "Arctic Adventure (Woche)",
+        arcticWeekend: "Arctic Adventure (Wochenende)",
+        sidewaysWeek: "Sideways Adventure (Woche)",
+        sidewaysWeekend: "Sideways Adventure (Wochenende)",
+        performanceWeek: "Performance Paket (Woche)",
+        performanceWeekend: "Performance Paket (Wochenende)",
+        incentive: "Incentive Events",
+        custom: "Maßgeschneiderte Events"
+      },
+      activities: {
+        snowmobile: "Schneemobil Tour",
+        reindeer: "Besuchen Sie die Rentiere",
+        snowshoe: "Schneeschuhwanderung",
+        spa: "Arktisches Spa",
+        restaurant: "Jay Jays Restaurant",
+        helicopter: "Hubschrauberflüge",
+        aurora: "Nordlichter"
+      },
+      flight: {
+        none: "Kein Charterflug benötigt",
+        privateJet: "Privatjet"
+      }
+    }
+  },
+
   // Footer
   footer: {
-    copyright: "© 2025 Triple X Adventures. Alle Rechte vorbehalten.",
+    copyright: " 2025 Triple X Adventures. Alle Rechte vorbehalten.",
     privacyPolicy: "Datenschutzrichtlinie",
     termsConditions: "AGB",
     imprint: "Impressum",

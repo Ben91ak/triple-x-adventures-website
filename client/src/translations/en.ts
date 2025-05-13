@@ -719,7 +719,9 @@ export const en = {
       other: "Other / Not sure yet",
     },
     interests: "I'm interested in (select all that apply)",
+    charterFlight: "Choose Your Departure Location",
     message: "Your Message",
+    messagePlaceholder: "Got questions, ideas, or ready to plan your adventure? Drop us a message – we'll get back to you faster than a snowmobile in fresh powder!",
     sending: "Sending...",
     send: "Send Message",
     successTitle: "Message Sent",
@@ -727,7 +729,7 @@ export const en = {
     errorTitle: "Submission Failed",
     errorMessage: "Please try again later.",
     
-    // Adding keys for the form itself
+    // Form subsection with nested objects
     form: {
       contactUsLabel: "Contact Us",
       desiredPackagesLabel: "Desired Packages",
@@ -750,21 +752,11 @@ export const en = {
         restaurant: "Jay Jays Restaurant",
         helicopter: "Helicopter Flights",
         aurora: "Northern Lights"
+      },
+      flight: {
+        none: "No charter flight needed",
+        privateJet: "Private Jet"
       }
-    },
-    
-    // Contact Info Section
-    info: {
-      title: "Get In Touch",
-      location: "Our Location",
-      locationText: "Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden",
-      phone: "Phone",
-      phoneText1: "+49 (0) 151 2411 5455",
-      phoneText2: "+46 (0) 70 357 5455",
-      email: "Email",
-      emailText: "info@triple-x-adventures.com",
-      restaurant: "Reservations @JayJay's",
-      restaurantPhone: "+46 (0) 70 387 5455",
     },
     
     // FAQ Section
@@ -804,11 +796,25 @@ export const en = {
     social: {
       title: "Connect With Us",
     },
+    
+    // Contact Info Section
+    info: {
+      title: "Get In Touch",
+      location: "Our Location",
+      locationText: "Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden",
+      phone: "Phone",
+      phoneText1: "+49 (0) 151 2411 5455",
+      phoneText2: "+46 (0) 70 357 5455",
+      email: "Email",
+      emailText: "info@triple-x-adventures.com",
+      restaurant: "Reservations @JayJay's",
+      restaurantPhone: "+46 (0) 70 387 5455",
+    },
   },
   
   // Footer
   footer: {
-    copyright: "© 2025 Triple X Adventures. All rights reserved.",
+    copyright: " 2025 Triple X Adventures. All rights reserved.",
     privacyPolicy: "Privacy Policy",
     termsConditions: "Terms & Conditions",
     imprint: "Imprint",

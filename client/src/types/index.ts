@@ -73,5 +73,6 @@ export interface ContactFormData {
   phone?: string;
   visitDate?: string;
   interests?: string[];
+  charterFlight?: string;
   message?: string;
 }
