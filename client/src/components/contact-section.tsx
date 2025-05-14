@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -15,22 +16,18 @@ import { ContactFormData } from "@/types/index";
 import { z } from "zod";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/use-translation";
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send, Loader2 } from "lucide-react";
 
-// Custom CSS for equal-sized containers
-const equalHeightContainerStyle: React.CSSProperties = {
-  height: '600px',
-};
-
-// Custom CSS for scrollable container
+// Custom CSS for scrollable container with green indicator
 const scrollableContainerStyle: React.CSSProperties = {
-  height: '520px', // Adjusted to fit within the container with padding
+  height: '400px', // Fixed height to ensure scrollability
+  maxHeight: '400px',
   overflowY: 'auto',
   paddingRight: '10px',
   // Using non-standard properties with type assertion
   ...({
     scrollbarWidth: 'thin',
-    scrollbarColor: 'rgba(255, 255, 255, 0.2) transparent',
+    scrollbarColor: 'rgba(164, 210, 51, 0.7) transparent', // Green accent color (#A4D233) with transparency
   } as React.CSSProperties),
 };
 
@@ -40,6 +37,12 @@ export function ContactSection() {
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
   const { language } = useLanguage();
   const { t } = useTranslation();
+  
+  // Style for container
+  const containerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+  };
 
   // Package options using translation keys
   const packageOptions = [
@@ -99,6 +102,7 @@ export function ContactSection() {
       toast({
         title: t('contact.successTitle'),
         description: t('contact.successMessage'),
+        variant: "default",
       });
       form.reset();
       setSelectedPackages([]);
@@ -115,8 +119,27 @@ export function ContactSection() {
 
   // Form submission handler
   const onSubmit = (data: z.infer<typeof contactFormSchema>) => {
-    data.interests = [...selectedPackages, ...selectedActivities];
-    mutation.mutate(data as ContactFormData);
+    // Map package and activity selections to their labels
+    const packageLabels = selectedPackages.map(id => {
+      const option = packageOptions.find(opt => opt.id === id);
+      return option ? option.label : id;
+    });
+    
+    const activityLabels = selectedActivities.map(id => {
+      const option = activityOptions.find(opt => opt.id === id);
+      return option ? option.label : id;
+    });
+    
+    // Combine all interests into a single array
+    const allInterests = [...packageLabels, ...activityLabels];
+    
+    // Create the form data with the interests field populated
+    const formData = { 
+      ...data, 
+      interests: allInterests.length > 0 ? allInterests : undefined 
+    };
+    
+    mutation.mutate(formData as ContactFormData);
   };
 
   // Handle package checkbox changes
@@ -139,100 +162,95 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
-      {/* Remove section-specific background to use global background only */}
-      
       <div className="container mx-auto px-4 relative z-10">
+        {/* Header with Title and Contact Information */}
         <div className="text-center mb-10">
-          <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
-            {t('contact.form.contactUsLabel')}
-          </span>
           <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
             {t('contact.title')}
           </h2>
-          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80">
+          <p className="text-lg max-w-3xl mx-auto text-white text-opacity-80 mb-8">
             {t('contact.subtitle')}
           </p>
-        </div>
-        
-        {/* Contact Information Section */}
-        <div className="glass-card border border-white/10 rounded-xl backdrop-blur-sm mb-12 max-w-6xl mx-auto">
-          <div className="p-8">
-            <h3 className="font-medium text-xl mb-6 text-white text-center">{t('contact.info.title')}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Phone */}
-              <div className="flex items-center space-x-4">
-                <div className="bg-[#1D1D1D] p-3 rounded-full">
-                  <Phone className="w-6 h-6 text-[#D4AF37]" />
+          
+          {/* Contact Information Cards */}
+          <div className="glass-card border border-white/10 rounded-xl backdrop-blur-sm mb-12 max-w-4xl mx-auto">
+            <div className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Phone */}
+                <div className="flex items-center space-x-4">
+                  <div className="bg-[#1A1D1F] p-3 rounded-full">
+                    <Phone className="w-5 h-5 text-[#A4D233]" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-medium text-white">Phone</h4>
+                    <p className="text-gray-300">+46 70 357 54 55</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg text-gray-200">Phone</h4>
-                  <p className="text-gray-400">+49 171 1234567</p>
-                </div>
-              </div>
 
-              {/* Email */}
-              <div className="flex items-center space-x-4">
-                <div className="bg-[#1D1D1D] p-3 rounded-full">
-                  <Mail className="w-6 h-6 text-[#D4AF37]" />
+                {/* Email */}
+                <div className="flex items-center space-x-4">
+                  <div className="bg-[#1A1D1F] p-3 rounded-full">
+                    <Mail className="w-5 h-5 text-[#A4D233]" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-medium text-white">Email</h4>
+                    <p className="text-gray-300">info@triple-x-adventures.com</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg text-gray-200">Email</h4>
-                  <p className="text-gray-400">info@triple-x-adventures.com</p>
-                </div>
-              </div>
 
-              {/* Address */}
-              <div className="flex items-center space-x-4">
-                <div className="bg-[#1D1D1D] p-3 rounded-full">
-                  <MapPin className="w-6 h-6 text-[#D4AF37]" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg text-gray-200">Address</h4>
-                  <p className="text-gray-400">Arvidsjaur, Sweden</p>
+                {/* Address */}
+                <div className="flex items-center space-x-4">
+                  <div className="bg-[#1A1D1F] p-3 rounded-full">
+                    <MapPin className="w-5 h-5 text-[#A4D233]" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-medium text-white">Address</h4>
+                    <p className="text-gray-300">Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         
-        {/* Form and FAQ Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto" style={{ alignItems: 'stretch' }}>
-          {/* Contact Form with glass effect */}
-          <div className="group relative">
-            
-            <div className="glass-card relative z-10 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl" style={equalHeightContainerStyle}>
-              <div className="p-8">
-                <h3 className="font-medium text-xl mb-6 text-white">{t('contact.formTitle')}</h3>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FormField
-                        control={form.control}
-                        name="firstName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">{t('contact.firstName')}</FormLabel>
-                            <FormControl>
-                              <Input {...field} id="firstName" name="firstName" autoComplete="given-name" className="bg-card-bg/50 border-white/10" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="lastName"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-white">{t('contact.lastName')}</FormLabel>
-                            <FormControl>
-                              <Input {...field} id="lastName" name="lastName" autoComplete="family-name" className="bg-card-bg/50 border-white/10" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+        {/* Vertical layout for Contact Form and FAQ */}
+        <div className="flex flex-col gap-8 max-w-4xl mx-auto">
+          {/* Contact Form Section */}
+          <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden">
+            <div className="p-6" style={containerStyle}>
+              <h3 className="font-medium text-xl mb-4 text-white">{t('contact.formTitle')}</h3>
+              
+              {/* Contact Form */}
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" autoComplete="on">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="firstName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">{t('contact.firstName')}</FormLabel>
+                          <FormControl>
+                            <Input {...field} autoComplete="given-name" className="bg-[#1A1D1F] border border-white/10 text-white" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    
+                    <FormField
+                      control={form.control}
+                      name="lastName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-white">{t('contact.lastName')}</FormLabel>
+                          <FormControl>
+                            <Input {...field} autoComplete="given-name" className="bg-[#1A1D1F] border border-white/10 text-white" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                     
                     <FormField
                       control={form.control}
@@ -241,7 +259,7 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-white">{t('contact.email')}</FormLabel>
                           <FormControl>
-                            <Input {...field} id="email" name="email" type="email" autoComplete="email" className="bg-card-bg/50 border-white/10" />
+                            <Input {...field} type="email" autoComplete="email" className="bg-[#1A1D1F] border border-white/10 text-white" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -255,213 +273,207 @@ export function ContactSection() {
                         <FormItem>
                           <FormLabel className="text-white">{t('contact.phone')}</FormLabel>
                           <FormControl>
-                            <Input {...field} id="phone" name="phone" type="tel" autoComplete="tel" className="bg-card-bg/50 border-white/10" />
+                            <Input {...field} type="tel" autoComplete="tel" className="bg-[#1A1D1F] border border-white/10 text-white" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
-                    <FormField
-                      control={form.control}
-                      name="visitDate"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">{t('contact.visitDate')}</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger className="bg-card-bg/50 border-white/10">
-                                <SelectValue placeholder={t('contact.visitDatePlaceholder')} />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="dec-jan">{t('contact.visitDateOptions.decJan')}</SelectItem>
-                              <SelectItem value="feb-mar">{t('contact.visitDateOptions.febMar')}</SelectItem>
-                              <SelectItem value="apr-may">{t('contact.visitDateOptions.aprMay')}</SelectItem>
-                              <SelectItem value="other">{t('contact.visitDateOptions.other')}</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <div>
-                      <FormLabel className="text-white">{t('contact.form.desiredPackagesLabel')}</FormLabel>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                        {packageOptions.map((option) => (
-                          <div key={option.id} className="flex items-center space-x-2">
-                            <Checkbox 
-                              id={option.id} 
-                              checked={selectedPackages.includes(option.id)}
-                              onCheckedChange={(checked) => handlePackageChange(checked as boolean, option.id)}
-                              className="border-accent-color/50 data-[state=checked]:bg-accent-color data-[state=checked]:border-accent-color"
-                            />
-                            <label 
-                              htmlFor={option.id}
-                              className="text-sm cursor-pointer text-white text-opacity-90"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <FormLabel className="text-white">{t('contact.form.desiredActivitiesLabel')}</FormLabel>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                        {activityOptions.map((option) => (
-                          <div key={option.id} className="flex items-center space-x-2">
-                            <Checkbox 
-                              id={option.id} 
-                              checked={selectedActivities.includes(option.id)}
-                              onCheckedChange={(checked) => handleActivityChange(checked as boolean, option.id)}
-                              className="border-accent-color/50 data-[state=checked]:bg-accent-color data-[state=checked]:border-accent-color"
-                            />
-                            <label 
-                              htmlFor={option.id}
-                              className="text-sm cursor-pointer text-white text-opacity-90"
-                            >
-                              {option.label}
-                            </label>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <FormField
-                      control={form.control}
-                      name="charterFlight"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">{t('contact.charterFlight') || 'Charter Flight Options'}</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
-                              <SelectTrigger className="bg-card-bg/50 border-white/10">
-                                <SelectValue placeholder={t('contact.charterFlightPlaceholder') || 'Select a charter flight option'} />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {flightOptions.map((option) => (
-                                <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-white">{t('contact.message')}</FormLabel>
+                  </div>
+                  
+                  <FormField
+                    control={form.control}
+                    name="visitDate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">{t('contact.visitDate')}</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <Textarea 
-                              {...field} 
-                              id="message" 
-                              name="message"
-                              placeholder={t('contact.messagePlaceholder')}
-                              className="min-h-[120px] bg-card-bg/50 border-white/10" 
-                            />
+                            <SelectTrigger className="bg-[#1A1D1F] border border-white/10 text-white hover:border-[#A4D233] focus:border-[#A4D233] h-10 rounded-md">
+                              <SelectValue placeholder={t('contact.visitDatePlaceholder')} />
+                            </SelectTrigger>
                           </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full bg-accent-color hover:bg-accent-color/90 text-black font-medium"
-                      disabled={mutation.isPending}
-                    >
-                      {mutation.isPending ? (
-                        <span className="flex items-center">
-                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          {t('contact.form.sending')}
-                        </span>
-                      ) : (
-                        <span className="flex items-center">
-                          <Send className="mr-2 h-4 w-4" />
-                          {t('contact.form.submit')}
-                        </span>
-                      )}
-                    </Button>
-                  </form>
-                </Form>
-              </div>
+                          <SelectContent className="bg-[#1A1D1F] border border-white/10 rounded-md">
+                            <SelectItem value="dec-jan" className="text-white hover:bg-[#A4D233]/10 focus:bg-[#A4D233]/20">{t('contact.visitDateOptions.decJan')}</SelectItem>
+                            <SelectItem value="feb-mar" className="text-white hover:bg-[#A4D233]/10 focus:bg-[#A4D233]/20">{t('contact.visitDateOptions.febMar')}</SelectItem>
+                            <SelectItem value="apr-may" className="text-white hover:bg-[#A4D233]/10 focus:bg-[#A4D233]/20">{t('contact.visitDateOptions.aprMay')}</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <div>
+                    <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">{t('contact.form.desiredPackagesLabel')}</Label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                      {packageOptions.map((option) => (
+                        <div key={option.id} className="flex items-center space-x-2">
+                          <Checkbox 
+                            id={option.id} 
+                            checked={selectedPackages.includes(option.id)}
+                            onCheckedChange={(checked) => handlePackageChange(checked as boolean, option.id)}
+                            className="border-[#A4D233]/50 data-[state=checked]:bg-[#A4D233] data-[state=checked]:border-[#A4D233]"
+                          />
+                          <label 
+                            htmlFor={option.id}
+                            className="text-sm cursor-pointer text-white text-opacity-90"
+                          >
+                            {option.label}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">{t('contact.form.desiredActivitiesLabel')}</Label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                      {activityOptions.map((option) => (
+                        <div key={option.id} className="flex items-center space-x-2">
+                          <Checkbox 
+                            id={option.id} 
+                            checked={selectedActivities.includes(option.id)}
+                            onCheckedChange={(checked) => handleActivityChange(checked as boolean, option.id)}
+                            className="border-[#A4D233]/50 data-[state=checked]:bg-[#A4D233] data-[state=checked]:border-[#A4D233]"
+                          />
+                          <label 
+                            htmlFor={option.id}
+                            className="text-sm cursor-pointer text-white text-opacity-90"
+                          >
+                            {option.label}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <FormField
+                    control={form.control}
+                    name="charterFlight"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">{t('contact.charterFlight')}</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-[#1A1D1F] border border-white/10 text-white hover:border-[#A4D233] focus:border-[#A4D233] h-10 rounded-md">
+                              <SelectValue placeholder={t('contact.charterFlightPlaceholder')} />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="bg-[#1A1D1F] border border-white/10 rounded-md">
+                            {flightOptions.map((option) => (
+                              <SelectItem key={option.value} value={option.value} className="text-white hover:bg-[#A4D233]/10 focus:bg-[#A4D233]/20">
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white">{t('contact.message')}</FormLabel>
+                        <FormControl>
+                          <Textarea 
+                            {...field} 
+                            className="bg-[#1A1D1F] border border-white/10 text-white min-h-[120px]" 
+                            placeholder={t('contact.messagePlaceholder')}
+                            autoComplete="off"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <Button 
+                    type="submit" 
+                    disabled={mutation.isPending}
+                    className="w-full bg-[#A4D233] hover:bg-[#8FBB1C] text-white font-medium h-10 rounded-md"
+                  >
+                    {mutation.isPending ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        {t('contact.sending')}
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        {t('contact.send')}
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </Form>
             </div>
           </div>
           
           {/* FAQ Section */}
-          <div className="group relative">
-            
-            <div className="glass-card relative z-10 border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden shadow-xl" style={equalHeightContainerStyle}>
-              <div className="p-8">
-                <h3 className="font-medium text-xl mb-6 text-white">{t('contact.faq.title')}</h3>
-                <div style={scrollableContainerStyle} className="space-y-3">
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q1')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a1')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q2')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a2')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q3')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a3')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q4')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a4')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q5')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a5')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q6')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a6')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q7')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a7')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q8')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a8')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q9')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a9')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q10')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a10')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q11')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a11')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q12')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a12')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q13')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a13')}</p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2 text-white">{t('contact.faq.q14')}</h4>
-                    <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a14')}</p>
-                  </div>
+          <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden">
+            <div className="p-6" style={containerStyle}>
+              <h3 className="font-medium text-xl mb-4 text-white">{t('contact.faq.title')}</h3>
+              <div style={scrollableContainerStyle} className="space-y-4">
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q1')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a1')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q2')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a2')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q3')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a3')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q4')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a4')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q5')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a5')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q6')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a6')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q7')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a7')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q8')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a8')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q9')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a9')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q10')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a10')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q11')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a11')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q12')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a12')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q13')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a13')}</p>
+                </div>
+                <div>
+                  <h4 className="font-medium mb-2 text-white">{t('contact.faq.q14')}</h4>
+                  <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a14')}</p>
                 </div>
               </div>
             </div>

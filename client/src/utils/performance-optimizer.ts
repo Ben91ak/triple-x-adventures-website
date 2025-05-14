@@ -161,45 +161,61 @@ export function loadDeferredCSS(href: string): void {
  * Monitors performance metrics and logs them
  */
 export function monitorPerformance(): void {
-  if (!isBrowser || !('performance' in window) || !('getEntriesByType' in performance)) return;
+  if (!isBrowser || !('performance' in window)) return;
+  
+  // Set up PerformanceObserver for Largest Contentful Paint
+  if ('PerformanceObserver' in window) {
+    try {
+      // Create a variable to store the LCP value
+      let lcpValue = 0;
+      
+      // Create new PerformanceObserver for LCP
+      const lcpObserver = new PerformanceObserver((entryList) => {
+        const entries = entryList.getEntries();
+        // Use the latest entry
+        const lastEntry = entries[entries.length - 1];
+        lcpValue = lastEntry.startTime;
+        console.log(`Largest Contentful Paint: ${Math.round(lcpValue)}ms`);
+      });
+      
+      // Start observing LCP
+      lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+    } catch (e) {
+      console.warn('PerformanceObserver for LCP not supported', e);
+    }
+  }
   
   // This will run after the page has loaded
   window.addEventListener('load', () => {
     setTimeout(() => {
-      // Get performance metrics
-      const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      
-      if (navigationEntry) {
-        // Calculate key metrics
-        const pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.startTime;
-        const timeToFirstByte = navigationEntry.responseStart - navigationEntry.requestStart;
-        const domContentLoaded = navigationEntry.domContentLoadedEventEnd - navigationEntry.startTime;
-        
-        // Log metrics
-        console.log(`Performance metrics:
+      // Get navigation performance metrics
+      try {
+        const navigationEntries = performance.getEntriesByType('navigation');
+        if (navigationEntries && navigationEntries.length > 0) {
+          const navigationEntry = navigationEntries[0] as PerformanceNavigationTiming;
+          
+          // Calculate key metrics
+          const pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.startTime;
+          const timeToFirstByte = navigationEntry.responseStart - navigationEntry.requestStart;
+          const domContentLoaded = navigationEntry.domContentLoadedEventEnd - navigationEntry.startTime;
+          
+          // Log metrics
+          console.log(`Performance metrics:
 - Page load time: ${Math.round(pageLoadTime)}ms
 - Time to first byte: ${Math.round(timeToFirstByte)}ms
 - DOM Content Loaded: ${Math.round(domContentLoaded)}ms`);
-        
-        // Send to analytics if needed
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'performance', {
-            pageLoadTime: Math.round(pageLoadTime),
-            timeToFirstByte: Math.round(timeToFirstByte),
-            domContentLoaded: Math.round(domContentLoaded)
-          });
-        }
-      }
-      
-      // Get Largest Contentful Paint if available
-      try {
-        const lcpEntries = performance.getEntriesByType('largest-contentful-paint');
-        if (lcpEntries && lcpEntries.length > 0) {
-          const lcp = lcpEntries[lcpEntries.length - 1];
-          console.log(`Largest Contentful Paint: ${Math.round(lcp.startTime)}ms`);
+          
+          // Send to analytics if needed
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'performance', {
+              pageLoadTime: Math.round(pageLoadTime),
+              timeToFirstByte: Math.round(timeToFirstByte),
+              domContentLoaded: Math.round(domContentLoaded)
+            });
+          }
         }
       } catch (e) {
-        // LCP API might not be supported
+        console.warn('Navigation timing API not fully supported', e);
       }
       
       // Clear entries to avoid memory leaks

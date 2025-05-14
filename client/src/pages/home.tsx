@@ -9,6 +9,7 @@ import { optimizePageImages } from "@/utils/performance-optimizer";
 import { preloadAllCriticalImages } from "@/utils/image-preloader";
 import { SEO } from "@/components/seo/SEO";
 import { BackToTop } from "@/components/ui/back-to-top";
+import { TrustedPartnersSection } from "@/components/trusted-partners-section";
 
 // Lazy-load non-critical sections for better performance
 const IntroductionSection = lazy(() => import("@/components/introduction-section").then(module => ({ default: module.IntroductionSection })));
@@ -22,7 +23,7 @@ const TestimonialsSection = lazy(() => import("@/components/testimonials-section
 import SectionLoader from "../components/ui/section-loader";
 
 const ContactSection = lazy(() => import("@/components/contact-section").then(module => ({ default: module.ContactSection })));
-const CTASection = lazy(() => import("@/components/cta-section").then(module => ({ default: module.CTASection })));
+// CTA Section removed per user request
 // Remove BookingSection import since module cannot be found
 
 // Memoize the entire Home component to prevent unnecessary re-renders
@@ -108,14 +109,15 @@ const Home = memo(function Home() {
             <ContactSection />
           </Suspense>
           
-          <Suspense fallback={<SectionLoader />}>
-            <CTASection />
-          </Suspense>
+          {/* CTA Section removed per user request */}
           
           <Suspense fallback={<SectionLoader />}>
             {/* Temporarily commenting out BookingSection until it's implemented */}
             {/* <BookingSection /> */}
           </Suspense>
+
+          {/* Trusted Partners Section */}
+          <TrustedPartnersSection />
         </main>
         
         {/* Footer with site information and navigation */}

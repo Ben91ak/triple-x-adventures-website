@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content="#0F2D40">
   <meta name="description" content="Triple X Adventures offers authentic, premium Arctic experiences in Swedish Lapland including snowmobiling, dog sledding, and wilderness adventures.">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googleapis.com *.gstatic.com cdnjs.cloudflare.com;">
   
   <!-- Open Graph metadata for social sharing -->
   <meta property="og:title" content="Triple X Adventures - The Real Arctic Deal">
@@ -28,7 +29,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   
   <!-- Only preload hero video - other resources loaded on demand -->
-  <link rel="preload" href="/public/videos/TXA Teaser 2025 Homepage.mp4" as="video" type="video/mp4" fetchpriority="high">
+  <link rel="preload" href="/public/videos/TXA Teaser 2025 Homepage.mp4" as="fetch" type="video/mp4" fetchpriority="high" crossorigin>
   
   <!-- Critical fonts loaded directly for better performance -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
