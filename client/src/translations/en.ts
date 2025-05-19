@@ -5,10 +5,9 @@ export const en = {
     packages: "Packages",
     about: "About Us",
     accommodations: "Accommodations",
-    restaurant: "Restaurant",
-    gallery: "Gallery",
     contact: "Contact",
     experiences: "Experiences",
+    professionalServices: "Professional Services",
     bookNow: "Book Now"
   },
   
@@ -663,42 +662,71 @@ export const en = {
     title: "STAY WITH US",
     subtitle: "Comfort in the Wilderness",
     viewAll: "View All Accommodations",
-  },
-  
-  // Restaurant Section
-  restaurant: {
-    title: "TASTE THE ARCTIC",
-    subtitle: "Local Flavors & Warm Hospitality",
-    description: "Experience authentic Nordic cuisine made with fresh, locally-sourced ingredients.",
-    menu: "View Menu",
-    book: "Book a Table",
-  },
-  
-  // About Section
-  about: {
-    title: "WHY WE LIVE FOR THIS",
-    subtitle: "Our story, our team, and our commitment to authentic Arctic adventures",
-    storyTitle: "OUR STORY",
-    story: {
-      paragraph1: "Triple X Adventures was born from a simple passion: sharing the raw beauty and adventure of Swedish Lapland with those who seek authentic experiences. Founded by Janina Möller in 2017 with just a few snowmobiles and a dream to show our guests the magic of Swedish Lapland.",
-      paragraph2: "Today, we've grown into a premium adventure company, but our heart remains the same. We still operate with small groups, still work with local partners, and still believe that the Arctic isn't just a destination—it's an experience that changes you.",
-      paragraph3: "Unlike mass tourism operations, we've chosen to stay true to our roots: personal, exclusive, and deeply connected to the land we call home."
+    whereYouWillStay: "Where You Will Stay",
+    comingSoon: "Coming Soon",
+    from: "From",
+    night: "night",
+    registerInterest: "Register Interest",
+    checkAvailability: "Check availability",
+    viewOptions: "View options",
+    // Accommodation data
+    cabinHotel: {
+      title: "CABIN HOTEL SAMELAND",
+      description: "Experience luxury in our premium Mirror Glass Cabins, featuring floor-to-ceiling glass walls that provide uninterrupted views of the Arctic wilderness and Northern Lights. A truly unforgettable stay in nature.",
+      features: [
+        "For 2-4 guests",
+        "13 Cabins",
+        "Climate controlled",
+        "Luxury king bed",
+        "own kitchen",
+        "Sameland, Arvidsjaur"
+      ]
     },
-    valuesTitle: "OUR VALUES",
-    values: [
-      { title: "Authenticity", description: "We showcase the real Arctic, without filters or pretense. What you experience with us is genuine Lapland.", icon: "mountain" },
-      { title: "Sustainability", description: "We tread lightly on the land we love, employing sustainable practices that preserve the Arctic for future generations.", icon: "leaf" },
-      { title: "Passion", description: "Our guides aren't just employees—they're enthusiasts who love sharing their knowledge and excitement for the Arctic.", icon: "heart" }
-    ],
-    teamTitle: "MEET OUR TEAM",
-    teamImageAlt: "Team members in Arctic gear",
-    teamMembers: [
-      { id: 1, name: "Janina JayJay Möller", role: "Founder & CEO", bio: "Founded Triple X Adventures with a passion for authentic Arctic experiences.", image: "/images/Team/jayjay.jpg" },
-      { id: 2, name: "Benni Fichtner", role: "Project Lead", bio: "Manages our projects with precision and creativity.", image: "/images/Team/Benni.jpg" },
-      { id: 3, name: "Jesper Axelsson", role: "Head Guide", bio: "Expert guide with years of experience in the Arctic wilderness.", image: "/images/Team/Jeppe.jpg" },
-      { id: 4, name: "Henni Bruhn", role: "Experience Coordinator", bio: "Creates unforgettable customer journeys and adventure itineraries.", image: "/images/Team/Henni.jpg" },
-      { id: 5, name: "Fanny Johannson", role: "Project Manager", bio: "Ensures all our adventures run smoothly from start to finish.", image: "/images/Team/Fanny.jpg" }
-    ]
+    txaChalet: {
+      title: "TXA - CHALET",
+      description: "Stay in your own TXA - Chalet and experience the highest level of comfort. Our exclusive chalet offers a perfect mix of rustic charm and modern luxury.",
+      features: [
+        "Up to 24 guests",
+        "12 bedrooms",
+        "Private sauna",
+        "Private lounge / restaurant"
+      ]
+    },
+    hotelLaponia: {
+      title: "HOTEL LAPONIA",
+      description: "A comfortable alternative to our TXA Chalet. Hotel Laponia provides you with a pleasant stay before and after your adventures, with all the amenities you need.",
+      features: [
+        "Central location",
+        "Arctic ambiance",
+        "only 10 km from the Airport",
+        "Fjälls Pub & Bistro"
+      ]
+    },
+    description: "After a day full of adventures, our premium accommodations offer the perfect place to relax and recharge.",
+    types: {
+      hotel: {
+        title: "Hotel Laponia",
+        description: "Our partner hotel offers luxurious rooms with all amenities for a comfortable stay.",
+        features: ["Luxurious Rooms", "Spa Area", "Restaurant", "Central Location", "WiFi"]
+      },
+      cabins: {
+        title: "Arctic Cabins",
+        description: "Our cozy cabins offer privacy and an authentic stay in the Arctic wilderness.",
+        features: ["Fully Equipped Kitchen", "Private Hot Tub", "Fireplace", "Northern Lights View", "Nature-Close Location"]
+      },
+      glamping: {
+        title: "Arctic Glamping",
+        description: "Experience luxury camping with all amenities in a breathtaking natural environment.",
+        features: ["Heated Tent", "Comfortable Beds", "Panoramic Windows", "Northern Lights View", "Authentic Experience"]
+      }
+    }
+  },
+  
+  
+  // About Section - Simplified
+  about: {
+    title: "ABOUT US",
+    subtitle: "Our commitment to authentic Arctic adventures"
   },
   
   // Contact Section
@@ -821,6 +849,26 @@ export const en = {
     privacyPolicy: "Privacy Policy",
     termsConditions: "Terms & Conditions",
     imprint: "Imprint",
+    openingHours: "Opening Hours",
+    monday: "Monday - Friday",
+    saturday: "Saturday",
+    sunday: "Sunday",
+    byAppointment: "By appointment",
+    // Privacy Policy Modal
+    privacyPolicyTitle: "PRIVACY POLICY",
+    privacyPolicyIntro: "This privacy policy (\"Policy\") describes how Triple X Adventures AB (\"Triple X Adventures AB\", \"we\", \"us\", or \"our\") collects, protects, and uses the personally identifiable information (\"Personal Information\") you (\"User\", \"you\", or \"your\") may provide on the triple-x-adventures.com website and any of its products or services (collectively, \"Website\" or \"Services\"). It also describes the choices you have regarding the use of your Personal Information and how you can access and update that information. This Policy does not apply to the practices of companies that we do not own or control, or to individuals that we do not employ or manage.",
+    automaticCollection: "Automatic Collection of Information",
+    automaticCollectionText: "Our top priority is customer data security, and we exercise a no-logs policy. We may process only minimal user data, only as much as is absolutely necessary to maintain the Website or Services. Information collected automatically is used only to identify potential cases of abuse and establish statistical information regarding Website usage. This statistical information is not otherwise aggregated in such a way that would identify any particular user of the system.",
+    personalInfoCollection: "Collection of Personal Information",
+    personalInfoCollectionText: "You can visit the Website without telling us who you are or revealing any information by which someone could identify you as a specific, identifiable individual. However, if you wish to use some of the Website's features, you may be asked to provide certain Personal Information (for example, your name and email address). We receive and store any information you knowingly provide to us when you make a purchase, or fill out any online form on the Website. This information may include:",
+    personalInfoItems: ["Personal details such as name, country of residence, etc.", "Contact information such as email address, address, etc."],
+    personalInfoChoice: "You can choose not to provide us with your Personal Information, but then you may not be able to take advantage of some of the Website's features. Users who are uncertain about what information is mandatory are welcome to contact us.",
+    // Terms and Conditions Modal
+    termsTitle: "TERMS AND CONDITIONS",
+    termsIntro: "The following terms and conditions shall be applied to packages offered and delivered during all seasons by Triple X Adventures AB (hereinafter referred to as \"TXA\") through its package programs in the following destinations: Arvidsjaur, Swedish Lapland, and any other areas where the services are delivered.",
+    commercialTerms: "COMMERCIAL TERMS",
+    contactUs: "Contacting Us",
+    contactUsText: "If you would like to contact us concerning any matter relating to this, you may do so via the contact form, send an email to info@triple-x-adventures.com, or write a letter to:"
   },
   
   // Language Selector
@@ -840,28 +888,7 @@ export const en = {
     returnHome: "Return to Homepage",
   },
   
-  // Animations Showcase
-  animationsShowcase: {
-    title: "Interactive Elements",
-    description: "Explore our premium micro-interactions and animations that enhance your Arctic adventure experience.",
-    entranceAnimations: "Entrance Animations",
-    hoverAnimations: "Hover Effects",
-    continuousAnimations: "Continuous Animations",
-    hoverCards: "Interactive Information",
-    staggeredAnimations: "Sequenced Elements",
-    specialEffects: "Special Effects",
-  },
   
-  // Adventure Map Page
-  adventureMap: {
-    pageTitle: "Adventure Map",
-    pageSubtitle: "Explore the Arctic wilderness with our interactive map",
-    interactive: "INTERACTIVE",
-    locationCount: "Discover all",
-    locationsText: "adventure locations",
-    description: "Our adventure map showcases all the incredible locations in and around Arvidsjaur where we offer our premium Arctic experiences. From our main office at Storgatan 6F to Sameland restaurant and cabins at Karlavagnen 1, and our premium accommodations at Hotel Laponia - this interactive guide will help you visualize your ultimate Swedish Lapland journey.",
-    legendText: "Click on any marker to learn more about the location. The color indicates the type of location: green for accommodations, blue for experiences, and purple for points of interest."
-  },
   
   // CTA Section
   ctaSection: {
@@ -871,44 +898,7 @@ export const en = {
     adventureAwaits: "Your Adventure Awaits"
   },
   
-  // Booking Section
-  bookingSection: {
-    title: "BOOK YOUR ADVENTURE",
-    subtitle: "Secure your spot for an unforgettable experience",
-    nameLabel: "Name",
-    namePlaceholder: "Your name",
-    emailLabel: "Email",
-    emailPlaceholder: "Your email",
-    phoneLabel: "Phone",
-    phonePlaceholder: "Phone number",
-    dateLabel: "Date",
-    datePlaceholder: "Preferred date",
-    participantsLabel: "Participants",
-    participantsPlaceholder: "Number of participants",
-    experienceLabel: "Experience",
-    experiencePlaceholder: "Select experience",
-    messageLabel: "Message",
-    messagePlaceholder: "Additional requests or questions",
-    submitButton: "Book Now",
-    successMessage: "Thank you! Your booking request has been received.",
-    successConfirmation: "We'll contact you shortly to confirm your booking details.",
-    experiences: {
-      snowmobile: "Snowmobile Safari",
-      husky: "Dog Sledding Adventure",
-      aurora: "Northern Lights Tour",
-      iceFishing: "Ice Fishing Experience",
-      survival: "Arctic Survival Course"
-    }
-  },
   
-  // Adventure Locations Data (Types)
-  adventureLocations: {
-    types: {
-      accommodation: "Accommodation",
-      experience: "Experience",
-      landmark: "Point of Interest"
-    }
-  },
   
   // Professional Services Page
   professionalServices: {
@@ -1043,11 +1033,57 @@ export const en = {
           placeholder: "Tell us about your project or idea..."
         },
         button: "Send Message",
-        directEmail: "Or email us directly at"
+        sending: "Sending...",
+        directEmail: "Or email us directly at",
+        success: {
+          title: "Message Sent Successfully",
+          message: "Thank you for your message. We'll get back to you as soon as possible.",
+          newMessage: "Send Another Message"
+        },
+        error: {
+          title: "Message Not Sent",
+          message: "There was an error sending your message. Please try again or contact us directly via email."
+        }
       }
     },
     partners: {
       title: "Our Trusted Partners"
     }
+  },
+  
+  // Testimonials Section
+  testimonials: {
+    title: "WHAT ADVENTURERS SAY",
+    subtitle: "Stories from those who've experienced the Real Arctic Deal",
+    sectionTitle: "Experiences",
+    loadingText: "Loading reviews...",
+    errorText: "Failed to load reviews",
+    leaveReview: "Leave a Review",
+    testimonialsList: [
+      {
+        id: 1,
+        text: "Triple X Adventures delivered an experience that was simply beyond words. The snowmobile trip through pristine forests felt like entering another world, and our guide Erik's knowledge added so much depth to the journey.",
+        author: "Sarah J.",
+        location: "London, UK",
+        image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      },
+      {
+        id: 2,
+        text: "The dog sledding adventure was incredible! These aren't tourist-factory experiences but real, authentic Arctic adventures. The TXA Chalet was amazing too—watching the northern lights from the sauna was unforgettable.",
+        author: "Michael T.",
+        location: "Berlin, Germany",
+        image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      },
+      {
+        id: 3,
+        text: "What sets Triple X apart is the personal touch. We've done winter activities elsewhere, but here we felt like guests rather than tourists. The meal at JayJay's was a highlight—I'm still dreaming about that reindeer stew!",
+        author: "Emma L.",
+        location: "Sydney, Australia",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      }
+    ]
   }
 };

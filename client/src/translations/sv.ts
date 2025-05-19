@@ -5,10 +5,9 @@ export const sv = {
     packages: "Paket",
     about: "Om Oss",
     accommodations: "Boende",
-    restaurant: "Restaurang",
-    gallery: "Galleri",
     contact: "Kontakt",
     experiences: "Upplevelser",
+    professionalServices: "Professionella Tjänster",
     bookNow: "Boka Nu"
   },
   
@@ -28,30 +27,57 @@ export const sv = {
     paragraph3: "Koppla av efter en spännande dag i vårt spa och njut av naturens lugn. Våra <strong>utomhus-bubbelpooler och bastur</strong> erbjuder den perfekta tillflyktsorten. Slutligen, titta på de vackra <strong>norrskenen</strong> som dansar på himlen."
   },
   
-  // About Section
+  // About Section - Simplified
   about: {
     title: "OM OSS",
-    subtitle: "Vår Historia och Mission",
-    mission: "VÅR MISSION",
-    missionText: "Vi erbjuder autentiska arktiska upplevelser som kombinerar äventyr, komfort och hållbarhet.",
-    story: "VÅR HISTORIA",
-    storyText: "Triple X Adventures grundades av passionerade friluftsentusiaster som ville dela sin kärlek till Svenska Lappland. I över ett decennium har vi erbjudit oförglömliga upplevelser i denna magiska region.",
-    values: "VÅRA VÄRDERINGAR",
-    valuesList: [
-      "Autentiska Upplevelser",
-      "Miljömedvetenhet",
-      "Högsta Säkerhetsstandarder",
-      "Lokalt Samarbete",
-      "Exceptionell Service"
-    ],
-    team: "VÅRT TEAM",
-    teamText: "Vårt erfarna team består av lokala experter och internationella äventyrare som delar sin passion och kunskap med dig."
+    subtitle: "Vårt engagemang för autentiska arktiska äventyr"
   },
   
   // Accommodations Section
   accommodations: {
     title: "BOENDE",
     subtitle: "Bekvämt Boende i Arktis",
+    viewAll: "Visa alla boenden",
+    whereYouWillStay: "Ditt Boende",
+    comingSoon: "Kommer snart",
+    from: "Från",
+    night: "natt",
+    registerInterest: "Intresseanmälan",
+    checkAvailability: "Kontrollera tillgänglighet",
+    viewOptions: "Visa alternativ",
+    // Accommodation data
+    cabinHotel: {
+      title: "CABIN HOTEL SAMELAND",
+      description: "Upplev lyx i vårt premium Glass Cabin Hotel, med glasväggar från golv till tak som ger obrutna vyer över den arktiska vildmarken och norrskenet. En verkligt oförglömlig vistelse i naturen.",
+      features: [
+        "För 2-4 gäster",
+        "13 Cabins",
+        "Klimatkontrollerad",
+        "Lyxig kingsize-säng",
+        "eget kök",
+        "SameLand, Arvidsjaur"
+      ]
+    },
+    txaChalet: {
+      title: "TXA - CHALET",
+      description: "Bo i din egen TXA - Chalet och upplev högsta komfort. Vårt exklusiva chalet erbjuder en perfekt blandning av rustik charm och modern lyx.",
+      features: [
+        "Upp till 24 gäster",
+        "12 sovrum",
+        "Privat bastu",
+        "Privat lounge / restaurang"
+      ]
+    },
+    hotelLaponia: {
+      title: "HOTEL LAPONIA",
+      description: "Ett bekvämt alternativ till vårt TXA Chalet. Hotel Laponia erbjuder en bekväm vistelse före och efter dina äventyr, med alla bekvämligheter du behöver.",
+      features: [
+        "Centralt läge",
+        "Arktisk atmosfär",
+        "Endast 10 km från flygplatsen",
+        "Fjälls Pub & Bistro"
+      ]
+    },
     description: "Efter en dag full av äventyr erbjuder vårt förstklassiga boende den perfekta platsen för att koppla av och återhämta sig.",
     types: {
       hotel: {
@@ -70,33 +96,6 @@ export const sv = {
         features: ["Uppvärmt Tält", "Bekväma Sängar", "Panoramafönster", "Norrskensutsikt", "Autentisk Upplevelse"]
       }
     }
-  },
-  
-  // Restaurant Section
-  restaurant: {
-    title: "VÅR RESTAURANG",
-    subtitle: "Autentisk Arktisk Matlagning",
-    description: "Vår restaurang Sameland erbjuder en unik kulinarisk resa genom arktisk matlagning med lokala och säsongsbetonade ingredienser.",
-    menu: {
-      title: "MENY-HÖJDPUNKTER",
-      starters: "Förrätter",
-      mains: "Huvudrätter",
-      desserts: "Efterrätter",
-      drinks: "Drycker",
-      items: {
-        reindeerCarpaccio: "Rencarpaccio med Skogsbär",
-        arcticChar: "Rökt Arktisk Röding",
-        wildMushroomSoup: "Skogssoppa",
-        reindeerStew: "Traditionell Rengryta",
-        arcticCharFillet: "Stekt Rödingfilé",
-        wildGameBurger: "Vilthamburgare",
-        cloudberryPanna: "Hjortronpannacotta",
-        blueberryPie: "Varm Blåbärspaj",
-        hotChocolate: "Arktisk Varm Choklad",
-        berryGlögg: "Hemlagad Bärglögg"
-      }
-    },
-    specialDiets: "Vi erbjuder även vegetariska, veganska och glutenfria alternativ. Vänligen informera oss om dina kostbehov."
   },
   
   // Experiences/Packages Section
@@ -472,6 +471,26 @@ export const sv = {
     privacyPolicy: "Integritetspolicy",
     termsConditions: "Villkor",
     imprint: "Avtryck",
+    openingHours: "Öppettider",
+    monday: "Måndag - Fredag",
+    saturday: "Lördag",
+    sunday: "Söndag",
+    byAppointment: "Enligt överenskommelse",
+    // Privacy Policy Modal
+    privacyPolicyTitle: "INTEGRITETSPOLICY",
+    privacyPolicyIntro: "Denna integritetspolicy (\"Policy\") beskriver hur Triple X Adventures AB (\"Triple X Adventures AB\", \"vi\", \"oss\" eller \"vår\") samlar in, skyddar och använder personligt identifierbar information (\"Personlig Information\") som du (\"Användare\", \"du\" eller \"din\") kan tillhandahålla på webbplatsen triple-x-adventures.com och någon av dess produkter eller tjänster (tillsammans \"Webbplatsen\" eller \"Tjänsterna\"). Den beskriver också de val du har angående användningen av din personliga information och hur du kan komma åt och uppdatera den informationen. Denna policy gäller inte för praxis från företag som vi inte äger eller kontrollerar, eller för individer som vi inte anställer eller hanterar.",
+    automaticCollection: "Automatisk insamling av information",
+    automaticCollectionText: "Vår högsta prioritet är kunddatasäkerhet, och vi tillämpar en policy utan loggar. Vi kan behandla endast minimala användardata, endast så mycket som är absolut nödvändigt för att upprätthålla webbplatsen eller tjänsterna. Information som samlas in automatiskt används endast för att identifiera potentiella missbruksfall och upprätta statistisk information om webbplatsanvändning. Denna statistiska information aggregeras inte på ett sådant sätt att den skulle identifiera någon särskild användare av systemet.",
+    personalInfoCollection: "Insamling av personlig information",
+    personalInfoCollectionText: "Du kan besöka webbplatsen utan att berätta vem du är eller avslöja någon information genom vilken någon skulle kunna identifiera dig som en specifik, identifierbar individ. Om du dock vill använda några av webbplatsens funktioner kan du bli ombedd att tillhandahålla viss personlig information (till exempel ditt namn och e-postadress). Vi tar emot och lagrar all information som du medvetet tillhandahåller oss när du gör ett köp eller fyller i något onlineformulär på webbplatsen. Denna information kan inkludera:",
+    personalInfoItems: ["Personliga uppgifter som namn, bosättningsland etc.", "Kontaktinformation som e-postadress, adress etc."],
+    personalInfoChoice: "Du kan välja att inte förse oss med din personliga information, men då kanske du inte kan dra nytta av vissa av webbplatsens funktioner. Användare som är osäkra på vilken information som är obligatorisk är välkomna att kontakta oss.",
+    // Terms and Conditions Modal
+    termsTitle: "VILLKOR",
+    termsIntro: "Följande villkor ska tillämpas på paket som erbjuds och levereras under alla säsonger av Triple X Adventures AB (nedan kallat \"TXA\") genom dess paketprogram på följande destinationer: Arvidsjaur, Svenska Lappland och alla andra områden där tjänsterna levereras.",
+    commercialTerms: "KOMMERSIELLA VILLKOR",
+    contactUs: "Kontakta oss",
+    contactUsText: "Om du vill kontakta oss angående något ärende relaterat till detta kan du göra det via kontaktformuläret, skicka ett e-postmeddelande till info@triple-x-adventures.com eller skriva ett brev till:"
   },
   
   // Language Selector
@@ -490,27 +509,7 @@ export const sv = {
   },
   
   // Animations Showcase
-  animationsShowcase: {
-    title: "Interaktiva Element",
-    description: "Utforska våra förstklassiga mikrointeraktioner och animationer som förbättrar din arktiska äventyrsupplevelse.",
-    entranceAnimations: "Entrésanimationer",
-    hoverAnimations: "Hover-effekter",
-    continuousAnimations: "Kontinuerliga Animationer",
-    hoverCards: "Interaktiv Information",
-    staggeredAnimations: "Sekvenserade Element",
-    specialEffects: "Specialeffekter",
-  },
   
-  // Adventure Map Page
-  adventureMap: {
-    pageTitle: "Äventyrskarta",
-    pageSubtitle: "Utforska den arktiska vildmarken med vår interaktiva karta",
-    interactive: "INTERAKTIV",
-    locationCount: "Upptäck alla",
-    locationsText: "äventyrsplatser",
-    description: "Vår äventyrskarta visar alla otroliga platser i och runt Arvidsjaur där vi erbjuder våra förstklassiga arktiska upplevelser. Från vårt huvudkontor på Storgatan 6F till Sameland restaurang och stugor på Karlavagnen 1, och vårt förstklassiga boende på Hotel Laponia - denna interaktiva guide hjälper dig att visualisera din ultimata Svenska Lappland-resa.",
-    legendText: "Klicka på valfri markör för att lära dig mer om platsen. Färgen indikerar typen av plats: grön för boende, blå för upplevelser och lila för sevärdheter."
-  },
   
   // CTA Section
   ctaSection: {
@@ -518,45 +517,6 @@ export const sv = {
     description: "Följ med oss i Svenska Lappland för en upplevelse som går bortom turism—en resa som kommer att stanna hos dig för alltid.",
     buttonText: "Låt oss göra vintern legendarisk",
     adventureAwaits: "Ditt Äventyr Väntar"
-  },
-  
-  // Booking Section
-  bookingSection: {
-    title: "BOKA DITT ÄVENTYR",
-    subtitle: "Säkra din plats för en oförglömlig upplevelse",
-    nameLabel: "Namn",
-    namePlaceholder: "Ditt namn",
-    emailLabel: "E-post",
-    emailPlaceholder: "Din e-post",
-    phoneLabel: "Telefon",
-    phonePlaceholder: "Telefonnummer",
-    dateLabel: "Datum",
-    datePlaceholder: "Önskat datum",
-    participantsLabel: "Deltagare",
-    participantsPlaceholder: "Antal deltagare",
-    experienceLabel: "Upplevelse",
-    experiencePlaceholder: "Välj upplevelse",
-    messageLabel: "Meddelande",
-    messagePlaceholder: "Ytterligare önskemål eller frågor",
-    submitButton: "Boka Nu",
-    successMessage: "Tack! Din bokningsförfrågan har mottagits.",
-    successConfirmation: "Vi kommer att kontakta dig inom kort för att bekräfta dina bokningsdetaljer.",
-    experiences: {
-      snowmobile: "Snöskotersafari",
-      husky: "Hundspannsäventyr",
-      aurora: "Norrskentur",
-      iceFishing: "Isfiskeupplevelse",
-      survival: "Arktisk Överlevnadskurs"
-    }
-  },
-  
-  // Adventure Locations Data (Types)
-  adventureLocations: {
-    types: {
-      accommodation: "Boende",
-      experience: "Upplevelse",
-      landmark: "Sevärdhet"
-    }
   },
   
   // Professional Services Page
@@ -692,11 +652,57 @@ export const sv = {
           placeholder: "Berätta om ditt projekt eller din idé..."
         },
         button: "Skicka meddelande",
-        directEmail: "Eller maila oss direkt på"
+        sending: "Skickar...",
+        directEmail: "Eller maila oss direkt på",
+        success: {
+          title: "Meddelande skickat",
+          message: "Tack för ditt meddelande. Vi återkommer till dig så snart som möjligt.",
+          newMessage: "Skicka ett nytt meddelande"
+        },
+        error: {
+          title: "Meddelandet kunde inte skickas",
+          message: "Det uppstod ett fel när ditt meddelande skulle skickas. Vänligen försök igen eller kontakta oss direkt via e-post."
+        }
       }
     },
     partners: {
       title: "Våra betrodda partners"
     }
+  },
+  
+  // Testimonials Section
+  testimonials: {
+    title: "VAD ÄVENTYRARE SÄGER",
+    subtitle: "Berättelser från de som har upplevt den äkta arktiska upplevelsen",
+    sectionTitle: "Upplevelser",
+    loadingText: "Laddar omdömen...",
+    errorText: "Kunde inte ladda omdömen",
+    leaveReview: "Lämna ett omdöme",
+    testimonialsList: [
+      {
+        id: 1,
+        text: "Triple X Adventures levererade en upplevelse som var helt enkelt bortom ord. Snöskoterturen genom orörda skogar kändes som att komma in i en annan värld, och vår guide Eriks kunskap tillförde så mycket djup till resan.",
+        author: "Sarah J.",
+        location: "London, Storbritannien",
+        image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      },
+      {
+        id: 2,
+        text: "Hundspannsäventyret var otroligt! Dessa är inte turistfabriksupplevelser utan riktiga, autentiska arktiska äventyr. TXA-chaléet var också fantastiskt – att titta på norrsken från bastun var oförglömligt.",
+        author: "Michael T.",
+        location: "Berlin, Tyskland",
+        image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      },
+      {
+        id: 3,
+        text: "Det som skiljer Triple X från mängden är den personliga touchen. Vi har gjort vinteraktiviteter på andra ställen, men här kände vi oss som gäster snarare än turister. Måltiden på JayJay's var en höjdpunkt – jag drömmer fortfarande om den rengrytan!",
+        author: "Emma L.",
+        location: "Sydney, Australien",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      }
+    ]
   }
 };

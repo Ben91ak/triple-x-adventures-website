@@ -453,81 +453,47 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       {t.professionalServices.contact.description}
                     </p>
 
-                    <form className="max-w-2xl mx-auto grid md:grid-cols-2 gap-6">
-                      <div className="relative md:col-span-1">
-                        <label className="text-white/70 text-sm block mb-1 ml-1">{t.professionalServices.contact.form.name.label}</label>
-                        <div className="flex items-center relative">
-                          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[rgb(149,204,47)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                          </div>
-                          <input
-                            type="text"
-                            placeholder={t.professionalServices.contact.form.name.placeholder}
-                            className="w-full bg-midnight/50 border border-white/20 rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[rgb(149,204,47)] focus:ring-1 focus:ring-[rgb(149,204,47)] transition-all duration-300"
-                            required
-                          />
-                        </div>
+                    <div className="max-w-2xl mx-auto text-center p-8 bg-midnight/30 rounded-xl border border-[rgb(149,204,47)]/30">
+                      <div className="text-[rgb(149,204,47)] mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
                       </div>
-                      
-                      <div className="relative md:col-span-1">
-                        <label className="text-white/70 text-sm block mb-1 ml-1">{t.professionalServices.contact.form.email.label}</label>
-                        <div className="flex items-center relative">
-                          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[rgb(149,204,47)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                          </div>
-                          <input
-                            type="email"
-                            placeholder={t.professionalServices.contact.form.email.placeholder}
-                            className="w-full bg-midnight/50 border border-white/20 rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[rgb(149,204,47)] focus:ring-1 focus:ring-[rgb(149,204,47)] transition-all duration-300"
-                            required
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="relative md:col-span-2">
-                        <label className="text-white/70 text-sm block mb-1 ml-1">{t.professionalServices.contact.form.message.label}</label>
-                        <div className="flex relative">
-                          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[rgb(149,204,47)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                            </svg>
-                          </div>
-                          <textarea
-                            placeholder={t.professionalServices.contact.form.message.placeholder}
-                            rows={4}
-                            className="w-full bg-midnight/50 border border-white/20 rounded-lg pl-10 pr-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[rgb(149,204,47)] focus:ring-1 focus:ring-[rgb(149,204,47)] transition-all duration-300"
-                            required
-                          ></textarea>
-                        </div>
-                      </div>
-                      
-                      <div className="md:col-span-2 flex justify-center mt-2">
-                        <button 
-                          type="submit"
-                          className="bg-[rgb(149,204,47)] hover:bg-[rgba(149,204,47,0.9)] text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-[0_0_15px_rgba(149,204,47,0.5)] transform hover:-translate-y-1 flex items-center gap-2"
+                      <h3 className="text-2xl font-bold text-white mb-4">Get in Touch</h3>
+                      <p className="text-slate-200 text-lg mb-6">
+                        Ready to discuss your professional services needs? Email us directly at{' '}
+                        <a 
+                          href="mailto:info@triple-x-adventures.com" 
+                          className="text-[rgb(149,204,47)] hover:text-white font-medium transition-colors underline"
                         >
-                          <span>{t.professionalServices.contact.form.button}</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                          </svg>
-                        </button>
-                      </div>
-                    </form>
-
-                    <div className="flex items-center justify-center mt-10">
-                      <div className="h-px bg-white/10 flex-grow"></div>
-                      <p className="text-white/70 text-center mx-4">
-                        {t.professionalServices.contact.form.directEmail}{' '}
-                        <a href="mailto:info@triple-x-adventures.com" className="text-[rgb(149,204,47)] hover:text-white font-medium transition-colors">
                           info@triple-x-adventures.com
                         </a>
                       </p>
-                      <div className="h-px bg-white/10 flex-grow"></div>
+                      
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+                        <a 
+                          href="/contact" 
+                          className="bg-[rgb(149,204,47)] hover:bg-[rgba(149,204,47,0.9)] text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-[0_0_15px_rgba(149,204,47,0.5)] transform hover:-translate-y-1 flex items-center gap-2"
+                        >
+                          <span>Visit Contact Page</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </a>
+                        
+                        <a 
+                          href="tel:+46703575455" 
+                          className="border border-[rgb(149,204,47)] text-[rgb(149,204,47)] hover:bg-[rgb(149,204,47)]/10 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center gap-2"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                          </svg>
+                          <span>Call Us</span>
+                        </a>
+                      </div>
                     </div>
+
+
                   </div>
                 </div>
               </motion.div>

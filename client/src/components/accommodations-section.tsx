@@ -3,148 +3,73 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { User, Hotel, BedDouble, Utensils, MapPin, Snowflake, Truck, Bell } from "lucide-react";
 
-// Accommodation data by language
-const accommodationsByLanguage = {
-  en: [
-    {
-      id: 1,
-      title: "CABIN HOTEL SAMELAND",
-      description: "Experience luxury in our premium Mirror Glass Cabins, featuring floor-to-ceiling glass walls that provide uninterrupted views of the Arctic wilderness and Northern Lights. A truly unforgettable stay in nature.",
-      pricePerNight: 5995,
-      image: "/images/ood-hotel.jpg",
-      featured: true,
-      features: [
-        { icon: "fas fa-user-group", text: "For 2-4 guests" },
-        { icon: "fas fa-hot-tub", text: "13 Cabins" },
-        { icon: "fas fa-snowflake", text: "Climate controlled" },
-        { icon: "fas fa-bed", text: "Luxury king bed" },
-        { icon: "fas fa-utensils", text: "own kitchen" },
-        { icon: "fas fa-location-dot", text: "Sameland, Arvidsjaur" }
-      ]
-    },
-    {
-      id: 2,
-      title: "TXA - CHALET",
-      description: "Stay in your own TXA - Chalet and experience the highest level of comfort. Our exclusive chalet offers a perfect mix of rustic charm and modern luxury.",
-      pricePerNight: 3995,
-      image: "/images/txa-chalet.jpg",
-      features: [
-        { icon: "fas fa-user-group", text: "Up to 24 guests" },
-        { icon: "fas fa-bed", text: "12 bedrooms" },
-        { icon: "fas fa-hot-tub", text: "Private sauna" },
-        { icon: "fas fa-utensils", text: "Private lounge / restaurant" }
-      ]
-    },
-    {
-      id: 3,
-      title: "HOTEL LAPONIA",
-      description: "A comfortable alternative to our TXA Chalet. Hotel Laponia provides you with a pleasant stay before and after your adventures, with all the amenities you need.",
-      pricePerNight: 1495,
-      image: "/images/hotel-laponia.jpg",
-      features: [
-        { icon: "fas fa-location-dot", text: "Central location" },
-        { icon: "fas fa-snowflake", text: "Arctic ambiance" },
-        { icon: "fas fa-shuttle-van", text: "only 10 km from the Airport" },
-        { icon: "fas fa-concierge-bell", text: "Fjälls Pub & Bistro" }
-      ]
-    }
-  ],
-  de: [
-    {
-      id: 1,
-      title: "CABIN HOTEL SAMELAND",
-      description: "Erleben Sie Luxus in unserem Premium-Mirror-Glass-Cabin-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die arktische Wildnis und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
-      pricePerNight: 5995,
-      image: "/images/ood-hotel.jpg",
-      featured: true,
-      features: [
-        { icon: "fas fa-user-group", text: "Für 2-4 Gäste" },
-        { icon: "fas fa-hot-tub", text: "13 Cabins" },
-        { icon: "fas fa-snowflake", text: "Klimatisiert" },
-        { icon: "fas fa-bed", text: "Luxuriöses Kingsize-Bett" },
-        { icon: "fas fa-utensils", text: "eigene Küche" },
-        { icon: "fas fa-location-dot", text: "SameLand, Arvidsjaur" }
-      ]
-    },
-    {
-      id: 2,
-      title: "TXA - CHALET",
-      description: "Übernachte im eigenen TXA - Chalet und erlebe ein Höchstmaß an Komfort. Unser exklusives Chalet bietet eine perfekte Mischung aus rustikalem Charme und modernem Luxus.",
-      pricePerNight: 3995,
-      image: "/images/txa-chalet.jpg",
-      features: [
-        { icon: "fas fa-user-group", text: "Bis zu 24 Gäste" },
-        { icon: "fas fa-bed", text: "12 Schlafzimmer" },
-        { icon: "fas fa-hot-tub", text: "Private Sauna" },
-        { icon: "fas fa-utensils", text: "Private Lounge / Restaurant" }
-      ]
-    },
-    {
-      id: 3,
-      title: "HOTEL LAPONIA",
-      description: "Eine komfortable Alternative zu unserem TXA Chalet. Das Hotel Laponia bietet Ihnen einen angenehmen Aufenthalt vor und nach Ihren Abenteuern, mit allen Annehmlichkeiten, die Sie benötigen.",
-      pricePerNight: 1495,
-      image: "/images/hotel-laponia.jpg",
-      features: [
-        { icon: "fas fa-location-dot", text: "Zentrale Lage" },
-        { icon: "fas fa-snowflake", text: "Arktisches Ambiente" },
-        { icon: "fas fa-shuttle-van", text: "nur 10km vom Flughafen entfernt" },
-        { icon: "fas fa-concierge-bell", text: "Fjälls Pub & Bistro" }
-      ]
-    }
-  ],
-  sv: [
-    {
-      id: 1,
-      title: "CABIN HOTEL SAMELAND",
-      description: "Upplev lyx i vårt premium Glass Cabin Hotel, med glasväggar från golv till tak som ger obrutna vyer över den arktiska vildmarken och norrskenet. En verkligt oförglömlig vistelse i naturen.",
-      pricePerNight: 5995,
-      image: "/images/ood-hotel.jpg",
-      featured: true,
-      features: [
-        { icon: "fas fa-user-group", text: "För 2-4 gäster" },
-        { icon: "fas fa-hot-tub", text: "13 Cabins" },
-        { icon: "fas fa-snowflake", text: "Klimatkontrollerad" },
-        { icon: "fas fa-bed", text: "Lyxig kingsize-säng" },
-        { icon: "fas fa-utensils", text: "eget kök" },
-        { icon: "fas fa-location-dot", text: "SameLand, Arvidsjaur" }
-      ]
-    },
-    {
-      id: 2,
-      title: "TXA - CHALET",
-      description: "Bo i din egen TXA - Chalet och upplev högsta komfort. Vårt exklusiva chalet erbjuder en perfekt blandning av rustik charm och modern lyx.",
-      pricePerNight: 3995,
-      image: "/images/txa-chalet.jpg",
-      features: [
-        { icon: "fas fa-user-group", text: "Upp till 24 gäster" },
-        { icon: "fas fa-bed", text: "12 sovrum" },
-        { icon: "fas fa-hot-tub", text: "Privat bastu" },
-        { icon: "fas fa-utensils", text: "Privat lounge / restaurang" }
-      ]
-    },
-    {
-      id: 3,
-      title: "HOTEL LAPONIA",
-      description: "Ett bekvämt alternativ till vårt TXA Chalet. Hotel Laponia erbjuder en bekväm vistelse före och efter dina äventyr, med alla bekvämligheter du behöver.",
-      pricePerNight: 1495,
-      image: "/images/hotel-laponia.jpg",
-      features: [
-        { icon: "fas fa-location-dot", text: "Centralt läge" },
-        { icon: "fas fa-snowflake", text: "Arktisk atmosfär" },
-        { icon: "fas fa-shuttle-van", text: "Endast 10 km från flygplatsen" },
-        { icon: "fas fa-concierge-bell", text: "Fjälls Pub & Bistro" }
-      ]
-    }
-  ]
-};
-
 export function AccommodationsSection() {
   const { language } = useLanguage();
   const t = useTranslation(language);
   
-  // Get accommodations based on the current language
-  const accommodations: Accommodation[] = accommodationsByLanguage[language];
+  // Create accommodations from translations
+  const accommodations: Accommodation[] = [
+    {
+      id: 1,
+      title: t.accommodations.cabinHotel.title,
+      description: t.accommodations.cabinHotel.description,
+      pricePerNight: 5995,
+      image: "/images/ood-hotel.jpg",
+      featured: true,
+      features: t.accommodations.cabinHotel.features.map(text => ({ 
+        icon: getIconForFeature(text), 
+        text 
+      }))
+    },
+    {
+      id: 2,
+      title: t.accommodations.txaChalet.title,
+      description: t.accommodations.txaChalet.description,
+      pricePerNight: 3995,
+      image: "/images/txa-chalet.jpg",
+      features: t.accommodations.txaChalet.features.map(text => ({ 
+        icon: getIconForFeature(text), 
+        text 
+      }))
+    },
+    {
+      id: 3,
+      title: t.accommodations.hotelLaponia.title,
+      description: t.accommodations.hotelLaponia.description,
+      pricePerNight: 1495,
+      image: "/images/hotel-laponia.jpg",
+      features: t.accommodations.hotelLaponia.features.map(text => ({ 
+        icon: getIconForFeature(text), 
+        text 
+      }))
+    }
+  ];
+  
+  // Helper function to determine icon based on feature text
+  function getIconForFeature(text: string): string {
+    if (text.toLowerCase().includes('guest') || text.toLowerCase().includes('gäste') || text.toLowerCase().includes('gäster')) {
+      return "fas fa-user-group";
+    } else if (text.toLowerCase().includes('bed') || text.toLowerCase().includes('schlafzimmer') || text.toLowerCase().includes('sovrum')) {
+      return "fas fa-bed";
+    } else if (text.toLowerCase().includes('sauna') || text.toLowerCase().includes('cabin')) {
+      return "fas fa-hot-tub";
+    } else if (text.toLowerCase().includes('kitchen') || text.toLowerCase().includes('küche') || text.toLowerCase().includes('kök') || 
+               text.toLowerCase().includes('restaurant') || text.toLowerCase().includes('lounge')) {
+      return "fas fa-utensils";
+    } else if (text.toLowerCase().includes('location') || text.toLowerCase().includes('lage') || text.toLowerCase().includes('läge') || 
+               text.toLowerCase().includes('sameland') || text.toLowerCase().includes('arvidsjaur')) {
+      return "fas fa-location-dot";
+    } else if (text.toLowerCase().includes('climate') || text.toLowerCase().includes('klima') || text.toLowerCase().includes('arctic') || 
+               text.toLowerCase().includes('arktisk')) {
+      return "fas fa-snowflake";
+    } else if (text.toLowerCase().includes('airport') || text.toLowerCase().includes('flughafen') || text.toLowerCase().includes('flygplats')) {
+      return "fas fa-shuttle-van";
+    } else if (text.toLowerCase().includes('pub') || text.toLowerCase().includes('bistro')) {
+      return "fas fa-concierge-bell";
+    } else {
+      return "fas fa-user-group"; // Default icon
+    }
+  }
   
   // Map the font awesome icons to Lucide icons
   const iconMap: Record<string, React.ReactNode> = {
@@ -169,7 +94,7 @@ export function AccommodationsSection() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-20">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
-            {language === 'de' ? 'Wo Sie Übernachten' : language === 'sv' ? 'Ditt Boende' : 'Where You Will Stay'}
+            {t.accommodations.whereYouWillStay}
           </span>
           <h2 className="font-bold text-3xl md:text-5xl mb-6 text-white">
             {t.accommodations.title}
@@ -191,7 +116,7 @@ export function AccommodationsSection() {
                 <div className="relative">
                   <span className="flex items-center gap-2 bg-gradient-to-r from-accent-color to-purple-600 text-white px-5 py-3 rounded-full font-bold text-sm uppercase tracking-widest shadow-xl border border-white/20 backdrop-blur-sm animate-pulse">
                     <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
-                    {language === 'de' ? 'Demnächst' : language === 'sv' ? 'Kommer snart' : 'Coming Soon'}
+                    {t.accommodations.comingSoon}
                   </span>
                   <span className="absolute inset-0 bg-accent-color/20 rounded-full blur-lg -z-10"></span>
                 </div>
@@ -212,14 +137,14 @@ export function AccommodationsSection() {
                   <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center">
                     <div className="bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
                       <p className="text-sm text-white text-opacity-70">
-                        {language === 'de' ? 'Ab' : language === 'sv' ? 'Från' : 'From'}
+                        {t.accommodations.from}
                       </p>
                       <div className="flex items-baseline">
                         <span className="font-bold text-2xl text-white">
                           {accommodation.pricePerNight.toLocaleString()}
                         </span>
                         <span className="text-white text-opacity-70 ml-1 text-sm">
-                          SEK/{language === 'de' ? 'Nacht' : language === 'sv' ? 'natt' : 'night'}
+                          SEK/{t.accommodations.night}
                         </span>
                       </div>
                     </div>
@@ -252,7 +177,7 @@ export function AccommodationsSection() {
                     href="#contact" 
                     className="btn-primary text-center w-full inline-flex items-center justify-center text-base px-8 py-4"
                   >
-                    {language === 'de' ? 'Vormerken' : language === 'sv' ? 'Intresseanmälan' : 'Register Interest'}
+                    {t.accommodations.registerInterest}
                   </a>
                 </div>
               </div>
@@ -281,14 +206,14 @@ export function AccommodationsSection() {
                     <div className="absolute bottom-6 left-6 right-6 flex justify-between items-center">
                       <div className="bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10">
                         <p className="text-sm text-white text-opacity-70">
-                          {language === 'de' ? 'Ab' : language === 'sv' ? 'Från' : 'From'}
+                          {t.accommodations.from}
                         </p>
                         <div className="flex items-baseline">
                           <span className="font-bold text-xl text-white">
                             {accommodation.pricePerNight.toLocaleString()}
                           </span>
                           <span className="text-white text-opacity-70 ml-1 text-sm">
-                            SEK/{language === 'de' ? 'Nacht' : language === 'sv' ? 'natt' : 'night'}
+                            SEK/{t.accommodations.night}
                           </span>
                         </div>
                       </div>
@@ -322,12 +247,8 @@ export function AccommodationsSection() {
                       className="btn-primary text-center w-full inline-flex items-center justify-center"
                     >
                       {accommodation.id === 2 ? 
-                        (language === 'de' ? 'Verfügbarkeit prüfen' : 
-                         language === 'sv' ? 'Kontrollera tillgänglighet' : 
-                         'Check availability') : 
-                        (language === 'de' ? 'Optionen anzeigen' : 
-                         language === 'sv' ? 'Visa alternativ' : 
-                         'View options')}
+                        t.accommodations.checkAvailability : 
+                        t.accommodations.viewOptions}
                     </a>
                   </div>
                 </div>

@@ -229,9 +229,9 @@ export function ContactSection() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t('contact.firstName')}</FormLabel>
+                          <FormLabel htmlFor="firstName" className="text-white">{t('contact.firstName')}</FormLabel>
                           <FormControl>
-                            <Input {...field} autoComplete="given-name" className="bg-[#1A1D1F] border border-white/10 text-white" />
+                            <Input id="firstName" {...field} autoComplete="given-name" className="bg-[#1A1D1F] border border-white/10 text-white" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -243,9 +243,9 @@ export function ContactSection() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t('contact.lastName')}</FormLabel>
+                          <FormLabel htmlFor="lastName" className="text-white">{t('contact.lastName')}</FormLabel>
                           <FormControl>
-                            <Input {...field} autoComplete="given-name" className="bg-[#1A1D1F] border border-white/10 text-white" />
+                            <Input id="lastName" {...field} autoComplete="family-name" className="bg-[#1A1D1F] border border-white/10 text-white" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -257,9 +257,9 @@ export function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t('contact.email')}</FormLabel>
+                          <FormLabel htmlFor="email" className="text-white">{t('contact.email')}</FormLabel>
                           <FormControl>
-                            <Input {...field} type="email" autoComplete="email" className="bg-[#1A1D1F] border border-white/10 text-white" />
+                            <Input id="email" {...field} type="email" autoComplete="email" className="bg-[#1A1D1F] border border-white/10 text-white" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -271,9 +271,9 @@ export function ContactSection() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-white">{t('contact.phone')}</FormLabel>
+                          <FormLabel htmlFor="phone" className="text-white">{t('contact.phone')}</FormLabel>
                           <FormControl>
-                            <Input {...field} type="tel" autoComplete="tel" className="bg-[#1A1D1F] border border-white/10 text-white" />
+                            <Input id="phone" {...field} type="tel" autoComplete="tel" className="bg-[#1A1D1F] border border-white/10 text-white" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -286,10 +286,10 @@ export function ContactSection() {
                     name="visitDate"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white">{t('contact.visitDate')}</FormLabel>
+                        <FormLabel htmlFor="visitDate" className="text-white">{t('contact.visitDate')}</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="bg-[#1A1D1F] border border-white/10 text-white hover:border-[#A4D233] focus:border-[#A4D233] h-10 rounded-md">
+                            <SelectTrigger id="visitDate" name="visitDate" className="bg-[#1A1D1F] border border-white/10 text-white hover:border-[#A4D233] focus:border-[#A4D233] h-10 rounded-md">
                               <SelectValue placeholder={t('contact.visitDatePlaceholder')} />
                             </SelectTrigger>
                           </FormControl>
@@ -304,41 +304,52 @@ export function ContactSection() {
                     )}
                   />
 
-                  <div>
-                    <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">{t('contact.form.desiredPackagesLabel')}</Label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                      {packageOptions.map((option) => (
-                        <div key={option.id} className="flex items-center space-x-2">
-                          <Checkbox 
-                            id={option.id} 
-                            checked={selectedPackages.includes(option.id)}
-                            onCheckedChange={(checked) => handlePackageChange(checked as boolean, option.id)}
-                            className="border-[#A4D233]/50 data-[state=checked]:bg-[#A4D233] data-[state=checked]:border-[#A4D233]"
-                          />
-                          <label 
-                            htmlFor={option.id}
-                            className="text-sm cursor-pointer text-white text-opacity-90"
-                          >
-                            {option.label}
-                          </label>
+                  <FormField
+                    control={form.control}
+                    name="interests"
+                    render={({ field }) => (
+                      <FormItem>
+                        <div className="space-y-2">
+                          <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">{t('contact.form.desiredPackagesLabel')}</div>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                            {packageOptions.map((option) => (
+                              <div key={option.id} className="flex items-center space-x-2">
+                                <Checkbox 
+                                  id={`package-${option.id}`}
+                                  name={`package-${option.id}`}
+                                  checked={selectedPackages.includes(option.id)}
+                                  onCheckedChange={(checked) => handlePackageChange(checked as boolean, option.id)}
+                                  className="border-[#A4D233]/50 data-[state=checked]:bg-[#A4D233] data-[state=checked]:border-[#A4D233]"
+                                />
+                                <label 
+                                  htmlFor={`package-${option.id}`}
+                                  className="text-sm cursor-pointer text-white text-opacity-90"
+                                >
+                                  {option.label}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                          <FormMessage />
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      </FormItem>
+                    )}
+                  />
                   
-                  <div>
-                    <Label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">{t('contact.form.desiredActivitiesLabel')}</Label>
+                  <div className="space-y-2">
+                    <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">{t('contact.form.desiredActivitiesLabel')}</div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
                       {activityOptions.map((option) => (
                         <div key={option.id} className="flex items-center space-x-2">
                           <Checkbox 
-                            id={option.id} 
+                            id={`activity-${option.id}`}
+                            name={`activity-${option.id}`}
                             checked={selectedActivities.includes(option.id)}
                             onCheckedChange={(checked) => handleActivityChange(checked as boolean, option.id)}
                             className="border-[#A4D233]/50 data-[state=checked]:bg-[#A4D233] data-[state=checked]:border-[#A4D233]"
                           />
                           <label 
-                            htmlFor={option.id}
+                            htmlFor={`activity-${option.id}`}
                             className="text-sm cursor-pointer text-white text-opacity-90"
                           >
                             {option.label}
@@ -353,10 +364,10 @@ export function ContactSection() {
                     name="charterFlight"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white">{t('contact.charterFlight')}</FormLabel>
+                        <FormLabel htmlFor="charterFlight" className="text-white">{t('contact.charterFlight')}</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="bg-[#1A1D1F] border border-white/10 text-white hover:border-[#A4D233] focus:border-[#A4D233] h-10 rounded-md">
+                            <SelectTrigger id="charterFlight" name="charterFlight" className="bg-[#1A1D1F] border border-white/10 text-white hover:border-[#A4D233] focus:border-[#A4D233] h-10 rounded-md">
                               <SelectValue placeholder={t('contact.charterFlightPlaceholder')} />
                             </SelectTrigger>
                           </FormControl>
@@ -378,9 +389,10 @@ export function ContactSection() {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-white">{t('contact.message')}</FormLabel>
+                        <FormLabel htmlFor="message" className="text-white">{t('contact.message')}</FormLabel>
                         <FormControl>
                           <Textarea 
+                            id="message"
                             {...field} 
                             className="bg-[#1A1D1F] border border-white/10 text-white min-h-[120px]" 
                             placeholder={t('contact.messagePlaceholder')}

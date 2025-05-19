@@ -64,7 +64,7 @@ export function Footer() {
         iceFishing: "Eisfischen",
         arcticSurvival: "Arktisches Überleben",
       },
-      address: "Akkavare, bei Arvidsjaur<br />Schwedisch-Lappland, Schweden",
+      address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
     },
     sv: {
       description: "Autentiska arktiska upplevelser i hjärtat av Svenska Lappland. Små grupper, lokal expertis och oförglömliga äventyr.",
@@ -84,7 +84,7 @@ export function Footer() {
         iceFishing: "Isfiske",
         arcticSurvival: "Arktisk Överlevnad",
       },
-      address: "Akkavare, nära Arvidsjaur<br />Svenska Lappland, Sverige",
+      address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
     }
   };
 
@@ -224,16 +224,16 @@ export function Footer() {
                       </ul>
                     </address>
                     <div>
-                      <h3 className="text-white text-base font-medium mb-3">Opening Hours</h3>
+                      <h3 className="text-white text-base font-medium mb-3">{t.footer.openingHours}</h3>
                       <ul className="space-y-2 list-none p-0">
                         <li className="text-white text-opacity-80">
-                          <span className="font-medium">Monday - Friday:</span> 9:00 - 17:00
+                          <span className="font-medium">{t.footer.monday}:</span> 9:00 - 17:00
                         </li>
                         <li className="text-white text-opacity-80">
-                          <span className="font-medium">Saturday:</span> By appointment
+                          <span className="font-medium">{t.footer.saturday}:</span> {t.footer.byAppointment}
                         </li>
                         <li className="text-white text-opacity-80">
-                          <span className="font-medium">Sunday:</span> By appointment
+                          <span className="font-medium">{t.footer.sunday}:</span> {t.footer.byAppointment}
                         </li>
                       </ul>
                     </div>
@@ -260,14 +260,14 @@ export function Footer() {
       >
         <div className="text-white space-y-6 max-h-[70vh] overflow-y-auto pr-2 text-sm sm:text-base">
           <div>
-            <h3 className="text-lg font-semibold mb-4">TERMS AND CONDITIONS</h3>
+            <h3 className="text-lg font-semibold mb-4">{t.footer.termsTitle}</h3>
             <p className="text-white/80 text-sm">
-              The following terms and conditions shall be applied to packages offered and delivered during all seasons by Triple X Adventures AB (hereinafter referred to as "TXA") through its package programs in the following destinations: Arvidsjaur, Swedish Lapland, and any other areas where the services are delivered.
+              {t.footer.termsIntro}
             </p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">COMMERCIAL TERMS</h3>
+            <h3 className="text-lg font-semibold mb-3">{t.footer.commercialTerms}</h3>
             
             <h4 className="font-medium mb-2">Services and Prices:</h4>
             <p className="text-white/80 text-sm mb-4">
@@ -398,34 +398,35 @@ export function Footer() {
       <Modal
         isOpen={isPrivacyOpen}
         onClose={() => setIsPrivacyOpen(false)}
-        title="Privacy Policy"
+        title={t.footer.privacyPolicy}
       >
         <div className="text-white space-y-6 max-h-[70vh] overflow-y-auto pr-2 text-sm sm:text-base">
           <div>
-            <h3 className="text-lg font-semibold mb-4">PRIVACY POLICY</h3>
+            <h3 className="text-lg font-semibold mb-4">{t.footer.privacyPolicyTitle}</h3>
             <p className="text-white/80 text-sm">
-              This privacy policy ("Policy") describes how Triple X Adventures AB ("Triple X Adventures AB", "we", "us", or "our") collects, protects, and uses the personally identifiable information ("Personal Information") you ("User", "you", or "your") may provide on the triple-x-adventures.com website and any of its products or services (collectively, "Website" or "Services"). It also describes the choices you have regarding the use of your Personal Information and how you can access and update that information. This Policy does not apply to the practices of companies that we do not own or control, or to individuals that we do not employ or manage.
+              {t.footer.privacyPolicyIntro}
             </p>
           </div>
 
           <div>
-            <h4 className="font-medium mb-2">Automatic Collection of Information</h4>
+            <h4 className="font-medium mb-2">{t.footer.automaticCollection}</h4>
             <p className="text-white/80 text-sm mb-4">
-              Our top priority is customer data security, and we exercise a no-logs policy. We may process only minimal user data, only as much as is absolutely necessary to maintain the Website or Services. Information collected automatically is used only to identify potential cases of abuse and establish statistical information regarding Website usage. This statistical information is not otherwise aggregated in such a way that would identify any particular user of the system.
+              {t.footer.automaticCollectionText}
             </p>
           </div>
 
           <div>
-            <h4 className="font-medium mb-2">Collection of Personal Information</h4>
+            <h4 className="font-medium mb-2">{t.footer.personalInfoCollection}</h4>
             <p className="text-white/80 text-sm mb-4">
-              You can visit the Website without telling us who you are or revealing any information by which someone could identify you as a specific, identifiable individual. However, if you wish to use some of the Website's features, you may be asked to provide certain Personal Information (for example, your name and email address). We receive and store any information you knowingly provide to us when you make a purchase, or fill out any online form on the Website. This information may include:
+              {t.footer.personalInfoCollectionText}
             </p>
             <ul className="text-white/80 text-sm list-disc pl-5 mb-4">
-              <li>Personal details such as name, country of residence, etc.</li>
-              <li>Contact information such as email address, address, etc.</li>
+              {t.footer.personalInfoItems.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
             </ul>
             <p className="text-white/80 text-sm mb-4">
-              You can choose not to provide us with your Personal Information, but then you may not be able to take advantage of some of the Website's features. Users who are uncertain about what information is mandatory are welcome to contact us.
+              {t.footer.personalInfoChoice}
             </p>
           </div>
 

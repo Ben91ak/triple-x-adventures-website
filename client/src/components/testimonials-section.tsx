@@ -4,112 +4,18 @@ import { useTranslation } from "@/translations";
 import { Quote, Star, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 
-// Testimonial data by language
-const testimonialsByLanguage = {
-  en: [
-    {
-      id: 1,
-      text: "Triple X Adventures delivered an experience that was simply beyond words. The snowmobile trip through pristine forests felt like entering another world, and our guide Erik's knowledge added so much depth to the journey.",
-      author: "Sarah J.",
-      location: "London, UK",
-      image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    },
-    {
-      id: 2,
-      text: "The dog sledding adventure was incredible! These aren't tourist-factory experiences but real, authentic Arctic adventures. The TXA Chalet was amazing too—watching the northern lights from the sauna was unforgettable.",
-      author: "Michael T.",
-      location: "Berlin, Germany",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    },
-    {
-      id: 3,
-      text: "What sets Triple X apart is the personal touch. We've done winter activities elsewhere, but here we felt like guests rather than tourists. The meal at JayJay's was a highlight—I'm still dreaming about that reindeer stew!",
-      author: "Emma L.",
-      location: "Sydney, Australia",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    }
-  ],
-  de: [
-    {
-      id: 1,
-      text: "Triple X Adventures hat ein Erlebnis geliefert, das einfach unbeschreiblich ist. Die Schneemobilfahrt durch unberührte Wälder fühlte sich an, als würde man eine andere Welt betreten, und das Wissen unseres Guides Erik hat der Reise so viel Tiefe verliehen.",
-      author: "Sarah J.",
-      location: "London, UK",
-      image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    },
-    {
-      id: 2,
-      text: "Das Hundeschlittenabenteuer war unglaublich! Dies sind keine Touristenfabrikerlebnisse, sondern echte, authentische arktische Abenteuer. Das TXA-Chalet war auch erstaunlich – die Nordlichter von der Sauna aus zu beobachten war unvergesslich.",
-      author: "Michael T.",
-      location: "Berlin, Deutschland",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    },
-    {
-      id: 3,
-      text: "Was Triple X auszeichnet, ist die persönliche Note. Wir haben anderswo Winteraktivitäten unternommen, aber hier fühlten wir uns wie Gäste und nicht wie Touristen. Das Essen bei JayJay's war ein Highlight – ich träume immer noch von diesem Rentiereintopf!",
-      author: "Emma L.",
-      location: "Sydney, Australien",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    }
-  ],
-  sv: [
-    {
-      id: 1,
-      text: "Triple X Adventures levererade en upplevelse som var helt enkelt bortom ord. Snöskoterturen genom orörda skogar kändes som att komma in i en annan värld, och vår guide Eriks kunskap tillförde så mycket djup till resan.",
-      author: "Sarah J.",
-      location: "London, Storbritannien",
-      image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    },
-    {
-      id: 2,
-      text: "Hundspannsäventyret var otroligt! Dessa är inte turistfabriksupplevelser utan riktiga, autentiska arktiska äventyr. TXA-chaléet var också fantastiskt – att titta på norrsken från bastun var oförglömligt.",
-      author: "Michael T.",
-      location: "Berlin, Tyskland",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    },
-    {
-      id: 3,
-      text: "Det som skiljer Triple X från mängden är den personliga touchen. Vi har gjort vinteraktiviteter på andra ställen, men här kände vi oss som gäster snarare än turister. Måltiden på JayJay's var en höjdpunkt – jag drömmer fortfarande om den rengrytan!",
-      author: "Emma L.",
-      location: "Sydney, Australien",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
-      rating: 5
-    }
-  ]
-};
-
-// Section content by language
-const contentByLanguage = {
-  en: {
-    title: "WHAT ADVENTURERS SAY",
-    subtitle: "Stories from those who've experienced the Real Arctic Deal"
-  },
-  de: {
-    title: "WAS ABENTEURER SAGEN",
-    subtitle: "Geschichten von denen, die das echte arktische Erlebnis erfahren haben"
-  },
-  sv: {
-    title: "VAD ÄVENTYRARE SÄGER",
-    subtitle: "Berättelser från de som har upplevt den äkta arktiska upplevelsen"
-  }
-};
-
 export function TestimonialsSection() {
   const { language } = useLanguage();
+  const translations = useTranslation(language);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
-  // Get content based on the current language
-  const content = contentByLanguage[language];
+  // Get content from translations
+  const content = {
+    title: translations.testimonials.title,
+    subtitle: translations.testimonials.subtitle
+  };
   
   // Fetch Google reviews
   useEffect(() => {
@@ -128,26 +34,40 @@ export function TestimonialsSection() {
         if (data.reviews && data.reviews.length > 0) {
           // Filter reviews by language if possible, otherwise use all
           const filteredReviews = data.reviews
-            .filter((review: any) => !review.language || review.language.toLowerCase().includes(language))
+            .filter((review: any) => {
+              // If review has no language field, include it
+              if (!review.language) return true;
+              
+              // Get the review language in lowercase
+              const reviewLang = review.language.toLowerCase();
+              
+              // Check for various language code formats
+              return reviewLang === language || // Exact match
+                     reviewLang.startsWith(language + '-') || // Format like "de-DE"
+                     reviewLang.startsWith(language + '_') || // Format like "de_DE"
+                     language === 'de' && (reviewLang === 'german' || reviewLang === 'deutsch') || // Common name
+                     language === 'sv' && (reviewLang === 'swedish' || reviewLang === 'svenska') || // Common name
+                     language === 'en' && (reviewLang === 'english'); // Common name
+            })
             .slice(0, 3); // Limit to 3 reviews
           
           setTestimonials(filteredReviews as Testimonial[]);
         } else {
-          // Fallback to hardcoded testimonials if no Google reviews
-          setTestimonials(testimonialsByLanguage[language]);
+          // Fallback to testimonials from translation files if no Google reviews
+          setTestimonials(translations.testimonials.testimonialsList);
         }
       } catch (err) {
         console.error('Error fetching Google reviews:', err);
-        setError('Failed to load reviews');
-        // Fallback to hardcoded testimonials
-        setTestimonials(testimonialsByLanguage[language]);
+        setError(translations.testimonials.errorText);
+        // Fallback to testimonials from translation files
+        setTestimonials(translations.testimonials.testimonialsList);
       } finally {
         setLoading(false);
       }
     }
     
     fetchGoogleReviews();
-  }, [language]);
+  }, [language, translations]);
 
   return (
     <section id="testimonials" className="py-16 md:py-24 relative overflow-hidden">
@@ -156,7 +76,7 @@ export function TestimonialsSection() {
       <div className="container mx-auto px-4 relative z-50">
         <div className="text-center mb-16 transform-gpu fade-in">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2 text-shadow-lg">
-            {language === 'de' ? 'Erfahrungen' : language === 'sv' ? 'Upplevelser' : 'Experiences'}
+            {translations.testimonials.sectionTitle}
           </span>
           <h2 className="font-bold text-4xl md:text-5xl lg:text-6xl mb-4 tracking-tight text-white text-shadow-lg" 
             style={{ 
@@ -174,7 +94,7 @@ export function TestimonialsSection() {
         {loading ? (
           <div className="flex justify-center items-center py-16">
             <Loader2 className="w-12 h-12 text-accent-color animate-spin" />
-            <span className="ml-4 text-white text-xl">Loading reviews...</span>
+            <span className="ml-4 text-white text-xl">{translations.testimonials.loadingText}</span>
           </div>
         ) : error ? (
           <div className="text-center py-16">
@@ -242,9 +162,7 @@ export function TestimonialsSection() {
             rel="noopener noreferrer"
             className="inline-block px-6 py-3 bg-[#A4D233] text-white rounded-lg hover:bg-[#8FBB1C] transition-colors shadow-md"
           >
-            {language === 'de' ? 'Bewertung abgeben' : 
-             language === 'sv' ? 'Lämna ett omdöme' : 
-             'Leave a Review'}
+            {translations.testimonials.leaveReview}
           </a>
         </div>
       </div>

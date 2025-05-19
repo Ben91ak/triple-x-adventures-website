@@ -23,7 +23,35 @@ export const api = {
   // Submit contact form
   submitContactForm: async (formData: ContactFormData) => {
     try {
-      const response = await apiRequest('POST', '/api/contact', formData);
+      console.log('API client submitting form data:', formData);
+      
+      // Ensure we have all required fields for the API
+      const payload = {
+        firstName: formData.firstName || '',
+        lastName: formData.lastName || '',
+        email: formData.email || '',
+        phone: formData.phone || '',
+        message: formData.message || '',
+        visitDate: '',  // Not used for professional services
+        interests: formData.interests || [],
+        charterFlight: ''  // Not used for professional services
+      };
+      
+      // Use the same API endpoint as the main contact form
+      const response = await fetch('/api/contact.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server returned error:', response.status, errorText);
+        throw new Error(`Server error: ${response.status} ${errorText}`);
+      }
+      
       return await response.json();
     } catch (error) {
       console.error('Error submitting contact form:', error);
@@ -34,7 +62,7 @@ export const api = {
   // Submit adventure package form
   submitAdventureForm: async (formData: AdventureFormData) => {
     try {
-      const response = await apiRequest('POST', '/api/adventure', formData);
+      const response = await apiRequest('POST', '/api/adventure.js', formData);
       return await response.json();
     } catch (error) {
       console.error('Error submitting adventure form:', error);
@@ -42,3 +70,4 @@ export const api = {
     }
   }
 };
+

@@ -5,10 +5,9 @@ export const de = {
     packages: "Pakete",
     about: "Über Uns",
     accommodations: "Unterkünfte",
-    restaurant: "Restaurant",
-    gallery: "Galerie",
     contact: "Kontakt",
     experiences: "Erlebnisse",
+    professionalServices: "Professionelle Dienstleistungen",
     bookNow: "Jetzt Buchen"
   },
   
@@ -26,77 +25,6 @@ export const de = {
     paragraph1: "Entdecke unvergessliche Abenteuer nahe dem Polarkreis. Erlebe atemberaubende <strong>Outdoor-Abenteuer</strong> und außergewöhnliche Küche in einer der schönsten Regionen der Welt.",
     paragraph2: "Freue dich auf eine Vielzahl von <strong>actionreichen und adrenalingeladenen Aktivitäten</strong>, die dein Herz höher schlagen lassen.",
     paragraph3: "Entspanne nach einem aufregenden Tag in unserem Spa und genieße die Ruhe der Natur. Unsere <strong>Outdoor-Whirlpools und Saunen</strong> bieten den perfekten Rückzugsort. Zum Abschluss kannst du die wunderschönen <strong>Nordlichter</strong> am Himmel tanzen sehen."
-  },
-  
-  // About Section
-  about: {
-    title: "ÜBER UNS",
-    subtitle: "Unsere Geschichte und Mission",
-    mission: "UNSERE MISSION",
-    missionText: "Wir bieten authentische arktische Erlebnisse, die Abenteuer, Komfort und Nachhaltigkeit verbinden.",
-    story: "UNSERE GESCHICHTE",
-    storyText: "Triple X Adventures wurde von leidenschaftlichen Outdoor-Enthusiasten gegründet, die ihre Liebe zu Schwedisch-Lappland teilen wollten. Seit über einem Jahrzehnt bieten wir unvergessliche Erlebnisse in dieser magischen Region.",
-    values: "UNSERE WERTE",
-    valuesList: [
-      "Authentische Erlebnisse",
-      "Umweltbewusstsein",
-      "Höchste Sicherheitsstandards",
-      "Lokale Zusammenarbeit",
-      "Außergewöhnlicher Service"
-    ],
-    team: "UNSER TEAM",
-    teamText: "Unser erfahrenes Team besteht aus lokalen Experten und internationalen Abenteurern, die ihre Leidenschaft und ihr Wissen mit Ihnen teilen."
-  },
-  
-  // Accommodations Section
-  accommodations: {
-    title: "UNTERKÜNFTE",
-    subtitle: "Komfortable Unterkünfte in der Arktis",
-    description: "Nach einem Tag voller Abenteuer bieten unsere erstklassigen Unterkünfte den perfekten Ort zum Entspannen und Erholen.",
-    types: {
-      hotel: {
-        title: "Hotel Laponia",
-        description: "Unser Partnerhotel bietet luxuriöse Zimmer mit allen Annehmlichkeiten für einen komfortablen Aufenthalt.",
-        features: ["Luxuriöse Zimmer", "Spa-Bereich", "Restaurant", "Zentrale Lage", "WLAN"]
-      },
-      cabins: {
-        title: "Arktische Hütten",
-        description: "Unsere gemütlichen Hütten bieten Privatsphäre und einen authentischen Aufenthalt in der arktischen Wildnis.",
-        features: ["Voll ausgestattete Küche", "Privater Whirlpool", "Kamin", "Nordlicht-Aussicht", "Naturnahe Lage"]
-      },
-      glamping: {
-        title: "Arctic Glamping",
-        description: "Erleben Sie Luxus-Camping mit allen Annehmlichkeiten in einer atemberaubenden natürlichen Umgebung.",
-        features: ["Beheiztes Zelt", "Komfortable Betten", "Panoramafenster", "Nordlicht-Aussicht", "Authentisches Erlebnis"]
-      }
-    }
-  },
-  
-  // Restaurant Section
-  restaurant: {
-    title: "UNSER RESTAURANT",
-    subtitle: "Authentische Arktische Küche",
-    description: "Unser Restaurant Sameland bietet eine einzigartige kulinarische Reise durch die arktische Küche mit lokalen und saisonalen Zutaten.",
-    menu: {
-      title: "MENÜ-HIGHLIGHTS",
-      starters: "Vorspeisen",
-      mains: "Hauptgerichte",
-      desserts: "Desserts",
-      drinks: "Getränke",
-      items: {
-        reindeerCarpaccio: "Rentier-Carpaccio mit Waldbeeren",
-        arcticChar: "Geräucherter Arktischer Saibling",
-        wildMushroomSoup: "Waldpilzsuppe",
-        reindeerStew: "Traditioneller Rentier-Eintopf",
-        arcticCharFillet: "Gebratenes Saiblingsfilet",
-        wildGameBurger: "Wildfleisch-Burger",
-        cloudberryPanna: "Moltebeeren-Panna-Cotta",
-        blueberryPie: "Warmer Blaubeerkuchen",
-        hotChocolate: "Arktische heiße Schokolade",
-        berryGlögg: "Hausgemachter Beeren-Glühwein"
-      }
-    },
-    specialDiets: "Wir bieten auch vegetarische, vegane und glutenfreie Optionen an. Bitte informieren Sie uns über Ihre Ernährungsbedürfnisse."
   },
   
   // Experiences/Packages Section
@@ -170,7 +98,7 @@ export const de = {
       },
       {
         id: 9,
-        title: "Seitwärts-Paket",
+        title: "Sideways-Paket",
         description: "Erleben Sie den ultimativen Adrenalinkick mit unserem Eisfahrtraining. Meistern Sie das Driften auf Eis unter Anleitung von Rennprofis in einer exklusiven Umgebung.",
         price: 1499,
         duration: "3-4 Nächte",
@@ -184,7 +112,7 @@ export const de = {
           "/images/Restaurant/restaurant-interior.jpg"
         ],
         detailedInfo: {
-          introduction: "Das Seitwärts-Paket bietet ein aufregendes Eisfahrerlebnis unter professioneller Anleitung. Verbessern Sie Ihre Fahrtechnik auf speziell präparierten Eisflächen und genießen Sie den Luxus unserer erstklassigen Unterkünfte.",
+          introduction: "Das Sideways-Paket bietet ein aufregendes Eisfahrerlebnis unter professioneller Anleitung. Verbessern Sie Ihre Fahrtechnik auf speziell präparierten Eisflächen und genießen Sie den Luxus unserer erstklassigen Unterkünfte.",
           adventureOptionsTitle: "PAKET BEINHALTET",
           tours: [
             {
@@ -206,7 +134,7 @@ export const de = {
             "Flughafentransfers inklusive",
             "Versicherung im Paketpreis enthalten"
           ],
-          closingRemark: "Das Seitwärts-Paket bietet die perfekte Mischung aus adrenalingeladenen Eisfahrerlebnissen und luxuriösem arktischen Komfort!"
+          closingRemark: "Das Sideways-Paket bietet die perfekte Mischung aus adrenalingeladenen Eisfahrerlebnissen und luxuriösem arktischen Komfort!"
         },
         tag: {
           text: "Empfohlen",
@@ -331,10 +259,10 @@ export const de = {
         id: 2,
         title: "Hundeschlittenexpedition",
         description: "Führen Sie Ihr eigenes Team von eifrigen Huskys durch stille, schneebedeckte Wälder. Ein authentisches und unvergessliches arktisches Erlebnis.",
-        price: 450,
-        duration: "4 Stunden",
-        intensityLevel: "Moderat",
-        keyHighlights: ["Fahren Sie Ihren eigenen Schlitten", "Freundliches Husky-Team", "Waldwege"],
+        price: 220,
+        duration: "1,5 Stunden",
+        intensityLevel: "Aktiv / Entspannt",
+        keyHighlights: ["Führen Sie Ihr eigenes Team", "Gemütliche Beifahrerfahrt", "Authentische arktische Tradition"],
         image: "/images/Huskys/Husky 1_result.webp",
         gallery: [
           "/images/Huskys/Husky 1_result.webp",
@@ -342,37 +270,151 @@ export const de = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
-        fullDescription: "Erleben Sie die pure Freude und Kraft des Hundeschlittenfahrens. Nach einer kurzen Einführung in Ihr Team und den Schlitten begeben Sie sich auf eine Reise durch magische Winterlandschaften. Die Stille wird nur durch das Hecheln der Hunde und die Kufen, die über den Schnee gleiten, unterbrochen. Diese Tour bietet eine tiefe Verbindung mit der Natur und diesen unglaublichen Tieren. Eine wärmende Pause mit heißen Getränken und Snacks ist auf halber Strecke inbegriffen."
+        "detailedInfo": {
+            "introduction": "Machen Sie sich bereit, die Kraft der Schlittenhunde zu spüren, während Sie durch verschneite Wälder und über gefrorene Seen gleiten. Egal, ob Sie Ihr eigenes Team führen oder als Beifahrer entspannen möchten, unsere Husky-Erlebnisse bieten die perfekte Balance aus Aufregung und Gelassenheit.",
+            "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
+            "tours": [
+                {
+                    "title": "AKTIVE HUSKY-TOUR",
+                    "description": "Fahren Sie Ihren eigenen Schlitten und führen Sie ein Team energiegeladener Huskys durch die arktische Wildnis.",
+                    "details": ["Geführt von erfahrenen Mushern", "Keine Vorkenntnisse erforderlich"]
+                },
+                {
+                    "title": "PASSIVE HUSKY-TOUR",
+                    "description": "Lehnen Sie sich zurück und genießen Sie die Fahrt, während unsere erfahrenen Musher Sie durch atemberaubende Landschaften führen.",
+                    "details": ["Geführt von erfahrenen Mushern", "Familienfreundlich"]
+                }
+            ],
+            "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+            "importantInfo": [
+                "Geeignet für Anfänger und erfahrene Gäste",
+                "Kinder als Beifahrer willkommen",
+                "Warme Kleidung bei Bedarf gestellt",
+                "Geführt von professionellen Mushern"
+            ],
+            "closingRemark": "Mehr als nur eine Fahrt - es ist ein authentisches arktisches Erlebnis, das Sie nie vergessen werden!"
+        },
+        "tag": {
+            "text": "Familienliebling",
+            "type": "family"
+        },
+        "features": [
+            "Geführt von Mushern",
+            "Fahren oder Mitfahren möglich",
+            "Warme Kleidung gestellt",
+            "Kleingruppenerleben"
+        ]
       },
       {
         id: 3,
-        title: "Schneeschuhwanderung und Fackelwanderung",
-        description: "Erleben Sie die Magie des arktischen Waldes auf Schneeschuhen, gefolgt von einer faszinierenden abendlichen Fackelwanderung unter den Sternen.",
-        price: 149,
-        duration: "3 Stunden",
+        title: "Schneeschuhwanderung",
+        description: "Erleben Sie die Magie des arktischen Waldes auf Schneeschuhen und entdecken Sie die Schönheit der verschneiten Winterlandschaft Lapplands.",
+        price: 40,
+        duration: "1,5 Stunden",
         intensityLevel: "Moderat",
-        keyHighlights: ["Geführtes Schneeschuh-Abenteuer", "Abendliche Fackelwanderung", "Warme Getränke & Snacks"],
-        image: "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+        keyHighlights: ["Geführtes Schneeschuh-Abenteuer", "Unberührte Waldpfade", "Warme Getränke & Snacks"],
+        image: "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
         gallery: [
           "/images/Snowshoe_Torchwalk/snowtorch1.webp",
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
-        fullDescription: "Entdecken Sie die heitere Schönheit des arktischen Waldes bei unserem geführten Schneeschuh-Abenteuer. Während das Tageslicht schwindet, gehen wir über zu einer magischen Fackelwanderung unter den Sternen. Unsere erfahrenen Führer führen Sie durch unberührte schneebedeckte Landschaften und teilen Geschichten über die lokale Kultur und Tierwelt. Keine Vorkenntnisse nötig - nur Abenteuerlust! Warme Getränke und traditionelle Snacks werden bereitgestellt, um Ihre Energie während dieses unvergesslichen Wintererlebnisses aufrechtzuerhalten.",
-        tag: {
-          text: "Neu",
-          type: "featured"
+    "detailedInfo": {
+      "introduction": "Erleben Sie den Zauber der lappländischen Wälder auf Schneeschuhen, während Sie durch unberührte schneebedeckte Landschaften wandern. Dieses Tagesabenteuer ist perfekt für Naturliebhaber jeden Alters, die die winterliche Wildnis erkunden möchten.",
+      "adventureOptionsTitle": "ABENTEUER-DETAILS",
+      "tours": [
+        {
+          "title": "GEFÜHRTE SCHNEESCHUHWANDERUNG",
+          "description": "Tagestour durch verschneite Wälder und gefrorene Seen auf Schneeschuhen.",
+          "details": [
+            "Professioneller Guide mit lokalem Wissen",
+            "Hochwertige Schneeschuhe werden gestellt",
+            "Heiße Getränke und Snacks inklusive",
+            "Fotomöglichkeiten in unberührter Natur"
+          ]
         }
+      ],
+      "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+      "importantInfo": [
+        "Geeignet für alle Altersgruppen und Fitnesslevel",
+        "Keine Vorkenntnisse erforderlich",
+        "Alle Ausrüstung wird gestellt",
+        "Warme Kleidung empfohlen",
+        "Kleine Gruppen für persönliches Erlebnis"
+      ],
+      "closingRemark": "Unsere Schneeschuhwanderung bietet eine friedliche Möglichkeit, die arktische Wildnis zu erkunden und mit der Natur in ihrer reinsten Winterform in Verbindung zu treten."
+    },
+    "tag": {
+      "text": "Naturerlebnis",
+      "type": "nature"
+    },
+    "features": [
+      "Geführte Schneeschuhwanderung",
+      "Komplette Ausrüstung gestellt",
+      "Heiße Getränke & Snacks inklusive",
+      "Familienfreundlich"
+    ]
+      },
+      {
+        id: 11,
+        title: "Abendliche Fackelwanderung",
+        description: "Nehmen Sie teil an einer faszinierenden abendlichen Fackelwanderung unter den Sternen, bei der der dunkle arktische Himmel und das warme Leuchten der Fackeln eine magische Atmosphäre im Winterwald schaffen.",
+        price: 40,
+        duration: "1,5 Stunden",
+        intensityLevel: "Leicht",
+        keyHighlights: ["Abendliches Fackelerlebnis", "Sternbeobachtungsmöglichkeit", "Warme Getränke am Feuer"],
+        image: "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+        gallery: [
+          "/images/Snowshoe_Torchwalk/snowtorch4.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch2.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch1.webp"
+        ],
+    "detailedInfo": {
+      "introduction": "Nehmen Sie teil an einer atmosphärischen Abendwanderung mit Fackeln unter dem arktischen Himmel. Wenn die Dunkelheit hereinbricht, verwandelt sich der Wald in ein magisches Reich, beleuchtet vom warmen Schein der Fackeln, und schafft unvergessliche Erinnerungen an Ihr arktisches Abenteuer.",
+      "adventureOptionsTitle": "ABENTEUER-DETAILS",
+      "tours": [
+        {
+          "title": "ABENDLICHE FACKELWANDERUNG",
+          "description": "Abendlicher Spaziergang durch den Winterwald, beleuchtet von Fackeln, mit warmen Getränken am Feuer.",
+          "details": [
+            "Traditionelle Fackeln werden gestellt",
+            "Professioneller Guide mit lokalen Geschichten",
+            "Heiße Getränke und Snacks am Lagerfeuer",
+            "Mögliche Nordlicht-Beobachtung (wetterabhängig)"
+          ]
+        }
+      ],
+      "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+      "importantInfo": [
+        "Geeignet für alle Altersgruppen",
+        "Keine besonderen Fähigkeiten erforderlich",
+        "Alle Ausrüstung wird gestellt",
+        "Warme Kleidung unbedingt erforderlich",
+        "Aktivität findet unabhängig von den Wetterbedingungen statt"
+      ],
+      "closingRemark": "Unsere Abendliche Fackelwanderung bietet eine friedliche und zugleich magische Art, die arktische Nacht zu erleben, und verbindet Tradition mit der natürlichen Schönheit der lappländischen Winterlandschaft."
+    },
+    "tag": {
+      "text": "Abendaktivität",
+      "type": "nature"
+    },
+    "features": [
+      "Geführte Fackelwanderung",
+      "Fackeln werden gestellt",
+      "Heiße Getränke & Snacks inklusive",
+      "Familienfreundlich"
+    ]
       },
       {
         id: 4,
         title: "Eisfischen-Abenteuer",
         description: "Bohren Sie durch das Eis auf einem gefrorenen See und versuchen Sie Ihr Glück beim Fangen von arktischem Saibling oder Barsch. Eine friedliche und traditionelle Lappland-Aktivität.",
         price: 149,
-        duration: "3 Stunden",
-        intensityLevel: "Entspannt",
-        keyHighlights: ["Traditionelle arktische Aktivität", "Fischereiausrüstung gestellt", "Heiße Getränke inklusive"],
+        duration: "3-4 Stunden",
+        intensityLevel: "Entspannt / Aufregend",
+        keyHighlights: ["Authentischer arktischer Lebensstil", "Fischereiausrüstung gestellt", "Testen Sie Ihr Geschick"],
         image: "/images/Ice-Fishing.jpg",
         gallery: [
           "/images/Ice Fishing/Icefish 1_result.webp",
@@ -380,16 +422,47 @@ export const de = {
           "/images/Ice Fishing/Shoot 3_result.webp",
           "/images/Ice Fishing/Shoot 4_result.webp"
         ],
-        fullDescription: "Erleben Sie die Ruhe des Eisfischens auf einem abgelegenen gefrorenen See. Wir stellen alle notwendigen Geräte zur Verfügung, einschließlich Eisbohrer, Angelruten und Köder. Ihr Guide wird Ihnen die Techniken beibringen und Geschichten über das Leben in der Arktis erzählen. Genießen Sie die frische Winterluft und die Stille der Wildnis. Warme Getränke werden bereitgestellt, um Sie komfortabel zu halten."
+        "detailedInfo": {
+          "introduction": "Beginnen Sie Ihren Tag an einem gefrorenen See mit einer traditionellen Eisfisch-Session, geführt von Einheimischen. Wechseln Sie dann den Gang und fordern Sie sich selbst mit Tontaubenschießen in der verschneiten Wildnis heraus. Dies ist das perfekte arktische Kombi-Erlebnis für alle Niveaus.",
+          "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
+          "tours": [
+            {
+              "title": "HALBTAGES ARKTISCHES OUTDOOR-ERLEBNIS",
+              "description": "Beginnen Sie mit Eisfischen und genießen Sie dann eine Tontaubenschieß-Session in der arktischen Wildnis. Inklusive Führung, Ausrüstung und Snacks.",
+              "details": [
+                "Komplette Ausrüstung gestellt",
+                "Heiße Getränke inklusive"
+              ]
+            }
+          ],
+          "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+          "importantInfo": [
+            "Geeignet für alle Niveaus",
+            "Geführt von erfahrenen Einheimischen",
+            "Komplette Ausrüstung gestellt",
+            "Warme Outdoor-Kleidung empfohlen"
+          ],
+          "closingRemark": "Ein echter arktischer Tag - Fischen, Schießen und unvergessliche Erinnerungen in Schwedisch-Lappland schaffen!"
+        },
+        "tag": {
+          "text": "Lokaler Favorit",
+          "type": "local"
+        },
+        "features": [
+          "Geführt von Einheimischen",
+          "Fischen & Schießen Kombi",
+          "Komplette Ausrüstung gestellt",
+          "Heiße Getränke inklusive"
+        ]
       },
       {
         id: 5,
         title: "Rentierbesuch",
-        description: "Treffen Sie diese sanften arktischen Tiere aus nächster Nähe, machen Sie Fotos und füttern Sie sie. Mit etwas Glück dürfen Sie sie sogar streicheln!",
-        price: 89,
-        duration: "1 Stunde",
+        description: "Treffen und füttern Sie Lapplands bekanntestes Tier aus der Hand und machen Sie unvergessliche Fotos mit unseren freundlichen Rentieren.",
+        price: 45,
+        duration: "40 Minuten",
         intensityLevel: "Entspannt",
-        keyHighlights: ["Rentierfütterung", "Fotomöglichkeiten", "Heiße Getränke"],
+        keyHighlights: ["Rentiere aus der Hand füttern", "Fotogelegenheit", "Familienfreundliche Aktivität"],
         image: "/images/Reindeers.jpg",
         gallery: [
           "/images/Reindeers/Reindeers 1_result.webp",
@@ -397,11 +470,37 @@ export const de = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
-        fullDescription: "Kommen Sie diesen wunderschönen arktischen Tieren während dieses kurzen, aber unvergesslichen Erlebnisses ganz nahe. Sie haben die Möglichkeit, die Rentiere zu füttern, viele Fotos zu machen und wenn Sie sehr viel Glück haben, dürfen Sie sie vielleicht sogar streicheln. Unser Guide wird interessante Fakten über Rentiere und ihre Bedeutung in der arktischen Region teilen. Heiße Getränke werden bereitgestellt, um Sie während Ihres Besuchs warm zu halten. Diese Aktivität ist perfekt für Familien und Tierliebhaber jeden Alters.",
-        tag: {
-          text: "Familienfreundlich",
-          type: "featured"
-        }
+        "detailedInfo": {
+          "introduction": "Kommen Sie unseren freundlichen Rentieren ganz nahe, füttern Sie sie aus der Hand und halten Sie unvergessliche Erinnerungen im Herzen Lapplands fest.",
+          "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
+          "tours": [
+            {
+              "title": "RENTIERFÜTTERUNGS-ERLEBNIS",
+              "description": "Treffen, füttern und fotografieren Sie Rentiere in einer gemütlichen natürlichen Umgebung.",
+              "details": [
+                "Tierfutter inklusive",
+                "Tolle Fotomöglichkeiten"
+              ]
+            }
+          ],
+          "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+          "importantInfo": [
+            "Geeignet für alle Altersgruppen",
+            "Tierfutter inklusive",
+            "Perfekt für Familien und Paare",
+            "Keine spezielle Ausrüstung nötig"
+          ],
+          "closingRemark": "Kurz, einfach und unvergesslich - kommen Sie, treffen Sie die Rentiere und machen Sie Ihr arktisches Erlebnis komplett!"
+        },
+        "tag": {
+          "text": "Familienliebling",
+          "type": "family"
+        },
+        "features": [
+          "Rentiere treffen & füttern",
+          "Fotogelegenheit",
+          "Familienfreundlich"
+        ]
       },
       {
         id: 6,
@@ -418,16 +517,48 @@ export const de = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
-        fullDescription: "Schweben Sie über die atemberaubenden Landschaften von Schwedisch-Lappland auf einer unvergesslichen Hubschraubertour. Erleben Sie die Größe der Wildnis, entdecken Sie Wildtiere von oben und gewinnen Sie eine einzigartige Perspektive auf die gefrorene Welt unter Ihnen. Unsere erfahrenen Piloten geben Kommentare zu den Sehenswürdigkeiten. Dies ist eine wirklich spektakuläre Art, die Schönheit der Arktis zu schätzen."
+        "detailedInfo": {
+            "introduction": "Genießen Sie einen atemberaubenden Blick aus der Vogelperspektive auf die weite arktische Wildnis, gefrorene Seen und schneebedeckte Wälder von einem Hubschrauber aus. Erleben Sie die Landschaft wie nie zuvor, während Sie über Schwedisch-Lappland schweben.",
+            "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
+            "tours": [
+                {
+                    "title": "30-MINÜTIGER PANORAMAFLUG",
+                    "description": "Unsere Standardtour bietet Panoramablicke auf das winterliche Wunderland des arktischen Lapplands.",
+                    "details": ["Erfahrener Pilot", "Kopfhörer werden gestellt"]
+                },
+                {
+                    "title": "INDIVIDUELLER FLUG ODER PRIVATER SHUTTLE",
+                    "description": "Suchen Sie nach etwas Längerem oder Exklusiverem? Kontaktieren Sie uns für maßgeschneiderte Flugdauern oder privaten Transport.",
+                    "details": ["Private Buchung auf Anfrage", "Verfügbarkeit vorbehalten"]
+                }
+            ],
+            "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+            "importantInfo": [
+                "Mindestens 4 Passagiere erforderlich für Standardflug",
+                "Wetterabhängige Aktivität",
+                "Private Flüge auf Anfrage verfügbar"
+            ],
+            "closingRemark": "Schweben Sie über die Arktis und genießen Sie Aussichten, die nur wenige jemals zu sehen bekommen - ein unvergesslicher Höhepunkt Ihrer Reise."
+        },
+        "tag": {
+            "text": "Landschaftlich",
+            "type": "scenic"
+        },
+        "features": [
+            "Professioneller Pilot",
+            "Landschaftliche Lufttour",
+            "Winter-Exklusiv",
+            "Individuelle Flüge verfügbar"
+        ]
       },
       {
         id: 7,
         title: "Eisdrift-Erlebnis",
-        description: "Lernen Sie Performancefahren auf Eis mit professionellen Instruktoren. Meistern Sie kontrollierte Drifts in speziell ausgerüsteten Autos auf unserer Gefrorenen-See-Strecke.",
-        price: 349,
-        duration: "Halber Tag",
+        description: "Meistern Sie die Kunst des Driftens auf Eis mit unseren professionellen Instruktoren auf speziell präparierten gefrorenen Strecken in Schwedisch-Lappland.",
+        price: 1800,
+        duration: "Ganzer Tag",
         intensityLevel: "Extrem",
-        keyHighlights: ["Performance-Fahren", "Professionelle Instruktoren", "Gefrorene-See-Strecke"],
+        keyHighlights: ["Performance-Fahren", "Profi-Instruktoren", "Hochgeschwindigkeits-Arktisaction"],
         image: "/images/Drifting.jpg",
         gallery: [
           "/images/Drifting.jpg",
@@ -435,18 +566,52 @@ export const de = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
-        fullDescription: "Spüren Sie den Nervenkitzel des seitlichen Gleitens auf Eis in unserem Eisdrift-Erlebnis. Unter der Anleitung professioneller Fahrlehrer lernen Sie die Techniken der Fahrzeugkontrolle unter extremen Winterbedingungen. Mit speziell vorbereiteten Performancefahrzeugen, die mit Spikereifen ausgestattet sind, üben Sie Drifttechniken auf unserer eigens gebauten Eispiste. Beginnen Sie mit grundlegenden Übungen und schreiten Sie zu komplexeren Manövern vor, während Ihr Selbstvertrauen wächst. Dieses Erlebnis ist perfekt für Fahrbegeisterte, die ihre Winterfahrkünste in einer sicheren und kontrollierten Umgebung verbessern möchten. Alle Fahrer erhalten gründliche Anweisungen und haben die Möglichkeit für mehrere Fahrsitzungen, um ihre Technik zu perfektionieren.",
-        tag: {
-          text: "Empfohlen",
-          type: "featured"
-        }
+        "detailedInfo": {
+          "introduction": "Spüren Sie den Nervenkitzel des Gleitens und Driftens auf dem Eis, wobei Experteninstruktoren Sie bei jedem Schritt anleiten. Geeignet für alle Niveaus, ist dies Ihre Chance, Ihre Grenzen auf gefrorenen Seen zu erweitern.",
+          "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
+          "tours": [
+            {
+              "title": "1-STUNDEN EISDRIFT-SESSION",
+              "description": "Lassen Sie sich mit Expertenanleitung auf unseren gefrorenen Strecken in das Eisdriften einführen.",
+              "details": [
+                "Professioneller Instruktor inklusive",
+                "Fahrzeuge für das Driften vorbereitet"
+              ]
+            },
+            {
+              "title": "HALBTAGES-EISDRIFT-ERLEBNIS",
+              "description": "Erweitern Sie Ihre Fähigkeiten mit verlängerter Streckenzeit und professionellem Coaching.",
+              "details": [
+                "Sicherheitsausrüstung gestellt",
+                "Mehrere Streckenlayouts verfügbar"
+              ]
+            }
+          ],
+          "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+          "importantInfo": [
+            "Keine vorherige Drifterfahrung erforderlich",
+            "Sicherheitsausrüstung gestellt",
+            "Heiße Getränke inklusive",
+            "Perfekt für Einzelpersonen, Gruppen oder Firmenveranstaltungen"
+          ],
+          "closingRemark": "Buchen Sie jetzt Ihren Platz und erleben Sie das aufregendste Motorsportabenteuer der Arktis!"
+        },
+        "tag": {
+          "text": "Adrenalinkick",
+          "type": "adrenaline"
+        },
+        "features": [
+          "Professioneller Unterricht",
+          "Präparierte Eisstrecken",
+          "Sicherheitsausrüstung gestellt"
+        ]
       },
       {
         id: 8,
-        title: "Side-By-Side Buggy-Abenteuer",
-        description: "Navigieren Sie durch verschneite Pfade und gefrorenes Gelände in einem leistungsstarken Side-By-Side (SBS) Buggy. Nervenkitzel und Spaß für Paare oder Einzelfahrer.",
+        title: "Buggy-Drift-Abenteuer",
+        description: "Fahren und driften Sie Buggys auf schneebedeckten Strecken mit sofortiger Beschleunigung und maximaler Kontrolle - perfekt für Adrenalinjunkies.",
         price: 249,
-        duration: "2 Stunden",
+        duration: "1 Stunde",
         intensityLevel: "Aufregend",
         keyHighlights: ["Off-Road Buggy-Spaß", "Navigation auf verschneiten Pfaden", "Beheizte Kabinenoption"],
         image: "/images/Side-By-Side-Buggy-Drifting.jpg",
@@ -456,23 +621,116 @@ export const de = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        fullDescription: "Begeben Sie sich auf ein aufregendes Off-Road-Abenteuer in unseren Side-By-Side Buggys. Diese vielseitigen Fahrzeuge sind perfekt für die Navigation durch das anspruchsvolle Wintergelände. Folgen Sie Ihrem Guide durch Wälder und über gefrorenes Gelände und genießen Sie die Kraft und Wendigkeit des Buggys. Geeignet für Fahrer und Beifahrer, die eine adrenalingeladene Erkundung suchen."
+        "detailedInfo": {
+          "introduction": "Erleben Sie den Rausch des Buggy-Driftens auf präparierten Schneestrecken. Fordern Sie sich selbst heraus oder bringen Sie einen Freund als Beifahrer mit für extra Spaß.",
+          "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
+          "tours": [
+            {
+              "title": "1-STUNDEN BUGGY-DRIFT-SESSION",
+              "description": "Eine Stunde Renn- und Drift-Action auf Schneestrecken.",
+              "details": [
+                "Sicherheitsgurte und Anweisungen inklusive",
+                "Beifahreroption verfügbar"
+              ]
+            }
+          ],
+          "importantInfoTitle": "WICHTIGE INFORMATIONEN",
+          "importantInfo": [
+            "Ein oder zwei Personen pro Buggy (Fahrer + Beifahrer)",
+            "Geeignet für alle Erfahrungsstufen",
+            "Sicherheitsgurte und Anweisungen gestellt",
+            "Warme Outdoor-Kleidung empfohlen"
+          ],
+          "closingRemark": "Machen Sie sich bereit zum Driften, Rasen und Fühlen des arktischen Rausches - buchen Sie Ihr Buggy-Abenteuer noch heute!"
+        },
+        "tag": {
+          "text": "Adrenalinkick",
+          "type": "adrenaline"
+        },
+        "features": [
+          "Ein oder zwei Personen pro Buggy",
+          "Sicherheitsausrüstung gestellt",
+          "Präparierte Schneestrecken",
+          "Adrenalingeladenes Erlebnis"
+        ]
       }
-    ],
-    
-    // Social Media Section
-    social: {
-      title: "Folgen Sie Uns",
-    },
+    ]
   },
   
-  // Testimonials Section
-  testimonials: {
-    title: "WAS UNSERE GÄSTE SAGEN",
-    subtitle: "Erfahrungen aus erster Hand von unseren Abenteurern"
+  // Accommodations Section
+  accommodations: {
+    title: "UNTERKÜNFTE",
+    subtitle: "Komfortable Unterkünfte in der Arktis",
+    viewAll: "Alle Unterkünfte anzeigen",
+    whereYouWillStay: "Wo Sie Übernachten",
+    comingSoon: "Demnächst",
+    from: "Ab",
+    night: "Nacht",
+    registerInterest: "Vormerken",
+    checkAvailability: "Verfügbarkeit prüfen",
+    viewOptions: "Optionen anzeigen",
+    // Accommodation data
+    cabinHotel: {
+      title: "CABIN HOTEL SAMELAND",
+      description: "Erleben Sie Luxus in unserem Premium-Mirror-Glass-Cabin-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die arktische Wildnis und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
+      features: [
+        "Für 2-4 Gäste",
+        "13 Cabins",
+        "Klimatisiert",
+        "Luxuriöses Kingsize-Bett",
+        "eigene Küche",
+        "SameLand, Arvidsjaur"
+      ]
+    },
+    txaChalet: {
+      title: "TXA - CHALET",
+      description: "Übernachte im eigenen TXA - Chalet und erlebe ein Höchstmaß an Komfort. Unser exklusives Chalet bietet eine perfekte Mischung aus rustikalem Charme und modernem Luxus.",
+      features: [
+        "Bis zu 24 Gäste",
+        "12 Schlafzimmer",
+        "Private Sauna",
+        "Private Lounge / Restaurant"
+      ]
+    },
+    hotelLaponia: {
+      title: "HOTEL LAPONIA",
+      description: "Eine komfortable Alternative zu unserem TXA Chalet. Das Hotel Laponia bietet Ihnen einen angenehmen Aufenthalt vor und nach Ihren Abenteuern, mit allen Annehmlichkeiten, die Sie benötigen.",
+      features: [
+        "Zentrale Lage",
+        "Arktisches Ambiente",
+        "nur 10km vom Flughafen entfernt",
+        "Fjälls Pub & Bistro"
+      ]
+    },
+    description: "Nach einem Tag voller Abenteuer bieten unsere erstklassigen Unterkünfte den perfekten Ort zum Entspannen und Erholen.",
+    types: {
+      hotel: {
+        title: "Hotel Laponia",
+        description: "Unser Partnerhotel bietet luxuriöse Zimmer mit allen Annehmlichkeiten für einen komfortablen Aufenthalt.",
+        features: ["Luxuriöse Zimmer", "Spa-Bereich", "Restaurant", "Zentrale Lage", "WLAN"]
+      },
+      cabins: {
+        title: "Arktische Hütten",
+        description: "Unsere gemütlichen Hütten bieten Privatsphäre und einen authentischen Aufenthalt in der arktischen Wildnis.",
+        features: ["Voll ausgestattete Küche", "Privater Whirlpool", "Kamin", "Nordlicht-Aussicht", "Naturnahe Lage"]
+      },
+      glamping: {
+        title: "Arctic Glamping",
+        description: "Erleben Sie Luxus-Camping mit allen Annehmlichkeiten in einer atemberaubenden natürlichen Umgebung.",
+        features: ["Beheiztes Zelt", "Komfortable Betten", "Panoramafenster", "Nordlicht-Aussicht", "Authentisches Erlebnis"]
+      }
+    }
   },
 
-  // This is a new section for the main contact form, mirroring en.ts structure
+  
+  // About Section - Simplified
+  about: {
+    title: "ÜBER UNS",
+    subtitle: "Unser Engagement für authentische arktische Abenteuer"
+  },
+  
+
+  // Contact Section
   contact: {
     title: "MACHEN WIR DEN WINTER LEGENDÄR", 
     subtitle: "Bereit, die echte Arktis zu erleben? Kontaktieren Sie uns, um Ihr Abenteuer zu planen", 
@@ -534,7 +792,54 @@ export const de = {
     faq: {
       title: "Häufig gestellte Fragen",
       showMore: "Mehr anzeigen",
-      showLess: "Weniger anzeigen"
+      showLess: "Weniger anzeigen",
+      q1: "Was ist die beste Reisezeit?",
+      a1: "Die Hauptsaison dauert von Dezember bis April, wobei Januar bis März die besten Schneeverhältnisse und Nordlicht-Sichtbarkeit bieten.",
+      q2: "Wie komme ich nach Arvidsjaur?",
+      a2: "Arvidsjaur verfügt über einen eigenen Flughafen mit Verbindungen nach Stockholm. Wir bieten Transfers vom Flughafen zu unserem Standort an.",
+      q3: "Benötige ich spezielle Ausrüstung?",
+      a3: "Wir stellen alle Spezialausrüstungen zur Verfügung, einschließlich Thermoanzüge, Stiefel und Helme. Bringen Sie einfach warme Basisschichten und Ihren Abenteuersinn mit!",
+      q4: "Brauche ich einen gültigen Führerschein?",
+      a4: "Um ein Schneemobil zu fahren oder an unserem Auto-Drift-auf-Eis-Programm teilzunehmen, müssen Sie über 18 Jahre alt sein und einen gültigen Führerschein besitzen. Bitte haben Sie Ihren Führerschein immer dabei, da die Polizei die Gültigkeit des Führerscheins überprüfen kann.",
+      q5: "Kann ich mein eigenes Schneemobil fahren?",
+      a5: "Ja, unsere Schneemobile sind alle einsitzig. Wenn Sie als Beifahrer an einer Tour teilnehmen möchten, informieren Sie bitte unser Team.",
+      q6: "Was ist, wenn mir kalt wird?",
+      a6: "Der Winter in Schwedisch-Lappland kann etwa -20°C oder kälter sein. Bitte stellen Sie sicher, dass Sie unsere Ausrüstung jederzeit tragen, wenn Sie im Freien sind. Verschiedene Kleidungsschichten halten Sie warm. Wir sagen unsere Touren nicht wegen Kälte ab.",
+      q7: "Wie viel Tageslicht haben wir?",
+      a7: "Prüfen Sie die verschiedenen Tageslichtzeiten in Arvidsjaur, Schweden: Mitte Dezember (10:48-14:23, 3 Std. 35 Min.), Mitte Januar (10:47-14:55, 4 Std. 8 Min.), Mitte Februar (09:10-16:47, 7 Std. 37 Min.), Mitte März (07:23-18:26, 11 Std. 3 Min.), Mitte April (05:26-20:06, 14 Std. 40 Min.).",
+      q8: "Kann ich 'nur' eine Schneemobiltour buchen?",
+      a8: "Ja, Sie können jede Aktivität einzeln buchen. TXA ist auf Premium-Paketreisen spezialisiert und fokussiert, aber wir prüfen gerne unsere Termine und machen Ihnen ein Angebot für einzelne Aktivitäten.",
+      q9: "Wann ist die beste Zeit, um die Aurora Borealis zu sehen?",
+      a9: "Die mystischen Nordlichter sind ein Naturschauspiel und können daher nicht garantiert werden. Wenn die Bedingungen gut sind (Oktober - März, keine Wolken, hohe KP-Vorhersage), hoffen wir, dieses Phänomen mit Ihnen beobachten zu können.",
+      q10: "Was ist die beste Reisesaison?",
+      a10: "Wir haben unsere Wintersaison von Dezember bis April.",
+      q11: "Was ist in den Premium-Paketen enthalten?",
+      a11: "Unsere Premium-Pakete beinhalten alles, vom ersten Angebot bis zur Nachbereitung der Events. Grundsätzlich muss nur der Alkohol vor Ort extra bezahlt werden. Schauen Sie sich unsere Premium-Paketbeispiele an!",
+      q12: "Was ist mit Reiseinformationen?",
+      a12: "Die Möglichkeiten, in den hohen Norden zu reisen, sind sehr begrenzt. Planen Sie daher bitte immer genügend Zeit ein (mindestens 1,5 Stunden vor Abflug). Denken Sie daran, Ihren gültigen Personalausweis oder Reisepass und Ihren Führerschein mitzubringen. Gepäck: 20 kg und 1 Handgepäck sind in Ihrem Ticket enthalten. In Arvidsjaur am Flughafen treffen Sie unser Team am Triple X Counter in der Ankunftshalle. Die Flüge werden von Populair und den Chartergesellschaften PAS, Polar Flights und Prosky durchgeführt.",
+      q13: "Was ist mit Haftungsausschlüssen?",
+      a13: "Ein Haftungsausschluss wird vor Ort ausgestellt. Es gelten folgende Selbstbeteiligungen: 2.200,00 EUR Schneemobil | 500,00 EUR Ice-Karts | 2.200,00 EUR Side-by-Sides | 7.500,00 EUR AUDI RS3.",
+      q14: "Was ist mit Versicherungen?",
+      a14: "Reisen in ein fremdes Land kann mit verschiedenen Risiken verbunden sein. Egal wie vorsichtig Sie sind. Seit der Gründung von Triple X im Jahr 2017 hatten wir keine schweren Verletzungen, aber wir möchten darauf hinweisen, dass es zusätzliche Versicherungen gibt, die online gebucht werden können. Reiserücktrittsversicherung sowie Haftpflichtversicherung, die die Selbstbeteiligung im Schadensfall reduzieren kann. www.allianz-reiseversicherung.de. Der Fahrer unserer Fahrzeuge haftet für Schäden am Fahrzeug. Die maximale persönliche Haftung finden Sie in unserem Haftungsausschluss."
+    },
+    
+    // Social Media Section
+    social: {
+      title: "Folgen Sie Uns",
+    },
+    
+    // Contact Info Section
+    info: {
+      title: "Kontaktieren Sie Uns",
+      location: "Unser Standort",
+      locationText: "Storgatan 6F, 93331 Arvidsjaur, Schwedisch-Lappland, Schweden",
+      phone: "Telefon",
+      phoneText1: "+49 (0) 151 2411 5455",
+      phoneText2: "+46 (0) 70 357 5455",
+      email: "E-Mail",
+      emailText: "info@triple-x-adventures.com",
+      restaurant: "Reservierungen @JayJay's",
+      restaurantPhone: "+46 (0) 70 387 5455",
     }
   },
 
@@ -544,6 +849,26 @@ export const de = {
     privacyPolicy: "Datenschutzrichtlinie",
     termsConditions: "AGB",
     imprint: "Impressum",
+    openingHours: "Öffnungszeiten",
+    monday: "Montag - Freitag",
+    saturday: "Samstag",
+    sunday: "Sonntag",
+    byAppointment: "Nach Vereinbarung",
+    // Privacy Policy Modal
+    privacyPolicyTitle: "DATENSCHUTZRICHTLINIE",
+    privacyPolicyIntro: "Diese Datenschutzrichtlinie (\"Richtlinie\") beschreibt, wie Triple X Adventures AB (\"Triple X Adventures AB\", \"wir\", \"uns\" oder \"unser\") die persönlich identifizierbaren Informationen (\"Persönliche Informationen\") sammelt, schützt und verwendet, die Sie (\"Benutzer\", \"Sie\" oder \"Ihr\") auf der Website triple-x-adventures.com und allen ihren Produkten oder Dienstleistungen (zusammen \"Website\" oder \"Dienste\") angeben können. Sie beschreibt auch die Möglichkeiten, die Sie bezüglich der Verwendung Ihrer persönlichen Daten haben und wie Sie auf diese zugreifen und sie aktualisieren können. Diese Richtlinie gilt nicht für die Praktiken von Unternehmen, die wir nicht besitzen oder kontrollieren, oder für Personen, die wir nicht beschäftigen oder verwalten.",
+    automaticCollection: "Automatische Erfassung von Informationen",
+    automaticCollectionText: "Unsere oberste Priorität ist die Sicherheit der Kundendaten, und wir üben eine No-Logs-Politik aus. Wir verarbeiten möglicherweise nur minimale Benutzerdaten, nur so viel wie unbedingt notwendig ist, um die Website oder Dienste zu betreiben. Automatisch gesammelte Informationen werden nur verwendet, um potenzielle Missbrauchsfälle zu identifizieren und statistische Informationen über die Website-Nutzung zu erstellen. Diese statistischen Informationen werden nicht auf eine Weise aggregiert, die einen bestimmten Benutzer des Systems identifizieren würde.",
+    personalInfoCollection: "Sammlung persönlicher Informationen",
+    personalInfoCollectionText: "Sie können die Website besuchen, ohne uns mitzuteilen, wer Sie sind oder Informationen preiszugeben, anhand derer jemand Sie als bestimmte, identifizierbare Person identifizieren könnte. Wenn Sie jedoch einige Funktionen der Website nutzen möchten, werden Sie möglicherweise gebeten, bestimmte persönliche Informationen anzugeben (z. B. Ihren Namen und Ihre E-Mail-Adresse). Wir erhalten und speichern alle Informationen, die Sie uns wissentlich zur Verfügung stellen, wenn Sie einen Kauf tätigen oder ein Online-Formular auf der Website ausfüllen. Diese Informationen können Folgendes umfassen:",
+    personalInfoItems: ["Persönliche Angaben wie Name, Wohnsitzland usw.", "Kontaktinformationen wie E-Mail-Adresse, Adresse usw."],
+    personalInfoChoice: "Sie können sich dafür entscheiden, uns Ihre persönlichen Daten nicht zur Verfügung zu stellen, dann können Sie jedoch möglicherweise einige Funktionen der Website nicht nutzen. Benutzer, die sich nicht sicher sind, welche Informationen obligatorisch sind, können uns gerne kontaktieren.",
+    // Terms and Conditions Modal
+    termsTitle: "ALLGEMEINE GESCHÄFTSBEDINGUNGEN",
+    termsIntro: "Die folgenden Allgemeinen Geschäftsbedingungen gelten für Pakete, die von Triple X Adventures AB (im Folgenden als \"TXA\" bezeichnet) durch seine Paketprogramme an folgenden Orten angeboten und geliefert werden: Arvidsjaur, Schwedisch-Lappland und alle anderen Gebiete, in denen die Dienstleistungen erbracht werden.",
+    commercialTerms: "GESCHÄFTSBEDINGUNGEN",
+    contactUs: "Kontakt",
+    contactUsText: "Wenn Sie uns zu diesem Thema kontaktieren möchten, können Sie dies über das Kontaktformular tun, eine E-Mail an info@triple-x-adventures.com senden oder einen Brief an folgende Adresse schreiben:"
   },
   
   // Language Selector
@@ -561,28 +886,7 @@ export const de = {
     returnHome: "Zurück zur Startseite",
   },
   
-  // Animations Showcase
-  animationsShowcase: {
-    title: "Interaktive Elemente",
-    description: "Entdecken Sie unsere Premium-Mikrointeraktionen und Animationen, die Ihr arktisches Abenteuererlebnis verbessern.",
-    entranceAnimations: "Eingangsanimationen",
-    hoverAnimations: "Hover-Effekte",
-    continuousAnimations: "Kontinuierliche Animationen",
-    hoverCards: "Interaktive Informationen",
-    staggeredAnimations: "Sequenzierte Elemente",
-    specialEffects: "Spezialeffekte",
-  },
   
-  // Adventure Map Page
-  adventureMap: {
-    pageTitle: "Abenteuerkarte",
-    pageSubtitle: "Erkunden Sie die arktische Wildnis mit unserer interaktiven Karte",
-    interactive: "INTERAKTIV",
-    locationCount: "Entdecken Sie alle",
-    locationsText: "Abenteuerorte",
-    description: "Unsere Abenteuerkarte zeigt alle unglaublichen Orte in und um Arvidsjaur, an denen wir unsere Premium-Arktis-Erlebnisse anbieten. Von unserem Hauptbüro in der Storgatan 6F bis zum Sameland Restaurant und den Hütten in Karlavagnen 1 und unseren Premium-Unterkünften im Hotel Laponia - dieser interaktive Führer hilft Ihnen, Ihre ultimative Reise durch Schwedisch-Lappland zu visualisieren.",
-    legendText: "Klicken Sie auf einen beliebigen Marker, um mehr über den Ort zu erfahren. Die Farbe gibt den Typ des Ortes an: grün für Unterkünfte, blau für Erlebnisse und lila für Sehenswürdigkeiten."
-  },
   
   // CTA Section
   ctaSection: {
@@ -592,44 +896,7 @@ export const de = {
     adventureAwaits: "Ihr Abenteuer wartet"
   },
   
-  // Booking Section
-  bookingSection: {
-    title: "BUCHEN SIE IHR ABENTEUER",
-    subtitle: "Sichern Sie sich Ihren Platz für ein unvergessliches Erlebnis",
-    nameLabel: "Name",
-    namePlaceholder: "Ihr Name",
-    emailLabel: "E-Mail",
-    emailPlaceholder: "Ihre E-Mail",
-    phoneLabel: "Telefon",
-    phonePlaceholder: "Telefonnummer",
-    dateLabel: "Datum",
-    datePlaceholder: "Bevorzugtes Datum",
-    participantsLabel: "Teilnehmer",
-    participantsPlaceholder: "Anzahl der Teilnehmer",
-    experienceLabel: "Erlebnis",
-    experiencePlaceholder: "Erlebnis auswählen",
-    messageLabel: "Nachricht",
-    messagePlaceholder: "Zusätzliche Wünsche oder Fragen",
-    submitButton: "Jetzt Buchen",
-    successMessage: "Vielen Dank! Ihre Buchungsanfrage wurde erhalten.",
-    successConfirmation: "Wir werden Sie in Kürze kontaktieren, um Ihre Buchungsdetails zu bestätigen.",
-    experiences: {
-      snowmobile: "Schneemobil-Safari",
-      husky: "Hundeschlittenabenteuer",
-      aurora: "Nordlichter-Tour",
-      iceFishing: "Eisfischen-Erlebnis",
-      survival: "Arktischer Überlebenskurs"
-    }
-  },
   
-  // Adventure Locations Data (Types)
-  adventureLocations: {
-    types: {
-      accommodation: "Unterkunft",
-      experience: "Erlebnis",
-      landmark: "Sehenswürdigkeit"
-    }
-  },
   
   // Professional Services Page
   professionalServices: {
@@ -764,11 +1031,57 @@ export const de = {
           placeholder: "Erzählen Sie uns von Ihrem Projekt oder Ihrer Idee..."
         },
         button: "Nachricht senden",
-        directEmail: "Oder schreiben Sie uns direkt an"
+        sending: "Wird gesendet...",
+        directEmail: "Oder schreiben Sie uns direkt an",
+        success: {
+          title: "Nachricht erfolgreich gesendet",
+          message: "Vielen Dank für Ihre Nachricht. Wir werden uns so schnell wie möglich bei Ihnen melden.",
+          newMessage: "Eine weitere Nachricht senden"
+        },
+        error: {
+          title: "Nachricht nicht gesendet",
+          message: "Beim Senden Ihrer Nachricht ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per E-Mail."
+        }
       }
     },
     partners: {
       title: "Unsere vertrauenswürdigen Partner"
     }
+  },
+
+  // Testimonials Section
+  testimonials: {
+    title: "WAS ABENTEURER SAGEN",
+    subtitle: "Geschichten von denen, die das echte arktische Erlebnis erfahren haben",
+    sectionTitle: "Erfahrungen",
+    loadingText: "Bewertungen werden geladen...",
+    errorText: "Bewertungen konnten nicht geladen werden",
+    leaveReview: "Bewertung abgeben",
+    testimonialsList: [
+      {
+        id: 1,
+        text: "Triple X Adventures hat ein Erlebnis geliefert, das einfach unbeschreiblich ist. Die Schneemobilfahrt durch unberührte Wälder fühlte sich an, als würde man eine andere Welt betreten, und das Wissen unseres Guides Erik hat der Reise so viel Tiefe verliehen.",
+        author: "Sarah J.",
+        location: "London, UK",
+        image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      },
+      {
+        id: 2,
+        text: "Das Hundeschlittenabenteuer war unglaublich! Dies sind keine Touristenfabrikerlebnisse, sondern echte, authentische arktische Abenteuer. Das TXA-Chalet war auch erstaunlich – die Nordlichter von der Sauna aus zu beobachten war unvergesslich.",
+        author: "Michael T.",
+        location: "Berlin, Deutschland",
+        image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      },
+      {
+        id: 3,
+        text: "Was Triple X auszeichnet, ist die persönliche Note. Wir haben anderswo Winteraktivitäten unternommen, aber hier fühlten wir uns wie Gäste und nicht wie Touristen. Das Essen bei JayJay's war ein Highlight – ich träume immer noch von diesem Rentiereintopf!",
+        author: "Emma L.",
+        location: "Sydney, Australien",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80",
+        rating: 5
+      }
+    ]
   }
 };

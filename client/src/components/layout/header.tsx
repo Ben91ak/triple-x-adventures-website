@@ -60,7 +60,7 @@ export function Header() {
     { href: "/#about", label: t.nav.about },
     { href: "/#experiences", label: t.nav.experiences || "Experiences" }, // Updated from "packages" to "experiences"
     { href: "/#accommodations", label: t.nav.accommodations },
-    { href: "/professional-services", label: "Professional Services" },
+    { href: "/professional-services", label: t.nav.professionalServices || "Professional Services" },
     // Restaurant section removed per user request
     { href: "/#contact", label: t.nav.contact }
   ];
