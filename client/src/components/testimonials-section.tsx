@@ -32,26 +32,21 @@ export function TestimonialsSection() {
         
         // If we successfully got reviews from Google
         if (data.reviews && data.reviews.length > 0) {
-          // Filter reviews by language if possible, otherwise use all
-          const filteredReviews = data.reviews
-            .filter((review: any) => {
-              // If review has no language field, include it
-              if (!review.language) return true;
-              
-              // Get the review language in lowercase
-              const reviewLang = review.language.toLowerCase();
-              
-              // Check for various language code formats
-              return reviewLang === language || // Exact match
-                     reviewLang.startsWith(language + '-') || // Format like "de-DE"
-                     reviewLang.startsWith(language + '_') || // Format like "de_DE"
-                     language === 'de' && (reviewLang === 'german' || reviewLang === 'deutsch') || // Common name
-                     language === 'sv' && (reviewLang === 'swedish' || reviewLang === 'svenska') || // Common name
-                     language === 'en' && (reviewLang === 'english'); // Common name
+          // Get top reviews regardless of language - we'll display all reviews
+          // and rely on the fallback testimonials if there are no reviews
+          const topReviews = data.reviews
+            .sort((a: any, b: any) => {
+              // Sort by rating (highest first)
+              return (b.rating || 0) - (a.rating || 0);
             })
             .slice(0, 3); // Limit to 3 reviews
           
-          setTestimonials(filteredReviews as Testimonial[]);
+          if (topReviews.length > 0) {
+            setTestimonials(topReviews as Testimonial[]);
+          } else {
+            // Fallback to testimonials from translation files if no reviews after filtering
+            setTestimonials(translations.testimonials.testimonialsList);
+          }
         } else {
           // Fallback to testimonials from translation files if no Google reviews
           setTestimonials(translations.testimonials.testimonialsList);

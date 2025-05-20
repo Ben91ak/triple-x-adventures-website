@@ -27,12 +27,6 @@ export const sv = {
     paragraph3: "Koppla av efter en spännande dag i vårt spa och njut av naturens lugn. Våra <strong>utomhus-bubbelpooler och bastur</strong> erbjuder den perfekta tillflyktsorten. Slutligen, titta på de vackra <strong>norrskenen</strong> som dansar på himlen."
   },
   
-  // About Section - Simplified
-  about: {
-    title: "OM OSS",
-    subtitle: "Vårt engagemang för autentiska arktiska äventyr"
-  },
-  
   // Accommodations Section
   accommodations: {
     title: "BOENDE",
@@ -96,6 +90,126 @@ export const sv = {
         features: ["Uppvärmt Tält", "Bekväma Sängar", "Panoramafönster", "Norrskensutsikt", "Autentisk Upplevelse"]
       }
     }
+  },
+  
+  // About Section
+  about: {
+    title: "OM OSS",
+    subtitle: "Vårt engagemang för autentiska arktiska äventyr"
+  },
+  
+  // Contact Section
+  contact: {
+    title: "LÅT OSS GÖRA VINTERN LEGENDARISK",
+    subtitle: "Redo att uppleva den verkliga Arktis? Kontakta oss för att börja planera ditt äventyr",
+    formTitle: "Kontakta oss",
+    firstName: "Förnamn",
+    lastName: "Efternamn",
+    email: "E-postadress",
+    phone: "Telefonnummer",
+    visitDate: "När planerar du att besöka?",
+    visitDatePlaceholder: "Välj en tidsram",
+    visitDateOptions: {
+      decJan: "December - Januari",
+      febMar: "Februari - Mars",
+      aprMay: "April - Maj",
+      other: "Annan / Inte säker ännu",
+    },
+    interests: "Jag är intresserad av (välj alla som gäller)",
+    charterFlight: "Välj din avreseort",
+    charterFlightPlaceholder: "Välj ett charterflygalternativ",
+    message: "Ditt meddelande",
+    messagePlaceholder: "Har du frågor, idéer eller är du redo att planera ditt äventyr? Skicka ett meddelande - vi återkommer snabbare än en snöskoter i nysnö!",
+    sending: "Skickar...",
+    send: "Skicka meddelande",
+    successTitle: "Meddelande skickat",
+    successMessage: "Vi har mottagit din förfrågan och återkommer inom kort.",
+    errorTitle: "Inskickning misslyckades",
+    errorMessage: "Försök igen senare.",
+    
+    // Form subsection with nested objects
+    form: {
+      contactUsLabel: "Kontakta oss",
+      desiredPackagesLabel: "Önskade paket",
+      desiredActivitiesLabel: "Önskade aktiviteter",
+      packages: {
+        arcticWeek: "Arktiskt Äventyr (Vecka)",
+        arcticWeekend: "Arktiskt Äventyr (Helg)",
+        sidewaysWeek: "Sidleds-Äventyr (Vecka)",
+        sidewaysWeekend: "Sidleds-Äventyr (Helg)",
+        performanceWeek: "Prestanda-Paket (Vecka)",
+        performanceWeekend: "Prestanda-Paket (Helg)",
+        incentive: "Incentive-evenemang",
+        custom: "Anpassade evenemang"
+      },
+      activities: {
+        snowmobile: "Snöskotertur",
+        reindeer: "Besök renarna",
+        snowshoe: "Snöskovandring",
+        spa: "Arktiskt spa",
+        restaurant: "Jay Jays restaurang",
+        helicopter: "Helikopterflygningar",
+        aurora: "Norrsken"
+      },
+      flight: {
+        none: "Inget charterflyg behövs",
+        privateJet: "Privatjet"
+      }
+    },
+    
+    // FAQ Section
+    faq: {
+      title: "Vanliga frågor",
+      showMore: "Visa mer",
+      showLess: "Visa mindre",
+      q1: "När är bästa tiden att besöka?",
+      a1: "Högsäsongen pågår från december till april, med januari till mars som erbjuder de bästa snöförhållandena och norrskenets synlighet.",
+      q2: "Hur tar jag mig till Arvidsjaur?",
+      a2: "Arvidsjaur har en egen flygplats med förbindelser till Stockholm. Vi erbjuder transfer från flygplatsen till vår anläggning.",
+      q3: "Behöver jag speciell utrustning?",
+      a3: "Vi tillhandahåller all specialutrustning inklusive termiska dräkter, kängor och hjälmar. Ta bara med varma baslager och din äventyrsanda!",
+      q4: "Behöver jag ett giltigt körkort?",
+      a4: "För att köra en snöskoter eller delta i vårt bildrift på isprogram måste du vara över 18 år med ett giltigt körkort. Ha alltid ditt körkort med dig, eftersom polisen kan kontrollera körkortets giltighet.",
+      q5: "Kan jag köra min egen snöskoter?",
+      a5: "Ja, våra snöskotrar är alla ensitsiga. Om du vill följa en tur som passagerare, vänligen informera vårt team.",
+      q6: "Vad händer om jag blir kall?",
+      a6: "Vintern i Svenska Lappland kan vara runt -20°C eller lägre. Se till att du bär vår utrustning hela tiden när du är utomhus. Olika lager av kläder håller dig varm. Vi ställer inte in våra turer på grund av kylan.",
+      q7: "Hur mycket dagsljus har vi?",
+      a7: "Kontrollera de olika dagsljustimmarna i Arvidsjaur, Sverige: Mitten av december (10:48-14:23, 3 timmar 35 minuter), mitten av januari (10:47-14:55, 4 timmar 8 minuter), mitten av februari (09:10-16:47, 7 timmar 37 minuter), mitten av mars (07:23-18:26, 11 timmar 3 minuter), mitten av april (05:26-20:06, 14 timmar 40 minuter).",
+      q8: "Kan jag boka 'bara' en snöskotertur?",
+      a8: "Ja, du kan boka varje aktivitet individuellt. TXA är specialiserat och fokuserat på premium paketresor, men vi är glada att kontrollera våra scheman och göra dig ett erbjudande för enskilda aktiviteter.",
+      q9: "När är bästa tiden att se norrsken?",
+      a9: "Det mystiska norrskenet är ett naturfenomen och kan därför inte garanteras. Om förhållandena är goda (oktober - mars, inga moln, hög KP-prognos) hoppas vi kunna titta på detta fenomen med dig.",
+      q10: "Vilken är den bästa säsongen att resa?",
+      a10: "Vi har vår vintersäsong från december - april.",
+      q11: "Vad ingår i premiumpaketen?",
+      a11: "Våra premiumpaket inkluderar allt, från det första erbjudandet till uppföljningen av evenemangen. I princip är det bara alkohol på plats som måste betalas extra. Kolla in våra exempel på premiumpaket!",
+      q12: "Vad gäller för reseinformation?",
+      a12: "Möjligheterna att resa långt norrut är mycket begränsade. Planera därför alltid tillräckligt med tid (minst 1 timme 30 minuter före avresa). Kom ihåg att ta med ditt giltiga ID-kort eller pass och ditt körkort. Bagage: 20 kg och 1 handbagage ingår i din biljett. I Arvidsjaur på flygplatsen kommer du att träffa vårt team vid Triple X-disken i ankomsthallen. Flygningarna drivs av Populair och charterbolagen PAS, Polar Flights och Prosky.",
+      q13: "Vad gäller för ansvarsfriskrivningar?",
+      a13: "En ansvarsfriskrivning kommer att utfärdas på plats. Följande självrisk gäller: 2 200,00 EUR snöskoter | 500,00 EUR iskarts | 2 200,00 EUR side-by-sides | 7 500,00 EUR AUDI RS3.",
+      q14: "Vad gäller för försäkring?",
+      a14: "Att resa till ett främmande land kan innebära olika risker. Oavsett hur försiktig du är. Sedan lanseringen av Triple X 2017 har vi inte haft några allvarliga skador, men vi vill påpeka att det finns ytterligare försäkringar som kan bokas online. Reseavbeställningsförsäkring samt ansvarsförsäkring, som kan minska självrisken vid en olycka. www.allianz-reiseversicherung.de. Föraren av våra fordon hålls ansvarig för skador som orsakas på fordonet. Den maximala personliga ansvarsskyldigheten hittar du i vår ansvarsfriskrivning.",
+    },
+    
+    // Social Media Section
+    social: {
+      title: "Anslut med oss",
+    },
+    
+    // Contact Info Section
+    info: {
+      title: "Kontakta oss",
+      location: "Vår plats",
+      locationText: "Storgatan 6F, 93331 Arvidsjaur, Svenska Lappland, Sverige",
+      phone: "Telefon",
+      phoneText1: "+49 (0) 151 2411 5455",
+      phoneText2: "+46 (0) 70 357 5455",
+      email: "E-post",
+      emailText: "info@triple-x-adventures.com",
+      restaurant: "Bokningar @JayJay's",
+      restaurantPhone: "+46 (0) 70 387 5455",
+    },
   },
   
   // Experiences/Packages Section
@@ -330,10 +444,10 @@ export const sv = {
         id: 2,
         title: "Hundspannsexpedition",
         description: "Led ditt eget team av ivriga huskies genom tysta, snötäckta skogar. En autentisk och oförglömlig arktisk upplevelse.",
-        price: 450,
-        duration: "4 Timmar",
-        intensityLevel: "Måttlig",
-        keyHighlights: ["Kör Din Egen Släde", "Vänligt Huskyteam", "Skogsstigar"],
+        price: 220,
+        duration: "1.5 Timmar",
+        intensityLevel: "Aktiv / Avslappnad",
+        keyHighlights: ["Led Ditt Eget Team", "Mysig Passagerartur", "Autentisk Arktisk Tradition"],
         image: "/images/Huskys/Husky 1_result.webp",
         gallery: [
           "/images/Huskys/Husky 1_result.webp",
@@ -341,37 +455,100 @@ export const sv = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
-        fullDescription: "Upplev den rena glädjen och kraften i hundspann. Efter en kort introduktion till ditt team och släden, ger du dig ut på en resa genom magiska vinterlandskap. Tystnaden bryts endast av hundarnas flåsande och medarna som glider över snön. Denna tur erbjuder en djup kontakt med naturen och dessa otroliga djur. En värmande paus med varma drycker och snacks ingår halvvägs."
+        "detailedInfo": {
+            "introduction": "Gör dig redo att känna kraften från slädhundar när du glider genom snöiga skogar och frusna sjöar. Oavsett om du vill leda ditt eget team eller koppla av som passagerare, erbjuder våra huskyupplevelser den perfekta balansen mellan spänning och lugn.",
+            "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
+            "tours": [
+                {
+                    "title": "AKTIV HUSKYTUR",
+                    "description": "Kör din egen släde och led ett team av energiska huskies genom den arktiska vildmarken.",
+                    "details": ["Guidad av expertmushers", "Ingen tidigare erfarenhet krävs"]
+                },
+                {
+                    "title": "PASSIV HUSKYTUR",
+                    "description": "Luta dig tillbaka och njut av turen medan våra erfarna mushers guidar dig genom hisnande landskap.",
+                    "details": ["Guidad av expertmushers", "Familjevänlig"]
+                }
+            ],
+            "importantInfoTitle": "VIKTIG INFORMATION",
+            "importantInfo": [
+                "Lämplig för nybörjare och erfarna gäster",
+                "Barn välkomna som passagerare",
+                "Varma kläder tillhandahålls vid behov",
+                "Guidad av professionella mushers"
+            ],
+            "closingRemark": "Mer än bara en tur—det är en autentisk arktisk upplevelse du aldrig kommer att glömma!"
+        },
+        "tag": {
+            "text": "Familjefavorit",
+            "type": "family"
+        },
+        "features": [
+            "Guidad av Mushers",
+            "Kör eller Åk Alternativ",
+            "Varma Kläder Tillhandahålls",
+            "Liten Gruppupplevelse"
+        ]
       },
       {
         id: 3,
-        title: "Snöskovandring och Fackelvandring",
-        description: "Upplev magin i den arktiska skogen på snöskor, följt av en fängslande kvällsfackelvandring under stjärnorna.",
-        price: 149,
-        duration: "3 Timmar",
+        title: "Snöskovandringäventyr",
+        description: "Upplev magin i den arktiska skogen på snöskor när du vandrar genom orörda snötäckta landskap och upptäcker skönheten i Lapplands vintervildmark.",
+        price: 40,
+        duration: "1.5 Timmar",
         intensityLevel: "Måttlig",
-        keyHighlights: ["Guidad Snöskoäventyr", "Kvällsfackelvandring", "Varma Drycker & Snacks"],
-        image: "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+        keyHighlights: ["Guidad Snöskoäventyr", "Orörda Skogsstigar", "Varma Drycker & Snacks"],
+        image: "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
         gallery: [
           "/images/Snowshoe_Torchwalk/snowtorch1.webp",
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
-        fullDescription: "Upptäck den fridfulla skönheten i den arktiska skogen på vårt guidade snöskoäventyr. När dagsljuset avtar övergår vi till en magisk fackelvandring under stjärnorna. Våra expertguider leder dig genom orörda snötäckta landskap och delar berättelser om lokal kultur och djurliv. Ingen tidigare erfarenhet krävs - bara äventyrsanda! Varma drycker och traditionella snacks tillhandahålls för att hålla din energi uppe under denna oförglömliga vinterupplevelse.",
-        tag: {
-          text: "Ny",
-          type: "featured"
-        }
+        "detailedInfo": {
+          "introduction": "Upplev magin i Lapplands skogar på snöskor när du vandrar genom orörda snötäckta landskap. Detta dagäventyr är perfekt för naturentusiaster i alla åldrar som vill utforska vintervildmarken.",
+          "adventureOptionsTitle": "ÄVENTYRSDETALJER",
+          "tours": [
+            {
+              "title": "GUIDAD SNÖSKOÄVENTYR",
+              "description": "Dagstur genom snöiga skogar och frusna sjöar på snöskor.",
+              "details": [
+                "Professionell guide med lokalkännedom",
+                "Högkvalitativa snöskor tillhandahålls",
+                "Varma drycker och snacks ingår",
+                "Fotomöjligheter i orörd natur"
+              ]
+            }
+          ],
+          "importantInfoTitle": "VIKTIG INFORMATION",
+          "importantInfo": [
+            "Lämplig för alla åldrar och konditionsnivåer",
+            "Ingen tidigare erfarenhet krävs",
+            "All utrustning tillhandahålls",
+            "Varma kläder rekommenderas",
+            "Små grupper för personlig upplevelse"
+          ],
+          "closingRemark": "Vårt Snöskovandringäventyr erbjuder ett fridfullt sätt att utforska den arktiska vildmarken och komma i kontakt med naturen i dess renaste vinterform."
+        },
+        "tag": {
+          "text": "Naturupplevelse",
+          "type": "nature"
+        },
+        "features": [
+          "Guidad Snöskovandring",
+          "All Utrustning Ingår",
+          "Varma Drycker & Snacks Ingår",
+          "Familjevänlig"
+        ]
       },
       {
         id: 4,
-        title: "Isfiskeäventyr",
-        description: "Borra genom isen på en frusen sjö och pröva lyckan att fånga arktisk röding eller abborre. En fridfull och traditionell lappsk aktivitet.",
+        title: "Pimpeläventyr",
+        description: "Borra genom isen på en frusen sjö och pröva lyckan med att fånga röding eller abborre. En fridfull och traditionell Lapplands-aktivitet.",
         price: 149,
-        duration: "3 Timmar",
-        intensityLevel: "Avslappnad",
-        keyHighlights: ["Traditionell Arktisk Aktivitet", "Fiskeutrustning Tillhandahålls", "Varma Drycker Ingår"],
+        duration: "3-4 Timmar",
+        intensityLevel: "Avslappnad / Spännande",
+        keyHighlights: ["Äkta Arktisk Livsstil", "Fiskeutrustning Ingår", "Testa Din Träffsäkerhet"],
         image: "/images/Ice-Fishing.jpg",
         gallery: [
           "/images/Ice Fishing/Icefish 1_result.webp",
@@ -379,16 +556,47 @@ export const sv = {
           "/images/Ice Fishing/Shoot 3_result.webp",
           "/images/Ice Fishing/Shoot 4_result.webp"
         ],
-        fullDescription: "Upplev lugnet i isfiske på en avskild frusen sjö. Vi tillhandahåller all nödvändig utrustning, inklusive isborrar, spön och bete. Din guide lär dig teknikerna och delar berättelser om livet i Arktis. Njut av den friska vinterluften och tystnaden i vildmarken. Varma drycker tillhandahålls för att hålla dig bekväm."
+        "detailedInfo": {
+      "introduction": "Börja din dag på en frusen sjö med en traditionell pimpelsession, guidad av lokalbefolkningen. Byt sedan inriktning och utmana dig själv med lerduveskytte i den snöiga vildmarken. Detta är den perfekta arktiska komboupplevelsen för alla nivåer.",
+      "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
+      "tours": [
+        {
+          "title": "HALV DAGS ARKTISK UTOMHUSUPPLEVELSE",
+          "description": "Börja med pimpelfiske och njut sedan av en lerduveskyttesession i den arktiska vildmarken. Inkluderar guidning, utrustning och snacks.",
+          "details": [
+            "All utrustning ingår",
+            "Varma drycker ingår"
+          ]
+        }
+      ],
+      "importantInfoTitle": "VIKTIG INFORMATION",
+      "importantInfo": [
+        "Lämplig för alla nivåer",
+        "Guidad av erfarna lokalinvånare",
+        "All utrustning ingår",
+        "Varma utomhuskläder rekommenderas"
+      ],
+      "closingRemark": "En äkta arktisk dag—fiske, skytte och skapande av oförglömliga minnen i svenska Lappland!"
+    },
+    "tag": {
+      "text": "Lokal Favorit",
+      "type": "local"
+    },
+    "features": [
+      "Guidad av Lokalbefolkningen",
+      "Fiske & Skytte Kombo",
+      "All Utrustning Ingår",
+      "Varma Drycker Ingår"
+    ]
       },
       {
         id: 5,
-        title: "Besök en Ren",
-        description: "Möt dessa milda arktiska djur på nära håll, ta foton och mata dem. Om du har tur kanske du till och med får klappa dem!",
-        price: 89,
-        duration: "1 Timme",
+        title: "Renupplevelse",
+        description: "Möt och mata Lapplands mest ikoniska djur för hand och fånga oförglömliga foton med våra vänliga renar.",
+        price: 45,
+        duration: "40 Minuter",
         intensityLevel: "Avslappnad",
-        keyHighlights: ["Renmatning", "Fotomöjligheter", "Varma Drycker"],
+        keyHighlights: ["Mata Renar för Hand", "Fotomöjlighet", "Familjevänlig Aktivitet"],
         image: "/images/Reindeers.jpg",
         gallery: [
           "/images/Reindeers/Reindeers 1_result.webp",
@@ -396,20 +604,46 @@ export const sv = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
-        fullDescription: "Kom nära dessa vackra arktiska djur under denna korta men minnevärda upplevelse. Du får möjlighet att mata renarna, ta många foton, och om du har riktigt tur kanske du till och med får klappa dem. Vår guide delar intressanta fakta om renar och deras betydelse i den arktiska regionen. Varma drycker tillhandahålls för att hålla dig varm under ditt besök. Denna aktivitet är perfekt för familjer och djurälskare i alla åldrar.",
-        tag: {
-          text: "Familjevänlig",
-          type: "featured"
-        }
+        "detailedInfo": {
+          "introduction": "Kom nära våra vänliga renar, mata dem för hand och fånga oförglömliga minnen i hjärtat av Lappland.",
+          "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
+          "tours": [
+            {
+              "title": "RENMATNINGSUPPLEVELSE",
+              "description": "Möt, mata och fotografera renar i en mysig naturmiljö.",
+              "details": [
+                "Djurfoder ingår",
+                "Utmärkta fotomöjligheter"
+              ]
+            }
+          ],
+          "importantInfoTitle": "VIKTIG INFORMATION",
+          "importantInfo": [
+            "Lämplig för alla åldrar",
+            "Djurfoder ingår",
+            "Perfekt för familjer och par",
+            "Ingen speciell utrustning krävs"
+          ],
+          "closingRemark": "Kort, enkel och oförglömlig—kom och möt renarna och gör din arktiska upplevelse komplett!"
+        },
+        "tag": {
+          "text": "Familjefavorit",
+          "type": "family"
+        },
+        "features": [
+          "Möt & Mata Renar",
+          "Fotomöjlighet",
+          "Familjevänlig"
+        ]
       },
       {
         id: 6,
-        title: "Helikopter Sightseeing-tur",
-        description: "Få en hisnande fågelperspektivvy över den vida arktiska vildmarken, frusna sjöar och snötäckta skogar från en helikopter.",
+        title: "Helicopter Sightseeing Tour",
+        description: "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter.",
         price: 599,
-        duration: "30 Minuters Flygning",
-        intensityLevel: "Spännande",
-        keyHighlights: ["Panoramiska Arktiska Vyer", "Unikt Perspektiv", "Erfaren Pilot"],
+        duration: "30 Minutes Flight",
+        intensityLevel: "Thrilling",
+        keyHighlights: ["Panoramic Arctic Views", "Unique Perspective", "Experienced Pilot"],
         image: "/images/Helikopter.jpg",
         gallery: [
           "/images/Helicopter/Helicopter 1_result.webp",
@@ -417,7 +651,39 @@ export const sv = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
-        fullDescription: "Sväva över de fantastiska landskapen i Svenska Lappland på en oförglömlig helikoptertur. Bevittna vildmarkens omfattning, spåra djurliv från ovan och få ett unikt perspektiv på den frusna världen nedanför. Våra erfarna piloter ger kommentarer om sevärdheter. Detta är ett verkligt spektakulärt sätt att uppskatta skönheten i Arktis."
+        "detailedInfo": {
+            "introduction": "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter. Experience the landscape like never before as you soar above Swedish Lapland.",
+            "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+            "tours": [
+                {
+                    "title": "30-MINUTE SCENIC FLIGHT",
+                    "description": "Our standard tour offering panoramic views of Arctic Lapland's winter wonderland.",
+                    "details": ["Experienced pilot", "Headsets provided"]
+                },
+                {
+                    "title": "CUSTOM FLIGHT OR PRIVATE SHUTTLE",
+                    "description": "Looking for something longer or more exclusive? Contact us for tailored flight durations or private transport.",
+                    "details": ["Private booking on request", "Subject to availability"]
+                }
+            ],
+            "importantInfoTitle": "IMPORTANT INFORMATION",
+            "importantInfo": [
+                "Minimum 4 passengers required for standard flight",
+                "Weather-dependent activity",
+                "Private flights available on request"
+            ],
+            "closingRemark": "Soar above the Arctic and capture views that few ever get to see—an unforgettable highlight of your trip."
+        },
+        "tag": {
+            "text": "Scenic",
+            "type": "scenic"
+        },
+        "features": [
+            "Professional Pilot",
+            "Scenic Aerial Tour",
+            "Winter Exclusive",
+            "Custom Flights Available"
+        ]
       },
       {
         id: 7,
@@ -434,18 +700,52 @@ export const sv = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
-        fullDescription: "Känn spänningen av att glida sidledes på is i vår Isdriftupplevelse. Under ledning av professionella körinstruktörer lär du dig teknikerna för att kontrollera ett fordon under extrema vinterförhållanden. Med specialförberedda prestandabilar utrustade med dubbdäck övar du drifttekniker på vår specialbyggda isbana. Börja med grundläggande övningar och gå vidare till mer komplexa manövrer när ditt självförtroende växer. Denna upplevelse är perfekt för körentusiaster som vill förbättra sina vinterkörfärdigheter i en säker och kontrollerad miljö. Alla förare får grundlig instruktion och har möjlighet till flera körsessioner för att perfekta sin teknik.",
-        tag: {
-          text: "Utvald",
-          type: "featured"
-        }
+        "detailedInfo": {
+          "introduction": "Känn spänningen av att glida sidledes på is i vår Isdriftupplevelse. Under ledning av professionella körinstruktörer lär du dig teknikerna för att kontrollera ett fordon under extrema vinterförhållanden. Med specialförberedda prestandabilar utrustade med dubbdäck övar du drifttekniker på vår specialbyggda isbana. Börja med grundläggande övningar och gå vidare till mer komplexa manövrer när ditt självförtroende växer. Denna upplevelse är perfekt för körentusiaster som vill förbättra sina vinterkörfärdigheter i en säker och kontrollerad miljö. Alla förare får grundlig instruktion och har möjlighet till flera körsessioner för att perfekta sin teknik.",
+          "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+          "tours": [
+            {
+              "title": "HALVDAGS ISDRIFTUPPLEVELSE",
+              "description": "Lär dig grunderna i isdrift med professionell handledning på vår frusna sjöbana.",
+              "details": [
+                "Professionell instruktör inkluderad",
+                "Fordon förberedda för isdrift"
+              ]
+            },
+            {
+              "title": "HELDAGS ISDRIFTUPPLEVELSE",
+              "description": "Förbättra dina färdigheter med förlängd körtid och professionell coaching.",
+              "details": [
+                "Säkerhetsutrustning tillhandahålls",
+                "Flera banlayouter tillgängliga"
+              ]
+            }
+          ],
+          "importantInfoTitle": "VIKTIG INFORMATION",
+          "importantInfo": [
+            "Ingen tidigare isdriftserfarenhet krävs",
+            "Säkerhetsutrustning tillhandahålls",
+            "Varm dryck ingår",
+            "Lämplig för individer, grupper eller företagsevent"
+          ],
+          "closingRemark": "Boka din plats nu och upplev Arktis mest spännande motorsportäventyr!"
+        },
+        "tag": {
+          "text": "Adrenalinkick",
+          "type": "adrenaline"
+        },
+        "features": [
+          "Professionell Instruktör",
+          "Förberedd Isbana",
+          "Säkerhetsutrustning Tillhandahålls"
+        ]
       },
       {
         id: 8,
-        title: "Side-By-Side Buggyäventyr",
-        description: "Navigera genom snöiga spår och frusen terräng i en kraftfull Side-By-Side (SBS) buggy. Spänning och kul för par eller ensamma förare.",
+        title: "Buggy Driftäventyr",
+        description: "Tävla och drifta buggys på snötäckta spår med omedelbar acceleration och maximal kontroll—perfekt för adrenalinsökare.",
         price: 249,
-        duration: "2 Timmar",
+        duration: "1 Timme",
         intensityLevel: "Spännande",
         keyHighlights: ["Off-Road Buggykul", "Navigering på Snöiga Spår", "Uppvärmt Hyttalternativ"],
         image: "/images/Side-By-Side-Buggy-Drifting.jpg",
@@ -455,7 +755,38 @@ export const sv = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        fullDescription: "Ge dig ut på ett spännande off-roadäventyr i våra Side-By-Side buggys. Dessa mångsidiga fordon är perfekta för att navigera i den utmanande vinterterrängen. Följ din guide genom skogar och över frusen mark, och njut av buggyns kraft och smidighet. Lämplig för förare och passagerare som söker en adrenalinfylld utforskning."
+        "detailedInfo": {
+          "introduction": "Upplev rusningen av buggydrifting på preparerade snöspår. Utmana dig själv eller ta med en vän som medpassagerare för extra kul.",
+          "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
+          "tours": [
+            {
+              "title": "1-TIMMES BUGGY DRIFT-SESSION",
+              "description": "En timme av racing- och driftingaction på snöspår.",
+              "details": [
+                "Säkerhetssbälten och instruktioner ingår",
+                "Medpassageraralternativ tillgängligt"
+              ]
+            }
+          ],
+          "importantInfoTitle": "VIKTIG INFORMATION",
+          "importantInfo": [
+            "En eller två personer per buggy (förare + medpassagerare)",
+            "Lämplig för alla erfarenhetsnivåer",
+            "Säkerhetsbälten och instruktioner tillhandahålls",
+            "Varma utomhuskläder rekommenderas"
+          ],
+          "closingRemark": "Gör dig redo att drifta, tävla och känna den arktiska rusningen—boka ditt buggyäventyr idag!"
+        },
+        "tag": {
+          "text": "Adrenalinkick",
+          "type": "adrenaline"
+        },
+        "features": [
+          "En eller Två Personer per Buggy",
+          "Säkerhetsutrustning Ingår",
+          "Preparerade Snöspår",
+          "Adrenalinfylld Upplevelse"
+        ]
       }
     ],
     
@@ -465,29 +796,10 @@ export const sv = {
     },
   },
   
-  // Footer
-  footer: {
-    copyright: "© 2025 Triple X Adventures. Alla rättigheter förbehållna.",
-    privacyPolicy: "Integritetspolicy",
-    termsConditions: "Villkor",
-    imprint: "Avtryck",
-    openingHours: "Öppettider",
-    monday: "Måndag - Fredag",
-    saturday: "Lördag",
-    sunday: "Söndag",
-    byAppointment: "Enligt överenskommelse",
-    // Privacy Policy Modal
-    privacyPolicyTitle: "INTEGRITETSPOLICY",
-    privacyPolicyIntro: "Denna integritetspolicy (\"Policy\") beskriver hur Triple X Adventures AB (\"Triple X Adventures AB\", \"vi\", \"oss\" eller \"vår\") samlar in, skyddar och använder personligt identifierbar information (\"Personlig Information\") som du (\"Användare\", \"du\" eller \"din\") kan tillhandahålla på webbplatsen triple-x-adventures.com och någon av dess produkter eller tjänster (tillsammans \"Webbplatsen\" eller \"Tjänsterna\"). Den beskriver också de val du har angående användningen av din personliga information och hur du kan komma åt och uppdatera den informationen. Denna policy gäller inte för praxis från företag som vi inte äger eller kontrollerar, eller för individer som vi inte anställer eller hanterar.",
-    automaticCollection: "Automatisk insamling av information",
-    automaticCollectionText: "Vår högsta prioritet är kunddatasäkerhet, och vi tillämpar en policy utan loggar. Vi kan behandla endast minimala användardata, endast så mycket som är absolut nödvändigt för att upprätthålla webbplatsen eller tjänsterna. Information som samlas in automatiskt används endast för att identifiera potentiella missbruksfall och upprätta statistisk information om webbplatsanvändning. Denna statistiska information aggregeras inte på ett sådant sätt att den skulle identifiera någon särskild användare av systemet.",
-    personalInfoCollection: "Insamling av personlig information",
-    personalInfoCollectionText: "Du kan besöka webbplatsen utan att berätta vem du är eller avslöja någon information genom vilken någon skulle kunna identifiera dig som en specifik, identifierbar individ. Om du dock vill använda några av webbplatsens funktioner kan du bli ombedd att tillhandahålla viss personlig information (till exempel ditt namn och e-postadress). Vi tar emot och lagrar all information som du medvetet tillhandahåller oss när du gör ett köp eller fyller i något onlineformulär på webbplatsen. Denna information kan inkludera:",
-    personalInfoItems: ["Personliga uppgifter som namn, bosättningsland etc.", "Kontaktinformation som e-postadress, adress etc."],
-    personalInfoChoice: "Du kan välja att inte förse oss med din personliga information, men då kanske du inte kan dra nytta av vissa av webbplatsens funktioner. Användare som är osäkra på vilken information som är obligatorisk är välkomna att kontakta oss.",
-    // Terms and Conditions Modal
-    termsTitle: "VILLKOR",
-    termsIntro: "Följande villkor ska tillämpas på paket som erbjuds och levereras under alla säsonger av Triple X Adventures AB (nedan kallat \"TXA\") genom dess paketprogram på följande destinationer: Arvidsjaur, Svenska Lappland och alla andra områden där tjänsterna levereras.",
+  // Terms and Conditions
+  terms: {
+    title: "VILLKOR",
+    intro: "Följande villkor ska tillämpas på paket som erbjuds och levereras under alla säsonger av Triple X Adventures AB (nedan kallat \"TXA\") genom dess paketprogram på följande destinationer: Arvidsjaur, Svenska Lappland och alla andra områden där tjänsterna levereras.",
     commercialTerms: "KOMMERSIELLA VILLKOR",
     contactUs: "Kontakta oss",
     contactUsText: "Om du vill kontakta oss angående något ärende relaterat till detta kan du göra det via kontaktformuläret, skicka ett e-postmeddelande till info@triple-x-adventures.com eller skriva ett brev till:"
@@ -506,6 +818,8 @@ export const sv = {
     title: "404 Sidan Hittades Inte",
     message: "Sidan du letar efter finns inte eller har flyttats.",
     returnHome: "Återgå till Startsidan",
+    buttonText: "Låt oss göra vintern legendarisk",
+    adventureAwaits: "Ditt äventyr väntar"
   },
   
   // Animations Showcase
@@ -704,5 +1018,38 @@ export const sv = {
         rating: 5
       }
     ]
+  },
+  
+  // Footer
+  footer: {
+    copyright: " 2025 Triple X Adventures. Alla rättigheter förbehållna.",
+    privacyPolicy: "Integritetspolicy",
+    termsConditions: "Villkor",
+    imprint: "Avtryck",
+    openingHours: "Öppettider",
+    monday: "Måndag - Fredag",
+    mondayHours: "09:00 - 17:00",
+    saturday: "Lördag",
+    saturdayHours: "10:00 - 16:00",
+    sunday: "Söndag",
+    sundayHours: "Stängt",
+    byAppointment: "Enligt överenskommelse",
+    privacyPolicyTitle: "INTEGRITETSPOLICY",
+    privacyPolicyIntro: "Denna integritetspolicy (\"Policy\") beskriver hur Triple X Adventures AB (\"Triple X Adventures AB\", \"vi\", \"oss\" eller \"vår\") samlar in, skyddar och använder personligt identifierbar information (\"Personlig information\") som du (\"Användare\", \"du\" eller \"din\") kan tillhandahålla på webbplatsen triple-x-adventures.com och någon av dess produkter eller tjänster (kollektivt, \"Webbplats\" eller \"Tjänster\"). Den beskriver också vilka val du har gällande användningen av din personliga information och hur du kan komma åt och uppdatera den informationen. Denna policy gäller inte för praxis hos företag som vi inte äger eller kontrollerar, eller för individer som vi inte anställer eller hanterar.",
+    automaticCollection: "Automatisk insamling av information",
+    automaticCollectionText: "Vår högsta prioritet är kunddatasäkerhet, och vi utövar en policy utan loggar. Vi kan behandla endast minimala användardata, endast så mycket som är absolut nödvändigt för att upprätthålla webbplatsen eller tjänsterna. Information som samlas in automatiskt används endast för att identifiera potentiella fall av missbruk och etablera statistisk information om webbplatsanvändning. Denna statistiska information aggregeras inte på ett sådant sätt att den skulle identifiera någon särskild användare av systemet.",
+    personalInfoCollection: "Insamling av personlig information",
+    personalInfoCollectionText: "Du kan besöka webbplatsen utan att berätta vem du är eller avslöja någon information genom vilken någon skulle kunna identifiera dig som en specifik, identifierbar individ. Om du dock vill använda några av webbplatsens funktioner kan du bli ombedd att tillhandahålla viss personlig information (till exempel ditt namn och e-postadress). Vi tar emot och lagrar all information som du medvetet tillhandahåller oss när du gör ett köp eller fyller i något onlineformulär på webbplatsen. Denna information kan inkludera:",
+    personalInfoItems: ["Personuppgifter som namn, bosättningsland, etc.", "Kontaktinformation som e-postadress, adress, etc."],
+    personalInfoChoice: "Du kan välja att inte ge oss din personliga information, men då kanske du inte kan dra nytta av vissa av webbplatsens funktioner. Användare som är osäkra på vilken information som är obligatorisk är välkomna att kontakta oss.",
+    termsTitle: "VILLKOR",
+    termsIntro: "Följande villkor ska tillämpas på paket som erbjuds och levereras under alla säsonger av Triple X Adventures AB (härefter kallat \"TXA\") genom dess paketprogram på följande destinationer: Arvidsjaur, Svenska Lappland, och alla andra områden där tjänsterna levereras.",
+    commercialTerms: "KOMMERSIELLA VILLKOR",
+    contactUs: "Kontakta oss",
+    contactUsText: "Om du vill kontakta oss angående något ärende relaterat till detta kan du göra det via kontaktformuläret, skicka ett e-postmeddelande till info@triple-x-adventures.com, eller skriva ett brev till:"
+  },
+  
+  partners: {
+    title: "Våra betrodda partners"
   }
 };

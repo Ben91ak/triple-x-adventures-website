@@ -901,7 +901,7 @@ export const de = {
   // Professional Services Page
   professionalServices: {
     hero: {
-      title: "Professionelle Dienstleistungen in Schwedisch-Lappland",
+      title: "Professionelle <span style='color: rgb(149, 204, 47)'>Dienstleistungen</span> in Schwedisch-Lappland",
       subtitle: "Maßgeschneiderte Lösungen für Unternehmensgruppen, Filmproduktionen und exklusive Kooperationen in der arktischen Wildnis.",
       cta: {
         contact: "KONTAKT AUFNEHMEN",

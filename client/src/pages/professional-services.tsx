@@ -62,7 +62,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                   transition={{ duration: 0.7 }}
                 >
                   <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-lg leading-tight mx-auto">
-                    {t.professionalServices.hero.title.split(' in ')[0]} <span style={{ color: 'rgb(149, 204, 47)' }}>Services</span> in Swedish Lapland
+                    {t.professionalServices.hero.title}
                   </h1>
                   <p className="mt-6 text-lg md:text-xl text-slate-200 max-w-lg mx-auto">
                     {t.professionalServices.hero.subtitle}

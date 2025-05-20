@@ -903,7 +903,7 @@ export const en = {
   // Professional Services Page
   professionalServices: {
     hero: {
-      title: "Professional Services in Swedish Lapland",
+      title: "Professional <span style='color: rgb(149, 204, 47)'>Services</span> in Swedish Lapland",
       subtitle: "Tailored solutions for corporate groups, film productions, and exclusive collaborations in the Arctic wilderness.",
       cta: {
         contact: "GET IN TOUCH",
