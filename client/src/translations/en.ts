@@ -40,6 +40,12 @@ export const en = {
     bookNow: "Book Now",
     durationOptions: ["3 Nights", "4 Nights"],
     weekendWeekText: "Available on weekdays and weekends",
+    premiumPackagesTitle: "Premium Packages",
+    premiumPackagesDescription: "Our all-inclusive premium packages combine multiple activities with luxury accommodations for the ultimate Arctic experience.",
+    hideActivitiesButton: "Hide Activities",
+    exploreActivitiesButton: "Explore Our Activities",
+    individualActivitiesTitle: "Individual Activities",
+    individualActivitiesDescription: "Choose from our selection of exciting individual activities to customize your Arctic adventure",
     
     // Experience List
     list: [

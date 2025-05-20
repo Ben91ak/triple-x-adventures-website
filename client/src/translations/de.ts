@@ -40,6 +40,12 @@ export const de = {
     bookNow: "Jetzt Buchen",
     durationOptions: ["3 Nächte", "4 Nächte"],
     weekendWeekText: "Verfügbar an Wochentagen und Wochenenden",
+    premiumPackagesTitle: "Premium-Pakete",
+    premiumPackagesDescription: "Unsere All-inclusive-Premiumpakete kombinieren mehrere Aktivitäten mit luxuriösen Unterkünften für das ultimative Arktis-Erlebnis.",
+    hideActivitiesButton: "Aktivitäten Ausblenden",
+    exploreActivitiesButton: "Unsere Aktivitäten Entdecken",
+    individualActivitiesTitle: "Individuelle Aktivitäten",
+    individualActivitiesDescription: "Wählen Sie aus unserer Auswahl an aufregenden individuellen Aktivitäten, um Ihr arktisches Abenteuer individuell zu gestalten",
     
     // Experience List - First few experiences
     list: [

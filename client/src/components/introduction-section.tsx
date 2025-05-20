@@ -8,6 +8,7 @@ import { translations } from "@/translations";
 // Introduction content by language
 const introContentByLanguage = {
   en: {
+    tagline: "ABOUT US",
     title: "Not Just Another Tour Company",
     description: "Triple X Adventures offers authentic Arctic experiences rooted in Swedish Lapland. Based in Arvidsjaur near the Polarcircle, we combine thrill, comfort, and authenticity in every adventure. Whether it's carving through snow-covered forests, dining around a crackling open fire, or staying in our premium accommodations, you'll leave with stories, not just memories.",
     features: [
@@ -29,6 +30,7 @@ const introContentByLanguage = {
     ]
   },
   de: {
+    tagline: "ÜBER UNS",
     title: "Nicht nur ein weiteres Tourunternehmen",
     description: "Triple X Adventures bietet authentische arktische Erlebnisse, verwurzelt in Schwedisch-Lappland. Mit Sitz in Arvidsjaur nahe dem Polarkreis verbinden wir Nervenkitzel, Komfort und Authentizität in jedem Abenteuer. Ob beim Fahren durch schneebedeckte Wälder, beim Essen rund um ein knisterndes offenes Feuer oder beim Aufenthalt in unseren erstklassigen Unterkünften – Sie werden mit Geschichten und nicht nur mit Erinnerungen nach Hause gehen.",
     features: [
@@ -50,6 +52,7 @@ const introContentByLanguage = {
     ]
   },
   sv: {
+    tagline: "OM OSS",
     title: "Inte bara ett till turföretag",
     description: "Triple X Adventures erbjuder autentiska arktiska upplevelser med rötter i Svenska Lappland. Med bas i Arvidsjaur nära Polcirkeln kombinerar vi spänning, komfort och autenticitet i varje äventyr. Oavsett om det handlar om att åka genom snötäckta skogar, äta runt en sprakande öppen eld eller bo i våra förstklassiga boenden, kommer du att lämna med berättelser, inte bara minnen.",
     features: [
@@ -87,7 +90,7 @@ export function IntroductionSection() {
   
   // Get the features array and text content
   const features: Feature[] = content.features;
-  const tagline = 'ABOUT US';
+  const tagline = content.tagline; // Use tagline from content
   const title = content.title;
   const description = content.description;
 

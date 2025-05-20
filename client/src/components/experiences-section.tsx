@@ -1124,12 +1124,12 @@ export function ExperiencesSection() {
             >
               <h3 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
                 <span className="bg-gradient-to-r from-accent-color to-accent-color/70 px-6 py-2 rounded-lg">
-                  Premium Packages
+                  {t.experiences.premiumPackagesTitle}
                 </span>
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-accent-color/50 rounded-full"></div>
               </h3>
               <p className="text-white/80 mt-4 max-w-2xl mx-auto">
-                Our all-inclusive premium packages combine multiple activities with luxury accommodations for the ultimate Arctic experience
+                {t.experiences.premiumPackagesDescription}
               </p>
             </motion.div>
 
@@ -1168,7 +1168,7 @@ export function ExperiencesSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="text-white font-medium">
-                  {showAllActivities ? 'Hide Activities' : 'Explore Our Activities'}
+                  {showAllActivities ? t.experiences.hideActivitiesButton : t.experiences.exploreActivitiesButton}
                 </span>
                 <motion.div
                   animate={{ rotate: showAllActivities ? 180 : 0 }}
@@ -1191,11 +1191,11 @@ export function ExperiencesSection() {
                 >
                   <h3 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
                     <span className="bg-white/10 px-6 py-2 rounded-lg">
-                      Individual Activities
+                      {t.experiences.individualActivitiesTitle}
                     </span>
                   </h3>
                   <p className="text-white/80 mt-4 max-w-2xl mx-auto">
-                    Choose from our selection of exciting individual activities to customize your Arctic adventure
+                    {t.experiences.individualActivitiesDescription}
                   </p>
                 </motion.div>
 

@@ -225,6 +225,12 @@ export const sv = {
     bookNow: "Boka Nu",
     durationOptions: ["3 Nätter", "4 Nätter"],
     weekendWeekText: "Tillgänglig på vardagar och helger",
+    premiumPackagesTitle: "Premiumpaket",
+    premiumPackagesDescription: "Våra allomfattande premiumpaket kombinerar flera aktiviteter med lyxigt boende för den ultimata arktiska upplevelsen.",
+    hideActivitiesButton: "Dölj Aktiviteter",
+    exploreActivitiesButton: "Utforska Våra Aktiviteter",
+    individualActivitiesTitle: "Individuella Aktiviteter",
+    individualActivitiesDescription: "Välj från vårt urval av spännande individuella aktiviteter för att anpassa ditt arktiska äventyr",
     
     // Experience List
     list: [
