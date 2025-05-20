@@ -221,6 +221,7 @@ export const en = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_18_Snowmobile-srTrl5j9qWeqtBxh4OaDgzQC7oT9Ab.webm",
         detailedInfo: {
           introduction: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.",
           adventureOptionsTitle: "PICK YOUR ADVENTURE",
@@ -276,6 +277,7 @@ export const en = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Husky_1-ADzspahuC5SAcoFtHDDKf7QQSciUu7.webm",
         "detailedInfo": {
             "introduction": "Get ready to feel the power of sled dogs as you glide through snowy forests and frozen lakes. Whether you want to lead your own team or relax as a passenger, our husky experiences offer the perfect balance of excitement and serenity.",
             "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -326,6 +328,7 @@ export const en = {
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Snowshoe_1-gi2MZ9BExMXQGMoaguetW7SnZFJRtr.webm",
     "detailedInfo": {
       "introduction": "Experience the magic of Lapland's forests on snowshoes as you trek through pristine snow-covered landscapes. This daytime adventure is perfect for nature lovers of all ages who want to explore the winter wilderness.",
       "adventureOptionsTitle": "ADVENTURE DETAILS",
@@ -377,6 +380,7 @@ export const en = {
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
           "/images/Snowshoe_Torchwalk/snowtorch1.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Torch_1-iYTmeOUkhsqtaPGqywbvGZMHAhlmrs.webm",
     "detailedInfo": {
       "introduction": "Join an atmospheric evening walk with torches under the Arctic sky. As darkness falls, the forest transforms into a magical realm lit by the warm glow of torches, creating unforgettable memories of your Arctic adventure.",
       "adventureOptionsTitle": "ADVENTURE DETAILS",
@@ -476,6 +480,7 @@ export const en = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm",
         "detailedInfo": {
           "introduction": "Get up close with our friendly reindeer, feed them by hand, and capture unforgettable memories in the heart of Lapland.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -629,7 +634,7 @@ export const en = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Buggy_1-1a2b3c4d5e6f7g8h9i0j.webm", // TODO: Replace with actual video URL if available
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm",
         "detailedInfo": {
           "introduction": "Experience the rush of buggy drifting on prepared snow tracks. Challenge yourself or bring a friend as a co-driver for extra fun.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",

@@ -807,7 +807,7 @@ export const sv = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Buggy_1-1a2b3c4d5e6f7g8h9i0j.webm", // TODO: Replace with actual video URL if available
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm",
         "detailedInfo": {
           "introduction": "Upplev rusningen av buggydrifting på preparerade snöspår. Utmana dig själv eller ta med en vän som medpassagerare för extra kul.",
           "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
