@@ -517,6 +517,7 @@ export const en = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Helicopter_1-2h7w1n8k9Lk3j4P5A.webm", // TODO: Replace with actual video URL if available
         "detailedInfo": {
             "introduction": "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter. Experience the landscape like never before as you soar above Swedish Lapland.",
             "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -566,6 +567,7 @@ export const en = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_IceDrift_1-3n4m5l6k7Jk8h9G0B.webm", // TODO: Replace with actual video URL if available
         "detailedInfo": {
           "introduction": "Feel the thrill of sliding and drifting on the ice with expert instructors guiding you every step of the way. Suitable for all levels, this is your chance to push your limits on frozen lakes.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -621,6 +623,7 @@ export const en = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Buggy_1-1a2b3c4d5e6f7g8h9i0j.webm", // TODO: Replace with actual video URL if available
         "detailedInfo": {
           "introduction": "Experience the rush of buggy drifting on prepared snow tracks. Challenge yourself or bring a friend as a co-driver for extra fun.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -903,7 +906,7 @@ export const en = {
   // Professional Services Page
   professionalServices: {
     hero: {
-      title: "Professional <span style='color: rgb(149, 204, 47)'>Services</span> in Swedish Lapland",
+      title: "Professional Services in Swedish Lapland",
       subtitle: "Tailored solutions for corporate groups, film productions, and exclusive collaborations in the Arctic wilderness.",
       cta: {
         contact: "GET IN TOUCH",

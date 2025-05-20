@@ -366,16 +366,19 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
   const hasGallery = galleryLength > 0;
   const categories = getCategoryFromExperience(experience);
   
-  // Check if this is a husky, helicopter, drift, reindeer, buggy, snowshoe, torchwalk, or snowmobile experience
-  const title = experience.title.toLowerCase();
-  const isBuggyExperience = title.includes('buggy') || title.includes('side by side');
-  const isHuskyExperience = title.includes('husky');
-  const isHelicopterExperience = title.includes('helicopter') || title.includes('helikopter');
-  const isDriftExperience = !isBuggyExperience && (title.includes('drift') || title.includes('ice driving'));
-  const isReindeerExperience = title.includes('reindeer') || title.includes('sami');
-  const isSnowshoeExperience = title.includes('snowshoe');
-  const isTorchwalkExperience = title.includes('torchwalk') || title.includes('torch walk');
-  const isSnowmobileExperience = title.includes('snowmobile') && !title.includes('husky') && !title.includes('reindeer');
+  // Check for video availability based on experience ID and video property
+  const hasVideo = !!experience.video;
+  
+  // Determine experience type based on ID and video URL
+  const videoUrl = experience.video as string || '';
+  const isBuggyExperience = hasVideo && videoUrl.includes('Side%20by%20Side');
+  const isHuskyExperience = hasVideo && videoUrl.includes('Husky');
+  const isHelicopterExperience = hasVideo && videoUrl.includes('Heli');
+  const isDriftExperience = hasVideo && videoUrl.includes('Drift');
+  const isReindeerExperience = hasVideo && videoUrl.includes('Reindeers');
+  const isSnowshoeExperience = hasVideo && videoUrl.includes('Snowshoe');
+  const isTorchwalkExperience = hasVideo && videoUrl.includes('Torch');
+  const isSnowmobileExperience = hasVideo && videoUrl.includes('Snowmobile');
   
   // Modal ref for scrolling
   const modalRef = useRef<HTMLDivElement>(null);

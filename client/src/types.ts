@@ -42,7 +42,7 @@ export interface Experience {
   };
   features?: string[]; // Add optional features array
   detailedInfo?: DetailedInfoType; // Add optional detailed info structure
-
+  video?: string; // URL to the experience video
 }
 
 // Define type for the weather data

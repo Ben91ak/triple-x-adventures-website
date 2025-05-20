@@ -400,6 +400,7 @@ export const sv = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_18_Snowmobile-srTrl5j9qWeqtBxh4OaDgzQC7oT9Ab.webm",
         detailedInfo: {
           introduction: "Vårt Snöskoter-Äventyr erbjuder en spännande upplevelse i den snötäckta vildmarken i Svenska Lappland. Kör med förstklassiga Ski-doo modeller över frusna sjöar och genom snötäckta skogar.",
           adventureOptionsTitle: "VÄLJ DITT ÄVENTYR",
@@ -455,6 +456,7 @@ export const sv = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Husky_1-ADzspahuC5SAcoFtHDDKf7QQSciUu7.webm",
         "detailedInfo": {
             "introduction": "Gör dig redo att känna kraften från slädhundar när du glider genom snöiga skogar och frusna sjöar. Oavsett om du vill leda ditt eget team eller koppla av som passagerare, erbjuder våra huskyupplevelser den perfekta balansen mellan spänning och lugn.",
             "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
@@ -491,6 +493,46 @@ export const sv = {
         ]
       },
       {
+        id: 11,
+        title: "Kvällsfackelpromenad",
+        description: "Delta i en förtrollande kvällspromenad med facklor under stjärnorna, där den mörka arktiska himlen och facklors varma glöd skapar en magisk atmosfär i vinterskogen.",
+        price: 40,
+        duration: "1.5 Timmar",
+        intensityLevel: "Lätt",
+        keyHighlights: ["Kvällsfackelupplevelse", "Stjärnskådningsmöjlighet", "Varma drycker vid elden"],
+        image: "/images/Snowshoe_Torchwalk/snowtorch1.webp",
+        gallery: [
+          "/images/Snowshoe_Torchwalk/snowtorch4.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch2.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch1.webp"
+        ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Torch_1-iYTmeOUkhsqtaPGqywbvGZMHAhlmrs.webm",
+        detailedInfo: {
+          introduction: "Vår kvällsfackelpromenad erbjuder en magisk upplevelse i den arktiska natten. Vandra genom den tysta vinterskogen, upplyst endast av facklor och stjärnorna ovanför, och känn den speciella stämningen som bara den arktiska vintern kan erbjuda.",
+          adventureOptionsTitle: "UPPLEVELSEN INKLUDERAR",
+          importantInfoTitle: "VIKTIG INFORMATION",
+          importantInfo: [
+            "Lämplig för alla åldrar och konditionsnivåer",
+            "Varm kläder och skor rekommenderas",
+            "Varma drycker ingår",
+            "Möjlighet att se norrsken beroende på väderförhållanden"
+          ],
+          closingRemark: "Kvällsfackelpromenaden är en perfekt avslutning på en dag fylld med arktiska äventyr, där du kan koppla av och ta in den magiska atmosfären i den arktiska natten."
+        },
+        tag: {
+          text: "Magisk",
+          type: "featured"
+        },
+        features: [
+          "Fackelpromenad",
+          "Stjärnskådning",
+          "Varma drycker",
+          "Möjlig norrskensskådning",
+          "Lätt aktivitet"
+        ]
+      },
+      {
         id: 3,
         title: "Snöskovandringäventyr",
         description: "Upplev magin i den arktiska skogen på snöskor när du vandrar genom orörda snötäckta landskap och upptäcker skönheten i Lapplands vintervildmark.",
@@ -505,6 +547,7 @@ export const sv = {
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Snowshoe_1-gi2MZ9BExMXQGMoaguetW7SnZFJRtr.webm",
         "detailedInfo": {
           "introduction": "Upplev magin i Lapplands skogar på snöskor när du vandrar genom orörda snötäckta landskap. Detta dagäventyr är perfekt för naturentusiaster i alla åldrar som vill utforska vintervildmarken.",
           "adventureOptionsTitle": "ÄVENTYRSDETALJER",
@@ -604,6 +647,7 @@ export const sv = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm",
         "detailedInfo": {
           "introduction": "Kom nära våra vänliga renar, mata dem för hand och fånga oförglömliga minnen i hjärtat av Lappland.",
           "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
@@ -651,6 +695,7 @@ export const sv = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Helicopter_1-2h7w1n8k9Lk3j4P5A.webm", // TODO: Replace with actual video URL if available
         "detailedInfo": {
             "introduction": "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter. Experience the landscape like never before as you soar above Swedish Lapland.",
             "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -700,6 +745,7 @@ export const sv = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_IceDrift_1-3n4m5l6k7Jk8h9G0B.webm", // TODO: Replace with actual video URL if available
         "detailedInfo": {
           "introduction": "Känn spänningen av att glida sidledes på is i vår Isdriftupplevelse. Under ledning av professionella körinstruktörer lär du dig teknikerna för att kontrollera ett fordon under extrema vinterförhållanden. Med specialförberedda prestandabilar utrustade med dubbdäck övar du drifttekniker på vår specialbyggda isbana. Börja med grundläggande övningar och gå vidare till mer komplexa manövrer när ditt självförtroende växer. Denna upplevelse är perfekt för körentusiaster som vill förbättra sina vinterkörfärdigheter i en säker och kontrollerad miljö. Alla förare får grundlig instruktion och har möjlighet till flera körsessioner för att perfekta sin teknik.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -755,6 +801,7 @@ export const sv = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
+        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Buggy_1-1a2b3c4d5e6f7g8h9i0j.webm", // TODO: Replace with actual video URL if available
         "detailedInfo": {
           "introduction": "Upplev rusningen av buggydrifting på preparerade snöspår. Utmana dig själv eller ta med en vän som medpassagerare för extra kul.",
           "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
