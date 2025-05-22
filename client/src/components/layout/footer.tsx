@@ -2,13 +2,9 @@ import React from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, ChevronRight } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react";
 
-type FooterLink = {
-  href: string;
-  text: string;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-};
+// FooterLink type removed as it's no longer used
 
 type SocialLink = {
   icon: React.ReactNode;
@@ -28,19 +24,7 @@ export function Footer() {
 
 
       contactInfo: "Contact Information",
-      ourExperiences: "Our Experiences",
-      accommodations: "Accommodations",
-      restaurant: "JayJay's Restaurant",
-      aboutUs: "About Us",
-      contact: "Contact",
-      blog: "Blog",
-      adventures: {
-        snowmobile: "Snowmobile Safari",
-        dogSledding: "Dog Sledding",
-        northernLights: "Northern Lights Tours",
-        iceFishing: "Ice Fishing",
-        arcticSurvival: "Arctic Survival",
-      },
+      // Removed unused properties
       address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
       imprint: "Imprint",
     },
@@ -49,19 +33,7 @@ export function Footer() {
 
 
       contactInfo: "Kontaktinformationen",
-      ourExperiences: "Unsere Erlebnisse",
-      accommodations: "Unterkünfte",
-      restaurant: "JayJay's Restaurant",
-      aboutUs: "Über uns",
-      contact: "Kontakt",
-      blog: "Blog",
-      adventures: {
-        snowmobile: "Schneemobil-Safari",
-        dogSledding: "Hundeschlittenfahrten",
-        northernLights: "Nordlicht-Touren",
-        iceFishing: "Eisfischen",
-        arcticSurvival: "Arktisches Überleben",
-      },
+      // Removed unused properties
       address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
       imprint: "Impressum",
     },
@@ -70,19 +42,7 @@ export function Footer() {
 
 
       contactInfo: "Kontaktinformation",
-      ourExperiences: "Våra Upplevelser",
-      accommodations: "Boende",
-      restaurant: "JayJay's Restaurang",
-      aboutUs: "Om Oss",
-      contact: "Kontakt",
-      blog: "Blogg",
-      adventures: {
-        snowmobile: "Snöskotersafari",
-        dogSledding: "Hundspann",
-        northernLights: "Norrskensjakt",
-        iceFishing: "Isfiske",
-        arcticSurvival: "Arktisk Överlevnad",
-      },
+      // Removed unused properties
       address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
       imprint: "Imprint",
     }
@@ -112,21 +72,7 @@ export function Footer() {
     }
   ];
 
-  // Legal links
-  const legalLinks: FooterLink[] = [
-    {
-      text: content.imprint,
-      href: "/imprint",
-    },
-    { 
-      href: "/privacy-policy", 
-      text: t.footer.privacyPolicy
-    },
-    { 
-      href: "/terms", 
-      text: t.footer.termsConditions
-    }
-  ];
+  // Legal links are now directly used in the JSX, no need for a separate array
 
   return (
     <>

@@ -56,7 +56,6 @@ export function preloadAllCriticalImages(): void {
   
   // Check if preloading is already in progress or completed
   if (window.sessionStorage && window.sessionStorage.getItem('imagesPreloaded') === 'true') {
-    console.log('Critical images already preloaded in this session');
     return;
   }
   
@@ -83,8 +82,7 @@ export function preloadAllCriticalImages(): void {
         document.head.appendChild(link);
       }
     } catch (error) {
-      console.warn(`Error preloading image: ${url}`, error);
-      // Continue with other images
+      // Silently continue with other images
     }
   });
   
@@ -102,8 +100,7 @@ export function preloadAllCriticalImages(): void {
       document.head.appendChild(videoLink);
     }
   } catch (error) {
-    console.warn('Error preloading video:', error);
-    // Continue execution
+    // Silently continue execution
   }
   
   // Mark as completed
@@ -158,10 +155,17 @@ export function loadDeferredCSS(href: string): void {
 }
 
 /**
- * Monitors performance metrics and logs them
+ * Monitors performance metrics and sends them to analytics if available
+ * Only runs in development mode or if analytics is enabled
  */
 export function monitorPerformance(): void {
   if (!isBrowser || !('performance' in window)) return;
+  
+  // Only run performance monitoring in development or if analytics is available
+  const isDev = import.meta.env.DEV;
+  const hasAnalytics = typeof window.gtag === 'function';
+  
+  if (!isDev && !hasAnalytics) return;
   
   // Set up PerformanceObserver for Largest Contentful Paint
   if ('PerformanceObserver' in window) {
@@ -175,13 +179,17 @@ export function monitorPerformance(): void {
         // Use the latest entry
         const lastEntry = entries[entries.length - 1];
         lcpValue = lastEntry.startTime;
-        console.log(`Largest Contentful Paint: ${Math.round(lcpValue)}ms`);
+        
+        // Only send to analytics, no console logs in production
+        if (hasAnalytics) {
+          window.gtag!('event', 'lcp', { value: Math.round(lcpValue) });
+        }
       });
       
       // Start observing LCP
       lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
     } catch (e) {
-      console.warn('PerformanceObserver for LCP not supported', e);
+      // Silently continue
     }
   }
   
@@ -199,15 +207,9 @@ export function monitorPerformance(): void {
           const timeToFirstByte = navigationEntry.responseStart - navigationEntry.requestStart;
           const domContentLoaded = navigationEntry.domContentLoadedEventEnd - navigationEntry.startTime;
           
-          // Log metrics
-          console.log(`Performance metrics:
-- Page load time: ${Math.round(pageLoadTime)}ms
-- Time to first byte: ${Math.round(timeToFirstByte)}ms
-- DOM Content Loaded: ${Math.round(domContentLoaded)}ms`);
-          
-          // Send to analytics if needed
-          if (typeof window.gtag === 'function') {
-            window.gtag('event', 'performance', {
+          // Only send to analytics, no console logs in production
+          if (hasAnalytics) {
+            window.gtag!('event', 'performance', {
               pageLoadTime: Math.round(pageLoadTime),
               timeToFirstByte: Math.round(timeToFirstByte),
               domContentLoaded: Math.round(domContentLoaded)
@@ -215,7 +217,7 @@ export function monitorPerformance(): void {
           }
         }
       } catch (e) {
-        console.warn('Navigation timing API not fully supported', e);
+        // Silently continue
       }
       
       // Clear entries to avoid memory leaks
@@ -259,7 +261,7 @@ export function optimizeFonts(): void {
 export function setupIntersectionObserver(): void {
   if (!isBrowser || !('IntersectionObserver' in window)) return;
   
-  const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+  const lazyImageObserver = new IntersectionObserver((entries, _observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const lazyImage = entry.target as HTMLImageElement;
@@ -301,9 +303,20 @@ declare global {
 export default function applyAllOptimizations(): void {
   if (!isBrowser) return;
   
+  // Apply core optimizations that are always needed
   optimizePageImages();
-  preloadAllCriticalImages();
   optimizeFonts();
   setupIntersectionObserver();
-  monitorPerformance();
+  
+  // Conditionally apply optimizations that might increase bundle size
+  if (import.meta.env.PROD) {
+    // In production, only load critical images if not already loaded
+    if (!window.sessionStorage || window.sessionStorage.getItem('imagesPreloaded') !== 'true') {
+      preloadAllCriticalImages();
+    }
+  } else {
+    // In development, always run all optimizations
+    preloadAllCriticalImages();
+    monitorPerformance();
+  }
 }

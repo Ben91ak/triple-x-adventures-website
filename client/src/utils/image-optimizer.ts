@@ -30,15 +30,11 @@ const formatSupportCache: FormatSupportCache = {
 if (typeof window !== 'undefined') {
   (async () => {
     try {
-      const webpSupported = await supportsWebP();
-      console.log(`WebP support: ${webpSupported ? 'Yes' : 'No'}`);
-      
-      // Also try to check AVIF (newer format with better compression)
-      const avifSupported = await supportsFormat('avif');
-      console.log(`AVIF support: ${avifSupported ? 'Yes' : 'No'}`);
+      // Silently check for WebP and AVIF support
+      await supportsWebP();
+      await supportsFormat('avif');
     } catch (e) {
       // Ignore errors in format detection and default to JPEG
-      console.warn('Error detecting image format support:', e);
     }
   })();
 }
@@ -167,21 +163,19 @@ export function getOptimizedImageSrc(
       src = new URL(src).pathname;
     } catch (e) {
       // If URL parsing fails, keep the original
-      console.warn(`Failed to parse URL: ${src}`);
     }
   }
   
-  // Default options
-  const { forceFormat, format, quality = 'medium', priority = false } = options || {};
+  // Default options - these variables are used in specific cases below
+  // but not directly in the general optimization logic
   
-  // Use format as an alias to forceFormat if provided
-  const effectiveFormat = format || forceFormat;
-  
-  // Get screen width to determine appropriate image size
-  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  // Get device pixel ratio for calculations in specific image handlers
   const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
   
   // Use network conditions to determine appropriate size
+  // This variable was used in the removed getOptimizedVersionForCollection function
+  // Keeping the calculation logic for reference but not using the variable
+  /* Removed for tree shaking
   let sizeSuffix = 'medium'; // Default size
   
   // Calculate effective screen width accounting for device pixel ratio
@@ -203,10 +197,13 @@ export function getOptimizedImageSrc(
   if (quality === 'low') {
     sizeSuffix = 'small';
   } else if (quality === 'high' && networkInfo.effectiveBandwidth >= 5 && !networkInfo.saveData) {
-    sizeSuffix = 'large';
+    // sizeSuffix = 'large';
   }
+  */
   
-  // Determine best available format
+  // Determine best available format - this logic is used in specific cases below
+  // but the variable itself is not used directly
+  /* Removed for tree shaking
   let bestFormat: ImageFormat = 'jpeg'; // Default fallback
   
   // If format is forced or provided, use that
@@ -223,10 +220,13 @@ export function getOptimizedImageSrc(
       bestFormat = 'png';
     }
   }
+  */
   
   // Optimization logic for specific image collections
   
   // Common function to handle image optimization across collections
+  // This function is currently unused but kept for future reference
+  /* Removed for tree shaking
   const getOptimizedVersionForCollection = (
     collectionPath: string, 
     fileNameWithoutExt: string,
@@ -275,10 +275,10 @@ export function getOptimizedImageSrc(
     
     return optimizedPath;
   };
+  */
   
   // Extract filename if there is one
   const fileName = src.split('/').pop() || '';
-  const fileNameWithoutExt = fileName.split('.')[0];
   
   // Path normalization - handle various path inconsistencies
   // Fixed paths for adventure images using the original asset versions we've copied
@@ -777,13 +777,11 @@ function optimizeImage(img: HTMLImageElement, isPriority: boolean): void {
     if (!img.onerror) {
       img.onerror = function() {
         const currentSrc = img.src;
-        console.warn(`Failed to load optimized image: ${currentSrc}`);
         
         // Try a series of fallbacks:
         
         // 1. If we're trying an optimized version, fall back to original
         if (currentSrc !== originalSrc && currentSrc.includes('/optimized/')) {
-          console.info(`Falling back to original image: ${originalSrc}`);
           img.src = originalSrc;
           return; // Exit and give the original a chance to load
         }
@@ -793,7 +791,6 @@ function optimizeImage(img: HTMLImageElement, isPriority: boolean): void {
           // Generate a WebP path by replacing extension
           const webpSrc = currentSrc.replace(/\.(jpe?g|png)$/, '.webp');
           if (webpSrc !== currentSrc) {
-            console.info(`Trying WebP fallback: ${webpSrc}`);
             img.src = webpSrc;
             return; // Exit and give WebP a chance to load
           }

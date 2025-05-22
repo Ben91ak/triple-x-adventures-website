@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { VideoProvider } from "@/contexts/VideoContext";
 import applyAllOptimizations from "@/utils/performance-optimizer";
 import { initImagePreloading } from "@/utils/image-preloader";
+import { inject } from "@vercel/analytics";
 import "./styles/theme.css";
 
 // Lazy load pages for better performance
@@ -88,6 +89,9 @@ function App() {
     
     // Initialize image preloading system
     initImagePreloading();
+    
+    // Initialize Vercel Analytics
+    inject();
     
     // Register a service worker for offline capabilities
     if ('serviceWorker' in navigator) {

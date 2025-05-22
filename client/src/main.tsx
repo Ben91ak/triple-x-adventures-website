@@ -28,7 +28,7 @@ const detectImageFormats = async () => {
     avifPromise.catch(() => {/* Ignore failures */});
   } catch (e) {
     // Safely continue if detection fails
-    console.warn('Image format detection failed:', e);
+    // No need to log in production
   }
 };
 
@@ -38,39 +38,27 @@ detectImageFormats();
 // Create root with concurrent mode
 const root = createRoot(document.getElementById("root")!);
 
-// Define our Core Web Vitals reporter
+// Define our Core Web Vitals reporter - only loaded in development mode
 const reportWebVitals = () => {
-  // Use a more detailed reporter for web vitals
-  import('web-vitals').then(({ onCLS, onFID, onLCP, onTTFB, onINP }) => {
-    const vitalsCallback = (metric: any) => {
-      // Log all vitals with clear labels
-      const value = Math.round(metric.value * 100) / 100;
-      console.info(`Web Vitals: ${metric.name} = ${value}`);
+  // Skip web vitals reporting in production to reduce bundle size
+  if (import.meta.env.DEV) {
+    // Use a more detailed reporter for web vitals in development only
+    import('web-vitals').then(({ onCLS, onFID, onLCP, onTTFB, onINP }) => {
+      const vitalsCallback = (_metric: any) => {
+        // Skip logging in production
+        // Send to analytics in production instead if needed
+      };
       
-      // For really poor values, log a warning
-      if (
-        (metric.name === 'CLS' && metric.value > 0.1) || 
-        (metric.name === 'LCP' && metric.value > 2500) ||
-        (metric.name === 'FID' && metric.value > 100) ||
-        (metric.name === 'TTFB' && metric.value > 600) ||
-        (metric.name === 'INP' && metric.value > 200)
-      ) {
-        console.warn(`Poor Web Vital: ${metric.name} = ${value}`);
-      }
-      
-      // If we have a real analytics service, we would send the data there
-      // Example: analyticsService.sendEvent('web-vitals', metric.name, value);
-    };
-    
-    // Monitor all Core Web Vitals
-    onCLS(vitalsCallback);
-    onFID(vitalsCallback);
-    onLCP(vitalsCallback);
-    onTTFB(vitalsCallback);
-    onINP(vitalsCallback);
-  }).catch(() => {
-    // Silently fail if web-vitals is not available
-  });
+      // Monitor all Core Web Vitals
+      onCLS(vitalsCallback);
+      onFID(vitalsCallback);
+      onLCP(vitalsCallback);
+      onTTFB(vitalsCallback);
+      onINP(vitalsCallback);
+    }).catch(() => {
+      // Silently fail if web-vitals is not available
+    });
+  }
 };
 
 // Critical path optimization - run before DOMContentLoaded
