@@ -150,6 +150,7 @@ export class MemStorage implements IStorage {
       phone: insertContact.phone ?? null,
       visitDate: insertContact.visitDate ?? null,
       interests: insertContact.interests ?? [],
+      charterFlight: insertContact.charterFlight ?? null,
       message: insertContact.message ?? null,
       submittedAt
     };

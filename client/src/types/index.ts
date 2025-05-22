@@ -15,7 +15,7 @@ export interface DetailedInfoType {
 }
 
 // Experience type
-export { Experience } from '../types';
+export type { Experience } from '../types';
 
 // Accommodation type
 export interface Accommodation {

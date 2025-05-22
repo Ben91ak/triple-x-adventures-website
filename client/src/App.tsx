@@ -18,7 +18,7 @@ const NotFound = lazy(() => import("@/pages/not-found"));
 const About = lazy(() => import("@/pages/about"));
 const Accommodations = lazy(() => import("@/pages/accommodations"));
 const Contact = lazy(() => import("@/pages/contact"));
-const Restaurant = lazy(() => import("@/pages/restaurant"));
+// Restaurant page removed
 const Admin = lazy(() => import("@/pages/admin"));
 const MediaManager = lazy(() => import("@/pages/admin/media"));
 
@@ -50,7 +50,7 @@ const Router = memo(function Router() {
         <Route path="/about" component={About} />
         <Route path="/accommodations" component={Accommodations} />
         <Route path="/contact" component={Contact} />
-        <Route path="/restaurant" component={Restaurant} />
+        {/* Restaurant route removed */}
         
         {/* Legal pages */}
         <Route path="/imprint" component={Imprint} />

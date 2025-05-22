@@ -32,9 +32,9 @@ export const api = {
         email: formData.email || '',
         phone: formData.phone || '',
         message: formData.message || '',
-        visitDate: '',  // Not used for professional services
+        visitDate: formData.visitDate || '',
         interests: formData.interests || [],
-        charterFlight: ''  // Not used for professional services
+        charterFlight: formData.charterFlight || ''
       };
       
       // Use the same API endpoint as the main contact form

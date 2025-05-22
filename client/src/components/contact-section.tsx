@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
+// Label import removed as it's not used
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import { ContactFormData } from "@/types/index";
 import { z } from "zod";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/use-translation";
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Send, Loader2 } from "lucide-react";
+import { MapPin, Phone, Mail, Send, Loader2 } from "lucide-react";
 
 // Custom CSS for scrollable container with green indicator
 const scrollableContainerStyle: React.CSSProperties = {
@@ -35,7 +35,8 @@ export function ContactSection() {
   const { toast } = useToast();
   const [selectedPackages, setSelectedPackages] = useState<string[]>([]);
   const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
-  const { language } = useLanguage();
+  // Using useLanguage hook but not directly accessing language variable
+  useLanguage();
   const { t } = useTranslation();
   
   // Style for container
@@ -93,7 +94,7 @@ export function ContactSection() {
     },
   });
 
-  // Set up mutation for form submission
+  // Define mutation for form submission
   const mutation = useMutation({
     mutationFn: (data: ContactFormData) => {
       return api.submitContactForm(data);
@@ -108,7 +109,7 @@ export function ContactSection() {
       setSelectedPackages([]);
       setSelectedActivities([]);
     },
-    onError: (error) => {
+    onError: () => {
       toast({
         title: t('contact.errorTitle'),
         description: t('contact.errorMessage'),
@@ -307,7 +308,7 @@ export function ContactSection() {
                   <FormField
                     control={form.control}
                     name="interests"
-                    render={({ field }) => (
+                    render={() => (
                       <FormItem>
                         <div className="space-y-2">
                           <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white">{t('contact.form.desiredPackagesLabel')}</div>
