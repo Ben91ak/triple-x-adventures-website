@@ -21,6 +21,11 @@ const Restaurant = lazy(() => import("@/pages/restaurant"));
 const Admin = lazy(() => import("@/pages/admin"));
 const MediaManager = lazy(() => import("@/pages/admin/media"));
 
+// Legal pages
+const Imprint = lazy(() => import("@/pages/imprint"));
+const PrivacyPolicy = lazy(() => import("@/pages/privacy-policy"));
+const Terms = lazy(() => import("@/pages/terms"));
+
 // Loading fallback component for lazy-loaded pages with improved HTML5 semantics
 const PageLoader = () => (
   <article className="flex items-center justify-center min-h-screen bg-dark-bg" aria-live="polite" role="status">
@@ -45,6 +50,11 @@ const Router = memo(function Router() {
         <Route path="/accommodations" component={Accommodations} />
         <Route path="/contact" component={Contact} />
         <Route path="/restaurant" component={Restaurant} />
+        
+        {/* Legal pages */}
+        <Route path="/imprint" component={Imprint} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms" component={Terms} />
         
         {/* Admin routes */}
         <Route path="/admin" component={Admin} />

@@ -7,6 +7,7 @@ import "./index.css";
 import { supportsFormat, optimizePageImages, prefetchImages } from "./utils/image-optimizer";
 import applyAllOptimizations from "./utils/performance-optimizer";
 import { initGlobalErrorHandlers } from "./utils/error-handlers";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 // Initialize global error handlers to catch and suppress WebSocket errors
 initGlobalErrorHandlers();
@@ -142,4 +143,9 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Hydrate the app
-root.render(<App />);
+root.render(
+  <>
+    <App />
+    <SpeedInsights />
+  </>
+);

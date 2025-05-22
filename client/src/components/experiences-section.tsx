@@ -670,9 +670,12 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                     muted
                     playsInline
                     className="w-full h-full object-cover"
-                    onLoadedData={() => setVideoLoaded(true)}
+                    onLoadedData={(e) => {
+                      console.log('Video first frame loaded:', e.currentTarget.src);
+                      setVideoLoaded(true);
+                    }}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    animate={{ opacity: videoLoaded ? 1 : 0 }}
                     transition={{ duration: 0.4 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
