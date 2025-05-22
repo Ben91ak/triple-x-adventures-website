@@ -1079,6 +1079,7 @@ export const sv = {
     privacyPolicy: "Integritetspolicy",
     termsConditions: "Villkor",
     imprint: "Avtryck",
+    allRightsReserved: "Alla rättigheter förbehållna.",
     openingHours: "Öppettider",
     monday: "Måndag - Fredag",
     mondayHours: "09:00 - 17:00",

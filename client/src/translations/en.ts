@@ -863,6 +863,7 @@ export const en = {
     privacyPolicy: "Privacy Policy",
     termsConditions: "Terms & Conditions",
     imprint: "Imprint",
+    allRightsReserved: "All rights reserved.",
     openingHours: "Opening Hours",
     monday: "Monday - Friday",
     saturday: "Saturday",

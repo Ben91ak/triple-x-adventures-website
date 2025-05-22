@@ -147,7 +147,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                     <div className="space-y-6">
                       <div>
                         <h4 className="text-lg font-semibold text-white">{t.professionalServices.services.corporate.drivingEvents.title}</h4>
-                        <ul className="list-disc text-slate-300 space-y-2 pl-0 inline-block text-left">
+                        <ul className="list-none text-slate-300 space-y-2 pl-0 inline-block text-center">
                           {t.professionalServices.services.corporate.drivingEvents.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -156,7 +156,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       
                       <div>
                         <h4 className="text-xl font-semibold text-white mb-2">{t.professionalServices.services.corporate.teambuilding.title}</h4>
-                        <ul className="list-disc space-y-1 text-slate-200 pl-0 inline-block text-left">
+                        <ul className="list-none space-y-1 text-slate-200 pl-0 inline-block text-center">
                           {t.professionalServices.services.corporate.teambuilding.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -165,7 +165,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       
                       <div>
                         <h4 className="text-xl font-semibold text-white mb-2">{t.professionalServices.services.corporate.retreats.title}</h4>
-                        <ul className="list-disc space-y-1 text-slate-200 pl-0 inline-block text-left">
+                        <ul className="list-none space-y-1 text-slate-200 pl-0 inline-block text-center">
                           {t.professionalServices.services.corporate.retreats.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -174,7 +174,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       
                       <div>
                         <h4 className="text-xl font-semibold text-white mb-2">{t.professionalServices.services.corporate.productLaunches.title}</h4>
-                        <ul className="list-disc space-y-1 text-slate-200 pl-0 inline-block text-left">
+                        <ul className="list-none space-y-1 text-slate-200 pl-0 inline-block text-center">
                           {t.professionalServices.services.corporate.productLaunches.items.map((item, index) => (
                             <li key={index}>{item}</li>
                           ))}
@@ -210,7 +210,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       <p className="text-slate-200">{t.professionalServices.services.production.description}</p>
                     </div>
                     
-                    <ul className="list-disc space-y-2 text-slate-200 pl-0 inline-block text-left">
+                    <ul className="list-none space-y-2 text-slate-200 pl-0 inline-block text-center">
                       {t.professionalServices.services.production.items.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
@@ -244,7 +244,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       <p className="text-slate-200">{t.professionalServices.services.vip.description}</p>
                     </div>
                     
-                    <ul className="list-disc space-y-2 text-slate-200 pl-0 inline-block text-left">
+                    <ul className="list-none space-y-2 text-slate-200 pl-0 inline-block text-center">
                       {t.professionalServices.services.vip.items.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}
@@ -278,7 +278,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                       <p className="text-slate-200">{t.professionalServices.services.consulting.description}</p>
                     </div>
                     
-                    <ul className="list-disc space-y-2 text-slate-200 pl-0 inline-block text-left">
+                    <ul className="list-none space-y-2 text-slate-200 pl-0 inline-block text-center">
                       {t.professionalServices.services.consulting.items.map((item, index) => (
                         <li key={index}>{item}</li>
                       ))}

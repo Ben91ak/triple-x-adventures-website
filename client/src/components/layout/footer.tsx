@@ -45,6 +45,7 @@ export function Footer() {
         arcticSurvival: "Arctic Survival",
       },
       address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
+      imprint: "Imprint",
     },
     de: {
       description: "Authentische arktische Erlebnisse im Herzen von Schwedisch-Lappland. Kleine Gruppen, lokale Expertise und unvergessliche Abenteuer.",
@@ -65,6 +66,7 @@ export function Footer() {
         arcticSurvival: "Arktisches Überleben",
       },
       address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
+      imprint: "Impressum",
     },
     sv: {
       description: "Autentiska arktiska upplevelser i hjärtat av Svenska Lappland. Små grupper, lokal expertis och oförglömliga äventyr.",
@@ -85,6 +87,7 @@ export function Footer() {
         arcticSurvival: "Arktisk Överlevnad",
       },
       address: "Storgatan 6F<br />93331 Arvidsjaur<br />Swedish Lapland, Sweden",
+      imprint: "Imprint",
     }
   };
 
@@ -114,6 +117,14 @@ export function Footer() {
 
   // Legal links
   const legalLinks: FooterLink[] = [
+    {
+      text: content.imprint,
+      href: "#",
+      onClick: (e) => {
+        e.preventDefault();
+        setIsImprintOpen(true);
+      },
+    },
     { 
       href: "#", 
       text: t.footer.privacyPolicy,
@@ -142,6 +153,51 @@ export function Footer() {
 
   return (
     <>
+      {/* Imprint Modal */}
+      <Modal
+        isOpen={isImprintOpen}
+        onClose={() => setIsImprintOpen(false)}
+        title={content.imprint}
+      >
+        <div className="prose prose-invert max-w-none text-white/80">
+          <h3 className="text-lg font-semibold text-white">{content.imprint}</h3>
+          <p className="text-sm">
+            Triple X Adventures AB<br />
+            Storgatan 6F<br />
+            93331 Arvidsjaur<br />
+            Sweden
+          </p>
+          <p className="text-sm">
+            <strong>Represented by:</strong><br />
+            [Managing Director Name]
+          </p>
+          <p className="text-sm">
+            <strong>Contact:</strong><br />
+            Telephone: [Your Phone Number]<br />
+            Email: <a href="mailto:info@triple-x-adventures.com" className="text-accent-color hover:underline">info@triple-x-adventures.com</a>
+          </p>
+          <p className="text-sm">
+            <strong>Register entry:</strong><br />
+            Entry in the Handelsregister.<br />
+            Registering court: Bolagsverket<br />
+            Registration number: [Your Company Registration Number]
+          </p>
+          <p className="text-sm">
+            <strong>VAT ID:</strong><br />
+            VAT identification number according to §27a Value Added Tax Act:<br />
+            [Your VAT ID]
+          </p>
+          <p className="text-sm">
+            <strong>Responsible for the content according to § 55 Abs. 2 RStV:</strong><br />
+            [Name and Address of person responsible for content, if different from above]
+          </p>
+          <p className="text-sm">
+            The European Commission provides a platform for online dispute resolution (OS): <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" className="text-accent-color hover:underline">https://ec.europa.eu/consumers/odr</a>.<br />
+            You can find our email address in the imprint above. We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.
+          </p>
+        </div>
+      </Modal>
+
       <footer className="relative overflow-hidden border-t border-white/5" role="contentinfo">
         {/* Background effects */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu" style={{ zIndex: 1 }} aria-hidden="true">
@@ -152,7 +208,45 @@ export function Footer() {
         {/* Gradient overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent-color/30 to-transparent" style={{ zIndex: 3 }} aria-hidden="true"></div>
         
-        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 relative z-10">
+        {/* Mobile Footer - Only visible on small screens */}
+        <div className="md:hidden container mx-auto px-4 py-8 relative z-10">
+          <div className="space-y-8">
+            {/* Contact Information Section */}
+            <div>
+              <h2 className="text-xl font-semibold mb-4 text-white">
+                {content.contactInfo}
+              </h2>
+              <address className="not-italic">
+                <ul className="space-y-4 list-none p-0">
+                  <li className="flex items-start">
+                    <div className="mr-3 mt-0.5 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm flex-shrink-0" aria-hidden="true">
+                      <MapPin size={15} />
+                    </div>
+                    <span 
+                      className="text-white text-opacity-80" 
+                      dangerouslySetInnerHTML={{ __html: content.address }} 
+                    />
+                  </li>
+                  <li className="flex items-center">
+                    <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm flex-shrink-0" aria-hidden="true">
+                      <Phone size={15} />
+                    </div>
+                    <a href="tel:+46703575455" className="text-white text-opacity-80 hover:text-accent-color transition-colors">+46 (0) 70 357 5455</a>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="mr-3 w-8 h-8 rounded-full bg-accent-color/10 flex items-center justify-center text-accent-color shadow-glow-sm flex-shrink-0" aria-hidden="true">
+                      <Mail size={15} />
+                    </div>
+                    <a href="mailto:info@triple-x-adventures.com" className="text-white text-opacity-80 hover:text-accent-color transition-colors">info@triple-x-adventures.com</a>
+                  </li>
+                </ul>
+              </address>
+            </div>
+          </div>
+        </div>
+        
+        {/* Desktop Footer - Hidden on small screens */}
+        <div className="hidden md:block container mx-auto px-4 sm:px-6 py-12 sm:py-16 relative z-10">
           {/* Main footer content */}
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
@@ -243,6 +337,25 @@ export function Footer() {
             </div>
           </div>
         </div>
+        {/* Common footer section for both mobile and desktop - legal links and copyright */}
+        <div className="border-t border-white/10 pt-8 mt-12 flex flex-col items-center text-sm">
+          {/* Links Div - now first */}
+          <div className="flex flex-col items-center space-y-2 sm:flex-row sm:space-y-0 sm:space-x-4">
+            <a href="#" onClick={(e) => { e.preventDefault(); setIsImprintOpen(true); }} className="text-white/70 hover:text-white transition-colors">
+              {content.imprint}
+            </a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setIsTermsOpen(true); }} className="text-white/70 hover:text-white transition-colors">
+              {t.footer.termsConditions}
+            </a>
+            <a href="#" onClick={(e) => { e.preventDefault(); setIsPrivacyOpen(true); }} className="text-white/70 hover:text-white transition-colors">
+              {t.footer.privacyPolicy}
+            </a>
+          </div>
+          {/* Copyright Paragraph - now second */}
+          <p className="text-white/70 text-center mt-4">
+            &copy; {new Date().getFullYear()} TRIPLE X ADVENTURES AB. {t.footer.allRightsReserved || 'All rights reserved.'} {/* Fallback in case translation is missing */}
+          </p>
+        </div>
       </footer>
 
       {/* Modals for legal links */}
@@ -251,7 +364,42 @@ export function Footer() {
         onClose={() => setIsImprintOpen(false)}
         title={t.footer.imprint}
       >
-        <div />
+        <div className="text-white/90 max-h-[70vh] overflow-y-auto pr-2 space-y-6 text-sm sm:text-base">
+          <h3 className="font-semibold text-lg">TRIPLE X ADVENTURES AB</h3>
+          <p>
+            Storgatan 6F<br />
+            93331 Arvidsjaur<br />
+            Sweden
+          </p>
+          <p>
+            Email: <a href="mailto:info@triple-x-adventures.com" className="text-accent-color hover:underline">info@triple-x-adventures.com</a><br />
+            Website: <a href="https://www.triple-x-adventures.com" target="_blank" rel="noopener noreferrer" className="text-accent-color hover:underline">www.triple-x-adventures.com</a>
+          </p>
+          
+          <h4 className="font-medium mt-4">Authorized representative managing directors:</h4>
+          <p>Janina Möller, Roberth Möller</p>
+
+          <p>Organization number: 559122-4745</p>
+          <p>Sales Tax Identification number: SE 559122474501</p>
+
+          <h4 className="font-medium mt-6 text-md">Content disclaimer</h4>
+          <p>
+            The information provided on www.triple-x-adventures.com is for general informational purposes only. 
+            All information on the site is provided in good faith, however, we make no representation or warranty of any kind, 
+            express or implied, regarding the accuracy, adequacy, validity, reliability, availability, or completeness of any 
+            information on the site. Under no circumstance shall we have any liability to you for any loss or damage of any 
+            kind incurred as a result of the use of the site or reliance on any information provided on the site. Your use 
+            of the site and your reliance on any information on the site is solely at your own risk. The site may contain 
+            (or you may be sent through the site) links to other websites or content belonging to or originating from third 
+            parties or links to websites and features. Such external links are not investigated, monitored, or checked for 
+            accuracy, adequacy, validity, reliability, availability or completeness by us.
+            For any queries, please contact us at <a href="mailto:info@triple-x-adventures.com" className="text-accent-color hover:underline">info@triple-x-adventures.com</a>.
+          </p>
+
+          <p className="mt-6">
+            © {new Date().getFullYear()} TRIPLE X ADVENTURES AB. All rights reserved.
+          </p>
+        </div>
       </Modal>
       <Modal
         isOpen={isTermsOpen}
