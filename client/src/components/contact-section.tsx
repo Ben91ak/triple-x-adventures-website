@@ -162,7 +162,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 md:py-24 relative overflow-hidden">
+    <section id="contact" className="py-10 md:py-16 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         {/* Header with Title and Contact Information */}
         <div className="text-center mb-10">

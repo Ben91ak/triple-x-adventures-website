@@ -1,6 +1,3 @@
-// Direct imports to avoid path alias issues during type checking
-import { useLanguage } from "../contexts/LanguageContext";
-import { useTranslation } from "../translations";
 // Import Lucide icons with type assertion to avoid TypeScript errors
 import { Users, MapPin, Crown } from 'lucide-react'; // Using Lucide icons
 
@@ -8,8 +5,6 @@ import { Users, MapPin, Crown } from 'lucide-react'; // Using Lucide icons
 // import { TeamMember } from "@/types";
 
 export function AboutSection() {
-  const { language } = useLanguage();
-  const t = useTranslation(language);
 
   const features = [
     {
@@ -30,12 +25,12 @@ export function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-20 md:py-28 bg-gray-900 text-white relative overflow-hidden">
+    <section id="about" className="py-10 md:py-16 bg-gray-900 text-white relative overflow-hidden">
       {/* Background elements if needed */}
       {/* <div className="absolute inset-0 bg-black opacity-50 z-0"></div> */}
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-10 max-w-3xl mx-auto">
           <span className="inline-block text-sm font-medium tracking-wider uppercase mb-3 text-slate-400">
             ABOUT US
           </span>

@@ -1,9 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/hooks/use-translation";
 import { Users, Mountain, Crown } from "lucide-react";
 import { useScrollAnimation, useParallax } from "@/hooks/use-scroll-animation";
-import { useRef } from "react";
-import { translations } from "@/translations";
 
 // Introduction content by language
 const introContentByLanguage = {
@@ -95,21 +92,19 @@ export function IntroductionSection() {
   const description = content.description;
 
   // Create scroll animation refs with different animation delays
-  const titleRef = useRef<HTMLHeadingElement>(null);
   const { ref: titleAnimRef, isVisible: isTitleVisible } = useScrollAnimation({
     threshold: 0.2,
     triggerOnce: true
   });
 
-  const descriptionRef = useRef<HTMLParagraphElement>(null);
   const { ref: descriptionAnimRef, isVisible: isDescriptionVisible } = useScrollAnimation({
     threshold: 0.2,
     triggerOnce: true,
     animationDelay: 150 // Slight delay after title
   });
 
-  // Create a subtle parallax effect
-  const { ref: parallaxRef, style: parallaxStyle } = useParallax(0.15);
+  // Create a subtle parallax effect for future implementation
+  useParallax(0.15); // Keep the hook call but don't destructure unused variables
 
   // Map feature icons to Lucide components
   const getIcon = (iconName: string) => {
@@ -126,7 +121,7 @@ export function IntroductionSection() {
   };
 
   return (
-    <section id="about" className="py-16 md:py-24 relative overflow-hidden">
+    <section id="about" className="py-10 md:py-16 relative overflow-hidden">
       {/* Remove any background overlays that might be causing issues */}
       
       <div className="container mx-auto px-4 relative z-10">

@@ -1,8 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/translations";
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, X, Volume2, VolumeX } from "lucide-react";
-import { useScrollAnimation, getAnimationClasses } from "@/hooks/use-scroll-animation";
+import { Play, Pause } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import { useVideo } from "@/contexts/VideoContext";
 
 // Section content by language
@@ -300,7 +299,7 @@ export function GallerySection() {
   };
 
   return (
-    <section id="gallery" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="gallery" className="py-10 md:py-16 relative overflow-hidden">
       {/* Background effects - Northern Lights style overlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu" style={{ zIndex: 1 }}>
         <div className="aurora-glow-strong absolute inset-0 opacity-30"></div>

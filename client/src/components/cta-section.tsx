@@ -1,13 +1,12 @@
-import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/use-translation";
 import { ArrowRight } from "lucide-react";
 
 export function CTASection() {
-  const { language } = useLanguage();
+  // Using only the translation hook without language parameter
   const { t } = useTranslation();
 
   return (
-    <section id="cta" className="py-16 md:py-24 relative overflow-hidden">
+    <section id="cta" className="py-10 md:py-16 relative overflow-hidden">
       {/* Using global background without additional overlays */}
       
       {/* Content */}

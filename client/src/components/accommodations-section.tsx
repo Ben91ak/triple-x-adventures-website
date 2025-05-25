@@ -84,7 +84,7 @@ export function AccommodationsSection() {
   };
 
   return (
-    <section id="accommodations" className="py-16 md:py-24 relative overflow-hidden">
+    <section id="accommodations" className="py-10 md:py-16 relative overflow-hidden">
       {/* Using the global background - no need for section-specific background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
         {/* Simple glow effect to complement global background */}
@@ -92,7 +92,7 @@ export function AccommodationsSection() {
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <span className="inline-block text-accent-color text-sm font-medium tracking-wider uppercase mb-2">
             {t.accommodations.whereYouWillStay}
           </span>

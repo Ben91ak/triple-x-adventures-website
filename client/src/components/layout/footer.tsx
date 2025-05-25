@@ -4,8 +4,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { MapPin, Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react";
 
-// FooterLink type removed as it's no longer used
-
 type SocialLink = {
   icon: React.ReactNode;
   label: string;
@@ -15,7 +13,6 @@ type SocialLink = {
 export function Footer() {
   const { language } = useLanguage();
   const t = useTranslation(language);
-  // State variables for modals removed as they're now separate pages
 
   // Multilingual footer content
   const footerContent = {
@@ -72,7 +69,7 @@ export function Footer() {
     }
   ];
 
-  // Legal links are now directly used in the JSX, no need for a separate array
+  // Legal links are directly used in the JSX
 
   return (
     <>
@@ -242,7 +239,7 @@ export function Footer() {
           </p>
           
           {/* Legal links in the same line */}
-          <div className="flex items-center space-x-4 md:space-x-6">
+          <div className="flex flex-wrap justify-center items-center space-x-4 md:space-x-6">
             <Link href="/imprint" className="text-white/70 hover:text-accent-color transition-colors">
               {content.imprint}
             </Link>
