@@ -22,9 +22,9 @@ export const sv = {
   heroSection: {
     welcome: "VÄLKOMMEN TILL VÄRLDEN AV",
     adventure: "Ditt äventyr i <strong>Arvidsjaur Svenska Lappland</strong>",
-    paragraph1: "Upptäck oförglömliga äventyr nära polcirkeln. Upplev hisnande <strong>utomhusäventyr</strong> och exceptionell mat i en av världens vackraste regioner.",
+    paragraph1: "Upplev oförglömliga <strong>utomhusäventyr</strong> och exceptionell mat i en av världens vackraste regioner nära polcirkeln",
     paragraph2: "Se fram emot en mängd <strong>actionfyllda och adrenalinfyllda aktiviteter</strong> som får ditt hjärta att slå snabbare.",
-    paragraph3: "Koppla av efter en spännande dag i vårt spa och njut av naturens lugn. Våra <strong>utomhus-bubbelpooler och bastur</strong> erbjuder den perfekta tillflyktsorten. Slutligen, titta på de vackra <strong>norrskenen</strong> som dansar på himlen."
+    paragraph3: "Koppla av efter en spännande dag i vårt spa och njut av naturens lugn. Våra <strong>utomhus-bubbelpooler och bastu </strong> erbjuder den perfekta tillflyktsorten. Avsluta med att titta på de vackra <strong>norrskenen</strong> som dansar på himlen."
   },
   
   // Accommodations Section

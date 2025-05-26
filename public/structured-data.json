@@ -1,0 +1,75 @@
+{
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "Triple X Adventures",
+  "url": "https://triple-x-adventures.com",
+  "logo": "https://triple-x-adventures.com/logo.png",
+  "description": "Experience premium Arctic adventures in Swedish Lapland with Triple X Adventures.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Arvidsjaur",
+    "addressRegion": "Swedish Lapland",
+    "addressCountry": "Sweden"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "65.5856",
+    "longitude": "19.1764"
+  },
+  "telephone": "+46 123 456 789",
+  "email": "info@triple-x-adventures.com",
+  "sameAs": [
+    "https://www.facebook.com/triplexadventures",
+    "https://www.instagram.com/triplexadventures",
+    "https://twitter.com/triplexadventures"
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "09:00",
+    "closes": "17:00"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "EUR",
+    "lowPrice": "100",
+    "highPrice": "5000",
+    "offerCount": "20"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Arctic Adventures",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Arctic Snowmobile Tour",
+          "description": "Experience the thrill of snowmobiling through the pristine Arctic landscape."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Northern Lights Experience",
+          "description": "Witness the magical Northern Lights in the clear Arctic sky."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "TouristTrip",
+          "name": "Ice Fishing Adventure",
+          "description": "Try traditional ice fishing on a frozen Arctic lake."
+        }
+      }
+    ]
+  }
+}
