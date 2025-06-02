@@ -26,6 +26,6 @@
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "importsNotUsedAsValues": "remove"
+    "verbatimModuleSyntax": false
   }
 }

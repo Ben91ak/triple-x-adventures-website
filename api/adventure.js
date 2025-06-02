@@ -16,19 +16,11 @@ function validateAdventureForm(formData) {
     endDate, 
     departureAirport,
     groupSize
-  // === Required fields ===
-   if (!firstName || !lastName || !email || !departureAirport) {
-     ...
-   }
+  } = formData;
 
-  // Optional extras
-  if (groupSize && (groupSize < 1 || groupSize > 100)) {
-    return { valid: false, error: 'Group size must be between 1 and 100' };
-  }
-
-  if (startDate && endDate && new Date(endDate) <= new Date(startDate)) {
-    return { valid: false, error: 'End date must be after start date' };
-  }
+   // === Required fields ===
+  if (!firstName || !lastName || !email || !departureAirport) {
+    return {
       valid: false,
       error: 'Missing required fields'
     };

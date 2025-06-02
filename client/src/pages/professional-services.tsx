@@ -86,7 +86,15 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                     <img 
                       src="/images/Professional Services.jpg" 
                       alt="Professional services in Swedish Lapland" 
-                      className="w-full h-full object-cover scale-115 transition-transform duration-700 ease-in-out group-hover:scale-125"
+                      /* Option 1 – closest preset */
+ /* Option 1 – closest preset */
+ className="w-full h-full object-cover scale-110 transition-transform duration-700 ease-in-out group-hover:scale-125"
+
+ /* Option 2 – arbitrary value (requires Tailwind v3.2+) */
+ /* className="w-full h-full object-cover scale-[1.15] transition-transform duration-700 ease-in-out group-hover:scale-[1.25]" */
+
+ /* Option 2 – arbitrary value (requires Tailwind v3.2+) */
+ /* className="w-full h-full object-cover scale-[1.15] transition-transform duration-700 ease-in-out group-hover:scale-[1.25]" */
                       style={{ transformOrigin: 'center center' }}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
@@ -418,8 +426,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                         </div>
                         <a 
                           href="#contact" 
-                          style={{ backgroundColor: 'rgb(149, 204, 47)' }} 
-                          className="text-white px-4 py-2 rounded-lg font-medium text-sm custom-button hover:shadow-lg transition-all whitespace-nowrap"
+                          className="text-white px-4 py-2 rounded-lg font-medium text-sm custom-button hover:shadow-lg transition-all whitespace-nowrap hover:bg-accent/90"
                         >
                           {t.professionalServices.drivecenter.cta.button}
                         </a>
@@ -488,7 +495,7 @@ const ProfessionalServices = memo(function ProfessionalServices() {
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                           </svg>
-                          <span>{t.professionalServices.contact.callUs}</span>
+                          <span>Call Us</span>
                         </a>
                       </div>
                     </div>

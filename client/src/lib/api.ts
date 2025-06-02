@@ -17,12 +17,30 @@ export interface AdventureFormData {
   preferredLanguage: string;
 }
 
+// Helper function for API requests
+const makeApiRequest = async (url: string, data: any) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('Server returned error:', response.status, errorText);
+    throw new Error(`Request failed with status: ${response.status}`);
+  }
+  
+  return await response.json();
+};
+
 // API functions for the application
 export const api = {
   // Submit contact form
   submitContactForm: async (formData: ContactFormData) => {
     try {
-      // Ensure we have all required fields for the API
       const payload = {
         firstName: formData.firstName || '',
         lastName: formData.lastName || '',
@@ -34,22 +52,7 @@ export const api = {
         charterFlight: formData.charterFlight || ''
       };
       
-      // Use the same API endpoint as the main contact form
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-      
-if (!response.ok) {
-         const errorText = await response.text();
-         console.error('Server returned error:', response.status, errorText);
-        throw new Error(`Request failed with status: ${response.status}`);
-       }
-      
-      return await response.json();
+      return await makeApiRequest('/api/contact', payload);
     } catch (error) {
       console.error('Error submitting contact form:', error);
       throw error;
@@ -67,11 +70,11 @@ if (!response.ok) {
         body: JSON.stringify(formData),
       });
       
-if (!response.ok) {
-         const errorText = await response.text();
-         console.error('Server returned error:', response.status, errorText);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server returned error:', response.status, errorText);
         throw new Error(`Request failed with status: ${response.status}`);
-       }
+      }
       
       return await response.json();
     } catch (error) {
@@ -80,4 +83,3 @@ if (!response.ok) {
     }
   }
 };
-

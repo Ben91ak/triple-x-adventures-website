@@ -1,4 +1,4 @@
-import { users, contactSubmissions, adventureSubmissions, type User, type InsertUser, type Contact, type InsertContact, type Adventure, type InsertAdventure from "@shared/schema";
+import { users, contactSubmissions, adventureSubmissions, type User, type InsertUser, type Contact, type InsertContact, type Adventure, type InsertAdventure } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
@@ -43,9 +43,8 @@ async createContactSubmission(insertContact: InsertContact): Promise<Contact> {
       message: insertContact.message || null,
     }).returning();
     
-    return result[0];
-  }
-  }
+return result[0];
+   }
 
   async getContactSubmissions(): Promise<Contact[]> {
     return await db.select().from(contactSubmissions).orderBy(contactSubmissions.submittedAt);

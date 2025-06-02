@@ -3,6 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import * as t from '@babel/types';
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -156,10 +157,9 @@ async function processWithAST(fileContent) {
     
     // Add constants with a separator comment
     if (sections.constants.length > 0) {
-      newBody.push({
-        type: 'CommentLine',
-        value: ' Constants'
-      });
+      const emptyStmt = t.emptyStatement();
+      emptyStmt.leadingComments = [{ type: 'CommentLine', value: ' Constants' }];
+      newBody.push(emptyStmt);
       newBody.push(...sections.constants);
     }
     

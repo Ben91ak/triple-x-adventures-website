@@ -2,12 +2,12 @@ import express, { type Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { contactFormSchema, adventureFormSchema } from "@shared/schema";
-import { z } from "zod";
 import { ZodError } from "zod";
 import { sendContactEmail, sendAdventureEmail } from "./emailService";
 import fetch from "node-fetch";
 import { authenticate, authorize, login, register, logout } from "./auth";
 import csrf from 'csurf';
+import { RequestHandler } from 'express';
 import { createHash } from 'crypto';
 import DOMPurify from 'dompurify';
 import rateLimit from "express-rate-limit";
@@ -62,7 +62,7 @@ interface WeatherstackSuccess {
 type WeatherstackResponse = WeatherstackSuccess | WeatherstackError;
 
 // Determine if we're in development mode without a database
-const isDevelopmentNoDb = process.env.NODE_ENV === 'development' && !process.env.DATABASE_URL;
+// const isDevelopmentNoDb = process.env.NODE_ENV === 'development' && !process.env.DATABASE_URL;
 
 // Create more specific rate limiters for sensitive endpoints
 const formSubmissionLimiter = rateLimit({
@@ -103,12 +103,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Apply CSRF protection to all routes that need it
   const csrfRoutes = express.Router();
   
-  // Apply CSRF protection middleware with proper typing
-  // Using a function expression with explicit typing to avoid TypeScript errors
-  csrfRoutes.use(function csrfMiddleware(req, res, next) {
-    // Type assertion to handle the middleware properly
-    return (csrfProtection as any)(req, res, next);
-  });
+  // Apply CSRF protection directly
+  csrfRoutes.use(csrfProtection as unknown as RequestHandler);
 
   // Authentication routes
   router.post("/auth/login", authLimiter, login);
@@ -227,7 +223,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get all contact submissions (admin only)
-  csrfRoutes.get("/contact", authenticate, authorize(['admin']), async (req, res) => {
+  csrfRoutes.get("/contact", authenticate, authorize(['admin']), async (_, res) => {
     try {
       const submissions = await storage.getContactSubmissions();
       res.json(submissions);
@@ -299,7 +295,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Get all adventure submissions (admin only)
-  csrfRoutes.get("/adventure", authenticate, authorize(['admin']), async (req, res) => {
+  csrfRoutes.get("/adventure", authenticate, authorize(['admin']), async (_, res) => {
     try {
       const submissions = await storage.getAdventureSubmissions();
       res.json(submissions);
@@ -313,7 +309,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Google Reviews API endpoint
-  csrfRoutes.get("/google-reviews", async (req, res) => {
+  csrfRoutes.get("/google-reviews", async (_, res) => {
     try {
       // Google Places API requires an API key
       const apiKey = process.env.GOOGLE_PLACES_API_KEY;
@@ -379,7 +375,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.use("/api", router);
   
   // Add a catch-all error handler
-  app.use((err: any, req: Request, res: Response, next: any) => {
+  app.use((err: any, _: Request, res: Response, __: any) => {
     if (err.code === 'EBADCSRFTOKEN') {
       // Handle CSRF token errors
       return res.status(403).json({

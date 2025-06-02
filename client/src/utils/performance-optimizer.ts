@@ -97,7 +97,7 @@ export function preloadAllCriticalImages(): void {
     videoLink.type = 'video/webm';
     
     // Only add if it doesn't already exist
-    if (!document.querySelector('link[rel="preload"][as="video"]')) {
+    if (!document.querySelector(`link[rel="preload"][as="video"][href="${videoUrl}"]`)) {
       document.head.appendChild(videoLink);
     }
   } catch (error) {
@@ -205,7 +205,7 @@ export function monitorPerformance(): void {
           
           // Calculate key metrics
           const pageLoadTime = navigationEntry.loadEventEnd - navigationEntry.startTime;
-          const timeToFirstByte = navigationEntry.responseStart - navigationEntry.requestStart;
+          const timeToFirstByte = navigationEntry.responseStart - navigationEntry.startTime;
           const domContentLoaded = navigationEntry.domContentLoadedEventEnd - navigationEntry.startTime;
           
           // Only send to analytics, no console logs in production
@@ -321,4 +321,5 @@ export default function applyAllOptimizations(): void {
     // In development, always run all optimizations
   preloadAllCriticalImages();
   monitorPerformance();
+  }
 }

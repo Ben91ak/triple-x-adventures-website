@@ -880,6 +880,8 @@ export const de = {
     personalInfoCollectionText: "Sie können die Website besuchen, ohne uns mitzuteilen, wer Sie sind oder Informationen preiszugeben, anhand derer jemand Sie als bestimmte, identifizierbare Person identifizieren könnte. Wenn Sie jedoch einige Funktionen der Website nutzen möchten, werden Sie möglicherweise gebeten, bestimmte persönliche Informationen anzugeben (z. B. Ihren Namen und Ihre E-Mail-Adresse). Wir erhalten und speichern alle Informationen, die Sie uns wissentlich zur Verfügung stellen, wenn Sie einen Kauf tätigen oder ein Online-Formular auf der Website ausfüllen. Diese Informationen können Folgendes umfassen:",
     personalInfoItems: ["Persönliche Angaben wie Name, Wohnsitzland usw.", "Kontaktinformationen wie E-Mail-Adresse, Adresse usw."],
     personalInfoChoice: "Sie können sich dafür entscheiden, uns Ihre persönlichen Daten nicht zur Verfügung zu stellen, dann können Sie jedoch möglicherweise einige Funktionen der Website nicht nutzen. Benutzer, die sich nicht sicher sind, welche Informationen obligatorisch sind, können uns gerne kontaktieren.",
+    storingInfo: "Diese Datenschutzrichtlinie beschreibt, wie Triple X Adventures AB Ihre persönlichen Daten sammelt, verwendet und schützt, wenn Sie unsere Website oder Dienste nutzen. Wir verpflichten uns, Ihre Privatsphäre gemäß den geltenden Datenschutzgesetzen zu schützen.",
+    storingPersonalInfo: "Speicherung persönlicher Informationen",
     // Terms and Conditions Modal
     termsTitle: "ALLGEMEINE GESCHÄFTSBEDINGUNGEN",
     termsIntro: "Die folgenden Allgemeinen Geschäftsbedingungen gelten für Pakete, die von Triple X Adventures AB (im Folgenden als \"TXA\" bezeichnet) durch seine Paketprogramme an folgenden Orten angeboten und geliefert werden: Arvidsjaur, Schwedisch-Lappland und alle anderen Gebiete, in denen die Dienstleistungen erbracht werden.",
@@ -1063,6 +1065,24 @@ export const de = {
     },
     partners: {
       title: "Unsere vertrauenswürdigen Partner"
+    }
+  },
+
+  // About Section
+  aboutSection: {
+    features: {
+      smallGroups: {
+        title: "Kleine Gruppen",
+        description: "Persönliche Betreuung und authentische Erlebnisse mit begrenzter Gruppengröße"
+      },
+      localExperts: {
+        title: "Lokale Experten",
+        description: "Unsere Guides sind leidenschaftliche Einheimische mit fundiertem Wissen über die arktische Wildnis"
+      },
+      premiumService: {
+        title: "Premium-Service",
+        description: "Hochwertige Ausrüstung, Unterkunft und Speiseerlebnisse durchgehend"
+      }
     }
   },
 

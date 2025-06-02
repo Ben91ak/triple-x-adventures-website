@@ -5,18 +5,20 @@
   "url": "https://triple-x-adventures.com",
   "logo": "https://triple-x-adventures.com/logo.png",
   "description": "Experience premium Arctic adventures in Swedish Lapland with Triple X Adventures.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Arvidsjaur",
-    "addressRegion": "Swedish Lapland",
-    "addressCountry": "Sweden"
-  },
+"address": {
+     "@type": "PostalAddress",
+    "streetAddress": "Storgatan 6F",
+    "postalCode": "93331",
+     "addressLocality": "Arvidsjaur",
+     "addressRegion": "Swedish Lapland",
+     "addressCountry": "Sweden"
+   },
 "geo": {
      "@type": "GeoCoordinates",
     "latitude": "65.5903",
     "longitude": "19.1668"
    },
-  "telephone": "+46 123 456 789",
+  "telephone": "+46 70 357 5455",
   "email": "info@triple-x-adventures.com",
   "sameAs": [
     "https://www.facebook.com/triplexadventures",

@@ -880,6 +880,8 @@ export const en = {
     personalInfoCollectionText: "You can visit the Website without telling us who you are or revealing any information by which someone could identify you as a specific, identifiable individual. However, if you wish to use some of the Website's features, you may be asked to provide certain Personal Information (for example, your name and email address). We receive and store any information you knowingly provide to us when you make a purchase, or fill out any online form on the Website. This information may include:",
     personalInfoItems: ["Personal details such as name, country of residence, etc.", "Contact information such as email address, address, etc."],
     personalInfoChoice: "You can choose not to provide us with your Personal Information, but then you may not be able to take advantage of some of the Website's features. Users who are uncertain about what information is mandatory are welcome to contact us.",
+    storingInfo: "This privacy policy outlines how Triple X Adventures AB collects, uses, and protects your personal information when you use our website or services. We are committed to ensuring your privacy is protected in accordance with applicable data protection laws.",
+    storingPersonalInfo: "Storage of Personal Information",
     // Terms and Conditions Modal
     termsTitle: "TERMS AND CONDITIONS",
     termsIntro: "The following terms and conditions shall be applied to packages offered and delivered during all seasons by Triple X Adventures AB (hereinafter referred to as \"TXA\") through its package programs in the following destinations: Arvidsjaur, Swedish Lapland, and any other areas where the services are delivered.",
@@ -1065,6 +1067,24 @@ export const en = {
     },
     partners: {
       title: "Our Trusted Partners"
+    }
+  },
+  
+  // About Section
+  aboutSection: {
+    features: {
+      smallGroups: {
+        title: "Small Groups",
+        description: "Personalized attention and authentic experiences with limited group sizes"
+      },
+      localExperts: {
+        title: "Local Experts",
+        description: "Our guides are passionate locals with deep knowledge of the Arctic wilderness"
+      },
+      premiumService: {
+        title: "Premium Service",
+        description: "High-quality equipment, accommodation and dining experiences throughout"
+      }
     }
   },
   

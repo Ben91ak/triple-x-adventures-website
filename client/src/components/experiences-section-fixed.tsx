@@ -120,10 +120,11 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                 <div className="w-full h-full relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
                   <div className="w-full h-full flex items-center justify-center bg-black/30">
-                    <img 
-                      src={experience.image} 
-                      alt={experience.title} 
-                      className="w-full h-full object-cover" 
+                    <video
+                      className="w-full h-full object-cover"
+                      controls
+                      poster={experience.image}
+                      src={experience.video}
                     />
                   </div>
                 </div>

@@ -49,7 +49,7 @@ export const sv = {
         "För 2-4 gäster",
         "13 Cabins",
         "AC",
-        " Kingsize-säng",
+        "Kingsize-säng",
         "Eget kök",
         "Sameland, Arvidsjaur"
       ]
@@ -98,6 +98,24 @@ export const sv = {
   about: {
     title: "OM OSS",
     subtitle: "Vårt engagemang för autentiska arktiska äventyr"
+  },
+  
+  // About Section Features
+  aboutSection: {
+    features: {
+      smallGroups: {
+        title: "Små Grupper",
+        description: "Personlig uppmärksamhet och autentiska upplevelser med begränsad gruppstorlek"
+      },
+      localExperts: {
+        title: "Lokala Experter",
+        description: "Våra guider är passionerade lokalinvånare med djup kunskap om den arktiska vildmarken"
+      },
+      premiumService: {
+        title: "Premium Service",
+        description: "Högkvalitativ utrustning, boende och matupplevelser genomgående"
+      }
+    }
   },
   
   // Contact Section
@@ -552,7 +570,7 @@ export const sv = {
         gallery: [
           "/images/Snowshoe_Torchwalk/snowtorch1.webp",
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
-          "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch3.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
         video: videoUrls.snowshoeAdventure,
@@ -818,7 +836,7 @@ export const sv = {
               "title": "1-TIMMES BUGGY DRIFT-SESSION",
               "description": "En timme av racing- och driftingaction på snöspår.",
               "details": [
-                "Säkerhetssbälten och instruktioner ingår",
+                "Säkerhetsbälten och instruktioner ingår",
                 "Medpassageraralternativ tillgängligt"
               ]
             }
@@ -1098,6 +1116,8 @@ export const sv = {
     personalInfoCollectionText: "Du kan besöka webbplatsen utan att berätta vem du är eller avslöja någon information genom vilken någon skulle kunna identifiera dig som en specifik, identifierbar individ. Om du dock vill använda några av webbplatsens funktioner kan du bli ombedd att tillhandahålla viss personlig information (till exempel ditt namn och e-postadress). Vi tar emot och lagrar all information som du medvetet tillhandahåller oss när du gör ett köp eller fyller i något onlineformulär på webbplatsen. Denna information kan inkludera:",
     personalInfoItems: ["Personuppgifter som namn, bosättningsland, etc.", "Kontaktinformation som e-postadress, adress, etc."],
     personalInfoChoice: "Du kan välja att inte ge oss din personliga information, men då kanske du inte kan dra nytta av vissa av webbplatsens funktioner. Användare som är osäkra på vilken information som är obligatorisk är välkomna att kontakta oss.",
+    storingInfo: "Denna integritetspolicy beskriver hur Triple X Adventures AB samlar in, använder och skyddar din personliga information när du använder vår webbplats eller tjänster. Vi är engagerade i att säkerställa att din integritet skyddas i enlighet med tillämpliga dataskyddslagar.",
+    storingPersonalInfo: "Lagring av personlig information",
     termsTitle: "VILLKOR",
     termsIntro: "Följande villkor ska tillämpas på paket som erbjuds och levereras under alla säsonger av Triple X Adventures AB (härefter kallat \"TXA\") genom dess paketprogram på följande destinationer: Arvidsjaur, Svenska Lappland, och alla andra områden där tjänsterna levereras.",
     commercialTerms: "KOMMERSIELLA VILLKOR",

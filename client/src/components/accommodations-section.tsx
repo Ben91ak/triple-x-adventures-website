@@ -5,28 +5,27 @@ import { User, Hotel, BedDouble, Utensils, MapPin, Snowflake, Truck, Bell } from
 
 // Helper function to determine icon based on feature text
 function getIconForFeature(text: string): string {
-  if (text.toLowerCase().includes('guest') || text.toLowerCase().includes('gäste') || text.toLowerCase().includes('gäster')) {
+  // Map feature text to corresponding Font Awesome icon class
+  if (text.toLowerCase().includes('person') || text.toLowerCase().includes('guest') || text.toLowerCase().includes('capacity')) {
     return "fas fa-user-group";
-  } else if (text.toLowerCase().includes('bed') || text.toLowerCase().includes('schlafzimmer') || text.toLowerCase().includes('sovrum')) {
+  } else if (text.toLowerCase().includes('bed') || text.toLowerCase().includes('bedroom') || text.toLowerCase().includes('sleep')) {
     return "fas fa-bed";
-  } else if (text.toLowerCase().includes('sauna') || text.toLowerCase().includes('cabin')) {
+  } else if (text.toLowerCase().includes('hot tub') || text.toLowerCase().includes('jacuzzi') || text.toLowerCase().includes('spa')) {
     return "fas fa-hot-tub";
-  } else if (text.toLowerCase().includes('kitchen') || text.toLowerCase().includes('küche') || text.toLowerCase().includes('kök') || 
-             text.toLowerCase().includes('restaurant') || text.toLowerCase().includes('lounge')) {
+  } else if (text.toLowerCase().includes('restaurant') || text.toLowerCase().includes('food') || text.toLowerCase().includes('meal')) {
     return "fas fa-utensils";
-  } else if (text.toLowerCase().includes('location') || text.toLowerCase().includes('lage') || text.toLowerCase().includes('läge') || 
-             text.toLowerCase().includes('sameland') || text.toLowerCase().includes('arvidsjaur')) {
+  } else if (text.toLowerCase().includes('location') || text.toLowerCase().includes('distance') || text.toLowerCase().includes('nearby')) {
     return "fas fa-location-dot";
-  } else if (text.toLowerCase().includes('climate') || text.toLowerCase().includes('klima') || text.toLowerCase().includes('arctic') || 
-             text.toLowerCase().includes('arktisk') || text.toLowerCase().includes('ac')) {
+  } else if (text.toLowerCase().includes('climate') || text.toLowerCase().includes('air') || text.toLowerCase().includes('cool')) {
     return "fas fa-snowflake";
-  } else if (text.toLowerCase().includes('airport') || text.toLowerCase().includes('flughafen') || text.toLowerCase().includes('flygplats')) {
+  } else if (text.toLowerCase().includes('transfer') || text.toLowerCase().includes('shuttle') || text.toLowerCase().includes('transport')) {
     return "fas fa-shuttle-van";
-  } else if (text.toLowerCase().includes('pub') || text.toLowerCase().includes('bistro')) {
+  } else if (text.toLowerCase().includes('service') || text.toLowerCase().includes('staff') || text.toLowerCase().includes('reception')) {
     return "fas fa-concierge-bell";
-  } else {
-    return "fas fa-user-group"; // Default icon
   }
+  
+  // Default icon if no match is found
+  return "fas fa-concierge-bell";
 }
 
 export function AccommodationsSection() {
@@ -69,30 +68,7 @@ export function AccommodationsSection() {
         text 
       }))
     }
-
-    if (text.toLowerCase().includes('guest') || text.toLowerCase().includes('gäste') || text.toLowerCase().includes('gäster')) {
-      return "fas fa-user-group";
-    } else if (text.toLowerCase().includes('bed') || text.toLowerCase().includes('schlafzimmer') || text.toLowerCase().includes('sovrum')) {
-      return "fas fa-bed";
-    } else if (text.toLowerCase().includes('sauna') || text.toLowerCase().includes('cabin')) {
-      return "fas fa-hot-tub";
-    } else if (text.toLowerCase().includes('kitchen') || text.toLowerCase().includes('küche') || text.toLowerCase().includes('kök') || 
-               text.toLowerCase().includes('restaurant') || text.toLowerCase().includes('lounge')) {
-      return "fas fa-utensils";
-    } else if (text.toLowerCase().includes('location') || text.toLowerCase().includes('lage') || text.toLowerCase().includes('läge') || 
-               text.toLowerCase().includes('sameland') || text.toLowerCase().includes('arvidsjaur')) {
-      return "fas fa-location-dot";
-    } else if (text.toLowerCase().includes('climate') || text.toLowerCase().includes('klima') || text.toLowerCase().includes('arctic') || 
-               text.toLowerCase().includes('arktisk') || text.toLowerCase().includes('ac')) {
-      return "fas fa-snowflake";
-    } else if (text.toLowerCase().includes('airport') || text.toLowerCase().includes('flughafen') || text.toLowerCase().includes('flygplats')) {
-      return "fas fa-shuttle-van";
-    } else if (text.toLowerCase().includes('pub') || text.toLowerCase().includes('bistro')) {
-      return "fas fa-concierge-bell";
-    } else {
-      return "fas fa-user-group"; // Default icon
-    }
-  }
+  ]
   
   // Map the font awesome icons to Lucide icons
   const iconMap: Record<string, React.ReactNode> = {

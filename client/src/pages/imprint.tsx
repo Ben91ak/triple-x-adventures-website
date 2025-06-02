@@ -68,7 +68,7 @@ export default function ImprintPage() {
                   SE 559122474501
                 </p>
                 <p className="text-sm">
-                  <strong>Responsible for the content according to § 55 Abs. 2 RStV:</strong><br />
+                  <strong>Responsible for the content:</strong><br />
                   Janina Möller, Roberth Möller<br />
                   Storgatan 6F<br />
                   93331 Arvidsjaur<br />

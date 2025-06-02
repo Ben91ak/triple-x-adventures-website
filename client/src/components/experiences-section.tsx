@@ -63,19 +63,22 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
         img.src = imageUrl;
       });
     }
+    
+    // Reset image index when experience changes
+    setCurrentImageIndex(0);
+    setImageLoaded(false);
   }, [experience, hasGallery]);
-  
   // Handle image navigation
   const handleNextImage = () => {
-    if (galleryLength > 0) {
-      setCurrentImageIndex((prev) => (prev + 1) % galleryLength);
+    if (experience?.gallery && experience.gallery.length > 0) {
+      setCurrentImageIndex((prev: number) => (prev + 1) % (experience.gallery?.length || 1));
       setImageLoaded(false);
     }
   };
   
   const handlePrevImage = () => {
-    if (galleryLength > 0) {
-      setCurrentImageIndex((prev) => (prev - 1 + galleryLength) % galleryLength);
+    if (experience?.gallery && experience.gallery.length > 0) {
+      setCurrentImageIndex((prev: number) => (prev - 1 + (experience.gallery?.length || 1)) % (experience.gallery?.length || 1));
       setImageLoaded(false);
     }
   };

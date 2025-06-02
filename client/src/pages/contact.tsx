@@ -9,6 +9,15 @@ import { ContactSection } from "@/components/contact-section";
 import SectionLoader from "../components/ui/section-loader";
 import { optimizePageImages } from "@/utils/performance-optimizer";
 
+// Helper function to safely access translations with fallbacks
+const getTranslationWithFallback = (
+  translation: any,
+  path: string,
+  fallback: string
+): string => {
+  return translation?.contact?.[path] || fallback;
+};
+
 export default function ContactPage() {
   const { language } = useLanguage();
   const t = useTranslation(language);
@@ -21,10 +30,10 @@ export default function ContactPage() {
   return (
     <div className="font-opensans text-slate relative">
       <Helmet>
-        <title>{`${(t as any).contact?.title || 'Contact Us'} | Triple X Adventures`}</title>
-        <meta name="description" content={(t as any).contact?.subtitle || 'Contact Triple X Adventures for your next adventure in Swedish Lapland'} />
-        <meta property="og:title" content={`${(t as any).contact?.title || 'Contact Us'} | Triple X Adventures`} />
-        <meta property="og:description" content={(t as any).contact?.subtitle || 'Contact Triple X Adventures for your next adventure in Swedish Lapland'} />
+        <title>{`${getTranslationWithFallback(t, 'title', 'Contact Us')} | Triple X Adventures`}</title>
+        <meta name="description" content={getTranslationWithFallback(t, 'subtitle', 'Contact Triple X Adventures for your next adventure in Swedish Lapland')} />
+        <meta property="og:title" content={`${getTranslationWithFallback(t, 'title', 'Contact Us')} | Triple X Adventures`} />
+        <meta property="og:description" content={getTranslationWithFallback(t, 'subtitle', 'Contact Triple X Adventures for your next adventure in Swedish Lapland')} />
         <meta property="og:type" content="website" />
       </Helmet>
 

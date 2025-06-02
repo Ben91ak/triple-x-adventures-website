@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Check, Globe, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +13,7 @@ import { useTranslation } from "@/translations";
 export function LanguageSelector({ className }: { className?: string }) {
   const { language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
-  const divRef = useRef<HTMLDivElement>(null);
+  const divRef = useRef<HTMLButtonElement>(null);
   const t = useTranslation(language);
   
   // Effect to remove focus from the button when language changes
@@ -90,16 +89,9 @@ export function LanguageSelector({ className }: { className?: string }) {
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
-        <div
+        <button
           ref={divRef}
-         role="button"
-         tabIndex={0}
-         onKeyDown={(e) => {
-           if (e.key === 'Enter' || e.key === ' ') {
-             e.preventDefault();
-             setOpen(!open);
-           }
-         }}
+          type="button"
           style={buttonStyle}
           className={cn(
             "relative group inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg",
@@ -146,7 +138,7 @@ export function LanguageSelector({ className }: { className?: string }) {
               style={{ color: flagColors[language as Language].secondary }}
             />
           </div>
-        </div>
+        </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 

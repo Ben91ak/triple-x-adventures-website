@@ -36,7 +36,11 @@ export default function PrivacyPolicyPage() {
         
         <main className="pt-24 md:pt-32 pb-24">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto bg-card-bg/80 backdrop-blur-md border border-white/10 rounded-xl p-6 md:p-10 shadow-glow-sm">
+            <div 
+  className="max-w-4xl mx-auto bg-card-bg/80 backdrop-blur-md border border-white/10 rounded-xl p-6 md:p-10 shadow-glow-sm"
+  role="article"
+  aria-labelledby="privacy-title"
+>
               <h1 className="text-3xl font-bold text-white mb-8">{content.privacyPolicy}</h1>
               
               <div className="text-white space-y-6 text-sm sm:text-base">
