@@ -1,11 +1,8 @@
 import { memo } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { useTranslation } from '@/translations';
 import { motion } from 'framer-motion';
 
+// Only export the TrustedPartnersSection component
 export const TrustedPartnersSection = memo(function TrustedPartnersSection() {
-  const { language } = useLanguage();
-  const t = useTranslation(language);
 
   return (
     <section className="py-8">
@@ -17,7 +14,7 @@ export const TrustedPartnersSection = memo(function TrustedPartnersSection() {
         >
           <div className="flex items-center my-12">
             <div className="flex-grow h-px bg-white/10"></div>
-            <h3 className="mx-4 text-xl text-white/60 font-medium">{t.partners.title}</h3>
+            <h3 className="mx-4 text-xl text-white/60 font-medium">{'Our Trusted Partners'}</h3>
             <div className="flex-grow h-px bg-white/10"></div>
           </div>
           
@@ -36,7 +33,7 @@ export const TrustedPartnersSection = memo(function TrustedPartnersSection() {
               { name: 'TH', src: '/images/Partnerlogos/TH.svg' },
               { name: 'Volkswagen', src: '/images/Partnerlogos/VW Logo.svg' },
               { name: 'Drivecenter Arena', src: '/images/Drivecenter/Drivecenter-Arena-white-logo-small-web.svg' }
-            ].map((partner, index) => (
+            ].map((partner) => (
               <div 
                 key={partner.name}
                 className="opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 flex items-center justify-center w-[40%] sm:w-[30%] md:w-[15%] h-[80px] bg-white/5 rounded-lg p-4"

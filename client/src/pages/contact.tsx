@@ -15,7 +15,9 @@ const getTranslationWithFallback = (
   path: string,
   fallback: string
 ): string => {
-  return translation?.contact?.[path] || fallback;
+  return path.includes('.') ? 
+    path.split('.').reduce((obj, key) => obj?.[key], translation) || fallback :
+    translation?.contact?.[path] || fallback;
 };
 
 export default function ContactPage() {
@@ -30,10 +32,10 @@ export default function ContactPage() {
   return (
     <div className="font-opensans text-slate relative">
       <Helmet>
-        <title>{`${getTranslationWithFallback(t, 'title', 'Contact Us')} | Triple X Adventures`}</title>
-        <meta name="description" content={getTranslationWithFallback(t, 'subtitle', 'Contact Triple X Adventures for your next adventure in Swedish Lapland')} />
-        <meta property="og:title" content={`${getTranslationWithFallback(t, 'title', 'Contact Us')} | Triple X Adventures`} />
-        <meta property="og:description" content={getTranslationWithFallback(t, 'subtitle', 'Contact Triple X Adventures for your next adventure in Swedish Lapland')} />
+        <title>{`${getTranslationWithFallback(t, 'contact.title', 'Contact Us')} | Triple X Adventures`}</title>
+        <meta name="description" content={getTranslationWithFallback(t, 'contact.subtitle', 'Contact Triple X Adventures for your next adventure in Swedish Lapland')} />
+        <meta property="og:title" content={`${getTranslationWithFallback(t, 'contact.title', 'Contact Us')} | Triple X Adventures`} />
+        <meta property="og:description" content={getTranslationWithFallback(t, 'contact.subtitle', 'Contact Triple X Adventures for your next adventure in Swedish Lapland')} />
         <meta property="og:type" content="website" />
       </Helmet>
 

@@ -103,7 +103,22 @@ export default async function handler(req, res) {
     if (!validation.valid) {
       return res.status(400).json({ error: validation.error });
     }
-const formatArray = (arr) => {
+
+   // Validate group size
+   if (groupSize) {
+     const groupSizeValidation = validateGroupSize(groupSize);
+     if (!groupSizeValidation.valid) {
+       return res.status(400).json({ error: groupSizeValidation.error });
+     }
+   }
+
+   // Validate dates
+   if (startDate && endDate) {
+     const datesValidation = validateDates(startDate, endDate);
+     if (!datesValidation.valid) {
+       return res.status(400).json({ error: datesValidation.error });
+     }
+   }const formatArray = (arr) => {
    if (!arr || arr.length === 0) return 'None specified';
    return arr.map(item => he.encode(String(item))).join(', ');
  };

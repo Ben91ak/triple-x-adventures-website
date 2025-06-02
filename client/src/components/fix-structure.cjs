@@ -25,17 +25,17 @@ try {
  // Validate the modification doesn't break syntax
  // (Add TypeScript parsing validation here)
   
-  fs.writeFileSync(filePath, content, 'utf8');
+fs.writeFileSync(filePath, content, 'utf8');
  
- // Clean up backup on success
- fs.unlinkSync(backupPath);
+  // Clean up backup on success
+  fs.unlinkSync(backupPath);
+ console.log('File structure fixed!');
 } catch (error) {
   // Restore backup on failure
   if (fs.existsSync(backupPath)) {
     fs.copyFileSync(backupPath, filePath);
     fs.unlinkSync(backupPath);
   }
-  console.log('File structure fixed!');
   console.error('Error processing file:', error.message);
   process.exit(1);
 }

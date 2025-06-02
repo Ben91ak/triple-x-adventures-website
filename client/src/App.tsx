@@ -93,14 +93,20 @@ function App() {
     // Initialize Vercel Analytics
     inject();
     
-    // Register a service worker for offline capabilities
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js').catch(error => {
-          console.log('Service Worker registration failed:', error);
-        });
-      });
-    }
+    // Temporarily disabled service worker for troubleshooting
+    // if ('serviceWorker' in navigator) {
+    //   window.addEventListener('load', () => {
+    //     navigator.serviceWorker.register('/service-worker.js').catch(error => {
+    //       console.log('Service Worker registration failed:', error);
+    //     });
+    //   });
+    // }
+    
+    // Add console logging to help debug deployment issues
+    console.log('App initialized successfully');
+    window.addEventListener('error', (event) => {
+      console.error('Global error caught:', event.error);
+    });
   }, []);
 
   return (

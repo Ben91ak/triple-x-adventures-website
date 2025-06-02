@@ -47,7 +47,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - serve from cache, fallback to network with improved handling for Vercel deployments
+// Fetch event - network first strategy for production reliability
 self.addEventListener('fetch', (event) => {
   // Skip cross-origin requests
   if (!event.request.url.startsWith(self.location.origin)) {
@@ -65,47 +65,52 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Check if the request matches our cache patterns
-  const url = new URL(event.request.url);
-  const shouldCache = ASSET_CACHE_PATTERNS.some(pattern => pattern.test(url.pathname));
-
-  // For all other requests, try the cache first, then network
+  // For all other requests, use network first in production for reliability
   event.respondWith(
-    caches.match(event.request)
-      .then((cachedResponse) => {
-        if (cachedResponse) {
-          return cachedResponse;
+    fetch(event.request.clone())
+      .then((response) => {
+        // Return the response if it's not valid
+        if (!response || response.status !== 200) {
+          return response;
         }
 
-        return fetch(event.request.clone())
-          .then((response) => {
-            // Return the response if it's not valid or not from our origin
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
+        // Clone the response
+        const responseToCache = response.clone();
 
-            // Clone the response
-            const responseToCache = response.clone();
+        // Cache the successful response for offline use
+        const url = new URL(event.request.url);
+        const shouldCache = ASSET_CACHE_PATTERNS.some(pattern => pattern.test(url.pathname));
+        
+        if (shouldCache && !url.pathname.endsWith('.mp4') && !url.pathname.endsWith('.webm')) {
+          caches.open(CACHE_NAME)
+            .then((cache) => {
+              cache.put(event.request, responseToCache);
+            })
+            .catch(err => console.log('Caching error:', err));
+        }
 
-            // Don't cache large media files and only cache assets matching our patterns
-            if (shouldCache && !url.pathname.endsWith('.mp4') && !url.pathname.endsWith('.webm')) {
-              // Cache the response
-              caches.open(CACHE_NAME)
-                .then((cache) => {
-                  cache.put(event.request, responseToCache);
-                });
-            }
-
-            return response;
-          });
+        return response;
       })
       .catch((error) => {
-        console.error('Fetch failed:', error);
-         if (event.request.destination === 'image') {
-           return caches.match('/images/TXA_fallback_optimized.jpg');
-         }
-         // Generic offline fallback
-         return new Response('Offline', { status: 503, headers: { 'Content-Type': 'text/plain' }});
+        console.log('Fetch failed, falling back to cache:', error);
+        // Try the cache as fallback
+        return caches.match(event.request)
+          .then(cachedResponse => {
+            if (cachedResponse) {
+              return cachedResponse;
+            }
+            
+            // Fallback image for image requests
+            if (event.request.destination === 'image') {
+              return caches.match('/images/TXA_fallback_optimized.jpg');
+            }
+            
+            // Generic offline fallback
+            return new Response('Offline', { 
+              status: 503, 
+              headers: { 'Content-Type': 'text/plain' }
+            });
+          });
       })
   );
 });

@@ -62,21 +62,7 @@ export const api = {
   // Submit adventure package form
   submitAdventureForm: async (formData: AdventureFormData) => {
     try {
-      const response = await fetch('/api/adventure', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Server returned error:', response.status, errorText);
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-      
-      return await response.json();
+      return await makeApiRequest('/api/adventure', formData);
     } catch (error) {
       console.error('Error submitting adventure form:', error);
       throw error;

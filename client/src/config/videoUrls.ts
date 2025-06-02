@@ -26,5 +26,10 @@ export const videoUrls = {
   iceDriftExperience: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_IceDrift_1-3n4m5l6k7Jk8h9G0B.webm",
   
   // Buggy drift videos
-  buggyDriftAdventure: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm"
+  buggyDriftAdventure: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm",
+  
+  // Package videos
+  arcticAdventure: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Arctic%20Adventure%20Package_1-pQKSjvFS6comuwYVLlhBaLkq9iLg7R.webm",
+  icePerformance: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20ICE%20Performance%20Package_1-LfFbopDsTYX5EkHyPcUvE8JdaoXAcv.webm",
+  sidewayPackage: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Sideway%20Package_1-YJiv3QVo5lLT36Nso284tMsWHvUZrC.webm"
 };

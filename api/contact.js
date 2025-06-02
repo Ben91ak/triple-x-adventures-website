@@ -27,20 +27,20 @@ const sanitizedData = {
 };
 
 // Basic validation
- if (!firstName || !lastName || !email || !message) {
+if (!sanitizedData.firstName || !sanitizedData.lastName || !sanitizedData.email || !sanitizedData.message) {
    return res.status(400).json({ error: 'Missing required fields' });
  }
  
  // Email format validation
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if (!emailRegex.test(email)) {
-  return res.status(400).json({ error: 'Invalid email format' });
-}
+ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(sanitizedData.email)) {
+   return res.status(400).json({ error: 'Invalid email format' });
+ }
 
-// Length validation to prevent abuse
-if (message.length > 5000 || firstName.length > 100 || lastName.length > 100) {
-  return res.status(400).json({ error: 'Input too long' });
-}
+ // Length validation to prevent abuse
+if (sanitizedData.message.length > 5000 || sanitizedData.firstName.length > 100 || sanitizedData.lastName.length > 100) {
+   return res.status(400).json({ error: 'Input too long' });
+ }
 
     // Format interests array for better readability
     const formattedInterests = interests && interests.length > 0 

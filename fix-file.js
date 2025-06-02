@@ -163,14 +163,13 @@ async function processWithAST(fileContent) {
       newBody.push(...sections.constants);
     }
     
-    // Add component declarations
-    if (sections.components.length > 0) {
-      newBody.push({
-        type: 'CommentLine',
-        value: ' Component declarations'
-      });
-      newBody.push(...sections.components);
-    }
+// Add component declarations
+if (sections.components.length > 0) {
+ const emptyStmt = t.emptyStatement();
+ emptyStmt.leadingComments = [{ type: 'CommentLine', value: ' Component declarations' }];
+ newBody.push(emptyStmt);
+  newBody.push(...sections.components);
+}
     
     // Add helper functions
     if (sections.helpers.length > 0) {

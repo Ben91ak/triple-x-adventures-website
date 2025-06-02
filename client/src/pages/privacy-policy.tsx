@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
   role="article"
   aria-labelledby="privacy-title"
 >
-              <h1 className="text-3xl font-bold text-white mb-8">{content.privacyPolicy}</h1>
+              <h1 id="privacy-title" className="text-3xl font-bold text-white mb-8">{content.privacyPolicy}</h1>
               
               <div className="text-white space-y-6 text-sm sm:text-base">
                 <div>

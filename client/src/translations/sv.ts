@@ -249,6 +249,8 @@ export const sv = {
     premiumPackagesDescription: "Våra skräddarsydd premiumpaket kombinerar flera aktiviteter med lyxigt boende för den ultimata arktiska upplevelsen.",
     hideActivitiesButton: "Dölj Aktiviteter",
     exploreActivitiesButton: "Utforska Våra Aktiviteter",
+    featuredTitle: "Utvalda Aktiviteter",
+    featuredDescription: "Bläddra bland våra mest populära och rekommenderade enskilda aktiviteter",
     individualActivitiesTitle: "Individuella Aktiviteter",
     individualActivitiesDescription: "Välj från vårt urval av spännande individuella aktiviteter för att anpassa ditt arktiska äventyr",
     
@@ -262,7 +264,8 @@ export const sv = {
         duration: "3-4 Nätter",
         intensityLevel: "Magical",
         keyHighlights: ["All-Inclusive Upplevelse", "Premium Boende", "Flera Aktiviteter", "Professionella Guider"],
-        image: "/images/Snowmobile/Snowmobile 2_result.webp",
+        image: "/images/Packages/Adventure Package.png",
+        video: "arcticAdventure",
         gallery: [
           "/images/Snowmobile/Snowmobile 2_result.webp",
           "/images/Husky/Husky 1_result.webp",
@@ -315,7 +318,8 @@ export const sv = {
         duration: "3-4 Nätter",
         intensityLevel: "Exciting",
         keyHighlights: ["Professionell Iskörningsträning", "Flera Fordonstyper", "Premium Boende", "All-Inclusive Måltider"],
-        image: "/images/Experiences/ice-driving.jpg",
+        image: "/images/Packages/Sideways Package.png",
+        video: "sidewayPackage",
         gallery: [
           "/images/Experiences/ice-driving.jpg",
           "/images/Experiences/ice-driving2.jpg",
@@ -367,7 +371,8 @@ export const sv = {
         duration: "3-4 Nätter",
         intensityLevel: "Adrenaline Rush",
         keyHighlights: ["Professionella Racinginstruktörer", "Moderna bilar", "Gourmetmat"],
-        image: "/images/Experiences/ice-performance.jpg",
+        image: "/images/Packages/Ice Performance Package.jpg",
+        video: "icePerformance",
         gallery: [
           "/images/Experiences/ice-performance.jpg",
           "/images/Experiences/ice-performance2.jpg",
@@ -1025,6 +1030,7 @@ export const sv = {
     contact: {
       title: "Låt oss prata arktiska affärer",
       description: "Har du en idé, ett team eller ett projekt? Vi är redo att bygga det tillsammans i Arktis.",
+      callUs: "Ring oss",
       form: {
         name: {
           label: "Ditt namn",

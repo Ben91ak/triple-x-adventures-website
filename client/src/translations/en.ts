@@ -46,6 +46,8 @@ export const en = {
     premiumPackagesDescription: "Our all-inclusive premium packages combine multiple activities with luxury accommodations for the ultimate Arctic experience.",
     hideActivitiesButton: "Hide Activities",
     exploreActivitiesButton: "Explore Our Activities",
+    featuredTitle: "Featured Activities",
+    featuredDescription: "Browse our most popular and recommended individual activities",
     individualActivitiesTitle: "Individual Activities",
     individualActivitiesDescription: "Choose from our selection of exciting individual activities to customize your Arctic adventure",
     
@@ -59,7 +61,8 @@ export const en = {
         duration: "3-4 Nights",
         intensityLevel: "Magical", // ← add colour/icon mapping in IntensityBadge.tsx
         keyHighlights: ["All-Inclusive Experience", "Premium Accommodations", "Multiple Activities", "Professional Guides"],
-        image: "/images/Snowmobile/Snowmobile 2_result.webp",
+        image: "/images/Packages/Adventure Package.png",
+        video: "arcticAdventure",
         gallery: [
           "/images/Snowmobile/Snowmobile 2_result.webp",
           "/images/Husky/Husky 1_result.webp",
@@ -112,7 +115,8 @@ export const en = {
         duration: "3-4 Nights",
         intensityLevel: "Thrilling",
         keyHighlights: ["Professional Driving Instructors", "Various Vehicle Options", "Progressive Skill Development", "Premium Accommodations"],
-        image: "/images/Experiences/ice-driving.jpg",
+        image: "/images/Packages/Sideways Package.png",
+        video: "sidewayPackage",
         gallery: [
           "/images/Experiences/ice-driving.jpg",
           "/images/Experiences/ice-driving2.jpg",
@@ -164,7 +168,8 @@ export const en = {
         duration: "3-4 Nights",
         intensityLevel: "Extreme",
         keyHighlights: ["High-Performance Vehicles", "Professional Racing Instructors", "Exclusive Track Access", "Luxury Accommodations"],
-        image: "/images/Experiences/ice-performance.jpg",
+        image: "/images/Packages/Ice Performance Package.jpg",
+        video: "icePerformance",
         gallery: [
           "/images/Experiences/ice-performance.jpg",
           "/images/Experiences/ice-performance2.jpg",
@@ -1038,6 +1043,7 @@ export const en = {
     contact: {
       title: "Let's talk Arctic business",
       description: "Have an idea, a team, or a project? We're ready to build it together in the Arctic.",
+      callUs: "Call Us",
       form: {
         name: {
           label: "Your name",

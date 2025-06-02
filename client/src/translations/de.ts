@@ -46,6 +46,8 @@ export const de = {
     premiumPackagesDescription: "Unsere All-inclusive-Premiumpakete kombinieren mehrere Aktivitäten mit luxuriösen Unterkünften für das ultimative Arktis-Erlebnis.",
     hideActivitiesButton: "Aktivitäten Ausblenden",
     exploreActivitiesButton: "Unsere Aktivitäten Entdecken",
+    featuredTitle: "Ausgewählte Aktivitäten",
+    featuredDescription: "Stöbern Sie in unseren beliebtesten und empfohlenen Einzelaktivitäten",
     individualActivitiesTitle: "Individuelle Aktivitäten",
     individualActivitiesDescription: "Wählen Sie aus unserer Auswahl an aufregenden individuellen Aktivitäten, um Ihr arktisches Abenteuer individuell zu gestalten",
     
@@ -59,7 +61,8 @@ export const de = {
         duration: "3-4 Nächte",
         intensityLevel: "Moderate",
         keyHighlights: ["All-Inclusive Erlebnis", "Premium-Unterkünfte", "Mehrere Aktivitäten", "Professionelle Guides"],
-        image: "/images/Snowmobile/Snowmobile 2_result.webp",
+        image: "/images/Packages/Adventure Package.png",
+        video: "arcticAdventure",
         gallery: [
           "/images/Snowmobile/Snowmobile 2_result.webp",
           "/images/Husky/Husky 1_result.webp",
@@ -108,11 +111,12 @@ export const de = {
         id: 9,
         title: "Sideways-Paket",
         description: "Erleben Sie den ultimativen Adrenalinkick mit unserem Eisfahrtraining. Meistern Sie das Driften auf Eis unter Anleitung von Rennprofis in einer exklusiven Umgebung.",
-        price: 1499,
-        duration: "3-4 Nächte",
-        intensityLevel: "Fortgeschritten",
-        keyHighlights: ["Professionelles Eisfahrtraining", "Mehrere Fahrzeugtypen", "Premium-Unterkünfte", "All-Inclusive Verpflegung"],
-        image: "/images/Experiences/ice-driving.jpg",
+        price: 1899,
+        duration: "3 Nächte",
+        intensityLevel: "Hoch",
+        keyHighlights: ["Professionelles Eisfahrtraining", "Luxusunterkunft", "Gourmet-Mahlzeiten", "Flughafentransfers"],
+        image: "/images/Packages/Sideways Package.png",
+        video: "sidewayPackage",
         gallery: [
           "/images/Experiences/ice-driving.jpg",
           "/images/Experiences/ice-driving2.jpg",
@@ -161,10 +165,11 @@ export const de = {
         title: "Eis-Performance-Paket",
         description: "Unser Premium-Eisfahrerlebnis für Enthusiasten. Fahren Sie Hochleistungsfahrzeuge auf Eis unter Anleitung von Rennprofis in einer exklusiven Umgebung.",
         price: 2499,
-        duration: "3-4 Nächte",
-        intensityLevel: "Experte",
-        keyHighlights: ["Hochleistungsfahrzeuge", "Professionelle Renninstruktoren", "Luxus-Unterkünfte", "Gourmet-Verpflegung"],
-        image: "/images/Experiences/ice-performance.jpg",
+        duration: "4 Nächte",
+        intensityLevel: "Sehr Hoch",
+        keyHighlights: ["Hochleistungsfahrzeuge", "Professionelle Instruktoren", "Luxus-Unterkünfte", "Gourmet-Verpflegung"],
+        image: "/images/Packages/Ice Performance Package.jpg",
+        video: "icePerformance",
         gallery: [
           "/images/Experiences/ice-performance.jpg",
           "/images/Experiences/ice-performance2.jpg",
@@ -1036,6 +1041,7 @@ export const de = {
     contact: {
       title: "Lassen Sie uns über arktische Geschäfte sprechen",
       description: "Haben Sie eine Idee, ein Team oder ein Projekt? Wir sind bereit, es gemeinsam in der Arktis aufzubauen.",
+      callUs: "Rufen Sie uns an",
       form: {
         name: {
           label: "Ihr Name",

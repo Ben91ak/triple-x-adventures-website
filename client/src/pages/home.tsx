@@ -27,7 +27,7 @@ const ContactSection = lazy(() => import("@/components/contact-section").then(mo
 // Remove BookingSection import since module cannot be found
 
 // Memoize the entire Home component to prevent unnecessary re-renders
-const Home = memo(function Home() {
+const Home = memo(function HomeComponent() {
   const { language } = useLanguage();
   const t = useTranslation(language);
 

@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '../hooks/use-translation';
 import { Experience } from '../types';
 import { 
-  X, ChevronLeft, ChevronRight, ArrowRight, 
+  X, ChevronRight, ArrowRight, 
   Zap, Star, Trees, Sparkles, Mountain,
   Snowflake, Users, Fish, Utensils
 } from "lucide-react";
+import { useLanguage } from '../contexts/LanguageContext';
+import { videoUrls } from '@/config/videoUrls';
 
 interface ExperienceDetailModalProps {
   experience: Experience | null;
@@ -35,60 +37,58 @@ const iconMap: Record<string, React.ReactNode> = {
   food: <Utensils className="w-3 h-3 text-amber-400" />,
 };
 
-const ExperienceDetailModal = React.memo(function ExperienceDetailModal({ 
-  experience, 
-  isOpen, 
-  onClose
-}: ExperienceDetailModalProps) {
+const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = memo(({
+  experience,
+  isOpen,
+  onClose,
+}) => {
   if (!experience || !isOpen) return null;
-  
+
   const { t } = useTranslation();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  
-  const galleryLength = experience?.gallery?.length || 0;
-  const hasGallery = galleryLength > 0;
-  
-  // Check for video availability based on experience ID and video property
+
   const hasVideo = !!experience.video;
-  
-  // We'll use EXPERIENCE_VIDEOS directly as our video URL mapping
-  
-  // Set the experience flags based on the detected type
+  const videoUrl = experience.video;
+
+  const modalContentRef = useRef<HTMLDivElement>(null);
+  const textPanelRef = useRef<HTMLDivElement>(null);
+  const mediaPanelRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    // Preload images if gallery exists
-    if (hasGallery && experience.gallery) {
-      experience.gallery.forEach((imageUrl: string) => {
-        const img = new Image();
-        img.src = imageUrl;
-      });
+    const modalElement = modalContentRef.current;
+    const textElement = textPanelRef.current;
+    const mediaElement = mediaPanelRef.current;
+
+    if (!isOpen || !modalElement || !textElement || !mediaElement) {
+      return;
     }
-    
-    // Reset image index when experience changes
-    setCurrentImageIndex(0);
-    setImageLoaded(false);
-  }, [experience, hasGallery]);
-  // Handle image navigation
-  const handleNextImage = () => {
-    if (experience?.gallery && experience.gallery.length > 0) {
-      setCurrentImageIndex((prev: number) => (prev + 1) % (experience.gallery?.length || 1));
-      setImageLoaded(false);
-    }
-  };
-  
-  const handlePrevImage = () => {
-    if (experience?.gallery && experience.gallery.length > 0) {
-      setCurrentImageIndex((prev: number) => (prev - 1 + (experience.gallery?.length || 1)) % (experience.gallery?.length || 1));
-      setImageLoaded(false);
-    }
-  };
+
+    const handleWheelScroll = (event: WheelEvent) => {
+      if (mediaElement.contains(event.target as Node)) {
+        // If scroll is over the media panel, prevent default and scroll text panel
+        event.preventDefault();
+        textElement.scrollTop += event.deltaY;
+      } else if (textElement.contains(event.target as Node) || event.target === textElement) {
+        // If scroll is directly on text panel, allow native scroll (do nothing here)
+        return;
+      } else {
+        // Optional: If scroll is elsewhere on modal but not media/text, prevent default page scroll
+        event.preventDefault(); 
+      }
+    };
+
+    modalElement.addEventListener('wheel', handleWheelScroll, { passive: false });
+
+    return () => {
+      modalElement.removeEventListener('wheel', handleWheelScroll);
+    };
+  }, [isOpen]);
   
   return (
     <AnimatePresence>
       {isOpen && experience && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-20 bg-black/70 backdrop-blur-sm overflow-y-auto">
           <motion.div
-            className="relative w-full max-w-6xl bg-gradient-to-b from-gray-900 to-black rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh]"
+            ref={modalContentRef} className="relative w-full max-w-6xl bg-gradient-to-b from-gray-900 to-black rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh]"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1, transition: { duration: 0.3, ease: "easeOut" } }}
             exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2, ease: "easeIn" } }}
@@ -101,114 +101,136 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
               <X className="w-5 h-5" />
             </button>
             
-            {/* Navigation buttons */}
-            <button
-              onClick={handlePrevImage}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-1 text-white hover:bg-black/70 transition-colors z-10"
-              aria-label="Previous image"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={handleNextImage}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-1 text-white hover:bg-black/70 transition-colors z-10"
-              aria-label="Next image"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+
             
             {/* Media content section */}
-            <div className="w-full lg:w-3/5 relative bg-black/50 flex items-center justify-center min-h-[300px] lg:min-h-[500px]">
-              {hasVideo ? (
-                <div className="w-full h-full relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                  <div className="w-full h-full flex items-center justify-center bg-black/30">
-                    <img 
-                      src={experience.image} 
-                      alt={experience.title} 
-                      className="w-full h-full object-cover" 
+            <div ref={mediaPanelRef} className="w-full lg:w-3/5 relative bg-black/50 flex items-center justify-center min-h-[300px] lg:min-h-[500px]">
+              {/* Media section */}
+              <div className="relative w-full h-64 md:h-96 lg:h-auto overflow-hidden bg-black">
+                {/* Video if available */}
+                {hasVideo && (
+                  <div className="w-full h-full">
+                    <video 
+                      src={videoUrl} 
+                      autoPlay 
+                      loop 
+                      muted 
+                      playsInline
+                      controls
+                      className="w-full h-full object-cover"
                     />
                   </div>
-                </div>
-              ) : (
-                <motion.div className="w-full h-full relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-                  
-                  {hasGallery ? (
-                    <img 
-                      src={experience.gallery?.[currentImageIndex] || experience.image}
-                      alt={experience.title} 
-                      className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                      onLoad={() => setImageLoaded(true)}
-                    />
-                  ) : (
-                    <img 
-                      src={experience.image} 
-                      alt={experience.title} 
-                      className="w-full h-full object-cover" 
-                    />
-                  )}
-                  
-                  {/* Gallery Controls - Only show if we have multiple images */}
-                  {hasGallery && galleryLength > 1 && (
-                    <div className="absolute bottom-4 right-4 flex space-x-2 z-20">
-                      <motion.button
-                        onClick={() => console.log('View All')}
-                        className="px-3 py-1 bg-black/70 text-white text-xs rounded-md hover:bg-accent-color/90 transition-colors"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        View All
-                      </motion.button>
-                      <div className="bg-black/70 text-white text-xs px-2.5 py-1 rounded-md">
-                        {currentImageIndex + 1} / {galleryLength}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Thumbnails */}
-                  {hasGallery && galleryLength > 1 && (
-                    <div className="gallery-thumbnails flex overflow-x-auto gap-2 mt-4 pb-2">
-                      {experience.gallery?.map((thumb: string, idx: number) => (
-                        <div
-                          key={idx}
-                          className={`thumbnail-item h-16 w-24 flex-shrink-0 cursor-pointer rounded-md overflow-hidden ${idx === currentImageIndex ? 'ring-2 ring-primary' : ''}`}
-                          onClick={() => setCurrentImageIndex(idx)}
-                        >
-                          <img 
-                            src={thumb} 
-                            alt={`${experience.title} thumbnail ${idx + 1}`} 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              )}
-            </div>
-            
-            {/* Details section */}
-            <div className="w-full lg:w-2/5 p-5 sm:p-6 flex flex-col overflow-y-auto custom-scrollbar flex-grow">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{experience.title}</h2>
-              <p className="text-white/90">{experience.description}</p>
-              
-              {/* Action buttons */}
-              <div className="mt-auto pt-4 border-t border-white/10">
-                <button
-                  onClick={onClose}
-                  className="btn-primary w-full inline-flex items-center justify-center text-base px-6 py-2.5 mb-3"
-                >
-                  {t('experiences.bookNow')}
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </button>
+                )}
+                
+                {/* Fallback image if no video */}
+                {!hasVideo && (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-900">
+                    <p className="text-white/70 text-center p-4">No video available for this experience</p>
+                  </div>
+                )}
               </div>
-            </div>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
-  );
+              
+              </div>
+              
+              {/* Details section */}
+              <div ref={textPanelRef} className="w-full lg:w-2/5 p-5 sm:p-6 flex flex-col overflow-y-auto custom-scrollbar flex-grow">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{experience.title}</h2>
+                <p className="text-white/80 mb-6">{experience.description}</p>
+                
+                {/* Full description if available */}
+                {experience.fullDescription && (
+                  <div className="text-white/80 mb-6">
+                    <h4 className="text-lg font-semibold text-white mb-2">About this experience</h4>
+                    <p>{experience.fullDescription}</p>
+                  </div>
+                )}
+                
+                {/* Features */}
+                {experience.features && experience.features.length > 0 && (
+                  <div className="bg-white/5 p-4 rounded-lg mb-6">
+                    <h4 className="text-lg font-semibold text-white mb-2">Features</h4>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {experience.features.map((feature: string, index: number) => (
+                        <li key={index} className="flex items-center gap-2 text-white/80">
+                          <div className="w-1.5 h-1.5 rounded-full bg-accent-color"></div>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {/* Detailed Info */}
+                {experience.detailedInfo && (
+                  <div className="mb-6">
+                    {experience.detailedInfo.introduction && (
+                      <div className="mb-4">
+                        <p className="text-white/80">{experience.detailedInfo.introduction}</p>
+                      </div>
+                    )}
+                    
+                    {experience.detailedInfo.adventureOptionsTitle && experience.detailedInfo.tours && experience.detailedInfo.tours.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="text-lg font-semibold text-white mb-2">{experience.detailedInfo.adventureOptionsTitle}</h4>
+                        <div className="space-y-4">
+                          {experience.detailedInfo?.tours?.map((tour: { title?: string; description?: string; details?: string[] }, index: number) => (
+                            <div key={index} className="bg-white/5 p-4 rounded-lg">
+                              {tour.title && <h5 className="font-medium text-white mb-1">{tour.title}</h5>}
+                              {tour.description && <p className="text-white/80 mb-2">{tour.description}</p>}
+                              {tour.details && tour.details.length > 0 && (
+                                <ul className="space-y-1">
+                                  {tour.details.map((detail: string, idx: number) => (
+                                    <li key={idx} className="flex items-start gap-2 text-white/70">
+                                      <div className="w-1.5 h-1.5 rounded-full bg-accent-color mt-2"></div>
+                                      <span>{detail}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {experience.detailedInfo.importantInfoTitle && experience.detailedInfo.importantInfo && experience.detailedInfo.importantInfo.length > 0 && (
+                      <div className="bg-white/5 p-4 rounded-lg mb-4">
+                        <h4 className="text-lg font-semibold text-white mb-2">{experience.detailedInfo.importantInfoTitle}</h4>
+                        <ul className="space-y-2">
+                          {experience.detailedInfo?.importantInfo?.map((info: string, index: number) => (
+                            <li key={index} className="flex items-start gap-2 text-white/80">
+                              <div className="w-1.5 h-1.5 rounded-full bg-accent-color mt-2"></div>
+                              <span>{info}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {experience.detailedInfo.closingRemark && (
+                      <div className="mt-4">
+                        <p className="text-white/80 italic">{experience.detailedInfo.closingRemark}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Action buttons */}
+                <div className="mt-auto pt-4 border-t border-white/10">
+                  <button
+                    onClick={onClose}
+                    className="btn-primary w-full inline-flex items-center justify-center text-base px-6 py-2.5 mb-3"
+                  >
+                    {t('experiences.bookNow')}
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>   
+          </div>
+        )}
+      </AnimatePresence>
+  )
 });
 
 // Experience Card component for displaying individual experiences
@@ -249,7 +271,9 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
         <h3 className="text-lg font-bold text-white mb-2">{experience.title}</h3>
         <p className="text-white/70 text-sm mb-4 line-clamp-3">{experience.description}</p>
         
-        {/* Features */}
+        {/* Features section removed from card to keep it simple */}
+        
+        {/* Action buttons */}
         <div className="mt-auto">
           <button
             onClick={(e) => onOpenDetail(experience, e)}
@@ -264,13 +288,52 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
 };
 
 // Main component
-export function ExperiencesSection({ experiences: propExperiences = [] }: ExperiencesSectionProps) {
+export const ExperiencesSection = ({ experiences: propExperiences = [] }: ExperiencesSectionProps) => {
   // Get translation function
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   
+  // Get current language
+  const { language } = useLanguage();
+  
   // State for experiences data
-  const [experiences, setExperiences] = useState<Experience[]>(propExperiences);
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  
+  // Load experiences from translation files
+  useEffect(() => {
+    // Get the translations directly from the import
+    import('@/translations').then(module => {
+      const translationData = module.translations[language];
+      if (translationData?.experiences?.list && Array.isArray(translationData.experiences.list)) {
+        // Use type assertion to ensure compatibility with the Experience interface
+        const experiencesList = translationData.experiences.list as unknown as Experience[];
+        
+        // Process experiences to ensure video URLs are properly set
+        const processedExperiences = experiencesList.map(exp => {
+          // If the experience has a video field that matches a key in videoUrls, use that URL
+          if (exp.video && typeof exp.video === 'string' && exp.video in videoUrls) {
+            return {
+              ...exp,
+              video: videoUrls[exp.video as keyof typeof videoUrls]
+            };
+          }
+          return exp;
+        });
+        
+        setExperiences(processedExperiences);
+        setIsLoaded(true);
+        console.log('Experiences loaded from translations:', processedExperiences.length);
+      } else if (propExperiences.length > 0) {
+        setExperiences(propExperiences);
+        setIsLoaded(true);
+        console.log('Experiences loaded from props:', propExperiences.length);
+      } else {
+        console.log('No experiences found in translations or props');
+      }
+    }).catch(error => {
+      console.error('Error loading translations:', error);
+    });
+  }, [language, propExperiences]);
   const [isLoaded, setIsLoaded] = useState(false);
   
   // State for selected experience and modal
@@ -280,35 +343,8 @@ export function ExperiencesSection({ experiences: propExperiences = [] }: Experi
   // State for showing all activities
   const [showAllActivities, setShowAllActivities] = useState(false);
   
-  // State for mobile view detection - used for limiting displayed experiences
-  const [isMobileView, setIsMobileView] = useState(false);
-  
-  // Handle window resize and check if mobile view
-  // This affects how many experiences are shown initially (see displayedExperiences)
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth < 768);
-    };
-    
-    // Initial check
-    handleResize();
-    
-    // Add event listener
-    window.addEventListener('resize', handleResize);
-    
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-  
-  // Set experiences from props
-  useEffect(() => {
-    if (propExperiences && propExperiences.length > 0) {
-      setExperiences(propExperiences);
-      setIsLoaded(true);
-    }
-  }, [propExperiences]);
+  // We've removed the redundant effect that was checking for propExperiences
+  // since we're already handling that in the main useEffect above
   
   // Navigation functions for the experience modal
   // We'll keep these but comment them out for future use if needed
@@ -343,17 +379,10 @@ export function ExperiencesSection({ experiences: propExperiences = [] }: Experi
     setModalOpen(false);
   };
   
-  // Define package IDs as constants for better maintainability
-  const PACKAGE_IDS = {
-    ARCTIC_ADVENTURE: 0,
-    PERFORMANCE_PACKAGE: 9,
-    SIDEWAYS_ADVENTURE: 10
-  };
-
-   // Separate packages from regular activities
-  const packageIds = Object.values(PACKAGE_IDS);
-   const packages = experiences.filter(exp => packageIds.includes(exp.id));
-   const activities = experiences.filter(exp => !packageIds.includes(exp.id));
+  // Separate packages from regular activities
+  const packageIds = [0, 9, 10];
+  const packages = experiences.filter(exp => packageIds.includes(exp.id));
+  const activities = experiences.filter(exp => !packageIds.includes(exp.id));
   
   const filteredPackages = packages;
   const filteredActivities = activities;
@@ -362,7 +391,7 @@ export function ExperiencesSection({ experiences: propExperiences = [] }: Experi
   // Use isMobileView to limit the number of experiences shown on mobile
   const displayedActivities = showAllActivities
     ? filteredActivities
-    : filteredActivities.slice(0, isMobileView ? 2 : 6);
+    : [];
   
   return (
     <section 
@@ -461,48 +490,56 @@ export function ExperiencesSection({ experiences: propExperiences = [] }: Experi
             </div>
 
             {/* Activities Section - Shows limited number on mobile */}
-            {filteredActivities.length > 0 && (
-              <>
-                {/* Activities Header */}
-                <motion.div 
-                  className="text-center mb-8 mt-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+            <AnimatePresence>
+              {showAllActivities && filteredActivities.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="overflow-hidden" 
                 >
-                  <div className="text-center">
-                    <h2 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
-                      <span className="bg-white/10 px-6 py-2 rounded-lg">
-                        {t('experiences.featuredTitle')}
-                      </span>
-                    </h2>
-                    <p className="text-white/80 mt-4 max-w-2xl mx-auto">
-                      {t('experiences.featuredDescription')}
-                    </p>
+                  {/* Activities Header */}
+                  <motion.div 
+                    className="text-center mb-8 mt-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }} 
+                  >
+                    <div className="text-center">
+                      <h2 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
+                        <span className="bg-white/10 px-6 py-2 rounded-lg">
+                          {t('experiences.featuredTitle')}
+                        </span>
+                      </h2>
+                      <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+                        {t('experiences.featuredDescription')}
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  {/* Activities Grid - responsive based on screen size */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
+                    {displayedActivities.map((experience, index) => (
+                      <motion.div 
+                        key={experience.id} 
+                        layout 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }} 
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 + 0.2 }} 
+                      >
+                        <ExperienceCard
+                          experience={experience}
+                          onOpenDetail={openExperienceDetail}
+                          delay={index} 
+                        />
+                      </motion.div>
+                    ))}
                   </div>
                 </motion.div>
-
-                {/* Activities Grid - responsive based on screen size */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
-                  {displayedActivities.map((experience, index) => (
-                    <motion.div 
-                      key={experience.id} 
-                      layout 
-                      animate={{ opacity: 1 }} 
-                      initial={{ opacity: 0 }} 
-                      exit={{ opacity: 0 }}
-                    >
-                      <ExperienceCard
-                        key={experience.id}
-                        experience={experience}
-                        onOpenDetail={openExperienceDetail}
-                        delay={index}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </>
-            )}
+              )}
+            </AnimatePresence>
           </>
         ) : (
           // No results state
@@ -535,3 +572,5 @@ export function ExperiencesSection({ experiences: propExperiences = [] }: Experi
     </section>
   );
 }
+
+
