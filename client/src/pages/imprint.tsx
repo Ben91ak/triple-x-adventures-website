@@ -53,8 +53,8 @@ export default function ImprintPage() {
                 </p>
                 <p className="text-sm">
                   <strong>Contact:</strong><br />
-                  Telephone: +46 (0) 70 357 5455<br />
-                  Email: <a href="mailto:info@triple-x-adventures.com" className="text-accent-color hover:underline">info@triple-x-adventures.com</a>
+                   Telephone: +46 70 357 5455<br />
+                    Email: <a href="mailto:info@triple-x-adventures.com" className="text-accent-color hover:underline">info@triple-x-adventures.com</a>
                 </p>
                 <p className="text-sm">
                   <strong>Register entry:</strong><br />

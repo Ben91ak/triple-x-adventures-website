@@ -2,17 +2,19 @@
 import { Users, MapPin, Crown } from 'lucide-react'; // Using Lucide icons
 
 // No need for TeamMember type here
-// import { TeamMember } from "@/types";
+import { useTranslation } from "@/hooks/use-translation";
 
-export function AboutSection() {
+ export function AboutSection() {
+  const { t } = useTranslation();
 
-  const features = [
-    {
-      icon: <Users size={28} className="text-slate-400" />,
-      title: "Small Groups",
-      text: "Personal attention and authentic experiences with small, intimate group sizes"
-    },
-    {
+   const features = [
+     {
+       icon: <Users size={28} className="text-slate-400" />,
+      title: t('aboutSection.features.smallGroups.title'),
+      text: t('aboutSection.features.smallGroups.description')
+     },
+     // ... apply similar changes to other features and text content
+   ];
       icon: <MapPin size={28} className="text-slate-400" />,
       title: "Local Experts",
       text: "Our guides are passionate locals with deep knowledge of the Arctic wilderness"

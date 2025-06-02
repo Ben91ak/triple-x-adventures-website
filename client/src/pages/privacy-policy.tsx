@@ -42,9 +42,9 @@ export default function PrivacyPolicyPage() {
               <div className="text-white space-y-6 text-sm sm:text-base">
                 <div>
                   <h3 className="text-lg font-semibold mb-4">{content.privacyPolicyTitle}</h3>
-                  <p className="text-white/80 text-sm">
-                    {content.privacyPolicyIntro}
-                  </p>
+ <p className="text-white/80 text-sm mb-4">
+   {content.storingInfo}
+ </p>
                 </div>
 
                 <div>
@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium mb-2">Storing Personal Information</h4>
+                  <h4 className="font-medium mb-2">{content.storingPersonalInfo}</h4>
                   <p className="text-white/80 text-sm mb-4">
                     We will retain and use your Personal Information for the period necessary to comply with our legal obligations, resolve disputes, and enforce our agreements, unless a longer retention period is required or permitted by law. We may use any aggregated data derived from or incorporating your Personal Information after you update or delete it, but not in a manner that would identify you personally. Once the retention period expires, Personal Information shall be deleted. Therefore, the right to access, the right to erasure, the right to rectification, and the right to data portability cannot be enforced after the expiration of the retention period.
                   </p>

@@ -11,11 +11,11 @@
     "addressRegion": "Swedish Lapland",
     "addressCountry": "Sweden"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "65.5856",
-    "longitude": "19.1764"
-  },
+"geo": {
+     "@type": "GeoCoordinates",
+    "latitude": "65.5903",
+    "longitude": "19.1668"
+   },
   "telephone": "+46 123 456 789",
   "email": "info@triple-x-adventures.com",
   "sameAs": [

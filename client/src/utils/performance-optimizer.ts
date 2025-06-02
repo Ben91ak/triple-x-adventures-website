@@ -59,11 +59,7 @@ export function preloadAllCriticalImages(): void {
     }
   } catch {
     /* storage not available – proceed without caching flag */
-  }
-
-  try {
-    window.sessionStorage?.setItem('imagesPreloaded', 'true');
-  } catch { /* ignore */ }
+   }
   // Only include images that are known to exist
   const criticalImageUrls = [
     '/weiss-grun.png', // Logo
@@ -214,11 +210,13 @@ export function monitorPerformance(): void {
           
           // Only send to analytics, no console logs in production
           if (hasAnalytics) {
-            window.gtag!('event', 'performance', {
-              pageLoadTime: Math.round(pageLoadTime),
-              timeToFirstByte: Math.round(timeToFirstByte),
-              domContentLoaded: Math.round(domContentLoaded)
-            });
+            if (window.gtag) {
+              window.gtag('event', 'performance', {
+                pageLoadTime: Math.round(pageLoadTime),
+                timeToFirstByte: Math.round(timeToFirstByte),
+                domContentLoaded: Math.round(domContentLoaded)
+              });
+            }
           }
         }
       } catch (e) {
@@ -321,7 +319,6 @@ export default function applyAllOptimizations(): void {
     }
   } else {
     // In development, always run all optimizations
-    preloadAllCriticalImages();
-    monitorPerformance();
-  }
+  preloadAllCriticalImages();
+  monitorPerformance();
 }

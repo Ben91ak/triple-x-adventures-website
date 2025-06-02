@@ -57,7 +57,7 @@ export const en = {
         description: "Our signature all-inclusive package featuring the best winter activities Swedish Lapland has to offer. Experience snowmobiling, husky sledding, and more in one comprehensive package.",
         price: 3650,
         duration: "3-4 Nights",
-        intensityLevel: "Magical",
+        intensityLevel: "Magical", // ← add colour/icon mapping in IntensityBadge.tsx
         keyHighlights: ["All-Inclusive Experience", "Premium Accommodations", "Multiple Activities", "Professional Guides"],
         image: "/images/Snowmobile/Snowmobile 2_result.webp",
         gallery: [

@@ -1,7 +1,11 @@
 // Type definitions for the project
 
 // Declare modules without type definitions
-declare module 'lucide-react';
+declare module 'lucide-react' {
+  import { FC, SVGProps } from 'react';
+  export type Icon = FC<SVGProps<SVGSVGElement>>;
+  // Add specific icon exports as needed
+}
 
 // Path alias modules
 declare module '@/contexts/LanguageContext' {

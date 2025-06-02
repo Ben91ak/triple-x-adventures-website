@@ -44,7 +44,7 @@ SMTP_PASSWORD=your_smtp_password
 SMTP_FROM=your_from_email
 
 # Google Places API
-GOOGLE_PLACE_ID=ChIJS3EmQH1YeEYRX8PdBeA8h_Q
+GOOGLE_PLACE_ID=your_google_place_id
 
 # Vercel Blob Storage (if using media uploads)
 BLOB_READ_WRITE_TOKEN=your_vercel_blob_token

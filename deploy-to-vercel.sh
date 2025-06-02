@@ -5,22 +5,27 @@ echo "===== Triple X Adventures - Vercel Deployment ====="
 echo "This script will help you deploy your application to Vercel"
 
 # Check if Vercel CLI is installed
-if ! command -v vercel &> /dev/null; then
-    echo "Vercel CLI is not installed. Installing..."
-    npm install -g vercel
-fi
+# Use npx to run vercel without global installation
+VERCEL_CMD="npx vercel@latest"
 
 # Check if user is logged in
 echo "Checking Vercel authentication..."
-VERCEL_USER=$(vercel whoami 2>/dev/null)
-if [ $? -ne 0 ]; then
+if ! vercel whoami &>/dev/null; then
     echo "You are not logged in to Vercel. Please log in:"
-    vercel login
+    if ! vercel login; then
+        echo "Login failed. Please try again."
+        exit 1
+    fi
+else
+    echo "Already logged in to Vercel as: $(vercel whoami)"
 fi
 
 # Build the application
-echo "Building application for production..."
-npm run build:prod
+ echo "Building application for production..."
+if ! npm run build:prod; then
+    echo "Build failed! Please fix the errors and try again."
+    exit 1
+fi
 
 # Confirm deployment
 echo ""

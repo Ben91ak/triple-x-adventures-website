@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react";
+import { MapPin, Phone, Mail, Instagram, Youtube } from "lucide-react";
 
 type SocialLink = {
   icon: React.ReactNode;
@@ -49,8 +49,9 @@ export function Footer() {
 
   // Social media links
   const socialLinks: SocialLink[] = [
-    { icon: <Facebook size={15} />, label: "Facebook", href: "#" },
-    { icon: <Instagram size={15} />, label: "Instagram", href: "http://instagram.com/triplexadventures" },
+    // TODO: Add actual Facebook URL when available
+    // { icon: <Facebook size={15} />, label: "Facebook", href: "https://facebook.com/triplexadventures" },
+    { icon: <Instagram size={15} />, label: "Instagram", href: "https://instagram.com/triplexadventures" },
     { icon: <Youtube size={15} />, label: "YouTube", href: "#" },
     { 
       icon: (

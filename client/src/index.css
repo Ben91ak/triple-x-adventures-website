@@ -89,6 +89,33 @@
     background-size: 200% 200%;
   }
   
+  /* Cross-browser scrollbar styling */
+  .scroll-container {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(164, 210, 51, 0.7) transparent;
+    
+    /* WebKit browsers (Chrome, Safari, Edge) */
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(164, 210, 51, 0.7);
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(164, 210, 51, 0.9);
+    }
+  }
+  
   /* Video optimization utilities */
   .video-thumbnail {
     position: relative;

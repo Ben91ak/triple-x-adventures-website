@@ -24,6 +24,9 @@ export interface DetailedInfoType {
   closingRemark?: string;
 }
 
+// Define video type for experiences
+export type ExperienceVideoType = 'buggy' | 'husky' | 'helicopter' | 'drift' | 'snowmobile' | 'icefishing' | 'reindeer' | 'snowshoe' | 'torchwalk' | 'arcticAdventure' | 'icePerformance' | 'sidewayPackage' | 'ice' | 'snow' | 'aurora' | 'northernlights' | 'icehotel' | 'icehotelpackage' | 'aurorapackage' | 'auroratour' | 'northernlightstour' | 'icehoteltour' | 'northernlightspackage';
+
 // Define the complete Experience type
 export interface Experience {
   id: number;
@@ -38,7 +41,7 @@ export interface Experience {
   keyHighlights?: string[]; // e.g., ["Arctic Scenery", "Professional Guide", "Adrenaline Rush"]
 tag?: {
     text: string;
-   type: 'bestseller' | 'new' | 'featured' | 'nature' | 'adrenaline' | 'scenic';
+    type: 'duration' | 'intensity' | 'highlight' | 'bestseller' | 'featured' | 'new' | 'nature' | 'adrenaline' | 'scenic' | 'winter' | 'adventure' | 'culture' | 'water' | 'dining' | 'all';
   };
   features?: string[]; // Add optional features array
   detailedInfo?: DetailedInfoType; // Add optional detailed info structure

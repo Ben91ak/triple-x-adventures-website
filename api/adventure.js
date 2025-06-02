@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import he from 'he';
 
 /**
  * Validates adventure form data
@@ -15,11 +16,19 @@ function validateAdventureForm(formData) {
     endDate, 
     departureAirport,
     groupSize
-  } = formData;
+  // === Required fields ===
+   if (!firstName || !lastName || !email || !departureAirport) {
+     ...
+   }
 
-  // Required fields validation
-  if (!firstName || !lastName || !email || !departureAirport) {
-    return {
+  // Optional extras
+  if (groupSize && (groupSize < 1 || groupSize > 100)) {
+    return { valid: false, error: 'Group size must be between 1 and 100' };
+  }
+
+  if (startDate && endDate && new Date(endDate) <= new Date(startDate)) {
+    return { valid: false, error: 'End date must be after start date' };
+  }
       valid: false,
       error: 'Missing required fields'
     };
@@ -34,44 +43,41 @@ function validateAdventureForm(formData) {
     };
   }
 
-  // Phone validation (if provided)
-  if (phone && !/^\+?[\d\s\-\(\)]{7,15}$/.test(phone.replace(/\s/g, ''))) {
+  // Phone validation (optional, only if phone is provided)
+  if (phone && !/^\+?[0-9\s-]{7,15}$/.test(phone)) {
     return {
       valid: false,
       error: 'Invalid phone format'
     };
   }
 
-  // Group size validation
-  if (groupSize && (isNaN(groupSize) || groupSize < 1 || groupSize > 50)) {
+  return { valid: true };
+}
+
+// Group size validation
+function validateGroupSize(groupSize) {
+  if (groupSize < 1 || groupSize > 100) {
     return {
       valid: false,
-      error: 'Group size must be between 1 and 50'
+      error: 'Group size must be between 1 and 100'
     };
   }
+  return { valid: true };
+}
 
-  // Date validation
-  if (startDate && endDate) {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    if (start < today) {
-      return {
-        valid: false,
-        error: 'Start date cannot be in the past'
-      };
-    }
-    if (end <= start) {
-      return {
-        valid: false,
-        error: 'End date must be after start date'
-      };
-    }
+// Date validation
+function validateDates(startDate, endDate) {
+  if (new Date(endDate) <= new Date(startDate)) {
+    return {
+      valid: false,
+      error: 'End date must be after start date'
+    };
   }
+  return { valid: true };
+}
 
-  // All validations passed
+// All validations passed
+function validateAll() {
   return {
     valid: true
   };
@@ -105,12 +111,10 @@ export default async function handler(req, res) {
     if (!validation.valid) {
       return res.status(400).json({ error: validation.error });
     }
-    
-    const he = require('he'); // Add HTML entity encoding library
-    const formatArray = (arr) => {
-      if (!arr || arr.length === 0) return 'None specified';
-      return arr.map(item => he.encode(String(item))).join(', ');
-    };
+const formatArray = (arr) => {
+   if (!arr || arr.length === 0) return 'None specified';
+   return arr.map(item => he.encode(String(item))).join(', ');
+ };
     
     const formattedPackages = formatArray(selectedPackages);
     const formattedAccommodations = formatArray(selectedAccommodations);

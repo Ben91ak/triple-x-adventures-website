@@ -69,15 +69,15 @@ export function ContactSection() {
   ];
 
   // Charter flight options
-  const flightOptions = [
+const flightOptions = [
     { value: "none", label: t('contact.form.flight.none') || "No charter flight needed" },
-    { value: "stuttgart", label: "Stuttgart" },
-    { value: "munich", label: "Munich" },
-    { value: "cologne-bonn", label: "Cologne/Bonn" },
-    { value: "hannover", label: "Hannover" },
-    { value: "stockholm", label: "Stockholm" },
+    { value: "stuttgart", label: t('contact.form.flight.stuttgart') || "Stuttgart" },
+    { value: "munich", label: t('contact.form.flight.munich') || "Munich" },
+    { value: "cologne-bonn", label: t('contact.form.flight.cologneBonn') || "Cologne/Bonn" },
+    { value: "hannover", label: t('contact.form.flight.hannover') || "Hannover" },
+    { value: "stockholm", label: t('contact.form.flight.stockholm') || "Stockholm" },
     { value: "private-jet", label: t('contact.form.flight.privateJet') || "Private Jet" },
-  ];
+   ];
 
   // Set up form with zod validation
   const form = useForm<z.infer<typeof contactFormSchema>>({
@@ -176,53 +176,31 @@ export function ContactSection() {
           {/* Contact Information Cards */}
           <div className="glass-card border border-white/10 rounded-xl backdrop-blur-sm mb-12 max-w-4xl mx-auto">
             <div className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Phone */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-[#1A1D1F] p-3 rounded-full">
-                    <Phone className="w-5 h-5 text-[#A4D233]" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-medium text-white"></h4>
-                    <p className="text-gray-300">+46 70 357 54 55</p>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-[#1A1D1F] p-3 rounded-full">
-                    <Mail className="w-5 h-5 text-[#A4D233]" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-medium text-white"></h4>
-                    <p className="text-gray-300">info@t-x-a.com</p>
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-[#1A1D1F] p-3 rounded-full">
-                    <MapPin className="w-5 h-5 text-[#A4D233]" />
-                  </div>
-                  <p className="text-gray-300">{t('contact.info.address')}</p>
-                </div>
-                
-                {/* Phone */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-[#1A1D1F] p-3 rounded-full">
-                    <Phone className="w-5 h-5 text-[#A4D233]" />
-                  </div>
-                  <p className="text-gray-300">{t('contact.info.phone')}</p>
-                </div>
-                
-                {/* Email */}
-                <div className="flex items-center space-x-4">
-                  <div className="bg-[#1A1D1F] p-3 rounded-full">
-                    <Mail className="w-5 h-5 text-[#A4D233]" />
-                  </div>
-                  <p className="text-gray-300">{t('contact.info.email')}</p>
-                </div>
-              </div>
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                 {/* Address */}
+                 <div className="flex items-center space-x-4">
+                   <div className="bg-[#1A1D1F] p-3 rounded-full">
+                     <MapPin className="w-5 h-5 text-[#A4D233]" />
+                   </div>
+                   <p className="text-gray-300">{t('contact.info.address')}</p>
+                 </div>
+                 
+                 {/* Phone */}
+                 <div className="flex items-center space-x-4">
+                   <div className="bg-[#1A1D1F] p-3 rounded-full">
+                     <Phone className="w-5 h-5 text-[#A4D233]" />
+                   </div>
+                   <p className="text-gray-300">{t('contact.info.phone')}</p>
+                 </div>
+                 
+                 {/* Email */}
+                 <div className="flex items-center space-x-4">
+                   <div className="bg-[#1A1D1F] p-3 rounded-full">
+                     <Mail className="w-5 h-5 text-[#A4D233]" />
+                   </div>
+                   <p className="text-gray-300">{t('contact.info.email')}</p>
+                 </div>
+               </div>
             </div>
           </div>
         </div>
@@ -444,7 +422,7 @@ export function ContactSection() {
           <div className="glass-card border border-white/10 backdrop-blur-sm rounded-xl overflow-hidden">
             <div className="p-6" style={containerStyle}>
               <h3 className="font-medium text-xl mb-4 text-white">{t('contact.faq.title')}</h3>
-              <div style={scrollableContainerStyle} className="space-y-4">
+              <div style={scrollableContainerStyle} className="space-y-4 scroll-container">
                 <div>
                   <h4 className="font-medium mb-2 text-white">{t('contact.faq.q1')}</h4>
                   <p className="text-white text-opacity-80 text-sm leading-relaxed">{t('contact.faq.a1')}</p>

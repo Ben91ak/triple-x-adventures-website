@@ -99,12 +99,13 @@ self.addEventListener('fetch', (event) => {
             return response;
           });
       })
-      .catch(error => {
-        console.error('Fetch failed:', error);
-        // For image requests, return a fallback image
+} catch (error) {
+         console.error('Fetch failed:', error);
         if (event.request.destination === 'image') {
           return caches.match('/images/TXA_fallback_optimized.jpg');
         }
-      })
+        // Generic offline fallback
+        return new Response('Offline', { status: 503, headers: { 'Content-Type': 'text/plain' }});
+       })
   );
 });

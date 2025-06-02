@@ -1,807 +1,156 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Experience } from "@/types";
-import { useLanguage, Language } from "@/contexts/LanguageContext";
-import { useTranslation } from "@/translations";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from '../hooks/use-translation';
+import { Experience } from '../types';
 import { 
-  X, ChevronLeft, ChevronRight, ArrowRight, Snowflake, 
-  Clock, Zap, Star, Sun, Utensils, Mountain, MapPin, Users, Trees, Fish, Check, Sparkles
+  X, ChevronLeft, ChevronRight, ArrowRight, 
+  Zap, Star, Trees, Sparkles, Mountain,
+  Snowflake, Users, Fish, Utensils
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { EXPERIENCE_VIDEOS, ExperienceVideoType } from '../config/videos';
 
-// Custom hook for parallax effect
-function useParallax(speed = 0.03) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = ref.current?.getBoundingClientRect();
-      if (!rect) return;
-      
-      const x = (e.clientX - rect.left - rect.width / 2) * speed;
-      const y = (e.clientY - rect.top - rect.height / 2) * speed;
-      
-      setPosition({ x, y });
-    };
-
-    const element = ref.current;
-    element.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      element.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [speed]);
-
-  return { ref, position };
-}
-
-// ----- ICON MAPPING ----- 
-const iconMap = {
-  // Experience details icons
-  duration: <Clock className="w-4 h-4 mr-1.5 text-accent-color/80" />,
-  intensity: <Zap className="w-4 h-4 mr-1.5 text-accent-color/80" />,
-  highlight: <Star className="w-4 h-4 mr-1.5 text-accent-color/80" />,
-  
-  // Tag icons
-  bestseller: <Star className="w-4 h-4 text-yellow-400" />,
-  featured: <Sun className="w-4 h-4 text-orange-400" />,
-  new: <Sparkles className="w-4 h-4 text-blue-400" />,
-  nature: <Trees className="w-4 h-4 text-white" />,
-  adrenaline: <Zap className="w-4 h-4 text-white" />,
-  scenic: <Mountain className="w-4 h-4 text-white" />,
-  
-  // Category Icons
-  winter: <Snowflake className="w-4 h-4 mr-1.5 text-blue-300" />,
-  adventure: <Mountain className="w-4 h-4 mr-1.5 text-orange-400" />,
-  culture: <Users className="w-4 h-4 mr-1.5 text-purple-400" />,
-  water: <Fish className="w-4 h-4 mr-1.5 text-cyan-400" />,
-  dining: <Utensils className="w-4 h-4 mr-1.5 text-amber-400" />,
-  all: <MapPin className="w-4 h-4 mr-1.5" />,
-};
-
-// Category types for filtering
-type ExperienceCategory = 'all' | 'adventure' | 'winter' | 'culture' | 'water' | 'dining' | 'scenic';
-
-// Helper function to get tag gradient styles based on tag type
-function getTagStyles(tagType: string): string {
-  switch (tagType) {
-    case 'bestseller':
-      return 'bg-gradient-to-r from-yellow-500 to-amber-600 text-white';
-    case 'new':
-      return 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white';
-    case 'nature':
-      return 'bg-gradient-to-r from-green-500 to-emerald-600 text-white';
-    case 'adrenaline':
-      return 'bg-gradient-to-r from-red-500 to-rose-600 text-white';
-    case 'scenic':
-      return 'bg-gradient-to-r from-purple-500 to-violet-600 text-white';
-    case 'featured':
-      return 'bg-gradient-to-r from-accent-color to-purple-600 text-white';
-    default:
-      return 'bg-gradient-to-r from-accent-color to-purple-600 text-white';
-  }
-}
-
-// Function to determine category based on experience title/description
-function getCategoryFromExperience(experience: Experience): ExperienceCategory[] {
-  const text = (experience.title + ' ' + experience.description).toLowerCase();
-  const categories: ExperienceCategory[] = [];
-  
-  if (text.includes('snowmobile') || text.includes('snow') || text.includes('ice') || 
-      text.includes('winter') || text.includes('drift') || text.includes('husky')) {
-    categories.push('winter');
-  }
-  
-  if (text.includes('helicopter') || text.includes('adventure') || 
-      text.includes('buggy') || text.includes('side') || text.includes('expedition')) {
-    categories.push('adventure');
-  }
-  
-  if (text.includes('fishing') || text.includes('boat')) {
-    categories.push('water');
-  }
-  
-  if (text.includes('reindeer') || text.includes('sami') || text.includes('culture')) {
-    categories.push('culture');
-  }
-  
-  if (text.includes('restaurant') || text.includes('dining') || text.includes('food')) {
-    categories.push('dining');
-  }
-  
-  if (text.includes('helicopter') || text.includes('sightseeing') || text.includes('northern lights')) {
-    categories.push('scenic');
-  }
-  
-  // Always have at least one category
-  if (categories.length === 0) {
-    if (text.includes('snow') || text.includes('ice')) categories.push('winter');
-    else categories.push('adventure'); 
-  }
-  
-  return Array.from(new Set(categories)); // Ensure unique categories
-}
-
-// Helper to get intensity color
-const getIntensityColor = (level: Experience['intensityLevel']) => {
-  switch (level) {
-    case 'Relaxed': return 'text-green-400';
-    case 'Moderate': return 'text-yellow-400';
-    case 'Thrilling': return 'text-orange-400';
-    case 'Extreme': return 'text-red-500';
-    default: return 'text-gray-400';
-  }
-};
-
-// ----- TRAVEL PACKAGE CARD COMPONENT -----
-interface ExperienceCardProps {
-  experience: Experience;
-  language: Language;
-  onOpenDetail: (experience: Experience, e: React.MouseEvent) => void;
-  delay?: number;
-}
-
-function ExperienceCard({ 
-  experience, 
-  language, 
-  onOpenDetail, 
-  delay = 0
-}: ExperienceCardProps) {
-  const t = useTranslation(language);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [fallbackUsed, setFallbackUsed] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const { ref, position } = useParallax(0.03);
-  
-  // Check if device is mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    // Initial check
-    checkMobile();
-    
-    // Add event listener for window resize
-    window.addEventListener('resize', checkMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  // Get experience categories for display (used for display logic only)
-  getCategoryFromExperience(experience);
-  
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    if (!fallbackUsed) {
-      console.error("Failed to load card image, trying fallback:", (e.target as HTMLImageElement).src);
-      
-      // Try direct fallback based on title
-      let fallbackPath = "/images/TXA_fallback.jpg"; // Default fallback
-      const title = experience.title.toLowerCase();
-      
-      if (title.includes("snowmobile")) {
-        // Assumes specific image inside directory exists
-        fallbackPath = "/images/Snowmobile/Snowmobile 1_result.webp"; 
-      } else if (title.includes("restaurant") || title.includes("jayjay")) {
-        // Keep this specific restaurant image reference
-        fallbackPath = "/images/JayJays-Restaurant.jpg"; 
-      } else if (title.includes("kart")) {
-        fallbackPath = "/images/ice-kart.jpg"; // Use correct filename casing
-      } else if (title.includes("reindeer")) {
-        fallbackPath = "/images/Reindeers.jpg"; // Use correct filename
-      } else if (title.includes("helicopter") || title.includes("helikopter")) {
-        fallbackPath = "/images/Helikopter.jpg"; // Use correct filename
-      } else if (title.includes("drift")) {
-        fallbackPath = "/images/Drifting.jpg"; // Use correct filename
-      } else if (title.includes("fishing")) {
-        fallbackPath = "/images/Ice-Fishing.jpg"; // Use correct filename
-      } else if (title.includes("buggy") || title.includes("side")) {
-        fallbackPath = "/images/Side-By-Side-Buggy-Drifting.jpg"; // Use correct filename
-      } else if (title.includes("husky") || title.includes("dog")) {
-        // Assumes specific image inside directory exists
-        fallbackPath = "/images/Huskys/Husky 1_result.webp"; 
-      }
-      
-      (e.target as HTMLImageElement).src = fallbackPath;
-      setFallbackUsed(true);
-    } else {
-      // If even the fallback fails, use ultimate fallback
-      console.error("Fallback image also failed, using final fallback");
-      (e.target as HTMLImageElement).src = "/images/TXA_fallback.jpg";
-    }
-  };
-
-
-
-  return (
-    <motion.div 
-      ref={ref}
-      className="flex flex-col h-full group"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: delay * 0.1, ease: "easeOut" }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={() => setIsHovered(true)}
-      onTouchEnd={() => setTimeout(() => setIsHovered(false), 1000)}
-    >
-      <div className="glass-card relative overflow-hidden flex flex-col flex-grow border border-white/10 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 touch-manipulation">
-        {/* Image Section */}
-        <div className="relative h-64 overflow-hidden">
-          {/* Loading State */}
-          {!imageLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center bg-card-bg/80 z-10">
-              <div className="w-8 h-8 border-t-2 border-accent-color rounded-full animate-spin"></div>
-            </div>
-          )}
-          {/* Parallax Image */}
-          <motion.img 
-            src={experience.image} 
-            alt={experience.title}
-            className="w-full h-full object-cover transition-transform duration-500 ease-out"
-            style={{
-              scale: isHovered ? 1.05 : 1,
-              x: !isMobile && isHovered ? position.x : 0,
-              y: !isMobile && isHovered ? position.y : 0,
-            }}
-            onLoad={() => setImageLoaded(true)}
-            onError={handleImageError}
-            loading="lazy"
-          />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-          
-          {/* Tag */}
-          {experience.tag && (
-            <div className="absolute top-3 right-3 z-20">
-              <div className="relative">
-                <span className={`flex items-center gap-2 ${getTagStyles(experience.tag.type)} px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest shadow-xl border border-white/20 backdrop-blur-sm`}>
-                  {iconMap[experience.tag.type]}
-                  <span className="font-medium">{experience.tag.text}</span>
-                </span>
-                <span className="absolute inset-0 bg-accent-color/20 rounded-full blur-lg -z-10"></span>
-              </div>
-            </div>
-          )}
-        </div>
-        
-        {/* Content Section */}
-        <div className="p-5 flex flex-col flex-grow bg-gradient-to-b from-black/70 to-black/90 backdrop-blur-sm">
-          <h3 className="font-semibold text-lg mb-2 text-white group-hover:text-accent-color transition-colors duration-200 drop-shadow-md">
-            {experience.title}
-          </h3>
-          
-          {/* Key Info Row */}
-          <div className="flex flex-wrap gap-x-3 gap-y-2 text-xs text-white mb-3">
-            {experience.duration && (
-              <span className="flex items-center bg-white/10 backdrop-blur-sm px-2 py-1 rounded-md font-normal"> 
-                {iconMap.duration} {experience.duration} 
-              </span>
-            )}
-            {experience.intensityLevel && (
-              <span className={`flex items-center bg-white/10 backdrop-blur-sm px-2 py-1 rounded-md font-normal ${getIntensityColor(experience.intensityLevel)}`}>
-                {iconMap.intensity}
-                {experience.intensityLevel}
-              </span>
-            )}
-          </div>
-
-          {/* Short Description */}
-          <p className="text-sm text-white/90 mb-4 line-clamp-2 sm:line-clamp-3 flex-grow font-normal">
-            {experience.description}
-          </p>
-          
-          {/* Key Highlights (optional) */}
-          {experience.keyHighlights && experience.keyHighlights.length > 0 && (
-            <div className="mb-4 flex flex-wrap gap-2">
-              {experience.keyHighlights.slice(0, isMobile ? 1 : 2).map((highlight, idx) => (
-                <span key={idx} className="flex items-center text-xs text-white/80 font-normal truncate max-w-full">
-                  {iconMap.highlight}
-                  <span className="truncate">{highlight}</span>
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Action Button */}
-          <motion.button
-            onClick={(e) => onOpenDetail(experience, e)}
-            className="btn-primary text-center w-full inline-flex items-center justify-center text-sm py-3 mt-auto font-medium shadow-lg active:scale-95 active:bg-accent-color/90 touch-manipulation"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            aria-label={`View details for ${experience.title}`}
-          >
-            {t.experiences.viewDetails}
-            <ArrowRight className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.button>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-// ----- MODAL COMPONENT (ADJUSTED FOR NEW FIELDS) ----- 
 interface ExperienceDetailModalProps {
   experience: Experience | null;
   isOpen: boolean;
   onClose: () => void;
-  onNext: () => void;
-  onPrevious: () => void;
-  language: Language;
-  isMobile?: boolean;
 }
+
+interface ExperiencesSectionProps {
+  experiences?: Experience[];
+}
+
+// Define the ExperienceVideoType type
+export type ExperienceVideoType = 'buggy' | 'husky' | 'helicopter' | 'drift' | 'snowmobile' | 'icefishing' | 'reindeer' | 'snowshoe' | 'torchwalk' | 'arcticAdventure' | 'icePerformance' | 'sidewayPackage' | 'ice' | 'snow' | 'aurora' | 'northernlights' | 'icehotel' | 'icehotelpackage' | 'aurorapackage' | 'auroratour' | 'northernlightstour' | 'icehoteltour' | 'northernlightspackage';
+
+// Icon mapping for experience tags
+const iconMap: Record<string, React.ReactNode> = {
+  bestseller: <Star className="w-3 h-3 text-yellow-400" />,
+  new: <Sparkles className="w-3 h-3 text-blue-400" />,
+  featured: <Star className="w-3 h-3 text-purple-400" />,
+  nature: <Trees className="w-3 h-3 text-green-400" />,
+  adrenaline: <Zap className="w-3 h-3 text-red-400" />,
+  scenic: <Mountain className="w-3 h-3 text-sky-400" />,
+  snow: <Snowflake className="w-3 h-3 text-blue-200" />,
+  group: <Users className="w-3 h-3 text-indigo-400" />,
+  fishing: <Fish className="w-3 h-3 text-cyan-400" />,
+  food: <Utensils className="w-3 h-3 text-amber-400" />,
+};
 
 const ExperienceDetailModal = React.memo(function ExperienceDetailModal({ 
   experience, 
   isOpen, 
-  onClose, 
-  onNext, 
-  onPrevious,
-  language,
-  isMobile = false
+  onClose
 }: ExperienceDetailModalProps) {
   if (!experience || !isOpen) return null;
   
-  const t = useTranslation(language);
+  const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [fallbackUsed, setFallbackUsed] = useState(false);
-  const [showFullGallery, setShowFullGallery] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   
-  // Create state variables for each experience type to determine what's active
-  const [isHuskyExperience, setIsHuskyExperience] = useState(false);
-  const [isHelicopterExperience, setIsHelicopterExperience] = useState(false);
-  const [isDriftExperience, setIsDriftExperience] = useState(false);
-  const [isReindeerExperience, setIsReindeerExperience] = useState(false);
-  const [isBuggyExperience, setIsBuggyExperience] = useState(false);
-  const [isSnowshoeExperience, setIsSnowshoeExperience] = useState(false);
-  const [isTorchwalkExperience, setIsTorchwalkExperience] = useState(false);
-  const [isSnowmobileExperience, setIsSnowmobileExperience] = useState(false);
-  const [isIceFishingExperience, setIsIceFishingExperience] = useState(false);
-  const [isArcticAdventureExperience, setIsArcticAdventureExperience] = useState(false);
-  const [isIcePerformanceExperience, setIsIcePerformanceExperience] = useState(false);
-  const [isSidewayPackageExperience, setIsSidewayPackageExperience] = useState(false);
-  
-  const galleryLength = experience.gallery?.length || 0;
+  const galleryLength = experience?.gallery?.length || 0;
   const hasGallery = galleryLength > 0;
-  const categories = getCategoryFromExperience(experience);
   
   // Check for video availability based on experience ID and video property
   const hasVideo = !!experience.video;
-  
-  // Determine experience type based on video URL patterns
-  const videoUrl = experience.video as string || '';
-  const experienceType = hasVideo ? getExperienceTypeFromVideo(videoUrl, experience.title) : null;
   
   // We'll use EXPERIENCE_VIDEOS directly as our video URL mapping
   
   // Set the experience flags based on the detected type
   useEffect(() => {
-    // Reset all flags first
-    setIsHuskyExperience(false);
-    setIsHelicopterExperience(false);
-    setIsDriftExperience(false);
-    setIsReindeerExperience(false);
-    setIsBuggyExperience(false);
-    setIsSnowshoeExperience(false);
-    setIsTorchwalkExperience(false);
-    setIsSnowmobileExperience(false);
-    setIsIceFishingExperience(false);
-    setIsArcticAdventureExperience(false);
-    setIsIcePerformanceExperience(false);
-    setIsSidewayPackageExperience(false);
-    
-    // Set the appropriate flag based on the experience type
-    if (experienceType) {
-      switch (experienceType) {
-        case 'husky':
-          setIsHuskyExperience(true);
-          break;
-        case 'helicopter':
-          setIsHelicopterExperience(true);
-          break;
-        case 'drift':
-          setIsDriftExperience(true);
-          break;
-        case 'reindeer':
-          setIsReindeerExperience(true);
-          break;
-        case 'buggy':
-          setIsBuggyExperience(true);
-          break;
-        case 'snowshoe':
-          setIsSnowshoeExperience(true);
-          break;
-        case 'torchwalk':
-          setIsTorchwalkExperience(true);
-          break;
-        case 'snowmobile':
-          setIsSnowmobileExperience(true);
-          break;
-        case 'iceFishing':
-          setIsIceFishingExperience(true);
-          break;
-        case 'arcticAdventure':
-          setIsArcticAdventureExperience(true);
-          break;
-        case 'icePerformance':
-          setIsIcePerformanceExperience(true);
-          break;
-        case 'sidewayPackage':
-          setIsSidewayPackageExperience(true);
-          break;
-      }
+    // Preload images if gallery exists
+    if (hasGallery && experience.gallery) {
+      experience.gallery.forEach((imageUrl: string) => {
+        const img = new Image();
+        img.src = imageUrl;
+      });
     }
-  }, [experienceType]);
+  }, [experience, hasGallery]);
   
-  // Helper function to detect experience type
-  function getExperienceTypeFromVideo(url: string, title: string): ExperienceVideoType | null {
-    // Define a structure for experience type patterns
-    interface ExperiencePattern {
-      type: ExperienceVideoType;
-      patterns: string[];
-      titlePatterns?: string[];
-    }
-  function getExperienceTypeFromVideo(url: string, title: string): string | null {
-    // Decode URL to handle encoded spaces and special characters
-    const decodedUrl = decodeURIComponent(url);
-    const normalizedTitle = title.toLowerCase();
-    
-    const patterns = [
-      { type: 'buggy', patterns: ['side by side', 'sbs'] },
-      { type: 'husky', patterns: ['husky'] },
-      { type: 'helicopter', patterns: ['heli', 'helicopter'] },
-      { type: 'drift', patterns: ['drift'] },
-      { type: 'reindeer', patterns: ['reindeer'] },
-      { type: 'snowshoe', patterns: ['snowshoe'] },
-      { type: 'torchwalk', patterns: ['torch'] },
-      { type: 'snowmobile', patterns: ['snowmobile'] },
-      { type: 'arcticAdventure', patterns: ['arctic'], titlePatterns: ['arctic adventure'] },
-      { type: 'icePerformance', patterns: ['ice performance'], titlePatterns: ['ice performance'] },
-      { type: 'sidewayPackage', patterns: ['sideway'], titlePatterns: ['sideway', 'side way'] },
-      { type: 'iceFishing', patterns: ['icefishing', 'ice fishing'], titlePatterns: ['fishing'] }
-    ];
-     
-     for (const { type, patterns, titlePatterns } of patterns) {
-      const urlMatches = patterns.some(p => decodedUrl.toLowerCase().includes(p));
-      const titleMatches = titlePatterns?.some(p => normalizedTitle.includes(p));
-      
-      if (urlMatches || titleMatches) return type;
-     }
-     return null;
-   }
-  
-  // Modal ref for scrolling
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isOpen && experience) {
-      setCurrentImageIndex(0);
+  // Handle image navigation
+  const handleNextImage = () => {
+    if (galleryLength > 0) {
+      setCurrentImageIndex((prev) => (prev + 1) % galleryLength);
       setImageLoaded(false);
-      setFallbackUsed(false);
-      setShowFullGallery(false);
-      setVideoLoaded(false);
-      
-      // Scroll to modal on mobile
-      if (isMobile && modalRef.current) {
-        setTimeout(() => {
-          modalRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 100);
-      }
-    }
-  }, [isOpen, experience, isMobile]);
-
-  // Define types for the fallback image mapping
-  type ExperienceType = 'snowmobile' | 'husky' | 'snowshoe' | 'fishing' | 'reindeer' | 'helicopter' | 'drift' | 'buggy' | 'restaurant' | 'kart' | 'aurora';
-
-  type FallbackImageConfig = {
-    patterns: string[];
-    paths: string[];
-    default: string;
-  };
-
-  type FallbackImageMap = {
-    [key in ExperienceType]: FallbackImageConfig;
-  };
-
-  const fallbackImageMap: FallbackImageMap = {
-    snowmobile: {
-      patterns: ["Snowmobile 1_result.webp", "Snowmobile 2_result.webp", "Snowmobile 3_result.webp", "Snowmobile 4_result.webp"],
-      paths: ["/images/Snowmobile/Snowmobile 1_result.webp", "/images/Snowmobile/Snowmobile 2_result.webp", "/images/Snowmobile/Snowmobile 3_result.webp", "/images/Snowmobile/Snowmobile 4_result.webp"],
-      default: "/images/Snowmobile/Snowmobile 1_result.webp"
-    },
-    husky: {
-      patterns: ["Husky 1_result.webp", "Husky 2_result.webp", "Husky 3_result.webp", "Husky 4_result.webp"],
-      paths: ["/images/Huskys/Husky 1_result.webp", "/images/Huskys/Husky 2_result.webp", "/images/Huskys/Husky 3_result.webp", "/images/Huskys/Husky 4_result.webp"],
-      default: "/images/Huskys/Husky 1_result.webp"
-    },
-    snowshoe: {
-      patterns: ["snowtorch1.webp", "snowtorch2.webp", "snowtorch3webp.webp", "snowtorch4.webp"],
-      paths: ["/images/Snowshoe_Torchwalk/snowtorch1.webp", "/images/Snowshoe_Torchwalk/snowtorch2.webp", "/images/Snowshoe_Torchwalk/snowtorch3webp.webp", "/images/Snowshoe_Torchwalk/snowtorch4.webp"],
-      default: "/images/Snowshoe_Torchwalk/snowtorch1.webp"
-    },
-    fishing: {
-      patterns: ["Icefish 1_result.webp", "Icefish 2_result.webp", "Shoot 3_result.webp", "Shoot 4_result.webp"],
-      paths: ["/images/Ice Fishing/Icefish 1_result.webp", "/images/Ice Fishing/Icefish 2_result.webp", "/images/Ice Fishing/Shoot 3_result.webp", "/images/Ice Fishing/Shoot 4_result.webp"],
-      default: "/images/Ice-Fishing.jpg"
-    },
-    reindeer: {
-      patterns: ["Reindeers 1_result.webp", "Reindeers 2_result.webp", "Reindeers 3_result.webp", "Reindeers 5_result.webp"],
-      paths: ["/images/Reindeers/Reindeers 1_result.webp", "/images/Reindeers/Reindeers 2_result.webp", "/images/Reindeers/Reindeers 3_result.webp", "/images/Reindeers/Reindeers 5_result.webp"],
-      default: "/images/Reindeers.jpg"
-    },
-    helicopter: {
-      patterns: ["Helikopter.jpg", "Helikopter 2.jpg", "Helikopter 3.jpg", "Helicopter 1_result.webp", "Helicopter 2_result.webp", "Helicopter 3_result.webp", "Helicopter 4_result.webp"],
-      paths: ["/images/Helikopter.jpg", "/images/Helicopter/Helicopter 1_result.webp", "/images/Helicopter/Helicopter 2_result.webp", "/images/Helicopter/Helicopter 1_result.webp", "/images/Helicopter/Helicopter 2_result.webp", "/images/Helicopter/Helicopter 3_result.webp", "/images/Helicopter/Helicopter 4_result.webp"],
-      default: "/images/Helikopter.jpg"
-    },
-    drift: {
-      patterns: ["Drifting.jpg", "Cars 1_result.webp", "Cars 2_result.webp", "Cars 3_result.webp"],
-      paths: ["/images/Drifting.jpg", "/images/Ice Drift/Cars 1_result.webp", "/images/Ice Drift/Cars 2_result.webp", "/images/Ice Drift/Cars 3_result.webp"],
-      default: "/images/Drifting.jpg"
-    },
-    buggy: {
-      patterns: ["SBS 1_result.webp", "SBS 2_result.webp", "SBS 3_result.webp", "Buggy 1.jpg", "Buggy 2.jpg", "Buggy 3.jpg", "Buggy 4.jpg"],
-      paths: ["/images/Side by Side/SBS 1_result.webp", "/images/Side by Side/SBS 2_result.webp", "/images/Side by Side/SBS 3_result.webp", "/images/Buggy/Buggy 1.jpg", "/images/Buggy/Buggy 2.jpg", "/images/Buggy/Buggy 3.jpg", "/images/Buggy/Buggy 4.jpg"],
-      default: "/images/Side-By-Side-Buggy-Drifting.jpg"
-    },
-    restaurant: {
-      patterns: ["JayJays-Restaurant.jpg", "Restaurant Interior.jpg", "Restaurant Food.jpg"],
-      paths: ["/images/JayJays-Restaurant.jpg", "/images/JayJays Restaurant/Restaurant 1_result.webp", "/images/JayJays Restaurant/Restaurant 2_result.webp"],
-      default: "/images/JayJays-Restaurant.jpg"
-    },
-    kart: {
-      patterns: ["Ice Kart.jpg"],
-      paths: ["/images/Ice Kart.jpg"],
-      default: "/images/Ice Kart.jpg"
-    },
-    aurora: {
-      patterns: ["Aurora 1.jpg", "Aurora 2.jpg", "Aurora 3.jpg", "Aurora 4.jpg"],
-      paths: ["/images/Aurora/Aurora 1.jpg", "/images/Aurora/Aurora 2.jpg", "/images/Aurora/Aurora 3.jpg", "/images/Aurora/Aurora 4.jpg"],
-      default: "/images/Aurora/Aurora 1.jpg"
     }
   };
-
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    if (!fallbackUsed) {
-      console.error("Failed to load modal image:", (e.target as HTMLImageElement).src);
-      let fallbackPath = "/images/TXA_fallback.jpg"; // Default fallback
-      const title = experience.title.toLowerCase();
-      const currentSrc = (e.target as HTMLImageElement).src;
-      
-      // Determine experience type based on title keywords
-      let experienceType: ExperienceType | null = null;
-      if (title.includes("snowmobile")) {
-        experienceType = "snowmobile";
-      } else if (title.includes("husky") || title.includes("dog")) {
-        experienceType = "husky";
-      } else if (title.includes("snowshoe") || title.includes("torch")) {
-        experienceType = "snowshoe";
-      } else if (title.includes("fishing")) {
-        experienceType = "fishing";
-      } else if (title.includes("reindeer")) {
-        experienceType = "reindeer";
-      } else if (title.includes("helicopter") || title.includes("helikopter")) {
-        experienceType = "helicopter";
-      } else if (title.includes("drift")) {
-        experienceType = "drift";
-      } else if (title.includes("buggy") || title.includes("side")) {
-        experienceType = "buggy";
-      } else if (title.includes("restaurant") || title.includes("jayjay")) {
-        experienceType = "restaurant";
-      } else if (title.includes("kart")) {
-        experienceType = "kart";
-      } else if (title.includes("aurora") || title.includes("northern lights")) {
-        experienceType = "aurora";
-      }
-      
-      // If we have a mapping for this experience type, use it to find the appropriate fallback
-      if (experienceType) {
-        const mapping = fallbackImageMap[experienceType];
-        
-        // Find matching pattern
-        const index = mapping.patterns.findIndex((pattern: string) => currentSrc.includes(pattern));
-        
-        // Use corresponding path or default
-        fallbackPath = index !== -1 ? mapping.paths[index] : mapping.default;
-      }
-      
-      // Set the fallback image
-      (e.target as HTMLImageElement).src = fallbackPath;
-      setFallbackUsed(true);
-    } else {
-      // If even the fallback fails, use ultimate fallback
-      (e.target as HTMLImageElement).src = "/images/TXA_fallback.jpg";
-    }
-  };
-
-  const handleNext = () => {
-    if (!hasGallery || galleryLength <= 1) return;
-    setCurrentImageIndex((prev) => (prev + 1) % galleryLength);
-    setImageLoaded(false);
-    setFallbackUsed(false);
-  };
-
-  const handlePrevious = () => {
-    if (!hasGallery || galleryLength <= 1) return;
-    setCurrentImageIndex((prev) => (prev - 1 + galleryLength) % galleryLength);
-    setImageLoaded(false);
-    setFallbackUsed(false);
-  };
-
-  const handleThumbnailClick = (index: number) => {
-    setCurrentImageIndex(index);
-    setImageLoaded(false);
-    setFallbackUsed(false);
-  };
-
-  const currentImage = hasGallery ? experience.gallery![currentImageIndex] : experience.image;
   
-  // We'll use EXPERIENCE_VIDEOS directly from the imported config
-
+  const handlePrevImage = () => {
+    if (galleryLength > 0) {
+      setCurrentImageIndex((prev) => (prev - 1 + galleryLength) % galleryLength);
+      setImageLoaded(false);
+    }
+  };
+  
   return (
     <AnimatePresence>
-      {isOpen && (
-        <motion.div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {/* Backdrop */}
-          <motion.div 
-            className="fixed inset-0 bg-black/85 backdrop-blur-md"
-            onClick={onClose}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          ></motion.div>
-
-          {/* Modal */}
-          <motion.div 
-            ref={modalRef}
-            className="glass-card relative max-w-6xl w-full max-h-[90vh] overflow-hidden rounded-xl border border-white/10 shadow-2xl flex flex-col lg:flex-row"
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+      {isOpen && experience && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
+          <motion.div
+            className="relative w-full max-w-6xl bg-gradient-to-b from-gray-900 to-black rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh]"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1, transition: { duration: 0.3, ease: "easeOut" } }}
+            exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2, ease: "easeIn" } }}
           >
-            {/* Close button */} 
-            <motion.button
+            {/* Close button */}
+            <button
               onClick={onClose}
-              className="absolute top-3 right-3 z-50 p-2 rounded-full bg-black/60 hover:bg-accent-color transition-colors"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label="Close modal"
+              className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/50 text-white hover:bg-accent-color/90 transition-colors"
             >
-              <X className="w-5 h-5 text-white" />
-            </motion.button>
-
-            {/* Full gallery overlay (remains the same) */}
-            {showFullGallery && hasGallery && galleryLength > 1 && (
-              <motion.div 
-                className="absolute inset-0 z-40 bg-black/95 p-6 sm:p-10 flex flex-col"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {/* ... Gallery overlay content ... */}
-                 <div className="flex justify-between items-center mb-4 sm:mb-6">
-                   <h3 className="text-lg sm:text-xl text-white font-semibold">Gallery</h3>
-                   <motion.button
-                     onClick={() => setShowFullGallery(false)}
-                     className="p-1.5 sm:p-2 rounded-full bg-black/70 hover:bg-accent-color transition-colors"
-                     whileHover={{ scale: 1.1 }}
-                     whileTap={{ scale: 0.9 }}
-                   >
-                     <X className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                   </motion.button>
-                 </div>
-                 
-                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 flex-grow overflow-auto custom-scrollbar">
-                   {experience.gallery!.map((image, idx) => (
-                     <motion.div 
-                       key={idx}
-                       className={`relative overflow-hidden rounded-lg cursor-pointer aspect-video
-                         ${idx === currentImageIndex ? 'ring-2 ring-accent-color' : ''}
-                       `}
-                       whileHover={{ scale: 1.02 }}
-                       onClick={() => {
-                         handleThumbnailClick(idx);
-                         setShowFullGallery(false);
-                       }}
-                     >
-                       <img 
-                         src={image} 
-                         alt={`${experience.title} - Image ${idx + 1}`}
-                         className="w-full h-full object-cover"
-                         onError={handleImageError}
-                       />
-                       <div className="absolute inset-0 bg-black/10 hover:bg-black/30 transition-colors"></div>
-                     </motion.div>
-                   ))}
-                 </div>
-              </motion.div>
-            )}
-
-            {/* Left: Image/Video section (slightly adjusted for better space) */}
-            <div className="relative w-full lg:w-3/5 h-72 sm:h-80 md:h-96 lg:h-auto flex-shrink-0">
-              {/* Loading state */} 
-              {!imageLoaded && !videoLoaded && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
-                <div className="absolute inset-0 flex items-center justify-center bg-card-bg/80 z-10">
-                  <div className="w-10 h-10 border-t-2 border-accent-color rounded-full animate-spin"></div>
+              <X className="w-5 h-5" />
+            </button>
+            
+            {/* Navigation buttons */}
+            <button
+              onClick={handlePrevImage}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-1 text-white hover:bg-black/70 transition-colors z-10"
+              aria-label="Previous image"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={handleNextImage}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 rounded-full p-1 text-white hover:bg-black/70 transition-colors z-10"
+              aria-label="Next image"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+            
+            {/* Media content section */}
+            <div className="w-full lg:w-3/5 relative bg-black/50 flex items-center justify-center min-h-[300px] lg:min-h-[500px]">
+              {hasVideo ? (
+                <div className="w-full h-full relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                  <div className="w-full h-full flex items-center justify-center bg-black/30">
+                    <img 
+                      src={experience.image} 
+                      alt={experience.title} 
+                      className="w-full h-full object-cover" 
+                    />
+                  </div>
                 </div>
-              )}
-              {/* Video for experience types */}
-              {isHuskyExperience || isHelicopterExperience || isDriftExperience || isReindeerExperience || isBuggyExperience || isSnowshoeExperience || isTorchwalkExperience || isSnowmobileExperience || isIceFishingExperience || isArcticAdventureExperience || isIcePerformanceExperience || isSidewayPackageExperience ? (
-                <motion.div className="relative h-full overflow-hidden">
-                  <motion.video
-                    src={experienceType ? EXPERIENCE_VIDEOS[experienceType] : ''}
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                    onLoadedData={(e) => {
-                      console.log('Video first frame loaded:', e.currentTarget.src);
-                      setVideoLoaded(true);
-                    }}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: videoLoaded ? 1 : 0 }}
-                    transition={{ duration: 0.4 }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                </motion.div>
               ) : (
-                /* Main Image for non-video experiences */
-                <motion.div className="relative h-full overflow-hidden">
-                  <motion.img
-                    src={currentImage}
-                    alt={`${experience.title} - Image ${currentImageIndex + 1}`}
-                    className="w-full h-full object-cover"
-                    onLoad={() => setImageLoaded(true)}
-                    onError={handleImageError}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                    key={currentImage}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-              
-                
-                  {/* Navigation Buttons - Only show for non-video experiences with galleries */} 
-                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
-                    <>
-                      <motion.button /* Previous */
-                        onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                        className="absolute left-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/50 hover:bg-accent-color/80 transition-colors z-20"
-                        whileHover={{ scale: 1.1, x: -2 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <ChevronLeft className="w-5 h-5 text-white" />
-                      </motion.button>
-                      <motion.button /* Next */
-                        onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-black/50 hover:bg-accent-color/80 transition-colors z-20"
-                        whileHover={{ scale: 1.1, x: 2 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <ChevronRight className="w-5 h-5 text-white" />
-                      </motion.button>
-                    </>
+                <motion.div className="w-full h-full relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                  
+                  {hasGallery ? (
+                    <img 
+                      src={experience.gallery?.[currentImageIndex] || experience.image}
+                      alt={experience.title} 
+                      className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                      onLoad={() => setImageLoaded(true)}
+                    />
+                  ) : (
+                    <img 
+                      src={experience.image} 
+                      alt={experience.title} 
+                      className="w-full h-full object-cover" 
+                    />
                   )}
                   
-                  {/* Counter & View All - Only show for non-video experiences with galleries */} 
-                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
-                    <div className="absolute bottom-3 right-3 flex items-center z-30 space-x-2">
+                  {/* Gallery Controls - Only show if we have multiple images */}
+                  {hasGallery && galleryLength > 1 && (
+                    <div className="absolute bottom-4 right-4 flex space-x-2 z-20">
                       <motion.button
-                        onClick={() => setShowFullGallery(true)}
+                        onClick={() => console.log('View All')}
                         className="px-3 py-1 bg-black/70 text-white text-xs rounded-md hover:bg-accent-color/90 transition-colors"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -814,346 +163,174 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                     </div>
                   )}
                   
-                  {/* Thumbnails - Only show for non-video experiences with galleries */}
-                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
-                    <div className="absolute bottom-12 left-3 right-3 overflow-x-auto scrollbar-hide z-20">
-                      <motion.div className="flex space-x-2 p-1">
-                        {experience.gallery!.map((thumb, idx) => (
-                          <motion.div
-                            key={idx}
-                            className={`flex-shrink-0 w-14 h-14 rounded-md overflow-hidden cursor-pointer border-2 transition-all duration-200
-                              ${idx === currentImageIndex ? 'border-accent-color opacity-100 scale-105' : 'border-transparent opacity-60 hover:opacity-90'}
-                            `}
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            onClick={() => handleThumbnailClick(idx)}
-                          >
-                            <img src={thumb} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" onError={handleImageError}/>
-                          </motion.div>
-                        ))}
-                      </motion.div>
+                  {/* Thumbnails */}
+                  {hasGallery && galleryLength > 1 && (
+                    <div className="gallery-thumbnails flex overflow-x-auto gap-2 mt-4 pb-2">
+                      {experience.gallery?.map((thumb: string, idx: number) => (
+                        <div
+                          key={idx}
+                          className={`thumbnail-item h-16 w-24 flex-shrink-0 cursor-pointer rounded-md overflow-hidden ${idx === currentImageIndex ? 'ring-2 ring-primary' : ''}`}
+                          onClick={() => setCurrentImageIndex(idx)}
+                        >
+                          <img 
+                            src={thumb} 
+                            alt={`${experience.title} thumbnail ${idx + 1}`} 
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
                     </div>
                   )}
                 </motion.div>
               )}
             </div>
-
-            {/* Right: Details section - Reworked for structured data */}
+            
+            {/* Details section */}
             <div className="w-full lg:w-2/5 p-5 sm:p-6 flex flex-col overflow-y-auto custom-scrollbar flex-grow">
-              {/* Title & Basic Info */}
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-              >
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{experience.title}</h2>
-                {/* Categories & Tag */} 
-                <div className="flex flex-wrap items-center gap-2 mb-4">
-                  {categories.map((category, idx) => (
-                    <span key={idx} className="px-2.5 py-1 bg-black/30 border border-white/10 rounded-full text-xs text-white/80 flex items-center">
-                      {iconMap[category]} <span className="ml-1 capitalize">{category}</span>
-                    </span>
-                  ))}
-                  {experience.tag && (
-                    <div className="relative ml-auto">
-                      <span className={`flex items-center gap-2 ${getTagStyles(experience.tag.type)} px-4 py-2 rounded-full font-bold text-xs uppercase tracking-widest shadow-md border border-white/20 backdrop-blur-sm`}>
-                        {iconMap[experience.tag.type]}
-                        <span className="font-medium">{experience.tag.text}</span>
-                      </span>
-                      <span className="absolute inset-0 bg-accent-color/20 rounded-full blur-lg -z-10"></span>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Structured Key Info */} 
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-5 border-y border-white/10 py-4">
-                  {experience.duration && (
-                    <div className="flex items-center text-sm text-white/70 mb-1.5">
-                      {iconMap.duration}
-                      <div>
-                        <span className="block text-xs text-white/60">Duration</span>
-                        {experience.duration}
-                      </div>
-                    </div>
-                  )}
-                  {experience.intensityLevel && (
-                    <div className="flex items-center text-sm text-white/90">
-                      {iconMap.intensity}
-                      <div>
-                        <span className={getIntensityColor(experience.intensityLevel)}>{experience.intensityLevel}</span>
-                      </div>
-                    </div>
-                  )}
-                  {/* Add Price display if available */}
-                  {experience.price && (
-                    <div className="flex items-center text-sm text-white/90">
-                      <span className="text-accent-color/80 mr-1.5">€</span>
-                      <div>
-                        <span className="block text-xs text-white/60">Starting Price</span>
-                        {experience.price}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </motion.div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{experience.title}</h2>
+              <p className="text-white/90">{experience.description}</p>
               
-              {/* Key Highlights & Description */} 
-              <motion.div 
-                className="text-white/90 mb-6 flex-grow"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                {experience.keyHighlights && experience.keyHighlights.length > 0 && (
-                  <div className="mb-5">
-                    <h3 className="text-md font-semibold text-white mb-2 flex items-center">
-                      <Star className="w-4 h-4 mr-2 text-accent-color"/> Key Highlights
-                    </h3>
-                    <ul className="space-y-1.5 pl-1">
-                      {experience.keyHighlights.map((highlight, index) => (
-                        <li key={index} className="flex items-start text-sm">
-                          <Check className="w-3.5 h-3.5 mr-2 mt-0.5 text-accent-color flex-shrink-0" />
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                
-                <div className="prose prose-sm prose-invert max-w-none text-white/80 leading-relaxed">
-                  {/* Render detailedInfo if available, otherwise fallback to description */}
-                  {experience.detailedInfo ? (
-                    <>
-                      {/* Introduction */}
-                      {experience.detailedInfo.introduction && <p>{experience.detailedInfo.introduction}</p>}
-                      
-                      {/* Adventure Options / Tours */}
-                      {experience.detailedInfo.tours && experience.detailedInfo.tours.length > 0 && (
-                        <div className="mt-4">
-                          {experience.detailedInfo.adventureOptionsTitle && (
-                            <h4 className="font-semibold text-white mb-2 text-base">{experience.detailedInfo.adventureOptionsTitle}</h4>
-                          )}
-                          <div className="space-y-3">
-                            {experience.detailedInfo.tours.map((tour: { title: string; description?: string; details?: string[] }, index: number) => (
-                              <div key={index} className="pl-2 border-l-2 border-white/10 py-1">
-                                <h5 className="font-semibold text-white mb-0.5">{tour.title}</h5>
-                                {tour.description && <p className="text-sm text-white/70 my-0.5">{tour.description}</p>}
-                                {tour.details && tour.details.length > 0 && (
-                                  <ul className="list-disc list-outside pl-5 mt-1 space-y-0.5 text-xs text-white/70">
-                                    {tour.details.map((detail: string, detailIndex: number) => (
-                                      <li key={detailIndex}>{detail}</li>
-                                    ))}
-                                  </ul>
-                                )}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      
-                      {/* Important Information */}
-                      {experience.detailedInfo.importantInfo && experience.detailedInfo.importantInfo.length > 0 && (
-                         <div className="mt-4">
-                          {experience.detailedInfo.importantInfoTitle && (
-                            <h4 className="font-semibold text-white mb-2 text-base">{experience.detailedInfo.importantInfoTitle}</h4>
-                          )}
-                          <ul className="list-disc list-outside pl-5 space-y-0.5 text-sm text-white/70">
-                            {experience.detailedInfo.importantInfo.map((info: string, index: number) => (
-                              <li key={index}>{info}</li>
-                            ))}
-                          </ul>
-                         </div>
-                      )}
-                      
-                      {/* Closing Remark */}
-                      {experience.detailedInfo.closingRemark && <p className="mt-4 text-sm italic text-white/70">{experience.detailedInfo.closingRemark}</p>}
-                    </>
-                  ) : (
-                    // Fallback for experiences without detailedInfo
-                    <p>{experience.description}</p>
-                  )}
-                </div>
-              </motion.div>
-
-              {/* Action Buttons - Placed at the bottom */} 
-              <motion.div 
-                className="mt-auto pt-4 border-t border-white/10"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <motion.button
-                  onClick={() => { console.log('Book now clicked:', experience.title); alert('Booking coming soon!'); onClose(); }}
+              {/* Action buttons */}
+              <div className="mt-auto pt-4 border-t border-white/10">
+                <button
+                  onClick={onClose}
                   className="btn-primary w-full inline-flex items-center justify-center text-base px-6 py-2.5 mb-3"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
                 >
-                  {t.experiences.bookNow}
+                  {t('experiences.bookNow')}
                   <ArrowRight className="w-5 h-5 ml-2" />
-                </motion.button>
-                
-                {/* Next/Previous Buttons */} 
-                <div className="flex justify-between text-xs">
-                  <motion.button 
-                    onClick={onPrevious}
-                    className="p-1.5 rounded-md text-white/70 hover:bg-white/10 hover:text-white transition-colors flex items-center"
-                    whileHover={{ x: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <ChevronLeft className="w-4 h-4 mr-1" /> Prev
-                  </motion.button>
-                  <motion.button 
-                    onClick={onNext}
-                    className="p-1.5 rounded-md text-white/70 hover:bg-white/10 hover:text-white transition-colors flex items-center"
-                    whileHover={{ x: 2 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Next <ChevronRight className="w-4 h-4 ml-1" />
-                  </motion.button>
-                </div>
-              </motion.div>
+                </button>
+              </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
 });
 
-// ----- MAIN COMPONENT -----
-export function ExperiencesSection() {
-  const { language } = useLanguage();
-  const t = useTranslation(language);
+// Experience Card component for displaying individual experiences
+const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
+  experience: Experience;
+  onOpenDetail: (experience: Experience, e: React.MouseEvent) => void;
+  delay?: number;
+}) => {
+  const { t } = useTranslation();
+  
+  return (
+    <motion.div 
+      className="relative bg-gradient-to-b from-gray-800 to-black rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: delay * 0.1 }}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+    >
+      {/* Experience image */}
+      <div className="relative aspect-[4/3] overflow-hidden">
+        <img 
+          src={experience.image} 
+          alt={experience.title}
+          className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+        />
+        
+        {/* Tag if present */}
+        {experience.tag && (
+          <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center">
+            {iconMap[experience.tag.type] || null}
+            <span className="text-xs font-medium text-white ml-1">{experience.tag.text}</span>
+          </div>
+        )}
+      </div>
+      
+      {/* Content */}
+      <div className="p-4 flex-grow flex flex-col">
+        <h3 className="text-lg font-bold text-white mb-2">{experience.title}</h3>
+        <p className="text-white/70 text-sm mb-4 line-clamp-3">{experience.description}</p>
+        
+        {/* Features */}
+        <div className="mt-auto">
+          <button
+            onClick={(e) => onOpenDetail(experience, e)}
+            className="w-full bg-white/10 hover:bg-white/20 border border-white/20 py-2 px-4 rounded-lg text-white text-sm font-medium transition-colors"
+          >
+            {t('experiences.viewDetails')}
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Main component
+export function ExperiencesSection({ experiences: propExperiences = [] }: ExperiencesSectionProps) {
+  // Get translation function
+  const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
   
-  // State for experience data and UI interaction
+  // State for experiences data
+  const [experiences, setExperiences] = useState<Experience[]>(propExperiences);
+  const [isLoaded, setIsLoaded] = useState(false);
+  
+  // State for selected experience and modal
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  const [showAllActivities, setShowAllActivities] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   
-  // Check if device is mobile
+  // State for showing all activities
+  const [showAllActivities, setShowAllActivities] = useState(false);
+  
+  // State for mobile view detection - used for limiting displayed experiences
+  const [isMobileView, setIsMobileView] = useState(false);
+  
+  // Handle window resize and check if mobile view
+  // This affects how many experiences are shown initially (see displayedExperiences)
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 768);
     };
     
     // Initial check
-    checkMobile();
+    handleResize();
     
-    // Add event listener for window resize
-    window.addEventListener('resize', checkMobile);
+    // Add event listener
+    window.addEventListener('resize', handleResize);
     
     // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-  
-  // Get experiences from translations
-  const experiences: Experience[] = t.experiences.list.map((exp: any) => {
-    // Check if this is the ice fishing experience based on title in different languages (English, Swedish, German)
-    const isIceFishing = exp.title?.toLowerCase().includes('fishing') || 
-                         exp.title?.toLowerCase().includes('pimpel') ||
-                         exp.title?.toLowerCase().includes('eisfischen') ||
-                         (exp.description?.toLowerCase().includes('fishing') && exp.description?.toLowerCase().includes('ice')) ||
-                         (exp.description?.toLowerCase().includes('eis') && exp.description?.toLowerCase().includes('fischen'));
-    
-    // Return the updated experience object
-    return {
-      ...exp,
-      // Add video property for ice fishing if it doesn't already have one
-      video: isIceFishing ? 
-             "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA_Reel_icefishing_1-48OBkubvztZbi1Th6IGMToOMTIOsfK.webm" : 
-             exp.video,
-      tag: exp.tag ? {
-        ...exp.tag,
-        type: exp.tag.type as "bestseller" | "featured" | "new" | "nature" | "adrenaline" | "scenic"
-      } : undefined,
-      // Ensure new fields are present, even if undefined
-      duration: exp.duration,
-      intensityLevel: exp.intensityLevel,
-      keyHighlights: exp.keyHighlights,
-    };
-  });
-  
-  // Separate packages from regular activities
-  // Packages have IDs 0, 9, 10 (Arctic Adventure, Sideways, Ice Performance)
-  const packageIds = [0, 9, 10];
-  const packages = experiences.filter(exp => packageIds.includes(exp.id));
-  const activities = experiences.filter(exp => !packageIds.includes(exp.id));
-  
-  // No filtering needed, just separate packages and activities
-  const filteredPackages = packages;
-  const filteredActivities = activities;
-  
-  // Use either filteredPackages or both depending on showAllActivities state
-  
-  // Pre-load images on component mount
-  useEffect(() => {
-    // Preload all experience images to improve UX
-    const preloadPromises = experiences.map(experience => {
-      return new Promise<void>((resolve) => {
-        if (experience.image) {
-          const img = new Image();
-          img.onload = () => resolve();
-          img.onerror = () => resolve(); // Resolve even on error
-          img.src = experience.image;
-        } else {
-          resolve();
-        }
-      });
-    });
-    
-    // Mark as loaded after all images are preloaded
-    Promise.all(preloadPromises).then(() => {
-      setIsLoaded(true);
-    });
-  }, [experiences]);
-  
-  // Intersection observer for section animation
-  useEffect(() => {
-    if (!sectionRef.current) return;
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsLoaded(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-    
-    observer.observe(sectionRef.current);
-    
     return () => {
-      observer.disconnect();
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
   
-  // Navigate to the next experience
+  // Set experiences from props
+  useEffect(() => {
+    if (propExperiences && propExperiences.length > 0) {
+      setExperiences(propExperiences);
+      setIsLoaded(true);
+    }
+  }, [propExperiences]);
+  
+  // Navigation functions for the experience modal
+  // We'll keep these but comment them out for future use if needed
+  /*
   const navigateToNext = () => {
-    if (!selectedExperience) return;
-    
-    const currentIndex = experiences.findIndex(e => e.id === selectedExperience.id);
-    const nextIndex = (currentIndex + 1) % experiences.length;
-    setSelectedExperience(experiences[nextIndex]);
+    if (selectedExperience && experiences.length > 0) {
+      const currentIndex = experiences.findIndex((e) => e.id === selectedExperience.id);
+      const nextIndex = (currentIndex + 1) % experiences.length;
+      setSelectedExperience(experiences[nextIndex]);
+    }
   };
   
-  // Navigate to the previous experience
   const navigateToPrevious = () => {
-    if (!selectedExperience) return;
-    
-    const currentIndex = experiences.findIndex(e => e.id === selectedExperience.id);
-    const prevIndex = (currentIndex - 1 + experiences.length) % experiences.length;
-    setSelectedExperience(experiences[prevIndex]);
+    if (selectedExperience && experiences.length > 0) {
+      const currentIndex = experiences.findIndex((e) => e.id === selectedExperience.id);
+      const prevIndex = (currentIndex - 1 + experiences.length) % experiences.length;
+      setSelectedExperience(experiences[prevIndex]);
+    }
   };
+  */
   
-  // Function to open modal with selected experience
+  // Function to open experience detail modal
   const openExperienceDetail = (experience: Experience, e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent default link behavior
-    e.stopPropagation(); // Stop event propagation
+    e.preventDefault();
+    e.stopPropagation();
     setSelectedExperience(experience);
     setModalOpen(true);
   };
@@ -1163,7 +340,26 @@ export function ExperiencesSection() {
     setModalOpen(false);
   };
   
+  // Define package IDs as constants for better maintainability
+  const PACKAGE_IDS = {
+    ARCTIC_ADVENTURE: 0,
+    PERFORMANCE_PACKAGE: 9,
+    SIDEWAYS_ADVENTURE: 10
+  };
 
+   // Separate packages from regular activities
+  const packageIds = Object.values(PACKAGE_IDS);
+   const packages = experiences.filter(exp => packageIds.includes(exp.id));
+   const activities = experiences.filter(exp => !packageIds.includes(exp.id));
+  
+  const filteredPackages = packages;
+  const filteredActivities = activities;
+  
+  // Determine which activities to display based on showAllActivities and screen size
+  // Use isMobileView to limit the number of experiences shown on mobile
+  const displayedActivities = showAllActivities
+    ? filteredActivities
+    : filteredActivities.slice(0, isMobileView ? 2 : 6);
   
   return (
     <section 
@@ -1187,7 +383,7 @@ export function ExperiencesSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
-            {t.experiences.title}
+            {t('experiences.title')}
           </h2>
         </motion.div>
 
@@ -1206,12 +402,12 @@ export function ExperiencesSection() {
             >
               <h3 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
                 <span className="bg-gradient-to-r from-accent-color to-accent-color/70 px-6 py-2 rounded-lg">
-                  {t.experiences.premiumPackagesTitle}
+                  {t('experiences.premiumPackagesTitle')}
                 </span>
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-accent-color/50 rounded-full"></div>
               </h3>
               <p className="text-white/80 mt-4 max-w-2xl mx-auto">
-                {t.experiences.premiumPackagesDescription}
+                {t('experiences.premiumPackagesDescription')}
               </p>
             </motion.div>
 
@@ -1231,8 +427,8 @@ export function ExperiencesSection() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-accent-color/30 to-accent-color/10 rounded-xl blur-lg opacity-75"></div>
                   <div className="relative">
                     <ExperienceCard
+                      key={experience.id}
                       experience={experience}
-                      language={language}
                       onOpenDetail={openExperienceDetail}
                       delay={index}
                     />
@@ -1250,7 +446,7 @@ export function ExperiencesSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <span className="text-white font-medium">
-                  {showAllActivities ? t.experiences.hideActivitiesButton : t.experiences.exploreActivitiesButton}
+                  {showAllActivities ? t('experiences.hideActivitiesButton') : t('experiences.exploreActivitiesButton')}
                 </span>
                 <motion.div
                   animate={{ rotate: showAllActivities ? 180 : 0 }}
@@ -1261,8 +457,8 @@ export function ExperiencesSection() {
               </motion.button>
             </div>
 
-            {/* Activities Section - Only visible when showAllActivities is true */}
-            {showAllActivities && filteredActivities.length > 0 && (
+            {/* Activities Section - Shows limited number on mobile */}
+            {filteredActivities.length > 0 && (
               <>
                 {/* Activities Header */}
                 <motion.div 
@@ -1271,19 +467,21 @@ export function ExperiencesSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
-                    <span className="bg-white/10 px-6 py-2 rounded-lg">
-                      {t.experiences.individualActivitiesTitle}
-                    </span>
-                  </h3>
-                  <p className="text-white/80 mt-4 max-w-2xl mx-auto">
-                    {t.experiences.individualActivitiesDescription}
-                  </p>
+                  <div className="text-center">
+                    <h2 className="text-2xl md:text-3xl font-bold text-white inline-block relative">
+                      <span className="bg-white/10 px-6 py-2 rounded-lg">
+                        {t('experiences.featuredTitle')}
+                      </span>
+                    </h2>
+                    <p className="text-white/80 mt-4 max-w-2xl mx-auto">
+                      {t('experiences.featuredDescription')}
+                    </p>
+                  </div>
                 </motion.div>
 
-                {/* Activities Grid */}
+                {/* Activities Grid - responsive based on screen size */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
-                  {filteredActivities.map((experience, index) => (
+                  {displayedActivities.map((experience, index) => (
                     <motion.div 
                       key={experience.id} 
                       layout 
@@ -1292,8 +490,8 @@ export function ExperiencesSection() {
                       exit={{ opacity: 0 }}
                     >
                       <ExperienceCard
+                        key={experience.id}
                         experience={experience}
-                        language={language}
                         onOpenDetail={openExperienceDetail}
                         delay={index}
                       />
@@ -1330,10 +528,6 @@ export function ExperiencesSection() {
         experience={selectedExperience}
         isOpen={modalOpen}
         onClose={closeModal}
-        onNext={navigateToNext}
-        onPrevious={navigateToPrevious}
-        language={language}
-        isMobile={isMobile}
       />
     </section>
   );

@@ -168,26 +168,7 @@ export function getOptimizedImageSrc(
   
   const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
   
-  // Determine best available format - this logic is used in specific cases below
-  // but the variable itself is not used directly
-  /* Removed for tree shaking
-  let bestFormat: ImageFormat = 'jpeg'; // Default fallback
-  
-  // If format is forced or provided, use that
-  if (effectiveFormat) {
-    bestFormat = effectiveFormat;
-  } 
-  // Otherwise determine based on browser support
-  else {
-    if (formatSupportCache.avif === true) {
-      bestFormat = 'avif';
-    } else if (formatSupportCache.webp === true) {
-      bestFormat = 'webp';
-    } else if (src.endsWith('.png')) {
-      bestFormat = 'png';
-    }
-  }
-  */
+
   
   // Optimization logic for specific image collections
   

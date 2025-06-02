@@ -327,7 +327,7 @@ export const de = {
         gallery: [
           "/images/Snowshoe_Torchwalk/snowtorch1.webp",
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
-          "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
+          "/images/Snowshoe_Torchwalk/snowtorch3.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
         video: videoUrls.snowshoeAdventure,

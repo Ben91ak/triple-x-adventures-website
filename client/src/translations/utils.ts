@@ -5,19 +5,32 @@ import { FlatTranslations, NestedTranslations } from './types';
  * Example: getNestedValue({ a: { b: 'c' } }, 'a.b') -> 'c'
  */
 export function getNestedValue(
-  obj: NestedTranslations,
-  path: string
-): string | undefined {
-  const keys = path.split('.');
-  let current: any = obj;
+   obj: NestedTranslations,
+   path: string
+ ): string | undefined {
+   const keys = path.split('.');
+   let current: any = obj;
 
-  for (const key of keys) {
-    if (current === undefined || current === null) return undefined;
-    current = (current as Record<string, any>)[key];
+   for (const key of keys) {
+     if (current === undefined || current === null) return undefined;
+     current = (current as Record<string, any>)[key];
+   }
+
+  // Handle JSON-serialized arrays from flattenTranslations
+  if (typeof current === 'string') {
+    // Check if it's a JSON-serialized array
+    if (current.startsWith('[') && current.endsWith(']')) {
+      try {
+        JSON.parse(current); // Validate it's valid JSON
+        return current; // Return the JSON string for the caller to parse
+      } catch {
+        // Not valid JSON, return as regular string
+      }
+    }
+    return current;
   }
-
-  return typeof current === 'string' ? current : undefined;
-}
+  return undefined;
+ }
 
 /**
  * Interpolates values into a translation string
@@ -42,12 +55,15 @@ export function flattenTranslations(obj: NestedTranslations, prefix = ''): FlatT
   return Object.keys(obj).reduce((acc: FlatTranslations, key) => {
     const prefixedKey = prefix ? `${prefix}.${key}` : key;
     
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
-      const flattened = flattenTranslations(obj[key] as NestedTranslations, prefixedKey);
-      Object.assign(acc, flattened);
-    } else if (typeof obj[key] === 'string') {
-      acc[prefixedKey] = obj[key] as string;
-    }
+ if (Array.isArray(obj[key])) {
+   // keep array intact – treat the whole array as a JSON string
+   acc[prefixedKey] = JSON.stringify(obj[key]);
+ } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+     const flattened = flattenTranslations(obj[key] as NestedTranslations, prefixedKey);
+     Object.assign(acc, flattened);
+ } else if (['string','number','boolean'].includes(typeof obj[key])) {
+     acc[prefixedKey] = String(obj[key]);
+ }
     
     return acc;
   }, {});

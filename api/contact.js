@@ -25,10 +25,38 @@ export default async function handler(req, res) {
    interests,
    charterFlight: sanitizeInput(charterFlight)
  };
+ 
+ // Sanitize inputs to prevent injection attacks
+ const sanitizeInput = (input) => {
+   if (typeof input !== 'string') return input;
+   return input.replace(/[\r\n\t]/g, '').trim();
+ };
+ 
+ const sanitizedData = {
+   firstName: sanitizeInput(firstName),
+   lastName: sanitizeInput(lastName),
+   email: sanitizeInput(email),
+   phone: sanitizeInput(phone),
+   visitDate: sanitizeInput(visitDate),
+   message: sanitizeInput(message),
+   interests,
+   charterFlight: sanitizeInput(charterFlight)
+ };
 
 // Basic validation
  if (!firstName || !lastName || !email || !message) {
    return res.status(400).json({ error: 'Missing required fields' });
+ }
+ 
+ // Email format validation
+ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+ if (!emailRegex.test(email)) {
+   return res.status(400).json({ error: 'Invalid email format' });
+ }
+ 
+ // Length validation to prevent abuse
+ if (message.length > 5000 || firstName.length > 100 || lastName.length > 100) {
+   return res.status(400).json({ error: 'Input too long' });
  }
  
  // Email format validation

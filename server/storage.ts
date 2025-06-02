@@ -1,4 +1,4 @@
-import { users, contactSubmissions, adventureSubmissions, type User, type InsertUser, type Contact, type InsertContact, type Adventure, type InsertAdventure } from "@shared/schema";
+import { users, contactSubmissions, adventureSubmissions, type User, type InsertUser, type Contact, type InsertContact, type Adventure, type InsertAdventure from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 
@@ -31,7 +31,7 @@ export class DbStorage implements IStorage {
     return result[0];
   }
 
-  async createContactSubmission(insertContact: InsertContact): Promise<Contact> {
+async createContactSubmission(insertContact: InsertContact): Promise<Contact> {
     const result = await db.insert(contactSubmissions).values({
       firstName: insertContact.firstName,
       lastName: insertContact.lastName,
@@ -44,6 +44,7 @@ export class DbStorage implements IStorage {
     }).returning();
     
     return result[0];
+  }
   }
 
   async getContactSubmissions(): Promise<Contact[]> {

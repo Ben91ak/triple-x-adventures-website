@@ -67,11 +67,11 @@ if (!response.ok) {
         body: JSON.stringify(formData),
       });
       
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Server returned error:', response.status, errorText);
-        throw new Error(`Server error: ${response.status} ${errorText}`);
-      }
+if (!response.ok) {
+         const errorText = await response.text();
+         console.error('Server returned error:', response.status, errorText);
+        throw new Error(`Request failed with status: ${response.status}`);
+       }
       
       return await response.json();
     } catch (error) {

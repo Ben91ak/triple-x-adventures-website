@@ -28,19 +28,19 @@ export function ExperiencesSEO() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "TouristAttraction",
-          "name": language === 'en' ? "Premium Adventure Packages" : language === 'de' ? "Premium-Abenteuer-Pakete" : "Premium Äventyrspaket",
-          "description": language === 'en' ? "All-inclusive premium packages combining multiple activities with luxury accommodations" : language === 'de' ? "All-inclusive Premium-Pakete, die mehrere Aktivitäten mit Luxusunterkünften kombinieren" : "All-inclusive premiumpaket som kombinerar flera aktiviteter med lyxboende"
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
+"item": {
+          "@type": ["TouristTrip", "Product"],
+           "name": language === 'en' 
+             ? "Premium Adventure Packages" 
+             : language === 'de' 
+               ? "Premium-Abenteuer-Pakete" 
+               : "Premium Äventyrspaket",
+           "description": language === 'en' 
+             ? "All-inclusive premium packages combining multiple activities with luxury accommodations" 
+             : language === 'de' 
+               ? "All-inclusive Premium-Pakete, die mehrere Aktivitäten mit Luxusunterkünften kombinieren" 
+               : "All-inclusive premiumpaket som kombinerar flera aktiviteter med lyxboende"
+         }
           "@type": "TouristAttraction",
           "name": language === 'en' ? "Snowmobile Tours" : language === 'de' ? "Schneemobiltouren" : "Snöskoterturer",
           "description": language === 'en' ? "Experience the thrill of snowmobiling through pristine Arctic landscapes" : language === 'de' ? "Erleben Sie den Nervenkitzel des Schneemobilfahrens durch unberührte arktische Landschaften" : "Upplev spänningen av snöskoteråkning genom orörda arktiska landskap"
