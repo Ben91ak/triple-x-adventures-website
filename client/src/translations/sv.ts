@@ -1,3 +1,5 @@
+import { videoUrls } from '../config/videoUrls';
+
 export const sv = {
   // Header Navigation
   nav: {
@@ -22,17 +24,17 @@ export const sv = {
   heroSection: {
     welcome: "VÄLKOMMEN TILL VÄRLDEN AV",
     adventure: "Ditt äventyr i <strong>Arvidsjaur Svenska Lappland</strong>",
-    paragraph1: "Upplev oförglömliga <strong>utomhusäventyr</strong> och exceptionell mat i en av världens vackraste regioner nära polcirkeln",
+    paragraph1: "Upplev oförglömliga <strong>utomhusäventyr</strong> och exceptionell mat nära polcirkeln i en av världens vackraste regioner.",
     paragraph2: "Se fram emot en mängd <strong>actionfyllda och adrenalinfyllda aktiviteter</strong> som får ditt hjärta att slå snabbare.",
     paragraph3: "Koppla av efter en spännande dag i vårt spa och njut av naturens lugn. Våra <strong>utomhus-bubbelpooler och bastu </strong> erbjuder den perfekta tillflyktsorten. Avsluta med att titta på de vackra <strong>norrskenen</strong> som dansar på himlen."
   },
   
   // Accommodations Section
   accommodations: {
-    title: "BOENDE",
-    subtitle: "Bekvämt Boende i Arktis",
+    title: "NÄRHET TILL NATUREN",
+    subtitle: "Där unik design möter komfort",
     viewAll: "Visa alla boenden",
-    whereYouWillStay: "Ditt Boende",
+    whereYouWillStay: "Bo Exklusivt",
     comingSoon: "Kommer snart",
     from: "Från",
     night: "natt",
@@ -46,15 +48,15 @@ export const sv = {
       features: [
         "För 2-4 gäster",
         "13 Cabins",
-        "Klimatkontrollerad",
-        "Lyxig kingsize-säng",
-        "eget kök",
-        "SameLand, Arvidsjaur"
+        "AC",
+        " Kingsize-säng",
+        "Eget kök",
+        "Sameland, Arvidsjaur"
       ]
     },
     txaChalet: {
       title: "TXA - CHALET",
-      description: "Bo i din egen TXA - Chalet och upplev högsta komfort. Vårt exklusiva chalet erbjuder en perfekt blandning av rustik charm och modern lyx.",
+      description: "Välkommen hem till ditt privata TXA Chalet – där exklusiv komfort möter avskildhet. Det perfekta boendet för privata grupper som vill uppleva Lappland tillsammans.",
       features: [
         "Upp till 24 gäster",
         "12 sovrum",
@@ -64,10 +66,10 @@ export const sv = {
     },
     hotelLaponia: {
       title: "HOTEL LAPONIA",
-      description: "Ett bekvämt alternativ till vårt TXA Chalet. Hotel Laponia erbjuder en bekväm vistelse före och efter dina äventyr, med alla bekvämligheter du behöver.",
+      description: "Hotel Laponia erbjuder en bekväm vistelse före och efter dina äventyr, med alla bekvämligheter du behöver.",
       features: [
         "Centralt läge",
-        "Arktisk atmosfär",
+        "Norrländsk atmosfär",
         "Endast 10 km från flygplatsen",
         "Fjälls Pub & Bistro"
       ]
@@ -101,7 +103,7 @@ export const sv = {
   // Contact Section
   contact: {
     title: "LÅT OSS GÖRA VINTERN LEGENDARISK",
-    subtitle: "Redo att uppleva den verkliga Arktis? Kontakta oss för att börja planera ditt äventyr",
+    subtitle: "Redo för det norrländska äventyret? Kontakta oss!",
     formTitle: "Kontakta oss",
     firstName: "Förnamn",
     lastName: "Efternamn",
@@ -133,14 +135,14 @@ export const sv = {
       desiredPackagesLabel: "Önskade paket",
       desiredActivitiesLabel: "Önskade aktiviteter",
       packages: {
-        arcticWeek: "Arktiskt Äventyr (Vecka)",
-        arcticWeekend: "Arktiskt Äventyr (Helg)",
-        sidewaysWeek: "Sidleds-Äventyr (Vecka)",
-        sidewaysWeekend: "Sidleds-Äventyr (Helg)",
-        performanceWeek: "Prestanda-Paket (Vecka)",
-        performanceWeekend: "Prestanda-Paket (Helg)",
-        incentive: "Incentive-evenemang",
-        custom: "Anpassade evenemang"
+        arcticWeek: "Arctic Adventure (Week)",
+        arcticWeekend: "Arctic Adventure (Weekend)",
+        sidewaysWeek: "Sideways Adventure (Week)",
+        sidewaysWeekend: "Sideways Adventure (Weekend)",
+        performanceWeek: "Performance Package (Week)",
+        performanceWeekend: "Performance Package (Weekend)",
+        incentive: "Incentive Event",
+        custom: "Custom Event"
       },
       activities: {
         snowmobile: "Snöskotertur",
@@ -148,8 +150,8 @@ export const sv = {
         snowshoe: "Snöskovandring",
         spa: "Arktiskt spa",
         restaurant: "Jay Jays restaurang",
-        helicopter: "Helikopterflygningar",
-        aurora: "Norrsken"
+        helicopter: "Helikopterflygning",
+        aurora: "Norrskensjakt"
       },
       flight: {
         none: "Inget charterflyg behövs",
@@ -226,7 +228,7 @@ export const sv = {
     durationOptions: ["3 Nätter", "4 Nätter"],
     weekendWeekText: "Tillgänglig på vardagar och helger",
     premiumPackagesTitle: "Premiumpaket",
-    premiumPackagesDescription: "Våra allomfattande premiumpaket kombinerar flera aktiviteter med lyxigt boende för den ultimata arktiska upplevelsen.",
+    premiumPackagesDescription: "Våra skräddarsydd premiumpaket kombinerar flera aktiviteter med lyxigt boende för den ultimata arktiska upplevelsen.",
     hideActivitiesButton: "Dölj Aktiviteter",
     exploreActivitiesButton: "Utforska Våra Aktiviteter",
     individualActivitiesTitle: "Individuella Aktiviteter",
@@ -236,11 +238,11 @@ export const sv = {
     list: [
       {
         id: 0,
-        title: "Arktiskt Äventyrspaket",
-        description: "Vårt signatur all-inclusive-paket med de bästa vinteraktiviteterna som Svenska Lappland har att erbjuda. Upplev snöskoter, hundspann och mer i ett omfattande paket.",
-        price: 1299,
+        title: "Arctic Adventure",
+        description: "Vårt signatur all-inclusive-paket med de bästa vinteraktiviteterna som Svenska Lappland har att erbjuda. Upplev snöskoter, hundspann och mer i vårt magiska paket.",
+        price: 3650,
         duration: "3-4 Nätter",
-        intensityLevel: "Måttlig",
+        intensityLevel: "Magical",
         keyHighlights: ["All-Inclusive Upplevelse", "Premium Boende", "Flera Aktiviteter", "Professionella Guider"],
         image: "/images/Snowmobile/Snowmobile 2_result.webp",
         gallery: [
@@ -250,17 +252,17 @@ export const sv = {
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
         detailedInfo: {
-          introduction: "Arktiska Äventyrspaketet är vårt mest omfattande erbjudande som ger dig den kompletta Svenska Lappland-upplevelsen. Detta all-inclusive-paket kombinerar de bästa aktiviteterna med förstklassigt boende och autentisk lokal mat.",
+          introduction: "Arctic Adventure-paketet är vårt mest omfattande erbjudande som ger dig den kompletta norrländska upplevelsen. Detta all-inclusive-paket kombinerar de bästa aktiviteterna med förstklassigt boende och autentisk lokal mat.",
           adventureOptionsTitle: "PAKETET INKLUDERAR",
           tours: [
             {
               title: "3-NÄTTERS PAKET",
-              description: "Perfekt för en långhelg. Upplev höjdpunkterna i Svenska Lappland under en kompakt tidsperiod.",
+              description: "Upplev höjdpunkterna i Norrland. Perfekt för en långhelg.",
               details: ["2-timmars Snöskotertur", "Hundspannsupplevelse", "Norrskensskådning", "3 Nätter Premium Boende", "Alla Måltider Ingår"]
             },
             {
               title: "4-NÄTTERS PAKET",
-              description: "Vårt utökade paket låter dig helt fördjupa dig i den arktiska upplevelsen med ytterligare aktiviteter och avkopplingstid.",
+              description: "Vårt utökade paket låter dig helt fördjupa dig i den norrländska upplevelsen med ytterligare aktiviteter och avkopplingstid.",
               details: ["4-timmars Snöskotertur", "Hundspannsupplevelse", "Isfiskeäventyr", "Norrskensskådning", "4 Nätter Premium Boende", "Alla Måltider Ingår"]
             }
           ],
@@ -289,11 +291,11 @@ export const sv = {
       },
       {
         id: 9,
-        title: "Sidleds-Paket",
-        description: "Upplev den ultimata adrenalinkicken med vår iskörningstträning. Bemästra driften på is med professionella instruktörer och olika fordon.",
-        price: 1499,
+        title: "Sideways Adventure",
+        description: "Upplev det mest fartfyllda signaturpaketet – en exklusiv all-inclusive-upplevelse där snöskotrar, Ice Drift och vinterns mest adrenalinfyllda aktiviteter står i centrum. Ett paket för dig som söker spänning, stil och Lappland när det är som mest levande.",
+        price: 4500,
         duration: "3-4 Nätter",
-        intensityLevel: "Avancerad",
+        intensityLevel: "Exciting",
         keyHighlights: ["Professionell Iskörningsträning", "Flera Fordonstyper", "Premium Boende", "All-Inclusive Måltider"],
         image: "/images/Experiences/ice-driving.jpg",
         gallery: [
@@ -303,7 +305,7 @@ export const sv = {
           "/images/Restaurant/restaurant-interior.jpg"
         ],
         detailedInfo: {
-          introduction: "Sidleds-Paketet erbjuder en spännande iskörningsupplevelse under professionell vägledning. Förbättra din körteknik på speciellt preparerade isytor och njut av lyxen i vårt förstklassiga boende.",
+          introduction: "Upplev den ultimata adrenalinkicken med vår iskörningstträning. Bemästra driften på is med professionella instruktörer och olika fordon.",
           adventureOptionsTitle: "PAKETET INKLUDERAR",
           tours: [
             {
@@ -341,12 +343,12 @@ export const sv = {
       },
       {
         id: 10,
-        title: "Is-Prestanda-Paket",
-        description: "Vår premium-iskörningsupplevelse för entusiaster. Kör högprestandafordon på is under vägledning av racingproffs i en exklusiv miljö.",
-        price: 2499,
+        title: "Ice Performance",
+        description: "Där precision, fart och is möts – vår exklusiva iskörningsupplevelse för riktiga bilentusiaster. Under vägledning av racingproffs får du tänja på gränserna på en specialdesignad isbana.",
+        price: 5500,
         duration: "3-4 Nätter",
-        intensityLevel: "Expert",
-        keyHighlights: ["Högprestandafordon", "Professionella Racinginstruktörer", "Lyxboende", "Gourmetmat"],
+        intensityLevel: "Adrenaline Rush",
+        keyHighlights: ["Professionella Racinginstruktörer", "Moderna bilar", "Gourmetmat"],
         image: "/images/Experiences/ice-performance.jpg",
         gallery: [
           "/images/Experiences/ice-performance.jpg",
@@ -406,7 +408,7 @@ export const sv = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_18_Snowmobile-srTrl5j9qWeqtBxh4OaDgzQC7oT9Ab.webm",
+        video: videoUrls.snowmobileAdventure,
         detailedInfo: {
           introduction: "Vårt Snöskoter-Äventyr erbjuder en spännande upplevelse i den snötäckta vildmarken i Svenska Lappland. Kör med förstklassiga Ski-doo modeller över frusna sjöar och genom snötäckta skogar.",
           adventureOptionsTitle: "VÄLJ DITT ÄVENTYR",
@@ -462,7 +464,7 @@ export const sv = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Husky_1-ADzspahuC5SAcoFtHDDKf7QQSciUu7.webm",
+        video: videoUrls.huskyExpedition,
         "detailedInfo": {
             "introduction": "Gör dig redo att känna kraften från slädhundar när du glider genom snöiga skogar och frusna sjöar. Oavsett om du vill leda ditt eget team eller koppla av som passagerare, erbjuder våra huskyupplevelser den perfekta balansen mellan spänning och lugn.",
             "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
@@ -513,7 +515,7 @@ export const sv = {
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
           "/images/Snowshoe_Torchwalk/snowtorch1.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Torch_1-iYTmeOUkhsqtaPGqywbvGZMHAhlmrs.webm",
+        video: videoUrls.torchWalkAdventure,
         detailedInfo: {
           introduction: "Vår kvällsfackelpromenad erbjuder en magisk upplevelse i den arktiska natten. Vandra genom den tysta vinterskogen, upplyst endast av facklor och stjärnorna ovanför, och känn den speciella stämningen som bara den arktiska vintern kan erbjuda.",
           adventureOptionsTitle: "UPPLEVELSEN INKLUDERAR",
@@ -553,7 +555,7 @@ export const sv = {
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Snowshoe_1-gi2MZ9BExMXQGMoaguetW7SnZFJRtr.webm",
+        video: videoUrls.snowshoeAdventure,
         "detailedInfo": {
           "introduction": "Upplev magin i Lapplands skogar på snöskor när du vandrar genom orörda snötäckta landskap. Detta dagäventyr är perfekt för naturentusiaster i alla åldrar som vill utforska vintervildmarken.",
           "adventureOptionsTitle": "ÄVENTYRSDETALJER",
@@ -653,7 +655,7 @@ export const sv = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm",
+        video: videoUrls.reindeerVisit,
         "detailedInfo": {
           "introduction": "Kom nära våra vänliga renar, mata dem för hand och fånga oförglömliga minnen i hjärtat av Lappland.",
           "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
@@ -701,10 +703,10 @@ export const sv = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Helicopter_1-2h7w1n8k9Lk3j4P5A.webm", // TODO: Replace with actual video URL if available
+        video: videoUrls.helicopterTour,
         "detailedInfo": {
-            "introduction": "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter. Experience the landscape like never before as you soar above Swedish Lapland.",
-            "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
+            "introduction": "Få en hisnande fågelperspektiv över den vidsträckta arktiska vildmarken, frusna sjöar och snötäckta skogar från en helikopter. Upplev landskapet som aldrig förr när du svävar över Svenska Lappland.",
+            "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
             "tours": [
                 {
                     "title": "30-MINUTE SCENIC FLIGHT",
@@ -751,7 +753,7 @@ export const sv = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_IceDrift_1-3n4m5l6k7Jk8h9G0B.webm", // TODO: Replace with actual video URL if available
+        video: videoUrls.iceDriftExperience,
         "detailedInfo": {
           "introduction": "Känn spänningen av att glida sidledes på is i vår Isdriftupplevelse. Under ledning av professionella körinstruktörer lär du dig teknikerna för att kontrollera ett fordon under extrema vinterförhållanden. Med specialförberedda prestandabilar utrustade med dubbdäck övar du drifttekniker på vår specialbyggda isbana. Börja med grundläggande övningar och gå vidare till mer komplexa manövrer när ditt självförtroende växer. Denna upplevelse är perfekt för körentusiaster som vill förbättra sina vinterkörfärdigheter i en säker och kontrollerad miljö. Alla förare får grundlig instruktion och har möjlighet till flera körsessioner för att perfekta sin teknik.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -807,7 +809,7 @@ export const sv = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm",
+        video: videoUrls.buggyDriftAdventure,
         "detailedInfo": {
           "introduction": "Upplev rusningen av buggydrifting på preparerade snöspår. Utmana dig själv eller ta med en vän som medpassagerare för extra kul.",
           "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",
@@ -1033,7 +1035,7 @@ export const sv = {
       }
     },
     partners: {
-      title: "Våra betrodda partners"
+      title: "Våra partners"
     }
   },
   

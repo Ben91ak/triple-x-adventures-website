@@ -13,12 +13,11 @@ declare module '@/contexts/LanguageContext' {
 }
 
 declare module '@/translations' {
-  export function useTranslation(language: string): any;
+  interface TranslationFunction {
+    (key: string, params?: Record<string, string | number>): string;
+  }
+  export function useTranslation(language: string): TranslationFunction;
 }
 
 // Ensure JSX is properly typed
-declare namespace JSX {
-  interface IntrinsicElements {
-    [elemName: string]: any;
-  }
-}
+

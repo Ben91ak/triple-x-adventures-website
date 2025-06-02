@@ -27,11 +27,7 @@ export default function AdminPage() {
             
             {/* Admin navigation */}
             <div className="flex flex-wrap justify-center gap-4 mb-10">
-              <Link href="/admin">
-                <a className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors">
-                  Translation Manager
-                </a>
-              </Link>
+
               <Link href="/admin/media">
                 <a className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors">
                   Media Manager

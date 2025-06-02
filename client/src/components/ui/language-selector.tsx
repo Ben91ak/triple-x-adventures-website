@@ -92,6 +92,14 @@ export function LanguageSelector({ className }: { className?: string }) {
       <DropdownMenuTrigger asChild>
         <div
           ref={divRef}
+         role="button"
+         tabIndex={0}
+         onKeyDown={(e) => {
+           if (e.key === 'Enter' || e.key === ' ') {
+             e.preventDefault();
+             setOpen(!open);
+           }
+         }}
           style={buttonStyle}
           className={cn(
             "relative group inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg",

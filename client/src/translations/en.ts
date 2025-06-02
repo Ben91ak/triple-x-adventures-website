@@ -1,3 +1,5 @@
+import { videoUrls } from "@/config/videoUrls";
+
 export const en = {
   // Header Navigation
   nav: {
@@ -53,9 +55,9 @@ export const en = {
         id: 0,
         title: "Arctic Adventure Package",
         description: "Our signature all-inclusive package featuring the best winter activities Swedish Lapland has to offer. Experience snowmobiling, husky sledding, and more in one comprehensive package.",
-        price: 1299,
+        price: 3650,
         duration: "3-4 Nights",
-        intensityLevel: "Moderate",
+        intensityLevel: "Magical",
         keyHighlights: ["All-Inclusive Experience", "Premium Accommodations", "Multiple Activities", "Professional Guides"],
         image: "/images/Snowmobile/Snowmobile 2_result.webp",
         gallery: [
@@ -221,7 +223,7 @@ export const en = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_18_Snowmobile-srTrl5j9qWeqtBxh4OaDgzQC7oT9Ab.webm",
+        video: videoUrls.snowmobileAdventure,
         detailedInfo: {
           introduction: "Feel the excitement as you ride across untouched snow and beautiful winter landscapes. Enjoy the fresh Arctic air and stunning views of Swedish Lapland. Our tours are designed to let you experience the magic of the area with friendly, local guides who love showing you special spots and helping you create great memories. We use the newest Ski-doo Backcountry Adrenalin models, making your ride safe, comfortable, and fun.",
           adventureOptionsTitle: "PICK YOUR ADVENTURE",
@@ -277,7 +279,7 @@ export const en = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Husky_1-ADzspahuC5SAcoFtHDDKf7QQSciUu7.webm",
+        video: videoUrls.huskyExpedition,
         "detailedInfo": {
             "introduction": "Get ready to feel the power of sled dogs as you glide through snowy forests and frozen lakes. Whether you want to lead your own team or relax as a passenger, our husky experiences offer the perfect balance of excitement and serenity.",
             "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -328,7 +330,7 @@ export const en = {
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Snowshoe_1-gi2MZ9BExMXQGMoaguetW7SnZFJRtr.webm",
+        video: videoUrls.snowshoeAdventure,
     "detailedInfo": {
       "introduction": "Experience the magic of Lapland's forests on snowshoes as you trek through pristine snow-covered landscapes. This daytime adventure is perfect for nature lovers of all ages who want to explore the winter wilderness.",
       "adventureOptionsTitle": "ADVENTURE DETAILS",
@@ -380,7 +382,7 @@ export const en = {
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
           "/images/Snowshoe_Torchwalk/snowtorch1.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Torch_1-iYTmeOUkhsqtaPGqywbvGZMHAhlmrs.webm",
+        video: videoUrls.torchWalkAdventure,
     "detailedInfo": {
       "introduction": "Join an atmospheric evening walk with torches under the Arctic sky. As darkness falls, the forest transforms into a magical realm lit by the warm glow of torches, creating unforgettable memories of your Arctic adventure.",
       "adventureOptionsTitle": "ADVENTURE DETAILS",
@@ -480,7 +482,7 @@ export const en = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm",
+        video: videoUrls.reindeerVisit,
         "detailedInfo": {
           "introduction": "Get up close with our friendly reindeer, feed them by hand, and capture unforgettable memories in the heart of Lapland.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -528,7 +530,7 @@ export const en = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Helicopter_1-2h7w1n8k9Lk3j4P5A.webm", // TODO: Replace with actual video URL if available
+        video: videoUrls.helicopterTour,
         "detailedInfo": {
             "introduction": "Get a breathtaking bird's-eye view of the vast Arctic wilderness, frozen lakes, and snow-covered forests from a helicopter. Experience the landscape like never before as you soar above Swedish Lapland.",
             "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -578,7 +580,7 @@ export const en = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_IceDrift_1-3n4m5l6k7Jk8h9G0B.webm", // TODO: Replace with actual video URL if available
+        video: videoUrls.iceDriftExperience,
         "detailedInfo": {
           "introduction": "Feel the thrill of sliding and drifting on the ice with expert instructors guiding you every step of the way. Suitable for all levels, this is your chance to push your limits on frozen lakes.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -634,7 +636,7 @@ export const en = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm",
+        video: videoUrls.buggyDriftAdventure,
         "detailedInfo": {
           "introduction": "Experience the rush of buggy drifting on prepared snow tracks. Challenge yourself or bring a friend as a co-driver for extra fun.",
           "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -674,9 +676,9 @@ export const en = {
   // Accommodations Section
   accommodations: {
     title: "STAY WITH US",
-    subtitle: "Comfort in the Wilderness",
+    subtitle: "Unwind in Comfort - Surrounded by Wilderness",
     viewAll: "View All Accommodations",
-    whereYouWillStay: "Where You Will Stay",
+    whereYouWillStay: "Where Nature Meets Luxury",
     comingSoon: "Coming Soon",
     from: "From",
     night: "night",
@@ -698,7 +700,7 @@ export const en = {
     },
     txaChalet: {
       title: "TXA - CHALET",
-      description: "Stay in your own TXA - Chalet and experience the highest level of comfort. Our exclusive chalet offers a perfect mix of rustic charm and modern luxury.",
+      description: "Make yourself at home in your private TXA Chalet and experience the highest level of comfort. Our chalet is the perfect choice for private groups.",
       features: [
         "Up to 24 guests",
         "12 bedrooms",
@@ -708,7 +710,7 @@ export const en = {
     },
     hotelLaponia: {
       title: "HOTEL LAPONIA",
-      description: "A comfortable alternative to our TXA Chalet. Hotel Laponia provides you with a pleasant stay before and after your adventures, with all the amenities you need.",
+      description: "Hotel Laponia is our standard accommodation – offering everything you need for a relaxing stay in Swedish Lapland.",
       features: [
         "Central location",
         "Arctic ambiance",

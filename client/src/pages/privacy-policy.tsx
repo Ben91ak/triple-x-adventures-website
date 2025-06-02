@@ -56,9 +56,9 @@ export default function PrivacyPolicyPage() {
 
                 <div>
                   <h4 className="font-medium mb-2">{content.personalInfoCollection}</h4>
-                  <p className="text-white/80 text-sm mb-4">
-                    {content.personalInfoCollectionText}
-                  </p>
+ <p className="text-white/80 text-sm mb-4">
+   {content.personalInfoCollectionText}
+ </p>
                   <ul className="text-white/80 text-sm list-disc pl-5 mb-4">
                     {content.personalInfoItems.map((item, index) => (
                       <li key={index}>{item}</li>

@@ -1,5 +1,4 @@
 import { ContactFormData } from "../types/index";
-import { apiRequest } from "./queryClient";
 
 // Adventure form data interface (mirrors schema in shared/schema.ts)
 export interface AdventureFormData {
@@ -23,8 +22,6 @@ export const api = {
   // Submit contact form
   submitContactForm: async (formData: ContactFormData) => {
     try {
-      console.log('API client submitting form data:', formData);
-      
       // Ensure we have all required fields for the API
       const payload = {
         firstName: formData.firstName || '',
@@ -38,7 +35,7 @@ export const api = {
       };
       
       // Use the same API endpoint as the main contact form
-      const response = await fetch('/api/contact.js', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,11 +43,11 @@ export const api = {
         body: JSON.stringify(payload),
       });
       
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Server returned error:', response.status, errorText);
-        throw new Error(`Server error: ${response.status} ${errorText}`);
-      }
+if (!response.ok) {
+         const errorText = await response.text();
+         console.error('Server returned error:', response.status, errorText);
+        throw new Error(`Request failed with status: ${response.status}`);
+       }
       
       return await response.json();
     } catch (error) {
@@ -62,7 +59,20 @@ export const api = {
   // Submit adventure package form
   submitAdventureForm: async (formData: AdventureFormData) => {
     try {
-      const response = await apiRequest('POST', '/api/adventure.js', formData);
+      const response = await fetch('/api/adventure', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server returned error:', response.status, errorText);
+        throw new Error(`Server error: ${response.status} ${errorText}`);
+      }
+      
       return await response.json();
     } catch (error) {
       console.error('Error submitting adventure form:', error);

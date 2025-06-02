@@ -53,12 +53,17 @@ export function optimizePageImages(): void {
  */
 export function preloadAllCriticalImages(): void {
   if (!isBrowser) return;
-  
-  // Check if preloading is already in progress or completed
-  if (window.sessionStorage && window.sessionStorage.getItem('imagesPreloaded') === 'true') {
-    return;
+  try {
+    if (window.sessionStorage?.getItem('imagesPreloaded') === 'true') {
+       return;
+    }
+  } catch {
+    /* storage not available – proceed without caching flag */
   }
-  
+
+  try {
+    window.sessionStorage?.setItem('imagesPreloaded', 'true');
+  } catch { /* ignore */ }
   // Only include images that are known to exist
   const criticalImageUrls = [
     '/weiss-grun.png', // Logo

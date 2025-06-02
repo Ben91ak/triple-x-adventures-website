@@ -166,40 +166,7 @@ export function getOptimizedImageSrc(
     }
   }
   
-  // Default options - these variables are used in specific cases below
-  // but not directly in the general optimization logic
-  
-  // Get device pixel ratio for calculations in specific image handlers
   const devicePixelRatio = typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1;
-  
-  // Use network conditions to determine appropriate size
-  // This variable was used in the removed getOptimizedVersionForCollection function
-  // Keeping the calculation logic for reference but not using the variable
-  /* Removed for tree shaking
-  let sizeSuffix = 'medium'; // Default size
-  
-  // Calculate effective screen width accounting for device pixel ratio
-  const effectiveWidth = screenWidth * devicePixelRatio;
-  
-  // Determine size based on screen dimensions and network conditions
-  if (networkInfo.saveData || networkInfo.connectionType === 'slow-2g' || networkInfo.connectionType === '2g') {
-    // Always use small images on poor connections or when data saver is enabled
-    sizeSuffix = 'small';
-  } else if (effectiveWidth <= 640 || networkInfo.effectiveBandwidth < 1.5) {
-    // Small screens or slow connections
-    sizeSuffix = 'small';
-  } else if (effectiveWidth > 1280 && networkInfo.effectiveBandwidth >= 5 && !networkInfo.saveData) {
-    // Large, high-DPI screens with good connection
-    sizeSuffix = 'large';
-  }
-  
-  // Override size suffix based on quality parameter
-  if (quality === 'low') {
-    sizeSuffix = 'small';
-  } else if (quality === 'high' && networkInfo.effectiveBandwidth >= 5 && !networkInfo.saveData) {
-    // sizeSuffix = 'large';
-  }
-  */
   
   // Determine best available format - this logic is used in specific cases below
   // but the variable itself is not used directly
@@ -225,57 +192,6 @@ export function getOptimizedImageSrc(
   // Optimization logic for specific image collections
   
   // Common function to handle image optimization across collections
-  // This function is currently unused but kept for future reference
-  /* Removed for tree shaking
-  const getOptimizedVersionForCollection = (
-    collectionPath: string, 
-    fileNameWithoutExt: string,
-    format: ImageFormat
-  ): string | null => {
-    // Build path to optimized version
-    const optimizedPath = `${collectionPath}/optimized/${fileNameWithoutExt}-${sizeSuffix}.${format}`;
-    
-    // Create a cache key for this specific optimized version
-    const cacheKey = `${collectionPath.replace('/images/', '')}-${fileNameWithoutExt}-${sizeSuffix}-${format}`;
-    
-    // If we've previously loaded this successfully, use it again
-    if (imageLoadCache[cacheKey] === true) {
-      return optimizedPath;
-    }
-    
-    // If we've tried this before and it failed, don't try again
-    if (imageLoadCache[cacheKey] === false) {
-      return null;
-    }
-    
-    // Try to load the optimized version asynchronously to confirm it exists
-    if (typeof window !== 'undefined') {
-      const img = new Image();
-      img.onload = () => {
-        imageLoadCache[cacheKey] = true;
-      };
-      img.onerror = () => {
-        imageLoadCache[cacheKey] = false;
-        // Only log if it's not a normal fallback situation
-        if (format === bestFormat) {
-          console.warn(`Optimized image not found: ${optimizedPath}`);
-        }
-      };
-      img.src = optimizedPath;
-      
-      // If this is a high priority image, also preload it
-      if (priority) {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = optimizedPath;
-        document.head.appendChild(link);
-      }
-    }
-    
-    return optimizedPath;
-  };
-  */
   
   // Extract filename if there is one
   const fileName = src.split('/').pop() || '';

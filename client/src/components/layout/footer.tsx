@@ -143,7 +143,7 @@ export function Footer() {
                       href={social.href} 
                       className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
                       aria-label={social.label}
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                       target="_blank"
                     >
                       {social.icon}
@@ -183,7 +183,7 @@ export function Footer() {
                           href={social.href} 
                           className="w-10 h-10 rounded-full bg-card-bg/80 border border-white/10 flex items-center justify-center text-white hover:text-accent-color hover:border-accent-color/50 transition-colors"
                           aria-label={social.label}
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           target="_blank"
                         >
                           {social.icon}

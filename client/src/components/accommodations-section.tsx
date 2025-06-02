@@ -60,7 +60,7 @@ export function AccommodationsSection() {
                text.toLowerCase().includes('sameland') || text.toLowerCase().includes('arvidsjaur')) {
       return "fas fa-location-dot";
     } else if (text.toLowerCase().includes('climate') || text.toLowerCase().includes('klima') || text.toLowerCase().includes('arctic') || 
-               text.toLowerCase().includes('arktisk')) {
+               text.toLowerCase().includes('arktisk') || text.toLowerCase().includes('ac')) {
       return "fas fa-snowflake";
     } else if (text.toLowerCase().includes('airport') || text.toLowerCase().includes('flughafen') || text.toLowerCase().includes('flygplats')) {
       return "fas fa-shuttle-van";

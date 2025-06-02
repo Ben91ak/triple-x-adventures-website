@@ -1,5 +1,82 @@
 import nodemailer from 'nodemailer';
 
+/**
+ * Validates adventure form data
+ * @param {Object} formData - The form data to validate
+ * @returns {Object} - Object containing validation status and error message if invalid
+ */
+function validateAdventureForm(formData) {
+  const { 
+    firstName, 
+    lastName, 
+    email, 
+    phone, 
+    startDate, 
+    endDate, 
+    departureAirport,
+    groupSize
+  } = formData;
+
+  // Required fields validation
+  if (!firstName || !lastName || !email || !departureAirport) {
+    return {
+      valid: false,
+      error: 'Missing required fields'
+    };
+  }
+
+  // Enhanced email validation
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  if (!emailRegex.test(email)) {
+    return {
+      valid: false,
+      error: 'Invalid email format'
+    };
+  }
+
+  // Phone validation (if provided)
+  if (phone && !/^\+?[\d\s\-\(\)]{7,15}$/.test(phone.replace(/\s/g, ''))) {
+    return {
+      valid: false,
+      error: 'Invalid phone format'
+    };
+  }
+
+  // Group size validation
+  if (groupSize && (isNaN(groupSize) || groupSize < 1 || groupSize > 50)) {
+    return {
+      valid: false,
+      error: 'Group size must be between 1 and 50'
+    };
+  }
+
+  // Date validation
+  if (startDate && endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    if (start < today) {
+      return {
+        valid: false,
+        error: 'Start date cannot be in the past'
+      };
+    }
+    if (end <= start) {
+      return {
+        valid: false,
+        error: 'End date must be after start date'
+      };
+    }
+  }
+
+  // All validations passed
+  return {
+    valid: true
+  };
+}
+
 export default async function handler(req, res) {
   // Only allow POST requests
   if (req.method !== 'POST') {
@@ -23,13 +100,17 @@ export default async function handler(req, res) {
       preferredLanguage
     } = req.body;
 
-    // Basic validation
-    if (!firstName || !lastName || !email || !departureAirport) {
-      return res.status(400).json({ error: 'Missing required fields' });
+    // Validate form data
+    const validation = validateAdventureForm(req.body);
+    if (!validation.valid) {
+      return res.status(400).json({ error: validation.error });
     }
-
-    // Format arrays for better readability
-    const formatArray = (arr) => arr && arr.length > 0 ? arr.join(', ') : 'None specified';
+    
+    const he = require('he'); // Add HTML entity encoding library
+    const formatArray = (arr) => {
+      if (!arr || arr.length === 0) return 'None specified';
+      return arr.map(item => he.encode(String(item))).join(', ');
+    };
     
     const formattedPackages = formatArray(selectedPackages);
     const formattedAccommodations = formatArray(selectedAccommodations);
@@ -70,17 +151,17 @@ export default async function handler(req, res) {
           },
         });
 
-        // Current date and time for the email
-        const now = new Date();
-        const formattedDate = now.toLocaleString('en-US', { 
-          weekday: 'long',
-          year: 'numeric', 
-          month: 'long', 
+        // Format the date for the email
+        const date = new Date();
+        const formattedDate = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'long',
           day: 'numeric',
           hour: '2-digit',
-          minute: '2-digit'
-        });
-        
+          minute: '2-digit',
+          timeZoneName: 'short'
+        }).format(date);
+
         // Email content
         const mailOptions = {
           from: process.env.SMTP_FROM || 'website@t-x-a.com',
@@ -126,21 +207,23 @@ To reply, simply respond to this email directly.
           `,
           html: `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Adventure Booking Request</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triple-X Adventures Booking</title>
   <style>
     body { 
       font-family: Arial, sans-serif; 
       line-height: 1.6; 
-      color: #333333; 
-      max-width: 600px; 
+      color: #333333;
+      max-width: 600px;
       margin: 0 auto;
+      padding: 20px;
     }
     .header { 
       background-color: #1a1a2e; 
-      color: white; 
+      color: #ffffff; 
       padding: 20px; 
       text-align: center;
       border-radius: 5px 5px 0 0;
@@ -233,7 +316,7 @@ To reply, simply respond to this email directly.
     <div class="section">
       <div class="section-title">Additional Requests</div>
       <div class="message-box">
-        ${additionalRequests ? additionalRequests.replace(/\\n/g, '<br>') : 'None'}
+${additionalRequests ? he.encode(additionalRequests).replace(/\n/g, '<br>') : 'None'}
       </div>
     </div>
     

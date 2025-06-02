@@ -3,10 +3,11 @@ import { Experience } from "@/types";
 import { useLanguage, Language } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { 
-  X, ChevronLeft, ChevronRight, ArrowRight, Filter, Snowflake, Play, Compass, Tag, 
+  X, ChevronLeft, ChevronRight, ArrowRight, Snowflake, 
   Clock, Zap, Star, Sun, Utensils, Mountain, MapPin, Users, Trees, Fish, Check, Sparkles
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { EXPERIENCE_VIDEOS, ExperienceVideoType } from '../config/videos';
 
 // Custom hook for parallax effect
 function useParallax(speed = 0.03) {
@@ -172,8 +173,8 @@ function ExperienceCard({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
-  // Get experience categories for display
-  const categories = getCategoryFromExperience(experience);
+  // Get experience categories for display (used for display logic only)
+  getCategoryFromExperience(experience);
   
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     if (!fallbackUsed) {
@@ -215,16 +216,7 @@ function ExperienceCard({
     }
   };
 
-  // Get icon for category
-  const getCategoryIcon = (category: ExperienceCategory) => {
-    switch(category) {
-      case 'winter': return <Snowflake className="w-4 h-4" />;
-      case 'adventure': return <Compass className="w-4 h-4" />;
-      case 'water': return <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>;
-      case 'culture': return <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" /></svg>;
-      default: return <Tag className="w-4 h-4" />;
-    }
-  };
+
 
   return (
     <motion.div 
@@ -362,6 +354,20 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
   const [showFullGallery, setShowFullGallery] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   
+  // Create state variables for each experience type to determine what's active
+  const [isHuskyExperience, setIsHuskyExperience] = useState(false);
+  const [isHelicopterExperience, setIsHelicopterExperience] = useState(false);
+  const [isDriftExperience, setIsDriftExperience] = useState(false);
+  const [isReindeerExperience, setIsReindeerExperience] = useState(false);
+  const [isBuggyExperience, setIsBuggyExperience] = useState(false);
+  const [isSnowshoeExperience, setIsSnowshoeExperience] = useState(false);
+  const [isTorchwalkExperience, setIsTorchwalkExperience] = useState(false);
+  const [isSnowmobileExperience, setIsSnowmobileExperience] = useState(false);
+  const [isIceFishingExperience, setIsIceFishingExperience] = useState(false);
+  const [isArcticAdventureExperience, setIsArcticAdventureExperience] = useState(false);
+  const [isIcePerformanceExperience, setIsIcePerformanceExperience] = useState(false);
+  const [isSidewayPackageExperience, setIsSidewayPackageExperience] = useState(false);
+  
   const galleryLength = experience.gallery?.length || 0;
   const hasGallery = galleryLength > 0;
   const categories = getCategoryFromExperience(experience);
@@ -369,16 +375,107 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
   // Check for video availability based on experience ID and video property
   const hasVideo = !!experience.video;
   
-  // Determine experience type based on ID and video URL
+  // Determine experience type based on video URL patterns
   const videoUrl = experience.video as string || '';
-  const isBuggyExperience = hasVideo && videoUrl.includes('Side%20by%20Side');
-  const isHuskyExperience = hasVideo && videoUrl.includes('Husky');
-  const isHelicopterExperience = hasVideo && videoUrl.includes('Heli');
-  const isDriftExperience = hasVideo && videoUrl.includes('Drift');
-  const isReindeerExperience = hasVideo && videoUrl.includes('Reindeers');
-  const isSnowshoeExperience = hasVideo && videoUrl.includes('Snowshoe');
-  const isTorchwalkExperience = hasVideo && videoUrl.includes('Torch');
-  const isSnowmobileExperience = hasVideo && videoUrl.includes('Snowmobile');
+  const experienceType = hasVideo ? getExperienceTypeFromVideo(videoUrl, experience.title) : null;
+  
+  // We'll use EXPERIENCE_VIDEOS directly as our video URL mapping
+  
+  // Set the experience flags based on the detected type
+  useEffect(() => {
+    // Reset all flags first
+    setIsHuskyExperience(false);
+    setIsHelicopterExperience(false);
+    setIsDriftExperience(false);
+    setIsReindeerExperience(false);
+    setIsBuggyExperience(false);
+    setIsSnowshoeExperience(false);
+    setIsTorchwalkExperience(false);
+    setIsSnowmobileExperience(false);
+    setIsIceFishingExperience(false);
+    setIsArcticAdventureExperience(false);
+    setIsIcePerformanceExperience(false);
+    setIsSidewayPackageExperience(false);
+    
+    // Set the appropriate flag based on the experience type
+    if (experienceType) {
+      switch (experienceType) {
+        case 'husky':
+          setIsHuskyExperience(true);
+          break;
+        case 'helicopter':
+          setIsHelicopterExperience(true);
+          break;
+        case 'drift':
+          setIsDriftExperience(true);
+          break;
+        case 'reindeer':
+          setIsReindeerExperience(true);
+          break;
+        case 'buggy':
+          setIsBuggyExperience(true);
+          break;
+        case 'snowshoe':
+          setIsSnowshoeExperience(true);
+          break;
+        case 'torchwalk':
+          setIsTorchwalkExperience(true);
+          break;
+        case 'snowmobile':
+          setIsSnowmobileExperience(true);
+          break;
+        case 'iceFishing':
+          setIsIceFishingExperience(true);
+          break;
+        case 'arcticAdventure':
+          setIsArcticAdventureExperience(true);
+          break;
+        case 'icePerformance':
+          setIsIcePerformanceExperience(true);
+          break;
+        case 'sidewayPackage':
+          setIsSidewayPackageExperience(true);
+          break;
+      }
+    }
+  }, [experienceType]);
+  
+  // Helper function to detect experience type
+  function getExperienceTypeFromVideo(url: string, title: string): ExperienceVideoType | null {
+    // Define a structure for experience type patterns
+    interface ExperiencePattern {
+      type: ExperienceVideoType;
+      patterns: string[];
+      titlePatterns?: string[];
+    }
+  function getExperienceTypeFromVideo(url: string, title: string): string | null {
+    // Decode URL to handle encoded spaces and special characters
+    const decodedUrl = decodeURIComponent(url);
+    const normalizedTitle = title.toLowerCase();
+    
+    const patterns = [
+      { type: 'buggy', patterns: ['side by side', 'sbs'] },
+      { type: 'husky', patterns: ['husky'] },
+      { type: 'helicopter', patterns: ['heli', 'helicopter'] },
+      { type: 'drift', patterns: ['drift'] },
+      { type: 'reindeer', patterns: ['reindeer'] },
+      { type: 'snowshoe', patterns: ['snowshoe'] },
+      { type: 'torchwalk', patterns: ['torch'] },
+      { type: 'snowmobile', patterns: ['snowmobile'] },
+      { type: 'arcticAdventure', patterns: ['arctic'], titlePatterns: ['arctic adventure'] },
+      { type: 'icePerformance', patterns: ['ice performance'], titlePatterns: ['ice performance'] },
+      { type: 'sidewayPackage', patterns: ['sideway'], titlePatterns: ['sideway', 'side way'] },
+      { type: 'iceFishing', patterns: ['icefishing', 'ice fishing'], titlePatterns: ['fishing'] }
+    ];
+     
+     for (const { type, patterns, titlePatterns } of patterns) {
+      const urlMatches = patterns.some(p => decodedUrl.toLowerCase().includes(p));
+      const titleMatches = titlePatterns?.some(p => normalizedTitle.includes(p));
+      
+      if (urlMatches || titleMatches) return type;
+     }
+     return null;
+   }
   
   // Modal ref for scrolling
   const modalRef = useRef<HTMLDivElement>(null);
@@ -546,15 +643,7 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
 
   const currentImage = hasGallery ? experience.gallery![currentImageIndex] : experience.image;
   
-  // Video URLs from Vercel Blob
-  const huskyVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Husky_1-ADzspahuC5SAcoFtHDDKf7QQSciUu7.webm";
-  const helicopterVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Heli_1-bPmUhpk0y2nC855JeuMT96zkqdypJh.webm";
-  const driftVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Drift1_1-wAPR67alYuim94rcVwbhHMgqyF8zvh.webm";
-  const reindeerVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm";
-  const buggyVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm";
-  const snowshoeVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Snowshoe_1-gi2MZ9BExMXQGMoaguetW7SnZFJRtr.webm";
-  const torchwalkVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Torch_1-iYTmeOUkhsqtaPGqywbvGZMHAhlmrs.webm";
-  const snowmobileVideoUrl = "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_18_Snowmobile-srTrl5j9qWeqtBxh4OaDgzQC7oT9Ab.webm";
+  // We'll use EXPERIENCE_VIDEOS directly from the imported config
 
   return (
     <AnimatePresence>
@@ -645,27 +734,16 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
             {/* Left: Image/Video section (slightly adjusted for better space) */}
             <div className="relative w-full lg:w-3/5 h-72 sm:h-80 md:h-96 lg:h-auto flex-shrink-0">
               {/* Loading state */} 
-              {!imageLoaded && !videoLoaded && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && (
+              {!imageLoaded && !videoLoaded && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
                 <div className="absolute inset-0 flex items-center justify-center bg-card-bg/80 z-10">
                   <div className="w-10 h-10 border-t-2 border-accent-color rounded-full animate-spin"></div>
                 </div>
               )}
-              {/* Video for Husky, Helicopter, Drift, Reindeer, or Buggy experience */}
-              {isHuskyExperience || isHelicopterExperience || isDriftExperience || isReindeerExperience || isBuggyExperience || isSnowshoeExperience || isTorchwalkExperience || isSnowmobileExperience ? (
+              {/* Video for experience types */}
+              {isHuskyExperience || isHelicopterExperience || isDriftExperience || isReindeerExperience || isBuggyExperience || isSnowshoeExperience || isTorchwalkExperience || isSnowmobileExperience || isIceFishingExperience || isArcticAdventureExperience || isIcePerformanceExperience || isSidewayPackageExperience ? (
                 <motion.div className="relative h-full overflow-hidden">
                   <motion.video
-                    src={
-                      isBuggyExperience ? buggyVideoUrl :
-                      isHuskyExperience ? huskyVideoUrl : 
-                      isHelicopterExperience ? helicopterVideoUrl : 
-                      isDriftExperience ? driftVideoUrl :
-                      isReindeerExperience ? reindeerVideoUrl :
-                      isSnowshoeExperience ? snowshoeVideoUrl :
-                      isTorchwalkExperience ? torchwalkVideoUrl :
-                      isSnowmobileExperience ? snowmobileVideoUrl :
-                      buggyVideoUrl
-                    }
-                    autoPlay
+                    src={experienceType ? EXPERIENCE_VIDEOS[experienceType] : ''}
                     loop
                     muted
                     playsInline
@@ -698,7 +776,7 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
               
                 
                   {/* Navigation Buttons - Only show for non-video experiences with galleries */} 
-                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && (
+                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
                     <>
                       <motion.button /* Previous */
                         onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
@@ -720,7 +798,7 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                   )}
                   
                   {/* Counter & View All - Only show for non-video experiences with galleries */} 
-                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && (
+                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
                     <div className="absolute bottom-3 right-3 flex items-center z-30 space-x-2">
                       <motion.button
                         onClick={() => setShowFullGallery(true)}
@@ -737,7 +815,7 @@ const ExperienceDetailModal = React.memo(function ExperienceDetailModal({
                   )}
                   
                   {/* Thumbnails - Only show for non-video experiences with galleries */}
-                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && (
+                  {hasGallery && galleryLength > 1 && !isHuskyExperience && !isHelicopterExperience && !isDriftExperience && !isReindeerExperience && !isBuggyExperience && !isSnowshoeExperience && !isTorchwalkExperience && !isSnowmobileExperience && !isIceFishingExperience && !isArcticAdventureExperience && !isIcePerformanceExperience && !isSidewayPackageExperience && (
                     <div className="absolute bottom-12 left-3 right-3 overflow-x-auto scrollbar-hide z-20">
                       <motion.div className="flex space-x-2 p-1">
                         {experience.gallery!.map((thumb, idx) => (
@@ -952,7 +1030,7 @@ export function ExperiencesSection() {
   const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [hoveredExperience, setHoveredExperience] = useState<number | null>(null);
+
   const [showAllActivities, setShowAllActivities] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
@@ -973,17 +1051,31 @@ export function ExperiencesSection() {
   }, []);
   
   // Get experiences from translations
-  const experiences: Experience[] = t.experiences.list.map((exp: any) => ({ // Use 'any' temporarily if types mismatch during transition
-    ...exp,
-    tag: exp.tag ? {
-      ...exp.tag,
-      type: exp.tag.type as "bestseller" | "featured" | "new" | "nature" | "adrenaline" | "scenic"
-    } : undefined,
-    // Ensure new fields are present, even if undefined
-    duration: exp.duration,
-    intensityLevel: exp.intensityLevel,
-    keyHighlights: exp.keyHighlights,
-  }));
+  const experiences: Experience[] = t.experiences.list.map((exp: any) => {
+    // Check if this is the ice fishing experience based on title in different languages (English, Swedish, German)
+    const isIceFishing = exp.title?.toLowerCase().includes('fishing') || 
+                         exp.title?.toLowerCase().includes('pimpel') ||
+                         exp.title?.toLowerCase().includes('eisfischen') ||
+                         (exp.description?.toLowerCase().includes('fishing') && exp.description?.toLowerCase().includes('ice')) ||
+                         (exp.description?.toLowerCase().includes('eis') && exp.description?.toLowerCase().includes('fischen'));
+    
+    // Return the updated experience object
+    return {
+      ...exp,
+      // Add video property for ice fishing if it doesn't already have one
+      video: isIceFishing ? 
+             "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA_Reel_icefishing_1-48OBkubvztZbi1Th6IGMToOMTIOsfK.webm" : 
+             exp.video,
+      tag: exp.tag ? {
+        ...exp.tag,
+        type: exp.tag.type as "bestseller" | "featured" | "new" | "nature" | "adrenaline" | "scenic"
+      } : undefined,
+      // Ensure new fields are present, even if undefined
+      duration: exp.duration,
+      intensityLevel: exp.intensityLevel,
+      keyHighlights: exp.keyHighlights,
+    };
+  });
   
   // Separate packages from regular activities
   // Packages have IDs 0, 9, 10 (Arctic Adventure, Sideways, Ice Performance)
@@ -995,10 +1087,7 @@ export function ExperiencesSection() {
   const filteredPackages = packages;
   const filteredActivities = activities;
   
-  // Combine experiences based on UI state
-  const filteredExperiences = showAllActivities 
-    ? [...filteredPackages, ...filteredActivities]
-    : filteredPackages;
+  // Use either filteredPackages or both depending on showAllActivities state
   
   // Pre-load images on component mount
   useEffect(() => {
@@ -1074,17 +1163,7 @@ export function ExperiencesSection() {
     setModalOpen(false);
   };
   
-  // Function to get icon for category
-  const getCategoryIcon = (category: ExperienceCategory) => {
-    switch(category) {
-      case 'all': return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>;
-      case 'winter': return <Snowflake className="w-5 h-5" />;
-      case 'adventure': return <Compass className="w-5 h-5" />;
-      case 'water': return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>;
-      case 'culture': return <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" /></svg>;
-      default: return <Tag className="w-5 h-5" />;
-    }
-  };
+
   
   return (
     <section 

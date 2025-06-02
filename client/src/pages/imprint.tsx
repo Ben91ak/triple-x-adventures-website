@@ -37,10 +37,10 @@ export default function ImprintPage() {
         <main className="pt-24 md:pt-32 pb-24">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto bg-card-bg/80 backdrop-blur-md border border-white/10 rounded-xl p-6 md:p-10 shadow-glow-sm">
-              <h1 className="text-3xl font-bold text-white mb-8">{content.imprint}</h1>
+<h1 className="text-3xl font-bold text-white mb-8">{content.imprint}</h1>
               
               <div className="prose prose-invert max-w-none text-white/80">
-                <h3 className="text-lg font-semibold text-white">{content.imprint}</h3>
+                <h3 className="text-lg font-semibold text-white">Company Information</h3>
                 <p className="text-sm">
                   Triple X Adventures AB<br />
                   Storgatan 6F<br />

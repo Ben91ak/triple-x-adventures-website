@@ -36,9 +36,9 @@ export interface Experience {
   duration?: string; // e.g., "2 hours", "Full Day"
   intensityLevel?: 'Relaxed' | 'Moderate' | 'Thrilling' | 'Extreme'; // Added intensity level
   keyHighlights?: string[]; // e.g., ["Arctic Scenery", "Professional Guide", "Adrenaline Rush"]
-  tag?: {
+tag?: {
     text: string;
-    type: 'bestseller' | 'featured' | 'new';
+   type: 'bestseller' | 'new' | 'featured' | 'nature' | 'adrenaline' | 'scenic';
   };
   features?: string[]; // Add optional features array
   detailedInfo?: DetailedInfoType; // Add optional detailed info structure

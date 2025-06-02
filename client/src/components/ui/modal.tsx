@@ -69,11 +69,10 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm transition-opacity" style={{ visibility: 'visible', display: 'flex' }}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm transition-opacity">
       <div 
         ref={modalRef}
-        className={`relative bg-card-bg border border-white/10 rounded-lg shadow-xl w-full ${isMobile ? 'max-w-full' : 'max-w-2xl'} max-h-[90vh] overflow-y-auto touch-manipulation z-[10000]`}
-        style={{ visibility: 'visible', display: 'block' }}
+        className={`relative bg-card-bg border border-white/10 rounded-lg shadow-xl w-full ${isMobile ? 'max-w-full' : 'max-w-2xl'} max-h-[90vh] overflow-y-auto touch-manipulation z-10`}
         aria-modal="true"
         role="dialog"
         aria-labelledby="modal-title"

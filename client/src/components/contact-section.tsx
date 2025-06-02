@@ -137,7 +137,7 @@ export function ContactSection() {
     // Create the form data with the interests field populated
     const formData = { 
       ...data, 
-      interests: allInterests.length > 0 ? allInterests : undefined 
+      interests: allInterests            // always an array, may be empty 
     };
     
     mutation.mutate(formData as ContactFormData);
@@ -183,7 +183,7 @@ export function ContactSection() {
                     <Phone className="w-5 h-5 text-[#A4D233]" />
                   </div>
                   <div className="text-left">
-                    <h4 className="font-medium text-white">Phone</h4>
+                    <h4 className="font-medium text-white"></h4>
                     <p className="text-gray-300">+46 70 357 54 55</p>
                   </div>
                 </div>
@@ -194,8 +194,8 @@ export function ContactSection() {
                     <Mail className="w-5 h-5 text-[#A4D233]" />
                   </div>
                   <div className="text-left">
-                    <h4 className="font-medium text-white">Email</h4>
-                    <p className="text-gray-300">info@triple-x-adventures.com</p>
+                    <h4 className="font-medium text-white"></h4>
+                    <p className="text-gray-300">info@t-x-a.com</p>
                   </div>
                 </div>
 
@@ -204,10 +204,23 @@ export function ContactSection() {
                   <div className="bg-[#1A1D1F] p-3 rounded-full">
                     <MapPin className="w-5 h-5 text-[#A4D233]" />
                   </div>
-                  <div className="text-left">
-                    <h4 className="font-medium text-white">Address</h4>
-                    <p className="text-gray-300">Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden</p>
+                  <p className="text-gray-300">{t('contact.info.address')}</p>
+                </div>
+                
+                {/* Phone */}
+                <div className="flex items-center space-x-4">
+                  <div className="bg-[#1A1D1F] p-3 rounded-full">
+                    <Phone className="w-5 h-5 text-[#A4D233]" />
                   </div>
+                  <p className="text-gray-300">{t('contact.info.phone')}</p>
+                </div>
+                
+                {/* Email */}
+                <div className="flex items-center space-x-4">
+                  <div className="bg-[#1A1D1F] p-3 rounded-full">
+                    <Mail className="w-5 h-5 text-[#A4D233]" />
+                  </div>
+                  <p className="text-gray-300">{t('contact.info.email')}</p>
                 </div>
               </div>
             </div>

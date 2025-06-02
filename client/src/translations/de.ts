@@ -1,3 +1,5 @@
+import { videoUrls } from '../config/videoUrls';
+
 export const de = {
   // Header Navigation
   nav: {
@@ -55,7 +57,7 @@ export const de = {
         description: "Unser Signature All-Inclusive-Paket mit den besten Winteraktivitäten, die Schwedisch-Lappland zu bieten hat. Erleben Sie Schneemobilfahren, Hundeschlittenfahrten und mehr in einem umfassenden Paket.",
         price: 1299,
         duration: "3-4 Nächte",
-        intensityLevel: "Moderat",
+        intensityLevel: "Moderate",
         keyHighlights: ["All-Inclusive Erlebnis", "Premium-Unterkünfte", "Mehrere Aktivitäten", "Professionelle Guides"],
         image: "/images/Snowmobile/Snowmobile 2_result.webp",
         gallery: [
@@ -221,7 +223,7 @@ export const de = {
           "/images/Snowmobile/Snowmobile 3_result.webp",
           "/images/Snowmobile/Snowmobile 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_18_Snowmobile-srTrl5j9qWeqtBxh4OaDgzQC7oT9Ab.webm",
+        video: videoUrls.snowmobileAdventure,
         detailedInfo: {
           introduction: "Unser Schneemobil-Abenteuer bietet ein aufregendes Erlebnis in der verschneiten Wildnis von Schwedisch-Lappland. Fahren Sie mit erstklassigen Ski-doo Modellen über gefrorene Seen und durch verschneite Wälder.",
           adventureOptionsTitle: "WÄHLEN SIE IHR ABENTEUER",
@@ -277,7 +279,7 @@ export const de = {
           "/images/Huskys/Husky 3_result.webp",
           "/images/Huskys/Husky 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Husky_1-ADzspahuC5SAcoFtHDDKf7QQSciUu7.webm",
+        video: videoUrls.huskyExpedition,
         "detailedInfo": {
             "introduction": "Machen Sie sich bereit, die Kraft der Schlittenhunde zu spüren, während Sie durch verschneite Wälder und über gefrorene Seen gleiten. Egal, ob Sie Ihr eigenes Team führen oder als Beifahrer entspannen möchten, unsere Husky-Erlebnisse bieten die perfekte Balance aus Aufregung und Gelassenheit.",
             "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
@@ -328,7 +330,7 @@ export const de = {
           "/images/Snowshoe_Torchwalk/snowtorch3webp.webp",
           "/images/Snowshoe_Torchwalk/snowtorch4.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Snowshoe_1-gi2MZ9BExMXQGMoaguetW7SnZFJRtr.webm",
+        video: videoUrls.snowshoeAdventure,
     "detailedInfo": {
       "introduction": "Erleben Sie den Zauber der lappländischen Wälder auf Schneeschuhen, während Sie durch unberührte schneebedeckte Landschaften wandern. Dieses Tagesabenteuer ist perfekt für Naturliebhaber jeden Alters, die die winterliche Wildnis erkunden möchten.",
       "adventureOptionsTitle": "ABENTEUER-DETAILS",
@@ -380,7 +382,7 @@ export const de = {
           "/images/Snowshoe_Torchwalk/snowtorch2.webp",
           "/images/Snowshoe_Torchwalk/snowtorch1.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Torch_1-iYTmeOUkhsqtaPGqywbvGZMHAhlmrs.webm",
+        video: videoUrls.torchWalkAdventure,
     "detailedInfo": {
       "introduction": "Nehmen Sie teil an einer atmosphärischen Abendwanderung mit Fackeln unter dem arktischen Himmel. Wenn die Dunkelheit hereinbricht, verwandelt sich der Wald in ein magisches Reich, beleuchtet vom warmen Schein der Fackeln, und schafft unvergessliche Erinnerungen an Ihr arktisches Abenteuer.",
       "adventureOptionsTitle": "ABENTEUER-DETAILS",
@@ -480,7 +482,7 @@ export const de = {
           "/images/Reindeers/Reindeers 3_result.webp",
           "/images/Reindeers/Reindeers 5_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm",
+        video: videoUrls.reindeerVisit,
         "detailedInfo": {
           "introduction": "Kommen Sie unseren freundlichen Rentieren ganz nahe, füttern Sie sie aus der Hand und halten Sie unvergessliche Erinnerungen im Herzen Lapplands fest.",
           "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
@@ -528,7 +530,7 @@ export const de = {
           "/images/Helicopter/Helicopter 3_result.webp",
           "/images/Helicopter/Helicopter 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Helicopter_1-2h7w1n8k9Lk3j4P5A.webm", // TODO: Replace with actual video URL if available
+        video: videoUrls.helicopterTour,
         "detailedInfo": {
             "introduction": "Genießen Sie einen atemberaubenden Blick aus der Vogelperspektive auf die weite arktische Wildnis, gefrorene Seen und schneebedeckte Wälder von einem Hubschrauber aus. Erleben Sie die Landschaft wie nie zuvor, während Sie über Schwedisch-Lappland schweben.",
             "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
@@ -578,7 +580,7 @@ export const de = {
           "/images/Ice Drift/Cars 2_result.webp",
           "/images/Ice Drift/Cars 3_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_IceDrift_1-3n4m5l6k7Jk8h9G0B.webm", // TODO: Replace with actual video URL if available
+        video: videoUrls.iceDriftExperience,
         "detailedInfo": {
           "introduction": "Spüren Sie den Nervenkitzel des Gleitens und Driftens auf dem Eis, wobei Experteninstruktoren Sie bei jedem Schritt anleiten. Geeignet für alle Niveaus, ist dies Ihre Chance, Ihre Grenzen auf gefrorenen Seen zu erweitern.",
           "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
@@ -634,7 +636,7 @@ export const de = {
           "/images/Side by Side/SBS 3_result.webp",
           "/images/Side by Side/SBS 4_result.webp"
         ],
-        video: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm",
+        video: videoUrls.buggyDriftAdventure,
         "detailedInfo": {
           "introduction": "Erleben Sie den Rausch des Buggy-Driftens auf präparierten Schneestrecken. Fordern Sie sich selbst heraus oder bringen Sie einen Freund als Beifahrer mit für extra Spaß.",
           "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",

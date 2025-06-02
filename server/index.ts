@@ -28,7 +28,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "*.googleapis.com", "*.gstatic.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "*.googleapis.com", "*.gstatic.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "*.googleapis.com"],
       imgSrc: ["'self'", "data:", "*.googleapis.com", "*.gstatic.com", "*.google.com"],
       connectSrc: ["'self'", "*.googleapis.com"],

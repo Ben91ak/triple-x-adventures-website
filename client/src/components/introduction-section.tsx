@@ -50,23 +50,23 @@ const introContentByLanguage = {
   },
   sv: {
     tagline: "OM OSS",
-    title: "Inte bara ett till turföretag",
-    description: "Triple X Adventures erbjuder autentiska arktiska upplevelser med rötter i Svenska Lappland. Med bas i Arvidsjaur nära Polcirkeln kombinerar vi spänning, komfort och autenticitet i varje äventyr. Oavsett om det handlar om att åka genom snötäckta skogar, äta runt en sprakande öppen eld eller bo i våra förstklassiga boenden, kommer du att lämna med berättelser, inte bara minnen.",
+    title: "Välkommen till Norrland – exklusivt, äventyrligt och magiskt.",
+    description: "Triple X Adventures erbjuder autentiska arktiska upplevelser med rötter i Svenska Lappland. Med bas i Arvidsjaur nära Polcirkeln kombinerar vi spänning, komfort och autenticitet i varje äventyr. Oavsett om det handlar om att åka genom snötäckta skogar, äta runt en sprakande öppen eld eller bo i våra förstklassiga boenden - och när det är dags att åka hem, vinkar vi dig adjö med berättelser och minnen i bagaget.",
     features: [
       {
         icon: "users",
         title: "Små grupper",
-        description: "Personlig uppmärksamhet och autentiska upplevelser med små, intima gruppstorlekar"
+        description: "Våra små grupper säkerställer ett personligt bemötande, exklusivitet i varje steg och autentiska upplevelser."
       },
       {
         icon: "mountain",
         title: "Lokala experter",
-        description: "Våra guider är passionerade lokalinvånare med djup kunskap om den arktiska vildmarken"
+        description: "Våra guider är passionerade lokalinvånare med djup kunskap om den Norrländska vildmarken."
       },
       {
         icon: "crown",
         title: "Premiumservice",
-        description: "Högkvalitativ utrustning, boende och matupplevelser genomgående"
+        description: "Genomtänkt kvalitet i varje detalj – från utrustning och boende till smakfulla matupplevelser."
       }
     ]
   }
