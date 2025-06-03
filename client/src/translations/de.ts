@@ -439,6 +439,7 @@ export const de = {
           "/images/Ice Fishing/Shoot 3_result.webp",
           "/images/Ice Fishing/Shoot 4_result.webp"
         ],
+        video: videoUrls.icefishing,
         "detailedInfo": {
           "introduction": "Beginnen Sie Ihren Tag an einem gefrorenen See mit einer traditionellen Eisfisch-Session, geführt von Einheimischen. Wechseln Sie dann den Gang und fordern Sie sich selbst mit Tontaubenschießen in der verschneiten Wildnis heraus. Dies ist das perfekte arktische Kombi-Erlebnis für alle Niveaus.",
           "adventureOptionsTitle": "WÄHLEN SIE IHR ERLEBNIS",
@@ -853,12 +854,13 @@ export const de = {
     info: {
       title: "Kontaktieren Sie Uns",
       location: "Unser Standort",
+      address: "Storgatan 6F, 93331 Arvidsjaur",
       locationText: "Storgatan 6F, 93331 Arvidsjaur, Schwedisch-Lappland, Schweden",
       phone: "Telefon",
       phoneText1: "+49 (0) 151 2411 5455",
-      phoneText2: "+46 (0) 70 357 5455",
+      phoneText2: "+46 70 357 5455",
       email: "E-Mail",
-      emailText: "info@triple-x-adventures.com",
+      emailText: "info@t-x-a.com",
       restaurant: "Reservierungen @JayJay's",
       restaurantPhone: "+46 (0) 70 387 5455",
     }

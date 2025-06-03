@@ -221,12 +221,13 @@ export const sv = {
     info: {
       title: "Kontakta oss",
       location: "Vår plats",
+      address: "Storgatan 6F, 93331 Arvidsjaur",
       locationText: "Storgatan 6F, 93331 Arvidsjaur, Svenska Lappland, Sverige",
       phone: "Telefon",
       phoneText1: "+49 (0) 151 2411 5455",
-      phoneText2: "+46 (0) 70 357 5455",
+      phoneText2: "+46 70 357 5455",
       email: "E-post",
-      emailText: "info@triple-x-adventures.com",
+      emailText: "info@t-x-a.com",
       restaurant: "Bokningar @JayJay's",
       restaurantPhone: "+46 (0) 70 387 5455",
     },
@@ -630,6 +631,7 @@ export const sv = {
           "/images/Ice Fishing/Shoot 3_result.webp",
           "/images/Ice Fishing/Shoot 4_result.webp"
         ],
+        video: videoUrls.icefishing,
         "detailedInfo": {
       "introduction": "Börja din dag på en frusen sjö med en traditionell pimpelsession, guidad av lokalbefolkningen. Byt sedan inriktning och utmana dig själv med lerduveskytte i den snöiga vildmarken. Detta är den perfekta arktiska komboupplevelsen för alla nivåer.",
       "adventureOptionsTitle": "VÄLJ DIN UPPLEVELSE",

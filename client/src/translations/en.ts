@@ -439,6 +439,7 @@ export const en = {
           "/images/Ice Fishing/Shoot 3_result.webp",
           "/images/Ice Fishing/Shoot 4_result.webp"
         ],
+        video: videoUrls.icefishing,
         "detailedInfo": {
       "introduction": "Start your day on a frozen lake with a traditional ice fishing session, guided by locals. Then switch gears and challenge yourself with clay shooting in the snowy wilderness. This is the perfect Arctic combo experience for all levels.",
       "adventureOptionsTitle": "PICK YOUR EXPERIENCE",
@@ -853,12 +854,13 @@ export const en = {
     info: {
       title: "Get In Touch",
       location: "Our Location",
+      address: "Storgatan 6F, 93331 Arvidsjaur",
       locationText: "Storgatan 6F, 93331 Arvidsjaur, Swedish Lapland, Sweden",
       phone: "Phone",
       phoneText1: "+49 (0) 151 2411 5455",
-      phoneText2: "+46 (0) 70 357 5455",
+      phoneText2: "+46 70 357 5455",
       email: "Email",
-      emailText: "info@triple-x-adventures.com",
+      emailText: "info@t-x-a.com",
       restaurant: "Reservations @JayJay's",
       restaurantPhone: "+46 (0) 70 387 5455",
     },

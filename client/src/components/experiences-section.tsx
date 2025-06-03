@@ -149,10 +149,9 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = memo(({
                 {experience.features && experience.features.length > 0 && (
                   <div className="bg-white/5 p-4 rounded-lg mb-6">
                     <h4 className="text-lg font-semibold text-white mb-2">Features</h4>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <ul className="space-y-2">
                       {experience.features.map((feature: string, index: number) => (
-                        <li key={index} className="flex items-center gap-2 text-white/80">
-                          <div className="w-1.5 h-1.5 rounded-full bg-accent-color"></div>
+                        <li key={index} className="text-white/80">
                           {feature}
                         </li>
                       ))}
@@ -180,8 +179,7 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = memo(({
                               {tour.details && tour.details.length > 0 && (
                                 <ul className="space-y-1">
                                   {tour.details.map((detail: string, idx: number) => (
-                                    <li key={idx} className="flex items-start gap-2 text-white/70">
-                                      <div className="w-1.5 h-1.5 rounded-full bg-accent-color mt-2"></div>
+                                    <li key={idx} className="text-white/70">
                                       <span>{detail}</span>
                                     </li>
                                   ))}
@@ -198,8 +196,7 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = memo(({
                         <h4 className="text-lg font-semibold text-white mb-2">{experience.detailedInfo.importantInfoTitle}</h4>
                         <ul className="space-y-2">
                           {experience.detailedInfo?.importantInfo?.map((info: string, index: number) => (
-                            <li key={index} className="flex items-start gap-2 text-white/80">
-                              <div className="w-1.5 h-1.5 rounded-full bg-accent-color mt-2"></div>
+                            <li key={index} className="text-white/80">
                               <span>{info}</span>
                             </li>
                           ))}

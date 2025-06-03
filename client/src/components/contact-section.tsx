@@ -190,7 +190,7 @@ const flightOptions = [
                    <div className="bg-[#1A1D1F] p-3 rounded-full">
                      <Phone className="w-5 h-5 text-[#A4D233]" />
                    </div>
-                   <p className="text-gray-300">{t('contact.info.phone')}</p>
+                   <p className="text-gray-300">{t('contact.info.phoneText2')}</p>
                  </div>
                  
                  {/* Email */}
@@ -198,7 +198,7 @@ const flightOptions = [
                    <div className="bg-[#1A1D1F] p-3 rounded-full">
                      <Mail className="w-5 h-5 text-[#A4D233]" />
                    </div>
-                   <p className="text-gray-300">{t('contact.info.email')}</p>
+                   <p className="text-gray-300">{t('contact.info.emailText')}</p>
                  </div>
                </div>
             </div>

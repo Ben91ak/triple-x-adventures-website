@@ -20,11 +20,14 @@ export const videoUrls = {
   reindeerVisit: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Reindeers_1-ZxEbIwkZubvNbledwaETNOuetfGMn1.webm",
   
   // Helicopter videos
-  helicopterTour: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Helicopter_1-2h7w1n8k9Lk3j4P5A.webm",
+  helicopterTour: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Heli_1-bPmUhpk0y2nC855JeuMT96zkqdypJh.webm",
   
   // Ice drift videos
-  iceDriftExperience: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_IceDrift_1-3n4m5l6k7Jk8h9G0B.webm",
+  iceDriftExperience: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Drift1_1-wAPR67alYuim94rcVwbhHMgqyF8zvh.webm",
   
+  // Ice fishing videos
+  icefishing: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA_Reel_icefishing_1-48OBkubvztZbi1Th6IGMToOMTIOsfK.webm",
+
   // Buggy drift videos
   buggyDriftAdventure: "https://8ixqcoqwa5k0ppxp.public.blob.vercel-storage.com/TXA%20Reels_Side%20by%20Side_1-VJolKwjAGhYfZeaB1C5DDl1YwwnfM8.webm",
   
