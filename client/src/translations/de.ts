@@ -55,12 +55,17 @@ export const de = {
     list: [
       {
         id: 0,
-        title: "Arktisches Abenteuerpaket",
+        title: "Arctic Adventure Packet",
         description: "Unser Signature All-Inclusive-Paket mit den besten Winteraktivitäten, die Schwedisch-Lappland zu bieten hat. Erleben Sie Schneemobilfahren, Hundeschlittenfahrten und mehr in einem umfassenden Paket.",
         price: 1299,
         duration: "3-4 Nächte",
         intensityLevel: "Moderate",
-        keyHighlights: ["All-Inclusive Erlebnis", "Premium-Unterkünfte", "Mehrere Aktivitäten", "Professionelle Guides"],
+        keyHighlights: [
+          "All-Inclusive Erlebnis", 
+          "Premium-Unterkünfte", 
+          "Mehrere Aktivitäten", 
+          "Professionelle Guides"
+        ],
         image: "/images/Packages/Adventure Package.png",
         video: "arcticAdventure",
         gallery: [
@@ -76,12 +81,25 @@ export const de = {
             {
               title: "3-NÄCHTE-PAKET",
               description: "Perfekt für einen langen Wochenendausflug. Erleben Sie die Highlights von Schwedisch-Lappland in einem kompakten Zeitrahmen.",
-              details: ["2-stündige Schneemobiltour", "Hundeschlittenerlebnis", "Nordlicht-Beobachtung", "3 Nächte Premium-Unterkunft", "Alle Mahlzeiten inklusive"]
+              details: [
+                "2-stündige Schneemobiltour", 
+                "Hundeschlittenerlebnis", 
+                "Nordlicht-Beobachtung", 
+                "3 Nächte Premium-Unterkunft", 
+                "Alle Mahlzeiten inklusive"
+              ]
             },
             {
               title: "4-NÄCHTE-PAKET",
               description: "Unser erweitertes Paket ermöglicht es Ihnen, vollständig in das arktische Erlebnis einzutauchen, mit zusätzlichen Aktivitäten und Entspannungszeit.",
-              details: ["4-stündige Schneemobiltour", "Hundeschlittenerlebnis", "Eisfischen-Abenteuer", "Nordlicht-Beobachtung", "4 Nächte Premium-Unterkunft", "Alle Mahlzeiten inklusive"]
+              details: [
+                "4-stündige Schneemobiltour", 
+                "Hundeschlittenerlebnis", 
+                "Eisfischen-Abenteuer", 
+                "Nordlicht-Beobachtung", 
+                "4 Nächte Premium-Unterkunft", 
+                "Alle Mahlzeiten inklusive"
+              ]
             }
           ],
           importantInfoTitle: "WICHTIGE INFORMATIONEN",
@@ -91,9 +109,9 @@ export const de = {
             "Flughafentransfers inklusive",
             "Alle notwendigen Ausrüstungen und Kleidung werden gestellt",
             "Geeignet für alle Erfahrungsstufen",
-            "Anpassungsoptionen auf Anfrage verfügbar"
+            "Pakete sind vollständig anpassbar, um Ihren spezifischen Interessen und Bedürfnissen gerecht zu werden."
           ],
-          closingRemark: "Das Arktische Abenteuerpaket bietet die perfekte Balance aus Aufregung, Entspannung und authentischen arktischen Erlebnissen in einem bequemen Paket!"
+          closingRemark: "Die perfekte Mischung aus Nervenkitzel, Komfort und authentischem arktischen Wunder - nahtlos verpackt nur für Sie."
         },
         tag: {
           text: "Bestseller",
@@ -101,20 +119,26 @@ export const de = {
         },
         features: [
           "All-Inclusive",
-          "Mehrere Aktivitäten",
+          "Schneemobiltouren",
+          "Hundeschlittenfahrten",
           "Premium-Unterkünfte",
-          "Authentische Küche",
+          "Gourmet-Mahlzeiten",
           "Professionelle Guides"
         ]
       },
       {
         id: 9,
         title: "Sideways-Paket",
-        description: "Erleben Sie den ultimativen Adrenalinkick mit unserem Eisfahrtraining. Meistern Sie das Driften auf Eis unter Anleitung von Rennprofis in einer exklusiven Umgebung.",
-        price: 1899,
-        duration: "3 Nächte",
-        intensityLevel: "Hoch",
-        keyHighlights: ["Professionelles Eisfahrtraining", "Luxusunterkunft", "Gourmet-Mahlzeiten", "Flughafentransfers"],
+        description: "Das ultimative Winter-Fahrabenteuer für Motorheads und Drift-Enthusiasten. Meistern Sie die Kunst des Präzisionsfahrens auf Eis unter fachkundiger Anleitung, kombiniert mit luxuriösen Aufenthalten und lokalen Gourmet-Erlebnissen.",
+        price: 4500,
+        duration: "3-4 Nächte",
+        intensityLevel: "Thrilling",
+        keyHighlights: [
+          "Professioneller Eisfahrunterricht",
+          "Erfahrung mit verschiedenen Fahrzeugtypen",
+          "Arktisches Abenteuer-Nebenprogramm",
+          "All-Inclusive Gourmet-Mahlzeiten"
+        ],
         image: "/images/Packages/Sideways Package.png",
         video: "sidewayPackage",
         gallery: [
@@ -124,18 +148,36 @@ export const de = {
           "/images/Restaurant/restaurant-interior.jpg"
         ],
         detailedInfo: {
-          introduction: "Das Sideways-Paket bietet ein aufregendes Eisfahrerlebnis unter professioneller Anleitung. Verbessern Sie Ihre Fahrtechnik auf speziell präparierten Eisflächen und genießen Sie den Luxus unserer erstklassigen Unterkünfte.",
-          adventureOptionsTitle: "PAKET BEINHALTET",
+          introduction: "Das Sideways-Paket ist für Fahrbegeisterte konzipiert, die den Nervenkitzel des Eisfahrens in Schwedisch-Lappland erleben möchten. Lernen Sie professionelle Techniken zur Kontrolle von Fahrzeugen auf Eis, während Sie erstklassige Unterkünfte und exzellente Küche genießen. Pakete sind vollständig anpassbar, um Ihren spezifischen Interessen und Bedürfnissen gerecht zu werden.",
+          adventureOptionsTitle: "WAS IST ENTHALTEN",
           tours: [
             {
-              title: "3-NÄCHTE-PAKET",
-              description: "Unser Wochenendpaket bietet intensive Eisfahrtrainings mit verschiedenen Fahrzeugen.",
-              details: ["Tägliches Eisfahrtraining (4 Stunden)", "Verschiedene Fahrzeugtypen", "3 Nächte Premium-Unterkunft", "Alle Mahlzeiten inklusive", "Flughafentransfers"]
+              title: "3-NÄCHTE SIDEWAYS-PAKET",
+              description: "Eine konzentrierte Eisfahrerfahrung mit professioneller Anleitung und erstklassigen Unterkünften.",
+              details: [
+                "Ganztägige Eisfahrsitzungen",
+                "2-stündige Schneemobiltour",
+                "Passive Hundeschlittenerfahrung",
+                "Side by Side Drifting mit Yamaha YXZ",
+                "Kraftstoff & notwendige Ausrüstung inklusive",
+                "3 Nächte Premium-Unterkunft",
+                "All-Inclusive Gourmet-Mahlzeiten",
+                "Arktisches Abenteuer-Nebenprogramm"
+              ]
             },
             {
-              title: "4-NÄCHTE-PAKET",
-              description: "Unser erweitertes Paket bietet zusätzliche Trainingszeit und fortgeschrittene Techniken.",
-              details: ["Tägliches Eisfahrtraining (6 Stunden)", "Erweiterte Drifttechniken", "Verschiedene Fahrzeugtypen", "4 Nächte Premium-Unterkunft", "Alle Mahlzeiten inklusive", "Flughafentransfers"]
+              title: "4-NÄCHTE SIDEWAYS-PAKET",
+              description: "Unser erweitertes Paket bietet mehr Streckenzeit und zusätzliche Fahrzeugerfahrungen für ein umfassendes Eisfahrabenteuer.",
+              details: [
+                "Ganztägiges Ice Driften",
+                "2-stündige Schneemobiltour",
+                "Passive Hundeschlittenerfahrung",
+                "Side by Side Drifting mit Yamaha YXZ",
+                "Kraftstoff & notwendige Ausrüstung inklusive",
+                "4 Nächte Premium-Unterkunft",
+                "All-Inclusive Gourmet-Mahlzeiten",
+                "Arktisches Abenteuer-Nebenprogramm"
+              ]
             }
           ],
           importantInfoTitle: "WICHTIGE INFORMATIONEN",
@@ -144,30 +186,38 @@ export const de = {
             "Geeignet für alle Fahrerfahrungsstufen",
             "Alle notwendigen Sicherheitsausrüstungen werden gestellt",
             "Flughafentransfers inklusive",
-            "Versicherung im Paketpreis enthalten"
+            "Versicherung im Paketpreis enthalten",
+            "Pakete sind vollständig anpassbar, um Ihren spezifischen Interessen und Bedürfnissen gerecht zu werden."
           ],
-          closingRemark: "Das Sideways-Paket bietet die perfekte Mischung aus adrenalingeladenen Eisfahrerlebnissen und luxuriösem arktischen Komfort!"
+          closingRemark: "Nicht nur Fahren - dies ist ein adrenalingeladener Meisterkurs in Eisperformance."
         },
         tag: {
           text: "Empfohlen",
           type: "featured"
         },
         features: [
-          "Professioneller Unterricht",
+          "Professioneller Eisfahrunterricht",
           "Verschiedene Fahrzeugtypen",
+          "Schneemobiltour",
+          "Hundeschlittenfahrt",
+          "Yamaha YXZ Drifting",
           "Premium-Unterkünfte",
-          "All-Inclusive Mahlzeiten",
-          "Flughafentransfers"
+          "All-Inclusive Mahlzeiten"
         ]
       },
       {
         id: 10,
         title: "Eis-Performance-Paket",
-        description: "Unser Premium-Eisfahrerlebnis für Enthusiasten. Fahren Sie Hochleistungsfahrzeuge auf Eis unter Anleitung von Rennprofis in einer exklusiven Umgebung.",
-        price: 2499,
-        duration: "4 Nächte",
-        intensityLevel: "Sehr Hoch",
-        keyHighlights: ["Hochleistungsfahrzeuge", "Professionelle Instruktoren", "Luxus-Unterkünfte", "Gourmet-Verpflegung"],
+        description: "Erleben Sie unser Elite-Fahrpaket, speziell zugeschnitten für Motorsport-Fanatiker. Steuern Sie Hochleistungsfahrzeuge auf präzisionsgefertigten Eispisten, die für atemberaubende Geschwindigkeit, höchste Kontrolle und unvergessliche Nervenkitzel konzipiert sind.",
+        price: 5900,
+        duration: "3-4 Nächte",
+        intensityLevel: "Extreme",
+        keyHighlights: [
+          "Exklusive Hochleistungsfahrzeuge",
+          "Professionelle Renninstruktoren",
+          "Maßgeschneiderte Eispisten",
+          "Premium-Unterkünfte & Dining"
+        ],
         image: "/images/Packages/Ice Performance Package.jpg",
         video: "icePerformance",
         gallery: [
@@ -177,29 +227,43 @@ export const de = {
           "/images/Restaurant/dining-experience.jpg"
         ],
         detailedInfo: {
-          introduction: "Das Eis-Performance-Paket ist unser exklusivstes Angebot für Fahrbegeisterte. Erleben Sie das ultimative Eisfahrerlebnis mit Hochleistungsfahrzeugen und professionellen Renninstruktoren in einer luxuriösen Umgebung.",
-          adventureOptionsTitle: "PAKET BEINHALTET",
+          introduction: "Das Eis-Performance-Paket ist unser exklusivstes Fahrerlebnis, konzipiert für diejenigen, die ihre Grenzen mit Hochleistungsfahrzeugen auf Eis austesten möchten. Lernen Sie von professionellen Rennfahrern, während Sie luxuriöse Unterkünfte und Gourmet-Dining genießen. Pakete sind vollständig anpassbar, um Ihren spezifischen Interessen und Bedürfnissen gerecht zu werden.",
+          adventureOptionsTitle: "WAS IST ENTHALTEN",
           tours: [
             {
-              title: "3-NÄCHTE-PAKET",
-              description: "Unser Wochenendpaket bietet ein intensives Hochleistungs-Eisfahrerlebnis.",
-              details: ["Tägliches Performance-Training (4 Stunden)", "Hochleistungsfahrzeuge", "Persönlicher Renninstruktor", "3 Nächte Luxus-Unterkunft", "Gourmet-Verpflegung", "VIP-Transfers"]
+              title: "3-NÄCHTE EIS-PERFORMANCE-PAKET",
+              description: "Ein intensives Hochleistungs-Fahrerlebnis mit professioneller Anleitung und Luxusunterkünften.",
+              details: [
+                "2 Tage Drifting auf Eis",
+                "2h Schneemobiltour",
+                "Personalisierte Coaching-Sitzungen",
+                "Premium-Unterkunft (3 Nächte)",
+                "Alle Mahlzeiten, Ausrüstung & Flughafentransfers inklusive"
+              ]
             },
             {
-              title: "4-NÄCHTE-PAKET",
-              description: "Unser erweitertes Paket bietet zusätzliche Trainingszeit und exklusive Erlebnisse.",
-              details: ["Tägliches Performance-Training (6 Stunden)", "Erweiterte Renntechniken", "Hochleistungsfahrzeuge", "Persönlicher Renninstruktor", "4 Nächte Luxus-Unterkunft", "Gourmet-Verpflegung", "VIP-Transfers"]
+              title: "4-NÄCHTE EIS-PERFORMANCE-PAKET",
+              description: "Unser erweitertes Paket bietet mehr Streckenzeit mit zusätzlichen Fahrzeugoptionen und fortgeschrittenen Techniken für das ultimative Eisfahrerlebnis.",
+              details: [
+                "2 Tage Drifting auf Eis (potenziell mehr Zeit oder fortgeschrittene Sitzung)",
+                "2h Schneemobiltour",
+                "Personalisierte Coaching-Sitzungen",
+                "Premium-Unterkunft (4 Nächte)",
+                "Alle Mahlzeiten, Ausrüstung & Flughafentransfers inklusive",
+                "Fortgeschrittene Fahrtechniken",
+                "Exklusive Streckenzeit"
+              ]
             }
           ],
           importantInfoTitle: "WICHTIGE INFORMATIONEN",
           importantInfo: [
             "Gültiger Führerschein erforderlich",
             "Vorherige Performance-Fahrerfahrung empfohlen",
-            "Alle notwendigen Sicherheitsausrüstungen werden gestellt",
-            "Premium-Versicherungspaket inklusive",
-            "Helikoptertransfers auf Anfrage verfügbar"
+            "Alle notwendigen Ausrüstungen werden gestellt",
+            "Helikoptertransfers auf Anfrage verfügbar",
+            "Pakete sind vollständig anpassbar, um Ihren spezifischen Interessen und Bedürfnissen gerecht zu werden."
           ],
-          closingRemark: "Das Eis-Performance-Paket bietet die ultimative Kombination aus Hochleistungs-Fahrthrills und arktischem Luxus für den anspruchsvollen Enthusiasten!"
+          closingRemark: "Bringen Sie Ihre Fahrkünste auf die Spitze - testen Sie Ihre Grenzen zusammen mit Profis auf Eispisten von Weltklasse."
         },
         tag: {
           text: "Premium",
@@ -208,9 +272,11 @@ export const de = {
         features: [
           "Hochleistungsfahrzeuge",
           "Professionelle Renninstruktoren",
-          "Luxus-Unterkünfte",
-          "Gourmet-Verpflegung",
-          "Exklusiver Streckenzugang"
+          "Maßgeschneiderte Eispisten",
+          "Luxus-Unterkünfte & Dining",
+          "2 Tage Drifting auf Eis",
+          "2h Schneemobiltour",
+          "Personalisiertes Coaching"
         ]
       },
       {
@@ -682,7 +748,7 @@ export const de = {
   // Accommodations Section
   accommodations: {
     title: "UNTERKÜNFTE",
-    subtitle: "Komfortable Unterkünfte in der Arktis",
+    subtitle: "Komfortable Unterkünfte in Schwedisch Lappland",
     viewAll: "Alle Unterkünfte anzeigen",
     whereYouWillStay: "Wo Sie Übernachten",
     comingSoon: "Demnächst",
@@ -694,34 +760,34 @@ export const de = {
     // Accommodation data
     cabinHotel: {
       title: "CABIN HOTEL SAMELAND",
-      description: "Erleben Sie Luxus in unserem Premium-Mirror-Glass-Cabin-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die arktische Wildnis und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
+      description: "Erleben Sie Luxus in unserem Premium-Mirror-Glass-Cabin-Hotel mit raumhohen Glaswänden, die einen ungehinderten Blick auf die Landschaft und die Nordlichter bieten. Ein wahrhaft unvergesslicher Aufenthalt in der Natur.",
       features: [
-        "Für 2-4 Gäste",
-        "13 Cabins",
-        "Klimatisiert",
-        "Luxuriöses Kingsize-Bett",
-        "eigene Küche",
-        "SameLand, Arvidsjaur"
+        { text: "Für bis zu 2 Gäste", iconKey: "capacity" },
+        { text: "13 Cabins", iconKey: "bed" },
+        { text: "Klimatisiert", iconKey: "climate" },
+        { text: "Luxuriöses Kingsize-Bett", iconKey: "bed" },
+        { text: "eigene Küche", iconKey: "kitchen" },
+        { text: "Sameland, Arvidsjaur", iconKey: "location" }
       ]
     },
     txaChalet: {
       title: "TXA - CHALET",
       description: "Übernachte im eigenen TXA - Chalet und erlebe ein Höchstmaß an Komfort. Unser exklusives Chalet bietet eine perfekte Mischung aus rustikalem Charme und modernem Luxus.",
       features: [
-        "Bis zu 24 Gäste",
-        "12 Schlafzimmer",
-        "Private Sauna",
-        "Private Lounge / Restaurant"
+        { text: "Bis zu 24 Gäste", iconKey: "capacity" },
+        { text: "12 Schlafzimmer", iconKey: "bed" },
+        { text: "Private Sauna", iconKey: "hottub" },
+        { text: "Private Lounge / Restaurant", iconKey: "kitchen" }
       ]
     },
     hotelLaponia: {
       title: "HOTEL LAPONIA",
       description: "Eine komfortable Alternative zu unserem TXA Chalet. Das Hotel Laponia bietet Ihnen einen angenehmen Aufenthalt vor und nach Ihren Abenteuern, mit allen Annehmlichkeiten, die Sie benötigen.",
       features: [
-        "Zentrale Lage",
-        "Arktisches Ambiente",
-        "nur 10km vom Flughafen entfernt",
-        "Fjälls Pub & Bistro"
+        { text: "Zentrale Lage", iconKey: "location" },
+        { text: "Arktisches Ambiente", iconKey: "default" },
+        { text: "nur 10km vom Flughafen entfernt", iconKey: "transport" },
+        { text: "Fjälls Pub & Bistro", iconKey: "kitchen" }
       ]
     },
     description: "Nach einem Tag voller Abenteuer bieten unsere erstklassigen Unterkünfte den perfekten Ort zum Entspannen und Erholen.",
@@ -729,17 +795,35 @@ export const de = {
       hotel: {
         title: "Hotel Laponia",
         description: "Unser Partnerhotel bietet luxuriöse Zimmer mit allen Annehmlichkeiten für einen komfortablen Aufenthalt.",
-        features: ["Luxuriöse Zimmer", "Spa-Bereich", "Restaurant", "Zentrale Lage", "WLAN"]
+        features: [
+          { text: "Luxuriöse Zimmer", iconKey: "bed" },
+          { text: "Spa-Bereich", iconKey: "hottub" },
+          { text: "Restaurant", iconKey: "kitchen" },
+          { text: "Zentrale Lage", iconKey: "location" },
+          { text: "WLAN", iconKey: "wifi" }
+        ]
       },
       cabins: {
-        title: "Arktische Hütten",
+        title: "Mirror Glass Cabins",
         description: "Unsere gemütlichen Hütten bieten Privatsphäre und einen authentischen Aufenthalt in der arktischen Wildnis.",
-        features: ["Voll ausgestattete Küche", "Privater Whirlpool", "Kamin", "Nordlicht-Aussicht", "Naturnahe Lage"]
+        features: [
+          { text: "Voll ausgestattete Küche", iconKey: "kitchen" },
+          { text: "Privater Whirlpool", iconKey: "hottub" },
+          { text: "Kamin", iconKey: "fireplace" },
+          { text: "Nordlicht-Aussicht", iconKey: "default" },
+          { text: "Naturnahe Lage", iconKey: "location" }
+        ]
       },
       glamping: {
         title: "Arctic Glamping",
         description: "Erleben Sie Luxus-Camping mit allen Annehmlichkeiten in einer atemberaubenden natürlichen Umgebung.",
-        features: ["Beheiztes Zelt", "Komfortable Betten", "Panoramafenster", "Nordlicht-Aussicht", "Authentisches Erlebnis"]
+        features: [
+          { text: "Beheiztes Zelt", iconKey: "climate" },
+          { text: "Komfortable Betten", iconKey: "bed" },
+          { text: "Panoramafenster", iconKey: "default" },
+          { text: "Nordlicht-Aussicht", iconKey: "default" },
+          { text: "Authentisches Erlebnis", iconKey: "default" }
+        ]
       }
     }
   },

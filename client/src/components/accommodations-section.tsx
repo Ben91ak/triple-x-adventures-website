@@ -1,31 +1,36 @@
 import { Accommodation } from "@/types";
+
+// Local interface for translation features to avoid module resolution issues
+interface TranslationFeature {
+  text: string;
+  iconKey: string;
+}
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/translations";
 import { User, Hotel, BedDouble, Utensils, MapPin, Snowflake, Truck, Bell } from "lucide-react";
 
-// Helper function to determine icon based on feature text
-function getIconForFeature(text: string): string {
-  // Map feature text to corresponding Font Awesome icon class
-  if (text.toLowerCase().includes('person') || text.toLowerCase().includes('guest') || text.toLowerCase().includes('capacity')) {
-    return "fas fa-user-group";
-  } else if (text.toLowerCase().includes('bed') || text.toLowerCase().includes('bedroom') || text.toLowerCase().includes('sleep')) {
-    return "fas fa-bed";
-  } else if (text.toLowerCase().includes('hot tub') || text.toLowerCase().includes('jacuzzi') || text.toLowerCase().includes('spa')) {
-    return "fas fa-hot-tub";
-  } else if (text.toLowerCase().includes('restaurant') || text.toLowerCase().includes('food') || text.toLowerCase().includes('meal')) {
-    return "fas fa-utensils";
-  } else if (text.toLowerCase().includes('location') || text.toLowerCase().includes('distance') || text.toLowerCase().includes('nearby')) {
-    return "fas fa-location-dot";
-  } else if (text.toLowerCase().includes('climate') || text.toLowerCase().includes('air') || text.toLowerCase().includes('cool')) {
-    return "fas fa-snowflake";
-  } else if (text.toLowerCase().includes('transfer') || text.toLowerCase().includes('shuttle') || text.toLowerCase().includes('transport')) {
-    return "fas fa-shuttle-van";
-  } else if (text.toLowerCase().includes('service') || text.toLowerCase().includes('staff') || text.toLowerCase().includes('reception')) {
-    return "fas fa-concierge-bell";
+// Helper function to determine icon based on feature iconKey
+function getIconForFeature(iconKey: string): string {
+  switch (iconKey.toLowerCase()) {
+    case 'capacity':
+      return "fas fa-user-group";
+    case 'bed':
+      return "fas fa-bed";
+    case 'hottub': // Covers hot tub, spa, sauna
+      return "fas fa-hot-tub";
+    case 'kitchen': // Covers restaurant, food, meal, kitchen
+      return "fas fa-utensils";
+    case 'location':
+      return "fas fa-location-dot";
+    case 'climate': // Covers AC, climate, air, cool
+      return "fas fa-snowflake";
+    case 'transport':
+      return "fas fa-shuttle-van";
+    case 'service': // Covers service, staff, reception
+      return "fas fa-concierge-bell";
+    default: // Default icon for unrecognized keys or 'default' key
+      return "fas fa-concierge-bell";
   }
-  
-  // Default icon if no match is found
-  return "fas fa-concierge-bell";
 }
 
 export function AccommodationsSection() {
@@ -38,12 +43,12 @@ export function AccommodationsSection() {
       id: 1,
       title: t.accommodations.cabinHotel.title,
       description: t.accommodations.cabinHotel.description,
-      pricePerNight: 5995,
-      image: "/images/ood-hotel.jpg",
+      pricePerNight: 3995,
+      image: "images/Accomondation/WhatsApp Image 2025-05-22 at 09.53.38.jpeg",
       featured: true,
-      features: t.accommodations.cabinHotel.features.map(text => ({ 
-        icon: getIconForFeature(text), 
-        text 
+      features: t.accommodations.cabinHotel.features.map((featureItem: TranslationFeature) => ({ 
+        icon: getIconForFeature(featureItem.iconKey), 
+        text: featureItem.text 
       }))
     },
     {
@@ -52,20 +57,20 @@ export function AccommodationsSection() {
       description: t.accommodations.txaChalet.description,
       pricePerNight: 3995,
       image: "/images/txa-chalet.jpg",
-      features: t.accommodations.txaChalet.features.map(text => ({ 
-        icon: getIconForFeature(text), 
-        text 
+      features: t.accommodations.txaChalet.features.map((featureItem: TranslationFeature) => ({ 
+        icon: getIconForFeature(featureItem.iconKey), 
+        text: featureItem.text 
       }))
     },
     {
       id: 3,
       title: t.accommodations.hotelLaponia.title,
       description: t.accommodations.hotelLaponia.description,
-      pricePerNight: 1495,
+      pricePerNight: 1500,
       image: "/images/hotel-laponia.jpg",
-      features: t.accommodations.hotelLaponia.features.map(text => ({ 
-        icon: getIconForFeature(text), 
-        text 
+      features: t.accommodations.hotelLaponia.features.map((featureItem: TranslationFeature) => ({ 
+        icon: getIconForFeature(featureItem.iconKey), 
+        text: featureItem.text 
       }))
     }
   ]

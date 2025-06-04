@@ -52,165 +52,233 @@ export const en = {
     individualActivitiesDescription: "Choose from our selection of exciting individual activities to customize your Arctic adventure",
     
     // Experience List
-    list: [
-      {
-        id: 0,
-        title: "Arctic Adventure Package",
-        description: "Our signature all-inclusive package featuring the best winter activities Swedish Lapland has to offer. Experience snowmobiling, husky sledding, and more in one comprehensive package.",
-        price: 3650,
-        duration: "3-4 Nights",
-        intensityLevel: "Magical", // ← add colour/icon mapping in IntensityBadge.tsx
-        keyHighlights: ["All-Inclusive Experience", "Premium Accommodations", "Multiple Activities", "Professional Guides"],
-        image: "/images/Packages/Adventure Package.png",
-        video: "arcticAdventure",
-        gallery: [
-          "/images/Snowmobile/Snowmobile 2_result.webp",
-          "/images/Husky/Husky 1_result.webp",
-          "/images/Snowmobile/Snowmobile 3_result.webp",
-          "/images/Snowmobile/Snowmobile 4_result.webp"
+  list: [
+    {
+      id: 0,
+      title: "Arctic Adventure Package",
+      description: "Discover your ultimate Arctic escape with our all-inclusive experience, perfectly crafted for adventure lovers. Immerse yourself in the magic of Swedish Lapland with thrilling snowmobile rides, unforgettable husky sledding, breathtaking Northern Lights, and luxurious accommodations paired with delicious local cuisine.",
+      price: 3650, 
+      duration: "3-4 Nights",
+      intensityLevel: "Magical", 
+      keyHighlights: [
+        "Exciting Snowmobile & Husky Sledding Tours",
+        "Premium Accommodations",
+        "All-Inclusive Gourmet Meals",
+        "Expert Professional Guides"
+      ],
+      image: "/images/Packages/Adventure Package.png",
+      video: "arcticAdventure",
+      gallery: [
+        "/images/Snowmobile/Snowmobile 2_result.webp",
+        "/images/Husky/Husky 1_result.webp",
+        "/images/Snowmobile/Snowmobile 3_result.webp",
+        "/images/Snowmobile/Snowmobile 4_result.webp"
+      ],
+      detailedInfo: {
+        introduction: "The Arctic Adventure Package is our most comprehensive offering, giving you the complete Swedish Lapland experience. This all-inclusive package combines the best activities with premium accommodations and authentic local cuisine. Packages are fully customizable to meet your specific interests and needs.",
+        adventureOptionsTitle: "CHOOSE YOUR ADVENTURE DURATION",
+        tours: [
+          {
+            title: "3-NIGHT PACKAGE (BESTSELLER)",
+            description: "Perfect for a long weekend getaway. Experience the highlights of Swedish Lapland in a compact timeframe.",
+            details: [
+              "2-hour Snowmobile Adventure",
+              "Passive Husky Sledding Experience",
+              "Ice Fishing and Skeet Shooting Activities",
+              "Visit the Reindeers",
+              "Premium Accommodation (3 Nights)",
+              "Breakfast, Lunches, Two 3-course Dinners, and One 4-course Dinner Included"
+            ]
+          },
+          {
+            title: "4-NIGHT PACKAGE",
+            description: "Our extended package allows you to fully immerse in the Arctic experience with additional activities and relaxation time.",
+            details: [
+              "4-hour Snowmobile Journey", 
+              "Passive Husky Sledding Experience", 
+              "Ice Fishing and Skeet Shooting Activities", 
+              "Visit the Reindeers", 
+              "Extended activities and additional relaxation time",
+              "Premium Accommodation (4 Nights)",
+              "All Meals Included" 
+            ]
+          }
         ],
-        detailedInfo: {
-          introduction: "The Arctic Adventure Package is our most comprehensive offering, giving you the complete Swedish Lapland experience. This all-inclusive package combines the best activities with premium accommodations and authentic local cuisine.",
-          adventureOptionsTitle: "PACKAGE INCLUDES",
-          tours: [
-            {
-              title: "3-NIGHT PACKAGE",
-              description: "Perfect for a long weekend getaway. Experience the highlights of Swedish Lapland in a compact timeframe.",
-              details: ["2-hour Snowmobile Tour", "Husky Sledding Experience", "Northern Lights Viewing", "3 Nights Premium Accommodation", "All Meals Included"]
-            },
-            {
-              title: "4-NIGHT PACKAGE",
-              description: "Our extended package allows you to fully immerse in the Arctic experience with additional activities and relaxation time.",
-              details: ["4-hour Snowmobile Tour", "Husky Sledding Experience", "Ice Fishing Adventure", "Northern Lights Viewing", "4 Nights Premium Accommodation", "All Meals Included"]
-            }
-          ],
-          importantInfoTitle: "IMPORTANT INFORMATION",
-          importantInfo: [
-            "3-NIGHT PACKAGE available on selected Weekends Friday - Monday",
-            "4-NIGHT PACKAGE available on selected Weeks Monday - Friday",
-            "Airport transfers included",
-            "All necessary equipment and clothing provided",
-            "Suitable for all experience levels",
-            "Customization options available upon request"
-          ],
-          closingRemark: "The Arctic Adventure Package offers the perfect balance of excitement, relaxation, and authentic Arctic experiences in one convenient package!"
-        },
-        tag: {
-          text: "Bestseller",
-          type: "bestseller"
-        },
-        features: [
-          "All-Inclusive",
-          "Multiple Activities",
-          "Premium Accommodations",
-          "Authentic Cuisine",
-          "Professional Guides"
-        ]
+        importantInfoTitle: "GOOD TO KNOW",
+        importantInfo: [
+          "Weekend (3N) or Weekday (4N) Availability",
+          "1 Activity on Arrival Day, 2 Activities per Full Day, 1 Activity on Departure Day",
+          "Complimentary Airport Transfers",
+          "Gear and Winter Clothing Provided",
+          "Beginner-Friendly Activities",
+          "Packages are fully customizable to meet your specific interests and needs."
+        ],
+        closingRemark: "The perfect blend of thrill, comfort, and authentic Arctic wonder-seamlessly packaged just for you."
       },
-      {
-        id: 9,
-        title: "Sideways Package",
-        description: "For driving enthusiasts who want to master the art of drifting on ice. This package combines our ice driving experiences with premium accommodations for the ultimate winter driving adventure.",
-        price: 1499,
-        duration: "3-4 Nights",
-        intensityLevel: "Thrilling",
-        keyHighlights: ["Professional Driving Instructors", "Various Vehicle Options", "Progressive Skill Development", "Premium Accommodations"],
-        image: "/images/Packages/Sideways Package.png",
-        video: "sidewayPackage",
-        gallery: [
-          "/images/Experiences/ice-driving.jpg",
-          "/images/Experiences/ice-driving2.jpg",
-          "/images/Accommodations/hotel-room1.jpg",
-          "/images/Restaurant/restaurant-interior.jpg"
-        ],
-        detailedInfo: {
-          introduction: "The Sideways Package is designed for driving enthusiasts who want to experience the thrill of ice driving in Swedish Lapland. Learn professional techniques for controlling vehicles on ice while enjoying premium accommodations and excellent cuisine.",
-          adventureOptionsTitle: "PACKAGE INCLUDES",
-          tours: [
-            {
-              title: "3-NIGHT SIDEWAYS PACKAGE",
-              description: "A concentrated ice driving experience with professional instruction and premium accommodations.",
-              details: ["1 Day of Ice Driving with Professional Instruction", "3 Nights Premium Accommodation", "All Meals Included", "Adventure Side Program"]
-            },
-            {
-              title: "4-NIGHT SIDEWAYS PACKAGE",
-              description: "Our extended package provides more track time and additional vehicle experiences for a comprehensive ice driving adventure.",
-              details: ["1 Day of Ice Driving with Professional Instruction", "4 Nights Premium Accommodation", "All Meals Included", "Adventure Side Program"]
-            }
-          ],
-          importantInfoTitle: "IMPORTANT INFORMATION",
-          importantInfo: [
-            "Valid driver's license required",
-            "Suitable for all driving skill levels",
-            "All necessary safety equipment provided",
-            "Airport transfers included",
-            "Insurance included in package price"
-          ],
-          closingRemark: "The Sideways Package offers a perfect blend of adrenaline-pumping ice driving experiences and luxurious Arctic comfort!"
-        },
-        tag: {
-          text: "Featured",
-          type: "featured"
-        },
-        features: [
-          "Professional Instruction",
-          "Multiple Vehicle Types",
-          "Premium Accommodations",
-          "All-Inclusive Meals",
-          "Airport Transfers"
-        ]
+      tag: {
+        text: "Bestseller",
+        type: "bestseller"
       },
-      {
-        id: 10,
-        title: "Ice Performance Package",
-        description: "Our premium winter driving experience designed for automotive enthusiasts. Master the art of ice driving with high-performance vehicles on our specially designed ice tracks.",
-        price: 1799,
-        duration: "3-4 Nights",
-        intensityLevel: "Extreme",
-        keyHighlights: ["High-Performance Vehicles", "Professional Racing Instructors", "Exclusive Track Access", "Luxury Accommodations"],
-        image: "/images/Packages/Ice Performance Package.jpg",
-        video: "icePerformance",
-        gallery: [
-          "/images/Experiences/ice-performance.jpg",
-          "/images/Experiences/ice-performance2.jpg",
-          "/images/Accommodations/luxury-suite.jpg",
-          "/images/Restaurant/dining-experience.jpg"
+      features: [ 
+        "All-Inclusive",
+        "Snowmobile Tours",
+        "Husky Sledding",
+        "Premium Accommodations",
+        "Gourmet Meals",
+        "Professional Guides"
+      ]
+    },
+    {
+      id: 9,
+      title: "Sideways Package",
+      description: "The ultimate winter driving adventure for petrolheads and drift enthusiasts. Master the art of precision driving on ice under expert guidance, combined with luxurious stays and local gourmet experiences.",
+      price: 4500, 
+      duration: "3-4 Nights",
+      intensityLevel: "Thrilling",
+      keyHighlights: [
+        "Professional Ice Driving Instruction",
+        "Experience Multiple Vehicle Types",
+        "Arctic Adventure Side Programm", 
+        "All-Inclusive Gourmet Meals"
+      ],
+      image: "/images/Packages/Sideways Package.png",
+      video: "sidewayPackage",
+      gallery: [
+        "/images/Experiences/ice-driving.jpg",
+        "/images/Experiences/ice-driving2.jpg",
+        "/images/Accommodations/hotel-room1.jpg",
+        "/images/Restaurant/restaurant-interior.jpg"
+      ],
+      detailedInfo: {
+        introduction: "The Sideways Package is designed for driving enthusiasts who want to experience the thrill of ice driving in Swedish Lapland. Learn professional techniques for controlling vehicles on ice while enjoying premium accommodations and excellent cuisine. Packages are fully customizable to meet your specific interests and needs.",
+        adventureOptionsTitle: "WHAT'S INCLUDED", 
+        tours: [ 
+          {
+            title: "3-NIGHT SIDEWAYS PACKAGE",
+            description: "A concentrated ice driving experience with professional instruction and premium accommodations.",
+            details: [
+              "Full-Day Ice Driving Sessions",
+              "2-hour Snowmobile Tour",
+              "Passive Husky Sledding Experience",
+              "Side by Side Drifting with Yamaha YXZ",
+              "Fuel & Necessary Gear Included",
+              "3 Nights Premium Accommodation",
+              "All-Inclusive Gourmet Meals",
+              "Arctic Adventure Side Programm"
+            ]
+          },
+          {
+            title: "4-NIGHT SIDEWAYS PACKAGE",
+            description: "Our extended package provides more track time and additional vehicle experiences for a comprehensive ice driving adventure.",
+            details: [
+              "Full-Day Ice Driving Sessions",
+              "2-hour Snowmobile Tour",
+              "Passive Husky Sledding Experience",
+              "Side by Side Drifting with Yamaha YXZ",
+              "Fuel & Necessary Gear Included",
+              "4 Nights Premium Accommodation",
+              "All-Inclusive Gourmet Meals",
+              "Arctic Adventure Side Programm"
+            ]
+          }
         ],
-        detailedInfo: {
-          introduction: "The Ice Performance Package is our most exclusive driving experience, designed for those who want to push their limits with high-performance vehicles on ice. Learn from professional racing drivers while enjoying luxury accommodations and gourmet dining.",
-          adventureOptionsTitle: "PACKAGE INCLUDES",
-          tours: [
-            {
-              title: "3-NIGHT ICE PERFORMANCE PACKAGE",
-              description: "An intensive high-performance driving experience with professional instruction and luxury accommodations.",
-              details: ["2 Full Days with Performance Vehicles", "3 Nights Luxury Accommodation", "Gourmet Dining Experience", "optional Side Activities"]
-            },
-            {
-              title: "4-NIGHT ICE PERFORMANCE PACKAGE",
-              description: "Our extended package provides more track time with additional vehicle options and advanced techniques for the ultimate ice driving experience.",
-              details: ["2.5 Days with Performance Vehicles", "Advanced Driving Techniques", "Exclusive Track Time", "4 Nights Luxury Accommodation", "Gourmet Dining Experience", "optional Side Activities"]
-            }
-          ],
-          importantInfoTitle: "IMPORTANT INFORMATION",
-          importantInfo: [
-            "Valid driver's license required",
-            "Previous performance driving experience recommended",
-            "All necessary safety equipment provided",
-            "Premium insurance package included",
-            "Helicopter transfers available upon request"
-          ],
-          closingRemark: "The Ice Performance Package offers the ultimate combination of high-performance driving thrills and Arctic luxury for the discerning enthusiast!"
-        },
-        tag: {
-          text: "Premium",
-          type: "featured"
-        },
-        features: [
-          "High-Performance Vehicles",
-          "Professional Racing Instructors",
-          "Luxury Accommodations",
-          "Gourmet Dining",
-          "Exclusive Track Access"
+        importantInfoTitle: "IMPORTANT INFORMATION", 
+        importantInfo: [
+          "Valid driver's license required",
+          "Suitable for all driving skill levels", 
+          "All necessary safety equipment provided",
+          "Airport transfers included",
+          "Insurance included in package price", 
+          "Packages are fully customizable to meet your specific interests and needs."
+        ],
+        closingRemark: "Not just driving-this is an adrenaline-fueled masterclass in ice performance." 
+      },
+      tag: {
+        text: "Featured", 
+        type: "featured"
+      },
+      features: [
+        "Professional Ice Driving Instruction",
+        "Multiple Vehicle Types",
+        "Snowmobile Tour",
+        "Husky Sledding",
+        "Yamaha YXZ Drifting",
+        "Premium Accommodations",
+        "All-Inclusive Meals"
+      ]
+    },
+    {
+      id: 10,
+      title: "Ice Performance Package",
+      description: "Experience our elite driving package, specially tailored for motorsport fanatics. Command high-performance cars on precision-engineered ice tracks designed for exhilarating speed, supreme control, and unforgettable thrills.",
+      price: 5900,  
+      duration: "3-4 Nights",
+      intensityLevel: "Extreme",
+      keyHighlights: [
+        "Exclusive High-Performance Vehicles",
+        "Professional Racing Instructors",
+        "Custom-Designed Ice Tracks",
+        "Premium Accommodations & Dining"
+      ],
+      image: "/images/Packages/Ice Performance Package.jpg",
+      video: "icePerformance",
+      gallery: [
+        "/images/Experiences/ice-performance.jpg",
+        "/images/Experiences/ice-performance2.jpg",
+        "/images/Accommodations/luxury-suite.jpg",
+        "/images/Restaurant/dining-experience.jpg"
+      ],
+      detailedInfo: {
+        introduction: "The Ice Performance Package is our most exclusive driving experience, designed for those who want to push their limits with high-performance vehicles on ice. Learn from professional racing drivers while enjoying luxury accommodations and gourmet dining. Packages are fully customizable to meet your specific interests and needs.",
+        adventureOptionsTitle: "WHAT'S INCLUDED", 
+        tours: [ 
+          { 
+            title: "3-NIGHT ICE PERFORMANCE PACKAGE",
+            description: "An intensive high-performance driving experience with professional instruction and luxury accommodations.",
+            details: [
+              "2 Days Drifting on Ice",
+              "2h Snowmobile Tour",
+              "Personalized Coaching Sessions",
+              "Premium Accommodation (3 Nights)", 
+              "All Meals, Gear & Airport Transfers Included"
+            ]
+          },
+          {
+            title: "4-NIGHT ICE PERFORMANCE PACKAGE",
+            description: "Our extended package provides more track time with additional vehicle options and advanced techniques for the ultimate ice driving experience.",
+            details: [
+              "2 Days Drifting on Ice (potentially more time or advanced session)",
+              "2h Snowmobile Tour",
+              "Personalized Coaching Sessions",
+              "Premium Accommodation (4 Nights)",
+              "All Meals, Gear & Airport Transfers Included",
+              "Advanced Driving Techniques",
+              "Exclusive Track Time"
+            ]
+          }
+        ],
+        importantInfoTitle: "IMPORTANT INFORMATION", 
+        importantInfo: [
+          "Valid driver's license required",
+          "Previous performance driving experience recommended", 
+          "All necessary equipment provided",
+          "Helicopter transfers available upon request",
+          "Packages are fully customizable to meet your specific interests and needs."
+        ],
+        closingRemark: "Take your driving skills to the extreme-push your limits alongside professionals on world-class ice tracks." 
+      },
+      tag: {
+        text: "Premium", 
+        type: "featured"
+      },
+      features: [
+        "High-Performance Vehicles",
+        "Professional Racing Instructors",
+        "Custom-Designed Ice Tracks",
+        "Luxury Accommodations & Dining",
+        "2 Days Drifting on Ice",
+        "2h Snowmobile Tour",
+        "Personalized Coaching"
         ]
       },
       {
@@ -696,32 +764,32 @@ export const en = {
       title: "CABIN HOTEL SAMELAND",
       description: "Experience luxury in our premium Mirror Glass Cabins, featuring floor-to-ceiling glass walls that provide uninterrupted views of the Arctic wilderness and Northern Lights. A truly unforgettable stay in nature.",
       features: [
-        "For 2-4 guests",
-        "13 Cabins",
-        "Climate controlled",
-        "Luxury king bed",
-        "own kitchen",
-        "Sameland, Arvidsjaur"
+        { text: "For up to 2 guests", iconKey: "capacity" },
+        { text: "13 Cabins", iconKey: "bed" },
+        { text: "Climate controlled", iconKey: "climate" },
+        { text: "Luxury king bed", iconKey: "bed" },
+        { text: "own kitchen", iconKey: "kitchen" },
+        { text: "Sameland, Arvidsjaur", iconKey: "location" }
       ]
     },
     txaChalet: {
       title: "TXA - CHALET",
       description: "Make yourself at home in your private TXA Chalet and experience the highest level of comfort. Our chalet is the perfect choice for private groups.",
       features: [
-        "Up to 24 guests",
-        "12 bedrooms",
-        "Private sauna",
-        "Private lounge / restaurant"
+        { text: "Up to 24 guests", iconKey: "capacity" },
+        { text: "12 bedrooms", iconKey: "bed" },
+        { text: "Private sauna", iconKey: "hottub" },
+        { text: "Private lounge / restaurant", iconKey: "kitchen" }
       ]
     },
     hotelLaponia: {
       title: "HOTEL LAPONIA",
       description: "Hotel Laponia is our standard accommodation – offering everything you need for a relaxing stay in Swedish Lapland.",
       features: [
-        "Central location",
-        "Arctic ambiance",
-        "only 10 km from the Airport",
-        "Fjälls Pub & Bistro"
+        { text: "Central location", iconKey: "location" },
+        { text: "Arctic ambiance", iconKey: "default" },
+        { text: "only 10 km from the Airport", iconKey: "transport" },
+        { text: "Fjälls Pub & Bistro", iconKey: "kitchen" }
       ]
     },
     description: "After a day full of adventures, our premium accommodations offer the perfect place to relax and recharge.",
@@ -729,17 +797,35 @@ export const en = {
       hotel: {
         title: "Hotel Laponia",
         description: "Our partner hotel offers luxurious rooms with all amenities for a comfortable stay.",
-        features: ["Luxurious Rooms", "Spa Area", "Restaurant", "Central Location", "WiFi"]
+        features: [
+          { text: "Luxurious Rooms", iconKey: "bed" },
+          { text: "Spa Area", iconKey: "hottub" },
+          { text: "Restaurant", iconKey: "kitchen" },
+          { text: "Central Location", iconKey: "location" },
+          { text: "WiFi", iconKey: "default" }
+        ]
       },
       cabins: {
-        title: "Arctic Cabins",
+        title: "Mirror Glass Cabins",
         description: "Our cozy cabins offer privacy and an authentic stay in the Arctic wilderness.",
-        features: ["Fully Equipped Kitchen", "Private Hot Tub", "Fireplace", "Northern Lights View", "Nature-Close Location"]
+        features: [
+          { text: "Fully Equipped Kitchen", iconKey: "kitchen" },
+          { text: "Private Hot Tub", iconKey: "hottub" },
+          { text: "Fireplace", iconKey: "default" },
+          { text: "Northern Lights View", iconKey: "default" },
+          { text: "Nature-Close Location", iconKey: "location" }
+        ]
       },
       glamping: {
         title: "Arctic Glamping",
         description: "Experience luxury camping with all amenities in a breathtaking natural environment.",
-        features: ["Heated Tent", "Comfortable Beds", "Panoramic Windows", "Northern Lights View", "Authentic Experience"]
+        features: [
+          { text: "Heated Tent", iconKey: "climate" },
+          { text: "Comfortable Beds", iconKey: "bed" },
+          { text: "Panoramic Windows", iconKey: "default" },
+          { text: "Northern Lights View", iconKey: "default" },
+          { text: "Authentic Experience", iconKey: "default" }
+        ]
       }
     }
   },

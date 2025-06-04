@@ -46,32 +46,32 @@ export const sv = {
       title: "CABIN HOTEL SAMELAND",
       description: "Upplev lyx i vårt premium Glass Cabin Hotel, med glasväggar från golv till tak som ger obrutna vyer över den arktiska vildmarken och norrskenet. En verkligt oförglömlig vistelse i naturen.",
       features: [
-        "För 2-4 gäster",
-        "13 Cabins",
-        "AC",
-        "Kingsize-säng",
-        "Eget kök",
-        "Sameland, Arvidsjaur"
+        { text: "För 2 gäster", iconKey: "capacity" },
+        { text: "13 Cabins", iconKey: "bed" },
+        { text: "AC", iconKey: "climate" },
+        { text: "Kingsize-säng", iconKey: "bed" },
+        { text: "Eget kök", iconKey: "kitchen" },
+        { text: "Sameland, Arvidsjaur", iconKey: "location" }
       ]
     },
     txaChalet: {
       title: "TXA - CHALET",
       description: "Välkommen hem till ditt privata TXA Chalet – där exklusiv komfort möter avskildhet. Det perfekta boendet för privata grupper som vill uppleva Lappland tillsammans.",
       features: [
-        "Upp till 24 gäster",
-        "12 sovrum",
-        "Privat bastu",
-        "Privat lounge / restaurang"
+        { text: "Upp till 24 gäster", iconKey: "capacity" },
+        { text: "12 sovrum", iconKey: "bed" },
+        { text: "Privat bastu", iconKey: "hottub" },
+        { text: "Privat lounge / restaurang", iconKey: "kitchen" }
       ]
     },
     hotelLaponia: {
       title: "HOTEL LAPONIA",
       description: "Hotel Laponia erbjuder en bekväm vistelse före och efter dina äventyr, med alla bekvämligheter du behöver.",
       features: [
-        "Centralt läge",
-        "Norrländsk atmosfär",
-        "Endast 10 km från flygplatsen",
-        "Fjälls Pub & Bistro"
+        { text: "Centralt läge", iconKey: "location" },
+        { text: "Norrländsk atmosfär", iconKey: "default" },
+        { text: "Endast 10 km från flygplatsen", iconKey: "transport" },
+        { text: "Fjälls Pub & Bistro", iconKey: "kitchen" }
       ]
     },
     description: "Efter en dag full av äventyr erbjuder vårt förstklassiga boende den perfekta platsen för att koppla av och återhämta sig.",
@@ -79,17 +79,35 @@ export const sv = {
       hotel: {
         title: "Hotel Laponia",
         description: "Vårt partnerhotell erbjuder lyxiga rum med alla bekvämligheter för en bekväm vistelse.",
-        features: ["Lyxiga Rum", "Spa-område", "Restaurang", "Centralt Läge", "WiFi"]
+        features: [
+          { text: "Lyxiga Rum", iconKey: "bed" },
+          { text: "Spa-område", iconKey: "hottub" },
+          { text: "Restaurang", iconKey: "kitchen" },
+          { text: "Centralt Läge", iconKey: "location" },
+          { text: "WiFi", iconKey: "wifi" }
+        ]
       },
       cabins: {
-        title: "Arktiska Stugor",
+        title: "Mirror Glass Cabins",
         description: "Våra mysiga stugor erbjuder avskildhet och en autentisk vistelse i den arktiska vildmarken.",
-        features: ["Fullt Utrustat Kök", "Privat Bubbelpool", "Öppen Spis", "Norrskensutsikt", "Naturnära Läge"]
+        features: [
+          { text: "Fullt Utrustat Kök", iconKey: "kitchen" },
+          { text: "Privat Bubbelpool", iconKey: "hottub" },
+          { text: "Öppen Spis", iconKey: "fireplace" },
+          { text: "Norrskensutsikt", iconKey: "default" },
+          { text: "Naturnära Läge", iconKey: "location" }
+        ]
       },
       glamping: {
         title: "Arctic Glamping",
         description: "Upplev lyxcamping med alla bekvämligheter i en hisnande naturlig miljö.",
-        features: ["Uppvärmt Tält", "Bekväma Sängar", "Panoramafönster", "Norrskensutsikt", "Autentisk Upplevelse"]
+        features: [
+          { text: "Uppvärmt Tält", iconKey: "climate" },
+          { text: "Bekväma Sängar", iconKey: "bed" },
+          { text: "Panoramafönster", iconKey: "default" },
+          { text: "Norrskensutsikt", iconKey: "default" },
+          { text: "Autentisk Upplevelse", iconKey: "default" }
+        ]
       }
     }
   },
@@ -263,8 +281,13 @@ export const sv = {
         description: "Vårt signatur all-inclusive-paket med de bästa vinteraktiviteterna som Svenska Lappland har att erbjuda. Upplev snöskoter, hundspann och mer i vårt magiska paket.",
         price: 3650,
         duration: "3-4 Nätter",
-        intensityLevel: "Magical",
-        keyHighlights: ["All-Inclusive Upplevelse", "Premium Boende", "Flera Aktiviteter", "Professionella Guider"],
+        intensityLevel: "Moderate",
+        keyHighlights: [
+          "All-Inclusive Upplevelse", 
+          "Premium Boende", 
+          "Flera Aktiviteter", 
+          "Professionella Guider"
+        ],
         image: "/images/Packages/Adventure Package.png",
         video: "arcticAdventure",
         gallery: [
@@ -280,12 +303,25 @@ export const sv = {
             {
               title: "3-NÄTTERS PAKET",
               description: "Upplev höjdpunkterna i Norrland. Perfekt för en långhelg.",
-              details: ["2-timmars Snöskotertur", "Hundspannsupplevelse", "Norrskensskådning", "3 Nätter Premium Boende", "Alla Måltider Ingår"]
+              details: [
+                "2-timmars Snöskotertur", 
+                "Hundspannsupplevelse", 
+                "Norrskensskådning", 
+                "3 Nätter Premium Boende", 
+                "Alla Måltider Ingår"
+              ]
             },
             {
               title: "4-NÄTTERS PAKET",
               description: "Vårt utökade paket låter dig helt fördjupa dig i den norrländska upplevelsen med ytterligare aktiviteter och avkopplingstid.",
-              details: ["4-timmars Snöskotertur", "Hundspannsupplevelse", "Isfiskeäventyr", "Norrskensskådning", "4 Nätter Premium Boende", "Alla Måltider Ingår"]
+              details: [
+                "4-timmars Snöskotertur", 
+                "Hundspannsupplevelse", 
+                "Isfiskeäventyr", 
+                "Norrskensskådning", 
+                "4 Nätter Premium Boende", 
+                "Alla Måltider Ingår"
+              ]
             }
           ],
           importantInfoTitle: "VIKTIG INFORMATION",
@@ -295,9 +331,9 @@ export const sv = {
             "Flygplatstransfer ingår",
             "All nödvändig utrustning och kläder tillhandahålls",
             "Lämpligt för alla erfarenhetsnivåer",
-            "Anpassningsalternativ tillgängliga på begäran"
+            "Paket kan anpassas helt efter dina specifika intressen och behov."
           ],
-          closingRemark: "Arktiska Äventyrspaketet erbjuder den perfekta balansen mellan spänning, avkoppling och autentiska arktiska upplevelser i ett bekvämt paket!"
+          closingRemark: "Den perfekta blandningen av spänning, komfort och autentiskt arktiskt under - sömlöst paketerat just för dig."
         },
         tag: {
           text: "Bästsäljare",
@@ -305,20 +341,26 @@ export const sv = {
         },
         features: [
           "All-Inclusive",
-          "Flera Aktiviteter",
+          "Snöskoterturer",
+          "Hundspann",
           "Premium Boende",
-          "Autentisk Mat",
+          "Gourmetmåltider",
           "Professionella Guider"
         ]
       },
       {
         id: 9,
-        title: "Sideways Adventure",
-        description: "Upplev det mest fartfyllda signaturpaketet – en exklusiv all-inclusive-upplevelse där snöskotrar, Ice Drift och vinterns mest adrenalinfyllda aktiviteter står i centrum. Ett paket för dig som söker spänning, stil och Lappland när det är som mest levande.",
+        title: "Sideways Package",
+        description: "Det ultimata vinterköräventyret för motorentusiaster och driftfantaster. Bemästra konsten att köra med precision på is under expertguidning, kombinerat med lyxiga vistelser och lokala gourmetupplevelser.",
         price: 4500,
         duration: "3-4 Nätter",
-        intensityLevel: "Exciting",
-        keyHighlights: ["Professionell Iskörningsträning", "Flera Fordonstyper", "Premium Boende", "All-Inclusive Måltider"],
+        intensityLevel: "Thrilling",
+        keyHighlights: [
+          "Professionell Iskörningsinstruktion",
+          "Upplev Flera Fordonstyper",
+          "Arktiskt Äventyr Sidoprogram",
+          "All-Inclusive Gourmetmåltider"
+        ],
         image: "/images/Packages/Sideways Package.png",
         video: "sidewayPackage",
         gallery: [
@@ -328,18 +370,36 @@ export const sv = {
           "/images/Restaurant/restaurant-interior.jpg"
         ],
         detailedInfo: {
-          introduction: "Upplev den ultimata adrenalinkicken med vår iskörningstträning. Bemästra driften på is med professionella instruktörer och olika fordon.",
-          adventureOptionsTitle: "PAKETET INKLUDERAR",
+          introduction: "Sideways Package är designat för körningsentusiaster som vill uppleva spänningen med iskörning i Svenska Lappland. Lär dig professionella tekniker för att kontrollera fordon på is medan du njuter av förstklassigt boende och utmärkt mat. Paket kan anpassas helt efter dina specifika intressen och behov.",
+          adventureOptionsTitle: "VAD SOM INGÅR",
           tours: [
             {
-              title: "3-NÄTTERS PAKET",
-              description: "Vårt helgpaket erbjuder intensiv iskörningsträning med olika fordon.",
-              details: ["Daglig Iskörningsträning (4 timmar)", "Olika Fordonstyper", "3 Nätter Premium Boende", "Alla Måltider Ingår", "Flygplatstransfer"]
+              title: "3-NÄTTERS SIDEWAYS PACKAGE",
+              description: "En koncentrerad iskörningsupplevelse med professionell instruktion och förstklassigt boende.",
+              details: [
+                "Heldags Iskörningssessioner",
+                "2-timmars Snöskotertur",
+                "Passiv Hundspannsupplevelse",
+                "Side by Side Drifting med Yamaha YXZ",
+                "Bränsle & Nödvändig Utrustning Ingår",
+                "3 Nätter Premium Boende",
+                "All-Inclusive Gourmetmåltider",
+                "Arktiskt Äventyr Sidoprogram"
+              ]
             },
             {
-              title: "4-NÄTTERS PAKET",
-              description: "Vårt utökade paket erbjuder ytterligare träningstid och avancerade tekniker.",
-              details: ["Daglig Iskörningsträning (6 timmar)", "Avancerade Drifttekniker", "Olika Fordonstyper", "4 Nätter Premium Boende", "Alla Måltider Ingår", "Flygplatstransfer"]
+              title: "4-NÄTTERS SIDEWAYS PACKAGE",
+              description: "Vårt utökade paket ger mer bantid och ytterligare fordonsupplevelser för ett omfattande iskörningsäventyr.",
+              details: [
+                "Heldags Iskörningssessioner (potentiellt mer tid eller avancerad session)",
+                "2-timmars Snöskotertur",
+                "Passiv Hundspannsupplevelse",
+                "Side by Side Drifting med Yamaha YXZ",
+                "Bränsle & Nödvändig Utrustning Ingår",
+                "4 Nätter Premium Boende",
+                "All-Inclusive Gourmetmåltider",
+                "Arktiskt Äventyr Sidoprogram"
+              ]
             }
           ],
           importantInfoTitle: "VIKTIG INFORMATION",
@@ -348,30 +408,38 @@ export const sv = {
             "Lämpligt för alla körfärdighetsnivåer",
             "All nödvändig säkerhetsutrustning tillhandahålls",
             "Flygplatstransfer ingår",
-            "Försäkring ingår i paketpriset"
+            "Försäkring ingår i paketpriset",
+            "Paket kan anpassas helt efter dina specifika intressen och behov."
           ],
-          closingRemark: "Sidleds-Paketet erbjuder den perfekta blandningen av adrenalinfyllda iskörningsupplevelser och lyxig arktisk komfort!"
+          closingRemark: "Inte bara körning - detta är en adrenalinfylld mästarklass i isprestanda."
         },
         tag: {
           text: "Utvald",
           type: "featured"
         },
         features: [
-          "Professionell Instruktion",
+          "Professionell Iskörningsinstruktion",
           "Flera Fordonstyper",
+          "Snöskotertur",
+          "Hundspann",
+          "Yamaha YXZ Drifting",
           "Premium Boende",
-          "All-Inclusive Måltider",
-          "Flygplatstransfer"
+          "All-Inclusive Måltider"
         ]
       },
       {
         id: 10,
-        title: "Ice Performance",
-        description: "Där precision, fart och is möts – vår exklusiva iskörningsupplevelse för riktiga bilentusiaster. Under vägledning av racingproffs får du tänja på gränserna på en specialdesignad isbana.",
-        price: 5500,
+        title: "Ice Performance Package",
+        description: "Upplev vårt elitdrivande paket, speciellt anpassat för motorsportfanatiker. Kör högprestandabilar på precisionsbyggda isbanor designade för hisnande hastighet, överlägsen kontroll och oförglömliga spänningar.",
+        price: 5900,
         duration: "3-4 Nätter",
-        intensityLevel: "Adrenaline Rush",
-        keyHighlights: ["Professionella Racinginstruktörer", "Moderna bilar", "Gourmetmat"],
+        intensityLevel: "Extreme",
+        keyHighlights: [
+          "Exklusiva Högprestandafordon",
+          "Professionella Racinginstruktörer",
+          "Specialdesignade Isbanor",
+          "Premium Boende & Matupplevelser"
+        ],
         image: "/images/Packages/Ice Performance Package.jpg",
         video: "icePerformance",
         gallery: [
@@ -381,29 +449,43 @@ export const sv = {
           "/images/Restaurant/dining-experience.jpg"
         ],
         detailedInfo: {
-          introduction: "Is-Prestanda-Paketet är vårt mest exklusiva erbjudande för körningsentusiaster. Upplev den ultimata iskörningsupplevelsen med högprestandafordon och professionella racinginstruktörer i en lyxig miljö.",
-          adventureOptionsTitle: "PAKETET INKLUDERAR",
+          introduction: "Ice Performance Package är vår mest exklusiva körupplevelse, designad för de som vill tänja sina gränser med högprestandafordon på is. Lär dig av professionella racingförare medan du njuter av lyxboende och gourmetmat. Paket kan anpassas helt efter dina specifika intressen och behov.",
+          adventureOptionsTitle: "VAD SOM INGÅR",
           tours: [
             {
-              title: "3-NÄTTERS PAKET",
-              description: "Vårt helgpaket erbjuder en intensiv högprestanda-iskörningsupplevelse.",
-              details: ["Daglig Prestandaträning (4 timmar)", "Högprestandafordon", "Personlig Racinginstruktör", "3 Nätter Lyxboende", "Gourmetmat", "VIP-transfer"]
+              title: "3-NÄTTERS ICE PERFORMANCE PACKAGE",
+              description: "En intensiv högprestandakörningsupplevelse med professionell instruktion och lyxboende.",
+              details: [
+                "2 Dagars Drifting på Is",
+                "2h Snöskotertur",
+                "Personliga Coachningsessioner",
+                "Premium Boende (3 Nätter)",
+                "Alla Måltider, Utrustning & Flygplatstransfer Ingår"
+              ]
             },
             {
-              title: "4-NÄTTERS PAKET",
-              description: "Vårt utökade paket erbjuder ytterligare träningstid och exklusiva upplevelser.",
-              details: ["Daglig Prestandaträning (6 timmar)", "Avancerade Racingtekniker", "Högprestandafordon", "Personlig Racinginstruktör", "4 Nätter Lyxboende", "Gourmetmat", "VIP-transfer"]
+              title: "4-NÄTTERS ICE PERFORMANCE PACKAGE",
+              description: "Vårt utökade paket ger mer bantid med ytterligare fordonsalternativ och avancerade tekniker för den ultimata iskörningsupplevelsen.",
+              details: [
+                "2 Dagars Drifting på Is (potentiellt mer tid eller avancerad session)",
+                "2h Snöskotertur",
+                "Personliga Coachningsessioner",
+                "Premium Boende (4 Nätter)",
+                "Alla Måltider, Utrustning & Flygplatstransfer Ingår",
+                "Avancerade Körtekniker",
+                "Exklusiv Bantid"
+              ]
             }
           ],
           importantInfoTitle: "VIKTIG INFORMATION",
           importantInfo: [
             "Giltigt körkort krävs",
             "Tidigare prestandakörningserfarenhet rekommenderas",
-            "All nödvändig säkerhetsutrustning tillhandahålls",
-            "Premium försäkringspaket ingår",
-            "Helikoptertransfer tillgänglig på begäran"
+            "All nödvändig utrustning tillhandahålls",
+            "Helikoptertransfer tillgänglig på begäran",
+            "Paket kan anpassas helt efter dina specifika intressen och behov."
           ],
-          closingRemark: "Is-Prestanda-Paketet erbjuder den ultimata kombinationen av högprestandakörningsspänning och arktisk lyx för den kräsne entusiasten!"
+          closingRemark: "Ta dina körkunskaper till det extrema - tänja dina gränser tillsammans med proffs på världsklass isbanor."
         },
         tag: {
           text: "Premium",
@@ -412,9 +494,11 @@ export const sv = {
         features: [
           "Högprestandafordon",
           "Professionella Racinginstruktörer",
-          "Lyxboende",
-          "Gourmetmat",
-          "Exklusiv Banåtkomst"
+          "Specialdesignade Isbanor",
+          "Lyxboende & Matupplevelser",
+          "2 Dagars Drifting på Is",
+          "2h Snöskotertur",
+          "Personlig Coaching"
         ]
       },
       {
