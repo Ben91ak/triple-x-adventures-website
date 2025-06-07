@@ -1,0 +1,145 @@
+# Triple X Adventures Robots.txt
+# Last Updated: 2025
+
+# Allow all legitimate search engine crawlers
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Google Image
+User-agent: Googlebot-Image
+Allow: /
+Allow: /images/
+
+# Google Mobile
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Google Video
+User-agent: Googlebot-Video
+Allow: /
+Allow: /videos/
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Bing AI / Copilot
+User-agent: BingPreview
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# AI Search Engines and Bots (2025)
+# OpenAI GPT Bot
+User-agent: GPTBot
+Allow: /
+
+# ChatGPT User
+User-agent: ChatGPT-User
+Allow: /
+
+# Google Bard / Gemini
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic Claude
+User-agent: Claude-Web
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Common AI crawlers
+User-agent: CCBot
+Allow: /
+
+# Facebook
+User-agent: facebookexternalhit
+Allow: /
+
+# Twitter
+User-agent: Twitterbot
+Allow: /
+
+# LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# WhatsApp
+User-agent: WhatsApp
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+
+# Pinterest
+User-agent: Pinterest
+Allow: /
+
+# Disallow specific paths for all bots
+User-agent: *
+Disallow: /admin/
+Disallow: /api/admin/
+Disallow: /api/auth/
+Disallow: /private/
+Disallow: /.env
+Disallow: /config/
+Disallow: /tmp/
+Disallow: /temp/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*page=
+Disallow: /search?
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /account/
+
+# Block bad bots and scrapers
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Sitemap locations
+Sitemap: https://triplexadventures.com/sitemap.xml
+Sitemap: https://triplexadventures.com/sitemap-index.xml
+
+# Host directive (for Yandex)
+Host: https://triplexadventures.com

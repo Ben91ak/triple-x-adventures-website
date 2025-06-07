@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { VideoProvider } from "@/contexts/VideoContext";
 import applyAllOptimizations from "@/utils/performance-optimizer";
 import { initImagePreloading } from "@/utils/image-preloader";
+import { initSEOAnalytics } from "@/utils/seo-analytics";
 import "./styles/theme.css";
 
 // Lazy load pages for better performance
@@ -78,6 +79,29 @@ function App() {
     
     // Initialize image preloading system
     initImagePreloading();
+    
+    // Initialize SEO analytics and Core Web Vitals tracking
+    initSEOAnalytics();
+    
+    // Add Google Analytics script if not already present
+    if (!document.querySelector('script[src*="googletagmanager.com/gtag"]')) {
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${process.env.REACT_APP_GA_ID || 'G-XXXXXXXXXX'}`;
+      document.head.appendChild(script);
+      
+      // Initialize gtag
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', process.env.REACT_APP_GA_ID || 'G-XXXXXXXXXX', {
+        send_page_view: true,
+        cookie_flags: 'SameSite=None;Secure'
+      });
+    }
     
     // Register a service worker for offline capabilities
     if ('serviceWorker' in navigator) {
