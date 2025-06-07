@@ -9,6 +9,9 @@ const envPath = path.resolve(__dirname, "../.env");
 
 console.log("Loading environment variables from:", envPath);
 dotenv.config({ path: envPath });
+console.log("CSRF_SECRET from env after dotenv.config:", process.env.CSRF_SECRET);
+console.log("CSRF_SECRET length:", process.env.CSRF_SECRET?.length);
+console.log("GOOGLE_PLACES_API_KEY from env:", process.env.GOOGLE_PLACES_API_KEY);
 
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
@@ -189,7 +192,7 @@ async function initializeApp() {
 }
 
 // Global error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error('Unhandled error:', err);
   
   // Don't expose error details in production

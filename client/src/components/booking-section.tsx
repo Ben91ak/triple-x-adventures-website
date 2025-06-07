@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { useTranslation } from "@/hooks/use-translation";
 import { Calendar, Users, MapPin, Clock, CalendarCheck } from "lucide-react";
 
 export function BookingSection() {
-  const { language } = useLanguage();
   const { t } = useTranslation();
   const [formSubmitted, setFormSubmitted] = useState(false);
   
@@ -31,7 +29,7 @@ export function BookingSection() {
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-dark-bg/90 via-dark-bg to-dark-bg/90 opacity-95"></div>
-        <div className="absolute inset-0 bg-[url('/images/noise-pattern.png')] opacity-20"></div>
+        <div className="absolute inset-0 opacity-20"></div>
         <div className="absolute left-0 right-0 bottom-0 h-1/3 bg-gradient-to-t from-accent-color/5 to-transparent"></div>
       </div>
       

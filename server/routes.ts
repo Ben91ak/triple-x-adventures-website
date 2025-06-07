@@ -6,9 +6,18 @@ import { ZodError } from "zod";
 import { sendContactEmail, sendAdventureEmail } from "./emailService";
 import fetch from "node-fetch";
 import { authenticate, authorize, login, register, logout } from "./auth";
-import csrf from 'csurf';
+import csrfMiddleware from 'tiny-csrf';
 import { RequestHandler } from 'express';
 import { createHash } from 'crypto';
+
+// Augment Express Request type to include csrfToken method
+declare global {
+  namespace Express {
+    interface Request {
+      csrfToken?: () => string;
+    }
+  }
+}
 import DOMPurify from 'dompurify';
 import rateLimit from "express-rate-limit";
 
@@ -98,7 +107,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const router = express.Router();
   
   // Setup CSRF protection
-  const csrfProtection = csrf({ cookie: true });
+
+  
+  // Setup CSRF protection with tiny-csrf
+  // IMPORTANT: Replace 'YOUR_VERY_SECRET_KEY_HERE_32_CHARS_MIN' with a strong, random secret (at least 32 characters)
+  // stored securely, e.g., in an environment variable like process.env.CSRF_SECRET.
+  // tiny-csrf defaults to protecting POST, PUT, PATCH methods.
+  const csrfProtection = csrfMiddleware(
+    process.env.CSRF_SECRET || 'YOUR_VERY_SECRET_KEY_HERE_32_CHARS_MIN'
+  );
   
   // Apply CSRF protection to all routes that need it
   const csrfRoutes = express.Router();
@@ -113,7 +130,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Get CSRF token
   csrfRoutes.get("/csrf-token", (req, res) => {
-    res.json({ csrfToken: req.csrfToken() });
+    if (typeof req.csrfToken === 'function') {
+      res.json({ csrfToken: req.csrfToken() });
+    } else {
+      console.error('CSRF token function (req.csrfToken) is not available on the request object.');
+      res.status(500).json({ error: 'CSRF setup error. Unable to generate token.' });
+    }
   });
   
   // API endpoints with CSRF protection
@@ -376,13 +398,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   
   // Add a catch-all error handler
   app.use((err: any, _: Request, res: Response, __: any) => {
-    if (err.code === 'EBADCSRFTOKEN') {
-      // Handle CSRF token errors
-      return res.status(403).json({
-        success: false,
-        message: 'Invalid or expired CSRF token. Please refresh the page and try again.'
-      });
-    }
+    // CSRF token errors are now handled by the tiny-csrf errorResponse callback.
+    // The check for err.code === 'EBADCSRFTOKEN' is removed as tiny-csrf handles this.
     
     // Log the error but don't expose details to the client
     console.error('Unhandled error:', err);

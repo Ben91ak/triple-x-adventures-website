@@ -99,12 +99,38 @@
       // Remove any dynamically added preload links that might cause warnings
       function cleanupUnusedPreloads() {
         const preloads = document.head.querySelectorAll('link[rel="preload"]');
+        const validAsValues = ['script', 'style', 'image', 'font', 'video', 'audio', 'document', 'embed', 'fetch', 'object', 'track', 'worker'];
+
         preloads.forEach(link => {
-          // Keep only our explicitly defined video preload
-          if (!link.href.includes('TXA Teaser 2025 Homepage.mp4')) {
+          const asValue = link.getAttribute('as');
+          const hrefValue = link.getAttribute('href');
+
+          // 1. If 'as' attribute is present but its value is not in the valid set (this matches the warning)
+          if (asValue && !validAsValues.includes(asValue.toLowerCase())) {
+            console.warn(`Removing preload with unsupported 'as' value ('${asValue}') for href '${hrefValue}':`, link.outerHTML);
             link.remove();
-            console.log('Removed unnecessary preload:', link.href);
+            return; // Link removed, go to next
           }
+
+          // 2. If 'as' attribute is MISSING, and it's for a JS file (common error for rel="preload")
+          // The warning "unsupported 'as' value" implies 'as' is present but invalid,
+          // but this check is good practice for script preloads.
+          if (!asValue && hrefValue && (hrefValue.endsWith('.js') || hrefValue.includes('/assets/js/'))) {
+            console.warn(`Found JS preload with missing 'as' attribute for href '${hrefValue}'. Consider adding as="script" or using modulepreload. Removing for now:`, link.outerHTML);
+            link.remove();
+            return; // Link removed, go to next
+          }
+
+          // 3. Original broad cleanup logic - temporarily commented out.
+          // This was removing valid preloads for images/other videos added by your optimization utilities.
+          // If, after fixing the specific warning, other preload issues arise, this can be revisited.
+          /*
+          if (hrefValue && !hrefValue.includes('TXA Teaser 2025 Homepage.mp4')) {
+            // This check is too broad as it removes legitimate preloads.
+            // console.log('Original broad cleanup: Removing preload not matching main video:', link.outerHTML);
+            // link.remove();
+          }
+          */
         });
       }
       

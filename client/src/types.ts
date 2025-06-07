@@ -28,6 +28,12 @@ export interface DetailedInfoType {
 export type ExperienceVideoType = 'buggy' | 'husky' | 'helicopter' | 'drift' | 'snowmobile' | 'icefishing' | 'reindeer' | 'snowshoe' | 'torchwalk' | 'arcticAdventure' | 'icePerformance' | 'sidewayPackage' | 'ice' | 'snow' | 'aurora' | 'northernlights' | 'icehotel' | 'icehotelpackage' | 'aurorapackage' | 'auroratour' | 'northernlightstour' | 'icehoteltour' | 'northernlightspackage';
 
 // Define the complete Experience type
+// Video type to support multiple formats
+export interface VideoFormats {
+  webm: string;
+  mp4: string;
+}
+
 export interface Experience {
   id: number;
   title: string;
@@ -45,7 +51,7 @@ tag?: {
   };
   features?: string[]; // Add optional features array
   detailedInfo?: DetailedInfoType; // Add optional detailed info structure
-  video?: string; // URL to the experience video
+  video?: string | VideoFormats; // URL to the experience video, can be string or VideoFormats object
 }
 
 // Define type for the weather data
