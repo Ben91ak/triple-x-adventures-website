@@ -155,14 +155,14 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
               
               {/* Details section */}
               <div ref={textPanelRef} className="w-full lg:w-2/5 p-5 sm:p-6 flex flex-col overflow-y-auto custom-scrollbar flex-grow">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{t(`experiences.list.${experience.id}.title`) || experience.title}</h2>
-                <p className="text-white/80 mb-6">{t(`experiences.list.${experience.id}.description`) || experience.description}</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{experience.title}</h2>
+                <p className="text-white/80 mb-6">{experience.description}</p>
                 
                 {/* Full description if available */}
                 {experience.fullDescription && (
                   <div className="text-white/80 mb-6">
                     <h4 className="text-lg font-semibold text-white mb-2">{t('experiences.aboutThisExperience') || 'About this experience'}</h4>
-                    <p>{t(`experiences.list.${experience.id}.fullDescription`) || experience.fullDescription}</p>
+                    <p>{experience.fullDescription}</p>
                   </div>
                 )}
                 
@@ -173,7 +173,7 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                     <ul className="space-y-2">
                       {experience.features.map((feature: string, index: number) => (
                         <li key={index} className="text-white/80">
-                          {t(`experiences.list.${experience.id}.features.${index}`) || feature}
+                          {feature}
                         </li>
                       ))}
                     </ul>
@@ -185,23 +185,23 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                   <div className="mb-6">
                     {experience.detailedInfo.introduction && (
                       <div className="mb-4">
-                        <p className="text-white/80">{t(`experiences.list.${experience.id}.detailedInfo.introduction`) || experience.detailedInfo.introduction}</p>
+                        <p className="text-white/80">{experience.detailedInfo.introduction}</p>
                       </div>
                     )}
                     
                     {experience.detailedInfo.adventureOptionsTitle && experience.detailedInfo.tours && experience.detailedInfo.tours.length > 0 && (
                       <div className="mb-4">
-                        <h4 className="text-lg font-semibold text-white mb-2">{t(`experiences.list.${experience.id}.detailedInfo.adventureOptionsTitle`) || experience.detailedInfo.adventureOptionsTitle}</h4>
+                        <h4 className="text-lg font-semibold text-white mb-2">{experience.detailedInfo.adventureOptionsTitle}</h4>
                         <div className="space-y-4">
                           {experience.detailedInfo?.tours?.map((tour: { title?: string; description?: string; details?: string[] }, index: number) => (
                             <div key={index} className="bg-white/5 p-4 rounded-lg">
-                              {tour.title && <h5 className="font-medium text-white mb-1">{t(`experiences.list.${experience.id}.detailedInfo.tours.${index}.title`) || tour.title}</h5>}
-                              {tour.description && <p className="text-white/80 mb-2">{t(`experiences.list.${experience.id}.detailedInfo.tours.${index}.description`) || tour.description}</p>}
+                              {tour.title && <h5 className="font-medium text-white mb-1">{tour.title}</h5>}
+                              {tour.description && <p className="text-white/80 mb-2">{tour.description}</p>}
                               {tour.details && tour.details.length > 0 && (
                                 <ul className="space-y-1">
                                   {tour.details.map((detail: string, idx: number) => (
                                     <li key={idx} className="text-white/70">
-                                      <span>{t(`experiences.list.${experience.id}.detailedInfo.tours.${index}.details.${idx}`) || detail}</span>
+                                      <span>{detail}</span>
                                     </li>
                                   ))}
                                 </ul>
@@ -214,11 +214,11 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                     
                     {experience.detailedInfo.importantInfoTitle && experience.detailedInfo.importantInfo && experience.detailedInfo.importantInfo.length > 0 && (
                       <div className="bg-white/5 p-4 rounded-lg mb-4">
-                        <h4 className="text-lg font-semibold text-white mb-2">{t(`experiences.list.${experience.id}.detailedInfo.importantInfoTitle`) || experience.detailedInfo.importantInfoTitle}</h4>
+                        <h4 className="text-lg font-semibold text-white mb-2">{experience.detailedInfo.importantInfoTitle}</h4>
                         <ul className="space-y-2">
                           {experience.detailedInfo?.importantInfo?.map((info: string, index: number) => (
                             <li key={index} className="text-white/80">
-                              <span>{t(`experiences.list.${experience.id}.detailedInfo.importantInfo.${index}`) || info}</span>
+                              <span>{info}</span>
                             </li>
                           ))}
                         </ul>
@@ -227,7 +227,7 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                     
                     {experience.detailedInfo.closingRemark && (
                       <div className="mt-4">
-                        <p className="text-white/80 italic">{t(`experiences.list.${experience.id}.detailedInfo.closingRemark`) || experience.detailedInfo.closingRemark}</p>
+                        <p className="text-white/80 italic">{experience.detailedInfo.closingRemark}</p>
                       </div>
                     )}
                   </div>
@@ -265,7 +265,7 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
   const handleOpenDetail = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Opening detail for experience:', t(`experiences.list.${experience.id}.title`) || experience.title);
+    console.log('Opening detail for experience:', experience.title);
     onOpenDetail(experience);
   };
   
@@ -284,7 +284,7 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
       <div className="relative aspect-[4/3] overflow-hidden">
         <img 
           src={experience.image} 
-          alt={t(`experiences.list.${experience.id}.title`) || experience.title}
+          alt={experience.title}
           className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
         />
         
@@ -292,15 +292,15 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
         {experience.tag && (
           <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm px-2.5 py-1 rounded-full flex items-center">
             {iconMap[experience.tag.type] || null}
-            <span className="text-xs font-medium text-white ml-1">{t(`experiences.list.${experience.id}.tag.text`) || experience.tag.text}</span>
+            <span className="text-xs font-medium text-white ml-1">{experience.tag.text}</span>
           </div>
         )}
       </div>
       
       {/* Content */}
       <div className="p-4 flex-grow flex flex-col">
-        <h3 className="text-lg font-bold text-white mb-2">{t(`experiences.list.${experience.id}.title`) || experience.title}</h3>
-        <p className="text-white/70 text-sm mb-4 line-clamp-3">{t(`experiences.list.${experience.id}.description`) || experience.description}</p>
+        <h3 className="text-lg font-bold text-white mb-2">{experience.title}</h3>
+        <p className="text-white/70 text-sm mb-4 line-clamp-3">{experience.description}</p>
         
         {/* Features section removed from card to keep it simple */}
         
@@ -309,7 +309,7 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
           <button
             onClick={handleOpenDetail}
             className="w-full bg-[#b5e550] hover:bg-[#a3d340] py-2.5 px-4 rounded-lg text-black text-sm font-medium transition-all flex items-center justify-center"
-            aria-label={`${t('experiences.viewDetails')} ${t(`experiences.list.${experience.id}.title`) || experience.title}`}
+            aria-label={`${t('experiences.viewDetails')} ${experience.title}`}
           >
             {t('experiences.viewDetails')}
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

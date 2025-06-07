@@ -892,6 +892,11 @@ export const en = {
       },
       flight: {
         none: "No charter flight needed",
+        stuttgart: "Stuttgart",
+        munich: "Munich", 
+        cologneBonn: "Cologne/Bonn",
+        hannover: "Hannover",
+        stockholm: "Stockholm",
         privateJet: "Private Jet"
       }
     },

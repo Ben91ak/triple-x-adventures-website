@@ -191,6 +191,11 @@ export const sv = {
       },
       flight: {
         none: "Inget charterflyg behövs",
+        stuttgart: "Stuttgart",
+        munich: "München",
+        cologneBonn: "Köln/Bonn",
+        hannover: "Hannover", 
+        stockholm: "Stockholm",
         privateJet: "Privatjet"
       }
     },
