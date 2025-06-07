@@ -36,33 +36,126 @@ const Home = memo(function Home() {
     preloadAllCriticalImages();
   }, [language]);
 
-  // Define structured data for better SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "TouristAttraction",
-    "name": "Triple X Adventures",
-    "description": t.hero.subtitle,
-    "url": "https://triplexadventures.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Arvidsjaur",
-      "addressRegion": "Swedish Lapland",
-      "addressCountry": "Sweden"
+  // Enhanced structured data for better SEO with 2025 best practices
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristAttraction",
+      "name": "Triple X Adventures Arctic Experience Center",
+      "description": "Premium Arctic adventure experiences in Swedish Lapland featuring authentic snowmobile tours, dog sledding expeditions, northern lights viewing, ice fishing, and wilderness survival experiences.",
+      "url": "https://triplexadventures.com",
+      "image": [
+        "https://triplexadventures.com/images/hero-winter.jpg",
+        "https://triplexadventures.com/images/snowmobile-tour.jpg",
+        "https://triplexadventures.com/images/dog-sledding.jpg",
+        "https://triplexadventures.com/images/northern-lights.jpg"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Adventure Base Road 1",
+        "addressLocality": "Kiruna",
+        "addressRegion": "Norrbotten",
+        "addressCountry": "SE",
+        "postalCode": "981 00"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "67.8558",
+        "longitude": "20.2253"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "08:00",
+        "closes": "20:00"
+      },
+      "touristType": ["Adventure Tourist", "Nature Lover", "Photography Enthusiast", "Cultural Explorer"],
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Professional Guides",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Equipment Rental",
+          "value": true
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Transportation",
+          "value": true
+        }
+      ],
+      "publicAccess": true,
+      "isAccessibleForFree": false,
+      "currenciesAccepted": "SEK, EUR, USD",
+      "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+      "availableLanguage": ["English", "Swedish", "German", "French"],
+      "tourBookingPage": "https://triplexadventures.com/booking",
+      "hasMap": "https://goo.gl/maps/triplexadventures"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "65.5856",
-      "longitude": "19.1764"
-    },
-    "tourBookingPage": "https://triplexadventures.com/booking"
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Triple X Adventures",
+      "image": "https://triplexadventures.com/images/logo.png",
+      "priceRange": "$$$",
+      "servesCuisine": "Local Arctic Cuisine",
+      "hasMenu": "https://triplexadventures.com/restaurant"
+    }
+  ];
 
   return (
     <article className="font-opensans text-slate relative" itemScope itemType="https://schema.org/TouristAttraction">
       <SEO 
-        title="Triple X Adventures | Premium Arctic Experiences"
-        description={t.hero.subtitle}
+        title="Arctic Adventures in Swedish Lapland"
+        description="Experience authentic Arctic adventures with Triple X Adventures. Premium snowmobile tours, dog sledding, northern lights expeditions, and wilderness experiences in Swedish Lapland. The Real Arctic Deal since 1995."
+        keywords="Arctic adventures, Swedish Lapland, snowmobile tours, dog sledding, northern lights tours, aurora borealis, Kiruna, wilderness expeditions, ice fishing, Arctic wildlife, snow activities, winter adventures, Lapland tourism, Arctic Circle tours, husky sledding, snowshoeing, ice hotel, midnight sun, polar experiences, adventure tourism Sweden"
         structuredData={structuredData}
+        ogImage="/images/hero-winter-optimized.jpg"
+        additionalMetaTags={[
+          {
+            name: "geo.region",
+            content: "SE-BD"
+          },
+          {
+            name: "geo.placename",
+            content: "Kiruna, Swedish Lapland"
+          },
+          {
+            property: "business:contact_data:street_address",
+            content: "Adventure Base Road 1"
+          },
+          {
+            property: "business:contact_data:locality",
+            content: "Kiruna"
+          },
+          {
+            property: "business:contact_data:country_name",
+            content: "Sweden"
+          },
+          {
+            property: "business:contact_data:postal_code",
+            content: "981 00"
+          },
+          {
+            property: "business:contact_data:website",
+            content: "https://triplexadventures.com"
+          },
+          {
+            name: "ai:business_type",
+            content: "Adventure Tourism Company"
+          },
+          {
+            name: "ai:services",
+            content: "Snowmobile tours, Dog sledding, Northern lights viewing, Ice fishing, Wilderness survival"
+          },
+          {
+            name: "ai:location",
+            content: "Arctic Circle, Swedish Lapland"
+          }
+        ]}
       />
       
       {/* Enhanced unified animated background with starry night effect */}

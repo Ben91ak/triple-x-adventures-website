@@ -20,6 +20,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import { Server } from "http";
+import { setupSitemap } from "./sitemap";
 
 const app = express();
 
@@ -170,6 +171,10 @@ async function initializeApp() {
 
     // Register API routes
     const server = await registerRoutes(app);
+    
+    // Setup sitemap routes
+    setupSitemap(app);
+    log("Sitemap routes configured");
 
     // Setup Vite development server or serve static files
     if (process.env.NODE_ENV === 'production') {
