@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useLanguage } from '../contexts/LanguageContext';
 import { videoUrls } from '@/config/videoUrls';
+import { disableBodyScroll, enableBodyScroll, cleanupScrollState } from '../utils/scroll-preservation';
 
 interface ExperienceDetailModalProps {
   experience: Experience | null;
@@ -54,69 +55,148 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
   // References for modal elements - no custom scroll handler needed for better accessibility
   const modalContentRef = useRef<HTMLDivElement>(null);
   const textPanelRef = useRef<HTMLDivElement>(null);
-  const mediaPanelRef = useRef<HTMLDivElement>(null);
   
-  // Effect to scroll to modal when it opens on mobile
+  // State for scroll-based fade effect
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+  const [textPanelTransform, setTextPanelTransform] = useState(0);
+  
+  // Effect to handle modal open/close with scroll position preservation
   useEffect(() => {
-    if (isOpen && modalContentRef.current) {
-      // Check if we're on mobile (simplified check)
-      const isMobile = window.innerWidth < 768;
-      
-      if (isMobile) {
-        // Scroll the modal into view with smooth behavior
-        setTimeout(() => {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-          
-          // Also ensure the modal is in view
-          modalContentRef.current?.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center'
-          });
-        }, 100);
-      }
-    }
-    
-    // Prevent body scrolling when modal is open
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      // Use the utility function to disable body scroll and preserve position
+      disableBodyScroll();
     } else {
-      document.body.style.overflow = '';
+      // Use the utility function to restore body scroll and position
+      enableBodyScroll();
     }
     
     // Cleanup function to restore scrolling when component unmounts
     return () => {
-      document.body.style.overflow = '';
+      cleanupScrollState();
     };
   }, [isOpen]);
+
+  // Handle scroll-based effects for text panel
+  useEffect(() => {
+    const handleScroll = () => {
+      if (textPanelRef.current) {
+        const scrollTop = textPanelRef.current.scrollTop;
+        const scrollHeight = textPanelRef.current.scrollHeight;
+        const clientHeight = textPanelRef.current.clientHeight;
+        
+        // Calculate scroll progress (0 to 1)
+        const scrollProgress = scrollTop / (scrollHeight - clientHeight);
+        
+        // Fade effect for gradient overlay
+        const fadeStart = 0.1;
+        const fadeEnd = 0.6;
+        let opacity = 1;
+        if (scrollProgress > fadeStart) {
+          opacity = Math.max(0, 1 - ((scrollProgress - fadeStart) / (fadeEnd - fadeStart)));
+        }
+        setScrollOpacity(opacity);
+        
+        // Transform effect for text panel (slide up to overlay video)
+        // Start sliding when user scrolls, max overlay at 40% scroll
+        const transformStart = 0.05;
+        const transformEnd = 0.4;
+        let transform = 0;
+        
+        if (scrollProgress > transformStart) {
+          const transformProgress = Math.min(1, (scrollProgress - transformStart) / (transformEnd - transformStart));
+          // On mobile, move up by 50vh (half the video height), on desktop less
+          const maxTransform = window.innerWidth < 768 ? 50 : 30;
+          transform = transformProgress * maxTransform;
+        }
+        
+        setTextPanelTransform(transform);
+      }
+    };
+
+    const textPanel = textPanelRef.current;
+    if (textPanel) {
+      textPanel.addEventListener('scroll', handleScroll, { passive: true });
+      return () => textPanel.removeEventListener('scroll', handleScroll);
+    }
+  }, [isOpen]);
+
+  // Enhanced close handler to ensure proper cleanup
+  const handleClose = () => {
+    // Force immediate cleanup of scroll state before closing
+    cleanupScrollState();
+    enableBodyScroll();
+    
+    // Small delay to ensure scroll is restored before closing
+    setTimeout(() => {
+      onClose();
+    }, 50);
+  };
+
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, onClose]);
   
+  // Handle backdrop click to close modal - improved for mobile
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    // Only handle mouse clicks, not touch events
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && experience && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-start md:items-center justify-center p-4 overflow-y-auto">
+        <div 
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] flex items-start md:items-center justify-center overflow-hidden"
+          onClick={handleBackdropClick}
+          style={{ touchAction: 'none' }} // Prevent default touch behaviors
+        >
           <motion.div 
             ref={modalContentRef}
-            className="relative w-full max-w-6xl bg-black/60 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row max-h-[90vh] my-4 md:my-8"
+            className="relative w-full max-w-7xl bg-transparent rounded-xl overflow-hidden shadow-2xl flex flex-col min-h-[100vh] md:min-h-[70vh] lg:min-h-[80vh] max-h-[100vh] m-0 md:m-4 lg:m-8"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1, transition: { duration: 0.3, ease: "easeOut" } }}
             exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2, ease: "easeIn" } }}
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
           >
-            {/* Close button */}
+            {/* Desktop close button - hidden on mobile */}
             <button
-              onClick={onClose}
-              className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/50 text-white hover:bg-accent-color/90 transition-colors"
+              onClick={handleClose}
+              className="hidden md:block absolute top-4 right-4 z-[120] p-2 rounded-full bg-black/70 text-white hover:bg-accent-color/90 transition-colors shadow-lg"
+              aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
-            
 
+            {/* Mobile close button - visible on mobile for better UX */}
+            <div className="md:hidden absolute top-0 left-0 right-0 bg-black/80 backdrop-blur-sm p-4 flex justify-between items-center z-[115] border-b border-white/20">
+              <h2 className="text-lg font-bold text-white truncate pr-4">{experience.title}</h2>
+              <button
+                onClick={handleClose}
+                className="p-2 rounded-full bg-black/50 text-white hover:bg-accent-color/90 transition-colors"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
             
-            {/* Media content section */}
-            <div ref={mediaPanelRef} className="w-full lg:w-3/5 relative bg-black/30 backdrop-blur-sm flex items-center justify-center min-h-[300px] lg:min-h-[500px]">
-              {/* Media section */}
-              <div className="relative w-full h-64 md:h-96 lg:h-auto overflow-hidden bg-transparent">
+            {/* Video background - full container */}
+            <div className="absolute inset-0 mt-16 md:mt-0">
+              <div className="relative w-full h-full overflow-hidden bg-black">
                 {/* Video if available */}
                 {hasVideo && (
                   <div className="w-full h-full">
@@ -149,30 +229,49 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                     <p className="text-white/70 text-center p-4">{t('experiences.noVideoAvailable') || 'No video available for this experience'}</p>
                   </div>
                 )}
+
+                {/* Subtle gradient overlay for better video-text contrast */}
+                <div 
+                  className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none transition-opacity duration-300"
+                  style={{ opacity: scrollOpacity }}
+                />
               </div>
-              
-              </div>
-              
-              {/* Details section */}
-              <div ref={textPanelRef} className="w-full lg:w-2/5 p-5 sm:p-6 flex flex-col overflow-y-auto custom-scrollbar flex-grow">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">{experience.title}</h2>
-                <p className="text-white/80 mb-6">{experience.description}</p>
+            </div>
+            
+            {/* Scrollable text panel - starts below video, slides up on scroll */}
+            <div 
+              ref={textPanelRef} 
+              className="relative z-10 w-full flex flex-col overflow-y-auto custom-scrollbar transition-transform duration-300 ease-out"
+              style={{ 
+                transform: `translateY(-${textPanelTransform}vh)`,
+                marginTop: window.innerWidth < 768 ? '60vh' : '50vh', // Start below video
+                minHeight: '100vh',
+                background: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.95) 100%)',
+                touchAction: 'pan-y' // Allow vertical scrolling on touch devices
+              }}
+            >
+              {/* Content container */}
+              <div className="p-4 md:p-6 lg:p-8">
+                {/* Title for all screen sizes */}
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 drop-shadow-lg">{experience.title}</h2>
+                <p className="text-white/90 mb-6 text-base md:text-lg drop-shadow-md leading-relaxed">{experience.description}</p>
                 
                 {/* Full description if available */}
                 {experience.fullDescription && (
-                  <div className="text-white/80 mb-6">
-                    <h4 className="text-lg font-semibold text-white mb-2">{t('experiences.aboutThisExperience') || 'About this experience'}</h4>
-                    <p>{experience.fullDescription}</p>
+                  <div className="text-white/90 mb-6">
+                    <h4 className="text-xl font-semibold text-white mb-3 drop-shadow-lg">{t('experiences.aboutThisExperience') || 'About this experience'}</h4>
+                    <p className="text-base md:text-lg drop-shadow-md leading-relaxed">{experience.fullDescription}</p>
                   </div>
                 )}
                 
                 {/* Features */}
                 {experience.features && experience.features.length > 0 && (
-                  <div className="bg-white/5 p-4 rounded-lg mb-6">
-                    <h4 className="text-lg font-semibold text-white mb-2">{t('experiences.features') || 'Features'}</h4>
-                    <ul className="space-y-2">
+                  <div className="bg-black/60 backdrop-blur-sm p-6 rounded-lg mb-6 border border-white/20">
+                    <h4 className="text-xl font-semibold text-white mb-4 drop-shadow-lg">{t('experiences.features') || 'Features'}</h4>
+                    <ul className="space-y-3">
                       {experience.features.map((feature: string, index: number) => (
-                        <li key={index} className="text-white/80">
+                        <li key={index} className="text-white/90 text-base md:text-lg drop-shadow-md flex items-start">
+                          <span className="w-2 h-2 bg-accent-color rounded-full mt-2 mr-3 flex-shrink-0"></span>
                           {feature}
                         </li>
                       ))}
@@ -182,25 +281,26 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                 
                 {/* Detailed Info */}
                 {experience.detailedInfo && (
-                  <div className="mb-6">
+                  <div className="mb-8">
                     {experience.detailedInfo.introduction && (
-                      <div className="mb-4">
-                        <p className="text-white/80">{experience.detailedInfo.introduction}</p>
+                      <div className="mb-6">
+                        <p className="text-white/90 text-base md:text-lg drop-shadow-md leading-relaxed">{experience.detailedInfo.introduction}</p>
                       </div>
                     )}
                     
                     {experience.detailedInfo.adventureOptionsTitle && experience.detailedInfo.tours && experience.detailedInfo.tours.length > 0 && (
-                      <div className="mb-4">
-                        <h4 className="text-lg font-semibold text-white mb-2">{experience.detailedInfo.adventureOptionsTitle}</h4>
+                      <div className="mb-6">
+                        <h4 className="text-xl font-semibold text-white mb-4 drop-shadow-lg">{experience.detailedInfo.adventureOptionsTitle}</h4>
                         <div className="space-y-4">
                           {experience.detailedInfo?.tours?.map((tour: { title?: string; description?: string; details?: string[] }, index: number) => (
-                            <div key={index} className="bg-white/5 p-4 rounded-lg">
-                              {tour.title && <h5 className="font-medium text-white mb-1">{tour.title}</h5>}
-                              {tour.description && <p className="text-white/80 mb-2">{tour.description}</p>}
+                            <div key={index} className="bg-black/60 backdrop-blur-sm p-6 rounded-lg border border-white/20">
+                              {tour.title && <h5 className="font-semibold text-white mb-2 text-lg drop-shadow-lg">{tour.title}</h5>}
+                              {tour.description && <p className="text-white/90 mb-3 text-base md:text-lg drop-shadow-md leading-relaxed">{tour.description}</p>}
                               {tour.details && tour.details.length > 0 && (
-                                <ul className="space-y-1">
+                                <ul className="space-y-2">
                                   {tour.details.map((detail: string, idx: number) => (
-                                    <li key={idx} className="text-white/70">
+                                    <li key={idx} className="text-white/80 text-base drop-shadow-md flex items-start">
+                                      <span className="w-1.5 h-1.5 bg-accent-color/60 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                                       <span>{detail}</span>
                                     </li>
                                   ))}
@@ -213,11 +313,12 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                     )}
                     
                     {experience.detailedInfo.importantInfoTitle && experience.detailedInfo.importantInfo && experience.detailedInfo.importantInfo.length > 0 && (
-                      <div className="bg-white/5 p-4 rounded-lg mb-4">
-                        <h4 className="text-lg font-semibold text-white mb-2">{experience.detailedInfo.importantInfoTitle}</h4>
-                        <ul className="space-y-2">
+                      <div className="bg-black/60 backdrop-blur-sm p-6 rounded-lg mb-6 border border-white/20">
+                        <h4 className="text-xl font-semibold text-white mb-4 drop-shadow-lg">{experience.detailedInfo.importantInfoTitle}</h4>
+                        <ul className="space-y-3">
                           {experience.detailedInfo?.importantInfo?.map((info: string, index: number) => (
-                            <li key={index} className="text-white/80">
+                            <li key={index} className="text-white/90 text-base md:text-lg drop-shadow-md flex items-start">
+                              <span className="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
                               <span>{info}</span>
                             </li>
                           ))}
@@ -226,31 +327,40 @@ const ExperienceDetailModal: React.FC<ExperienceDetailModalProps> = ({
                     )}
                     
                     {experience.detailedInfo.closingRemark && (
-                      <div className="mt-4">
-                        <p className="text-white/80 italic">{experience.detailedInfo.closingRemark}</p>
+                      <div className="mt-6">
+                        <p className="text-white/90 italic text-base md:text-lg drop-shadow-md leading-relaxed">{experience.detailedInfo.closingRemark}</p>
                       </div>
                     )}
                   </div>
                 )}
                 
-                {/* Action buttons */}
-                <div className="mt-auto pt-4 border-t border-white/10">
+                {/* Action buttons - improved mobile layout */}
+                <div className="pt-6 border-t border-white/20 space-y-4 pb-8">
                   <button
-                    onClick={onClose}
-                    className="w-full bg-[#b5e550] hover:bg-[#a3d340] py-3 px-6 rounded-lg text-black text-base font-medium transition-all flex items-center justify-center mb-3"
+                    onClick={handleClose}
+                    className="w-full bg-[#b5e550] hover:bg-[#a3d340] py-4 px-8 rounded-lg text-black text-lg font-semibold transition-all flex items-center justify-center shadow-lg"
                   >
                     {t('experiences.bookNow')}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7" />
                     </svg>
                   </button>
+                  
+                  {/* Mobile-specific close button */}
+                  <button
+                    onClick={handleClose}
+                    className="md:hidden w-full bg-white/20 hover:bg-white/30 py-4 px-8 rounded-lg text-white text-lg font-medium transition-all border border-white/30 backdrop-blur-sm"
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
-            </motion.div>   
-          </div>
-        )}
-      </AnimatePresence>
-    );
+            </div>
+          </motion.div>   
+        </div>
+      )}
+    </AnimatePresence>
+  );
 };
 
 // Experience Card component for displaying individual experiences
@@ -262,7 +372,7 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
   const { t } = useTranslation();
   
   // Create a handler function to prevent event propagation issues
-  const handleOpenDetail = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleOpenDetail = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('Opening detail for experience:', experience.title);
@@ -308,7 +418,7 @@ const ExperienceCard = ({ experience, onOpenDetail, delay = 0 }: {
         <div className="mt-auto">
           <button
             onClick={handleOpenDetail}
-            className="w-full bg-[#b5e550] hover:bg-[#a3d340] py-2.5 px-4 rounded-lg text-black text-sm font-medium transition-all flex items-center justify-center"
+            className="w-full bg-[#b5e550] hover:bg-[#a3d340] active:bg-[#9bc93a] py-2.5 px-4 rounded-lg text-black text-sm font-medium transition-all flex items-center justify-center"
             aria-label={`${t('experiences.viewDetails')} ${experience.title}`}
           >
             {t('experiences.viewDetails')}
@@ -412,24 +522,20 @@ export const ExperiencesSection = ({ experiences: propExperiences = [] }: Experi
 
   // Function to open experience detail modal
   const openExperienceDetail = (experience: Experience) => {
-    // First set the selected experience
+    console.log('Opening modal for:', experience.title);
+    // Set both the selected experience and modal state simultaneously
     setSelectedExperience(experience);
-    // Then open the modal with a slight delay to ensure the experience is set
-    setTimeout(() => {
-      setModalOpen(true);
-    }, 50);
+    setModalOpen(true);
   };
   
   // Function to close modal
   const closeModal = () => {
-    // First close the modal
+    // Close the modal immediately
     setModalOpen(false);
-    // Restore scrolling
-    document.body.style.overflow = '';
-    // Then clear the selected experience after animation completes
+    // Clear the selected experience after animation completes
     setTimeout(() => {
       setSelectedExperience(null);
-    }, 300);
+    }, 200); // Reduced delay to match animation timing
   };
   
   // Define package and activity IDs in the exact order they should appear

@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { disableBodyScroll, enableBodyScroll, cleanupScrollState } from '../../utils/scroll-preservation';
 
 interface ModalProps {
   isOpen: boolean;
@@ -29,7 +30,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
     };
   }, []);
 
-  // Close on escape key press
+  // Handle scroll position preservation and escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -38,13 +39,18 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
     };
 
     if (isOpen) {
+      // Use utility function to disable body scroll and preserve position
+      disableBodyScroll();
       document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+    } else {
+      // Use utility function to restore body scroll and position
+      enableBodyScroll();
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'auto'; // Restore scrolling when modal is closed
+      // Cleanup on unmount
+      cleanupScrollState();
     };
   }, [isOpen, onClose]);
 
@@ -69,7 +75,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm transition-opacity">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-2 sm:p-4 bg-black/80 backdrop-blur-sm transition-opacity">
       <div 
         ref={modalRef}
         className={`relative bg-card-bg border border-white/10 rounded-lg shadow-xl w-full ${isMobile ? 'max-w-full' : 'max-w-2xl'} max-h-[90vh] overflow-y-auto touch-manipulation z-10`}
